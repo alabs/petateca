@@ -1,0 +1,27 @@
+Metadata-Version: 1.0
+Name: liberweb
+Version: 0.1dev
+Summary: Web de libercopy
+Home-page: UNKNOWN
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: UNKNOWN
+Description: Develop instalation
+        ===================
+        
+        easy_install -U pip
+        pip install -U virtualenv
+        pip install -U virtualenvwrapper
+        pip -E directorio_environ install django
+        source directorio_environ/bin/activate
+        python setup.py develop
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Natural Language :: Spanish
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2

@@ -1,0 +1,11 @@
+README.txt
+setup.py
+liberweb/__init__.py
+liberweb/manage.py
+liberweb/settings.py
+liberweb/urls.py
+liberweb.egg-info/PKG-INFO
+liberweb.egg-info/SOURCES.txt
+liberweb.egg-info/dependency_links.txt
+liberweb.egg-info/requires.txt
+liberweb.egg-info/top_level.txt
