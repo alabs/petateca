@@ -1,9 +1,16 @@
 Develop instalation
 ===================
 
-sudo easy_install -U pip
-sudo pip install -U virtualenv
-sudo pip install -U virtualenvwrapper
-pip -E directorio_environ install django
-source directorio_environ/bin/activate
-python setup.py develop
+desde el directorio raiz del proyecto::
+
+    sudo easy_install -U pip
+    sudo pip install -U virtualenv
+    sudo pip install -U virtualenvwrapper
+    pip -E directorio_environ install django
+    source directorio_environ/bin/activate
+    python setup.py develop
+
+desde el directorio liberweb (donde está manage.py):
+    
+    python manage.py syncdb
+    python manage.py runserver
