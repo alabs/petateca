@@ -6,8 +6,8 @@ desde el directorio raiz del proyecto::
     sudo easy_install -U pip
     sudo pip install -U virtualenv
     sudo pip install -U virtualenvwrapper
-    pip -E directorio_environ install django
-    source directorio_environ/bin/activate
+    pip -E virtual install django
+    source virtual/bin/activate
     python setup.py develop
 
 desde el directorio liberweb (donde está manage.py):
