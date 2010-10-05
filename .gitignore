@@ -1,3 +1,4 @@
 # Ficheros de vim
 *.swp
-
+*.pyc
+liberweb/liberweb.db
