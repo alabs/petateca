@@ -2,3 +2,5 @@
 *.swp
 *.pyc
 liberweb/liberweb.db
+virtual
+
