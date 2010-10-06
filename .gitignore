@@ -3,4 +3,6 @@
 *.pyc
 liberweb/liberweb.db
 virtual
+liberweb.egg-info/*
+distribute*
 
