@@ -16,6 +16,7 @@ setup(
     install_requires=[
         'django',
         'PIL',
+        'docutils',
     ],
     classifiers=[
         'Environment :: Web Environment',
