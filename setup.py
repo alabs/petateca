@@ -15,6 +15,7 @@ setup(
     long_description=open('README.txt').read(),
     install_requires=[
         'django',
+        'PIL',
     ],
     classifiers=[
         'Environment :: Web Environment',
