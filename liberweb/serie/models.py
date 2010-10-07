@@ -4,8 +4,8 @@ class Serie(models.Model):
     name = models.CharField(max_length=255)
     slug_name = models.SlugField()
     network = models.ForeignKey("Network", related_name="series")
-    genre = models.ForeignKey("Genre")
-    runtime = models.IntegerField()
+    genres = models.ManyToManyField("Genre", related_name="series")
+    runtime = models.IntegerField(blank=True, null=True)
     actors = models.ManyToManyField("Actor")
     description = models.TextField()
 
@@ -14,7 +14,8 @@ class Serie(models.Model):
 
 
 class Episode(models.Model):
-    air_date = models.DateField()
+    serie = models.ForeignKey('Serie', related_name="episodes")
+    air_date = models.DateField(blank=True, null=True)
     title = models.CharField(max_length=255)
     slug_title = models.SlugField()
     season = models.IntegerField()
@@ -36,20 +37,20 @@ class Link(models.Model):
 class SubtitleLink(models.Model):
     url = models.CharField(max_length=255)
     lang = models.ForeignKey("Languages")
-    link = models.ForeignKey("Link")
+    link = models.ForeignKey("Link", related_name="subtitles")
 
     def __unicode__(self):
         return self.url
 
 class Languages(models.Model):
-    iso_code = models.CharField(max_length=2)
+    iso_code = models.CharField(max_length=2, unique=True)
 
     def __unicode__(self):
         return self.iso_code
 
 class Network(models.Model):
     name = models.CharField(max_length=25)
-    url = models.URLField(null=True)
+    url = models.URLField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -70,9 +71,9 @@ class Actor(models.Model):
 class ImageSerie(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="/img/serie")
-    creator = models.CharField(max_length=100)
+    creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField()
-    serie = models.ForeignKey("Serie")
+    serie = models.ForeignKey("Serie", related_name="images")
 
     def __unicode__(self):
         return self.title
@@ -80,9 +81,9 @@ class ImageSerie(models.Model):
 class ImageActor(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="/img/actor")
-    creator = models.CharField(max_length=100)
+    creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField()
-    actor = models.ForeignKey("Actor")
+    actor = models.ForeignKey("Actor", related_name="images")
 
     def __unicode__(self):
         return self.title
