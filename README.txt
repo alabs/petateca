@@ -7,6 +7,7 @@ desde el directorio raiz del proyecto::
     sudo pip install -U virtualenv
     sudo pip install -U virtualenvwrapper
     pip -E virtual install django
+    pip -E virtual install ipython
     source virtual/bin/activate
     python setup.py develop
 
