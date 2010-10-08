@@ -1,0 +1,7 @@
+<h1>Listado de series</h1>
+<ul>
+  {% for serie in series %}
+    <li><a href="/series/{{ serie.slug_name }}">{{ serie.name }}</a></li>
+  {% endfor %}
+</ul>
+
