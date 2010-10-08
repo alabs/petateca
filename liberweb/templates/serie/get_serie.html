@@ -1,0 +1,21 @@
+<h1>{{ serie.name }}</h1>
+<ul>
+  <li>Proveedor: {{ serie.network.name }}</li>
+  <li>
+    Género:
+    <ul>
+      {% for genre in serie.genres.all %}
+        <li>{{ genre.name }}</li>
+      {% endfor %}
+    </ul>
+  </li>
+  <li>
+    Actores:
+    <ul>
+      {% for actor in serie.actors.all %}
+        <li>{{ actor.name }}</li>
+      {% endfor %}
+    </ul>
+  </li>
+  <li>Descripción: {{ serie.description }}</li>
+</ul>
