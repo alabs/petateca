@@ -3,7 +3,7 @@ Develop instalation
 
 desde el directorio raiz del proyecto::
 
-    sudo aptitude install python-setuptools
+    sudo aptitude install python-setuptools python-dev
     sudo easy_install -U pip
     sudo pip install -U virtualenv
     sudo pip install -U virtualenvwrapper
