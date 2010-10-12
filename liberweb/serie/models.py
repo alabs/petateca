@@ -1,11 +1,12 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 class Serie(models.Model):
     name = models.CharField(max_length=255)
     slug_name = models.SlugField()
     network = models.ForeignKey("Network", related_name="series")
     genres = models.ManyToManyField("Genre", related_name="series")
-    runtime = models.IntegerField(blank=True, null=True)
+    runtime = models.IntegerField(_('Runtime duration'), blank=True, null=True, help_text=_('duration of episodes in minutes'))
     actors = models.ManyToManyField("Actor")
     description = models.TextField()
 
@@ -15,12 +16,14 @@ class Serie(models.Model):
 
 class Episode(models.Model):
     serie = models.ForeignKey('Serie', related_name="episodes")
-    air_date = models.DateField(blank=True, null=True)
+    air_date = models.DateField(_('Air date'), blank=True, null=True, help_text=_('first broadcast date'))
     title = models.CharField(max_length=255)
     slug_title = models.SlugField()
     season = models.IntegerField()
     episode = models.IntegerField()
     description = models.TextField()
+    created_time = models.DateField(auto_now_add=True)
+    modified_time = models.DateField(auto_now=True)
 
     def __unicode__(self):
         return self.title

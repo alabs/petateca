@@ -35,7 +35,11 @@ TIME_ZONE = 'Europe/Madrid'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'es-es'
+LANGUAGE_CODE = 'en-en'
+LANGUAGES = (
+ ('es', 'Spanish'),
+ ('en', 'English'),
+)
 
 SITE_ID = 1
 
