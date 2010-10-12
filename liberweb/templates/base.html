@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/1999/xhtml">
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
+    <head>
+        <title>{% block title %}{{title|default:"Liber Copy"}}{% endblock %}</title>
+        {% block extrastyle %}{% endblock %}
+        {% block extrahead %}{% endblock %}
+    </head>
+    <body>
+<div id="logo">Logo</div>
+<div id="contents">
+{% block contents %}{% endblock %}
+</div>
+    </body>
+</html>

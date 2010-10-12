@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block contents %}
 <h1>{{ serie.name }}</h1>
 <ul>
   <li>Proveedor: {{ serie.network.name }}</li>
@@ -20,3 +22,4 @@
   <li>Descripción: {{ serie.description }}</li>
 </ul>
 <a href="/series">Volver al listado de series</a>
+{% endblock %}
