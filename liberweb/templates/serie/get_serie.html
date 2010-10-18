@@ -19,7 +19,16 @@
       {% endfor %}
     </ul>
   </li>
+  <li>Duración: {{ serie.runtime }} minutos</li>
   <li>Descripción: {{ serie.description }}</li>
 </ul>
 <a href="/series">Volver al listado de series</a>
+  <li>
+    <h2>Episodios</h2>
+    <ul>
+      {% for episode in serie.episodes.all %}
+        <li>{{ episode.title }}</li>
+      {% endfor %}
+    </ul>
+  </li>
 {% endblock %}

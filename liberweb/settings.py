@@ -22,12 +22,12 @@ DATABASES = {
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     },
-    'imdb': {
-        'ENGINE': 'postgresql_psycopg2',
-        'NAME': 'imdb',
-        'USER': 'liberweb',
-        'PASSWORD': 'libre',
-    },
+#    'imdb': {
+#        'ENGINE': 'postgresql_psycopg2',
+#        'NAME': 'imdb',
+#        'USER': 'liberweb',
+#        'PASSWORD': 'libre',
+#    },
 }
 
 # Local time zone for this installation. Choices can be found here:

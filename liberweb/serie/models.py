@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
 class Serie(models.Model):
@@ -13,6 +14,9 @@ class Serie(models.Model):
     def __unicode__(self):
         return self.name
 
+    def save(self):
+        self.slug_name = slugify( self.name )
+        super( Serie, self ).save()
 
 class Episode(models.Model):
     serie = models.ForeignKey('Serie', related_name="episodes")
@@ -32,7 +36,7 @@ class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")
     url = models.CharField(max_length=255)
     audio_lang = models.ForeignKey("Languages", related_name="audio_langs")
-    subtitle = models.ForeignKey("Languages", related_name="sub_langs", null=True) #Integrated subtitles
+    subtitle = models.ForeignKey("Languages", related_name="sub_langs", null=True, blank=True) #Integrated subtitles
 
     def __unicode__(self):
         return self.url
