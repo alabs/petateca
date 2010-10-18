@@ -21,7 +21,13 @@ DATABASES = {
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
+    },
+    'imdb': {
+        'ENGINE': 'postgresql_psycopg2',
+        'NAME': 'imdb',
+        'USER': 'liberweb',
+        'PASSWORD': 'libre',
+    },
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -36,9 +42,10 @@ TIME_ZONE = 'Europe/Madrid'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-en'
+ugettext = lambda s: s
 LANGUAGES = (
- ('es', 'Spanish'),
- ('en', 'English'),
+ ('es', ugettext('Spanish')),
+ ('en', ugettext('English')),
 )
 
 SITE_ID = 1
@@ -77,6 +84,7 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -103,4 +111,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'liberweb.serie',
+    #'liberweb.imdblocal', #Don't use yet, sucks a lot
 )
+
+DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
+

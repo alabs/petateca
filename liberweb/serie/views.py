@@ -16,3 +16,11 @@ def get_episodes(request, serie_slug):
 def get_episode(request, serie_slug, episode_slug):
     return HttpResponse("Hola, soy el episodio: %s" % episode_slug)
 
+def by_date(request):
+    return "TODO"
+
+def by_popularity(request):
+    return "TODO"
+
+def by_review(request):
+    return "TODO"

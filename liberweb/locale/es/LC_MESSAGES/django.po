@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-12 20:40+0200\n"
+"POT-Creation-Date: 2010-10-13 17:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: settings.py:41
+msgid "Spanish"
+msgstr "Español"
+
+#: settings.py:42
+msgid "English"
+msgstr "Inglés"
+
 #: serie/models.py:9
-msgid "Runtime duration"
+#, fuzzy
+msgid "runtime duration"
 msgstr "Duración de emisión"
 
 #: serie/models.py:9
@@ -27,7 +36,8 @@ msgid "duration of episodes in minutes"
 msgstr "la duración de los episodios en minutos"
 
 #: serie/models.py:19
-msgid "Air date"
+#, fuzzy
+msgid "air date"
 msgstr "Fecha de estreno"
 
 #: serie/models.py:19

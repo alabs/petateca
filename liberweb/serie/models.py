@@ -6,7 +6,7 @@ class Serie(models.Model):
     slug_name = models.SlugField()
     network = models.ForeignKey("Network", related_name="series")
     genres = models.ManyToManyField("Genre", related_name="series")
-    runtime = models.IntegerField(_('Runtime duration'), blank=True, null=True, help_text=_('duration of episodes in minutes'))
+    runtime = models.IntegerField(name=_('runtime duration'), blank=True, null=True, help_text=_('duration of episodes in minutes'))
     actors = models.ManyToManyField("Actor")
     description = models.TextField()
 
@@ -16,7 +16,7 @@ class Serie(models.Model):
 
 class Episode(models.Model):
     serie = models.ForeignKey('Serie', related_name="episodes")
-    air_date = models.DateField(_('Air date'), blank=True, null=True, help_text=_('first broadcast date'))
+    air_date = models.DateField(_('air date'), blank=True, null=True, help_text=_('first broadcast date'))
     title = models.CharField(max_length=255)
     slug_title = models.SlugField()
     season = models.IntegerField()
