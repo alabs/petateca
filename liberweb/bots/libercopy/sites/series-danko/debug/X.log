@@ -1,0 +1,70 @@
+2010-10-16 14:54:13+0200 [scrapy] INFO: Scrapy 0.10.2 started (bot: liberbot)
+2010-10-16 14:54:13+0200 [scrapy] DEBUG: Enabled extensions: FeedExporter, TelnetConsole, SpiderContext, WebService, CoreStats, MemoryUsage, CloseSpider
+2010-10-16 14:54:13+0200 [scrapy] DEBUG: Enabled scheduler middlewares: DuplicatesFilterMiddleware
+2010-10-16 14:54:13+0200 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, RedirectMiddleware, CookiesMiddleware, HttpCompressionMiddleware, DownloaderStats, HttpCacheMiddleware
+2010-10-16 14:54:13+0200 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2010-10-16 14:54:13+0200 [scrapy] DEBUG: Enabled item pipelines: 
+2010-10-16 14:54:13+0200 [scrapy] DEBUG: Telnet console listening on port 6024
+2010-10-16 14:54:13+0200 [scrapy] DEBUG: Web service listening on port 6081
+2010-10-16 14:54:13+0200 [series-danko] INFO: Spider opened
+2010-10-16 14:54:14+0200 [series-danko] DEBUG: Crawled (200) <GET http://www.seriesdanko.com/2010/06/lista-de-capitulos-xiii-la-conspiracion.html> (referer: None)
+2010-10-16 14:54:15+0200 [series-danko] DEBUG: Crawled (200) <GET http://www.seriesdanko.com/2010/06/lista-de-capitulos-xena-la-princesa.html> (referer: None)
+2010-10-16 14:54:16+0200 [series-danko] DEBUG: Crawled (200) <GET http://www.seriesdanko.com/2010/06/xiii-la-conspiracion-1x01-capitulo-01.html> (referer: http://www.seriesdanko.com/2010/06/lista-de-capitulos-xiii-la-conspiracion.html)
+2010-10-16 14:54:16+0200 [series-danko] DEBUG: Scraped LiberBotItems(lang='Spanish', links='http://www.megavideo.com/?v=2KI82MQW', temp='1', serie='X', epi='01', type='VerOnline') in <http://www.seriesdanko.com/2010/06/xiii-la-conspiracion-1x01-capitulo-01.html>
+2010-10-16 14:54:16+0200 [series-danko] INFO: Passed LiberBotItems(lang='Spanish', links='http://www.megavideo.com/?v=2KI82MQW', temp='1', serie='X', epi='01', type='VerOnline')
+2010-10-16 14:54:16+0200 [series-danko] ERROR: Spider error processing <http://www.seriesdanko.com/2010/06/xiii-la-conspiracion-1x01-capitulo-01.html> (referer: <http://www.seriesdanko.com/2010/06/lista-de-capitulos-xiii-la-conspiracion.html>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots/libercopy/liberbot/spiders/series_danko.py", line 84, in parse_episode
+	    img = trraw.select('.//img/@src')[0].extract().encode('utf-8')
+	exceptions.IndexError: list index out of range
+	
+2010-10-16 14:54:17+0200 [series-danko] DEBUG: Crawled (200) <GET http://www.seriesdanko.com/2010/06/xiii-la-conspiracion-1x02-capitulo-02.html> (referer: http://www.seriesdanko.com/2010/06/lista-de-capitulos-xiii-la-conspiracion.html)
+2010-10-16 14:54:17+0200 [series-danko] DEBUG: Scraped LiberBotItems(lang='Spanish', links='http://www.megavideo.com/?v=T970P9JL', temp='1', serie='X', epi='02', type='VerOnline') in <http://www.seriesdanko.com/2010/06/xiii-la-conspiracion-1x02-capitulo-02.html>
+2010-10-16 14:54:17+0200 [series-danko] INFO: Passed LiberBotItems(lang='Spanish', links='http://www.megavideo.com/?v=T970P9JL', temp='1', serie='X', epi='02', type='VerOnline')
+2010-10-16 14:54:17+0200 [series-danko] ERROR: Spider error processing <http://www.seriesdanko.com/2010/06/xiii-la-conspiracion-1x02-capitulo-02.html> (referer: <http://www.seriesdanko.com/2010/06/lista-de-capitulos-xiii-la-conspiracion.html>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots/libercopy/liberbot/spiders/series_danko.py", line 84, in parse_episode
+	    img = trraw.select('.//img/@src')[0].extract().encode('utf-8')
+	exceptions.IndexError: list index out of range
+	
+2010-10-16 14:54:17+0200 [series-danko] INFO: Closing spider (finished)
+2010-10-16 14:54:17+0200 [series-danko] INFO: Stored json feed (2 items, 262 bytes) in: sites/series-danko/dump/X.json
+2010-10-16 14:54:17+0200 [series-danko] INFO: Spider closed (finished)

@@ -1,0 +1,10 @@
+README.txt
+setup.py
+liberclass/askletter.py
+liberclass/fileextract.py
+liberclass/liberimport.py
+thetvdb/__init__.py
+thetvdb/config.py
+thetvdb/language.py
+thetvdb/mirror.py
+thetvdb/tool.py

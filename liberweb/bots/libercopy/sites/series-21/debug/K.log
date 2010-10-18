@@ -1,0 +1,301 @@
+2010-10-17 02:06:23+0200 [scrapy] INFO: Scrapy 0.10.2 started (bot: liberbot)
+2010-10-17 02:06:23+0200 [scrapy] DEBUG: Enabled extensions: FeedExporter, TelnetConsole, SpiderContext, WebService, CoreStats, MemoryUsage, CloseSpider
+2010-10-17 02:06:23+0200 [scrapy] DEBUG: Enabled scheduler middlewares: DuplicatesFilterMiddleware
+2010-10-17 02:06:23+0200 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, RedirectMiddleware, CookiesMiddleware, HttpCompressionMiddleware, DownloaderStats, HttpCacheMiddleware
+2010-10-17 02:06:23+0200 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2010-10-17 02:06:23+0200 [scrapy] DEBUG: Enabled item pipelines: 
+2010-10-17 02:06:23+0200 [scrapy] DEBUG: Telnet console listening on port 6023
+2010-10-17 02:06:23+0200 [scrapy] DEBUG: Web service listening on port 6080
+2010-10-17 02:06:23+0200 [series-21] INFO: Spider opened
+2010-10-17 02:06:27+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/> (referer: None)
+2010-10-17 02:06:28+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/> (referer: None)
+2010-10-17 02:06:33+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/karabudjan/> (referer: None)
+2010-10-17 02:06:34+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/> (referer: None)
+2010-10-17 02:06:35+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x10-bringing-down-the-house/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:06:35+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=HTO57PPB', serie=u'Kyle XY', epi=u'10', sublang='Spanish') in <http://www.series21.com/kyle-xy/3x10-bringing-down-the-house/>
+2010-10-17 02:06:35+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=HTO57PPB', serie=u'Kyle XY', epi=u'10', sublang='Spanish')
+2010-10-17 02:06:45+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x12-the-new-king-part-2/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:06:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=5L6C3BXQ', serie=u'Kings', epi=u'12', sublang='Spanish') in <http://www.series21.com/kings/1x12-the-new-king-part-2/>
+2010-10-17 02:06:45+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=5L6C3BXQ', serie=u'Kings', epi=u'12', sublang='Spanish')
+2010-10-17 02:06:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=89FJ5JPT', serie=u'Kings', epi=u'12', sublang='Spanish') in <http://www.series21.com/kings/1x12-the-new-king-part-2/>
+2010-10-17 02:06:45+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=89FJ5JPT', serie=u'Kings', epi=u'12', sublang='Spanish')
+2010-10-17 02:06:47+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/karabudjan/1x06-el-final-part-2/> (referer: http://www.series21.com/karabudjan/)
+2010-10-17 02:06:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=5D9YBF8W', temp=u'1', epi=u'06') in <http://www.series21.com/karabudjan/1x06-el-final-part-2/>
+2010-10-17 02:06:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=5D9YBF8W', temp=u'1', epi=u'06')
+2010-10-17 02:06:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=3O8HGJ43', temp=u'1', epi=u'06') in <http://www.series21.com/karabudjan/1x06-el-final-part-2/>
+2010-10-17 02:06:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=3O8HGJ43', temp=u'1', epi=u'06')
+2010-10-17 02:06:48+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x13-capitulo-13/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:06:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=EA6UU87W', serie=u'Kdabra', epi=u'13', sublang='Spanish') in <http://www.series21.com/kadabra/1x13-capitulo-13/>
+2010-10-17 02:06:48+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=EA6UU87W', serie=u'Kdabra', epi=u'13', sublang='Spanish')
+2010-10-17 02:06:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=EA6UU87W', serie=u'Kdabra', epi=u'13', sublang='Spanish') in <http://www.series21.com/kadabra/1x13-capitulo-13/>
+2010-10-17 02:06:48+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=EA6UU87W', serie=u'Kdabra', epi=u'13', sublang='Spanish')
+2010-10-17 02:06:52+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x12-capitulo-12/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:06:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=ND5RHRKC', serie=u'Kdabra', epi=u'12', sublang='Spanish') in <http://www.series21.com/kadabra/1x12-capitulo-12/>
+2010-10-17 02:06:52+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=ND5RHRKC', serie=u'Kdabra', epi=u'12', sublang='Spanish')
+2010-10-17 02:06:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=YH2RI08F', serie=u'Kdabra', epi=u'12', sublang='Spanish') in <http://www.series21.com/kadabra/1x12-capitulo-12/>
+2010-10-17 02:06:52+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=YH2RI08F', serie=u'Kdabra', epi=u'12', sublang='Spanish')
+2010-10-17 02:06:53+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x11-capitulo-11/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:06:53+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=8IHIZF0F', serie=u'Kdabra', epi=u'11', sublang='Spanish') in <http://www.series21.com/kadabra/1x11-capitulo-11/>
+2010-10-17 02:06:53+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=8IHIZF0F', serie=u'Kdabra', epi=u'11', sublang='Spanish')
+2010-10-17 02:06:53+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=8IHIZF0F', serie=u'Kdabra', epi=u'11', sublang='Spanish') in <http://www.series21.com/kadabra/1x11-capitulo-11/>
+2010-10-17 02:06:53+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=8IHIZF0F', serie=u'Kdabra', epi=u'11', sublang='Spanish')
+2010-10-17 02:06:54+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x10-capitulo-10/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:06:54+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=VJ1GWE17', serie=u'Kdabra', epi=u'10', sublang='Spanish') in <http://www.series21.com/kadabra/1x10-capitulo-10/>
+2010-10-17 02:06:54+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=VJ1GWE17', serie=u'Kdabra', epi=u'10', sublang='Spanish')
+2010-10-17 02:06:54+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=VJ1GWE17', serie=u'Kdabra', epi=u'10', sublang='Spanish') in <http://www.series21.com/kadabra/1x10-capitulo-10/>
+2010-10-17 02:06:54+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=VJ1GWE17', serie=u'Kdabra', epi=u'10', sublang='Spanish')
+2010-10-17 02:06:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x09-capitulo-09/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:06:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=JNXT1S5A', serie=u'Kdabra', epi=u'09', sublang='Spanish') in <http://www.series21.com/kadabra/1x09-capitulo-09/>
+2010-10-17 02:06:56+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=JNXT1S5A', serie=u'Kdabra', epi=u'09', sublang='Spanish')
+2010-10-17 02:06:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=JNXT1S5A', serie=u'Kdabra', epi=u'09', sublang='Spanish') in <http://www.series21.com/kadabra/1x09-capitulo-09/>
+2010-10-17 02:06:56+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=JNXT1S5A', serie=u'Kdabra', epi=u'09', sublang='Spanish')
+2010-10-17 02:06:57+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x08-capitulo-08/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:06:57+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=PBVB4HP3', serie=u'Kdabra', epi=u'08', sublang='Spanish') in <http://www.series21.com/kadabra/1x08-capitulo-08/>
+2010-10-17 02:06:57+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=PBVB4HP3', serie=u'Kdabra', epi=u'08', sublang='Spanish')
+2010-10-17 02:06:57+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=1F0FESG2', serie=u'Kdabra', epi=u'08', sublang='Spanish') in <http://www.series21.com/kadabra/1x08-capitulo-08/>
+2010-10-17 02:06:57+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=1F0FESG2', serie=u'Kdabra', epi=u'08', sublang='Spanish')
+2010-10-17 02:06:58+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x07-capitulo-07/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:06:58+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=RZONUGFE', serie=u'Kdabra', epi=u'07', sublang='Spanish') in <http://www.series21.com/kadabra/1x07-capitulo-07/>
+2010-10-17 02:06:58+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=RZONUGFE', serie=u'Kdabra', epi=u'07', sublang='Spanish')
+2010-10-17 02:06:58+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=BB7A12AU', serie=u'Kdabra', epi=u'07', sublang='Spanish') in <http://www.series21.com/kadabra/1x07-capitulo-07/>
+2010-10-17 02:06:58+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=BB7A12AU', serie=u'Kdabra', epi=u'07', sublang='Spanish')
+2010-10-17 02:07:00+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x06-capitulo-06/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:07:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=E6M9LTLB', serie=u'Kdabra', epi=u'06', sublang='Spanish') in <http://www.series21.com/kadabra/1x06-capitulo-06/>
+2010-10-17 02:07:00+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=E6M9LTLB', serie=u'Kdabra', epi=u'06', sublang='Spanish')
+2010-10-17 02:07:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=WAT0KRW6', serie=u'Kdabra', epi=u'06', sublang='Spanish') in <http://www.series21.com/kadabra/1x06-capitulo-06/>
+2010-10-17 02:07:00+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=WAT0KRW6', serie=u'Kdabra', epi=u'06', sublang='Spanish')
+2010-10-17 02:07:04+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x05-capitulo-05/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:07:04+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=E14JQVY9', serie=u'Kdabra', epi=u'05', sublang='Spanish') in <http://www.series21.com/kadabra/1x05-capitulo-05/>
+2010-10-17 02:07:04+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=E14JQVY9', serie=u'Kdabra', epi=u'05', sublang='Spanish')
+2010-10-17 02:07:04+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=HEYMNXZU', serie=u'Kdabra', epi=u'05', sublang='Spanish') in <http://www.series21.com/kadabra/1x05-capitulo-05/>
+2010-10-17 02:07:04+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=HEYMNXZU', serie=u'Kdabra', epi=u'05', sublang='Spanish')
+2010-10-17 02:07:08+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x04-capitulo-04/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:07:08+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=DD8VX6DF', serie=u'Kdabra', epi=u'04', sublang='Spanish') in <http://www.series21.com/kadabra/1x04-capitulo-04/>
+2010-10-17 02:07:08+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=DD8VX6DF', serie=u'Kdabra', epi=u'04', sublang='Spanish')
+2010-10-17 02:07:08+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=CMH9Q63X', serie=u'Kdabra', epi=u'04', sublang='Spanish') in <http://www.series21.com/kadabra/1x04-capitulo-04/>
+2010-10-17 02:07:08+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=CMH9Q63X', serie=u'Kdabra', epi=u'04', sublang='Spanish')
+2010-10-17 02:07:09+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x03-capitulo-03/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:07:09+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=XO401KKB', serie=u'Kdabra', epi=u'03', sublang='Spanish') in <http://www.series21.com/kadabra/1x03-capitulo-03/>
+2010-10-17 02:07:09+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=XO401KKB', serie=u'Kdabra', epi=u'03', sublang='Spanish')
+2010-10-17 02:07:09+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=XO401KKB', serie=u'Kdabra', epi=u'03', sublang='Spanish') in <http://www.series21.com/kadabra/1x03-capitulo-03/>
+2010-10-17 02:07:09+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=XO401KKB', serie=u'Kdabra', epi=u'03', sublang='Spanish')
+2010-10-17 02:07:14+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x02-capitulo-02/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:07:14+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=AYZFXGFM', serie=u'Kdabra', epi=u'02', sublang='Spanish') in <http://www.series21.com/kadabra/1x02-capitulo-02/>
+2010-10-17 02:07:14+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=AYZFXGFM', serie=u'Kdabra', epi=u'02', sublang='Spanish')
+2010-10-17 02:07:14+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=AYZFXGFM', serie=u'Kdabra', epi=u'02', sublang='Spanish') in <http://www.series21.com/kadabra/1x02-capitulo-02/>
+2010-10-17 02:07:14+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=AYZFXGFM', serie=u'Kdabra', epi=u'02', sublang='Spanish')
+2010-10-17 02:07:15+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kadabra/1x01-capitulo-01/> (referer: http://www.series21.com/kadabra/)
+2010-10-17 02:07:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=T5IG0E95', serie=u'Kdabra', epi=u'01', sublang='Spanish') in <http://www.series21.com/kadabra/1x01-capitulo-01/>
+2010-10-17 02:07:15+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=T5IG0E95', serie=u'Kdabra', epi=u'01', sublang='Spanish')
+2010-10-17 02:07:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=7LX6X1PG', serie=u'Kdabra', epi=u'01', sublang='Spanish') in <http://www.series21.com/kadabra/1x01-capitulo-01/>
+2010-10-17 02:07:15+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=7LX6X1PG', serie=u'Kdabra', epi=u'01', sublang='Spanish')
+2010-10-17 02:07:17+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/karabudjan/1x05-el-final/> (referer: http://www.series21.com/karabudjan/)
+2010-10-17 02:07:17+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=VPXVD0UP', temp=u'1', epi=u'05') in <http://www.series21.com/karabudjan/1x05-el-final/>
+2010-10-17 02:07:17+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=VPXVD0UP', temp=u'1', epi=u'05')
+2010-10-17 02:07:17+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=B8L98OFI', temp=u'1', epi=u'05') in <http://www.series21.com/karabudjan/1x05-el-final/>
+2010-10-17 02:07:17+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=B8L98OFI', temp=u'1', epi=u'05')
+2010-10-17 02:07:21+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/karabudjan/1x04-Secuestro/> (referer: http://www.series21.com/karabudjan/)
+2010-10-17 02:07:21+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=PMKB54IW ', temp=u'1', epi=u'04') in <http://www.series21.com/karabudjan/1x04-Secuestro/>
+2010-10-17 02:07:21+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=PMKB54IW ', temp=u'1', epi=u'04')
+2010-10-17 02:07:21+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=A2FHJV45 ', temp=u'1', epi=u'04') in <http://www.series21.com/karabudjan/1x04-Secuestro/>
+2010-10-17 02:07:21+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=A2FHJV45 ', temp=u'1', epi=u'04')
+2010-10-17 02:07:22+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/karabudjan/1x03-capitulo-03/> (referer: http://www.series21.com/karabudjan/)
+2010-10-17 02:07:22+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=LVJZK67C ', temp=u'1', epi=u'03') in <http://www.series21.com/karabudjan/1x03-capitulo-03/>
+2010-10-17 02:07:22+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=LVJZK67C ', temp=u'1', epi=u'03')
+2010-10-17 02:07:22+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=2Y65EXBS ', temp=u'1', epi=u'03') in <http://www.series21.com/karabudjan/1x03-capitulo-03/>
+2010-10-17 02:07:22+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=2Y65EXBS ', temp=u'1', epi=u'03')
+2010-10-17 02:07:23+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/karabudjan/1x02-capitulo-02/> (referer: http://www.series21.com/karabudjan/)
+2010-10-17 02:07:23+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=AFQZYT0Z ', temp=u'1', epi=u'02') in <http://www.series21.com/karabudjan/1x02-capitulo-02/>
+2010-10-17 02:07:23+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megavideo.com/?v=AFQZYT0Z ', temp=u'1', epi=u'02')
+2010-10-17 02:07:23+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=D1IHDSPY ', temp=u'1', epi=u'02') in <http://www.series21.com/karabudjan/1x02-capitulo-02/>
+2010-10-17 02:07:23+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Karabudjan', links=u'http://www.megaupload.com/?d=D1IHDSPY ', temp=u'1', epi=u'02')
+2010-10-17 02:07:24+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/karabudjan/1x01-capitulo-01/> (referer: http://www.series21.com/karabudjan/)
+2010-10-17 02:07:24+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=BA3WPG3N ', serie=u'Karabudjan', epi=u'01', sublang='Spanish') in <http://www.series21.com/karabudjan/1x01-capitulo-01/>
+2010-10-17 02:07:24+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?d=BA3WPG3N ', serie=u'Karabudjan', epi=u'01', sublang='Spanish')
+2010-10-17 02:07:25+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x11-the-new-king-part-1/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:25+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=QQVTPMP8', serie=u'Kings', epi=u'11', sublang='Spanish') in <http://www.series21.com/kings/1x11-the-new-king-part-1/>
+2010-10-17 02:07:25+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=QQVTPMP8', serie=u'Kings', epi=u'11', sublang='Spanish')
+2010-10-17 02:07:25+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=RNRHJBK9', serie=u'Kings', epi=u'11', sublang='Spanish') in <http://www.series21.com/kings/1x11-the-new-king-part-1/>
+2010-10-17 02:07:25+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=RNRHJBK9', serie=u'Kings', epi=u'11', sublang='Spanish')
+2010-10-17 02:07:26+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x10-javelin/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:26+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=I9BX1I5P', serie=u'Kings', epi=u'10', sublang='Spanish') in <http://www.series21.com/kings/1x10-javelin/>
+2010-10-17 02:07:26+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=I9BX1I5P', serie=u'Kings', epi=u'10', sublang='Spanish')
+2010-10-17 02:07:26+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=719J67Q1', serie=u'Kings', epi=u'10', sublang='Spanish') in <http://www.series21.com/kings/1x10-javelin/>
+2010-10-17 02:07:26+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=719J67Q1', serie=u'Kings', epi=u'10', sublang='Spanish')
+2010-10-17 02:07:31+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x09-chapter-one/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:31+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=VEY6FNRM', serie=u'Kings', epi=u'09', sublang='Spanish') in <http://www.series21.com/kings/1x09-chapter-one/>
+2010-10-17 02:07:31+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=VEY6FNRM', serie=u'Kings', epi=u'09', sublang='Spanish')
+2010-10-17 02:07:31+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=9S3E0DPU', serie=u'Kings', epi=u'09', sublang='Spanish') in <http://www.series21.com/kings/1x09-chapter-one/>
+2010-10-17 02:07:31+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=9S3E0DPU', serie=u'Kings', epi=u'09', sublang='Spanish')
+2010-10-17 02:07:32+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x08-pilgrimage/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:32+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=WAE5MUNS', serie=u'Kings', epi=u'08', sublang='Spanish') in <http://www.series21.com/kings/1x08-pilgrimage/>
+2010-10-17 02:07:32+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=WAE5MUNS', serie=u'Kings', epi=u'08', sublang='Spanish')
+2010-10-17 02:07:32+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=7P3HF1RA', serie=u'Kings', epi=u'08', sublang='Spanish') in <http://www.series21.com/kings/1x08-pilgrimage/>
+2010-10-17 02:07:32+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=7P3HF1RA', serie=u'Kings', epi=u'08', sublang='Spanish')
+2010-10-17 02:07:37+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x07-brotherhood1/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:37+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kings', links=u' http://www.megavideo.com/?v=SBS2VOLY', temp=u'1', epi=u'13') in <http://www.series21.com/kings/1x07-brotherhood1/>
+2010-10-17 02:07:37+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kings', links=u' http://www.megavideo.com/?v=SBS2VOLY', temp=u'1', epi=u'13')
+2010-10-17 02:07:37+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megaupload.com/?d=XK4GWMAP', temp=u'1', epi=u'13') in <http://www.series21.com/kings/1x07-brotherhood1/>
+2010-10-17 02:07:37+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megaupload.com/?d=XK4GWMAP', temp=u'1', epi=u'13')
+2010-10-17 02:07:38+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x07-the-sabbath-queen/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=MJGBW29B', serie=u'Kings', epi=u'07', sublang='Spanish') in <http://www.series21.com/kings/1x07-the-sabbath-queen/>
+2010-10-17 02:07:38+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=MJGBW29B', serie=u'Kings', epi=u'07', sublang='Spanish')
+2010-10-17 02:07:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=2HWUFR6L', serie=u'Kings', epi=u'07', sublang='Spanish') in <http://www.series21.com/kings/1x07-the-sabbath-queen/>
+2010-10-17 02:07:38+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=2HWUFR6L', serie=u'Kings', epi=u'07', sublang='Spanish')
+2010-10-17 02:07:42+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x06-brotherhood/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:42+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=GVVTTOYY', serie=u'Kings', epi=u'06', sublang='Spanish') in <http://www.series21.com/kings/1x06-brotherhood/>
+2010-10-17 02:07:42+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=GVVTTOYY', serie=u'Kings', epi=u'06', sublang='Spanish')
+2010-10-17 02:07:42+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=4WTYB7KK', serie=u'Kings', epi=u'06', sublang='Spanish') in <http://www.series21.com/kings/1x06-brotherhood/>
+2010-10-17 02:07:42+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=4WTYB7KK', serie=u'Kings', epi=u'06', sublang='Spanish')
+2010-10-17 02:07:43+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x05-insurrection/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megavideo.com/?v=ZPG6I6Q4', temp=u'1', epi=u'05') in <http://www.series21.com/kings/1x05-insurrection/>
+2010-10-17 02:07:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megavideo.com/?v=ZPG6I6Q4', temp=u'1', epi=u'05')
+2010-10-17 02:07:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megaupload.com/?d=6TWV453L', temp=u'1', epi=u'05') in <http://www.series21.com/kings/1x05-insurrection/>
+2010-10-17 02:07:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megaupload.com/?d=6TWV453L', temp=u'1', epi=u'05')
+2010-10-17 02:07:45+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x03-prosperity/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megavideo.com/?v=S3NYS75B', temp=u'1', epi=u'03') in <http://www.series21.com/kings/1x03-prosperity/>
+2010-10-17 02:07:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megavideo.com/?v=S3NYS75B', temp=u'1', epi=u'03')
+2010-10-17 02:07:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megaupload.com/?d=ZFRGME7R', temp=u'1', epi=u'03') in <http://www.series21.com/kings/1x03-prosperity/>
+2010-10-17 02:07:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kings', links=u'http://www.megaupload.com/?d=ZFRGME7R', temp=u'1', epi=u'03')
+2010-10-17 02:07:46+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kings/1x01-1x02-goliath/> (referer: http://www.series21.com/kings/)
+2010-10-17 02:07:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=CZENSFZP', serie=u'Kings', epi=u'01', sublang='Spanish') in <http://www.series21.com/kings/1x01-1x02-goliath/>
+2010-10-17 02:07:46+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=CZENSFZP', serie=u'Kings', epi=u'01', sublang='Spanish')
+2010-10-17 02:07:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=ISEXG6V2', serie=u'Kings', epi=u'01', sublang='Spanish') in <http://www.series21.com/kings/1x01-1x02-goliath/>
+2010-10-17 02:07:46+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=ISEXG6V2', serie=u'Kings', epi=u'01', sublang='Spanish')
+2010-10-17 02:07:47+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x09-guess-whos-coming-to-dinner/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:07:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=MCRJMDDJ', serie=u'Kyle XY', epi=u'09', sublang='Spanish') in <http://www.series21.com/kyle-xy/3x09-guess-whos-coming-to-dinner/>
+2010-10-17 02:07:47+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=MCRJMDDJ', serie=u'Kyle XY', epi=u'09', sublang='Spanish')
+2010-10-17 02:07:49+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x08-the-tell-tale-heart/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:07:49+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=MNWHAH2L', serie=u'Kyle XY', epi=u'08', sublang='Spanish') in <http://www.series21.com/kyle-xy/3x08-the-tell-tale-heart/>
+2010-10-17 02:07:49+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=MNWHAH2L', serie=u'Kyle XY', epi=u'08', sublang='Spanish')
+2010-10-17 02:07:54+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x07-chemistry-101/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:07:54+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=RPGACUP0', serie=u'Kyle XY', epi=u'07', sublang='Spanish') in <http://www.series21.com/kyle-xy/3x07-chemistry-101/>
+2010-10-17 02:07:54+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=RPGACUP0', serie=u'Kyle XY', epi=u'07', sublang='Spanish')
+2010-10-17 02:07:55+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x06-rush/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:07:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=04S42AX0', serie=u'Kyle XY', epi=u'06', sublang='Spanish') in <http://www.series21.com/kyle-xy/3x06-rush/>
+2010-10-17 02:07:55+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=04S42AX0', serie=u'Kyle XY', epi=u'06', sublang='Spanish')
+2010-10-17 02:07:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x05-life-support/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:07:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=FFOZUDYL', serie=u'Kyle XY', epi=u'05', sublang='Spanish') in <http://www.series21.com/kyle-xy/3x05-life-support/>
+2010-10-17 02:07:56+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=FFOZUDYL', serie=u'Kyle XY', epi=u'05', sublang='Spanish')
+2010-10-17 02:07:58+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x04-in-the-company-of-men/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:07:58+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=PVQ9WITX', serie=u'Kyle XY', epi=u'04', sublang='Spanish') in <http://www.series21.com/kyle-xy/3x04-in-the-company-of-men/>
+2010-10-17 02:07:58+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=PVQ9WITX', serie=u'Kyle XY', epi=u'04', sublang='Spanish')
+2010-10-17 02:07:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x03-electric-kiss/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:07:59+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=PFH3K1QO', serie=u'Kyle XY', epi=u'03', sublang='Spanish') in <http://www.series21.com/kyle-xy/3x03-electric-kiss/>
+2010-10-17 02:07:59+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=PFH3K1QO', serie=u'Kyle XY', epi=u'03', sublang='Spanish')
+2010-10-17 02:08:00+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x02-psychic-friend/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=KCTK4458', serie=u'Kyle XY', epi=u'02', sublang='Spanish') in <http://www.series21.com/kyle-xy/3x02-psychic-friend/>
+2010-10-17 02:08:00+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'3', links=u'http://www.megavideo.com/?v=KCTK4458', serie=u'Kyle XY', epi=u'02', sublang='Spanish')
+2010-10-17 02:08:01+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/3x01-sucedio-una-noche-it-happened-one-night/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=KRCCK2TO', temp=u'3', epi=u'01') in <http://www.series21.com/kyle-xy/3x01-sucedio-una-noche-it-happened-one-night/>
+2010-10-17 02:08:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=KRCCK2TO', temp=u'3', epi=u'01')
+2010-10-17 02:08:02+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x23-ha-sido-el-mejor-dia-de-mi-vida-ive-had-the-time-of-my-life/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:02+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=XOPWTI5W', temp=u'2', epi=u'23') in <http://www.series21.com/kyle-xy/2x23-ha-sido-el-mejor-dia-de-mi-vida-ive-had-the-time-of-my-life/>
+2010-10-17 02:08:02+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=XOPWTI5W', temp=u'2', epi=u'23')
+2010-10-17 02:08:04+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x22-hola-hello/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:04+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=VLIAIMU2', temp=u'2', epi=u'22') in <http://www.series21.com/kyle-xy/2x22-hola-hello/>
+2010-10-17 02:08:04+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=VLIAIMU2', temp=u'2', epi=u'22')
+2010-10-17 02:08:08+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x21-materia-gris-grey-matters/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:08+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=B1INUUFE', temp=u'2', epi=u'21') in <http://www.series21.com/kyle-xy/2x21-materia-gris-grey-matters/>
+2010-10-17 02:08:08+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=B1INUUFE', temp=u'2', epi=u'21')
+2010-10-17 02:08:10+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x20-colores-primarios-primary-colors/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:10+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=M1EEAB12', temp=u'2', epi=u'20') in <http://www.series21.com/kyle-xy/2x20-colores-primarios-primary-colors/>
+2010-10-17 02:08:10+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=M1EEAB12', temp=u'2', epi=u'20')
+2010-10-17 02:08:11+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x19-la-primera-herida-es-la-mas-profunda-the-first-cut-is-the-deepest/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:11+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=EXIN2MT0', temp=u'2', epi=u'19') in <http://www.series21.com/kyle-xy/2x19-la-primera-herida-es-la-mas-profunda-the-first-cut-is-the-deepest/>
+2010-10-17 02:08:11+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=EXIN2MT0', temp=u'2', epi=u'19')
+2010-10-17 02:08:12+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x18-entre-rack-y-algo-peor-between-the-rack-and/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:12+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=ILAG04I6', temp=u'2', epi=u'18') in <http://www.series21.com/kyle-xy/2x18-entre-rack-y-algo-peor-between-the-rack-and/>
+2010-10-17 02:08:12+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=ILAG04I6', temp=u'2', epi=u'18')
+2010-10-17 02:08:14+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x17-castigados-grounded/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:14+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=CIHN60HZ', temp=u'2', epi=u'17') in <http://www.series21.com/kyle-xy/2x17-castigados-grounded/>
+2010-10-17 02:08:14+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=CIHN60HZ', temp=u'2', epi=u'17')
+2010-10-17 02:08:15+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x16-grandes-esperanzas-great-expectations/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=PK6K8F0L', temp=u'2', epi=u'16') in <http://www.series21.com/kyle-xy/2x16-grandes-esperanzas-great-expectations/>
+2010-10-17 02:08:15+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=PK6K8F0L', temp=u'2', epi=u'16')
+2010-10-17 02:08:17+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x15-el-futuro-es-tan-brillante-que-necesito-gafas-de-sol-the-futures-so-bright-i-gotta-wear-shades/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:17+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=RKS5XI2H', temp=u'2', epi=u'15') in <http://www.series21.com/kyle-xy/2x15-el-futuro-es-tan-brillante-que-necesito-gafas-de-sol-the-futures-so-bright-i-gotta-wear-shades/>
+2010-10-17 02:08:17+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=RKS5XI2H', temp=u'2', epi=u'15')
+2010-10-17 02:08:17+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x14-para-tic-con-amor-to-cir-with-love/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:17+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=DKUM7EKD', temp=u'2', epi=u'14') in <http://www.series21.com/kyle-xy/2x14-para-tic-con-amor-to-cir-with-love/>
+2010-10-17 02:08:17+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=DKUM7EKD', temp=u'2', epi=u'14')
+2010-10-17 02:08:19+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x13-salto-de-fe-leap-of-faith/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=VZKUV81P', temp=u'2', epi=u'13') in <http://www.series21.com/kyle-xy/2x13-salto-de-fe-leap-of-faith/>
+2010-10-17 02:08:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=VZKUV81P', temp=u'2', epi=u'13')
+2010-10-17 02:08:20+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x12-encerrados-lockdown/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:20+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=6M9QDOVC', temp=u'2', epi=u'12') in <http://www.series21.com/kyle-xy/2x12-encerrados-lockdown/>
+2010-10-17 02:08:20+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=6M9QDOVC', temp=u'2', epi=u'12')
+2010-10-17 02:08:21+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x11-a-tocar-el-hibrido-hands-on-a-hybrid/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:21+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=PHNQCKSN', temp=u'2', epi=u'11') in <http://www.series21.com/kyle-xy/2x11-a-tocar-el-hibrido-hands-on-a-hybrid/>
+2010-10-17 02:08:21+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=PHNQCKSN', temp=u'2', epi=u'11')
+2010-10-17 02:08:22+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x10-castillo-de-naipes-house-of-cards/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:22+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=9ZRC8Q5L', temp=u'2', epi=u'10') in <http://www.series21.com/kyle-xy/2x10-castillo-de-naipes-house-of-cards/>
+2010-10-17 02:08:22+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=9ZRC8Q5L', temp=u'2', epi=u'10')
+2010-10-17 02:08:23+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x09-el-fantasma-dentro-de-la-maquina-the-ghost-in-the-machine/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:23+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=AWI03U76', temp=u'2', epi=u'09') in <http://www.series21.com/kyle-xy/2x09-el-fantasma-dentro-de-la-maquina-the-ghost-in-the-machine/>
+2010-10-17 02:08:23+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=AWI03U76', temp=u'2', epi=u'09')
+2010-10-17 02:08:24+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x08-cual-es-la-frecuencia-kyle-whats-the-frequency-kyle/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:24+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=Y1CMAX44', temp=u'2', epi=u'08') in <http://www.series21.com/kyle-xy/2x08-cual-es-la-frecuencia-kyle-whats-the-frequency-kyle/>
+2010-10-17 02:08:24+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=Y1CMAX44', temp=u'2', epi=u'08')
+2010-10-17 02:08:24+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x07-libertad-para-ser-nosotros-free-to-be-you-and-me/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:24+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=XPGUYSLI', temp=u'2', epi=u'07') in <http://www.series21.com/kyle-xy/2x07-libertad-para-ser-nosotros-free-to-be-you-and-me/>
+2010-10-17 02:08:24+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=XPGUYSLI', temp=u'2', epi=u'07')
+2010-10-17 02:08:25+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x06-suena-kyle-con-peces-electricos-does-kyle-dream-of-electric-fish/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:25+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=JBMZ2P2Q', temp=u'2', epi=u'06') in <http://www.series21.com/kyle-xy/2x06-suena-kyle-con-peces-electricos-does-kyle-dream-of-electric-fish/>
+2010-10-17 02:08:25+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=JBMZ2P2Q', temp=u'2', epi=u'06')
+2010-10-17 02:08:27+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x05-con-los-cinco-sentidos-come-to-your-senses/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:27+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=C36DF75G', temp=u'2', epi=u'05') in <http://www.series21.com/kyle-xy/2x05-con-los-cinco-sentidos-come-to-your-senses/>
+2010-10-17 02:08:27+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=C36DF75G', temp=u'2', epi=u'05')
+2010-10-17 02:08:28+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x04-mantener-el-equilibrio-balancing-act/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:28+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=33CUZORU', temp=u'2', epi=u'04') in <http://www.series21.com/kyle-xy/2x04-mantener-el-equilibrio-balancing-act/>
+2010-10-17 02:08:28+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=33CUZORU', temp=u'2', epi=u'04')
+2010-10-17 02:08:29+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x03-la-lista-es-la-vida-the-list-is-life/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:29+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=QVVN6EO1', temp=u'2', epi=u'03') in <http://www.series21.com/kyle-xy/2x03-la-lista-es-la-vida-the-list-is-life/>
+2010-10-17 02:08:29+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=QVVN6EO1', temp=u'2', epi=u'03')
+2010-10-17 02:08:30+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x02-la-vuelta-a-casa-the-homecoming/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:30+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=CC1DT1K2', temp=u'2', epi=u'02') in <http://www.series21.com/kyle-xy/2x02-la-vuelta-a-casa-the-homecoming/>
+2010-10-17 02:08:30+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=CC1DT1K2', temp=u'2', epi=u'02')
+2010-10-17 02:08:32+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/2x01-el-profeta-the-prophet/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:32+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=0PX4XVEQ', temp=u'2', epi=u'01') in <http://www.series21.com/kyle-xy/2x01-el-profeta-the-prophet/>
+2010-10-17 02:08:32+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=0PX4XVEQ', temp=u'2', epi=u'01')
+2010-10-17 02:08:33+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x10-fin-del-juego-endgame/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:33+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=RJEOIR63', temp=u'1', epi=u'10') in <http://www.series21.com/kyle-xy/1x10-fin-del-juego-endgame/>
+2010-10-17 02:08:33+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=RJEOIR63', temp=u'1', epi=u'10')
+2010-10-17 02:08:38+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x09-espiando-overheard/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=W0NW54QA', temp=u'1', epi=u'09') in <http://www.series21.com/kyle-xy/1x09-espiando-overheard/>
+2010-10-17 02:08:38+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=W0NW54QA', temp=u'1', epi=u'09')
+2010-10-17 02:08:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megaupload.com/?d=HJFZEE40', temp=u'1', epi=u'09') in <http://www.series21.com/kyle-xy/1x09-espiando-overheard/>
+2010-10-17 02:08:38+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megaupload.com/?d=HJFZEE40', temp=u'1', epi=u'09')
+2010-10-17 02:08:39+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x08-la-memoria-esta-servida-memory-serves/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:39+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=OVXJSTPJ', serie=u'Kyle XY', epi=u'08', sublang='Spanish') in <http://www.series21.com/kyle-xy/1x08-la-memoria-esta-servida-memory-serves/>
+2010-10-17 02:08:39+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=OVXJSTPJ', serie=u'Kyle XY', epi=u'08', sublang='Spanish')
+2010-10-17 02:08:40+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x07-kyle-tiene-juego-kyle-got-game/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:40+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=R018SAPD', temp=u'1', epi=u'07') in <http://www.series21.com/kyle-xy/1x07-kyle-tiene-juego-kyle-got-game/>
+2010-10-17 02:08:40+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=R018SAPD', temp=u'1', epi=u'07')
+2010-10-17 02:08:40+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megaupload.com/?d=ATP5WIML', temp=u'1', epi=u'07') in <http://www.series21.com/kyle-xy/1x07-kyle-tiene-juego-kyle-got-game/>
+2010-10-17 02:08:40+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megaupload.com/?d=ATP5WIML', temp=u'1', epi=u'07')
+2010-10-17 02:08:41+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x06-culpa-a-la-lluvia-blame-it-on-the-rain/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:41+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=823MIZ3A', temp=u'1', epi=u'06') in <http://www.series21.com/kyle-xy/1x06-culpa-a-la-lluvia-blame-it-on-the-rain/>
+2010-10-17 02:08:41+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=823MIZ3A', temp=u'1', epi=u'06')
+2010-10-17 02:08:43+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x05-esto-no-es-un-test-this-is-not-a-test/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=DIBT891S', temp=u'1', epi=u'05') in <http://www.series21.com/kyle-xy/1x05-esto-no-es-un-test-this-is-not-a-test/>
+2010-10-17 02:08:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=DIBT891S', temp=u'1', epi=u'05')
+2010-10-17 02:08:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megaupload.com/?d=5A55LX8E', temp=u'1', epi=u'05') in <http://www.series21.com/kyle-xy/1x05-esto-no-es-un-test-this-is-not-a-test/>
+2010-10-17 02:08:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megaupload.com/?d=5A55LX8E', temp=u'1', epi=u'05')
+2010-10-17 02:08:44+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x04-zambullendose-diving-in/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=7ZD89FE4', temp=u'1', epi=u'04') in <http://www.series21.com/kyle-xy/1x04-zambullendose-diving-in/>
+2010-10-17 02:08:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=7ZD89FE4', temp=u'1', epi=u'04')
+2010-10-17 02:08:46+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x03-mentiras-que-unen-the-lies-that-bind/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=YVGV7VTC', temp=u'1', epi=u'03') in <http://www.series21.com/kyle-xy/1x03-mentiras-que-unen-the-lies-that-bind/>
+2010-10-17 02:08:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=YVGV7VTC', temp=u'1', epi=u'03')
+2010-10-17 02:08:47+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x02-desvelados-en-seattle-sleepless-in-seattle/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=6UTBF5L8', temp=u'1', epi=u'02') in <http://www.series21.com/kyle-xy/1x02-desvelados-en-seattle-sleepless-in-seattle/>
+2010-10-17 02:08:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=6UTBF5L8', temp=u'1', epi=u'02')
+2010-10-17 02:08:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megaupload.com/?d=9EVI50CJ', temp=u'1', epi=u'02') in <http://www.series21.com/kyle-xy/1x02-desvelados-en-seattle-sleepless-in-seattle/>
+2010-10-17 02:08:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megaupload.com/?d=9EVI50CJ', temp=u'1', epi=u'02')
+2010-10-17 02:08:48+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/kyle-xy/1x01-piloto-pilot/> (referer: http://www.series21.com/kyle-xy/)
+2010-10-17 02:08:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=UBCI3DM1', temp=u'1', epi=u'01') in <http://www.series21.com/kyle-xy/1x01-piloto-pilot/>
+2010-10-17 02:08:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Kyle XY', links=u'http://www.megavideo.com/?v=UBCI3DM1', temp=u'1', epi=u'01')
+2010-10-17 02:08:48+0200 [series-21] INFO: Closing spider (finished)
+2010-10-17 02:08:48+0200 [series-21] INFO: Stored json feed (106 items, 13466 bytes) in: sites/series-21/dump/K.json
+2010-10-17 02:08:48+0200 [series-21] INFO: Spider closed (finished)

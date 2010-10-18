@@ -1,0 +1,708 @@
+2010-10-17 05:54:20+0200 [scrapy] INFO: Scrapy 0.10.2 started (bot: liberbot)
+2010-10-17 05:54:20+0200 [scrapy] DEBUG: Enabled extensions: FeedExporter, TelnetConsole, SpiderContext, WebService, CoreStats, MemoryUsage, CloseSpider
+2010-10-17 05:54:20+0200 [scrapy] DEBUG: Enabled scheduler middlewares: DuplicatesFilterMiddleware
+2010-10-17 05:54:20+0200 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, RedirectMiddleware, CookiesMiddleware, HttpCompressionMiddleware, DownloaderStats, HttpCacheMiddleware
+2010-10-17 05:54:20+0200 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2010-10-17 05:54:20+0200 [scrapy] DEBUG: Enabled item pipelines: 
+2010-10-17 05:54:20+0200 [scrapy] DEBUG: Telnet console listening on port 6023
+2010-10-17 05:54:20+0200 [scrapy] DEBUG: Web service listening on port 6080
+2010-10-17 05:54:20+0200 [series-21] INFO: Spider opened
+2010-10-17 05:54:21+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/> (referer: None)
+2010-10-17 05:54:22+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x01-sins-of-the-past/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:24+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x11-instintos-maternales-maternal-instincts/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:24+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LUCW30HE', temp=u'3', epi=u'11') in <http://www.series21.com/xena-la-princesa-guerrera/3x11-instintos-maternales-maternal-instincts/>
+2010-10-17 05:54:24+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LUCW30HE', temp=u'3', epi=u'11')
+2010-10-17 05:54:25+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x10-la-pluma-encantada-the-quill-is-mightyer/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:25+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/xena-la-princesa-guerrera/3x10-la-pluma-encantada-the-quill-is-mightyer/> (referer: <http://www.series21.com/xena-la-princesa-guerrera/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:54:27+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x22-una-amiga-en-apuros-parte-2-a-friend-in-need-part-2/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:27+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=XWVMGQ90', temp=u'6', epi=u'22') in <http://www.series21.com/xena-la-princesa-guerrera/6x22-una-amiga-en-apuros-parte-2-a-friend-in-need-part-2/>
+2010-10-17 05:54:27+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=XWVMGQ90', temp=u'6', epi=u'22')
+2010-10-17 05:54:28+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x21-una-amiga-en-apuros-parte-1-a-friend-in-need-part-1/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:28+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NVM2BZWS', temp=u'6', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/6x21-una-amiga-en-apuros-parte-1-a-friend-in-need-part-1/>
+2010-10-17 05:54:28+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NVM2BZWS', temp=u'6', epi=u'21')
+2010-10-17 05:54:28+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=B4RMC9BW', temp=u'6', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/6x21-una-amiga-en-apuros-parte-1-a-friend-in-need-part-1/>
+2010-10-17 05:54:28+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=B4RMC9BW', temp=u'6', epi=u'21')
+2010-10-17 05:54:28+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x20-posesion-del-alma-soul-possession/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:28+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VUID5IAL', temp=u'6', epi=u'20') in <http://www.series21.com/xena-la-princesa-guerrera/6x20-posesion-del-alma-soul-possession/>
+2010-10-17 05:54:28+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VUID5IAL', temp=u'6', epi=u'20')
+2010-10-17 05:54:30+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x19-many-happy-returns/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:30+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=54WR6ERT', temp=u'6', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/6x19-many-happy-returns/>
+2010-10-17 05:54:30+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=54WR6ERT', temp=u'6', epi=u'19')
+2010-10-17 05:54:31+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x18-cuando-los-destinos-chocan-when-fates-collide/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:31+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ID5QH9R1', temp=u'6', epi=u'18') in <http://www.series21.com/xena-la-princesa-guerrera/6x18-cuando-los-destinos-chocan-when-fates-collide/>
+2010-10-17 05:54:31+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ID5QH9R1', temp=u'6', epi=u'18')
+2010-10-17 05:54:31+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x17-los-ultimos-centauros-the-last-of-the-centaurs/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:31+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CWDYCZZ0', temp=u'6', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/6x17-los-ultimos-centauros-the-last-of-the-centaurs/>
+2010-10-17 05:54:31+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CWDYCZZ0', temp=u'6', epi=u'17')
+2010-10-17 05:54:32+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x16-que-entren-los-clones-send-in-the-clones/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:32+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0RRZJN0S', temp=u'6', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/6x16-que-entren-los-clones-send-in-the-clones/>
+2010-10-17 05:54:32+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0RRZJN0S', temp=u'6', epi=u'16')
+2010-10-17 05:54:33+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x15-el-viaje-de-ida-y-vuelta-to-helicon-and-back/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:33+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=7I0BV2AC', temp=u'6', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/6x15-el-viaje-de-ida-y-vuelta-to-helicon-and-back/>
+2010-10-17 05:54:33+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=7I0BV2AC', temp=u'6', epi=u'15')
+2010-10-17 05:54:35+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x14-el-camino-de-la-venganza-path-of-vengeance/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:35+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=QZUVIF24', temp=u'6', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/6x14-el-camino-de-la-venganza-path-of-vengeance/>
+2010-10-17 05:54:35+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=QZUVIF24', temp=u'6', epi=u'14')
+2010-10-17 05:54:35+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=DQXGQPF4', temp=u'6', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/6x14-el-camino-de-la-venganza-path-of-vengeance/>
+2010-10-17 05:54:35+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=DQXGQPF4', temp=u'6', epi=u'14')
+2010-10-17 05:54:35+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x13-estas-ahi-you-are-there/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:35+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=M0R22RUO', temp=u'6', epi=u'13') in <http://www.series21.com/xena-la-princesa-guerrera/6x13-estas-ahi-you-are-there/>
+2010-10-17 05:54:35+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=M0R22RUO', temp=u'6', epi=u'13')
+2010-10-17 05:54:35+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=ADEXP5O0', temp=u'6', epi=u'13') in <http://www.series21.com/xena-la-princesa-guerrera/6x13-estas-ahi-you-are-there/>
+2010-10-17 05:54:35+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=ADEXP5O0', temp=u'6', epi=u'13')
+2010-10-17 05:54:36+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x12-el-dios-que-conoces-the-god-you-know/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=72P3UUGL', temp=u'6', epi=u'12') in <http://www.series21.com/xena-la-princesa-guerrera/6x12-el-dios-que-conoces-the-god-you-know/>
+2010-10-17 05:54:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=72P3UUGL', temp=u'6', epi=u'12')
+2010-10-17 05:54:37+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x11-dangerus-dangerous-prey/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:37+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ZN31EWXG', temp=u'6', epi=u'11') in <http://www.series21.com/xena-la-princesa-guerrera/6x11-dangerus-dangerous-prey/>
+2010-10-17 05:54:37+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ZN31EWXG', temp=u'6', epi=u'11')
+2010-10-17 05:54:37+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=IG14P6HW', temp=u'6', epi=u'11') in <http://www.series21.com/xena-la-princesa-guerrera/6x11-dangerus-dangerous-prey/>
+2010-10-17 05:54:37+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=IG14P6HW', temp=u'6', epi=u'11')
+2010-10-17 05:54:38+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x10-el-viejo-ares-tenia-una-granja-old-ares-had-a-farm/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=EYZSXTWJ', temp=u'6', epi=u'10') in <http://www.series21.com/xena-la-princesa-guerrera/6x10-el-viejo-ares-tenia-una-granja-old-ares-had-a-farm/>
+2010-10-17 05:54:38+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=EYZSXTWJ', temp=u'6', epi=u'10')
+2010-10-17 05:54:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4258P68K', temp=u'6', epi=u'10') in <http://www.series21.com/xena-la-princesa-guerrera/6x10-el-viejo-ares-tenia-una-granja-old-ares-had-a-farm/>
+2010-10-17 05:54:38+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4258P68K', temp=u'6', epi=u'10')
+2010-10-17 05:54:39+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x09-el-retorno-de-valakire-return-of-the-valkyrie/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:39+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=XJZLM1RJ', temp=u'6', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/6x09-el-retorno-de-valakire-return-of-the-valkyrie/>
+2010-10-17 05:54:39+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=XJZLM1RJ', temp=u'6', epi=u'09')
+2010-10-17 05:54:39+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=KNOUV3BN', temp=u'6', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/6x09-el-retorno-de-valakire-return-of-the-valkyrie/>
+2010-10-17 05:54:39+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=KNOUV3BN', temp=u'6', epi=u'09')
+2010-10-17 05:54:40+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x08-el-anillo-the-ring/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:40+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ROU769XN', temp=u'6', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/6x08-el-anillo-the-ring/>
+2010-10-17 05:54:40+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ROU769XN', temp=u'6', epi=u'08')
+2010-10-17 05:54:40+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=CY38DJEX', temp=u'6', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/6x08-el-anillo-the-ring/>
+2010-10-17 05:54:40+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=CY38DJEX', temp=u'6', epi=u'08')
+2010-10-17 05:54:41+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x07-the-reingold/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:41+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JTLDB8TC', temp=u'6', epi=u'07') in <http://www.series21.com/xena-la-princesa-guerrera/6x07-the-reingold/>
+2010-10-17 05:54:41+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JTLDB8TC', temp=u'6', epi=u'07')
+2010-10-17 05:54:41+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1PB9U9AR', temp=u'6', epi=u'07') in <http://www.series21.com/xena-la-princesa-guerrera/6x07-the-reingold/>
+2010-10-17 05:54:41+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1PB9U9AR', temp=u'6', epi=u'07')
+2010-10-17 05:54:43+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x06-el-abismo-the-abyss/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=T44OTBCO', temp=u'6', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/6x06-el-abismo-the-abyss/>
+2010-10-17 05:54:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=T44OTBCO', temp=u'6', epi=u'06')
+2010-10-17 05:54:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=2TB29QBR', temp=u'6', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/6x06-el-abismo-the-abyss/>
+2010-10-17 05:54:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=2TB29QBR', temp=u'6', epi=u'06')
+2010-10-17 05:54:43+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x05-legado-legacy/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=W8S99MWS', temp=u'6', epi=u'05') in <http://www.series21.com/xena-la-princesa-guerrera/6x05-legado-legacy/>
+2010-10-17 05:54:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=W8S99MWS', temp=u'6', epi=u'05')
+2010-10-17 05:54:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=MLQC6OM6', temp=u'6', epi=u'05') in <http://www.series21.com/xena-la-princesa-guerrera/6x05-legado-legacy/>
+2010-10-17 05:54:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=MLQC6OM6', temp=u'6', epi=u'05')
+2010-10-17 05:54:44+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x04-quien-es-gurkam/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WS36E5LO', temp=u'6', epi=u'04') in <http://www.series21.com/xena-la-princesa-guerrera/6x04-quien-es-gurkam/>
+2010-10-17 05:54:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WS36E5LO', temp=u'6', epi=u'04')
+2010-10-17 05:54:45+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x03-el-corazon-de-la-oscuridad/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ZGP027QB', temp=u'6', epi=u'03') in <http://www.series21.com/xena-la-princesa-guerrera/6x03-el-corazon-de-la-oscuridad/>
+2010-10-17 05:54:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ZGP027QB', temp=u'6', epi=u'03')
+2010-10-17 05:54:46+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x02-la-caza-de-anphipolis-the-haunting-of-amphipolis/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=FK7ZHHAG', temp=u'6', epi=u'02') in <http://www.series21.com/xena-la-princesa-guerrera/6x02-la-caza-de-anphipolis-the-haunting-of-amphipolis/>
+2010-10-17 05:54:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=FK7ZHHAG', temp=u'6', epi=u'02')
+2010-10-17 05:54:47+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/6x01-coming-home/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=MYKATEVF', temp=u'6', epi=u'01') in <http://www.series21.com/xena-la-princesa-guerrera/6x01-coming-home/>
+2010-10-17 05:54:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=MYKATEVF', temp=u'6', epi=u'01')
+2010-10-17 05:54:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=IUDQZ6YB', temp=u'6', epi=u'01') in <http://www.series21.com/xena-la-princesa-guerrera/6x01-coming-home/>
+2010-10-17 05:54:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=IUDQZ6YB', temp=u'6', epi=u'01')
+2010-10-17 05:54:48+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x22-motherhood/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=K3XGB9H3', temp=u'5', epi=u'22') in <http://www.series21.com/xena-la-princesa-guerrera/5x22-motherhood/>
+2010-10-17 05:54:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=K3XGB9H3', temp=u'5', epi=u'22')
+2010-10-17 05:54:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=W0IUFII7', temp=u'5', epi=u'22') in <http://www.series21.com/xena-la-princesa-guerrera/5x22-motherhood/>
+2010-10-17 05:54:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=W0IUFII7', temp=u'5', epi=u'22')
+2010-10-17 05:54:49+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x21-eva/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:49+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JZHR9905', temp=u'5', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/5x21-eva/>
+2010-10-17 05:54:49+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JZHR9905', temp=u'5', epi=u'21')
+2010-10-17 05:54:49+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=6IHUG0NS', temp=u'5', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/5x21-eva/>
+2010-10-17 05:54:49+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=6IHUG0NS', temp=u'5', epi=u'21')
+2010-10-17 05:54:50+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x20-livia/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NGY3OG1U', temp=u'5', epi=u'20') in <http://www.series21.com/xena-la-princesa-guerrera/5x20-livia/>
+2010-10-17 05:54:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NGY3OG1U', temp=u'5', epi=u'20')
+2010-10-17 05:54:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4313D8Q7', temp=u'5', epi=u'20') in <http://www.series21.com/xena-la-princesa-guerrera/5x20-livia/>
+2010-10-17 05:54:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4313D8Q7', temp=u'5', epi=u'20')
+2010-10-17 05:54:51+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x19-cara-a-cara-con-la-muerte-looking-death-in-the-eye/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=KE06JR0V', temp=u'5', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/5x19-cara-a-cara-con-la-muerte-looking-death-in-the-eye/>
+2010-10-17 05:54:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=KE06JR0V', temp=u'5', epi=u'19')
+2010-10-17 05:54:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=YG2NV1YR', temp=u'5', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/5x19-cara-a-cara-con-la-muerte-looking-death-in-the-eye/>
+2010-10-17 05:54:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=YG2NV1YR', temp=u'5', epi=u'19')
+2010-10-17 05:54:52+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x18-antonio-y-cleopatra-anthony-and-cleopatra/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=G20JVIVR', temp=u'5', epi=u'18') in <http://www.series21.com/xena-la-princesa-guerrera/5x18-antonio-y-cleopatra-anthony-and-cleopatra/>
+2010-10-17 05:54:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=G20JVIVR', temp=u'5', epi=u'18')
+2010-10-17 05:54:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=U8KSF8GH', temp=u'5', epi=u'18') in <http://www.series21.com/xena-la-princesa-guerrera/5x18-antonio-y-cleopatra-anthony-and-cleopatra/>
+2010-10-17 05:54:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=U8KSF8GH', temp=u'5', epi=u'18')
+2010-10-17 05:54:53+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x17-alamas-gemelas-kindred-spirits/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:53+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=YHPIUN3H', temp=u'5', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/5x17-alamas-gemelas-kindred-spirits/>
+2010-10-17 05:54:53+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=YHPIUN3H', temp=u'5', epi=u'17')
+2010-10-17 05:54:53+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=A4XCAOH3', temp=u'5', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/5x17-alamas-gemelas-kindred-spirits/>
+2010-10-17 05:54:53+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=A4XCAOH3', temp=u'5', epi=u'17')
+2010-10-17 05:54:54+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x16-life-blood/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:54+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ATZZEWCF', temp=u'5', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/5x16-life-blood/>
+2010-10-17 05:54:54+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ATZZEWCF', temp=u'5', epi=u'16')
+2010-10-17 05:54:54+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1DFHERQP', temp=u'5', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/5x16-life-blood/>
+2010-10-17 05:54:54+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1DFHERQP', temp=u'5', epi=u'16')
+2010-10-17 05:54:55+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x15-married-with-fishsticks/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=SAGI3OLR', temp=u'5', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/5x15-married-with-fishsticks/>
+2010-10-17 05:54:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=SAGI3OLR', temp=u'5', epi=u'15')
+2010-10-17 05:54:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x14-amphipolis-under-siege/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=94GI3WMZ', temp=u'5', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/5x14-amphipolis-under-siege/>
+2010-10-17 05:54:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=94GI3WMZ', temp=u'5', epi=u'14')
+2010-10-17 05:54:57+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x13-eternal-bonds/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:57+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=Z1RQ4DBY', temp=u'5', epi=u'13') in <http://www.series21.com/xena-la-princesa-guerrera/5x13-eternal-bonds/>
+2010-10-17 05:54:57+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=Z1RQ4DBY', temp=u'5', epi=u'13')
+2010-10-17 05:54:58+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x12-god-fearing-child/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:58+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=DWSORQ9X', temp=u'5', epi=u'12') in <http://www.series21.com/xena-la-princesa-guerrera/5x12-god-fearing-child/>
+2010-10-17 05:54:58+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=DWSORQ9X', temp=u'5', epi=u'12')
+2010-10-17 05:54:58+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=WKKOFCUE', temp=u'5', epi=u'12') in <http://www.series21.com/xena-la-princesa-guerrera/5x12-god-fearing-child/>
+2010-10-17 05:54:58+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=WKKOFCUE', temp=u'5', epi=u'12')
+2010-10-17 05:54:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x10-lyre-lyre-hearts-on-fire/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:54:59+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HIFO4PVO', temp=u'5', epi=u'10') in <http://www.series21.com/xena-la-princesa-guerrera/5x10-lyre-lyre-hearts-on-fire/>
+2010-10-17 05:54:59+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HIFO4PVO', temp=u'5', epi=u'10')
+2010-10-17 05:54:59+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=W1GB3RE0', temp=u'5', epi=u'10') in <http://www.series21.com/xena-la-princesa-guerrera/5x10-lyre-lyre-hearts-on-fire/>
+2010-10-17 05:54:59+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=W1GB3RE0', temp=u'5', epi=u'10')
+2010-10-17 05:55:00+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x09-la-semilla-de-la-fe-seeds-of-faith/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LSNT00DN', temp=u'5', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/5x09-la-semilla-de-la-fe-seeds-of-faith/>
+2010-10-17 05:55:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LSNT00DN', temp=u'5', epi=u'09')
+2010-10-17 05:55:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=5NTVD2QC', temp=u'5', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/5x09-la-semilla-de-la-fe-seeds-of-faith/>
+2010-10-17 05:55:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=5NTVD2QC', temp=u'5', epi=u'09')
+2010-10-17 05:55:00+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x08-problemillas-little-problems/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=UHMI51LI', temp=u'5', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/5x08-problemillas-little-problems/>
+2010-10-17 05:55:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=UHMI51LI', temp=u'5', epi=u'08')
+2010-10-17 05:55:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=KN8NURFT', temp=u'5', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/5x08-problemillas-little-problems/>
+2010-10-17 05:55:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=KN8NURFT', temp=u'5', epi=u'08')
+2010-10-17 05:55:01+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x07-de-vuelta-a-la-botella-back-in-the-bottle/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=BKRBB4MC', temp=u'5', epi=u'07') in <http://www.series21.com/xena-la-princesa-guerrera/5x07-de-vuelta-a-la-botella-back-in-the-bottle/>
+2010-10-17 05:55:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=BKRBB4MC', temp=u'5', epi=u'07')
+2010-10-17 05:55:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=DC9WSL9H', temp=u'5', epi=u'07') in <http://www.series21.com/xena-la-princesa-guerrera/5x07-de-vuelta-a-la-botella-back-in-the-bottle/>
+2010-10-17 05:55:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=DC9WSL9H', temp=u'5', epi=u'07')
+2010-10-17 05:55:01+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x06-purity/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=XRER1T0Q', temp=u'5', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/5x06-purity/>
+2010-10-17 05:55:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=XRER1T0Q', temp=u'5', epi=u'06')
+2010-10-17 05:55:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=CSUDPIP2', temp=u'5', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/5x06-purity/>
+2010-10-17 05:55:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=CSUDPIP2', temp=u'5', epi=u'06')
+2010-10-17 05:55:02+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/505-them-bones/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:02+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/xena-la-princesa-guerrera/505-them-bones/> (referer: <http://www.series21.com/xena-la-princesa-guerrera/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:55:02+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x04-animal-atraction/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:02+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/xena-la-princesa-guerrera/5x04-animal-atraction/> (referer: <http://www.series21.com/xena-la-princesa-guerrera/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:55:03+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x03-la-sucesion-succession/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:03+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/xena-la-princesa-guerrera/5x03-la-sucesion-succession/> (referer: <http://www.series21.com/xena-la-princesa-guerrera/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:55:03+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x02-chakram/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:03+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/xena-la-princesa-guerrera/5x02-chakram/> (referer: <http://www.series21.com/xena-la-princesa-guerrera/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:55:04+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/5x01-el-angel-caido-fallen-angel/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:04+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/xena-la-princesa-guerrera/5x01-el-angel-caido-fallen-angel/> (referer: <http://www.series21.com/xena-la-princesa-guerrera/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:55:04+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x22-deja-vu-repetido/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:04+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0T61FBLM', temp=u'4', epi=u'22') in <http://www.series21.com/xena-la-princesa-guerrera/4x22-deja-vu-repetido/>
+2010-10-17 05:55:04+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0T61FBLM', temp=u'4', epi=u'22')
+2010-10-17 05:55:05+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x21-los-idus-de-marzo/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:05+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=99D997UX', temp=u'4', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/4x21-los-idus-de-marzo/>
+2010-10-17 05:55:05+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=99D997UX', temp=u'4', epi=u'21')
+2010-10-17 05:55:06+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x20-juego-final/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:06+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VD4ZINQ5', temp=u'4', epi=u'20') in <http://www.series21.com/xena-la-princesa-guerrera/4x20-juego-final/>
+2010-10-17 05:55:06+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VD4ZINQ5', temp=u'4', epi=u'20')
+2010-10-17 05:55:07+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x19-hace-falta-uno/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:07+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VEDWGVCF', temp=u'4', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/4x19-hace-falta-uno/>
+2010-10-17 05:55:07+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VEDWGVCF', temp=u'4', epi=u'19')
+2010-10-17 05:55:07+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=29CMJP16', temp=u'4', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/4x19-hace-falta-uno/>
+2010-10-17 05:55:07+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=29CMJP16', temp=u'4', epi=u'19')
+2010-10-17 05:55:08+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x18-la-conversa/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:08+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=QT2ON97P', temp=u'4', epi=u'18') in <http://www.series21.com/xena-la-princesa-guerrera/4x18-la-conversa/>
+2010-10-17 05:55:08+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=QT2ON97P', temp=u'4', epi=u'18')
+2010-10-17 05:55:09+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x17-la-obra-es-el-asunto/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:09+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=FFFIA7U0', temp=u'4', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/4x17-la-obra-es-el-asunto/>
+2010-10-17 05:55:09+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=FFFIA7U0', temp=u'4', epi=u'17')
+2010-10-17 05:55:10+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x16-el-camino/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:10+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=E4S9FD35', temp=u'4', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/4x16-el-camino/>
+2010-10-17 05:55:10+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=E4S9FD35', temp=u'4', epi=u'16')
+2010-10-17 05:55:10+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x15-entre-lineas/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:10+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JXSP9GIJ', temp=u'4', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/4x15-entre-lineas/>
+2010-10-17 05:55:10+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JXSP9GIJ', temp=u'4', epi=u'15')
+2010-10-17 05:55:10+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4UUSHPTE', temp=u'4', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/4x15-entre-lineas/>
+2010-10-17 05:55:10+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4UUSHPTE', temp=u'4', epi=u'15')
+2010-10-17 05:55:11+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x14-devi/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:11+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JXSP9GIJ', temp=u'4', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/4x14-devi/>
+2010-10-17 05:55:11+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JXSP9GIJ', temp=u'4', epi=u'14')
+2010-10-17 05:55:11+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4UUSHPTE', temp=u'4', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/4x14-devi/>
+2010-10-17 05:55:11+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4UUSHPTE', temp=u'4', epi=u'14')
+2010-10-17 05:55:12+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x12-if-the-shoe-fits/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:12+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=APKV5ZVR', temp=u'4', epi=u'12') in <http://www.series21.com/xena-la-princesa-guerrera/4x12-if-the-shoe-fits/>
+2010-10-17 05:55:12+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=APKV5ZVR', temp=u'4', epi=u'12')
+2010-10-17 05:55:13+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x11-la-hija-de-pomira/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:13+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WCAMQPBG', temp=u'4', epi=u'11') in <http://www.series21.com/xena-la-princesa-guerrera/4x11-la-hija-de-pomira/>
+2010-10-17 05:55:13+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WCAMQPBG', temp=u'4', epi=u'11')
+2010-10-17 05:55:14+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x10-la-llave-del-rey/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:14+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=S8PIQ0GF', temp=u'4', epi=u'10') in <http://www.series21.com/xena-la-princesa-guerrera/4x10-la-llave-del-rey/>
+2010-10-17 05:55:14+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=S8PIQ0GF', temp=u'4', epi=u'10')
+2010-10-17 05:55:14+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=GMER5AML', temp=u'4', epi=u'10') in <http://www.series21.com/xena-la-princesa-guerrera/4x10-la-llave-del-rey/>
+2010-10-17 05:55:14+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=GMER5AML', temp=u'4', epi=u'10')
+2010-10-17 05:55:14+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x09-pasado-imperfecto-s04e09/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:14+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=IUUDGW5A', temp=u'4', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/4x09-pasado-imperfecto-s04e09/>
+2010-10-17 05:55:14+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=IUUDGW5A', temp=u'4', epi=u'09')
+2010-10-17 05:55:14+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=GMXI0Z49', temp=u'4', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/4x09-pasado-imperfecto-s04e09/>
+2010-10-17 05:55:14+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=GMXI0Z49', temp=u'4', epi=u'09')
+2010-10-17 05:55:15+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x08-la-cruza-crusader/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NS4AASRL', temp=u'4', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/4x08-la-cruza-crusader/>
+2010-10-17 05:55:15+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NS4AASRL', temp=u'4', epi=u'08')
+2010-10-17 05:55:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=WSAJCM8R', temp=u'4', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/4x08-la-cruza-crusader/>
+2010-10-17 05:55:15+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=WSAJCM8R', temp=u'4', epi=u'08')
+2010-10-17 05:55:15+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x07-encadenada-y-atada-locked-up-and-tied-down/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=W03YV78G', temp=u'4', epi=u'07') in <http://www.series21.com/xena-la-princesa-guerrera/4x07-encadenada-y-atada-locked-up-and-tied-down/>
+2010-10-17 05:55:15+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=W03YV78G', temp=u'4', epi=u'07')
+2010-10-17 05:55:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=J8E05VKG', temp=u'4', epi=u'07') in <http://www.series21.com/xena-la-princesa-guerrera/4x07-encadenada-y-atada-locked-up-and-tied-down/>
+2010-10-17 05:55:15+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=J8E05VKG', temp=u'4', epi=u'07')
+2010-10-17 05:55:15+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x06-historia-de-dos-musas-a-tale-of-two-muses/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JV6HU5MA', temp=u'4', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/4x06-historia-de-dos-musas-a-tale-of-two-muses/>
+2010-10-17 05:55:15+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JV6HU5MA', temp=u'4', epi=u'06')
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x05-un-buen-dia-a-good-day/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=9E7KRYSH', temp=u'4', epi=u'05') in <http://www.series21.com/xena-la-princesa-guerrera/4x05-un-buen-dia-a-good-day/>
+2010-10-17 05:55:16+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=9E7KRYSH', temp=u'4', epi=u'05')
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=YNGCRJ00', temp=u'4', epi=u'05') in <http://www.series21.com/xena-la-princesa-guerrera/4x05-un-buen-dia-a-good-day/>
+2010-10-17 05:55:16+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=YNGCRJ00', temp=u'4', epi=u'05')
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x04-enfermas-y-en-el-infierno-in-sickness-and-in-hell/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=9E7KRYSH', temp=u'4', epi=u'04') in <http://www.series21.com/xena-la-princesa-guerrera/4x04-enfermas-y-en-el-infierno-in-sickness-and-in-hell/>
+2010-10-17 05:55:16+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=9E7KRYSH', temp=u'4', epi=u'04')
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=YNGCRJ00', temp=u'4', epi=u'04') in <http://www.series21.com/xena-la-princesa-guerrera/4x04-enfermas-y-en-el-infierno-in-sickness-and-in-hell/>
+2010-10-17 05:55:16+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=YNGCRJ00', temp=u'4', epi=u'04')
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x03-un-asunto-de-familia-a-family-affair/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=OZRLM1Q9', temp=u'4', epi=u'03') in <http://www.series21.com/xena-la-princesa-guerrera/4x03-un-asunto-de-familia-a-family-affair/>
+2010-10-17 05:55:16+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=OZRLM1Q9', temp=u'4', epi=u'03')
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=QQD2W3GS', temp=u'4', epi=u'03') in <http://www.series21.com/xena-la-princesa-guerrera/4x03-un-asunto-de-familia-a-family-affair/>
+2010-10-17 05:55:16+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=QQD2W3GS', temp=u'4', epi=u'03')
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x02-reino-del-pecado2-adventures-in-the-sin-trade-part-2/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=5R8S3A47', temp=u'4', epi=u'02') in <http://www.series21.com/xena-la-princesa-guerrera/4x02-reino-del-pecado2-adventures-in-the-sin-trade-part-2/>
+2010-10-17 05:55:16+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=5R8S3A47', temp=u'4', epi=u'02')
+2010-10-17 05:55:16+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1ZA0BSTW', temp=u'4', epi=u'02') in <http://www.series21.com/xena-la-princesa-guerrera/4x02-reino-del-pecado2-adventures-in-the-sin-trade-part-2/>
+2010-10-17 05:55:16+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1ZA0BSTW', temp=u'4', epi=u'02')
+2010-10-17 05:55:18+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/4x01-reino-del-pecado1-adventures-in-the-sin-trade-part-1/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:18+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=64VE7QA5', temp=u'4', epi=u'01') in <http://www.series21.com/xena-la-princesa-guerrera/4x01-reino-del-pecado1-adventures-in-the-sin-trade-part-1/>
+2010-10-17 05:55:18+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=64VE7QA5', temp=u'4', epi=u'01')
+2010-10-17 05:55:18+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=FDEJW8DV', temp=u'4', epi=u'01') in <http://www.series21.com/xena-la-princesa-guerrera/4x01-reino-del-pecado1-adventures-in-the-sin-trade-part-1/>
+2010-10-17 05:55:18+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=FDEJW8DV', temp=u'4', epi=u'01')
+2010-10-17 05:55:18+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x22-sacrifice-part-2/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:18+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0Y7ASQJE', temp=u'3', epi=u'22') in <http://www.series21.com/xena-la-princesa-guerrera/3x22-sacrifice-part-2/>
+2010-10-17 05:55:18+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0Y7ASQJE', temp=u'3', epi=u'22')
+2010-10-17 05:55:18+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x21-sacrifice-part-1/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:18+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=P549VRX3', temp=u'3', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/3x21-sacrifice-part-1/>
+2010-10-17 05:55:18+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=P549VRX3', temp=u'3', epi=u'21')
+2010-10-17 05:55:18+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x20-vanishing-act/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:18+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=1HARXC52', temp=u'3', epi=u'20') in <http://www.series21.com/xena-la-princesa-guerrera/3x20-vanishing-act/>
+2010-10-17 05:55:18+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=1HARXC52', temp=u'3', epi=u'20')
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x19-tsunami/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=D1HI4QXF', temp=u'3', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/3x19-tsunami/>
+2010-10-17 05:55:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=D1HI4QXF', temp=u'3', epi=u'19')
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x17-no-me-olvides-forget-me-not/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=FCWDIH11', temp=u'3', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/3x17-no-me-olvides-forget-me-not/>
+2010-10-17 05:55:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=FCWDIH11', temp=u'3', epi=u'17')
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=NS5ZQLIH', temp=u'3', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/3x17-no-me-olvides-forget-me-not/>
+2010-10-17 05:55:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=NS5ZQLIH', temp=u'3', epi=u'17')
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x16-cuando-estes-en-roma-when-in-rome/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=YDVS0C2C', temp=u'3', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/3x16-cuando-estes-en-roma-when-in-rome/>
+2010-10-17 05:55:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=YDVS0C2C', temp=u'3', epi=u'16')
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=JPFY6GT7', temp=u'3', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/3x16-cuando-estes-en-roma-when-in-rome/>
+2010-10-17 05:55:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=JPFY6GT7', temp=u'3', epi=u'16')
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x15-el-rey-del-timo-king-con/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ND45U3Z0', temp=u'3', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/3x15-el-rey-del-timo-king-con/>
+2010-10-17 05:55:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ND45U3Z0', temp=u'3', epi=u'15')
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=S6OCJDU3', temp=u'3', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/3x15-el-rey-del-timo-king-con/>
+2010-10-17 05:55:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=S6OCJDU3', temp=u'3', epi=u'15')
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x14-perdonada-forgiven/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=KMRZPZC9', temp=u'3', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/3x14-perdonada-forgiven/>
+2010-10-17 05:55:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=KMRZPZC9', temp=u'3', epi=u'14')
+2010-10-17 05:55:19+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4AE220AB', temp=u'3', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/3x14-perdonada-forgiven/>
+2010-10-17 05:55:19+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4AE220AB', temp=u'3', epi=u'14')
+2010-10-17 05:55:20+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x13-una-contra-un-ejercito-one-against-an-army/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:20+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=1GJV2OSI', temp=u'3', epi=u'13') in <http://www.series21.com/xena-la-princesa-guerrera/3x13-una-contra-un-ejercito-one-against-an-army/>
+2010-10-17 05:55:20+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=1GJV2OSI', temp=u'3', epi=u'13')
+2010-10-17 05:55:20+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=MUXBV98T', temp=u'3', epi=u'13') in <http://www.series21.com/xena-la-princesa-guerrera/3x13-una-contra-un-ejercito-one-against-an-army/>
+2010-10-17 05:55:20+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=MUXBV98T', temp=u'3', epi=u'13')
+2010-10-17 05:55:20+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x12-the-bitter-suite/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:20+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=QIDYHNRF', temp=u'3', epi=u'12') in <http://www.series21.com/xena-la-princesa-guerrera/3x12-the-bitter-suite/>
+2010-10-17 05:55:20+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=QIDYHNRF', temp=u'3', epi=u'12')
+2010-10-17 05:55:21+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x09-warrior-warriorpriestesstramp/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:21+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=TMV4JZCI', temp=u'3', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/3x09-warrior-warriorpriestesstramp/>
+2010-10-17 05:55:21+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=TMV4JZCI', temp=u'3', epi=u'09')
+2010-10-17 05:55:21+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x08-the-king-of-assassins-the-king-of-assassins/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:21+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WYVWYS8N', temp=u'3', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/3x08-the-king-of-assassins-the-king-of-assassins/>
+2010-10-17 05:55:21+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WYVWYS8N', temp=u'3', epi=u'08')
+2010-10-17 05:55:22+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x07-la-deuda-ii-the-debt-ii/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:22+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=2XX9LL6P', temp=u'3', epi=u'07') in <http://www.series21.com/xena-la-princesa-guerrera/3x07-la-deuda-ii-the-debt-ii/>
+2010-10-17 05:55:22+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=2XX9LL6P', temp=u'3', epi=u'07')
+2010-10-17 05:55:23+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x06-la-deuda-the-debt-i/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:23+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=1NOLWQOM', temp=u'3', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/3x06-la-deuda-the-debt-i/>
+2010-10-17 05:55:23+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=1NOLWQOM', temp=u'3', epi=u'06')
+2010-10-17 05:55:23+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=VVQ0XF49', temp=u'3', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/3x06-la-deuda-the-debt-i/>
+2010-10-17 05:55:23+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=VVQ0XF49', temp=u'3', epi=u'06')
+2010-10-17 05:55:24+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x05-gabrielles-hope-gabrielles-hope/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:24+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=OXR5BGIZ', temp=u'3', epi=u'05') in <http://www.series21.com/xena-la-princesa-guerrera/3x05-gabrielles-hope-gabrielles-hope/>
+2010-10-17 05:55:24+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=OXR5BGIZ', temp=u'3', epi=u'05')
+2010-10-17 05:55:25+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x04-el-profeta-the-deliverer/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:25+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0S3NXB2B', temp=u'3', epi=u'04') in <http://www.series21.com/xena-la-princesa-guerrera/3x04-el-profeta-the-deliverer/>
+2010-10-17 05:55:25+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0S3NXB2B', temp=u'3', epi=u'04')
+2010-10-17 05:55:25+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=YO4BK5FI', temp=u'3', epi=u'04') in <http://www.series21.com/xena-la-princesa-guerrera/3x04-el-profeta-the-deliverer/>
+2010-10-17 05:55:25+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=YO4BK5FI', temp=u'3', epi=u'04')
+2010-10-17 05:55:26+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x03-los-6-magnificos-the-dirty-half-dozen/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:26+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=4XKBN8XS', temp=u'3', epi=u'03') in <http://www.series21.com/xena-la-princesa-guerrera/3x03-los-6-magnificos-the-dirty-half-dozen/>
+2010-10-17 05:55:26+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=4XKBN8XS', temp=u'3', epi=u'03')
+2010-10-17 05:55:26+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=6XO8LXX7', temp=u'3', epi=u'03') in <http://www.series21.com/xena-la-princesa-guerrera/3x03-los-6-magnificos-the-dirty-half-dozen/>
+2010-10-17 05:55:26+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=6XO8LXX7', temp=u'3', epi=u'03')
+2010-10-17 05:55:27+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x02-un-dia-interminable-been-there-done-that/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:27+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LBEYF6L2', temp=u'3', epi=u'02') in <http://www.series21.com/xena-la-princesa-guerrera/3x02-un-dia-interminable-been-there-done-that/>
+2010-10-17 05:55:27+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LBEYF6L2', temp=u'3', epi=u'02')
+2010-10-17 05:55:27+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=8AMY0EWI', temp=u'3', epi=u'02') in <http://www.series21.com/xena-la-princesa-guerrera/3x02-un-dia-interminable-been-there-done-that/>
+2010-10-17 05:55:27+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=8AMY0EWI', temp=u'3', epi=u'02')
+2010-10-17 05:55:28+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/3x01-las-furias-the-furies/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:28+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VMQZ8MMS', temp=u'3', epi=u'01') in <http://www.series21.com/xena-la-princesa-guerrera/3x01-las-furias-the-furies/>
+2010-10-17 05:55:28+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VMQZ8MMS', temp=u'3', epi=u'01')
+2010-10-17 05:55:28+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=A2Z1SQ5D', temp=u'3', epi=u'01') in <http://www.series21.com/xena-la-princesa-guerrera/3x01-las-furias-the-furies/>
+2010-10-17 05:55:28+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=A2Z1SQ5D', temp=u'3', epi=u'01')
+2010-10-17 05:55:29+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x21-el-marinero-perdido-lost-mariner/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:29+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=K83U0LC8', temp=u'2', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/2x21-el-marinero-perdido-lost-mariner/>
+2010-10-17 05:55:29+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=K83U0LC8', temp=u'2', epi=u'21')
+2010-10-17 05:55:29+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=U5GZQTDO', temp=u'2', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/2x21-el-marinero-perdido-lost-mariner/>
+2010-10-17 05:55:29+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=U5GZQTDO', temp=u'2', epi=u'21')
+2010-10-17 05:55:30+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x20-el-precio-the-price/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:30+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=UESVLZNW', temp=u'2', epi=u'20') in <http://www.series21.com/xena-la-princesa-guerrera/2x20-el-precio-the-price/>
+2010-10-17 05:55:30+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=UESVLZNW', temp=u'2', epi=u'20')
+2010-10-17 05:55:30+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=KKL2WYM8', temp=u'2', epi=u'20') in <http://www.series21.com/xena-la-princesa-guerrera/2x20-el-precio-the-price/>
+2010-10-17 05:55:30+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=KKL2WYM8', temp=u'2', epi=u'20')
+2010-10-17 05:55:31+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x19-ulises-ulysses/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:31+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CHFCW3ME', temp=u'2', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/2x19-ulises-ulysses/>
+2010-10-17 05:55:31+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CHFCW3ME', temp=u'2', epi=u'19')
+2010-10-17 05:55:31+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=06UZ3DBR', temp=u'2', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/2x19-ulises-ulysses/>
+2010-10-17 05:55:31+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=06UZ3DBR', temp=u'2', epi=u'19')
+2010-10-17 05:55:32+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x18-fe-ciega-blind-faith/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:32+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VJHJFTIA', temp=u'2', epi=u'18') in <http://www.series21.com/xena-la-princesa-guerrera/2x18-fe-ciega-blind-faith/>
+2010-10-17 05:55:32+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VJHJFTIA', temp=u'2', epi=u'18')
+2010-10-17 05:55:32+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=AG55GZS6', temp=u'2', epi=u'18') in <http://www.series21.com/xena-la-princesa-guerrera/2x18-fe-ciega-blind-faith/>
+2010-10-17 05:55:32+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=AG55GZS6', temp=u'2', epi=u'18')
+2010-10-17 05:55:33+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x17-la-ejecucion-the-execution/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:33+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HSUG32N6', temp=u'2', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/2x17-la-ejecucion-the-execution/>
+2010-10-17 05:55:33+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HSUG32N6', temp=u'2', epi=u'17')
+2010-10-17 05:55:33+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=OI6XTQTO', temp=u'2', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/2x17-la-ejecucion-the-execution/>
+2010-10-17 05:55:33+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=OI6XTQTO', temp=u'2', epi=u'17')
+2010-10-17 05:55:34+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x16-por-el-doblan-las-campanas-for-him-the-bell-tolls/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:34+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HFCJSQAG', temp=u'2', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/2x16-por-el-doblan-las-campanas-for-him-the-bell-tolls/>
+2010-10-17 05:55:34+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HFCJSQAG', temp=u'2', epi=u'16')
+2010-10-17 05:55:34+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=CUQNC2YX', temp=u'2', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/2x16-por-el-doblan-las-campanas-for-him-the-bell-tolls/>
+2010-10-17 05:55:34+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=CUQNC2YX', temp=u'2', epi=u'16')
+2010-10-17 05:55:35+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x15-un-dia-en-la-vida-a-day-in-the-life/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:35+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CRIEKQYU', temp=u'2', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/2x15-un-dia-en-la-vida-a-day-in-the-life/>
+2010-10-17 05:55:35+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CRIEKQYU', temp=u'2', epi=u'15')
+2010-10-17 05:55:35+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=QTP7FXI6', temp=u'2', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/2x15-un-dia-en-la-vida-a-day-in-the-life/>
+2010-10-17 05:55:35+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=QTP7FXI6', temp=u'2', epi=u'15')
+2010-10-17 05:55:36+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x14-un-mal-necesario-a-necessary-evil/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=IVTI8FNQ', temp=u'2', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/2x14-un-mal-necesario-a-necessary-evil/>
+2010-10-17 05:55:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=IVTI8FNQ', temp=u'2', epi=u'14')
+2010-10-17 05:55:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=K5M0YH4E', temp=u'2', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/2x14-un-mal-necesario-a-necessary-evil/>
+2010-10-17 05:55:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=K5M0YH4E', temp=u'2', epi=u'14')
+2010-10-17 05:55:36+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x13-la-busqueda-the-quest/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0K2DW8PH', temp=u'2', epi=u'13') in <http://www.series21.com/xena-la-princesa-guerrera/2x13-la-busqueda-the-quest/>
+2010-10-17 05:55:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=0K2DW8PH', temp=u'2', epi=u'13')
+2010-10-17 05:55:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1T9HPBUL', temp=u'2', epi=u'13') in <http://www.series21.com/xena-la-princesa-guerrera/2x13-la-busqueda-the-quest/>
+2010-10-17 05:55:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1T9HPBUL', temp=u'2', epi=u'13')
+2010-10-17 05:55:36+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x12-destino-destiny/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=3E3K335P', temp=u'2', epi=u'12') in <http://www.series21.com/xena-la-princesa-guerrera/2x12-destino-destiny/>
+2010-10-17 05:55:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=3E3K335P', temp=u'2', epi=u'12')
+2010-10-17 05:55:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=58WYGYRQ', temp=u'2', epi=u'12') in <http://www.series21.com/xena-la-princesa-guerrera/2x12-destino-destiny/>
+2010-10-17 05:55:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=58WYGYRQ', temp=u'2', epi=u'12')
+2010-10-17 05:55:37+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x11-here-she-comes/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:37+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CGC5GFM8', temp=u'2', epi=u'11') in <http://www.series21.com/xena-la-princesa-guerrera/2x11-here-she-comes/>
+2010-10-17 05:55:37+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CGC5GFM8', temp=u'2', epi=u'11')
+2010-10-17 05:55:37+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=5XNSMFS1', temp=u'2', epi=u'11') in <http://www.series21.com/xena-la-princesa-guerrera/2x11-here-she-comes/>
+2010-10-17 05:55:37+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=5XNSMFS1', temp=u'2', epi=u'11')
+2010-10-17 05:55:37+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x10-the-xena-scrolls-the-xena-scrolls/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:37+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=V956C5IH', temp=u'2', epi=u'10') in <http://www.series21.com/xena-la-princesa-guerrera/2x10-the-xena-scrolls-the-xena-scrolls/>
+2010-10-17 05:55:37+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=V956C5IH', temp=u'2', epi=u'10')
+2010-10-17 05:55:38+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x09-un-canto-de-solsticio-a-solstice-carol/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JHY4J4DB', temp=u'2', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/2x09-un-canto-de-solsticio-a-solstice-carol/>
+2010-10-17 05:55:38+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=JHY4J4DB', temp=u'2', epi=u'09')
+2010-10-17 05:55:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=6V2QL7EI', temp=u'2', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/2x09-un-canto-de-solsticio-a-solstice-carol/>
+2010-10-17 05:55:38+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=6V2QL7EI', temp=u'2', epi=u'09')
+2010-10-17 05:55:39+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x08-diez-pequenos-guerreros-ten-little-warlords/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:39+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=6VT9I46T', temp=u'2', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/2x08-diez-pequenos-guerreros-ten-little-warlords/>
+2010-10-17 05:55:39+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=6VT9I46T', temp=u'2', epi=u'08')
+2010-10-17 05:55:39+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=MVC07IVW', temp=u'2', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/2x08-diez-pequenos-guerreros-ten-little-warlords/>
+2010-10-17 05:55:39+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=MVC07IVW', temp=u'2', epi=u'08')
+2010-10-17 05:55:40+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x07-un-extrano-dentro-de-mi-intimate-stranger/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:40+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=QVQ4RUYD', temp=u'2', epi=u'07') in <http://www.series21.com/xena-la-princesa-guerrera/2x07-un-extrano-dentro-de-mi-intimate-stranger/>
+2010-10-17 05:55:40+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=QVQ4RUYD', temp=u'2', epi=u'07')
+2010-10-17 05:55:40+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=8SPBGBN7', temp=u'2', epi=u'07') in <http://www.series21.com/xena-la-princesa-guerrera/2x07-un-extrano-dentro-de-mi-intimate-stranger/>
+2010-10-17 05:55:40+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=8SPBGBN7', temp=u'2', epi=u'07')
+2010-10-17 05:55:40+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x06-guerreraprincesavagabunda-warrior-princess-tramp/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:40+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LVABHMSL', temp=u'2', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/2x06-guerreraprincesavagabunda-warrior-princess-tramp/>
+2010-10-17 05:55:40+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LVABHMSL', temp=u'2', epi=u'06')
+2010-10-17 05:55:40+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=8VZXKLRG', temp=u'2', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/2x06-guerreraprincesavagabunda-warrior-princess-tramp/>
+2010-10-17 05:55:40+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=8VZXKLRG', temp=u'2', epi=u'06')
+2010-10-17 05:55:41+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x05-el-regreso-de-calisto-the-return-of-callisto/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:41+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=8CXHRVE8', temp=u'2', epi=u'05') in <http://www.series21.com/xena-la-princesa-guerrera/2x05-el-regreso-de-calisto-the-return-of-callisto/>
+2010-10-17 05:55:41+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=8CXHRVE8', temp=u'2', epi=u'05')
+2010-10-17 05:55:41+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=PN5YK67C', temp=u'2', epi=u'05') in <http://www.series21.com/xena-la-princesa-guerrera/2x05-el-regreso-de-calisto-the-return-of-callisto/>
+2010-10-17 05:55:41+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=PN5YK67C', temp=u'2', epi=u'05')
+2010-10-17 05:55:42+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x04-las-chicas-se-divierten-girls-just-wanna-have-fun/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:42+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=RE7HT6FJ', temp=u'2', epi=u'04') in <http://www.series21.com/xena-la-princesa-guerrera/2x04-las-chicas-se-divierten-girls-just-wanna-have-fun/>
+2010-10-17 05:55:42+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=RE7HT6FJ', temp=u'2', epi=u'04')
+2010-10-17 05:55:42+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=08FS3MX2', temp=u'2', epi=u'04') in <http://www.series21.com/xena-la-princesa-guerrera/2x04-las-chicas-se-divierten-girls-just-wanna-have-fun/>
+2010-10-17 05:55:42+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=08FS3MX2', temp=u'2', epi=u'04')
+2010-10-17 05:55:43+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x03-el-gigante-asesino-the-giant-killer/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NT8WYPNT', temp=u'2', epi=u'03') in <http://www.series21.com/xena-la-princesa-guerrera/2x03-el-gigante-asesino-the-giant-killer/>
+2010-10-17 05:55:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NT8WYPNT', temp=u'2', epi=u'03')
+2010-10-17 05:55:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=CMJ4E762', temp=u'2', epi=u'03') in <http://www.series21.com/xena-la-princesa-guerrera/2x03-el-gigante-asesino-the-giant-killer/>
+2010-10-17 05:55:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=CMJ4E762', temp=u'2', epi=u'03')
+2010-10-17 05:55:52+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x02-no-me-olvides-remember-nothing/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=252OUYE5', temp=u'2', epi=u'02') in <http://www.series21.com/xena-la-princesa-guerrera/2x02-no-me-olvides-remember-nothing/>
+2010-10-17 05:55:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=252OUYE5', temp=u'2', epi=u'02')
+2010-10-17 05:55:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=SU1CFDWK', temp=u'2', epi=u'02') in <http://www.series21.com/xena-la-princesa-guerrera/2x02-no-me-olvides-remember-nothing/>
+2010-10-17 05:55:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=SU1CFDWK', temp=u'2', epi=u'02')
+2010-10-17 05:55:54+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/2x01-huerfano-de-guerra-orphan-of-war/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:54+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HX2KYQ8V', temp=u'2', epi=u'01') in <http://www.series21.com/xena-la-princesa-guerrera/2x01-huerfano-de-guerra-orphan-of-war/>
+2010-10-17 05:55:54+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HX2KYQ8V', temp=u'2', epi=u'01')
+2010-10-17 05:55:54+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=BTO9HLH6', temp=u'2', epi=u'01') in <http://www.series21.com/xena-la-princesa-guerrera/2x01-huerfano-de-guerra-orphan-of-war/>
+2010-10-17 05:55:54+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=BTO9HLH6', temp=u'2', epi=u'01')
+2010-10-17 05:55:55+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x24-hay-algun-medico-en-casa/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=D8CMYZI4', temp=u'1', epi=u'24') in <http://www.series21.com/xena-la-princesa-guerrera/1x24-hay-algun-medico-en-casa/>
+2010-10-17 05:55:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=D8CMYZI4', temp=u'1', epi=u'24')
+2010-10-17 05:55:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=KHR1ZYEL', temp=u'1', epi=u'24') in <http://www.series21.com/xena-la-princesa-guerrera/1x24-hay-algun-medico-en-casa/>
+2010-10-17 05:55:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=KHR1ZYEL', temp=u'1', epi=u'24')
+2010-10-17 05:55:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x23-la-mascara-de-la-muerte/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=SPD47JV1', temp=u'1', epi=u'23') in <http://www.series21.com/xena-la-princesa-guerrera/1x23-la-mascara-de-la-muerte/>
+2010-10-17 05:55:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=SPD47JV1', temp=u'1', epi=u'23')
+2010-10-17 05:55:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=P7F0RWN8', temp=u'1', epi=u'23') in <http://www.series21.com/xena-la-princesa-guerrera/1x23-la-mascara-de-la-muerte/>
+2010-10-17 05:55:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=P7F0RWN8', temp=u'1', epi=u'23')
+2010-10-17 05:55:57+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x22-calisto/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:57+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=M0M6TXKI', temp=u'1', epi=u'22') in <http://www.series21.com/xena-la-princesa-guerrera/1x22-calisto/>
+2010-10-17 05:55:57+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=M0M6TXKI', temp=u'1', epi=u'22')
+2010-10-17 05:55:57+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=S5LNY9BM', temp=u'1', epi=u'22') in <http://www.series21.com/xena-la-princesa-guerrera/1x22-calisto/>
+2010-10-17 05:55:57+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=S5LNY9BM', temp=u'1', epi=u'22')
+2010-10-17 05:55:58+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x21-el-menor-de-los-males/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:58+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LRO79XAK', temp=u'1', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/1x21-el-menor-de-los-males/>
+2010-10-17 05:55:58+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=LRO79XAK', temp=u'1', epi=u'21')
+2010-10-17 05:55:58+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=GVQUL60M', temp=u'1', epi=u'21') in <http://www.series21.com/xena-la-princesa-guerrera/1x21-el-menor-de-los-males/>
+2010-10-17 05:55:58+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=GVQUL60M', temp=u'1', epi=u'21')
+2010-10-17 05:55:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x20-lazos-de-sangre/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:55:59+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=7LR65IOY', temp=u'1', epi=u'20') in <http://www.series21.com/xena-la-princesa-guerrera/1x20-lazos-de-sangre/>
+2010-10-17 05:55:59+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=7LR65IOY', temp=u'1', epi=u'20')
+2010-10-17 05:55:59+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=0H0M9X9D', temp=u'1', epi=u'20') in <http://www.series21.com/xena-la-princesa-guerrera/1x20-lazos-de-sangre/>
+2010-10-17 05:55:59+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=0H0M9X9D', temp=u'1', epi=u'20')
+2010-10-17 05:56:00+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x19-estados-alterados/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WHBMCL8V', temp=u'1', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/1x19-estados-alterados/>
+2010-10-17 05:56:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WHBMCL8V', temp=u'1', epi=u'19')
+2010-10-17 05:56:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4S1Q2KCC', temp=u'1', epi=u'19') in <http://www.series21.com/xena-la-princesa-guerrera/1x19-estados-alterados/>
+2010-10-17 05:56:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4S1Q2KCC', temp=u'1', epi=u'19')
+2010-10-17 05:56:01+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x18-la-hermana-prodiga/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HX39NZ6T', temp=u'1', epi=u'18') in <http://www.series21.com/xena-la-princesa-guerrera/1x18-la-hermana-prodiga/>
+2010-10-17 05:56:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=HX39NZ6T', temp=u'1', epi=u'18')
+2010-10-17 05:56:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=14L03FVM', temp=u'1', epi=u'18') in <http://www.series21.com/xena-la-princesa-guerrera/1x18-la-hermana-prodiga/>
+2010-10-17 05:56:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=14L03FVM', temp=u'1', epi=u'18')
+2010-10-17 05:56:02+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x17-una-pareja-de-ladrones/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:02+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=D5VRH94V', temp=u'1', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/1x17-una-pareja-de-ladrones/>
+2010-10-17 05:56:02+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=D5VRH94V', temp=u'1', epi=u'17')
+2010-10-17 05:56:02+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=A6HEDSC5', temp=u'1', epi=u'17') in <http://www.series21.com/xena-la-princesa-guerrera/1x17-una-pareja-de-ladrones/>
+2010-10-17 05:56:02+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=A6HEDSC5', temp=u'1', epi=u'17')
+2010-10-17 05:56:02+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x16-mi-adorable-inmortal/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:02+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NYXOG2I6', temp=u'1', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/1x16-mi-adorable-inmortal/>
+2010-10-17 05:56:02+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=NYXOG2I6', temp=u'1', epi=u'16')
+2010-10-17 05:56:02+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1OSP1DZV', temp=u'1', epi=u'16') in <http://www.series21.com/xena-la-princesa-guerrera/1x16-mi-adorable-inmortal/>
+2010-10-17 05:56:02+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=1OSP1DZV', temp=u'1', epi=u'16')
+2010-10-17 05:56:03+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x15-guerrera-princesa/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:03+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=N9DBZEID', temp=u'1', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/1x15-guerrera-princesa/>
+2010-10-17 05:56:03+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=N9DBZEID', temp=u'1', epi=u'15')
+2010-10-17 05:56:03+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=NNDQQQIH', temp=u'1', epi=u'15') in <http://www.series21.com/xena-la-princesa-guerrera/1x15-guerrera-princesa/>
+2010-10-17 05:56:03+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=NNDQQQIH', temp=u'1', epi=u'15')
+2010-10-17 05:56:04+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x14-un-punado-de-dinares/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:04+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=3X96Z441', temp=u'1', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/1x14-un-punado-de-dinares/>
+2010-10-17 05:56:04+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=3X96Z441', temp=u'1', epi=u'14')
+2010-10-17 05:56:04+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=SQHBGCQM', temp=u'1', epi=u'14') in <http://www.series21.com/xena-la-princesa-guerrera/1x14-un-punado-de-dinares/>
+2010-10-17 05:56:04+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=SQHBGCQM', temp=u'1', epi=u'14')
+2010-10-17 05:56:05+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x13-la-academia-para-bardos-de-atenas/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:05+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=3Z7YZGH2', temp=u'1', epi=u'13') in <http://www.series21.com/xena-la-princesa-guerrera/1x13-la-academia-para-bardos-de-atenas/>
+2010-10-17 05:56:05+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=3Z7YZGH2', temp=u'1', epi=u'13')
+2010-10-17 05:56:05+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=JM4GNWCO', temp=u'1', epi=u'13') in <http://www.series21.com/xena-la-princesa-guerrera/1x13-la-academia-para-bardos-de-atenas/>
+2010-10-17 05:56:05+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=JM4GNWCO', temp=u'1', epi=u'13')
+2010-10-17 05:56:05+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x12-cuidado-con-los-griegos-que-dejan-regalos/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:05+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CTWRTY2K', temp=u'1', epi=u'12') in <http://www.series21.com/xena-la-princesa-guerrera/1x12-cuidado-con-los-griegos-que-dejan-regalos/>
+2010-10-17 05:56:05+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=CTWRTY2K', temp=u'1', epi=u'12')
+2010-10-17 05:56:05+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=IKFW5QH2', temp=u'1', epi=u'12') in <http://www.series21.com/xena-la-princesa-guerrera/1x12-cuidado-con-los-griegos-que-dejan-regalos/>
+2010-10-17 05:56:05+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=IKFW5QH2', temp=u'1', epi=u'12')
+2010-10-17 05:56:06+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x11-el-lobo-negro/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:06+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ARGTEDT4', temp=u'1', epi=u'11') in <http://www.series21.com/xena-la-princesa-guerrera/1x11-el-lobo-negro/>
+2010-10-17 05:56:06+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=ARGTEDT4', temp=u'1', epi=u'11')
+2010-10-17 05:56:06+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=FKVSDXLN', temp=u'1', epi=u'11') in <http://www.series21.com/xena-la-princesa-guerrera/1x11-el-lobo-negro/>
+2010-10-17 05:56:06+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=FKVSDXLN', temp=u'1', epi=u'11')
+2010-10-17 05:56:06+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x10-hooves-and-harlots/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:06+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=W50MBUHX', temp=u'1', epi=u'10') in <http://www.series21.com/xena-la-princesa-guerrera/1x10-hooves-and-harlots/>
+2010-10-17 05:56:06+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=W50MBUHX', temp=u'1', epi=u'10')
+2010-10-17 05:56:06+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=Z5B301F5', temp=u'1', epi=u'10') in <http://www.series21.com/xena-la-princesa-guerrera/1x10-hooves-and-harlots/>
+2010-10-17 05:56:06+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=Z5B301F5', temp=u'1', epi=u'10')
+2010-10-17 05:56:07+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x08-prometheus/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:07+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VYMQ0MO6', temp=u'1', epi=u'08') in <http://www.series21.com/xena-la-princesa-guerrera/1x08-prometheus/>
+2010-10-17 05:56:07+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=VYMQ0MO6', temp=u'1', epi=u'08')
+2010-10-17 05:56:09+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x09-death-in-chains/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:09+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WD58VOYA', temp=u'1', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/1x09-death-in-chains/>
+2010-10-17 05:56:09+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=WD58VOYA', temp=u'1', epi=u'09')
+2010-10-17 05:56:09+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=U1JMUTM9', temp=u'1', epi=u'09') in <http://www.series21.com/xena-la-princesa-guerrera/1x09-death-in-chains/>
+2010-10-17 05:56:09+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=U1JMUTM9', temp=u'1', epi=u'09')
+2010-10-17 05:56:13+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x06-the-reckoning/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:13+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=YK6IE0WZ', temp=u'1', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/1x06-the-reckoning/>
+2010-10-17 05:56:13+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=YK6IE0WZ', temp=u'1', epi=u'06')
+2010-10-17 05:56:13+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=XEDVB2EP', temp=u'1', epi=u'06') in <http://www.series21.com/xena-la-princesa-guerrera/1x06-the-reckoning/>
+2010-10-17 05:56:13+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=XEDVB2EP', temp=u'1', epi=u'06')
+2010-10-17 05:56:14+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x05-path-no-taken/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:14+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=P26AZJH9', temp=u'1', epi=u'05') in <http://www.series21.com/xena-la-princesa-guerrera/1x05-path-no-taken/>
+2010-10-17 05:56:14+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=P26AZJH9', temp=u'1', epi=u'05')
+2010-10-17 05:56:14+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=QTKD4MP0', temp=u'1', epi=u'05') in <http://www.series21.com/xena-la-princesa-guerrera/1x05-path-no-taken/>
+2010-10-17 05:56:14+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=QTKD4MP0', temp=u'1', epi=u'05')
+2010-10-17 05:56:15+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x04-cradle-of-hope/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=YZXCUML6', temp=u'1', epi=u'04') in <http://www.series21.com/xena-la-princesa-guerrera/1x04-cradle-of-hope/>
+2010-10-17 05:56:15+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=YZXCUML6', temp=u'1', epi=u'04')
+2010-10-17 05:56:15+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=0EZOM3TP', temp=u'1', epi=u'04') in <http://www.series21.com/xena-la-princesa-guerrera/1x04-cradle-of-hope/>
+2010-10-17 05:56:15+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=0EZOM3TP', temp=u'1', epi=u'04')
+2010-10-17 05:56:17+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x03-dreamworker/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:17+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=GB52OIYU', temp=u'1', epi=u'03') in <http://www.series21.com/xena-la-princesa-guerrera/1x03-dreamworker/>
+2010-10-17 05:56:17+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=GB52OIYU', temp=u'1', epi=u'03')
+2010-10-17 05:56:18+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/xena-la-princesa-guerrera/1x02-chariots-of-war/> (referer: http://www.series21.com/xena-la-princesa-guerrera/)
+2010-10-17 05:56:18+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=5702HUP0', temp=u'1', epi=u'02') in <http://www.series21.com/xena-la-princesa-guerrera/1x02-chariots-of-war/>
+2010-10-17 05:56:18+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megavideo.com/?v=5702HUP0', temp=u'1', epi=u'02')
+2010-10-17 05:56:18+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4IRIYRP7', temp=u'1', epi=u'02') in <http://www.series21.com/xena-la-princesa-guerrera/1x02-chariots-of-war/>
+2010-10-17 05:56:18+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Xena: la princesa guerrera', links=u'http://www.megaupload.com/?d=4IRIYRP7', temp=u'1', epi=u'02')
+2010-10-17 05:56:18+0200 [series-21] INFO: Closing spider (finished)
+2010-10-17 05:56:18+0200 [series-21] INFO: Stored json feed (208 items, 28166 bytes) in: sites/series-21/dump/X.json
+2010-10-17 05:56:18+0200 [series-21] INFO: Spider closed (finished)

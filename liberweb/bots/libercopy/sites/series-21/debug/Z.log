@@ -1,0 +1,882 @@
+2010-10-17 05:56:30+0200 [scrapy] INFO: Scrapy 0.10.2 started (bot: liberbot)
+2010-10-17 05:56:30+0200 [scrapy] DEBUG: Enabled extensions: FeedExporter, TelnetConsole, SpiderContext, WebService, CoreStats, MemoryUsage, CloseSpider
+2010-10-17 05:56:30+0200 [scrapy] DEBUG: Enabled scheduler middlewares: DuplicatesFilterMiddleware
+2010-10-17 05:56:30+0200 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, RedirectMiddleware, CookiesMiddleware, HttpCompressionMiddleware, DownloaderStats, HttpCacheMiddleware
+2010-10-17 05:56:30+0200 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2010-10-17 05:56:30+0200 [scrapy] DEBUG: Enabled item pipelines: 
+2010-10-17 05:56:30+0200 [scrapy] DEBUG: Telnet console listening on port 6023
+2010-10-17 05:56:30+0200 [scrapy] DEBUG: Web service listening on port 6080
+2010-10-17 05:56:30+0200 [series-21] INFO: Spider opened
+2010-10-17 05:56:31+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/> (referer: None)
+2010-10-17 05:56:32+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/> (referer: None)
+2010-10-17 05:56:33+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x01-bienvenida-a-pca/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:33+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=CLDN463D', temp=u'1', epi=u'01') in <http://www.series21.com/zoey-101/1x01-bienvenida-a-pca/>
+2010-10-17 05:56:33+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=CLDN463D', temp=u'1', epi=u'01')
+2010-10-17 05:56:33+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=YL7EHEH1', temp=u'1', epi=u'01') in <http://www.series21.com/zoey-101/1x01-bienvenida-a-pca/>
+2010-10-17 05:56:33+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=YL7EHEH1', temp=u'1', epi=u'01')
+2010-10-17 05:56:33+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x08-vince-ha-vuelto/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:33+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=QGF0POED', temp=u'4', epi=u'08') in <http://www.series21.com/zoey-101/4x08-vince-ha-vuelto/>
+2010-10-17 05:56:33+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=QGF0POED', temp=u'4', epi=u'08')
+2010-10-17 05:56:33+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=4YCBYDLJ', temp=u'4', epi=u'08') in <http://www.series21.com/zoey-101/4x08-vince-ha-vuelto/>
+2010-10-17 05:56:33+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=4YCBYDLJ', temp=u'4', epi=u'08')
+2010-10-17 05:56:34+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x12-persiguiendo-a-zoey-2/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:34+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=4RT5U1I3', temp=u'4', epi=u'13') in <http://www.series21.com/zoey-101/4x12-persiguiendo-a-zoey-2/>
+2010-10-17 05:56:34+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=4RT5U1I3', temp=u'4', epi=u'13')
+2010-10-17 05:56:34+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=NR1CT4OS', temp=u'4', epi=u'13') in <http://www.series21.com/zoey-101/4x12-persiguiendo-a-zoey-2/>
+2010-10-17 05:56:34+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=NR1CT4OS', temp=u'4', epi=u'13')
+2010-10-17 05:56:35+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x26-astronave-tipton/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:35+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=UB6LZK97', temp=u'2', epi=u'26') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x26-astronave-tipton/>
+2010-10-17 05:56:35+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=UB6LZK97', temp=u'2', epi=u'26')
+2010-10-17 05:56:35+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=8I784UC5', temp=u'2', epi=u'26') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x26-astronave-tipton/>
+2010-10-17 05:56:35+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=8I784UC5', temp=u'2', epi=u'26')
+2010-10-17 05:56:36+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x21-matrimonio-101/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=8443VM58', temp=u'2', epi=u'21') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x21-matrimonio-101/>
+2010-10-17 05:56:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=8443VM58', temp=u'2', epi=u'21')
+2010-10-17 05:56:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=R1C9R5C9', temp=u'2', epi=u'21') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x21-matrimonio-101/>
+2010-10-17 05:56:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=R1C9R5C9', temp=u'2', epi=u'21')
+2010-10-17 05:56:36+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x19-el-aprendiz-de-london/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=U41Q93G9', temp=u'2', epi=u'19') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x19-el-aprendiz-de-london/>
+2010-10-17 05:56:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=U41Q93G9', temp=u'2', epi=u'19')
+2010-10-17 05:56:36+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=OLXM5H6N', temp=u'2', epi=u'19') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x19-el-aprendiz-de-london/>
+2010-10-17 05:56:36+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=OLXM5H6N', temp=u'2', epi=u'19')
+2010-10-17 05:56:37+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x18-puedes-escavar/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:37+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=V1VW1AWW', temp=u'2', epi=u'18') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x18-puedes-escavar/>
+2010-10-17 05:56:37+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=V1VW1AWW', temp=u'2', epi=u'18')
+2010-10-17 05:56:37+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=R893ZCOA', temp=u'2', epi=u'18') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x18-puedes-escavar/>
+2010-10-17 05:56:37+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=R893ZCOA', temp=u'2', epi=u'18')
+2010-10-17 05:56:38+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x15-the-defiant-ones/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=Y405ENA2', temp=u'2', epi=u'15') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x15-the-defiant-ones/>
+2010-10-17 05:56:38+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=Y405ENA2', temp=u'2', epi=u'15')
+2010-10-17 05:56:38+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=116UI72L', temp=u'2', epi=u'15') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x15-the-defiant-ones/>
+2010-10-17 05:56:38+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=116UI72L', temp=u'2', epi=u'15')
+2010-10-17 05:56:39+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x14-la-madre-del-novio/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:39+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zack-y-cody-todos-a-bordo/2x14-la-madre-del-novio/> (referer: <http://www.series21.com/zack-y-cody-todos-a-bordo/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:40+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x13-la-vida-sueca/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:40+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zack-y-cody-todos-a-bordo/2x13-la-vida-sueca/> (referer: <http://www.series21.com/zack-y-cody-todos-a-bordo/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:41+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x11-el-triangulo-de-las-bermudas/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:41+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zack-y-cody-todos-a-bordo/2x11-el-triangulo-de-las-bermudas/> (referer: <http://www.series21.com/zack-y-cody-todos-a-bordo/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:41+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x10-cruzando-a-jordin/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:41+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zack-y-cody-todos-a-bordo/2x10-cruzando-a-jordin/> (referer: <http://www.series21.com/zack-y-cody-todos-a-bordo/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:42+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x09-companeros-de-cuarto/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:42+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zack-y-cody-todos-a-bordo/2x09-companeros-de-cuarto/> (referer: <http://www.series21.com/zack-y-cody-todos-a-bordo/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:42+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x08-lost-at-sea/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:42+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=3EEA96ZV', temp=u'2', epi=u'08') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x08-lost-at-sea/>
+2010-10-17 05:56:42+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=3EEA96ZV', temp=u'2', epi=u'08')
+2010-10-17 05:56:42+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=XKBTBQU8', temp=u'2', epi=u'08') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x08-lost-at-sea/>
+2010-10-17 05:56:42+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=XKBTBQU8', temp=u'2', epi=u'08')
+2010-10-17 05:56:42+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x06-family-thais/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:42+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=GG5WUZ9T', temp=u'2', epi=u'06') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x06-family-thais/>
+2010-10-17 05:56:42+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=GG5WUZ9T', temp=u'2', epi=u'06')
+2010-10-17 05:56:42+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=LC9NZPHL', temp=u'2', epi=u'06') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x06-family-thais/>
+2010-10-17 05:56:42+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=LC9NZPHL', temp=u'2', epi=u'06')
+2010-10-17 05:56:43+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x05-smarticle-particles/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=D9KKML3M', temp=u'2', epi=u'05') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x05-smarticle-particles/>
+2010-10-17 05:56:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=D9KKML3M', temp=u'2', epi=u'05')
+2010-10-17 05:56:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=0C790DDJ', temp=u'2', epi=u'05') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x05-smarticle-particles/>
+2010-10-17 05:56:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=0C790DDJ', temp=u'2', epi=u'05')
+2010-10-17 05:56:43+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x03-en-la-linea-del-deber/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:43+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zack-y-cody-todos-a-bordo/2x03-en-la-linea-del-deber/> (referer: <http://www.series21.com/zack-y-cody-todos-a-bordo/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:43+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x02-ala-ka-scram/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=89IP5OD7', temp=u'2', epi=u'02') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x02-ala-ka-scram/>
+2010-10-17 05:56:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=89IP5OD7', temp=u'2', epi=u'02')
+2010-10-17 05:56:43+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=5PUTCAKG', temp=u'2', epi=u'02') in <http://www.series21.com/zack-y-cody-todos-a-bordo/2x02-ala-ka-scram/>
+2010-10-17 05:56:43+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=5PUTCAKG', temp=u'2', epi=u'02')
+2010-10-17 05:56:43+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/2x01-the-daily-show/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x21-doble-cruzada/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=J05E30ZE', serie=u'Zack y Cody: Todos a bordo', epi=u'21', sublang='Spanish') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x21-doble-cruzada/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megavideo.com/?v=J05E30ZE', serie=u'Zack y Cody: Todos a bordo', epi=u'21', sublang='Spanish')
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=ELLPUZDT', serie=u'Zack y Cody: Todos a bordo', epi=u'21', sublang='Spanish') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x21-doble-cruzada/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='English', temp=u'1', links=u'http://www.megaupload.com/?d=ELLPUZDT', serie=u'Zack y Cody: Todos a bordo', epi=u'21', sublang='Spanish')
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x20-capitulo-20/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=50CHJRBE', temp=u'1', epi=u'20') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x20-capitulo-20/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=50CHJRBE', temp=u'1', epi=u'20')
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x19-haciendo-paja-y-pocas-nueces/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=9P5B99XG', temp=u'1', epi=u'19') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x19-haciendo-paja-y-pocas-nueces/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=9P5B99XG', temp=u'1', epi=u'19')
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x18-salpica-tira/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=PDZHGL4H', temp=u'1', epi=u'18') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x18-salpica-tira/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=PDZHGL4H', temp=u'1', epi=u'18')
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=UCSRAOA5', temp=u'1', epi=u'18') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x18-salpica-tira/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=UCSRAOA5', temp=u'1', epi=u'18')
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x17-capitulo-17/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=J9BI34ID', temp=u'1', epi=u'17') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x17-capitulo-17/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=J9BI34ID', temp=u'1', epi=u'17')
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=ECZVDHFC', temp=u'1', epi=u'17') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x17-capitulo-17/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=ECZVDHFC', temp=u'1', epi=u'17')
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x16-mama-y-papa-a-bordo/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=9KQJDA5H', temp=u'1', epi=u'16') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x16-mama-y-papa-a-bordo/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=9KQJDA5H', temp=u'1', epi=u'16')
+2010-10-17 05:56:44+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=88VKLNER', temp=u'1', epi=u'16') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x16-mama-y-papa-a-bordo/>
+2010-10-17 05:56:44+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=88VKLNER', temp=u'1', epi=u'16')
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x15-barconotizado/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=B77UOG8K', temp=u'1', epi=u'15') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x15-barconotizado/>
+2010-10-17 05:56:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=B77UOG8K', temp=u'1', epi=u'15')
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=2TWH7DX5', temp=u'1', epi=u'15') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x15-barconotizado/>
+2010-10-17 05:56:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=2TWH7DX5', temp=u'1', epi=u'15')
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x14-cuando-en-roma/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=H5K5414G', temp=u'1', epi=u'14') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x14-cuando-en-roma/>
+2010-10-17 05:56:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=H5K5414G', temp=u'1', epi=u'14')
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x13-maddie-a-bordo/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=3OC9RFZG', temp=u'1', epi=u'13') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x13-maddie-a-bordo/>
+2010-10-17 05:56:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=3OC9RFZG', temp=u'1', epi=u'13')
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=M0T8VCGD', temp=u'1', epi=u'13') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x13-maddie-a-bordo/>
+2010-10-17 05:56:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=M0T8VCGD', temp=u'1', epi=u'13')
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x12-swami-y-la-mami/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=LY2BHEMO', temp=u'1', epi=u'12') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x12-swami-y-la-mami/>
+2010-10-17 05:56:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=LY2BHEMO', temp=u'1', epi=u'12')
+2010-10-17 05:56:45+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=3IP2F93R', temp=u'1', epi=u'12') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x12-swami-y-la-mami/>
+2010-10-17 05:56:45+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=3IP2F93R', temp=u'1', epi=u'12')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x11-mar-armonia/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=FONVR9DQ', temp=u'1', epi=u'11') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x11-mar-armonia/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=FONVR9DQ', temp=u'1', epi=u'11')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=QYV16VJX', temp=u'1', epi=u'11') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x11-mar-armonia/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=QYV16VJX', temp=u'1', epi=u'11')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x10-te-pille/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=QKQDIR0U', temp=u'1', epi=u'10') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x10-te-pille/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=QKQDIR0U', temp=u'1', epi=u'10')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=78IJ06P1', temp=u'1', epi=u'10') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x10-te-pille/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=78IJ06P1', temp=u'1', epi=u'10')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x09-flores-y-chocolate/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=5GILWLGJ', temp=u'1', epi=u'09') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x09-flores-y-chocolate/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=5GILWLGJ', temp=u'1', epi=u'09')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=BZ1I6J3M', temp=u'1', epi=u'09') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x09-flores-y-chocolate/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=BZ1I6J3M', temp=u'1', epi=u'09')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x08-la-busqueda-del-monstruo/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=XT8DXKPE', temp=u'1', epi=u'08') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x08-la-busqueda-del-monstruo/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=XT8DXKPE', temp=u'1', epi=u'08')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=DZQ4W3AU', temp=u'1', epi=u'08') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x08-la-busqueda-del-monstruo/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=DZQ4W3AU', temp=u'1', epi=u'08')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x07-para-mi-son-todos-griegos/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=GR3TEQJA', temp=u'1', epi=u'07') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x07-para-mi-son-todos-griegos/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=GR3TEQJA', temp=u'1', epi=u'07')
+2010-10-17 05:56:46+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=W2Q4L1K7', temp=u'1', epi=u'07') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x07-para-mi-son-todos-griegos/>
+2010-10-17 05:56:46+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=W2Q4L1K7', temp=u'1', epi=u'07')
+2010-10-17 05:56:47+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x06-linea-de-cambio-de-fecha/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=FCQBCXRM', temp=u'1', epi=u'06') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x06-linea-de-cambio-de-fecha/>
+2010-10-17 05:56:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=FCQBCXRM', temp=u'1', epi=u'06')
+2010-10-17 05:56:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=9PBL00S5', temp=u'1', epi=u'06') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x06-linea-de-cambio-de-fecha/>
+2010-10-17 05:56:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=9PBL00S5', temp=u'1', epi=u'06')
+2010-10-17 05:56:47+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x05-las-chicas-del-show/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=MM5DTIIQ', temp=u'1', epi=u'05') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x05-las-chicas-del-show/>
+2010-10-17 05:56:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=MM5DTIIQ', temp=u'1', epi=u'05')
+2010-10-17 05:56:47+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=SLSG0TT2', temp=u'1', epi=u'05') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x05-las-chicas-del-show/>
+2010-10-17 05:56:47+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=SLSG0TT2', temp=u'1', epi=u'05')
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x04-el-rinon-del-mar/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=SIE0VJXK', temp=u'1', epi=u'04') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x04-el-rinon-del-mar/>
+2010-10-17 05:56:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=SIE0VJXK', temp=u'1', epi=u'04')
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=4NKYH7G6', temp=u'1', epi=u'04') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x04-el-rinon-del-mar/>
+2010-10-17 05:56:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=4NKYH7G6', temp=u'1', epi=u'04')
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x03-roto-y-yo-yo/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=3VPU5CPI', temp=u'1', epi=u'03') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x03-roto-y-yo-yo/>
+2010-10-17 05:56:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=3VPU5CPI', temp=u'1', epi=u'03')
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=2LPHHI2F', temp=u'1', epi=u'03') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x03-roto-y-yo-yo/>
+2010-10-17 05:56:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=2LPHHI2F', temp=u'1', epi=u'03')
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x02-isla-del-loro/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=8N2GV4JR', temp=u'1', epi=u'02') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x02-isla-del-loro/>
+2010-10-17 05:56:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=8N2GV4JR', temp=u'1', epi=u'02')
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=ZMB7508I', temp=u'1', epi=u'02') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x02-isla-del-loro/>
+2010-10-17 05:56:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=ZMB7508I', temp=u'1', epi=u'02')
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zack-y-cody-todos-a-bordo/1x01-un-lio-en-el-hotel-hotel-hangout/> (referer: http://www.series21.com/zack-y-cody-todos-a-bordo/)
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=DDS828OK', temp=u'1', epi=u'01') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x01-un-lio-en-el-hotel-hotel-hangout/>
+2010-10-17 05:56:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megavideo.com/?v=DDS828OK', temp=u'1', epi=u'01')
+2010-10-17 05:56:48+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=DRMZVHY3', temp=u'1', epi=u'01') in <http://www.series21.com/zack-y-cody-todos-a-bordo/1x01-un-lio-en-el-hotel-hotel-hangout/>
+2010-10-17 05:56:48+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zack y Cody: Todos a bordo', links=u'http://www.megaupload.com/?d=DRMZVHY3', temp=u'1', epi=u'01')
+2010-10-17 05:56:49+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x12-persiguiendo-a-zoey-1/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:49+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=B0AN3AA6', temp=u'4', epi=u'12') in <http://www.series21.com/zoey-101/4x12-persiguiendo-a-zoey-1/>
+2010-10-17 05:56:49+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=B0AN3AA6', temp=u'4', epi=u'12')
+2010-10-17 05:56:49+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=AN7Z7E4Z', temp=u'4', epi=u'12') in <http://www.series21.com/zoey-101/4x12-persiguiendo-a-zoey-1/>
+2010-10-17 05:56:49+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=AN7Z7E4Z', temp=u'4', epi=u'12')
+2010-10-17 05:56:49+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x11-la-montana-rusa/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:49+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=4I7GXO3W', temp=u'4', epi=u'11') in <http://www.series21.com/zoey-101/4x11-la-montana-rusa/>
+2010-10-17 05:56:49+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=4I7GXO3W', temp=u'4', epi=u'11')
+2010-10-17 05:56:49+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=QIHSSUXA', temp=u'4', epi=u'11') in <http://www.series21.com/zoey-101/4x11-la-montana-rusa/>
+2010-10-17 05:56:49+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=QIHSSUXA', temp=u'4', epi=u'11')
+2010-10-17 05:56:49+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x10-ley-seca-del-cafe/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:49+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=3ELAWFLT', temp=u'4', epi=u'10') in <http://www.series21.com/zoey-101/4x10-ley-seca-del-cafe/>
+2010-10-17 05:56:49+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=3ELAWFLT', temp=u'4', epi=u'10')
+2010-10-17 05:56:49+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=DJZL9YIW', temp=u'4', epi=u'10') in <http://www.series21.com/zoey-101/4x10-ley-seca-del-cafe/>
+2010-10-17 05:56:49+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=DJZL9YIW', temp=u'4', epi=u'10')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x09-cena-para-dos-cientos/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=9X7F3YKT', temp=u'4', epi=u'09') in <http://www.series21.com/zoey-101/4x09-cena-para-dos-cientos/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=9X7F3YKT', temp=u'4', epi=u'09')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=8258SA26', temp=u'4', epi=u'09') in <http://www.series21.com/zoey-101/4x09-cena-para-dos-cientos/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=8258SA26', temp=u'4', epi=u'09')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x07-la-gran-caminata/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=6NEGW0P3', temp=u'4', epi=u'07') in <http://www.series21.com/zoey-101/4x07-la-gran-caminata/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=6NEGW0P3', temp=u'4', epi=u'07')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=X0JYD6KX', temp=u'4', epi=u'07') in <http://www.series21.com/zoey-101/4x07-la-gran-caminata/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=X0JYD6KX', temp=u'4', epi=u'07')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x06-quinn-extrana-a-mark/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=P63B70U3', temp=u'4', epi=u'06') in <http://www.series21.com/zoey-101/4x06-quinn-extrana-a-mark/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=P63B70U3', temp=u'4', epi=u'06')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=IBR0EB0V', temp=u'4', epi=u'06') in <http://www.series21.com/zoey-101/4x06-quinn-extrana-a-mark/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=IBR0EB0V', temp=u'4', epi=u'06')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x05-controla-tu-ira/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=ZTE1A85X', temp=u'4', epi=u'05') in <http://www.series21.com/zoey-101/4x05-controla-tu-ira/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=ZTE1A85X', temp=u'4', epi=u'05')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=R88WBX61', temp=u'4', epi=u'05') in <http://www.series21.com/zoey-101/4x05-controla-tu-ira/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=R88WBX61', temp=u'4', epi=u'05')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x04-rumores-de-amor/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=LUOYL063', temp=u'4', epi=u'04') in <http://www.series21.com/zoey-101/4x04-rumores-de-amor/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=LUOYL063', temp=u'4', epi=u'04')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=54A8VS0I', temp=u'4', epi=u'04') in <http://www.series21.com/zoey-101/4x04-rumores-de-amor/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=54A8VS0I', temp=u'4', epi=u'04')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x03-solos-en-pca/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=C62NTM75', temp=u'4', epi=u'03') in <http://www.series21.com/zoey-101/4x03-solos-en-pca/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=C62NTM75', temp=u'4', epi=u'03')
+2010-10-17 05:56:50+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=5ZJ0ZZBI', temp=u'4', epi=u'03') in <http://www.series21.com/zoey-101/4x03-solos-en-pca/>
+2010-10-17 05:56:50+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=5ZJ0ZZBI', temp=u'4', epi=u'03')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x02-falso-companero/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=3FEYW8LP', temp=u'4', epi=u'02') in <http://www.series21.com/zoey-101/4x02-falso-companero/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=3FEYW8LP', temp=u'4', epi=u'02')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=AJLQ6OQ7', temp=u'4', epi=u'02') in <http://www.series21.com/zoey-101/4x02-falso-companero/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=AJLQ6OQ7', temp=u'4', epi=u'02')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/4x01-intercambiando-lugares/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?s=seriesyonkis&d=37QHLGA0&confirmed=1', temp=u'4', epi=u'01') in <http://www.series21.com/zoey-101/4x01-intercambiando-lugares/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?s=seriesyonkis&d=37QHLGA0&confirmed=1', temp=u'4', epi=u'01')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=JLCO62IB', temp=u'4', epi=u'01') in <http://www.series21.com/zoey-101/4x01-intercambiando-lugares/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=JLCO62IB', temp=u'4', epi=u'01')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x25-adios-zoey-2/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=PECAFZEL', temp=u'3', epi=u'25') in <http://www.series21.com/zoey-101/3x25-adios-zoey-2/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=PECAFZEL', temp=u'3', epi=u'25')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=ZV5LW996', temp=u'3', epi=u'25') in <http://www.series21.com/zoey-101/3x25-adios-zoey-2/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=ZV5LW996', temp=u'3', epi=u'25')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x24-adios-zoey-1/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=0QWV8LAX', temp=u'3', epi=u'24') in <http://www.series21.com/zoey-101/3x24-adios-zoey-1/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=0QWV8LAX', temp=u'3', epi=u'24')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=L1S5U0BQ', temp=u'3', epi=u'24') in <http://www.series21.com/zoey-101/3x24-adios-zoey-1/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=L1S5U0BQ', temp=u'3', epi=u'24')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x23-a-logan-le-cierran-el-grifo/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=FZ1SSJ6K', temp=u'3', epi=u'23') in <http://www.series21.com/zoey-101/3x23-a-logan-le-cierran-el-grifo/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=FZ1SSJ6K', temp=u'3', epi=u'23')
+2010-10-17 05:56:51+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=L70VPEQH', temp=u'3', epi=u'23') in <http://www.series21.com/zoey-101/3x23-a-logan-le-cierran-el-grifo/>
+2010-10-17 05:56:51+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=L70VPEQH', temp=u'3', epi=u'23')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x22-miss-pca/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=L9LHF7W3', temp=u'3', epi=u'22') in <http://www.series21.com/zoey-101/3x22-miss-pca/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=L9LHF7W3', temp=u'3', epi=u'22')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=1U57BBTS', temp=u'3', epi=u'22') in <http://www.series21.com/zoey-101/3x22-miss-pca/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=1U57BBTS', temp=u'3', epi=u'22')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x21-el-concurso-de-baile/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=CCB9H5GH', temp=u'3', epi=u'21') in <http://www.series21.com/zoey-101/3x21-el-concurso-de-baile/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=CCB9H5GH', temp=u'3', epi=u'21')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=QA1QWIS6', temp=u'3', epi=u'21') in <http://www.series21.com/zoey-101/3x21-el-concurso-de-baile/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=QA1QWIS6', temp=u'3', epi=u'21')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x20-con-las-manos-en-la-furgo-de-blix/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=POTYN5R5', temp=u'3', epi=u'20') in <http://www.series21.com/zoey-101/3x20-con-las-manos-en-la-furgo-de-blix/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=POTYN5R5', temp=u'3', epi=u'20')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=2KTYHEW4', temp=u'3', epi=u'20') in <http://www.series21.com/zoey-101/3x20-con-las-manos-en-la-furgo-de-blix/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=2KTYHEW4', temp=u'3', epi=u'20')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x19-el-hijo-del-decano/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=UFB9UC5S', temp=u'3', epi=u'19') in <http://www.series21.com/zoey-101/3x19-el-hijo-del-decano/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=UFB9UC5S', temp=u'3', epi=u'19')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=AZABO7CY', temp=u'3', epi=u'19') in <http://www.series21.com/zoey-101/3x19-el-hijo-del-decano/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=AZABO7CY', temp=u'3', epi=u'19')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x18-paige-en-pca/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=BASW4ANB', temp=u'3', epi=u'18') in <http://www.series21.com/zoey-101/3x18-paige-en-pca/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=BASW4ANB', temp=u'3', epi=u'18')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=MM5ICSCD', temp=u'3', epi=u'18') in <http://www.series21.com/zoey-101/3x18-paige-en-pca/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=MM5ICSCD', temp=u'3', epi=u'18')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x17-drippin/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=PBEYGWE6', temp=u'3', epi=u'17') in <http://www.series21.com/zoey-101/3x17-drippin/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=PBEYGWE6', temp=u'3', epi=u'17')
+2010-10-17 05:56:52+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=1L2NG0BI', temp=u'3', epi=u'17') in <http://www.series21.com/zoey-101/3x17-drippin/>
+2010-10-17 05:56:52+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=1L2NG0BI', temp=u'3', epi=u'17')
+2010-10-17 05:56:53+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x16-las-costillas-de-zoey/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:53+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=5PIZCLL3', temp=u'3', epi=u'16') in <http://www.series21.com/zoey-101/3x16-las-costillas-de-zoey/>
+2010-10-17 05:56:53+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=5PIZCLL3', temp=u'3', epi=u'16')
+2010-10-17 05:56:53+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=TWCU507O', temp=u'3', epi=u'16') in <http://www.series21.com/zoey-101/3x16-las-costillas-de-zoey/>
+2010-10-17 05:56:53+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=TWCU507O', temp=u'3', epi=u'16')
+2010-10-17 05:56:53+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x15-la-maldicion-de-pca-2/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:53+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=57L8TIGV', temp=u'3', epi=u'15') in <http://www.series21.com/zoey-101/3x15-la-maldicion-de-pca-2/>
+2010-10-17 05:56:53+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=57L8TIGV', temp=u'3', epi=u'15')
+2010-10-17 05:56:53+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=ZF7IQ3ZF', temp=u'3', epi=u'15') in <http://www.series21.com/zoey-101/3x15-la-maldicion-de-pca-2/>
+2010-10-17 05:56:53+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=ZF7IQ3ZF', temp=u'3', epi=u'15')
+2010-10-17 05:56:54+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x14-la-maldicion-de-pca-1/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:54+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=JN7O465C', temp=u'3', epi=u'14') in <http://www.series21.com/zoey-101/3x14-la-maldicion-de-pca-1/>
+2010-10-17 05:56:54+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=JN7O465C', temp=u'3', epi=u'14')
+2010-10-17 05:56:54+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=DR5RGH8D', temp=u'3', epi=u'14') in <http://www.series21.com/zoey-101/3x14-la-maldicion-de-pca-1/>
+2010-10-17 05:56:54+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=DR5RGH8D', temp=u'3', epi=u'14')
+2010-10-17 05:56:54+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x13-a-michael-le-gusta-lisie/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:54+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/3x13-a-michael-le-gusta-lisie/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x12-la-radio/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=4C287RJC', temp=u'3', epi=u'12') in <http://www.series21.com/zoey-101/3x12-la-radio/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=4C287RJC', temp=u'3', epi=u'12')
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=UJ4O4QIN', temp=u'3', epi=u'12') in <http://www.series21.com/zoey-101/3x12-la-radio/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=UJ4O4QIN', temp=u'3', epi=u'12')
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x11-cadena-de-favores/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=U8WWTRS8', temp=u'3', epi=u'11') in <http://www.series21.com/zoey-101/3x11-cadena-de-favores/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=U8WWTRS8', temp=u'3', epi=u'11')
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=VAELA0Y4', temp=u'3', epi=u'11') in <http://www.series21.com/zoey-101/3x11-cadena-de-favores/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=VAELA0Y4', temp=u'3', epi=u'11')
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x10-cuarentena/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=Q8EJKMF3', temp=u'3', epi=u'10') in <http://www.series21.com/zoey-101/3x10-cuarentena/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=Q8EJKMF3', temp=u'3', epi=u'10')
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=ZWJ2HZW6', temp=u'3', epi=u'10') in <http://www.series21.com/zoey-101/3x10-cuarentena/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=ZWJ2HZW6', temp=u'3', epi=u'10')
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x09-la-abuela-de-chaise/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=E0QVD5JI', temp=u'3', epi=u'09') in <http://www.series21.com/zoey-101/3x09-la-abuela-de-chaise/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=E0QVD5JI', temp=u'3', epi=u'09')
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=ZYIFN1LD', temp=u'3', epi=u'09') in <http://www.series21.com/zoey-101/3x09-la-abuela-de-chaise/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=ZYIFN1LD', temp=u'3', epi=u'09')
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x08-el-globo-de-zoey/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=OS655KKA', temp=u'3', epi=u'08') in <http://www.series21.com/zoey-101/3x08-el-globo-de-zoey/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=OS655KKA', temp=u'3', epi=u'08')
+2010-10-17 05:56:55+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=YTI5NA58', temp=u'3', epi=u'08') in <http://www.series21.com/zoey-101/3x08-el-globo-de-zoey/>
+2010-10-17 05:56:55+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=YTI5NA58', temp=u'3', epi=u'08')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x07-lucha-libre/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=3MD2ORDX', temp=u'3', epi=u'07') in <http://www.series21.com/zoey-101/3x07-lucha-libre/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=3MD2ORDX', temp=u'3', epi=u'07')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=HRJQNHGZ', temp=u'3', epi=u'07') in <http://www.series21.com/zoey-101/3x07-lucha-libre/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=HRJQNHGZ', temp=u'3', epi=u'07')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x06-la-sociedad-martillo-de-plata/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=9FB3ZPRD', temp=u'3', epi=u'06') in <http://www.series21.com/zoey-101/3x06-la-sociedad-martillo-de-plata/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=9FB3ZPRD', temp=u'3', epi=u'06')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=7492XOFZ', temp=u'3', epi=u'06') in <http://www.series21.com/zoey-101/3x06-la-sociedad-martillo-de-plata/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=7492XOFZ', temp=u'3', epi=u'06')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x05-el-gran-vince-blake/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=LPTIXMSI', temp=u'3', epi=u'05') in <http://www.series21.com/zoey-101/3x05-el-gran-vince-blake/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=LPTIXMSI', temp=u'3', epi=u'05')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=4OXM5ECL', temp=u'3', epi=u'05') in <http://www.series21.com/zoey-101/3x05-el-gran-vince-blake/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=4OXM5ECL', temp=u'3', epi=u'05')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x04-el-profe-particular-de-zoey/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=M0SV8U30', temp=u'3', epi=u'04') in <http://www.series21.com/zoey-101/3x04-el-profe-particular-de-zoey/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=M0SV8U30', temp=u'3', epi=u'04')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=WDKH9KJZ', temp=u'3', epi=u'04') in <http://www.series21.com/zoey-101/3x04-el-profe-particular-de-zoey/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=WDKH9KJZ', temp=u'3', epi=u'04')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x03-el-decano-canon/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=8254UFFF', temp=u'3', epi=u'03') in <http://www.series21.com/zoey-101/3x03-el-decano-canon/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=8254UFFF', temp=u'3', epi=u'03')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=aug3556d', temp=u'3', epi=u'03') in <http://www.series21.com/zoey-101/3x03-el-decano-canon/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=aug3556d', temp=u'3', epi=u'03')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x02-la-novia-de-chaise/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=JFO1MTLL', temp=u'3', epi=u'02') in <http://www.series21.com/zoey-101/3x02-la-novia-de-chaise/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=JFO1MTLL', temp=u'3', epi=u'02')
+2010-10-17 05:56:56+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=m83kyj8l', temp=u'3', epi=u'02') in <http://www.series21.com/zoey-101/3x02-la-novia-de-chaise/>
+2010-10-17 05:56:56+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=m83kyj8l', temp=u'3', epi=u'02')
+2010-10-17 05:56:57+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/3x01-sorpresa/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:57+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=FV8585KH', temp=u'3', epi=u'01') in <http://www.series21.com/zoey-101/3x01-sorpresa/>
+2010-10-17 05:56:57+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=FV8585KH', temp=u'3', epi=u'01')
+2010-10-17 05:56:57+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=wv8rv2o0', temp=u'3', epi=u'01') in <http://www.series21.com/zoey-101/3x01-sorpresa/>
+2010-10-17 05:56:57+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=wv8rv2o0', temp=u'3', epi=u'01')
+2010-10-17 05:56:57+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x13-la-alpaca-de-queen/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:57+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x13-la-alpaca-de-queen/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:57+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x12-subasta-humana/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:57+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x12-subasta-humana/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:58+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x10-vacaciones-de-primavera/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:58+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=TAB2GLXJ', temp=u'2', epi=u'10') in <http://www.series21.com/zoey-101/2x10-vacaciones-de-primavera/>
+2010-10-17 05:56:58+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=TAB2GLXJ', temp=u'2', epi=u'10')
+2010-10-17 05:56:58+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=8PHI0D5T', temp=u'2', epi=u'10') in <http://www.series21.com/zoey-101/2x10-vacaciones-de-primavera/>
+2010-10-17 05:56:58+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=8PHI0D5T', temp=u'2', epi=u'10')
+2010-10-17 05:56:58+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x9-a-lola-le-gusta-chaise/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:58+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x9-a-lola-le-gusta-chaise/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:58+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x8-guerra-de-robots/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:58+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x8-guerra-de-robots/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:58+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x7-las-chicas-seran-chicos/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:58+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x7-las-chicas-seran-chicos/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x6-opiniones-de-la-red/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:59+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x6-opiniones-de-la-red/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x5-chica-mala/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:59+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x5-chica-mala/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x4-la-casa-encantada/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:59+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x4-la-casa-encantada/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x3-elecciones/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:59+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x3-elecciones/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/2x2-la-capsula-del-tiempo/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:59+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/2x2-la-capsula-del-tiempo/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/de-nuevo-en-pca/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:59+0200 [series-21] ERROR: Spider error processing <http://www.series21.com/zoey-101/de-nuevo-en-pca/> (referer: <http://www.series21.com/zoey-101/>)
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/base.py", line 796, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 577, in _tick
+	    taskObj._oneWorkUnit()
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/task.py", line 458, in _oneWorkUnit
+	    result = self._iterator.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 57, in <genexpr>
+	    work = (callable(elem, *args, **named) for elem in iterable)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/defer.py", line 96, in iter_errback
+	    yield it.next()
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/offsite.py", line 24, in process_spider_output
+	    for x in result:
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/referer.py", line 14, in <genexpr>
+	    return (_set_referer(r) for r in result or ())
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/urllength.py", line 32, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/spidermiddleware/depth.py", line 48, in <genexpr>
+	    return (r for r in result or () if _filter(r))
+	  File "/home/anders/bots999/libercopy/liberbot/spiders/series_21.py", line 61, in parse_episode
+	    serie['temp'], serie['epi'], epi_title = hxs.select('//h1/text()').re(r' (\d)x(\d*) - (.*)')
+	exceptions.ValueError: need more than 0 values to unpack
+	
+2010-10-17 05:56:59+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x13-pequena-fiesta-en-la-playa/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:56:59+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=N4R9VXKI', temp=u'1', epi=u'13') in <http://www.series21.com/zoey-101/1x13-pequena-fiesta-en-la-playa/>
+2010-10-17 05:56:59+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=N4R9VXKI', temp=u'1', epi=u'13')
+2010-10-17 05:56:59+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=9IMAYBWE', temp=u'1', epi=u'13') in <http://www.series21.com/zoey-101/1x13-pequena-fiesta-en-la-playa/>
+2010-10-17 05:56:59+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=9IMAYBWE', temp=u'1', epi=u'13')
+2010-10-17 05:57:00+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x12-disc-golf/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=TIV1R1B3', temp=u'1', epi=u'12') in <http://www.series21.com/zoey-101/1x12-disc-golf/>
+2010-10-17 05:57:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=TIV1R1B3', temp=u'1', epi=u'12')
+2010-10-17 05:57:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=SPC3O81V', temp=u'1', epi=u'12') in <http://www.series21.com/zoey-101/1x12-disc-golf/>
+2010-10-17 05:57:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=SPC3O81V', temp=u'1', epi=u'12')
+2010-10-17 05:57:00+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x11-el-baile-del-colegio/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=UVHDZT6C', temp=u'1', epi=u'11') in <http://www.series21.com/zoey-101/1x11-el-baile-del-colegio/>
+2010-10-17 05:57:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=UVHDZT6C', temp=u'1', epi=u'11')
+2010-10-17 05:57:00+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=J1GQIJLG', temp=u'1', epi=u'11') in <http://www.series21.com/zoey-101/1x11-el-baile-del-colegio/>
+2010-10-17 05:57:00+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=J1GQIJLG', temp=u'1', epi=u'11')
+2010-10-17 05:57:01+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x10-mochilas/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=Z7PDNMED', temp=u'1', epi=u'10') in <http://www.series21.com/zoey-101/1x10-mochilas/>
+2010-10-17 05:57:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=Z7PDNMED', temp=u'1', epi=u'10')
+2010-10-17 05:57:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=QO93SDI6', temp=u'1', epi=u'10') in <http://www.series21.com/zoey-101/1x10-mochilas/>
+2010-10-17 05:57:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=QO93SDI6', temp=u'1', epi=u'10')
+2010-10-17 05:57:01+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x09-la-cita-de-quinn/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=2EQB8OXL', temp=u'1', epi=u'09') in <http://www.series21.com/zoey-101/1x09-la-cita-de-quinn/>
+2010-10-17 05:57:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=2EQB8OXL', temp=u'1', epi=u'09')
+2010-10-17 05:57:01+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=SERU8MYF', temp=u'1', epi=u'09') in <http://www.series21.com/zoey-101/1x09-la-cita-de-quinn/>
+2010-10-17 05:57:01+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=SERU8MYF', temp=u'1', epi=u'09')
+2010-10-17 05:57:02+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x08-semana-de-novatadas/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:02+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=CX87S2AO', temp=u'1', epi=u'08') in <http://www.series21.com/zoey-101/1x08-semana-de-novatadas/>
+2010-10-17 05:57:02+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=CX87S2AO', temp=u'1', epi=u'08')
+2010-10-17 05:57:02+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=O4FV2VFE', temp=u'1', epi=u'08') in <http://www.series21.com/zoey-101/1x08-semana-de-novatadas/>
+2010-10-17 05:57:02+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=O4FV2VFE', temp=u'1', epi=u'08')
+2010-10-17 05:57:03+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x07-la-fiesta-de-primavera/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:03+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=IIRMF0K7', temp=u'1', epi=u'07') in <http://www.series21.com/zoey-101/1x07-la-fiesta-de-primavera/>
+2010-10-17 05:57:03+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=IIRMF0K7', temp=u'1', epi=u'07')
+2010-10-17 05:57:03+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=415MOPWY', temp=u'1', epi=u'07') in <http://www.series21.com/zoey-101/1x07-la-fiesta-de-primavera/>
+2010-10-17 05:57:03+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=415MOPWY', temp=u'1', epi=u'07')
+2010-10-17 05:57:03+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x06-jet-x/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:03+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=8ZWHAR1B', temp=u'1', epi=u'06') in <http://www.series21.com/zoey-101/1x06-jet-x/>
+2010-10-17 05:57:03+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=8ZWHAR1B', temp=u'1', epi=u'06')
+2010-10-17 05:57:03+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=7RMF9HO1', temp=u'1', epi=u'06') in <http://www.series21.com/zoey-101/1x06-jet-x/>
+2010-10-17 05:57:03+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=7RMF9HO1', temp=u'1', epi=u'06')
+2010-10-17 05:57:04+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x05-webcam/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:04+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=U63BX0I5', temp=u'1', epi=u'05') in <http://www.series21.com/zoey-101/1x05-webcam/>
+2010-10-17 05:57:04+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=U63BX0I5', temp=u'1', epi=u'05')
+2010-10-17 05:57:04+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=TYEYS8WU', temp=u'1', epi=u'05') in <http://www.series21.com/zoey-101/1x05-webcam/>
+2010-10-17 05:57:04+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=TYEYS8WU', temp=u'1', epi=u'05')
+2010-10-17 05:57:05+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x04-la-obra/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:05+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=MC23UO7T', temp=u'1', epi=u'04') in <http://www.series21.com/zoey-101/1x04-la-obra/>
+2010-10-17 05:57:05+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=MC23UO7T', temp=u'1', epi=u'04')
+2010-10-17 05:57:05+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=N8GKRQN0', temp=u'1', epi=u'04') in <http://www.series21.com/zoey-101/1x04-la-obra/>
+2010-10-17 05:57:05+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=N8GKRQN0', temp=u'1', epi=u'04')
+2010-10-17 05:57:06+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x03-defendiendo-a-dustin/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:06+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=SGBN80K9', temp=u'1', epi=u'03') in <http://www.series21.com/zoey-101/1x03-defendiendo-a-dustin/>
+2010-10-17 05:57:06+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=SGBN80K9', temp=u'1', epi=u'03')
+2010-10-17 05:57:06+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=JAV0U3FI', temp=u'1', epi=u'03') in <http://www.series21.com/zoey-101/1x03-defendiendo-a-dustin/>
+2010-10-17 05:57:06+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=JAV0U3FI', temp=u'1', epi=u'03')
+2010-10-17 05:57:07+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/zoey-101/1x02-compis-nuevas/> (referer: http://www.series21.com/zoey-101/)
+2010-10-17 05:57:07+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=SIWYDDV2', temp=u'1', epi=u'02') in <http://www.series21.com/zoey-101/1x02-compis-nuevas/>
+2010-10-17 05:57:07+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megavideo.com/?v=SIWYDDV2', temp=u'1', epi=u'02')
+2010-10-17 05:57:07+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=XPAT8AXN', temp=u'1', epi=u'02') in <http://www.series21.com/zoey-101/1x02-compis-nuevas/>
+2010-10-17 05:57:07+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Zoey 101', links=u'http://www.megaupload.com/?d=XPAT8AXN', temp=u'1', epi=u'02')
+2010-10-17 05:57:07+0200 [series-21] INFO: Closing spider (finished)
+2010-10-17 05:57:08+0200 [series-21] INFO: Stored json feed (159 items, 19779 bytes) in: sites/series-21/dump/Z.json
+2010-10-17 05:57:08+0200 [series-21] INFO: Spider closed (finished)

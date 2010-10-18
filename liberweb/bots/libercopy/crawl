@@ -1,0 +1,237 @@
+#!/bin/bash
+# crawl - LiberBot starter :) 
+# 
+# Manages the bots in libercopy, download a site, a letter, or view logs
+#
+
+COMMAND=$1
+NAME=$2
+LETTER=$3
+
+SCRIPT_NAME=`echo $0 | sed -s 's/.\///g'`
+VERSION="[$SCRIPT_NAME] - 20101001 - v0.1"
+
+usage_routine(){
+    echo "Usage: $SCRIPT_NAME debug [SITE] [LETTER] - Debug get site and letter using Scrapy"
+    echo "Usage: $SCRIPT_NAME dialog              - Get, dowload site, put, view Log - the friendly way"
+    echo "Usage: $SCRIPT_NAME download [SITE]     - Download all site" 
+    echo "Usage: $SCRIPT_NAME count [SITE] 	  - Count crawled items for site"
+    echo "Usage: $SCRIPT_NAME get [SITE] [LETTER] - Get site and letter using Scrapy" 
+    echo "Usage: $SCRIPT_NAME put [SITE] [LETTER] - Put site and letter on LiberCopy" 
+    echo "Usage: $SCRIPT_NAME help                - Shows this message" 
+    echo "Usage: $SCRIPT_NAME log [SITE] [LETTER] - View logs for site and letter"
+    echo "Usage: $SCRIPT_NAME version             - Shows version" 
+    exit
+}
+
+getsites(){
+    # ls available spiders, filter the unwanted and converts 'series_yonkis.py' to 'series-yonkis' 
+    echo `ls liberbot/spiders/ | egrep -v "(init|template|pyc|cache|rss|check|espoiler)" | sed -s 's/.py//g' | tr '_' '-'`
+}
+
+getletters(){
+    # getletters eztv dump or getletters eztv showlist. Erases .txt and .json extensions
+    site=$1
+    folder=$2
+    echo `ls sites/$site/$folder/ | sed -s 's/.txt//g' | sed -s 's/.json//g'`
+}
+
+dialog_routine(){
+    # Check for dialog (ncurses questions ;)
+    type -P dialog &>/dev/null || { echo "[$SCRIPT_NAME] - ERROR: Dependency need. Install dialog." >&2; exit 1; }
+    # Ask which site you want to crawl
+    SITES=`getsites`
+    LIST_SITES=$(for i in `echo $SITES`; do count=`expr $count + 1`; echo "$i" $count ; done)
+    ASKNAME=`dialog --stdout --title "Select the bot" --menu "Availables:" 20 40 40 $LIST_SITES`
+    # Ask which letter
+    LETTERS=`getletters $ASKNAME showlist`
+    LIST_LETTERS=$(for i in `echo $LETTERS`; do count=`expr $count + 1`; echo "$i" $count ; done)
+    ASKLETTER=`dialog --stdout --title "Select the letter" --menu "Availables:" 20 40 40 $LIST_LETTERS`
+    # start crawling ;)
+    start_crawl $ASKNAME $ASKLETTER | dialog --infobox "Scraping all over the shit you pass me. Good shit mother fucker, good shit..." 0 0
+    exit
+}
+
+start_crawl(){
+    # start_crawl name letter 
+    NAME=$1
+    LETTER=$2
+    # Exports to json format 
+    if test -e sites/$NAME/showlist/$LETTER.txt ; then 
+        /usr/bin/scrapy crawl $NAME \
+			--set FOLDER=$NAME \
+			--set LETTER=$LETTER \
+			--set LOG_FILE=sites/$NAME/debug/$LETTER.log \
+			--set FEED_FORMAT=json \
+			--set FEED_URI=sites/$NAME/dump/$LETTER.json
+    else 
+        echo "[$SCRIPT_NAME] - ERROR: Letter \"$LETTER\" couldn't be found"
+        echo "[$SCRIPT_NAME] - Possible letters:"
+        LETTERS=`getletters $NAME showlist`
+        for letter in $LETTERS ; do printf "\"$letter\" " ; done && echo
+    fi
+}
+
+start_crawl_debug(){
+    # start_crawl name letter 
+    NAME=$1
+    LETTER=$2
+    # Exports to json format 
+    if test -e sites/$NAME/showlist/$LETTER.txt ; then 
+        /usr/bin/scrapy crawl $NAME \
+			--set FOLDER=$NAME \
+			--set LETTER=$LETTER \
+			--set FEED_FORMAT=json \
+			--set FEED_URI=debug.json
+    else 
+        echo "[$SCRIPT_NAME] - ERROR: Letter \"$LETTER\" couldn't be found"
+        echo "[$SCRIPT_NAME] - Possible letters:"
+        LETTERS=`getletters $NAME showlist`
+        for letter in $LETTERS ; do printf "\"$letter\" " ; done && echo
+    fi
+}
+
+list_sites(){
+    # list_sites message
+    # List availables sites giving a defined message
+    MESSAGE=$1
+    SITES=`getsites`
+    echo "[$SCRIPT_NAME] - $1:" 
+    for site in `echo $SITES` ; do printf "\"$site\" " ; done && echo 
+    exit
+}
+
+hms()
+{
+    # Converts seconds to HMS -> 00:00:00
+    local S=${1}
+    ((h=S/3600))
+    ((m=S%3600/60))
+    ((s=S%60))
+    (($s < 10)) && s=0$s || s=$s
+    (($m < 10)) && m=0$m || m=$m
+    (($h < 10)) && h=0$h || h=$h
+    echo $h:$m:$s
+}
+
+ask_name_letter(){
+    # Ask name and letter, receives action for letter
+    ACTION=$1
+    if test ! "$NAME" ; then
+        list_sites "Enter site to crawl"
+    fi
+
+    if test ! "$LETTER" ; then
+       if test -d sites/$NAME ; then
+           LETTERS=`getletters $NAME $ACTION`
+           echo "[$SCRIPT_NAME] - Enter letter to crawl:"
+           for letter in `echo $LETTERS` ; do printf "\"$letter\" " ; done && echo 
+           exit
+       else 
+           echo "[$SCRIPT_NAME] - ERROR: Couldn't find site \"$NAME\""
+           exit
+       fi 
+    fi
+}
+
+count_routine(){
+   # Ask name and letter, receives action for letter
+    ACTION=$1
+    if test ! "$NAME" ; then
+        list_sites "Enter site to count items"
+    fi
+
+    TOTALITEMS=`grep items sites/$NAME/debug/*.log 2> /dev/null | awk '{print $8}' | sed -s 's/(//g' | awk '{sum+=$1} END {print sum}'` 
+    if test ! "$TOTALITEMS" ; then
+        echo "[$SCRIPT_NAME] - ERROR: Couldn't count site \"$NAME\". Are there any crawled item?"
+    else
+        echo "[$SCRIPT_NAME] - Total Items crawled for site \"$NAME\" ==> $TOTALITEMS"
+    fi
+    exit
+}
+
+action_routine(){
+    # Receives an action (verb) and a command/function/script
+    # action_routine "Crawl" "start_crawl"
+    verb=$1
+    command=$2
+    TIME_START=`date +%s`
+    echo "[$SCRIPT_NAME] - $verb starting. It may take a few minutes"
+    $command $NAME $LETTER
+    TIME_END=`date +%s`
+    ELAPSED=`expr $TIME_END - $TIME_START`
+    echo "[$SCRIPT_NAME] - $verb finished. Time elapsed: `hms $ELAPSED`" 
+    exit
+}
+
+get_routine(){
+    # Yeah. Ask name and letter in the folder showlist
+    ask_name_letter showlist 
+    # Start crawling based on that :)
+    action_routine "Crawl" start_crawl 
+}
+
+debug_routine(){
+    # Yeah. Ask name and letter in the folder showlist
+    ask_name_letter showlist 
+    # Start crawling based on that :)
+    action_routine "Crawl Debugging" start_crawl_debug
+}
+
+put_routine(){
+    # Yeah. Ask name and letter in the folder dump
+    ask_name_letter dump
+    # Start putting based on that :)
+    action_routine "Upload" ./liberclass/parse_sites.py 
+}
+
+download_routine(){
+    # If there is a name..
+    if test "$NAME" ; then
+        # .. crawl it!!
+        echo "[$SCRIPT_NAME] - Crawling starting. It may take a few minutes"
+        TIME_START=`date +%s`
+        LETTERS=`getletters $NAME showlist`
+        for letter in $LETTERS ; do
+            #echo `date +%H:%M:%S` - Crawl $letter
+            start_crawl $NAME $letter
+        done
+        TIME_END=`date +%s`
+        SECONDS_ELAPSED=`expr $TIME_END - $TIME_START`
+        echo "[$SCRIPT_NAME] - Crawling finished. Time elapsed: `hms $SECONDS_ELAPSED`" 
+        exit
+    else
+    # If there isn't a name, ask for it
+        list_sites "Enter site to crawl completely"
+    fi
+}
+
+log_routine(){
+    # View log if there is a name and letter:
+    if test "$LETTER" ; then
+        tail -f sites/$NAME/logs/$LETTER 2> /dev/null || echo "[$SCRIPT_NAME] - ERROR: No logs available for this letter"
+        exit
+    # View all logs if only there is a name
+    elif test "$NAME" ; then
+        tail -f sites/$NAME/logs/* 2> /dev/null || echo "[$SCRIPT_NAME] - ERROR: No logs available from this site"
+        exit
+    else
+    # Ask for it if there isn't a name
+          list_sites "Enter site to view log"
+    fi
+}
+
+
+# All the routines
+case $COMMAND in
+    debug ) debug_routine;;
+    dialog ) dialog_routine;;
+    download ) download_routine;;
+    count ) count_routine;;
+    get ) get_routine;;
+    help ) usage_routine ;;
+    log ) log_routine;;
+    put ) put_routine;;
+    version ) echo $VERSION  ;;
+    *) usage_routine ;; 
+esac  

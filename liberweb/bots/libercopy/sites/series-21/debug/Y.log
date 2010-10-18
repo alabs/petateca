@@ -1,0 +1,53 @@
+2010-10-17 05:56:19+0200 [scrapy] INFO: Scrapy 0.10.2 started (bot: liberbot)
+2010-10-17 05:56:19+0200 [scrapy] DEBUG: Enabled extensions: FeedExporter, TelnetConsole, SpiderContext, WebService, CoreStats, MemoryUsage, CloseSpider
+2010-10-17 05:56:19+0200 [scrapy] DEBUG: Enabled scheduler middlewares: DuplicatesFilterMiddleware
+2010-10-17 05:56:19+0200 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, RedirectMiddleware, CookiesMiddleware, HttpCompressionMiddleware, DownloaderStats, HttpCacheMiddleware
+2010-10-17 05:56:19+0200 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2010-10-17 05:56:19+0200 [scrapy] DEBUG: Enabled item pipelines: 
+2010-10-17 05:56:19+0200 [scrapy] DEBUG: Telnet console listening on port 6023
+2010-10-17 05:56:19+0200 [scrapy] DEBUG: Web service listening on port 6080
+2010-10-17 05:56:19+0200 [series-21] INFO: Spider opened
+2010-10-17 05:56:20+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/> (referer: None)
+2010-10-17 05:56:21+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x12-un-dios-de-britania/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:21+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=OUS85XPR', temp=u'1', epi=u'12') in <http://www.series21.com/yo-claudio/1x12-un-dios-de-britania/>
+2010-10-17 05:56:21+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=OUS85XPR', temp=u'1', epi=u'12')
+2010-10-17 05:56:21+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=N9M90JXQ', temp=u'1', epi=u'12') in <http://www.series21.com/yo-claudio/1x12-un-dios-de-britania/>
+2010-10-17 05:56:21+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=N9M90JXQ', temp=u'1', epi=u'12')
+2010-10-17 05:56:21+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x11-la-suerte-del-tonto/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:21+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=02IUMBOH', temp=u'1', epi=u'11') in <http://www.series21.com/yo-claudio/1x11-la-suerte-del-tonto/>
+2010-10-17 05:56:21+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=02IUMBOH', temp=u'1', epi=u'11')
+2010-10-17 05:56:22+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x10-salve-quien/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:22+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=VAXTT0EM', temp=u'1', epi=u'10') in <http://www.series21.com/yo-claudio/1x10-salve-quien/>
+2010-10-17 05:56:22+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=VAXTT0EM', temp=u'1', epi=u'10')
+2010-10-17 05:56:23+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x09-zeus-por-jupiter/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:23+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=5QLGEAT4', temp=u'1', epi=u'09') in <http://www.series21.com/yo-claudio/1x09-zeus-por-jupiter/>
+2010-10-17 05:56:23+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=5QLGEAT4', temp=u'1', epi=u'09')
+2010-10-17 05:56:24+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x07-la-reina-de-los-cielos-1x08-el-reinado-del-terror/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:24+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=DFA70NZI', temp=u'1', epi=u'07') in <http://www.series21.com/yo-claudio/1x07-la-reina-de-los-cielos-1x08-el-reinado-del-terror/>
+2010-10-17 05:56:24+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=DFA70NZI', temp=u'1', epi=u'07')
+2010-10-17 05:56:24+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=FAARS6RI', temp=u'1', epi=u'07') in <http://www.series21.com/yo-claudio/1x07-la-reina-de-los-cielos-1x08-el-reinado-del-terror/>
+2010-10-17 05:56:24+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=FAARS6RI', temp=u'1', epi=u'07')
+2010-10-17 05:56:25+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x06-un-poco-de-justicia/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:25+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=V61BE20V', temp=u'1', epi=u'06') in <http://www.series21.com/yo-claudio/1x06-un-poco-de-justicia/>
+2010-10-17 05:56:25+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=V61BE20V', temp=u'1', epi=u'06')
+2010-10-17 05:56:25+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=UXN55YMQ', temp=u'1', epi=u'06') in <http://www.series21.com/yo-claudio/1x06-un-poco-de-justicia/>
+2010-10-17 05:56:25+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=UXN55YMQ', temp=u'1', epi=u'06')
+2010-10-17 05:56:27+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x05-el-veneno-es-la-reina/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:27+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=ZSG5B9XL', temp=u'1', epi=u'05') in <http://www.series21.com/yo-claudio/1x05-el-veneno-es-la-reina/>
+2010-10-17 05:56:27+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=ZSG5B9XL', temp=u'1', epi=u'05')
+2010-10-17 05:56:27+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x04-que-hacemos-con-claudio/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:27+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=CJEBAVGK', temp=u'1', epi=u'04') in <http://www.series21.com/yo-claudio/1x04-que-hacemos-con-claudio/>
+2010-10-17 05:56:27+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=CJEBAVGK', temp=u'1', epi=u'04')
+2010-10-17 05:56:28+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x03-esperando-entre-bastidores/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:28+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=PWM65YZ6', temp=u'1', epi=u'03') in <http://www.series21.com/yo-claudio/1x03-esperando-entre-bastidores/>
+2010-10-17 05:56:28+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?v=PWM65YZ6', temp=u'1', epi=u'03')
+2010-10-17 05:56:28+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=O3833FJM', temp=u'1', epi=u'03') in <http://www.series21.com/yo-claudio/1x03-esperando-entre-bastidores/>
+2010-10-17 05:56:28+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=O3833FJM', temp=u'1', epi=u'03')
+2010-10-17 05:56:29+0200 [series-21] DEBUG: Crawled (200) <GET http://www.series21.com/yo-claudio/1x01-un-toque-de-asesinato/> (referer: http://www.series21.com/yo-claudio/)
+2010-10-17 05:56:29+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?d=98R5CQHA', temp=u'1', epi=u'01') in <http://www.series21.com/yo-claudio/1x01-un-toque-de-asesinato/>
+2010-10-17 05:56:29+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megavideo.com/?d=98R5CQHA', temp=u'1', epi=u'01')
+2010-10-17 05:56:29+0200 [series-21] DEBUG: Scraped LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=98R5CQHA', temp=u'1', epi=u'01') in <http://www.series21.com/yo-claudio/1x01-un-toque-de-asesinato/>
+2010-10-17 05:56:29+0200 [series-21] INFO: Passed LiberBotItems(lang='Spanish', serie=u'Yo Claudio', links=u'http://www.megaupload.com/?d=98R5CQHA', temp=u'1', epi=u'01')
+2010-10-17 05:56:29+0200 [series-21] INFO: Closing spider (finished)
+2010-10-17 05:56:29+0200 [series-21] INFO: Stored json feed (15 items, 1790 bytes) in: sites/series-21/dump/Y.json
+2010-10-17 05:56:29+0200 [series-21] INFO: Spider closed (finished)
