@@ -44,10 +44,10 @@ TIME_ZONE = 'Europe/Madrid'
 LANGUAGE_CODE = 'en-en'
 ugettext = lambda s: s
 LANGUAGES = (
- ('es', ugettext('Spanish')),
  ('en', ugettext('English')),
+ ('es', ugettext('Spanish')),
 )
-
+TRANSLATION_REGISTRY='liberweb.translation'
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -112,6 +112,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'liberweb.serie',
     #'liberweb.imdblocal', #Don't use yet, sucks a lot
+    'south',
+    #'modeltranslation',
 )
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']

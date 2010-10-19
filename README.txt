@@ -15,5 +15,7 @@ desde el directorio raiz del proyecto::
 desde el directorio liberweb (donde está manage.py):
     
     python manage.py syncdb
+    python manage.py convert_to_south serie #ver http://south.aeracode.org/docs/convertinganapp.html#converting-an-app
     python manage.py runserver
     python manage.py loaddata serie/fixtures/test_data.json
+
