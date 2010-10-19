@@ -12,10 +12,21 @@ desde el directorio raiz del proyecto::
     source virtual/bin/activate
     python setup.py develop
 
-desde el directorio liberweb (donde está manage.py):
+desde el directorio liberweb (donde está manage.py)::
     
     python manage.py syncdb
-    python manage.py convert_to_south serie #ver http://south.aeracode.org/docs/convertinganapp.html#converting-an-app
     python manage.py runserver
     python manage.py loaddata serie/fixtures/test_data.json
 
+
+Updates
+=======
+
+2010-10-20
+----------
+
+desde el directorio liberweb (donde está manage.py)::
+
+    python manage.py migrate myapp 0001 --fake
+    python manage.py migrate
+    python manage.py update_translation_fields
