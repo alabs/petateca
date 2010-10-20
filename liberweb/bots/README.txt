@@ -8,6 +8,9 @@ Para empezar a trabajar debes primero instalar las liberclass:
 cd liberclass
 sudo python setup.py install
 
+Para instalar las dependencias en un virtualenv leer:
+http://www.thomasdesvenain.fr/?p=56
+
 Luego debes ir a /bots/libercopy/ y ejecutar ./crawl para ver lo que te pueda gustar ;) 
 
 Usage: crawl dialog              - Get, dowload site, put, view Log - the friendly way

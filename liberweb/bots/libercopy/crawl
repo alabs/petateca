@@ -8,7 +8,7 @@ COMMAND=$1
 NAME=$2
 LETTER=$3
 
-SCRIPT_NAME=`echo $0 | sed -s 's/.\///g'`
+SCRIPT_NAME=`echo $0 | sed 's/.\///g'`
 VERSION="[$SCRIPT_NAME] - 20101001 - v0.1"
 
 usage_routine(){
@@ -27,14 +27,14 @@ usage_routine(){
 
 getsites(){
     # ls available spiders, filter the unwanted and converts 'series_yonkis.py' to 'series-yonkis' 
-    echo `ls liberbot/spiders/ | egrep -v "(init|template|pyc|cache|rss|check|espoiler)" | sed -s 's/.py//g' | tr '_' '-'`
+    echo `ls liberbot/spiders/ | egrep -v "(init|template|pyc|cache|rss|check|espoiler)" | sed 's/.py//g' | tr '_' '-'`
 }
 
 getletters(){
     # getletters eztv dump or getletters eztv showlist. Erases .txt and .json extensions
     site=$1
     folder=$2
-    echo `ls sites/$site/$folder/ | sed -s 's/.txt//g' | sed -s 's/.json//g'`
+    echo `ls sites/$site/$folder/ | sed 's/.txt//g' | sed 's/.json//g'`
 }
 
 dialog_routine(){
@@ -42,10 +42,12 @@ dialog_routine(){
     type -P dialog &>/dev/null || { echo "[$SCRIPT_NAME] - ERROR: Dependency need. Install dialog." >&2; exit 1; }
     # Ask which site you want to crawl
     SITES=`getsites`
+    count=0
     LIST_SITES=$(for i in `echo $SITES`; do count=`expr $count + 1`; echo "$i" $count ; done)
     ASKNAME=`dialog --stdout --title "Select the bot" --menu "Availables:" 20 40 40 $LIST_SITES`
     # Ask which letter
     LETTERS=`getletters $ASKNAME showlist`
+    count=0
     LIST_LETTERS=$(for i in `echo $LETTERS`; do count=`expr $count + 1`; echo "$i" $count ; done)
     ASKLETTER=`dialog --stdout --title "Select the letter" --menu "Availables:" 20 40 40 $LIST_LETTERS`
     # start crawling ;)
@@ -57,9 +59,11 @@ start_crawl(){
     # start_crawl name letter 
     NAME=$1
     LETTER=$2
-    # Exports to json format 
+    # Exports to json format
+    [[ -d "sites/$NAME/debug" ]] || mkdir -p "sites/$NAME/debug"
+    [[ -d "sites/$NAME/dump" ]] || mkdir -p "sites/$NAME/dump"
     if test -e sites/$NAME/showlist/$LETTER.txt ; then 
-        /usr/bin/scrapy crawl $NAME \
+        scrapy crawl $NAME \
 			--set FOLDER=$NAME \
 			--set LETTER=$LETTER \
 			--set LOG_FILE=sites/$NAME/debug/$LETTER.log \
@@ -79,7 +83,7 @@ start_crawl_debug(){
     LETTER=$2
     # Exports to json format 
     if test -e sites/$NAME/showlist/$LETTER.txt ; then 
-        /usr/bin/scrapy crawl $NAME \
+        scrapy crawl $NAME \
 			--set FOLDER=$NAME \
 			--set LETTER=$LETTER \
 			--set FEED_FORMAT=json \
@@ -142,7 +146,7 @@ count_routine(){
         list_sites "Enter site to count items"
     fi
 
-    TOTALITEMS=`grep items sites/$NAME/debug/*.log 2> /dev/null | awk '{print $8}' | sed -s 's/(//g' | awk '{sum+=$1} END {print sum}'` 
+    TOTALITEMS=`grep items sites/$NAME/debug/*.log 2> /dev/null | awk '{print $8}' | sed 's/(//g' | awk '{sum+=$1} END {print sum}'` 
     if test ! "$TOTALITEMS" ; then
         echo "[$SCRIPT_NAME] - ERROR: Couldn't count site \"$NAME\". Are there any crawled item?"
     else
