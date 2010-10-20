@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block contents %}
+<h1>{{ serie.name }}</h1>
+<ul>
+  <li>
+    Episodios:
+    <ul>
+      {% for episode in serie.episodes.all %}
+        <li><a href="/series/{{ serie.slug_name }}/episodes/{{ episode.slug_title }}/">{{ episode.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
+
+<a href="/series">Volver al listado de series</a>
+<a href="/series/{{ serie.slug_name }}">Volver a {{ serie.name }}</a>
+
+{% endblock %}

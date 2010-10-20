@@ -1,0 +1,42 @@
+2010-10-19 19:47:17+0200 [scrapy] INFO: Scrapy 0.10.2 started (bot: liberbot)
+2010-10-19 19:47:18+0200 [scrapy] DEBUG: Enabled extensions: FeedExporter, TelnetConsole, SpiderContext, WebService, CoreStats, MemoryUsage, CloseSpider
+2010-10-19 19:47:18+0200 [scrapy] DEBUG: Enabled scheduler middlewares: DuplicatesFilterMiddleware
+2010-10-19 19:47:18+0200 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, RedirectMiddleware, CookiesMiddleware, HttpCompressionMiddleware, DownloaderStats, HttpCacheMiddleware
+2010-10-19 19:47:18+0200 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2010-10-19 19:47:18+0200 [scrapy] DEBUG: Enabled item pipelines: 
+2010-10-19 19:47:18+0200 [scrapy] DEBUG: Telnet console listening on port 6024
+2010-10-19 19:47:18+0200 [scrapy] DEBUG: Web service listening on port 6081
+2010-10-19 19:47:18+0200 [cinetube] INFO: Spider opened
+2010-10-19 19:47:18+0200 [scrapy] INFO: Received SIGINT, shutting down gracefully. Send again to force unclean shutdown
+2010-10-19 19:47:18+0200 [cinetube] INFO: Closing spider (shutdown)
+2010-10-19 19:47:18+0200 [cinetube] DEBUG: Crawled while closing spider: <GET http://www.cinetube.es/series/dulce-desafio/>
+2010-10-19 19:47:18+0200 [cinetube] INFO: Spider closed (shutdown)
+2010-10-19 21:01:23+0200 [scrapy] INFO: Scrapy 0.10.2 started (bot: liberbot)
+2010-10-19 21:01:23+0200 [scrapy] DEBUG: Enabled extensions: FeedExporter, TelnetConsole, SpiderContext, WebService, CoreStats, MemoryUsage, CloseSpider
+2010-10-19 21:01:23+0200 [scrapy] DEBUG: Enabled scheduler middlewares: DuplicatesFilterMiddleware
+2010-10-19 21:01:23+0200 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, RedirectMiddleware, CookiesMiddleware, HttpCompressionMiddleware, DownloaderStats, HttpCacheMiddleware
+2010-10-19 21:01:23+0200 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2010-10-19 21:01:23+0200 [scrapy] DEBUG: Enabled item pipelines: 
+2010-10-19 21:01:23+0200 [scrapy] DEBUG: Telnet console listening on port 6024
+2010-10-19 21:01:23+0200 [scrapy] DEBUG: Web service listening on port 6081
+2010-10-19 21:01:23+0200 [cinetube] INFO: Spider opened
+2010-10-19 21:01:23+0200 [cinetube] ERROR: Error caught on signal handler: <bound method ?.open_spider of <scrapy.contrib.feedexport.FeedExporter object at 0x1441550>>
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/defer.py", line 1014, in unwindGenerator
+	    return _inlineCallbacks(None, f(*args, **kwargs), Deferred())
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/defer.py", line 893, in _inlineCallbacks
+	    result = g.send(result)
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/core/engine.py", line 199, in open_spider
+	    yield send_catch_log_deferred(signals.spider_opened, spider=spider)
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/utils/signal.py", line 53, in send_catch_log_deferred
+	    *arguments, **named)
+	--- <exception caught here> ---
+	  File "/usr/local/lib/python2.6/dist-packages/Twisted-10.1.0-py2.6-linux-x86_64.egg/twisted/internet/defer.py", line 125, in maybeDeferred
+	    result = f(*args, **kw)
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/xlib/pydispatch/robustapply.py", line 47, in robustApply
+	    return receiver(*arguments, **named)
+	  File "/usr/local/lib/python2.6/dist-packages/Scrapy-0.10.2-py2.6.egg/scrapy/contrib/feedexport.py", line 142, in open_spider
+	    file = TemporaryFile(prefix='feed-')
+	  File "/usr/lib/python2.6/tempfile.py", line 468, in TemporaryFile
+	    dir = gettempdir()
+	  File "/usr/
