@@ -71,8 +71,12 @@ class CreateLanguage(object):
         '''
         from serie.models import Languages
         lang_iso=''
-        if self.lang_name == 'Spanish' or 'Dual' or 'Latino':
+        if self.lang_name == 'Spanish':
+            lang_iso = 'es_es'
+        if self.lang_name == 'Latin':
             lang_iso = 'es'
+        if self.lang_name == 'Japanese':
+            lang_iso = 'jp'
         elif self.lang_name == 'English':
             lang_iso = 'en'
         try: 
@@ -213,8 +217,11 @@ class CreateLink(object):
         If it doesn't exists, create it. 
         ''' 
         from serie.models import Link
-        e = CreateEpisode(self.serie, self.n_temp, self.n_epi)
-        e = e.create_episode()
+        try:
+            e = CreateEpisode(self.serie, self.n_temp, self.n_epi)
+            e = e.create_episode()
+        except:
+            return None
         try: 
             l = Link.objects.get(url=self.url)
             return l
@@ -255,12 +262,10 @@ class Import(object):
         from json import loads
         all_items = loads(open(import_file).read())
         for item in all_items:
-            print item['lang']
             l = CreateLink(item['serie'], item['temp'], item['epi'], item['links'], item['lang'])
             try:
                 l.create_link_sub(item['sublang'])
             except:
-                print item['serie']
                 l.create_link()
  
     def json_letter_site(self, letter, site):

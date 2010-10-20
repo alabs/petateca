@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block contents %}
+<h1>{{ serie.name }}</h1>
+<ul>
+  <li>Temporada: {{ episode.season }}</li>
+  <li>Episodio: {{ episode.episode }}</li>
+  <li>Fecha de Emisión: {{ episode.air_date }}</li>
+  <li>Descripción: {{ episode.description }}</li>
+</ul>
+<ul>
+  <li>
+    Enlaces:
+    <ul>
+      {% for link in episode.links.all %}
+        <li><a href="{{ link.url }}"> Ver en idioma {{ link.audio_lang }}. Subtitulos: {{ link.subtitle }}</a>
+      {% endfor %}
+    </ul>
+  </li>
+<br />
+  <a href="/series">Volver al listado de series</a>
+<br />
+  <a href="/series/{{ serie.slug_name }}">Volver a {{ serie.name }}</a>
+<br />
+  <a href="/series/{{ serie.slug_name }}/episodes/">Volver a listado de episodios de {{ serie.name }}</a>
+{% endblock %}
+

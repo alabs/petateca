@@ -18,7 +18,6 @@ desde el directorio liberweb (donde está manage.py)::
     python manage.py runserver
     python manage.py loaddata serie/fixtures/test_data.json
 
-
 Updates
 =======
 
@@ -30,3 +29,10 @@ desde el directorio liberweb (donde está manage.py)::
     python manage.py migrate myapp 0001 --fake
     python manage.py migrate
     python manage.py update_translation_fields
+
+Crawling framework 
+==================
+
+la documentacion se encuentra en 
+
+liberweb/bots/README.txt

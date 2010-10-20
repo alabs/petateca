@@ -65,11 +65,13 @@ class SerieOnlineSpider(BaseSpider):
             # Searching 'lang' - language -  and 'sublang' - subtitle language. 
             lang = tabla('.//strong/text()').extract()
             if lang == [u'Dual']:
-                serie['lang'] = "Dual"
+                serie['lang'] = "English"
             elif lang == [u'V.O']:
                 serie['lang'] = "English"
             elif lang == [u'Espa\xf1ol']:
                 serie['lang'] = "Spanish"
+            elif lang == [u'Dual Esp-Jap']:
+                serie['lang'] = "Japanese"
             elif lang == [u'V.O.S.E']:
                 serie['lang'] = "English"
                 serie['sublang'] = "Spanish"
@@ -85,5 +87,22 @@ class SerieOnlineSpider(BaseSpider):
             for link in links:
                 serie['links'] = link.encode('utf-8')
                 yield serie
+  
+            try: 
+                links = hxs.select('//input[@id="ver-megavideo"]/@onclick').re('.*\(\'(.*)\'')
+                for link in links:
+                    if not link == '':
+                        serie['links'] = link.encode('utf-8')
+            except: 
+                pass
+
+            try:
+                links = hxs.select('//input[@id="ver-fileflyer"]/@onclick').re('.*\(\'(.*)\'')
+                for link in links:
+                    if not link == '':
+                        serie['links'] = link.encode('utf-8')
+                        yield serie
+            except: 
+                pass
 
 SPIDER = SerieOnlineSpider()

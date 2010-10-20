@@ -16,6 +16,7 @@ usage_routine(){
     echo "Usage: $SCRIPT_NAME dialog              - Get, dowload site, put, view Log - the friendly way"
     echo "Usage: $SCRIPT_NAME download [SITE]     - Download all site" 
     echo "Usage: $SCRIPT_NAME count [SITE] 	  - Count crawled items for site"
+    echo "Usage: $SCRIPT_NAME countall  	  - Count crawled items for all sites"
     echo "Usage: $SCRIPT_NAME get [SITE] [LETTER] - Get site and letter using Scrapy" 
     echo "Usage: $SCRIPT_NAME put [SITE] [LETTER] - Put site and letter on LiberCopy" 
     echo "Usage: $SCRIPT_NAME help                - Shows this message" 
@@ -150,6 +151,18 @@ count_routine(){
     exit
 }
 
+countall_routine(){
+    n1=`./crawl count cinetube  | awk '{print $10}'`
+    n2=`./crawl count eztv  | awk '{print $10}'`
+    n3=`./crawl count serie-online  | awk '{print $10}'`
+    n4=`./crawl count series-21  | awk '{print $10}'`
+    n5=`./crawl count series-danko  | awk '{print $10}'`
+    n6=`./crawl count series-pepito  | awk '{print $10}'`
+    
+    TOTALITEMS=`expr $n1 + $n2 + $n3 + $n4 + $n5 + $n6` 
+    echo "[$SCRIPT_NAME] - Total Items crawled for all sites ==> $TOTALITEMS"
+}
+
 action_routine(){
     # Receives an action (verb) and a command/function/script
     # action_routine "Crawl" "start_crawl"
@@ -193,7 +206,7 @@ download_routine(){
         TIME_START=`date +%s`
         LETTERS=`getletters $NAME showlist`
         for letter in $LETTERS ; do
-            #echo `date +%H:%M:%S` - Crawl $letter
+            echo `date +%H:%M:%S` - Crawl $letter
             start_crawl $NAME $letter
         done
         TIME_END=`date +%s`
@@ -228,6 +241,7 @@ case $COMMAND in
     dialog ) dialog_routine;;
     download ) download_routine;;
     count ) count_routine;;
+    countall ) countall_routine;;
     get ) get_routine;;
     help ) usage_routine ;;
     log ) log_routine;;

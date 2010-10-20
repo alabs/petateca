@@ -23,12 +23,6 @@
   <li>Descripción: {{ serie.description }}</li>
 </ul>
 <a href="/series">Volver al listado de series</a>
-  <li>
-    <h2>Episodios</h2>
-    <ul>
-      {% for episode in serie.episodes.all %}
-        <li>{{ episode.title }}</li>
-      {% endfor %}
-    </ul>
-  </li>
+<br /> 
+<a href="/series/{{ serie.slug_name }}/episodes/">Ver listado de episodios de {{ serie.name }} </a>
 {% endblock %}
