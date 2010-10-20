@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-15 -*-
-
 import sys
 sys.path.append(".")
 from liberclass.askletter import AskLetter
@@ -53,11 +52,11 @@ class TuMejorTVSpider(BaseSpider):
         xpathselector to the rescue! Search for 'serie', 'titulo', 'temporada', etc
         '''
         hxs = HtmlXPathSelector(response)
-#        serie = LiberBotItems()
-#        # Format: Serie - TempxEpi - Title
-#        #         Dexter 1x01 Capitulo 01 
-#        serie['serie'], serie['temp'], serie['epi'] = hxs.select('//h3[@class="post-title entry-title"]/a/text()').re(r'(.*) (\d*)x(\d*)')
-#
+        serie = LiberBotItems()
+        # Format: Serie - TempxEpi - Title
+        #         Dexter 1x01 Capitulo 01 
+        serie['serie'], serie['temp'], serie['epi'] = hxs.select('//h3/a/text()').re('.*, (.*) Temporada (.*), Capitulo (.*)')
+
 #        # Let's go to language and links, please...
 #        tableraw = hxs.select('//table/tbody/tr')
 #

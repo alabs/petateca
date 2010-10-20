@@ -32,6 +32,10 @@ class Episode(models.Model):
     def __unicode__(self):
         return self.title
 
+    def save(self):
+        self.slug_title = slugify( self.title )
+        super( Episode, self ).save()
+
 class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")
     url = models.CharField(max_length=255)

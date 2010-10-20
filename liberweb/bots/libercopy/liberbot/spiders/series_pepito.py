@@ -50,8 +50,12 @@ class SeriesPepitoSpider(BaseSpider):
         serie = LiberBotItems()
         # Formato: Serie - TemporadaxEpisodio - Titulo
         # Ejemplo: Big Bang Theory 3x23 - La excitacio³n lunar
-        serie_name, serie['temp'], serie['epi'], serie['title'] = hxs.select('//span[@class="tam12"]/text()')[0].re(r'(.*) (\d)x(\d*) - (.*)')
+        serie_name, serie['temp'], serie['epi'], serie['title'] = hxs.select('//span[@class="tam12"]/text()')[0].re(r'(.*) (.*)x(.*) - (.*)')
         serie['serie'] = serie_name.strip()
+        serie['serie'] = serie['serie'].encode('utf-8')
+        serie['title'] = serie['title'].encode('utf-8')
+        serie['temp'] = serie['temp'].encode('utf-8')
+        serie['epi'] = serie['epi'].encode('utf-8') 
 
         tablas = hxs.select('//table[@width="620"]')
 
@@ -61,26 +65,31 @@ class SeriesPepitoSpider(BaseSpider):
 
            # tabla.select('.//td[@class="tam12"]/text()').re(r'No hay registros disponibles .*')
 
-            lang = tabla.select('.//strong/text()').extract()
-            # Como python no tiene case, usamos ifs anidados
-            if lang == [u'Dual']:
-                serie['lang'] = "English"
-            elif lang == [u'V.O']:
-                serie['lang'] = "English"
-            elif lang == [u'Espa\xf1ol']:
-                serie['lang'] = "Spanish"
-            elif lang == [u'V.O.S.E']:
+            img = tabla.select('//img[@width="30"]/@src')[0].extract()
+            ''' Returns lang based on img flag '''
+            VOS = "http://www.seriespepito.com/seriespepito/idiomas/vos.png"
+            esp = "http://www.seriespepito.com/seriespepito/idiomas/es.png"
+            eng = "http://www.seriespepito.com/seriespepito/idiomas/vo.png"
+            lat = "http://www.seriespepito.com/seriespepito/idiomas/la.png"
+            if img == VOS:
                 serie['lang'] = "English"
                 serie['sublang'] = "Spanish"
+            elif img == esp:
+                serie['lang'] = "Spanish"
+            elif img == lat: 
+                serie['lang'] = "Latin" 
+            elif img == eng: 
+                serie['lang'] = "English" 
+
+#            lang = tabla.select('.//strong/text()').extract()
 
             links = tabla('.//a[contains(@target, "_blank")]/@href').extract()
 
             for link in links:
-                serie['links'] = link
+                serie['links'] = link.encode('utf-8')
                 subtitulos = tabla('.//a[contains(@href,"http://www.serieonline.net/subtitulos/series")]/@href').extract()
                 if subtitulos:
                     serie['sublink'] = subtitulos
-                print serie
                 yield serie
 
             # ARRRGHHH por la puta enie no puedo hacer esto que quedaria mas mejor:
