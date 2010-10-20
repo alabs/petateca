@@ -3,6 +3,7 @@ setup.py
 liberweb/__init__.py
 liberweb/manage.py
 liberweb/settings.py
+liberweb/translation.py
 liberweb/urls.py
 liberweb.egg-info/PKG-INFO
 liberweb.egg-info/SOURCES.txt

@@ -19,6 +19,7 @@ setup(
         'docutils',
         'South',
         'django-modeltranslation',
+        'django-rosetta',
     ],
     classifiers=[
         'Environment :: Web Environment',

@@ -8,38 +8,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-13 17:03+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-10-20 04:05+0200\n"
+"PO-Revision-Date: 2010-10-20 04:05\n"
+"Last-Translator: <lasi@lasi.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: settings.py:41
-msgid "Spanish"
-msgstr "Español"
-
-#: settings.py:42
+#: settings.py:47
 msgid "English"
 msgstr "Inglés"
 
-#: serie/models.py:9
-#, fuzzy
+#: settings.py:48
+msgid "Spanish"
+msgstr "Español"
+
+#: serie/models.py:10
 msgid "runtime duration"
 msgstr "Duración de emisión"
 
-#: serie/models.py:9
+#: serie/models.py:10
 msgid "duration of episodes in minutes"
 msgstr "la duración de los episodios en minutos"
 
-#: serie/models.py:19
-#, fuzzy
+#: serie/models.py:23
 msgid "air date"
 msgstr "Fecha de estreno"
 
-#: serie/models.py:19
+#: serie/models.py:23
 msgid "first broadcast date"
 msgstr "la fecha de la primera emisión"

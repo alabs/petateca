@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     #'liberweb.imdblocal', #Don't use yet, sucks a lot
     'south',
     'modeltranslation',
+    'rosetta',
 )
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
