@@ -17,3 +17,10 @@ desde el directorio liberweb (donde está manage.py):
     python manage.py syncdb
     python manage.py runserver
     python manage.py loaddata serie/fixtures/test_data.json
+
+Crawling framework 
+==================
+
+la documentacion se encuentra en 
+
+liberweb/bots/README.txt

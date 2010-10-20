@@ -31,4 +31,48 @@ Los logs de los sitios que se crawlearon se encuentran en
 Los dumps json de los sitios crawleados se encuentra en 
 /bots/libercopy/sites/SITIO/dump
 
-NOTA: A fecha del 16/10/2010, los spiders funcionales son serie-online, eztv y series-danko
+NOTA: A fecha del 20/10/2010, los spiders funcionales son serie-online, cinetube, series-pepito, eztv y series-danko
+
+$ ./crawl countall
+[crawl] - Total Items crawled for all sites ==> 479445
+
+---------
+
+De liberclass una clase muy interesante es liberimport. La forma correcta de ejecutarla es a traves del manage.py en Django:
+
+$ python manage.py shell
+
+>>> from liberclass import liberimport
+>>> help liberimport
+
+LiberImport tiene las siguientes clases:
+        CreateActor
+        CreateEpisode
+        CreateGenre
+        CreateLanguage
+        CreateLink
+        CreateNetwork
+        CreateSerie
+        Import
+
+Casi todas se ejecutan asi:
+
+>>> a = liberimport.CreateActor('Frank Sinatra')
+>>> a = a.create_actor()
+
+a nos devuelve el objeto de Django: 
+
+>>> a
+>>> <Actor: Frank Sinatra>
+
+Para cargar datos del scrapy, la forma mas facil es con Import:
+
+>>> site='eztv'
+>>> letter='F'
+>>> 
+>>> i = liberimport.Import()
+>>> i.json_file('bots/libercopy/sites/' + site + '/dump/' + letter + '.json')
+
+Para mas ejemplos ver el propio fichero de liberimport.py en liberclass/liberclass/liberimport.py
+
+

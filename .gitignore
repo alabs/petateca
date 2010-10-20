@@ -6,3 +6,5 @@ virtual
 liberweb.egg-info/*
 distribute*
 *.mo
+liberweb/bots/libercopy/liberbot/cache/*
+liberweb/bots/libercopy/sites/*/debug/*
