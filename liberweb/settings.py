@@ -119,3 +119,12 @@ INSTALLED_APPS = (
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
 
+if DEBUG:
+    try:
+        #Check if django-debug-toolbar is installed
+        import debug_toolbar
+        MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+        INTERNAL_IPS = ('127.0.0.1',)
+        INSTALLED_APPS += ('debug_toolbar', )
+    except:
+        pass
