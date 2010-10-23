@@ -23,5 +23,8 @@ def get_episode(request, serie_slug, episode_slug):
     episode = get_object_or_404(Episode, slug_title=episode_slug)
     return render_to_response('serie/get_episode.html', {'serie': serie, 'episode': episode })
 
+def list_user_favorite(request):
+    return "TODO"
+
 def list_user_recommendation(request):
     return "TODO"
