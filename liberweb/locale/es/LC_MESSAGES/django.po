@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-20 04:05+0200\n"
-"PO-Revision-Date: 2010-10-20 04:05\n"
+"POT-Creation-Date: 2010-10-23 03:32+0200\n"
+"PO-Revision-Date: 2010-10-23 03:22\n"
 "Last-Translator: <lasi@lasi.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -42,3 +42,50 @@ msgstr "Fecha de estreno"
 #: serie/models.py:23
 msgid "first broadcast date"
 msgstr "la fecha de la primera emisión"
+
+#: serie/views.py:18
+#, python-format
+msgid "Episodes of %(name)s"
+msgstr "Los episodios de %(name)s "
+
+#: templates/serie/get_episodes.html:7
+msgid "Episodes"
+msgstr "Episodios"
+
+#: templates/serie/get_episodes.html:15 templates/serie/get_serie.html:26
+#: templates/serie/serie_list.html:4
+msgid "Series list"
+msgstr "Lista de series"
+
+#: templates/serie/get_episodes.html:17
+msgid "Back to"
+msgstr "Volver a"
+
+#: templates/serie/get_serie.html:6
+msgid "Network"
+msgstr "Compañía"
+
+#: templates/serie/get_serie.html:8
+msgid "Genre"
+msgstr "Género"
+
+#: templates/serie/get_serie.html:16
+msgid "Actors"
+msgstr "Actores"
+
+#: templates/serie/get_serie.html:23
+msgid "Runtime"
+msgstr "Duración"
+
+#: templates/serie/get_serie.html:24
+msgid "Description"
+msgstr "Descripción"
+
+#: templates/serie/get_serie.html:29
+#, fuzzy, python-format
+msgid ""
+"\n"
+"View espisode list of %(s_name)s\n"
+msgstr ""
+"\n"
+"Los episodios de %(name)s \n"

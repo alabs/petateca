@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block contents %}
+<h1>{% trans "Series list" %}</h1>
+<ul>
+  {% for serie in object_list %}
+  <li><a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">{{ serie.name }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

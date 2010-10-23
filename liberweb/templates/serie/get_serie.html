@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block contents %}
 <h1>{{ serie.name }}</h1>
 <ul>
-  <li>Proveedor: {{ serie.network.name }}</li>
+    <li>{% trans "Network" %}: {{ serie.network.name }}</li>
   <li>
-    Género:
+  {% trans "Genre" %}:
     <ul>
       {% for genre in serie.genres.all %}
         <li>{{ genre.name }}</li>
@@ -12,17 +13,21 @@
     </ul>
   </li>
   <li>
-    Actores:
+  {% trans "Actors" %}:
     <ul>
       {% for actor in serie.actors.all %}
         <li>{{ actor.name }}</li>
       {% endfor %}
     </ul>
   </li>
-  <li>Duración: {{ serie.runtime }} minutos</li>
-  <li>Descripción: {{ serie.description }}</li>
+  <li>{% trans "Runtime" %}: {{ serie.runtime }} minutos</li>
+  <li>{% trans "Description" %}: {{ serie.description }}</li>
 </ul>
-<a href="/series">Volver al listado de series</a>
+<a href="{% url serie-index %}">{% trans "Series list" %}</a>
 <br /> 
-<a href="/series/{{ serie.slug_name }}/episodes/">Ver listado de episodios de {{ serie.name }} </a>
+<a href="{% url liberweb.serie.views.get_episodes serie_slug=serie.slug_name %}">
+{% blocktrans with serie.name as s_name %}
+View espisode list of {{ s_name }}
+{% endblocktrans %}
+</a>
 {% endblock %}
