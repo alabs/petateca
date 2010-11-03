@@ -119,12 +119,12 @@ class CreateSerie(object):
         TODO: Add actors and images
         '''
         from serie.models import Serie
-        serie_name = self.normalizer(self.serie_untrust)
+        serie_name = self.__normalizer__(self.serie_untrust)
         try: 
             s = Serie.objects.get(name=serie_name)
             return s
         except Serie.DoesNotExist:
-            serie = self.get_serie(serie_name)
+            serie = self.__get_serie__(serie_name)
             n = CreateNetwork(serie['network'])
             n = n.create_network()
             s = Serie(name=serie['name'], runtime=serie['runtime'], description=serie['description'], network=n)
@@ -140,11 +140,11 @@ class CreateSerie(object):
             # TODO: Images
             return s
 
-    def swap_dictionary(self, original_dict):
+    def __swap_dictionary__(self, original_dict):
         ''' Swap values/keys '''
         return dict([(v, k) for (k, v) in original_dict.iteritems()])
     
-    def normalizer(self, serie_untrust): 
+    def __normalizer__(self, serie_untrust): 
         '''
         Receives serie_untrust, ask to IMDB and get serie_name
         Normalize Lost, lost, Perdidos, perdidos
@@ -153,26 +153,50 @@ class CreateSerie(object):
         ia = IMDb()
         serie_name = ia.search_movie(serie_untrust)[0]['title']
         return serie_name
-    
-    def get_serie(self, serie_untrust):
+
+    def __get_list__(self, list_raw):
+        ''' 
+        Get list method, for getting actors and genres in this format '|Bla|'
+        '''
+        list_clean = list_raw.split('|')
+        list_clean.pop(0)
+        list_clean.pop(-1)
+        return list_clean
+   
+    def __get_banners__(self, serie_trust): 
+        '''
+        Get Banners files
+        ''' 
+        from tvdb_api import Tvdb
+        t = Tvdb(banners=True)
+        banner_list = t[serie_trust]['_banners']['poster']
+        urls = []
+        for resolution in banner_list:
+            for banner in banner_list[resolution]:
+                urls.append(banner_list[resolution][banner]['_bannerpath'])
+        filenames = []
+        for index, f in enumerate(urls):
+            from urllib import urlretrieve
+            filename = '/tmp/' + serie_trust + '-' + str(index) + '.jpg'
+            urlretrieve(f, filename)
+            filenames.append(filename)
+        return filenames
+
+    def __get_serie__(self, serie_untrust):
         ''' 
         Receives a serie name, returns a dict with name, genres, description, 
         network, actors and runtime
         '''
-        from thetvdb.tool import Tool
-        t = Tool()
-        serie_name = self.normalizer(serie_untrust) # normalize the name
-        series_list = t.get_series(serie_name) # receives similar series list
-        query = self.swap_dictionary(series_list) # swap key/value
-        serie_id = query.get(serie_name) # getting the ID
-        serie_info = t.get_serie_information(int(serie_id), 'es') # ask with ID
+        from tvdb_api import Tvdb
+        t = Tvdb()
+        serie_trust = self.__normalizer__(serie_untrust)
         serie = {}
-        serie['name'] = serie_name 
-        serie['genres'] = serie_info['genres']
-        serie['description'] = serie_info['description']
-        serie['network'] = serie_info['network']
-        serie['actors'] = serie_info['actors']
-        serie['runtime'] = serie_info['runtime']
+        serie['name'] = t[serie_trust]['seriesname']
+        serie['network'] = t[serie_trust]['network']
+        serie['runtime'] = t[serie_trust]['runtime']
+        serie['description'] = t[serie_trust]['overview']
+        serie['genres'] = self.__get_list__(t['Lost']['genre'])
+        serie['actors'] = self.__get_list__(t['Lost']['actors'])
         return serie
 
 class CreateEpisode(object):
