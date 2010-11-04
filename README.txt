@@ -26,7 +26,7 @@ Updates
 
 desde el directorio liberweb (donde está manage.py)::
 
-    python manage.py migrate myapp 0001 --fake
+    python manage.py migrate serie 0001 --fake
     python manage.py migrate
     python manage.py update_translation_fields
 
