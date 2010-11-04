@@ -28,3 +28,7 @@ def list_user_favorite(request):
 
 def list_user_recommendation(request):
     return "TODO"
+
+def index(request):
+    ctx = {}
+    return render_to_response('serie/index.html', ctx)

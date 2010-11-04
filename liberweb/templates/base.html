@@ -6,13 +6,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
     <head>
         <title>{% block title %}{{title|default:"Liber Copy"}}{% endblock %}</title>
+        <link rel="stylesheet" href="/static/css/lc.css" type="text/css" />
         {% block extrastyle %}{% endblock %}
         {% block extrahead %}{% endblock %}
     </head>
     <body>
-<div id="logo">Logo</div>
-<div id="contents">
+	<div id="back">
+		<div id="main">
+			<div id="logo"></div>
+			<div id="top-menu">
+				<ul>
+					<li><a href="#">SERIES</a></li>
+					<li><a href="#">PELICULAS</a></li>
+					<li><a href="#">MÚSICA</a></li>
+				</ul>
+			</div>
+			<div id="frase"><h2>Sharing is good</h2></div>
 {% block contents %}{% endblock %}
-</div>
+		<div id="line"></div>
+	</div>
     </body>
 </html>

@@ -9,7 +9,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     # (r'^liberweb/', include('liberweb.foo.urls')),
-    (r'^serie', include('liberweb.serie.urls')),
+    (r'^serie/', include('liberweb.serie.urls.obj')),
+    (r'^series/', include('liberweb.serie.urls.entity')),
+    (r'^$', 'liberweb.serie.views.index'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

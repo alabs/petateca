@@ -1,0 +1,88 @@
+@import 'reset.css';
+
+body{color:#7d7d7d;font-family:Arial,sans-serif; }
+
+a{ color:#7d7d7d;text-decoration: none;}
+a:hover{ color:#7d7d7d;text-decoration: underline;}
+
+
+#back{
+	background-image: url(../images/topdegra.png);
+	background-repeat: repeat-x;
+}
+
+#main{
+	width: 900px;	
+	margin: 0px auto;
+	height: 100px;
+	padding: 1em;
+
+}
+	#logo{
+		float:left;
+		background-image: url(../images/logo.png);
+		background-repeat: none repeat;
+		width: 241px;
+		height: 81px;
+	}
+
+	#top-menu{
+		float:right;		
+		width: 600px;
+		margin-top: 35px;
+		font-size:0.8em;
+	}
+		#top-menu ul li{display:inline;margin-left: 0.8em;}
+	
+	#frase{
+		float:left;
+		width:100%;
+		margin-top:10px;
+		text-align: right;
+		font-size: 1.5em;
+		color: #F4792A;
+	}
+	#series-menu{
+		float:left;
+		width:200px;
+		margin-top:50px;
+		margin-left:25px;
+		font-size:0.9em;
+	}
+
+	#panel{
+		float:right;
+		background-image: url(../images/fotos.png);
+		background-repeat: none repeat;
+		width: 655px;
+		height: 306px;
+		margin-top: 20px;
+	}
+
+	#line{
+		width: 100%;
+		height: 230px;
+		background-color: #eee;
+		margin-top:350px;		
+	}
+
+	.text{
+		float:left;
+		padding:1em;
+		width: 270px;
+		font-size: 0.8em;
+		margin-top:25px;
+	}
+	.text h2{ font-size:1.5em;color:#F4792A}
+	.text p{padding:1em;}
+
+	.text2{
+		float:left;
+		padding:1em;
+		width: 270px;
+		font-size: 0.8em;
+		margin-top:25px;
+	}
+	.text2 h2{ font-size:1.5em;}
+	.text2 p{padding:1em;}
+
