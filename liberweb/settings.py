@@ -119,6 +119,12 @@ INSTALLED_APPS = (
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
 
+#Valid values are http, sql
+IMDB_ACCESS_SYSTEM = "http"  #XXX: sql search is worse
+
+#uri for use with sql
+IMDB_ACCESS_DB_URI = "postgres://liberweb:libre@localhost/imdb"
+
 if DEBUG:
     try:
         #Check if django-debug-toolbar is installed

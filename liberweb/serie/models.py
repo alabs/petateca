@@ -8,8 +8,11 @@ class Serie(models.Model):
     network = models.ForeignKey("Network", related_name="series")
     genres = models.ManyToManyField("Genre", related_name="series")
     runtime = models.IntegerField(name=_('runtime duration'), blank=True, null=True, help_text=_('duration of episodes in minutes'))
-    actors = models.ManyToManyField("Actor")
+    actors = models.ManyToManyField("Actor", through='Role')
     description = models.TextField()
+    rating = models.FloatField(blank=True, null=True)
+    rating_count = models.IntegerField(default=0)
+    finished = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name
@@ -17,6 +20,16 @@ class Serie(models.Model):
     def save(self):
         self.slug_name = slugify( self.name )
         super( Serie, self ).save()
+
+class Role(models.Model):
+    serie = models.ForeignKey("Serie")
+    actor = models.ForeignKey("Actor")
+    sortorder = models.IntegerField(blank=True, null=True)
+    role = models.CharField(max_length=255)
+
+class SerieAlias(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    serie = models.ForeignKey("Serie", related_name="aliases")
 
 class Episode(models.Model):
     serie = models.ForeignKey('Serie', related_name="episodes")
@@ -33,7 +46,8 @@ class Episode(models.Model):
         return self.title
 
     def save(self):
-        self.slug_title = slugify( self.title )
+        if not self.slug_title:
+            self.slug_title = slugify( self.title )
         super( Episode, self ).save()
 
 class Link(models.Model):
@@ -70,6 +84,11 @@ class Genre(models.Model):
     name = models.CharField(max_length=25)
     slug_name = models.SlugField(unique=True)
 
+    def save(self):
+        if not self.slug_name:
+            self.slug_name = slugify( self.name )
+        super( Genre, self ).save()
+
     def __unicode__(self):
         return self.name
 
@@ -81,7 +100,7 @@ class Actor(models.Model):
 
 class ImageSerie(models.Model):
     title = models.CharField(max_length=100)
-    src = models.ImageField(upload_to="/img/serie")
+    src = models.ImageField(upload_to="img/serie")
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField()
     serie = models.ForeignKey("Serie", related_name="images")
@@ -91,7 +110,7 @@ class ImageSerie(models.Model):
 
 class ImageActor(models.Model):
     title = models.CharField(max_length=100)
-    src = models.ImageField(upload_to="/img/actor")
+    src = models.ImageField(upload_to="img/actor")
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField()
     actor = models.ForeignKey("Actor", related_name="images")

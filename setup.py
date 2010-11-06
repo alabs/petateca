@@ -20,6 +20,7 @@ setup(
         'South',
         'django-modeltranslation',
         'django-rosetta',
+        'IMDbPY',
     ],
     classifiers=[
         'Environment :: Web Environment',
