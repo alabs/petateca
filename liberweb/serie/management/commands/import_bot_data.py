@@ -50,6 +50,12 @@ class Command(BaseCommand):
             warn("Unsuported fields in json: %s" % kw)
         if not lang:
             warn("Serie %s with link %s has not lang" % (serie, links))
+            return
+        try:
+            m.Link.objects.get(url=links)
+            return #It's already loaded
+        except m.Link.DoesNotExist:
+            pass
 
         try:
             db_serie_alias = m.SerieAlias.objects.get(name=serie)
@@ -83,7 +89,46 @@ class Command(BaseCommand):
         except m.Episode.DoesNotExist:
             warn("Episode %sx%s of %s not populated yet" % (temp, epi, serie))
             #Create episode
+            db_episode = m.Episode()
+            db_episode.serie = db_serie
+            db_episode.title_en = db_episode.title_es = "%sx%s" % (temp, epi)
+            db_episode.season = int(temp)
+            db_episode.episode = int(epi)
+            db_episode.description_en = "Not available"
+            db_episode.description_es = "No disponible"
+            db_episode.save()
 
+        db_lang = self.normalize_lang(lang)
+        if not db_lang:
+            warn("Invalid lang %s" % lang)
+            return
+        db_link = m.Link()
+        db_link.episode = db_episode
+        db_link.url = links
+        db_link.audio_lang = self.normalize_lang(lang)
+        #TODO: Subtitle stuff
+        db_link.save()
+
+    def normalize_lang(self, lang_code):
+        langs = {
+            "spanish": ("es", "es"),
+            "japanese": ("jp", None),
+            "latin": ("es", None),
+            "english": ("en", None),
+            "es-es": ("es", "es"),
+            "jp": ("jp", None),
+            "es": ("es", None),
+            "en": ("en", None),
+        }
+        try:
+            iso_code, country = langs[lang_code.lower()]
+            return m.Languages.objects.get(iso_code=iso_code, country=country)
+        except m.Languages.DoesNotExist:
+            lang = m.Languages(iso_code=iso_code, country=country)
+            lang.save()
+            return lang
+        except KeyError:
+            pass
     
     def populate_serie(self, name):
         tvdb_en = Tvdb(actors=True, banners=True)

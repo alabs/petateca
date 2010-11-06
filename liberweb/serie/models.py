@@ -52,7 +52,7 @@ class Episode(models.Model):
 
 class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")
-    url = models.CharField(max_length=255)
+    url = models.CharField(max_length=255, unique=True, db_index=True)
     audio_lang = models.ForeignKey("Languages", related_name="audio_langs")
     subtitle = models.ForeignKey("Languages", related_name="sub_langs", null=True, blank=True) #Integrated subtitles
 
@@ -68,9 +68,12 @@ class SubtitleLink(models.Model):
         return self.url
 
 class Languages(models.Model):
-    iso_code = models.CharField(max_length=2, unique=True)
+    iso_code = models.CharField(max_length=2)
+    country = models.CharField(max_length=2, null=True, blank=True)
 
     def __unicode__(self):
+        if self.country:
+            return "%s-%s" % (self.iso_code, self.country)
         return self.iso_code
 
 class Network(models.Model):
