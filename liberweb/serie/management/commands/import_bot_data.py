@@ -24,6 +24,8 @@ class Command(BaseCommand):
     args = '<json_file json_file ...>'
     help = 'Import bot data from generated json files'
 
+    not_found = {}
+
     def handle(self, *args, **options):
         imdb_am = settings.IMDB_ACCESS_SYSTEM
         if imdb_am == "http":
@@ -51,6 +53,8 @@ class Command(BaseCommand):
         if not lang:
             warn("Serie %s with link %s has not lang" % (serie, links))
             return
+        if serie in self.not_found:
+            return #It's a waste of time
         try:
             m.Link.objects.get(url=links)
             return #It's already loaded
@@ -71,9 +75,10 @@ class Command(BaseCommand):
                     imdb_reg = res
                     break
             if imdb_reg:
-                db_serie = self.populate_serie(imdb_reg["title"])
+                db_serie = self.populate_serie(imdb_reg["title"], serie)
                 if not db_serie:
                     warn("%s is not found in tvdb" % imdb_reg["title"])
+                    self.not_found[serie] = True
                     return
                 db_serie.save()
                 db_serie_alias = m.SerieAlias()
@@ -82,6 +87,7 @@ class Command(BaseCommand):
                 db_serie_alias.save()
             else:
                 warn("Not found serie '%s'" % serie)
+                self.not_found[serie] = True
                 return
         #Search episode in database
         try:
@@ -130,14 +136,18 @@ class Command(BaseCommand):
         except KeyError:
             pass
     
-    def populate_serie(self, name):
+    def populate_serie(self, name, orig_name=None):
         tvdb_en = Tvdb(actors=True, banners=True)
         tvdb_es = Tvdb(language="es")
         try:
             reg_en = tvdb_en[name]
             reg_es = tvdb_es[name]
         except:
-            return None
+            try:
+                reg_en = tvdb_en[orig_name]
+                reg_es = tvdb_es[orig_name]
+            except:
+                return None
         
         try:
             db_serie = m.Serie.objects.get(name=name)
@@ -174,6 +184,7 @@ class Command(BaseCommand):
             db_img.save()
 
         for actor in reg_en["_actors"]:
+            if not actor["name"]: continue #This field is needed
             db_actor = self.populate_actor(actor)
             db_role = m.Role(actor=db_actor, serie=db_serie, role=actor["role"] or "")
             db_role.save()
@@ -198,11 +209,15 @@ class Command(BaseCommand):
                     db_episode.air_date = datetime.datetime.strptime(
                             episode["firstaired"], "%Y-%m-%d") if episode["firstaired"] else None
                     db_episode.title_en = reg_en[n_season][n_episode]["episodename"]
-                    db_episode.title_es = reg_es[n_season][n_episode]["episodename"]
                     db_episode.season = n_season
                     db_episode.episode = n_episode
                     db_episode.description_en = reg_en[n_season][n_episode]["overview"] or "Not available"
-                    db_episode.description_es = reg_es[n_season][n_episode]["overview"] or "No disponible"
+                    try:
+                        db_episode.title_es = reg_es[n_season][n_episode]["episodename"]
+                        db_episode.description_es = reg_es[n_season][n_episode]["overview"] or "No disponible"
+                    except:
+                        db_episode.title_es = "%sx%s" % (n_season, n_episode)
+                        db_episode.description_es = "No disponible"
                     db_episode.save()
 
     def populate_network(self, network):
