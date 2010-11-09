@@ -32,9 +32,19 @@ desde el directorio liberweb (donde está manage.py)::
     python manage.py migrate
     python manage.py update_translation_fields
 
+2010-11-09
+----------
+
+# Para importar los jsonses crawleados por scrapy:
+# Cambiar el sitio (eztv) y la letra (W.json)
+python manage.py import_bot_data bots/libercopy/sites/eztv/dump/W.json 
+
+
 Crawling framework 
 ==================
 
 la documentacion se encuentra en 
 
 liberweb/bots/README.txt
+
+
