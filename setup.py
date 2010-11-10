@@ -21,6 +21,7 @@ setup(
         'django-modeltranslation',
         'django-rosetta',
         'IMDbPY',
+        'sorl-thumbnail',
     ],
     classifiers=[
         'Environment :: Web Environment',

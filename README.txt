@@ -12,11 +12,9 @@ Develop instalation
     source virtual/bin/activate
     python setup.py develop
 # Desde liberweb (donde esta manage.py)    
-# Con el --migrate ya no hace falta hacer los otros migrates
-# FIXME: Falla con sqlite3
     python manage.py syncdb --migrate
-    python manage.py runserver
     python manage.py update_translation_fields
+    python manage.py runserver
 # FIXME: Hay que agregar fixtures validos
 #    python manage.py loaddata serie/fixtures/test_data.json
 
@@ -37,7 +35,7 @@ desde el directorio liberweb (donde está manage.py)::
 
 # Para importar los jsonses crawleados por scrapy:
 # Cambiar el sitio (eztv) y la letra (W.json)
-python manage.py import_bot_data bots/libercopy/sites/eztv/dump/W.json 
+    python manage.py import_bot_data bots/libercopy/sites/eztv/dump/W.json 
 
 
 Crawling framework 
@@ -46,5 +44,4 @@ Crawling framework
 la documentacion se encuentra en 
 
 liberweb/bots/README.txt
-
 

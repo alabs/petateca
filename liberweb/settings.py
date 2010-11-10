@@ -60,7 +60,7 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static')
+MEDIA_ROOT = '/home/anders/liberweb/liberweb/static'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -106,15 +106,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'liberweb.serie',
     #'liberweb.imdblocal', #Don't use yet, sucks a lot
     'south',
     'modeltranslation',
     'rosetta',
+    'sorl.thumbnail',
 )
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
@@ -124,6 +123,9 @@ IMDB_ACCESS_SYSTEM = "http"  #XXX: sql search is worse
 
 #uri for use with sql
 IMDB_ACCESS_DB_URI = "postgres://liberweb:libre@localhost/imdb"
+
+#THUMBNAIL_DEBUG = True
+THUMBNAIL_SUBDIR = 'thumbs'
 
 if DEBUG:
     try:

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load thumbnail %}
 {% block contents %}
 <h1>{{ serie.name }}</h1>
 <ul>
@@ -20,8 +21,9 @@
       {% endfor %}
     </ul>
   </li>
-  <li>{% trans "Runtime" %}: {{ serie.runtime }} minutos</li>
+  <li>{% trans "Runtime" %}: {{ serie.runtime }} {% trans "minutes" %}</li>
   <li>{% trans "Description" %}: {{ serie.description }}</li>
+  <li>{% trans "Poster" %}: <img src="{% thumbnail image 300x200 upscale %}" />
 </ul>
 <a href="{% url serie-index %}">{% trans "Series list" %}</a>
 <br /> 
