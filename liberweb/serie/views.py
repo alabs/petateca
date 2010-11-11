@@ -6,7 +6,10 @@ from django.utils.translation import gettext_lazy as _
 
 def get_serie(request, serie_slug):
     serie = get_object_or_404(Serie, slug_name=serie_slug)
-    img = serie.images.get()
+    # get() returned more than one
+    # img = serie.images.get() 
+    for img in serie.images.values(): any_id = img['id']
+    img = serie.images.get(id=any_id)
     return render_to_response('serie/get_serie.html', {
         'serie': serie,
         'title': serie.name,

@@ -5,13 +5,11 @@ Develop instalation
     sudo aptitude install python-setuptools python-dev
     sudo easy_install -U pip
 # Desde el directorio raiz
-    sudo pip install -U virtualenv
-    sudo pip install -U virtualenvwrapper
-    pip -E virtual install django
-    pip -E virtual install ipython
+    sudo pip install -U virtualenv virtualenvwrapper
+    pip -E virtual install django ipython PIL
     source virtual/bin/activate
     python setup.py develop
-# Desde liberweb (donde esta manage.py)    
+# Desde liberweb (donde esta manage.py)
     python manage.py syncdb --migrate
     python manage.py update_translation_fields
     python manage.py runserver
@@ -37,6 +35,13 @@ desde el directorio liberweb (donde está manage.py)::
 # Cambiar el sitio (eztv) y la letra (W.json)
     python manage.py import_bot_data bots/libercopy/sites/eztv/dump/W.json 
 
+
+2010-11-11
+----------
+
+# Para que funcionen los thumbnails
+    source virtual/bin/activate
+    pip install sorl-thumbnail PIL
 
 Crawling framework 
 ==================
