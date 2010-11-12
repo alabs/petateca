@@ -22,6 +22,7 @@ setup(
         'django-rosetta',
         'IMDbPY',
         'sorl-thumbnail',
+        'tvdb_api',
     ],
     classifiers=[
         'Environment :: Web Environment',
