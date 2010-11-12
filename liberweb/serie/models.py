@@ -55,6 +55,7 @@ class Link(models.Model):
     url = models.CharField(max_length=255, unique=True, db_index=True)
     audio_lang = models.ForeignKey("Languages", related_name="audio_langs")
     subtitle = models.ForeignKey("Languages", related_name="sub_langs", null=True, blank=True) #Integrated subtitles
+    bot = models.CharField(max_length=255, null=True, blank=True)
 
     def __unicode__(self):
         return self.url

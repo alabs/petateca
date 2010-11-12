@@ -15,6 +15,8 @@ import urllib
 import os.path
 import datetime
 
+from optparse import make_option
+
 try:
     import json
 except:
@@ -23,10 +25,18 @@ except:
 class Command(BaseCommand):
     args = '<json_file json_file ...>'
     help = 'Import bot data from generated json files'
+    option_list = BaseCommand.option_list + (
+        make_option('--bot',
+            action='store',
+            dest='bot',
+            default="import_bot_data",
+            help='Name of the importer bot'),
+        )
 
     not_found = {}
 
     def handle(self, *args, **options):
+        self.bot = options.get("bot")
         imdb_am = settings.IMDB_ACCESS_SYSTEM
         if imdb_am == "http":
             self.imdb = IMDb()
@@ -56,8 +66,12 @@ class Command(BaseCommand):
         if serie in self.not_found:
             return #It's a waste of time
         try:
-            m.Link.objects.get(url=links)
-            return #It's already loaded
+            db_link = m.Link.objects.get(url=links)
+            db_link.audio_lang = self.normalize_lang(lang)
+            db_link.subtitle = self.normalize_lang(sublang)
+            db_link.bot = self.bot
+            db_link.save()
+            return #It's already loaded, but update data
         except m.Link.DoesNotExist:
             pass
 
@@ -112,7 +126,8 @@ class Command(BaseCommand):
         db_link.episode = db_episode
         db_link.url = links
         db_link.audio_lang = self.normalize_lang(lang)
-        #TODO: Subtitle stuff
+        db_link.subtitle = self.normalize_lang(sublang)
+        db_link.bot = self.bot
         db_link.save()
 
     def normalize_lang(self, lang_code):
@@ -127,7 +142,7 @@ class Command(BaseCommand):
             "en": ("en", None),
         }
         try:
-            iso_code, country = langs[lang_code.lower()]
+            iso_code, country = langs[lang_code.lower()] if lang_code else (None, None)
             return m.Languages.objects.get(iso_code=iso_code, country=country)
         except m.Languages.DoesNotExist:
             lang = m.Languages(iso_code=iso_code, country=country)
@@ -180,11 +195,12 @@ class Command(BaseCommand):
             db_img = m.ImageSerie(is_poster=True, title=reg_en["seriesname"])
             db_img.serie = db_serie
             file_content = ContentFile(open(img[0]).read())
-            db_img.src.save(os.path.basename(reg_en["poster"]),file_content)
+            db_img.src.save(os.path.basename(reg_en["poster"]), file_content)
             db_img.save()
 
         for actor in reg_en["_actors"]:
-            if not actor["name"]: continue #This field is needed
+            if not actor["name"]:
+                continue #This field is needed
             db_actor = self.populate_actor(actor)
             db_role = m.Role(actor=db_actor, serie=db_serie, role=actor["role"] or "")
             db_role.save()
