@@ -12,3 +12,6 @@ liberweb/static/img/serie/*.jpg
 liberweb/static/img/actor/*.jpg
 debug.json
 build
+liberweb/.coverage
+liberweb/reports/
+*.egg
