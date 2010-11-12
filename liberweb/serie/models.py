@@ -17,9 +17,9 @@ class Serie(models.Model):
     def __unicode__(self):
         return self.name
 
-    def save(self):
+    def save(self, force_insert=False, force_update=False, using=None):
         self.slug_name = slugify( self.name )
-        super( Serie, self ).save()
+        super( Serie, self ).save(force_insert, force_update, using)
 
 class Role(models.Model):
     serie = models.ForeignKey("Serie")
@@ -45,10 +45,10 @@ class Episode(models.Model):
     def __unicode__(self):
         return self.title
 
-    def save(self):
+    def save(self, force_insert=False, force_update=False, using=None):
         if not self.slug_title:
             self.slug_title = slugify( self.title )
-        super( Episode, self ).save()
+        super( Episode, self ).save(force_insert, force_update, using)
 
 class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")
@@ -88,10 +88,10 @@ class Genre(models.Model):
     name = models.CharField(max_length=25)
     slug_name = models.SlugField(unique=True)
 
-    def save(self):
+    def save(self, force_insert=False, force_update=False, using=None):
         if not self.slug_name:
             self.slug_name = slugify( self.name )
-        super( Genre, self ).save()
+        super( Genre, self ).save(force_insert, force_update, using)
 
     def __unicode__(self):
         return self.name
