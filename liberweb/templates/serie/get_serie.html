@@ -23,7 +23,12 @@
   </li>
   <li>{% trans "Runtime" %}: {{ serie.runtime }} {% trans "minutes" %}</li>
   <li>{% trans "Description" %}: {{ serie.description }}</li>
-  <li>{% trans "Poster" %}: <img src="{% thumbnail image 300x200 upscale %}" />
+  <li>{% trans "Poster" %}: 
+  {% if image %}
+  <img src="{% thumbnail image 300x200 upscale %}" />
+  {% else %}
+  Esta serie no tiene imagen de portada
+  {% endif %}
 </ul>
 <a href="{% url serie-index %}">{% trans "Series list" %}</a>
 <br /> 
