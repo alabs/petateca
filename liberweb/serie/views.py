@@ -1,6 +1,5 @@
 from liberweb.serie.models import Serie, Episode
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse
 
 from django.utils.translation import gettext_lazy as _
 
@@ -24,10 +23,11 @@ def get_episodes(request, serie_slug):
         'title': _("Episodes of %(name)s") % {"name": serie.name}, 
     })
 
-def get_episode(request, serie_slug, episode_slug):
+def get_episode(request, serie_slug, season, episode):
     serie = get_object_or_404(Serie, slug_name=serie_slug)
-    episode = get_object_or_404(Episode, slug_title=episode_slug)
-    return render_to_response('serie/get_episode.html', {'serie': serie, 'episode': episode })
+    episode = get_object_or_404(Episode, serie=serie, season=season, episode=episode)
+    return render_to_response('serie/get_episode.html', 
+            {'serie': serie, 'episode': episode })
 
 def list_user_favorite(request):
     return "TODO"

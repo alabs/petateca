@@ -7,7 +7,7 @@
     {% trans "Episodes" %}:
     <ul>
       {% for episode in serie.episodes.all %}
-      <li><a href="{% url liberweb.serie.views.get_episode serie_slug=serie.slug_name episode_slug=episode.slug_title %}">{{ episode.title }}</a></li>
+      <li><a href="{% url liberweb.serie.views.get_episode serie_slug=serie.slug_name season=episode.season episode=episode.episode %}">{{ episode.title }}</a></li>
       {% endfor %}
     </ul>
   </li>

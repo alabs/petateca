@@ -1,10 +1,7 @@
-from django.conf.urls.defaults import *
-from django.views.generic.list_detail import object_list
-
-from liberweb.serie.models import Serie
+from django.conf.urls.defaults import patterns
 
 urlpatterns = patterns('liberweb.serie.views',
-    (r'^(?P<serie_slug>[a-z0-9-]+)/$', 'get_serie'),
-    (r'^(?P<serie_slug>[a-z0-9-]+)/episodes/$', 'get_episodes'),
-    (r'^(?P<serie_slug>[a-z0-9-]+)/episodes/(?P<episode_slug>[a-z0-9-]+)/$', 'get_episode'),
+    (r'^(?P<serie_slug>[-\w]+)/$', 'get_serie'),
+    (r'^(?P<serie_slug>[-\w]+)/episodes/$', 'get_episodes'),
+    (r'^(?P<serie_slug>[-\w]+)/episodes/S(?P<season>\d+)E(?P<episode>\d+)/$', 'get_episode'),
 )
