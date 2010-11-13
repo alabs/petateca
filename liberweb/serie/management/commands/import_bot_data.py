@@ -3,10 +3,6 @@ from liberweb.serie import models as m
 
 from django.conf import settings
 
-from warnings import warn
-
-from collections import defaultdict
-
 from imdb import IMDb
 from tvdb_api import Tvdb
 
@@ -16,6 +12,11 @@ import os.path
 import datetime
 
 from optparse import make_option
+
+from sys import stderr
+
+def warn(msg):
+    print >> stderr, msg
 
 try:
     import json
@@ -34,6 +35,8 @@ class Command(BaseCommand):
         )
 
     not_found = {}
+    bot = None
+    imdb = None
 
     def handle(self, *args, **options):
         self.bot = options.get("bot")
@@ -45,9 +48,9 @@ class Command(BaseCommand):
         else:
             raise CommandError("Incorrect configuration of IMDB_ACCESS_SYSTEM property")
 
-        for file in args:
-            print "Importing...", file
-            data = json.load(open(file))
+        for f in args:
+            print "Importing...", f
+            data = json.load(open(f))
             for link in data:
                 print link
                 if not link["temp"] or not link["epi"]:
@@ -59,9 +62,9 @@ class Command(BaseCommand):
             temp=None, type=None, title=None, sublink=None, sublang=None,
             **kw):
         if kw:
-            warn("Unsuported fields in json: %s" % kw)
+            warn(u"Unsuported fields in json: %s" % kw)
         if not lang:
-            warn("Serie %s with link %s has not lang" % (serie, links))
+            warn(u"Serie %s with link %s has not lang" % (serie, links))
             return
         if serie in self.not_found:
             return #It's a waste of time
@@ -91,7 +94,7 @@ class Command(BaseCommand):
             if imdb_reg:
                 db_serie = self.populate_serie(imdb_reg["title"], serie)
                 if not db_serie:
-                    warn("%s is not found in tvdb" % imdb_reg["title"])
+                    warn(u"%s is not found in tvdb" % imdb_reg["title"])
                     self.not_found[serie] = True
                     return
                 db_serie.save()
@@ -100,14 +103,14 @@ class Command(BaseCommand):
                 db_serie_alias.name = serie
                 db_serie_alias.save()
             else:
-                warn("Not found serie '%s'" % serie)
+                warn(u"Not found serie '%s'" % serie)
                 self.not_found[serie] = True
                 return
         #Search episode in database
         try:
             db_episode = m.Episode.objects.get(serie=db_serie, season=temp, episode=epi)
         except m.Episode.DoesNotExist:
-            warn("Episode %sx%s of %s not populated yet" % (temp, epi, serie))
+            warn(u"Episode %sx%s of %s not populated yet" % (temp, epi, serie))
             #Create episode
             db_episode = m.Episode()
             db_episode.serie = db_serie
@@ -120,7 +123,7 @@ class Command(BaseCommand):
 
         db_lang = self.normalize_lang(lang)
         if not db_lang:
-            warn("Invalid lang %s" % lang)
+            warn(u"Invalid lang %s" % lang)
             return
         db_link = m.Link()
         db_link.episode = db_episode
@@ -141,8 +144,10 @@ class Command(BaseCommand):
             "es": ("es", None),
             "en": ("en", None),
         }
+        if not lang_code:
+            return None
         try:
-            iso_code, country = langs[lang_code.lower()] if lang_code else (None, None)
+            iso_code, country = langs[lang_code.lower()]
             return m.Languages.objects.get(iso_code=iso_code, country=country)
         except m.Languages.DoesNotExist:
             lang = m.Languages(iso_code=iso_code, country=country)
@@ -250,7 +255,8 @@ class Command(BaseCommand):
                 return m.Genre.objects.get(name_en=genre)
             except m.Genre.DoesNotExist:
                 genre_db = m.Genre()
-                genre_db.name_en = genre_db.name_es = genre #XXX: Genres need traslation
+                #Genres need be traslated manually
+                genre_db.name_en = genre_db.name_es = genre
                 genre_db.save()
                 return genre_db
         if not genres_str:
