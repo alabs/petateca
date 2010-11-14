@@ -11,6 +11,7 @@ liberweb/bots/libercopy/sites/*
 liberweb/static/img/serie/thumbs/*.jpg
 liberweb/static/img/serie/*.jpg
 liberweb/static/img/actor/*.jpg
+liberweb/static/img/blog/*.jpg
 debug.json
 build
 liberweb/.coverage

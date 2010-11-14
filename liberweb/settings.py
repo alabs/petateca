@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'modeltranslation',
     'rosetta',
     'sorl.thumbnail',
+    'liberweb.blog',
 )
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
@@ -124,7 +125,7 @@ IMDB_ACCESS_SYSTEM = "http"  #XXX: sql search is worse
 #uri for use with sql
 IMDB_ACCESS_DB_URI = "postgres://liberweb:libre@localhost/imdb"
 
-#THUMBNAIL_DEBUG = True
+THUMBNAIL_DEBUG = True
 THUMBNAIL_SUBDIR = 'thumbs'
 
 if DEBUG:
