@@ -11,6 +11,8 @@ import urllib
 import os.path
 import datetime
 
+import time
+
 from optparse import make_option
 
 from sys import stderr
@@ -34,7 +36,7 @@ class Command(BaseCommand):
             help='Name of the importer bot'),
         )
 
-    not_found = {}
+    not_found = set()
     bot = None
     imdb = None
 
@@ -53,21 +55,31 @@ class Command(BaseCommand):
             data = json.load(open(f))
             for link in data:
                 print link
-                if not link["temp"] or not link["epi"]:
-                    warn("Season and episode is not setted")
-                    continue
-                self.process_link(**link)
+                #Data checks
+                if "serie" not in link or link["serie"] in self.not_found:
+                    warn("Problems looking up serie %s" % link)
+                elif "temp" not in link or "epi" not in link:
+                    warn("Season and episode is not setted in %s" % link)
+                elif "lang" not in link:
+                    warn(u"Serie %s with link %s has not lang" % (serie, links))
+                else:
+                    try:
+                        #Check if temp and epi are ints
+                        link["temp"] = int(link["temp"])
+                        link["epi"] = int(link["epi"])
+                    except:
+                        warn("Erroneous temp or epi in %s" % link)
+                    else:
+                        self.process_link(**link)
+        print "List of series not found:"
+        for serie in self.not_found:
+            print "\t%s" % serie
 
     def process_link(self, epi=None, lang=None, links=None, serie=None,
             temp=None, type=None, title=None, sublink=None, sublang=None,
             **kw):
         if kw:
             warn(u"Unsuported fields in json: %s" % kw)
-        if not lang:
-            warn(u"Serie %s with link %s has not lang" % (serie, links))
-            return
-        if serie in self.not_found:
-            return #It's a waste of time
         try:
             db_link = m.Link.objects.get(url=links)
             db_link.audio_lang = self.normalize_lang(lang)
@@ -83,19 +95,12 @@ class Command(BaseCommand):
             db_serie = db_serie_alias.serie
         except m.SerieAlias.DoesNotExist:
             #Normalize serie name in imdb
-            imdb_res = self.imdb.search_movie(serie)
-            imdb_reg = None
-            for res in imdb_res:
-                if res["kind"] != "tv series":
-                    continue
-                else:
-                    imdb_reg = res
-                    break
-            if imdb_reg:
-                db_serie = self.populate_serie(imdb_reg["title"], serie)
+            normalized_serie = self.normalize_name(serie)
+            if normalized_serie:
+                db_serie = self.populate_serie(normalized_serie, serie)
                 if not db_serie:
-                    warn(u"%s is not found in tvdb" % imdb_reg["title"])
-                    self.not_found[serie] = True
+                    warn(u"%s is not found in tvdb" % normalized_serie)
+                    self.not_found.add(serie)
                     return
                 db_serie.save()
                 db_serie_alias = m.SerieAlias()
@@ -104,7 +109,7 @@ class Command(BaseCommand):
                 db_serie_alias.save()
             else:
                 warn(u"Not found serie '%s'" % serie)
-                self.not_found[serie] = True
+                self.not_found.add(serie)
                 return
         #Search episode in database
         try:
@@ -132,6 +137,22 @@ class Command(BaseCommand):
         db_link.subtitle = self.normalize_lang(sublang)
         db_link.bot = self.bot
         db_link.save()
+
+    def normalize_name(self, name, retries=3):
+        if retries:
+            try:
+                imdb_res = self.imdb.search_movie(serie)
+            except:
+                time.sleep(30) #Wait 30secs and retry
+                return self.normalize_name(name, retries-1)
+            else:
+                for res in imdb_res:
+                    if res.get("kind", None) != "tv series":
+                        continue
+                    else:
+                        return res["title"]
+        return None
+
 
     def normalize_lang(self, lang_code):
         langs = {
@@ -227,8 +248,11 @@ class Command(BaseCommand):
                 except m.Episode.DoesNotExist:
                     db_episode = m.Episode()
                     db_episode.serie = db_serie
-                    db_episode.air_date = datetime.datetime.strptime(
-                            episode["firstaired"], "%Y-%m-%d") if episode["firstaired"] else None
+                    try:
+                        db_episode.air_date = datetime.datetime.strptime(
+                            episode["firstaired"], "%Y-%m-%d")
+                    except:
+                        db_episode.air_date = None
                     db_episode.title_en = reg_en[n_season][n_episode]["episodename"]
                     db_episode.season = n_season
                     db_episode.episode = n_episode
