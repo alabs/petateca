@@ -8,7 +8,7 @@ def get_serie(request, serie_slug):
     # get() returned more than one
     # img = serie.images.get() 
     imgs = serie.images.filter(is_poster=True)
-    img_src = imgs[0].src if imgs else None
+    img_src = imgs[0] if imgs else None
 
     return render_to_response('serie/get_serie.html', {
         'serie': serie,
@@ -18,8 +18,10 @@ def get_serie(request, serie_slug):
 
 def get_episodes(request, serie_slug):
     serie = get_object_or_404(Serie, slug_name=serie_slug)
+    episodes = serie.episodes.all().order_by('season')
     return render_to_response('serie/get_episodes.html', {
         'serie': serie,
+        'episode_list': episodes,
         'title': _("Episodes of %(name)s") % {"name": serie.name}, 
     })
 
