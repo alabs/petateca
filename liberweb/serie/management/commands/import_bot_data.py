@@ -61,7 +61,7 @@ class Command(BaseCommand):
                 elif "temp" not in link or "epi" not in link:
                     warn("Season and episode is not setted in %s" % link)
                 elif "lang" not in link:
-                    warn(u"Serie %s with link %s has not lang" % (serie, links))
+                    warn(u"Serie %s with link %s has not lang" % (link["serie"], link["links"]))
                 else:
                     try:
                         #Check if temp and epi are ints
@@ -88,29 +88,27 @@ class Command(BaseCommand):
             db_link.save()
             return #It's already loaded, but update data
         except m.Link.DoesNotExist:
-            pass
-
-        try:
-            db_serie_alias = m.SerieAlias.objects.get(name=serie)
-            db_serie = db_serie_alias.serie
-        except m.SerieAlias.DoesNotExist:
-            #Normalize serie name in imdb
-            normalized_serie = self.normalize_name(serie)
-            if normalized_serie:
-                db_serie = self.populate_serie(normalized_serie, serie)
-                if not db_serie:
-                    warn(u"%s is not found in tvdb" % normalized_serie)
+            try:
+                db_serie_alias = m.SerieAlias.objects.get(name=serie)
+                db_serie = db_serie_alias.serie
+            except m.SerieAlias.DoesNotExist:
+                #Normalize serie name in imdb
+                normalized_serie = self.normalize_name(serie)
+                if normalized_serie:
+                    db_serie = self.populate_serie(normalized_serie, serie)
+                    if not db_serie:
+                        warn(u"%s is not found in tvdb" % normalized_serie)
+                        self.not_found.add(serie)
+                        return
+                    db_serie.save()
+                    db_serie_alias = m.SerieAlias()
+                    db_serie_alias.serie = db_serie
+                    db_serie_alias.name = serie
+                    db_serie_alias.save()
+                else:
+                    warn(u"Not found serie '%s'" % serie)
                     self.not_found.add(serie)
                     return
-                db_serie.save()
-                db_serie_alias = m.SerieAlias()
-                db_serie_alias.serie = db_serie
-                db_serie_alias.name = serie
-                db_serie_alias.save()
-            else:
-                warn(u"Not found serie '%s'" % serie)
-                self.not_found.add(serie)
-                return
         #Search episode in database
         try:
             db_episode = m.Episode.objects.get(serie=db_serie, season=temp, episode=epi)
@@ -141,7 +139,7 @@ class Command(BaseCommand):
     def normalize_name(self, name, retries=3):
         if retries:
             try:
-                imdb_res = self.imdb.search_movie(serie)
+                imdb_res = self.imdb.search_movie(name)
             except:
                 time.sleep(30) #Wait 30secs and retry
                 return self.normalize_name(name, retries-1)
