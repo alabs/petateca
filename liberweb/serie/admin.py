@@ -3,6 +3,7 @@ from .import models as m
 
 class ImageInline(admin.TabularInline):
     model = m.ImageSerie
+    extra = 1
 
 class EpisodeInline(admin.StackedInline):
     model = m.Episode

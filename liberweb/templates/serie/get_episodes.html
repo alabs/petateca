@@ -1,16 +1,26 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block contents %}
+{% regroup episode_list by season as episode_list %}
+
 <h1>{{ serie.name }}</h1>
 <ul>
   <li>
     {% trans "Episodes" %}:
     <ul>
-      {% for episode in serie.episodes.all %}
-      <li><a href="{% url liberweb.serie.views.get_episode serie_slug=serie.slug_name season=episode.season episode=episode.episode %}">{{ episode.title }}</a></li>
+      {% for episode in episode_list %}
+      <br/>
+        <li>{% trans "Season" %} {{ episode.grouper }}
+        <ul>
+          {% for episode in episode.list %}
+         <li><a href="{% url liberweb.serie.views.get_episode serie_slug=serie.slug_name season=episode.season episode=episode.episode %}">{{ episode.title }}</a></li>
+          {% endfor %}
+        </ul>
+        </li>
       {% endfor %}
     </ul>
   </li>
+</ul>
 
   <a href="{% url serie-index %}">{% trans "Series list" %}</a>
   <br/>

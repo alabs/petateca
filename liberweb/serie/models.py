@@ -72,6 +72,10 @@ class Languages(models.Model):
     iso_code = models.CharField(max_length=2)
     country = models.CharField(max_length=2, null=True, blank=True)
 
+    class Meta:
+        unique_together = ("iso_code", "country")
+        
+
     def __unicode__(self):
         if self.country:
             return "%s-%s" % (self.iso_code, self.country)
