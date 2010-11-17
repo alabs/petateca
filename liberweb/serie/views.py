@@ -8,7 +8,7 @@ def get_serie(request, serie_slug):
     # get() returned more than one
     # img = serie.images.get() 
     imgs = serie.images.filter(is_poster=True)
-    img_src = imgs[0] if imgs else None
+    img_src = imgs[0].src if imgs else None
 
     return render_to_response('serie/get_serie.html', {
         'serie': serie,
