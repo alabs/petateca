@@ -2,14 +2,25 @@
 {% load i18n %}
 {% load thumbnail %}
 {% block contents %}
-			<div id="series-menu">
-				<ul>
-					<li><a href="#">BREAKING BAD</a></li>
-					<li><a href="#">PERDIDOS</a></li>
-					<li><a href="#">HOUSE</a></li>
-				</ul>
-			</div>
-			<div id="panel">
+<div id="series-menu">
+<ul>
+  {% for serie in series %}
+  {% endfor %}
+</ul>
+</div>
+<div id="series-menu">
+  {% for serie in series %}
+    {% if serie.images.all.0 %}
+    <li><a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">
+        <img src="{% thumbnail serie.images.all.0.src 300x200 upscale %}" /><br/>
+        {{ serie.name }}
+    </a></li>
+      </a>
+    {% endif %}
+  {% endfor %}
+
+</div>
+<div id="panel">
 				<div id="dock"> 
 					<div class="dock-container" style="left: 200px; width: 500px;">
 						<a href="index.html" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">Example&nbsp;1</span><img alt="home" src="/static/images/video.png"></a> 

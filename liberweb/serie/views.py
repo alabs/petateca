@@ -52,8 +52,10 @@ def get_episodes(request, serie_slug):
 def get_episode(request, serie_slug, season, episode):
     serie = get_object_or_404(Serie, slug_name=serie_slug)
     episode = get_object_or_404(Episode, serie=serie, season=season, episode=episode)
-    return render_to_response('serie/get_episode.html', 
-            {'serie': serie, 'episode': episode })
+    return render_to_response('serie/get_episode.html', {
+        'serie': serie, 
+        'episode': episode, 
+    })
 
 def list_user_favorite(request):
     return "TODO"
@@ -62,6 +64,9 @@ def list_user_recommendation(request):
     return "TODO"
 
 def index(request):
-    all_posts = Post.objects.all().order_by('-date')
-    ctx = {'posts' : all_posts}
-    return render_to_response('serie/index.html', ctx)
+    post_list = Post.objects.all().order_by('-date')[:6]
+    serie_list = series = Serie.objects.order_by('?')[:5] # ?=random
+    return render_to_response('serie/index.html', { 
+            'posts': post_list, 
+            'series': serie_list,
+     })
