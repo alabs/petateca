@@ -5,11 +5,11 @@ from django.utils.translation import gettext_lazy as _
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 def serie_list(request):
-    serie_list = Serie.objects.order_by('name').all()
+    series_list = Serie.objects.order_by('name').all()
     # FIXME: Paginator should be separating by letter
     #        Yes, I know it isn't a django Paginator what we need but 
     #        'there, I fixed it': http://thereifixedit.failblog.org/
-    paginator = Paginator(serie_list, 25) # Show 25 series per page 
+    paginator = Paginator(series_list, 25) # Show 25 series per page 
 
     # Make sure page request is an int. If not, deliver first page.
     try:
@@ -65,7 +65,7 @@ def list_user_recommendation(request):
 
 def index(request):
     post_list = Post.objects.all().order_by('-date')[:6]
-    serie_list = series = Serie.objects.order_by('?')[:5] # ?=random
+    serie_list = Serie.objects.order_by('?')[:5] # ?=random
     return render_to_response('serie/index.html', { 
             'posts': post_list, 
             'series': serie_list,
