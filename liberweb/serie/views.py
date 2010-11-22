@@ -1,7 +1,30 @@
 from liberweb.serie.models import Serie, Episode
 from django.shortcuts import render_to_response, get_object_or_404
-
 from django.utils.translation import gettext_lazy as _
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
+
+def serie_list(request):
+    serie_list = Serie.objects.order_by('name').all()
+    # FIXME: Paginator should be separating by letter
+    #        Yes, I know it isn't a django Paginator what we need but 
+    #        'there, I fixed it': http://thereifixedit.failblog.org/
+    paginator = Paginator(serie_list, 25) # Show 25 series per page 
+
+    # Make sure page request is an int. If not, deliver first page.
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    # If page request (9999) is out of range, deliver last page of results.
+    try:
+        series = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        series = paginator.page(paginator.num_pages)
+
+    return render_to_response('serie/serie_list.html', {
+        'series': series,
+    })
 
 def get_serie(request, serie_slug):
     serie = get_object_or_404(Serie, slug_name=serie_slug)

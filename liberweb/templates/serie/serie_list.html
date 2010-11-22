@@ -1,10 +1,35 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load thumbnail %}
 {% block contents %}
 <h1>{% trans "Series list" %}</h1>
 <ul>
-  {% for serie in object_list %}
+  {% for serie in series.object_list %}
+    {% if serie.images.all.0 %}
+      <a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">
+        <img src="{% thumbnail serie.images.all.0.src 100x100 upscale %}" />
+      </a>
+    {% else %}
+      Esta serie no tiene imagen de portada
+    {% endif %}
   <li><a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">{{ serie.name }}</a></li>
   {% endfor %}
 </ul>
+<br/>
+<div class="pagination">
+    <span class="step-links">
+        {% if series.has_previous %}
+            <a href="?page={{ series.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ series.number }} of {{ series.paginator.num_pages }}.
+        </span>
+
+        {% if series.has_next %}
+            <a href="?page={{ series.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
 {% endblock %}
