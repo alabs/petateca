@@ -43,6 +43,15 @@ desde el directorio liberweb (donde está manage.py)::
     source virtual/bin/activate
     pip install sorl-thumbnail PIL
 
+2010-11-22
+----------
+
+
+cp -rp blog/fixtures/static/img/blog/ static/img/blog/ 
+# Si se hace un syncdb --migrate es automagico, no hace falta hacer el migrate ni el loaddata
+python manage.py migrate blog 0001 --fake
+python manage.py loaddata blog/fixtures/initial_data.json 
+
 Crawling framework 
 ==================
 

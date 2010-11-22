@@ -1,0 +1,19 @@
+{% extends "base.html" %}  
+{% load i18n %}
+{% load thumbnail %}
+{% block contents %}  
+<h2>Blog: All Postings</h2>  
+
+{% for p in posts %}
+ <li><a href="{% url get_post p.slug %}">{{ p.title }}</a></li>
+    <h3>{{p.title}}</h3>
+    <p>Written on {{p.date}}</p>
+    <p>{{p.summary}}</p>
+    {% if p.images.all.0 %}
+    <img src="{% thumbnail p.images.all.0.src 100x100 upscale %}" />
+    {% else %}
+    Este post no tiene imagen
+    {% endif %} 
+{% endfor %}
+
+{% endblock %}

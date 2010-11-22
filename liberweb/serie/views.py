@@ -1,4 +1,5 @@
 from liberweb.serie.models import Serie, Episode
+from liberweb.blog.models import Post
 from django.shortcuts import render_to_response, get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
@@ -61,5 +62,6 @@ def list_user_recommendation(request):
     return "TODO"
 
 def index(request):
-    ctx = {}
+    all_posts = Post.objects.all().order_by('-date')
+    ctx = {'posts' : all_posts}
     return render_to_response('serie/index.html', ctx)

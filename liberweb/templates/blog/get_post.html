@@ -1,0 +1,19 @@
+{% extends "base.html" %}  
+{% load i18n %}
+{% load thumbnail %}
+{% block contents %}  
+
+<div class="post">
+  <h3>{{post.title}}</h3>
+  
+  <p>{% trans "Written on" %}: {{post.date}}</p>
+  <p>{{post.post}}</p>
+
+  {% if image %}
+  <img src="{% thumbnail image 300x200 upscale %}" />
+  {% else %}
+  Esta serie no tiene imagen de portada
+  {% endif %}
+</div>
+
+{% endblock %}
