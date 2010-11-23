@@ -1,6 +1,6 @@
-from django.conf.urls.defaults import *
+#from django.conf.urls.defaults import *
+from django.conf.urls.defaults import patterns, url
 from django.views.generic.list_detail import object_list
-
 from liberweb.serie.models import Serie
 
 urlpatterns = patterns('liberweb.serie.views',

@@ -7,8 +7,8 @@ from liberweb.lib.namepaginator import NamePaginator
 
 def get_serie_list(request):
     serie_list = Serie.objects.order_by('name').all()
-    # FIXME: NamePaginator doesn't show numerics
     paginator = NamePaginator(serie_list, on="name", per_page=25) # Show 25 series per page
+
     # Make sure page request is an int. If not, deliver first page.
     try:
         page = int(request.GET.get('page', '1'))
@@ -27,8 +27,6 @@ def get_serie_list(request):
 
 def get_serie(request, serie_slug):
     serie = get_object_or_404(Serie, slug_name=serie_slug)
-    # get() returned more than one
-    # img = serie.images.get() 
     imgs = serie.images.filter(is_poster=True)
     img_src = imgs[0].src if imgs else None
     episodes = serie.episodes.all().order_by('season')
