@@ -2,30 +2,46 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-23 03:32+0200\n"
-"PO-Revision-Date: 2010-10-23 03:22\n"
-"Last-Translator: <lasi@lasi.es>\n"
+"POT-Creation-Date: 2010-11-23 18:34+0100\n"
+"PO-Revision-Date: 2010-11-23 18:36\n"
+"Last-Translator:   <lasi@lasi.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: settings.py:47
+#: settings.py:31
 msgid "English"
 msgstr "Inglés"
 
-#: settings.py:48
+#: settings.py:32
 msgid "Spanish"
 msgstr "Español"
+
+#: blog/models.py:9
+msgid "Body of the Post - the post itself"
+msgstr ""
+
+#: blog/models.py:11
+msgid "Summary of the Post seeing in the homepage"
+msgstr ""
+
+#: serie/adminthumb.py:24
+msgid "Currently:"
+msgstr ""
+
+#: serie/adminthumb.py:24 serie/adminthumb.py:27
+msgid "Change:"
+msgstr ""
 
 #: serie/models.py:10
 msgid "runtime duration"
@@ -35,57 +51,80 @@ msgstr "Duración de emisión"
 msgid "duration of episodes in minutes"
 msgstr "la duración de los episodios en minutos"
 
-#: serie/models.py:23
+#: serie/models.py:36
 msgid "air date"
 msgstr "Fecha de estreno"
 
-#: serie/models.py:23
+#: serie/models.py:36
 msgid "first broadcast date"
 msgstr "la fecha de la primera emisión"
 
-#: serie/views.py:18
+#: serie/views.py:46
 #, python-format
 msgid "Episodes of %(name)s"
 msgstr "Los episodios de %(name)s "
 
-#: templates/serie/get_episodes.html:7
-msgid "Episodes"
-msgstr "Episodios"
+#: templates/blog/get_post.html:9
+msgid "Written on"
+msgstr ""
 
-#: templates/serie/get_episodes.html:15 templates/serie/get_serie.html:26
-#: templates/serie/serie_list.html:4
+#: templates/serie/get_episode.html:21 templates/serie/get_episodes.html:35
+#: templates/serie/get_serie.html:66 templates/serie/serie_list.html:5
 msgid "Series list"
 msgstr "Lista de series"
 
-#: templates/serie/get_episodes.html:17
+#: templates/serie/get_episode.html:23 templates/serie/get_episodes.html:37
 msgid "Back to"
 msgstr "Volver a"
 
-#: templates/serie/get_serie.html:6
+#: templates/serie/get_episode.html:25
+#, fuzzy
+msgid "Episode list of"
+msgstr "Episodios"
+
+#: templates/serie/get_episodes.html:9 templates/serie/get_serie.html:39
+msgid "Episodes"
+msgstr "Episodios"
+
+#: templates/serie/get_episodes.html:13 templates/serie/get_serie.html:43
+msgid "Season"
+msgstr ""
+
+#: templates/serie/get_serie.html:8
 msgid "Network"
 msgstr "Compañía"
 
-#: templates/serie/get_serie.html:8
+#: templates/serie/get_serie.html:10
 msgid "Genre"
 msgstr "Género"
 
-#: templates/serie/get_serie.html:16
+#: templates/serie/get_serie.html:18
 msgid "Actors"
 msgstr "Actores"
 
-#: templates/serie/get_serie.html:23
+#: templates/serie/get_serie.html:25
 msgid "Runtime"
 msgstr "Duración"
 
-#: templates/serie/get_serie.html:24
+#: templates/serie/get_serie.html:25
+msgid "minutes"
+msgstr "minutos"
+
+#: templates/serie/get_serie.html:26
 msgid "Description"
 msgstr "Descripción"
 
-#: templates/serie/get_serie.html:29
-#, fuzzy, python-format
-msgid ""
-"\n"
-"View espisode list of %(s_name)s\n"
-msgstr ""
-"\n"
-"Los episodios de %(name)s \n"
+#: templates/serie/get_serie.html:27
+msgid "Poster"
+msgstr "Imagen"
+
+#: templates/serie/serie_list.html:8 templates/serie/serie_list.html.py:33
+msgid "Browse by letter"
+msgstr "Navegar por letra"
+
+#~ msgid ""
+#~ "\n"
+#~ "View espisode list of %(s_name)s\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Los episodios de %(name)s \n"
