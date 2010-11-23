@@ -3,14 +3,12 @@ from liberweb.blog.models import Post
 from django.shortcuts import render_to_response, get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from liberweb.lib.namepaginator import NamePaginator
 
-def serie_list(request):
-    series_list = Serie.objects.order_by('name').all()
-    # FIXME: Paginator should be separating by letter
-    #        Yes, I know it isn't a django Paginator what we need but 
-    #        'there, I fixed it': http://thereifixedit.failblog.org/
-    paginator = Paginator(series_list, 25) # Show 25 series per page 
-
+def get_serie_list(request):
+    serie_list = Serie.objects.order_by('name').all()
+    # FIXME: NamePaginator doesn't show numerics
+    paginator = NamePaginator(serie_list, on="name", per_page=25) # Show 25 series per page
     # Make sure page request is an int. If not, deliver first page.
     try:
         page = int(request.GET.get('page', '1'))
@@ -19,12 +17,12 @@ def serie_list(request):
 
     # If page request (9999) is out of range, deliver last page of results.
     try:
-        series = paginator.page(page)
+        page = paginator.page(page)
     except (EmptyPage, InvalidPage):
-        series = paginator.page(paginator.num_pages)
+        page = paginator.page(paginator.num_pages)
 
     return render_to_response('serie/serie_list.html', {
-        'series': series,
+        'page': page,
     })
 
 def get_serie(request, serie_slug):

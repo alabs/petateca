@@ -3,11 +3,23 @@
 {% load thumbnail %}
 {% block contents %}
 <h1>{% trans "Series list" %}</h1>
+
+<div class="pagination">
+ {% trans "Browse by letter" %}:
+  {% for p in page.paginator.pages %}
+    {% ifequal p serie %}
+      <span class="selected">{{ page }}</span>
+    {% else %}
+      <a href="?page={{ p.number }}">{{ p }}</a>
+    {% endifequal %}
+  {% endfor %}
+</div>
+
 <ul>
-  {% for serie in series.object_list %}
-    {% if serie.images.all.0 %}
+  {% for serie in page.object_list %}
+    {% if serie.images.get_is_poster.0.src %}
       <a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">
-        <img src="{% thumbnail serie.images.all.0.src 100x100 upscale %}" />
+        <img src="{% thumbnail serie.images.get_is_poster.0.src 100x100 upscale %}" />
       </a>
     {% else %}
       Esta serie no tiene imagen de portada
@@ -16,20 +28,16 @@
   {% endfor %}
 </ul>
 <br/>
-<div class="pagination">
-    <span class="step-links">
-        {% if series.has_previous %}
-            <a href="?page={{ series.previous_page_number }}">previous</a>
-        {% endif %}
 
-        <span class="current">
-            Page {{ series.number }} of {{ series.paginator.num_pages }}.
-        </span>
-
-        {% if series.has_next %}
-            <a href="?page={{ series.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
+<div class="pagination">                                                                                                                                                                     
+ {% trans "Browse by letter" %}:                                                                                                                                                             
+  {% for p in page.paginator.pages %}                                                                                                                                                        
+    {% ifequal p serie %}                                                                                                                                                                    
+      <span class="selected">{{ page }}</span>                                                                                                                                               
+    {% else %}                                                                                                                                                                               
+      <a href="?page={{ p.number }}">{{ p }}</a>                                                                                                                                             
+    {% endifequal %}                                                                                                                                                                         
+  {% endfor %}                                                                                                                                                                               
+</div>   
 
 {% endblock %}

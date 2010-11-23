@@ -106,12 +106,17 @@ class Actor(models.Model):
     def __unicode__(self):
         return self.name
 
+class IsPosterManager(models.Manager):
+    def get_is_poster(self):
+        return self.filter(is_poster=True)
+
 class ImageSerie(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/serie")
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField()
     serie = models.ForeignKey("Serie", related_name="images")
+    get_is_poster = IsPosterManager()
 
     def __unicode__(self):
         return self.title
