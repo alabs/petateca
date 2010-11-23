@@ -25,7 +25,7 @@ class NamePaginator(object):
         # the process for assigning objects to each page
         current_page = NamePage(self)
         
-        for letter in unicode(string.ascii_uppercase):
+        for letter in unicode('0123456789' + string.ascii_uppercase):
             if letter not in chunks: 
                 current_page.add([], letter)
                 continue
