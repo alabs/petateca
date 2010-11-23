@@ -8,49 +8,30 @@
   {% endfor %}
 </ul>
 </div>
-<div id="series-menu">
-  {% for serie in series %}
-    {% if serie.images.all.0 %}
-    <li><a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">
-        <img src="{% thumbnail serie.images.all.0.src 300x200 upscale %}" /><br/>
-        {{ serie.name }}
-    </a></li>
-      </a>
-    {% endif %}
-  {% endfor %}
-
-</div>
 <div id="panel">
-				<div id="dock"> 
-					<div class="dock-container" style="left: 200px; width: 500px;">
-						<a href="index.html" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">Example&nbsp;1</span><img alt="home" src="/static/images/video.png"></a> 
-						<a href="example2.html" class="dock-item" style="width: 50px; left: 50px;"><span style="display: none;">Example&nbsp;2</span><img alt="contact" src="/static/images/video.png"></a> 
-						<a href="example3.html" class="dock-item" style="width: 50px; left: 100px;"><span style="display: none;">Example&nbsp;3</span><img alt="portfolio" src="/static/images/video.png"></a> 
-						<a href="all-examples.html" class="dock-item" style="width: 50px; left: 150px;"><span style="display: none;">All&nbsp;Examples</span><img alt="music" src="/static/images/video.png"></a> 
-						<a href="#" class="dock-item" style="width: 50px; left: 200px;"><span style="display: none;">Video</span><img alt="video" src="/static/images/video.png"></a> 
-						<a href="#" class="dock-item" style="width: 50px; left: 250px;"><span style="display: none;">History</span><img alt="history" src="/static/images/video.png"></a> 
-						<a href="#" class="dock-item" style="width: 50px; left: 300px;"><span style="display: none;">Calendar</span><img alt="calendar" src="/static/images/video.png"></a> 
-						<a href="#" class="dock-item" style="width: 50px; left: 350px;"><span style="display: none;">Links</span><img alt="links" src="/static/images/video.png"></a> 
-						<a href="#" class="dock-item" style="width: 50px; left: 400px;"><span style="display: none;">RSS</span><img alt="rss" src="/static/images/video.png"></a> 
-						<a href="#" class="dock-item" style="width: 50px; left: 450px;"><span style="display: none;">RSS2</span><img alt="rss" src="/static/images/video.png"></a> 
-					</div>	
-				</div>
-			</div>			
-			<div id="textos">
+  <div id="dock"> 
+    <div class="dock-container" style="left: 200px; width: 500px;">
+      {% for serie in series %}
+        {% if serie.images.all.0 %}
+        <a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">{{ serie.name }}</span><img alt="{{ serie.name }}" src="{% thumbnail serie.images.all.0.src 300x200 upscale %}"></a> 
+        {% endif %}
+      {% endfor %}
+    </div>	
+  </div>
+</div>			
 
-
-                        {% for p in posts %}
-				<div class="text">
-					<h2><a href="{% url get_post p.slug %}">{{ p.title }}</a></h2>
-                                        <p>{{p.summary}}</p>
-                                        {% if p.images.all.0 %}
-                                        <img src="{% thumbnail p.images.all.0.src 50x50 upscale %}" />
-                                        {% else %}
-                                        Este post no tiene imagen
-                                        {% endif %} 
-				</div>
-                        {% endfor %}
- 
-			</div>
-		</div>
+<div id="textos">
+  {% for p in posts %}
+  <div class="text">
+    <h2><a href="{% url get_post p.slug %}">{{ p.title }}</a></h2>
+    <p>{{p.summary}}</p>
+    {% if p.images.all.0 %}
+    <img src="{% thumbnail p.images.all.0.src 50x50 upscale %}" />
+    {% else %}
+    Este post no tiene imagen
+    {% endif %} 
+  </div>
+  {% endfor %}
+</div>
+</div>
 {% endblock %}

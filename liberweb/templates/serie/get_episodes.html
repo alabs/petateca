@@ -12,8 +12,18 @@
       <br/>
         <li>{% trans "Season" %} {{ episode.grouper }}
         <ul>
-          {% for episode in episode.list %}
-         <li><a href="{% url liberweb.serie.views.get_episode serie_slug=serie.slug_name season=episode.season episode=episode.episode %}">{{ episode.title }}</a></li>
+         <table>
+          <tr>
+           <th colspan="10"> Season  <th>
+           <th colspan="10"> Episode  <th>
+           <th colspan="30"> Name <th>                                    
+          </tr>
+	  {% for episode in episode.list %}
+           <tr>
+             <td colspan="10"> {{ episode.season }} </td>
+             <td colspan="10"> {{ episode.episode }} </td>
+             <td colspan="30"><a href="{% url liberweb.serie.views.get_episode serie_slug=serie.slug_name season=episode.season episode=episode.episode %}">{{ episode.title }}</a></td>
+           </tr>
           {% endfor %}
         </ul>
         </li>

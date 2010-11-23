@@ -33,11 +33,12 @@ def get_serie(request, serie_slug):
     # img = serie.images.get() 
     imgs = serie.images.filter(is_poster=True)
     img_src = imgs[0].src if imgs else None
-
+    episodes = serie.episodes.all().order_by('season')
     return render_to_response('serie/get_serie.html', {
         'serie': serie,
         'title': serie.name,
         'image': img_src,
+        'episode_list': episodes,
     })
 
 def get_episodes(request, serie_slug):

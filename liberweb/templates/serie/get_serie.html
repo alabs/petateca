@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load thumbnail %}
 {% block contents %}
+
 <h1>{{ serie.name }}</h1>
 <ul>
     <li>{% trans "Network" %}: {{ serie.network.name }}</li>
@@ -30,11 +31,39 @@
   Esta serie no tiene imagen de portada
   {% endif %}
 </ul>
+
+{% regroup episode_list by season as episode_list %}
+
+<ul>
+  <li> 
+    {% trans "Episodes" %}: 
+    <ul> 
+      {% for episode in episode_list %} 
+      <br/> 
+        <li>{% trans "Season" %} {{ episode.grouper }} 
+        <ul> 
+         <table> 
+          <tr> 
+           <th colspan="10"> Season  <th> 
+           <th colspan="10"> Episode  <th> 
+           <th colspan="30"> Name <th>                                     
+          </tr> 
+          {% for episode in episode.list %} 
+           <tr> 
+             <td colspan="10"> {{ episode.season }} </td> 
+             <td colspan="10"> {{ episode.episode }} </td> 
+             <td colspan="30"><a href="{% url liberweb.serie.views.get_episode serie_slug=serie.slug_name season=episode.season episode=episode.episode %}">{{ episode.title }}</a></td> 
+           </tr>
+          {% endfor %}
+        </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </li>
+</ul>
+
+<br />
 <a href="{% url serie-index %}">{% trans "Series list" %}</a>
 <br /> 
-<a href="{% url liberweb.serie.views.get_episodes serie_slug=serie.slug_name %}">
-{% blocktrans with serie.name as s_name %}
-View espisode list of {{ s_name }}
-{% endblocktrans %}
 </a>
 {% endblock %}

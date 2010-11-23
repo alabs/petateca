@@ -1,4 +1,6 @@
 from django.conf.urls.defaults import *
+# seems like wildcard MUST be there http://code.djangoproject.com/ticket/5350 
+#from django.conf.urls.defaults import patterns, include
 from django.views.generic.list_detail import object_list
 
 from liberweb.serie.models import Serie

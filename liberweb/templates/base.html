@@ -5,7 +5,7 @@
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
 	<head>
-		<title>{% block title %}{{title|default:"Liber Copy"}}{% endblock %}</title>
+		<title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
 		<link rel="stylesheet" href="/static/css/lc.css" type="text/css" />
 		<script type="text/javascript" src="/static/js/jquery-min.js"></script>
 		<script type="text/javascript" src="/static/js/fisheyes-iutils-min.js"></script>
