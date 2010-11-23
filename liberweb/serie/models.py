@@ -4,13 +4,13 @@ from django.utils.translation import ugettext_lazy as _
 
 class Serie(models.Model):
     name = models.CharField(max_length=255)
-    slug_name = models.SlugField(unique=True)
+    slug_name = models.SlugField(unique=True, help_text=_('name in URL'))
     network = models.ForeignKey("Network", related_name="series")
     genres = models.ManyToManyField("Genre", related_name="series")
     runtime = models.IntegerField(name=_('runtime duration'), blank=True, null=True, help_text=_('duration of episodes in minutes'))
     actors = models.ManyToManyField("Actor", through='Role')
     description = models.TextField()
-    rating = models.FloatField(blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True, help_text=('rating from eztv'))
     rating_count = models.IntegerField(default=0)
     finished = models.BooleanField(default=False)
 

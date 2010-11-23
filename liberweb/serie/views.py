@@ -61,9 +61,11 @@ def list_user_recommendation(request):
     return "TODO"
 
 def index(request):
-    post_list = Post.objects.all().order_by('-date')[:6]
+    post_list = Post.objects.all().order_by('-date')[:3]
+    post_list_2 = Post.objects.all().order_by('-date')[4:6]
     serie_list = Serie.objects.order_by('?')[:5] # ?=random
     return render_to_response('serie/index.html', { 
             'posts': post_list, 
+            'posts2': post_list_2, 
             'series': serie_list,
      })

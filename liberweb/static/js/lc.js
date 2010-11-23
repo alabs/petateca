@@ -1,10 +1,10 @@
 $(function () {
 	$('#dock').Fisheye({
-		maxWidth: 30,
+		maxWidth: 60,
 		items: 'a',
 		itemsText: 'span',
 		container: '.dock-container',
-		itemWidth: 50,
+		itemWidth: 100,
 		proximity: 60,
 		alignment : 'left',
 		valign: 'bottom',

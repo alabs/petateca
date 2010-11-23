@@ -4,38 +4,38 @@
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
-	<head>
-		<title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
-		<link rel="stylesheet" href="/static/css/lc.css" type="text/css" />
-		<script type="text/javascript" src="/static/js/jquery-min.js"></script>
-		<script type="text/javascript" src="/static/js/fisheyes-iutils-min.js"></script>
-		<script type="text/javascript" src="/static/js/lc.js"></script>
-		{% block extrastyle %}{% endblock %}
-		{% block extrahead %}{% endblock %}
-	</head>
-	<body>
-		<div id="back">
-			<div id="main">
-				<div id="logo"></div>
-				<div id="top-menu">
-					<ul>
-						<li><a href="#">SERIES</a></li>
-						<li><a href="#">PELICULAS</a></li>
-						<li><a href="#">MÚSICA</a></li>
-					</ul>
-				</div>
-				<div id="search">
-					<form action="">
-						<fieldset>
-							<legend></legend>
-							<input type="text" value="Buscar..." class="field">
-							<input type="button" onclick="buscar()" value="" class="button">
-						</fieldset>
-					</form>
-				</div>
-				<div id="frase"><h2>Sharing is good</h2></div>
-				{% block contents %}{% endblock %}
-				<div id="line"></div>
-		</div>
-    </body>
+  <head>
+    <title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/lc.css" type="text/css" />
+    <script type="text/javascript" src="/static/js/jquery-min.js"></script>
+    <script type="text/javascript" src="/static/js/fisheyes-iutils-min.js"></script>
+    <script type="text/javascript" src="/static/js/lc.js"></script>
+    {% block extrastyle %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+  </head>
+  <body>
+    <div id="back">
+      <div id="main">
+        <div id="logo"><a href="/" id="logo">LiberCopy</a></div>
+          <div id="top-menu">
+            <ul>
+              <li><a href="/series">SERIES</a></li>
+              <!--<li><a href="#">PELICULAS</a></li>
+              <li><a href="#">MÚSICA</a></li>-->
+            </ul>
+          </div>
+        <div id="search">
+          <form action="">
+          <fieldset>
+            <legend></legend>
+            <input type="text" value="Buscar..." class="field">
+            <input type="button" onclick="buscar()" value="" class="button">
+          </fieldset>
+          </form>
+        </div>
+        <div id="frase"><h2>Sharing is good</h2></div>
+      {% block contents %}{% endblock %}
+      <div id="line"></div>
+    </div>
+  </body>
 </html>

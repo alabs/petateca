@@ -32,6 +32,18 @@
     {% endif %} 
   </div>
   {% endfor %}
+
+  {% for p in posts2 %}
+  <div class="text2">
+    <h2><a href="{% url get_post p.slug %}">{{ p.title }}</a></h2>
+    <p>{{p.summary}}</p>
+    {% if p.images.all.0 %}
+    <img src="{% thumbnail p.images.all.0.src 50x50 upscale %}" />
+    {% else %}
+    Este post no tiene imagen
+    {% endif %} 
+  </div>
+  {% endfor %}
 </div>
 </div>
 {% endblock %}
