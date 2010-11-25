@@ -1,4 +1,4 @@
-from liberweb.serie.models import Serie, Episode
+from liberweb.serie.models import Serie, Episode, Actor
 from liberweb.blog.models import Post
 from django.shortcuts import render_to_response, get_object_or_404
 from django.utils.translation import gettext_lazy as _
@@ -69,3 +69,13 @@ def index(request):
             'posts2': post_list_2, 
             'series': serie_list,
      })
+
+def get_actor(request, id):
+    actor = get_object_or_404(Actor, id=id)
+    imgs = actor.images.all()
+    img_src = imgs[0].src if imgs else None
+    return render_to_response('serie/get_actor.html', {
+        'actor': actor,
+        'title': actor.name,
+        'image': img_src,
+    })

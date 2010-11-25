@@ -25,11 +25,12 @@
             </ul>
           </div>
         <div id="search">
-          <form action="">
+          <form action="/search/">
           <fieldset>
             <legend></legend>
-            <input type="text" value="Buscar..." class="field">
-            <input type="button" onclick="buscar()" value="" class="button">
+            <input type="text" name="q" value="{% trans "Search" %}..." class="field" 
+                onblur="this.value='{% trans "Search" %}...'" onfocus="this.value=''" />
+            <input type="submit" value="" class="button" / >
           </fieldset>
           </form>
         </div>

@@ -1,6 +1,11 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 
+from haystack.views import SearchView, search_view_factory
+from haystack.forms import ModelSearchForm
+from haystack.query import SearchQuerySet
+
+
 from django.contrib import admin
 admin.autodiscover()
 
@@ -20,6 +25,11 @@ urlpatterns = patterns('',
     (r'^blog/', include('liberweb.blog.urls')),
 
  #   (r'^blog/', 'blog.views.index'),
+    (r'^search/$', search_view_factory(
+        view_class=SearchView,
+        searchqueryset=SearchQuerySet(),
+        form_class=ModelSearchForm
+    )),
 )
 
 if settings.DEBUG:

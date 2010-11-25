@@ -21,6 +21,11 @@ class Serie(models.Model):
         self.slug_name = slugify( self.name )
         super( Serie, self ).save(force_insert, force_update, using)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('liberweb.serie.views.get_serie', (), 
+                { 'serie_slug': self.slug_name, })
+
 class Role(models.Model):
     serie = models.ForeignKey("Serie")
     actor = models.ForeignKey("Actor")
@@ -108,6 +113,10 @@ class Actor(models.Model):
     
     def __unicode__(self):
         return self.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('liberweb.serie.views.get_actor', [str(self.id)])
 
 class IsPosterManager(models.Manager):
     def get_is_poster(self):

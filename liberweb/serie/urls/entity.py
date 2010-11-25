@@ -1,7 +1,7 @@
 #from django.conf.urls.defaults import *
 from django.conf.urls.defaults import patterns, url
 from django.views.generic.list_detail import object_list
-from liberweb.serie.models import Serie
+from liberweb.serie.models import Serie, Actor
 
 urlpatterns = patterns('liberweb.serie.views',
     #url(r'^$', object_list, {
@@ -16,4 +16,9 @@ urlpatterns = patterns('liberweb.serie.views',
     }),
     (r'^favorite$', 'list_user_favorite'),
     (r'^recommended$', 'list_user_recommendation'),
+    url(r'^actors$', object_list, {
+        'queryset': Actor.objects.order_by('name').all(),
+        'paginate_by': 100,
+    }, name="actor-serie-list"),
+    (r'^actor/(\d+)$', 'get_actor')
 )

@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'rosetta',
     'sorl.thumbnail',
     'liberweb.blog',
+    'haystack',
 )
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
@@ -139,3 +140,8 @@ if DEBUG:
         INSTALLED_APPS += ('debug_toolbar', )
     except:
         pass
+
+HAYSTACK_SITECONF = 'liberweb.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
+

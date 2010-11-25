@@ -23,6 +23,8 @@ setup(
         'IMDbPY',
         'sorl-thumbnail',
         'tvdb_api',
+        'django-haystack',
+        'Whoosh',
     ],
     classifiers=[
         'Environment :: Web Environment',
