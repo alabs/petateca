@@ -27,6 +27,9 @@ class Role(models.Model):
     sortorder = models.IntegerField(blank=True, null=True)
     role = models.CharField(max_length=255)
 
+    class Meta:
+        unique_together = ("serie", "actor", "role")
+
 class SerieAlias(models.Model):
     name = models.CharField(max_length=255, unique=True)
     serie = models.ForeignKey("Serie", related_name="aliases")
