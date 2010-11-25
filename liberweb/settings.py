@@ -111,12 +111,13 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'liberweb.serie',
+    'liberweb.blog',
+    'liberweb.userdata',
     #'liberweb.imdblocal', #Don't use yet, sucks a lot
     'south',
     'modeltranslation',
     'rosetta',
     'sorl.thumbnail',
-    'liberweb.blog',
     'haystack',
 )
 
@@ -145,3 +146,4 @@ HAYSTACK_SITECONF = 'liberweb.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
 
+AUTH_PROFILE_MODULE='liberweb.userdata.UserProfile'
