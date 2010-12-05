@@ -5,21 +5,16 @@ from haystack.views import SearchView, search_view_factory
 from haystack.forms import ModelSearchForm
 from haystack.query import SearchQuerySet
 
-
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^liberweb/', include('liberweb.foo.urls')),
+    (r'^$', 'liberweb.views.index'),
+
     (r'^serie/', include('liberweb.serie.urls.obj')),
     (r'^series/', include('liberweb.serie.urls.entity')),
-    (r'^$', 'liberweb.serie.views.index'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 
     (r'^blog/', include('liberweb.blog.urls')),

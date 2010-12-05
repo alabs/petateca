@@ -2,6 +2,7 @@ from liberweb.serie.models import Serie, Episode, Actor
 from liberweb.blog.models import Post
 from django.shortcuts import render_to_response, get_object_or_404
 from django.utils.translation import gettext_lazy as _
+
 from django.core.paginator import InvalidPage, EmptyPage
 from liberweb.lib.namepaginator import NamePaginator
 
@@ -59,16 +60,6 @@ def list_user_favorite(request):
 
 def list_user_recommendation(request):
     return "TODO"
-
-def index(request):
-    post_list = Post.objects.all().order_by('-date')[:3]
-    post_list_2 = Post.objects.all().order_by('-date')[4:6]
-    serie_list = Serie.objects.order_by('?')[:5] # ?=random
-    return render_to_response('serie/index.html', { 
-            'posts': post_list, 
-            'posts2': post_list_2, 
-            'series': serie_list,
-     })
 
 def get_actor(request, id):
     actor = get_object_or_404(Actor, id=id)
