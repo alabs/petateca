@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding field 'Post.summary'
-        db.add_column('blog_post', 'summary', self.gf('django.db.models.fields.TextField')(default=None, max_length=200), keep_default=False)
+        db.add_column('blog_post', 'summary', self.gf('django.db.models.fields.TextField')(default='', max_length=200), keep_default=False)
 
 
     def backwards(self, orm):

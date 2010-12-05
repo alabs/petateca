@@ -12,9 +12,11 @@
   <div id="dock"> 
     <div class="dock-container" style="left: 200px; width: 500px;">
       {% for serie in series %}
-        {% if serie.images.get_is_poster.0.src %}
-        <a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">{{ serie.name }}</span><img alt="{{ serie.name }}" src="{% thumbnail serie.images.get_is_poster.0.src 300x200 upscale %}"></a> 
-        {% endif %}
+        {% with serie.images.get_is_poster.0.src as img_serie %}
+          {% if img_serie %}
+          <a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">{{ serie.name }}</span><img alt="{{ serie.name }}" src="{% thumbnail img_serie 300x200 upscale %}"></a> 
+          {% endif %}
+        {% endwith %}
       {% endfor %}
     </div>	
   </div>
@@ -25,11 +27,13 @@
   <div class="text">
     <h2><a href="{% url get_post p.slug %}">{{ p.title }}</a></h2>
     <p>{{p.summary}}</p>
-    {% if p.images.all.0 %}
-    <img src="{% thumbnail p.images.all.0.src 50x50 upscale %}" />
-    {% else %}
-    Este post no tiene imagen
-    {% endif %} 
+    {% with p.images.all.0.src as img_post %}
+      {% if img_post %}
+      <img src="{% thumbnail img_post 50x50 upscale %}" />
+      {% else %}
+      Este post no tiene imagen
+      {% endif %} 
+    {% endwith %}
   </div>
   {% endfor %}
 
