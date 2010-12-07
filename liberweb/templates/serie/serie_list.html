@@ -19,7 +19,9 @@
   {% for serie in page.object_list %}
     {% if serie.images.get_is_poster.0.src %}
       <a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">
-        <img src="{% thumbnail serie.images.get_is_poster.0.src 100x100 upscale %}" />
+        {% thumbnail serie.images.get_is_poster.0.src "100x100" as img_serie %}
+          <img src="{{ img_serie.url }}" />
+        {% endthumbnail %}
       </a>
     {% else %}
       Esta serie no tiene imagen de portada
@@ -29,15 +31,15 @@
 </ul>
 <br/>
 
-<div class="pagination">                                                                                                                                                                     
- {% trans "Browse by letter" %}:                                                                                                                                                             
-  {% for p in page.paginator.pages %}                                                                                                                                                        
-    {% ifequal p serie %}                                                                                                                                                                    
-      <span class="selected">{{ page }}</span>                                                                                                                                               
-    {% else %}                                                                                                                                                                               
-      <a href="?page={{ p.number }}">{{ p }}</a>                                                                                                                                             
-    {% endifequal %}                                                                                                                                                                         
-  {% endfor %}                                                                                                                                                                               
+<div class="pagination">
+ {% trans "Browse by letter" %}:
+  {% for p in page.paginator.pages %}
+    {% ifequal p serie %}
+      <span class="selected">{{ page }}</span>
+    {% else %}
+      <a href="?page={{ p.number }}">{{ p }}</a>
+    {% endifequal %}
+  {% endfor %}
 </div>   
 
 {% endblock %}

@@ -26,7 +26,9 @@
   <li>{% trans "Description" %}: {{ serie.description }}</li>
   <li>{% trans "Poster" %}: 
   {% if image %}
-  <img src="{% thumbnail image 300x200 upscale %}" />
+    {% thumbnail image "300x200" as img_serie %}
+      <img src="{{ img_serie.url }}" />
+    {% endthumbnail %}
   {% else %}
   Esta serie no tiene imagen de portada
   {% endif %}
