@@ -135,3 +135,26 @@ a:hover{ color:#7d7d7d;text-decoration: underline;}
 a.dock-item { display: block; width: 50px; position: absolute; bottom: 0; text-align: center; text-decoration: none; color: #F4792A;font-weight:bold;}
 .dock-item span { display: none; padding-left: 20px; }
 .dock-item img { border: 0; margin: 5px 10px 0px; width: 100%; }
+
+/* rating */
+
+
+.titulo_serie {
+	float:right; 
+        font-size: 3em;
+}
+
+#rating {
+        float:right;
+}
+
+
+
+#content {
+        margin-top: 100px; 
+}
+
+#poster {
+	float:right;
+}
+

@@ -25,6 +25,7 @@ setup(
         'tvdb_api',
         'django-haystack',
         'Whoosh',
+        'django-ratings',
     ],
     classifiers=[
         'Environment :: Web Environment',

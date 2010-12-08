@@ -1,6 +1,8 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
+from djangoratings import AnonymousRatingField
+
 
 class Serie(models.Model):
     name = models.CharField(max_length=255)
@@ -13,6 +15,7 @@ class Serie(models.Model):
     rating = models.FloatField(blank=True, null=True, help_text=('rating from eztv'))
     rating_count = models.IntegerField(default=0)
     finished = models.BooleanField(default=False)
+    rating_user = AnonymousRatingField(range=5)
 
     def __unicode__(self):
         return self.name

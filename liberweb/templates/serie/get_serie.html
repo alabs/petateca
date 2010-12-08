@@ -1,9 +1,47 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% block extrastyle %}
+  <link href='http://jquery-star-rating-plugin.googlecode.com/svn/trunk/jquery.rating.css' type="text/css" rel="stylesheet"/>
+{% endblock %}
+{% block extrahead %}
+  <script src='http://jquery-star-rating-plugin.googlecode.com/svn/trunk/jquery.MetaData.js' type="text/javascript" language="javascript"></script>
+  <script src='http://jquery-star-rating-plugin.googlecode.com/svn/trunk/jquery.rating.js' type="text/javascript" language="javascript"></script>
+{% endblock %}
 {% block contents %}
+<div class="titulo_serie">{{ serie.name }}
+<br />
+  <div id="rating">
+    <form action="." method="POST">
+      <input type="radio" name="user_rating" value="1" class="star" />
+      <input type="radio" name="user_rating" value="2" class="star" />
+      <input type="radio" name="user_rating" value="3" class="star" />
+      <input type="radio" name="user_rating" value="4" class="star" />
+      <input type="radio" name="user_rating" value="5" class="star" />
+      <button type="submit">Rate</button>
+    </form>
+    {% if message %}
+      <div class="message">{{ message }}</div>
+    {% endif %}
+    
+    {% if error %}
+      <div class="error"> Couldn't vote :( </div>
+    {% endif %}
+  </div>
+  <br>
+  {% if image %}
+    {% thumbnail image "400x300" as img_serie %}
+      <img id="poster" src="{{ img_serie.url }}" />
+    {% endthumbnail %}
+  {% else %}
+  <div class="image_not_found"> Esta serie no tiene imagen de portada </div>
+  {% endif %}
+</div>
 
-<h1>{{ serie.name }}</h1>
+<br />
+{# serie.rating_user_votes #}
+{# serie.rating_user.get_percent #}
+
 <ul>
     <li>{% trans "Network" %}: {{ serie.network.name }}</li>
   <li>
@@ -24,14 +62,6 @@
   </li>
   <li>{% trans "Runtime" %}: {{ serie.runtime }} {% trans "minutes" %}</li>
   <li>{% trans "Description" %}: {{ serie.description }}</li>
-  <li>{% trans "Poster" %}: 
-  {% if image %}
-    {% thumbnail image "300x200" as img_serie %}
-      <img src="{{ img_serie.url }}" />
-    {% endthumbnail %}
-  {% else %}
-  Esta serie no tiene imagen de portada
-  {% endif %}
 </ul>
 
 {% regroup episode_list by season as episode_list %}

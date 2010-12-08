@@ -87,6 +87,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
@@ -100,7 +101,6 @@ TEMPLATE_DIRS = (
 FIXTURE_DIRS = (
     os.path.join(PROJECT_ROOT, 'blog/fixtures')
 )
-
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'rosetta',
     'sorl.thumbnail',
     'haystack',
+    'djangoratings',
 )
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']

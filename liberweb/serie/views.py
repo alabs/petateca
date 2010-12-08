@@ -6,6 +6,11 @@ from django.utils.translation import gettext_lazy as _
 from django.core.paginator import InvalidPage, EmptyPage
 from liberweb.lib.namepaginator import NamePaginator
 
+from django.contrib.contenttypes.models import ContentType
+from djangoratings.views import AddRatingView
+from django.template import RequestContext
+from django.views.decorators.csrf import csrf_protect
+
 def get_serie_list(request):
     serie_list = Serie.objects.order_by('name').all()
     paginator = NamePaginator(serie_list, on="name", per_page=25) # Show 25 series per page
@@ -26,17 +31,53 @@ def get_serie_list(request):
         'page': page,
     })
 
+@csrf_protect
 def get_serie(request, serie_slug):
+    ''' Request a serie, returns images and episodes, also treats star-rating '''
+
     serie = get_object_or_404(Serie, slug_name=serie_slug)
     imgs = serie.images.filter(is_poster=True)
     img_src = imgs[0].src if imgs else None
     episodes = serie.episodes.all().order_by('season')
+    if request.method == 'POST':
+        ct = ContentType.objects.get(app_label='serie', name='serie')
+        serie = Serie.objects.get(slug_name=serie_slug)
+    
+        params = {
+            'content_type_id': ct.id,
+            'object_id': serie.id,
+            'field_name': 'rating_user',
+            'score': request.POST['user_rating'],
+        }
+        response = AddRatingView()(request, **params)
+        try:
+            if response.status_code == 200:
+                if response.content == 'Vote recorded.':
+                    return render_to_response('serie/get_serie.html', {
+                        'serie': serie,
+                        'title': serie.name,
+                        'image': img_src,
+                        'episode_list': episodes,
+                        'message': response.content, 
+                        'score': params['score']
+                    }, context_instance=RequestContext(request))
+        except:
+            return render_to_response('serie/get_serie.html', {
+                'serie': serie,
+                'title': serie.name,
+                'image': img_src,
+                'episode_list': episodes,
+                'message': response.content, 
+                'error': 9,
+            }, context_instance=RequestContext(request))
     return render_to_response('serie/get_serie.html', {
         'serie': serie,
         'title': serie.name,
         'image': img_src,
         'episode_list': episodes,
-    })
+    }, context_instance=RequestContext(request))
+
+
 
 def get_episodes(request, serie_slug):
     serie = get_object_or_404(Serie, slug_name=serie_slug)
@@ -70,3 +111,4 @@ def get_actor(request, id):
         'title': actor.name,
         'image': img_src,
     })
+
