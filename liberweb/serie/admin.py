@@ -1,19 +1,25 @@
 from django.contrib import admin
-from .import models as m
+from . import models as m
 
 class ImageInline(admin.TabularInline):
     model = m.ImageSerie
     extra = 1
+    list_display = ['my_image_thumb']
+
 
 class EpisodeInline(admin.StackedInline):
     model = m.Episode
 
 class SerieAdmin(admin.ModelAdmin):
+    list_display = ['name', 'network', 'runtime',]
+    list_filter = ('runtime', 'genres', 'network',)
     prepopulated_fields = {'slug_name': ('name', )}
     inlines = [
         #EpisodeInline,
         ImageInline,
     ]
+    search_fields = ['name',]
+    ordering       = ('name',)
 
 admin.site.register(m.Serie, SerieAdmin)
 
