@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load thumbnail %}
 
 {% block contents %}
 <div>
@@ -9,7 +10,9 @@
 
             {% for result in page.object_list %}
                 <p>
-                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.name }}</a>
+                    {% thumbnail result.object.images.get_is_poster.0.src "300x200" as img_serie %}
+                      <a href="{{ result.object.get_absolute_url }}"> <img src="{{ img_serie.url }}">{{ result.object.name }}</a>
+                    {% endthumbnail %}
                 </p>
             {% empty %}
                 <p>No results found.</p>
