@@ -23,6 +23,11 @@
               <!--<li><a href="#">PELICULAS</a></li>
               <li><a href="#">MÚSICA</a></li>-->
             </ul>
+
+            {% if initial_message %}
+              <div id="message_box"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Ha leido nuestro <a href="/faq">FAQ?</a></div>
+            {% endif %}
+
               <form class="language" action="/i18n/setlang/" method="post">
                 <input name="next" type="hidden" value="{{ request.path }}" />
                 <select name="language">

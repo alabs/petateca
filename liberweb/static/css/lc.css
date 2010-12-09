@@ -158,3 +158,15 @@ a.dock-item { display: block; width: 50px; position: absolute; bottom: 0; text-a
 	float:right;
 }
 
+#message_box { 
+	 position: absolute; 
+	 top: 0; left: 0; 
+	 z-index: 10; 
+	     background:#ffc;
+	     padding:5px;
+	 border:1px solid #CCCCCC;
+	 text-align:center; 
+	 font-weight:bold; 
+	 width:99%;
+}
+
