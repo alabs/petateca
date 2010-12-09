@@ -27,9 +27,9 @@ urlpatterns = patterns('',
 
     (r'^i18n/', include('django.conf.urls.i18n')),
 
+    (r'^faq/$', 'django.views.generic.simple.direct_to_template', {'template': 'faq.html'}),
+
 )
-
-
 
 if settings.DEBUG:
     urlpatterns += patterns('',
