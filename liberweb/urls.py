@@ -19,13 +19,16 @@ urlpatterns = patterns('',
 
     (r'^blog/', include('liberweb.blog.urls')),
 
- #   (r'^blog/', 'blog.views.index'),
+
     (r'^search/$', search_view_factory(
         view_class=SearchView,
         searchqueryset=SearchQuerySet(),
         form_class=ModelSearchForm
     )),
+
+    (r'^i18n/', include('django.conf.urls.i18n')),
 )
+
 
 if settings.DEBUG:
     urlpatterns += patterns('',

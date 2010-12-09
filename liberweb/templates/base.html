@@ -7,10 +7,10 @@
   <head>
     <title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
     <link rel="stylesheet" href="/static/css/lc.css" type="text/css" />
+    {% block extrastyle %}{% endblock %}
     <script type="text/javascript" src="/static/js/jquery-min.js"></script>
     <script type="text/javascript" src="/static/js/fisheyes-iutils-min.js"></script>
     <script type="text/javascript" src="/static/js/lc.js"></script>
-    {% block extrastyle %}{% endblock %}
     {% block extrahead %}{% endblock %}
   </head>
   <body>
@@ -23,6 +23,15 @@
               <!--<li><a href="#">PELICULAS</a></li>
               <li><a href="#">MÚSICA</a></li>-->
             </ul>
+              <form class="language" action="/i18n/setlang/" method="post">
+                <input name="next" type="hidden" value="{{ request.path }}" />
+                <select name="language">
+                {% for lang in LANGUAGES %}
+                <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" value="Go" />
+              </form>
           </div>
         <div id="search">
           <form action="/search/">
@@ -35,7 +44,9 @@
           </form>
         </div>
         <div id="frase"><h2>Sharing is good</h2></div>
-      {% block contents %}{% endblock %}
+        <div id="content"> 
+          {% block contents %}{% endblock %}
+        </div>
       <div id="line"></div>
     </div>
   </body>

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-23 18:34+0100\n"
-"PO-Revision-Date: 2010-11-23 18:36\n"
+"POT-Creation-Date: 2010-12-09 01:02+0100\n"
+"PO-Revision-Date: 2010-12-09 01:02\n"
 "Last-Translator:   <lasi@lasi.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,57 +19,62 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: settings.py:31
+#: settings.py:47
 msgid "English"
 msgstr "Inglés"
 
-#: settings.py:32
+#: settings.py:48
 msgid "Spanish"
 msgstr "Español"
 
 #: blog/models.py:9
 msgid "Body of the Post - the post itself"
-msgstr ""
+msgstr "Cuerpo del mensaje - el mensaje en sí"
 
 #: blog/models.py:11
 msgid "Summary of the Post seeing in the homepage"
-msgstr ""
+msgstr "Resumen del mensaje para ver en la página de inicio"
 
-#: serie/adminthumb.py:24
-msgid "Currently:"
-msgstr ""
+#: serie/models.py:9
+msgid "name in URL"
+msgstr "nombre en la URL"
 
-#: serie/adminthumb.py:24 serie/adminthumb.py:27
-msgid "Change:"
-msgstr ""
-
-#: serie/models.py:10
+#: serie/models.py:12
 msgid "runtime duration"
 msgstr "Duración de emisión"
 
-#: serie/models.py:10
+#: serie/models.py:12
 msgid "duration of episodes in minutes"
 msgstr "la duración de los episodios en minutos"
 
-#: serie/models.py:36
+#: serie/models.py:47
 msgid "air date"
 msgstr "Fecha de estreno"
 
-#: serie/models.py:36
+#: serie/models.py:47
 msgid "first broadcast date"
 msgstr "la fecha de la primera emisión"
 
-#: serie/views.py:46
+#: serie/views.py:88
 #, python-format
 msgid "Episodes of %(name)s"
 msgstr "Los episodios de %(name)s "
 
+#: templates/base.html:31 templates/base.html.py:32
+msgid "Search"
+msgstr "Búsqueda"
+
 #: templates/blog/get_post.html:9
 msgid "Written on"
-msgstr ""
+msgstr "Escrito el"
+
+#: templates/serie/actor_list.html:4 templates/serie/get_actor.html:16
+#, fuzzy
+msgid "Actors list"
+msgstr "Actores"
 
 #: templates/serie/get_episode.html:21 templates/serie/get_episodes.html:35
-#: templates/serie/get_serie.html:66 templates/serie/serie_list.html:5
+#: templates/serie/get_serie.html:98 templates/serie/serie_list.html:5
 msgid "Series list"
 msgstr "Lista de series"
 
@@ -82,45 +87,54 @@ msgstr "Volver a"
 msgid "Episode list of"
 msgstr "Episodios"
 
-#: templates/serie/get_episodes.html:9 templates/serie/get_serie.html:39
+#: templates/serie/get_episodes.html:9 templates/serie/get_serie.html:71
 msgid "Episodes"
 msgstr "Episodios"
 
-#: templates/serie/get_episodes.html:13 templates/serie/get_serie.html:43
+#: templates/serie/get_episodes.html:13 templates/serie/get_serie.html:75
+#: templates/serie/get_serie.html.py:79
 msgid "Season"
-msgstr ""
+msgstr "Temporada"
 
-#: templates/serie/get_serie.html:8
+#: templates/serie/get_serie.html:46
 msgid "Network"
 msgstr "Compañía"
 
-#: templates/serie/get_serie.html:10
+#: templates/serie/get_serie.html:48
 msgid "Genre"
 msgstr "Género"
 
-#: templates/serie/get_serie.html:18
+#: templates/serie/get_serie.html:56
 msgid "Actors"
 msgstr "Actores"
 
-#: templates/serie/get_serie.html:25
+#: templates/serie/get_serie.html:63
 msgid "Runtime"
 msgstr "Duración"
 
-#: templates/serie/get_serie.html:25
+#: templates/serie/get_serie.html:63
 msgid "minutes"
 msgstr "minutos"
 
-#: templates/serie/get_serie.html:26
+#: templates/serie/get_serie.html:64
 msgid "Description"
 msgstr "Descripción"
 
-#: templates/serie/get_serie.html:27
-msgid "Poster"
-msgstr "Imagen"
+#: templates/serie/get_serie.html:80
+#, fuzzy
+msgid "Episode"
+msgstr "Episodios"
 
-#: templates/serie/serie_list.html:8 templates/serie/serie_list.html.py:33
+#: templates/serie/get_serie.html:81
+msgid "Name"
+msgstr "Nombre"
+
+#: templates/serie/serie_list.html:8 templates/serie/serie_list.html.py:35
 msgid "Browse by letter"
 msgstr "Navegar por letra"
+
+#~ msgid "Poster"
+#~ msgstr "Imagen"
 
 #~ msgid ""
 #~ "\n"

@@ -84,12 +84,12 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'liberweb.urls'
@@ -97,6 +97,14 @@ ROOT_URLCONF = 'liberweb.urls'
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates')
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.core.context_processors.i18n',
+'django.contrib.auth.context_processors.auth',
+)
+
+
 
 FIXTURE_DIRS = (
     os.path.join(PROJECT_ROOT, 'blog/fixtures')
@@ -121,6 +129,7 @@ INSTALLED_APPS = (
     'haystack',
     'djangoratings',
 )
+ 
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
 
@@ -133,15 +142,15 @@ IMDB_ACCESS_DB_URI = "postgres://liberweb:libre@localhost/imdb"
 THUMBNAIL_DEBUG = True
 THUMBNAIL_SUBDIR = 'thumbs'
 
-if DEBUG:
-    try:
-        #Check if django-debug-toolbar is installed
-        import debug_toolbar
-        MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-        INTERNAL_IPS = ('127.0.0.1',)
-        INSTALLED_APPS += ('debug_toolbar', )
-    except:
-        pass
+#if DEBUG:
+#    try:
+#        #Check if django-debug-toolbar is installed
+#        import debug_toolbar
+#        MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+#        INTERNAL_IPS = ('127.0.0.1',)
+#        INSTALLED_APPS += ('debug_toolbar', )
+#    except:
+#        pass
 
 HAYSTACK_SITECONF = 'liberweb.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
