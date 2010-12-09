@@ -101,10 +101,8 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.i18n',
-'django.contrib.auth.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
 )
-
-
 
 FIXTURE_DIRS = (
     os.path.join(PROJECT_ROOT, 'blog/fixtures')
@@ -130,7 +128,6 @@ INSTALLED_APPS = (
     'djangoratings',
 )
  
-
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
 
 #Valid values are http, sql

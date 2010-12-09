@@ -4,11 +4,9 @@
 {% block contents %}
 
 <h1>{{ actor.name }}</h1>
-  {% if image %}
-  <img src="{% thumbnail image 300x200 upscale %}" />
-  {% else %}
-  Este actor no tiene imagen
-  {% endif %}
+    {% thumbnail actors.images.all.0 300x200 as img %}
+      <img src="{{ img.url }}" />
+    {% endthumbnail %}
 
 <br />
 <a href="{% url actor-serie-list %}">{% trans "Actors list" %}</a>

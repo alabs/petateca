@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% block contents %}
+
+<br />
+<a href="{% url genre-list %}">{% trans "Genre list" %}</a>
+<br />
+
+<h1>{{ genre.name }}</h1>
+
+<br />
+
+<ul>
+  {% for serie in serie_list %}
+    {% thumbnail serie.images.get_is_poster.0.src "300x200" as img_serie %}
+      <li><a href="{% url get_serie serie.slug_name %}"><img src="{{ img_serie.url }}">{{ serie.name }}</a></li>
+    {% endthumbnail %}
+  {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-from liberweb.serie.models import Serie, Episode, Actor
+from liberweb.serie.models import Serie, Episode, Actor, Genre, Network
 from liberweb.blog.models import Post
 from django.shortcuts import render_to_response, get_object_or_404
 from django.utils.translation import gettext_lazy as _
@@ -112,3 +112,20 @@ def get_actor(request, id):
         'image': img_src,
     })
 
+def get_genre(request, id):
+    genre = get_object_or_404(Genre, id=id)
+    serie_list = Serie.objects.filter(genres=genre.id)
+    serie_list = serie_list.order_by("name")
+    return render_to_response('serie/get_genre.html', {
+        'genre': genre,
+        'serie_list': serie_list,
+    })
+
+def get_network(request, id):
+    network = get_object_or_404(Network, id=id)
+    serie_list = Serie.objects.filter(network=network.id)
+    serie_list = serie_list.order_by("name")
+    return render_to_response('serie/get_network.html', {
+        'network': network,
+        'serie_list': serie_list,
+    })

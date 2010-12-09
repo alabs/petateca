@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% block title %}{% trans "Genre list" %}{% endblock %}
+{% block contents %}
+
+<ul>
+  {% for network in object_list %}
+    <li><a href="{% url get_network id=network.id %}">{{ network.name }}</a></li>
+  {% endfor %}
+</ul>
+
+
+{% endblock %}
+

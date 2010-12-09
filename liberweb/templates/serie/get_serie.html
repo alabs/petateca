@@ -43,32 +43,32 @@
 {# serie.rating_user.get_percent #}
 
 <ul>
-    <li>{% trans "Network" %}: {{ serie.network.name }}</li>
+    <h2><li>{% trans "Network" %}:</h2> <a href="{% url get_network id=serie.network.id %}">{{ serie.network.name }}</a></li>
   <li>
-  {% trans "Genre" %}:
+  <h2>{% trans "Genre" %}:</h2>
     <ul>
       {% for genre in serie.genres.all %}
-        <li>{{ genre.name }}</li>
+        <li><a href={% url get_genre id=genre.id %}>{{ genre.name }}</a></li>
       {% endfor %}
     </ul>
   </li>
   <li>
-  {% trans "Actors" %}:
+  <h2>{% trans "Actors" %}:</h2>
     <ul>
       {% for actor in serie.actors.all %}
-        <li>{{ actor.name }}</li>
+        <li><a href={% url get_actor actor.id %}>{{ actor.name }}</a>
       {% endfor %}
     </ul>
   </li>
-  <li>{% trans "Runtime" %}: {{ serie.runtime }} {% trans "minutes" %}</li>
-  <li>{% trans "Description" %}: {{ serie.description }}</li>
+  <li><h2>{% trans "Runtime" %}:</h2> {{ serie.runtime }} {% trans "minutes" %}</li>
+  <li><h2>{% trans "Description" %}:</h2> {{ serie.description }}</li>
 </ul>
 
 {% regroup episode_list by season as episode_list %}
 
 <ul>
   <li> 
-    {% trans "Episodes" %}: 
+    <h2>{% trans "Episodes" %}: </h2>
     <ul> 
       {% for episode in episode_list %} 
       <br/> 
@@ -76,9 +76,9 @@
         <ul> 
          <table> 
           <tr> 
-           <th colspan="10"> Season  <th> 
-           <th colspan="10"> Episode  <th> 
-           <th colspan="30"> Name <th>                                     
+           <th colspan="10"> {% trans "Season" %}  <th> 
+           <th colspan="10"> {% trans "Episode" %}  <th> 
+           <th colspan="30"> {% trans "Name" %} <th>                                     
           </tr> 
           {% for episode in episode.list %} 
            <tr> 
