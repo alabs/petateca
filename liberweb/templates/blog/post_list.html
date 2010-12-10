@@ -6,14 +6,19 @@
 
 {% for p in posts %}
  <li><a href="{% url get_post p.slug %}">{{ p.title }}</a></li>
-    <h3>{{p.title}}</h3>
     <p>Written on {{p.date}}</p>
     <p>{{p.summary}}</p>
+
+    <div class="image_post">
     {% if p.images.all.0 %}
-    <img src="{% thumbnail p.images.all.0.src 100x100 upscale %}" />
+      {% thumbnail p.images.all.0.src "100x100" as img_post %}
+        <img src="{{ img_post.url }}" />
+      {% endthumbnail %}
     {% else %}
     Este post no tiene imagen
     {% endif %} 
+    </div>
+
 {% endfor %}
 
 {% endblock %}

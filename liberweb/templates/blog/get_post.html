@@ -6,14 +6,19 @@
 <div class="post">
   <h3>{{post.title}}</h3>
   
-  <p>{% trans "Written on" %}: {{post.date}}</p>
-  <p>{{post.post}}</p>
-
+  <div class="image_post"> 
   {% if image %}
-  <img src="{% thumbnail image 300x200 upscale %}" />
+    {% thumbnail image "300x200" as img_post %}
+  <img  src="{{ img_post.url }}" />
+    {% endthumbnail %}
   {% else %}
   Esta serie no tiene imagen de portada
   {% endif %}
+  </div>
+
+  <p>{% trans "Written on" %}: {{post.date}}</p>
+  <p>{{post.post}}</p>
+
 </div>
 
 {% endblock %}

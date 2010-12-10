@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/1999/xhtml">
 {% load i18n %}
+{% load dropdown_series %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -7,6 +8,10 @@
   <head>
     <title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
     <link rel="stylesheet" href="/static/css/lc.css" type="text/css" />
+    <link rel=alternate type=application/atom+xml href="{% url rssblogfeed %}">
+    <link rel=alternate type=application/atom+xml href="{% url rsslinksfeed %}">
+    <link rel=alternate type=application/atom+xml href="{% url atomblogfeed %}">
+    <link rel=alternate type=application/atom+xml href="{% url atomlinksfeed %}">
     {% block extrastyle %}{% endblock %}
     <script type="text/javascript" src="/static/js/jquery-min.js"></script>
     <script type="text/javascript" src="/static/js/fisheyes-iutils-min.js"></script>
@@ -20,6 +25,8 @@
           <div id="top-menu">
             <ul>
               <li><a href="/series">SERIES</a></li>
+              <li><a href="/blog">BLOG</a></li>
+              <li><a href="/faq">FAQ</a></li>
               <!--<li><a href="#">PELICULAS</a></li>
               <li><a href="#">MÚSICA</a></li>-->
             </ul>
@@ -38,6 +45,9 @@
                 <input type="submit" value="Go" />
               </form>
           </div>
+        <div id="dropdown_series">
+          {% dropdown_series %}
+        </div>
         <div id="search">
           <form action="/search/">
           <fieldset>

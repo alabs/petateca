@@ -170,3 +170,12 @@ a.dock-item { display: block; width: 50px; position: absolute; bottom: 0; text-a
 	 width:99%;
 }
 
+.language{
+         margin-left:18em;
+
+}
+
+.image_post{
+	float: left;
+        margin: 1em;
+}

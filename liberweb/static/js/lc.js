@@ -28,3 +28,9 @@ $(document).ready(function()
 	});
 });
 
+
+function go(){ 
+if (document.lcdropdown.series.options[document.lcdropdown.series.selectedIndex].value != "none") { 
+location = document.lcdropdown.series.options[document.lcdropdown.series.selectedIndex].value 
+		} 
+	} 
