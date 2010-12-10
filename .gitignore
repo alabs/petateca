@@ -7,7 +7,7 @@ liberweb.egg-info/*
 distribute*
 *.mo
 liberweb/bots/libercopy/liberbot/cache/*
-liberweb/bots/libercopy/sites/*
+liberweb/bots/libercopy/sites/*/debug/*
 liberweb/static/img/serie/thumbs/*.jpg
 liberweb/static/img/serie/*.jpg
 liberweb/static/img/actor/*.jpg

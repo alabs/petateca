@@ -1,5 +1,4 @@
-#!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 from scrapy.conf import settings
 from scrapy.http import Request
@@ -11,7 +10,7 @@ import sys
 sys.path.append(".")
 from liberclass.askletter import AskLetter
 from liberclass.fileextract import FileExtract
-#from liberclass.crawlerjs import CrawlerJS
+import Yonkis
 from liberbot.items import LiberBotItems
 
 class SeriesYonkisSpider(BaseSpider):
@@ -22,17 +21,17 @@ class SeriesYonkisSpider(BaseSpider):
 
     name = "series-yonkis"
     allowed_domains = ["seriesyonkis.com"]
-    start_urls = ['http://www.seriesyonkis.com/serie/alf']
+ #   start_urls = ['http://www.seriesyonkis.com/serie/aeon-flux']
 
-   # letter = settings['LETTER']
-   # folder = settings['FOLDER']
+    letter = settings['LETTER']
+    folder = settings['FOLDER']
 
-   # if letter and folder:
-   #     import_file, export_file = AskLetter(letter,folder)
-   #     settings.overrides['EXPORT_FILE'] = export_file
-   #     start_urls = ['http://www.seriesyonkis.com/serie/alf'] #FileExtract(import_file)
-   # else:
-   #     log.msg("Usage: scrapy crawl " + name + " --set LETTER=X --set FOLDER=X", level=log.INFO)
+    if letter and folder:
+        import_file, export_file = AskLetter(letter,folder)
+        settings.overrides['EXPORT_FILE'] = export_file
+        start_urls = FileExtract(import_file)
+    else:
+        log.msg("Usage: scrapy crawl " + name + " --set LETTER=X --set FOLDER=X", level=log.INFO)
 
     def parse(self, response):
         '''
@@ -40,7 +39,7 @@ class SeriesYonkisSpider(BaseSpider):
         '''
         hxs = HtmlXPathSelector(response)
 
-        episodes = hxs.select('//div[@id="tempycaps"]/ul/ul/li[@class="page_item"]/h5/a/@href').extract()
+        episodes = hxs.select('//div[@id="tempycaps"]/ul/ul/li[@class="page_item"]/h5/a/@href')
 
         for episode in episodes:
             yield Request(episode.extract(), callback=self.parse_episode)
@@ -53,33 +52,64 @@ class SeriesYonkisSpider(BaseSpider):
         serie = LiberBotItems()
         # Format: Serie - TempxEpi - Title
         #         Big Bang Theory - 3x23 - La excitacio³n lunar
-        serie['serie'] = hxs.select('//div[@class="post"]/div/center/h2/a/text()').extract()
-        serie['temp'], serie['epi'] = hxs.select('//div[@class="post"]/div/h1/a/text()').re(r'(.*)x(.*) -')
+        serie['serie'] = hxs.select('//div[@class="post"]/div/center/h2/a/text()').extract()[0]
+        ntemp, nepi = hxs.select('//div[@class="post"]/div/h1/a/text()').re(r'(.*)x(.*) -')
+        serie['temp'] = ntemp.decode('utf-8')
+        serie['epi'] = nepi.decode('utf-8')
 
-        serie['type'] = "VerOnline"
+        lines = hxs.select('//div[@class="post"]/div/table/tr')
 
-        veronline = hxs.select('//div[@class="post"]/div/table/tr')
+        for line in lines:
+            # We get all tds, so if the line starts with 
+            # Bandera - Idioma - Informador
+            # we skep it 
+            if line.select('.//span/text()')[0].extract() != u'Bandera':
+                lang = line.select('.//img/@title')[0].extract()
+                # If its a download, we capture the language from the 2nd image
+                if lang == 'Descargar':
+                    lang = line.select('.//img/@title')[1].extract()
 
-        for line in enumerate(veronline):
-            lang = veronline[line]('.//div/span/text()')[2].extract()
-            subtitle = veronline[line]('.//div/span/text()')[3].extract()
+                # Translate Languages/Subs
+                if lang == u'Audio Español':
+                    serie['lang'] = "es-es"
+                elif lang == u'Audio Latino':
+                    serie['lang'] = "es"
+                elif lang == u'Subtítulos en Español':
+                    serie['lang'] = "en"
+                    serie['sublang'] = "es-es"
+                elif lang == u'Audio Inglés':
+                    serie['lang'] = "en"
+                elif lang == u'Audio Catalan':
+                    serie['lang'] = "ca"
+                elif lang == u'Audio Euskera':
+                    serie['lang'] = "eu"
+                elif lang == u'Subtítulos en Inglés':
+                    serie['lang'] = "en"
+                    serie['sublang'] = "en"
+                else:
+                    print "LANGUAGE NOT FOUND!!!!"
+                    print line.select('.//img/@title').extract()
+    
+                # Split and start fucking the link encrypted
+                link_fuck = line.select('.//a/@href').extract()
+                link_sep = link_fuck[0].split('=')
+                
+                # If using pymeno5, we crawl and decrypt
+                if link_sep[0] == 'http://www.seriesyonkis.com/player/visor_pymeno5.php?d':
+                    id = link_sep[-1]
+                    ref = Yonkis.DecryptYonkis()
+                    id_decrypted = ref.decryptID_series(ref.unescape(id))
+                    link = 'http://www.megavideo.com/?v=' + id_decrypted
+                else:
+                # Also for downloads (descargar)
+                    link_sep = link_fuck[0].split('/descargar/')
+                    if link_sep[0] == 'http://www.seriesyonkis.com/lista-series':
+                        id = link_sep[-1].split('/')[1]
+                        ref = Yonkis.DecryptYonkis()
+                        id_decrypted = ref.ccM(ref.unescape(id))
+                        link = 'http://www.megaupload.com/?d=' + id_decrypted
+                serie['links'] = link
 
-            if lang == [u'Dual']:
-                serie['lang'] = "Dual"
-            elif lang == [u'V.O']:
-                serie['lang'] = "English"
-            elif lang == [u'Espa\xf1ol']:
-                serie['lang'] = "Spanish"
-            elif lang == [u'V.O.S.E']:
-                serie['lang'] = "English"
-                serie['sublang'] = "Spanish"
-
-            link = veronline[line]('.//a/@href').extract()
-
-            # SeriesYonkis checks trough JS if you're a real client... We see an error page :S
-            request = CrawlerJS('link').crawl()
-            hxs = HtmlXPathSelector(request)
-            
-            yield serie
+                yield serie
 
 SPIDER = SeriesYonkisSpider()
