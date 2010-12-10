@@ -2,7 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from djangoratings import AnonymousRatingField
-
+from datetime import datetime
 
 class Serie(models.Model):
     name = models.CharField(max_length=255)
@@ -61,12 +61,21 @@ class Episode(models.Model):
             self.slug_title = slugify( self.title )
         super( Episode, self ).save(force_insert, force_update, using)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('liberweb.serie.views.get_episode', (),{
+                'serie_slug': self.serie.slug_name,
+                'season': self.season,
+                'episode': self.episode,
+        })
+
 class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")
     url = models.CharField(max_length=255, unique=True, db_index=True)
     audio_lang = models.ForeignKey("Languages", related_name="audio_langs")
     subtitle = models.ForeignKey("Languages", related_name="sub_langs", null=True, blank=True) #Integrated subtitles
     bot = models.CharField(max_length=255, null=True, blank=True)
+    pub_date = models.DateTimeField(default=datetime.now)
 
     def __unicode__(self):
         return self.url
