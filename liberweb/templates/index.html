@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% load get_twitter_messages %}
 {% block contents %}
 <div id="series-menu">
 <ul>
@@ -20,24 +21,28 @@
   </div>
 </div>			
 
+<div id="tweets">
+{% get_twitter_messages user libercopy limit 5 as tweets %} 
+<ul>
+  {% for tweet in tweets %} 
+  <li>{{ tweet.text }} {{ tweet.time }} {{ tweet.url }} 
+  {% endfor %} 
+</ul>
+</div>
+
 <div id="textos">
   {% for p in posts %}
   <div class="text">
     <h2><a href="{% url get_post p.slug %}">{{ p.title }}</a></h2>
-    <p>{{p.summary}}</p>
-    {% thumbnail p.images.all.0.src "50x50" as img_post %}
-      <img src="{{ img_post.url }}" />
-    {% endthumbnail %}
+    <p>{{p.summary|safe}}</p>
+    {% thumbnail p.images.all.0.src "50x50" as img_post %} <img src="{{ img_post.url }}" /> {% endthumbnail %}
   </div>
   {% endfor %}
-
   {% for p in posts2 %}
   <div class="text2">
     <h2><a href="{% url get_post p.slug %}">{{ p.title }}</a></h2>
-    <p>{{p.summary}}</p>
-    {% thumbnail p.images.all.0.src "50x50" as img_post %}
-      <img src="{{ img_post.url }}" />
-    {% endthumbnail %}
+    <p>{{p.summary|safe}}</p>
+    {% thumbnail p.images.all.0.src "50x50" as img_post %} <img src="{{ img_post.url }}" /> {% endthumbnail %}
   </div>
   {% endfor %}
 </div>

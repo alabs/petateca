@@ -1,7 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
-from djangoratings import AnonymousRatingField
+from djangoratings.fields import RatingField
 from datetime import datetime
 
 class Serie(models.Model):
@@ -15,7 +15,7 @@ class Serie(models.Model):
     rating = models.FloatField(blank=True, null=True, help_text=('rating from eztv'))
     rating_count = models.IntegerField(default=0)
     finished = models.BooleanField(default=False)
-    rating_user = AnonymousRatingField(range=5)
+    rating_user = RatingField(range=5, can_change_vote=True)
 
     def __unicode__(self):
         return self.name
@@ -46,7 +46,7 @@ class Episode(models.Model):
     serie = models.ForeignKey('Serie', related_name="episodes")
     air_date = models.DateField(_('air date'), blank=True, null=True, help_text=_('first broadcast date'))
     title = models.CharField(max_length=255)
-    slug_title = models.SlugField(unique=True)
+    slug_title = models.SlugField(unique=False)
     season = models.IntegerField()
     episode = models.IntegerField()
     description = models.TextField()
@@ -79,6 +79,7 @@ class Link(models.Model):
 
     def __unicode__(self):
         return self.url
+
 
 class SubtitleLink(models.Model):
     url = models.CharField(max_length=255)
@@ -155,3 +156,13 @@ class ImageActor(models.Model):
     def __unicode__(self):
         return self.title
 
+class ImageEpisode(models.Model):
+    title  = models.CharField(max_length=100)
+    src = models.ImageField(upload_to="img/episodes")
+    creator = models.CharField(max_length=100, null=True, blank=True)
+    is_poster = models.BooleanField()
+    episode = models.ForeignKey("Episode", related_name="images")
+    get_is_poster = IsPosterManager()
+
+    def __unicode__(self):
+        return self.title

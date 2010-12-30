@@ -26,6 +26,10 @@ setup(
         'django-haystack',
         'Whoosh',
         'django-ratings',
+        'django-registration',
+        'django-voting',
+        'django-taggit',
+        'django-localeurl',
     ],
     classifiers=[
         'Environment :: Web Environment',

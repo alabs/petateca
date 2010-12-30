@@ -1,22 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/1999/xhtml">
+{% spaceless %}
 {% load i18n %}
 {% load dropdown_series %}
+{% load localeurl_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
+{% endspaceless %}<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
   <head>
     <title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/lc.css" type="text/css" />
-    <link rel=alternate type=application/atom+xml href="{% url rssblogfeed %}">
-    <link rel=alternate type=application/atom+xml href="{% url rsslinksfeed %}">
-    <link rel=alternate type=application/atom+xml href="{% url atomblogfeed %}">
-    <link rel=alternate type=application/atom+xml href="{% url atomlinksfeed %}">
-    {% block extrastyle %}{% endblock %}
+    <link rel="stylesheet" href="/static/css/lc.css" type="text/css" />{% block extrastyle %}{% endblock %}
+    <link rel="alternate" type="application/atom+xml" href="{% url rssblogfeed %}">
+    <link rel="alternate" type="application/atom+xml" href="{% url rsslinksfeed %}">
+    <link rel="alternate" type="application/atom+xml" href="{% url atomblogfeed %}">
+    <link rel="alternate" type="application/atom+xml" href="{% url atomlinksfeed %}">
     <script type="text/javascript" src="/static/js/jquery-min.js"></script>
     <script type="text/javascript" src="/static/js/fisheyes-iutils-min.js"></script>
-    <script type="text/javascript" src="/static/js/lc.js"></script>
-    {% block extrahead %}{% endblock %}
+    <script type="text/javascript" src="/static/js/lc.js"></script>{% block extrahead %}{% endblock %}
   </head>
   <body>
     <div id="back">
@@ -24,30 +24,51 @@
         <div id="logo"><a href="/" id="logo">LiberCopy</a></div>
           <div id="top-menu">
             <ul>
-              <li><a href="/series">SERIES</a></li>
-              <li><a href="/blog">BLOG</a></li>
-              <li><a href="/faq">FAQ</a></li>
-              <!--<li><a href="#">PELICULAS</a></li>
-              <li><a href="#">MÚSICA</a></li>-->
+              <li><a href="{% url serie-index %}">SERIES</a></li>
+              <li><a href="{% url blog-index %}">BLOG</a></li>
+              <li><a href="{% url faq %}">FAQ</a></li>
+              <li>{% spaceless %}
+                {% if request.user.is_authenticated %}
+                   <a href="/accounts/logout?next={{request.path}}">LOGOUT</a>
+                {% else %}
+                   <div id="login">
+                     <form method="post" action="{% url registration_register %}?next={{request.path}}">{% csrf_token %}
+                     <table>
+                     <tr> 
+                         <td><label for="id_username">Username</label></td> 
+                         <td><input id="id_username" type="text" name="username" maxlength="30" /></td> 
+                     </tr> 
+                     <tr> 
+                         <td><label for="id_password">Password</label></td> 
+                         <td><input type="password" name="password" id="id_password" /></td> 
+                     </tr> 
+                     </table>
+                     <p><a href="{% url auth_password_reset %}">Forgot</a> your password?  <a href="{% url registration_register %}">Need an account</a>?</p>
+                     
+                     <input type="submit" value="login" />
+                     <input type="hidden" name="next" value="{{ next }}" />
+                     </form>
+                   </div>
+                {% endif %}
+              </li>{% endspaceless %}
+              <li>{% spaceless %}{% if LANGUAGE_CODE == 'en' %} 
+                  <a href="{{ request.path|chlocale:'es' }}"><img src="/static/img/flag_es.gif"></a>
+                {% else %}{% if LANGUAGE_CODE == 'es' %} 
+                  <a href="{{ request.path|chlocale:'en' }}"><img src="/static/img/flag_en.gif"></a>
+                {% endif %}
+                {% endif %}
+              </li>
+                {% endspaceless %}
             </ul>
-
-            {% if initial_message %}
+            <div id="social_buttons">
+              <a href="{% url facebook %}"><img src="/static/images/facebook-button.png" /></a>
+              <a href="{% url twitter %}"><img src="/static/images/twitter-button.gif" /></a>
+            </div>
+           {% spaceless %} {% if initial_message %}
               <div id="message_box"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Ha leido nuestro <a href="/faq">FAQ?</a></div>
             {% endif %}
-
-              <form class="language" action="/i18n/setlang/" method="post">
-                <input name="next" type="hidden" value="{{ request.path }}" />
-                <select name="language">
-                {% for lang in LANGUAGES %}
-                <option value="{{ lang.0 }}">{{ lang.1 }}</option>
-                {% endfor %}
-                </select>
-                <input type="submit" value="Go" />
-              </form>
-          </div>
-        <div id="dropdown_series">
-          {% dropdown_series %}
-        </div>
+          </div> {% endspaceless %}
+        <div id="dropdown_series"> {# dropdown_series #} </div>
         <div id="search">
           <form action="/search/">
           <fieldset>
@@ -62,7 +83,7 @@
         <div id="content"> 
           {% block contents %}{% endblock %}
         </div>
-      <div id="line"></div>
+      <!-- div id="line"></div -->
     </div>
   </body>
 </html>

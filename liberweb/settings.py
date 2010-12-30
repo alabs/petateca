@@ -83,13 +83,14 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'localeurl.middleware.LocaleURLMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    #'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'liberweb.urls'
@@ -99,9 +100,11 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
-    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
 )
 
 FIXTURE_DIRS = (
@@ -109,6 +112,7 @@ FIXTURE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'localeurl',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -126,6 +130,10 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'haystack',
     'djangoratings',
+    'voting',
+    'registration',
+    'taggit',
+    'django.contrib.comments',
 )
  
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
@@ -139,19 +147,34 @@ IMDB_ACCESS_DB_URI = "postgres://liberweb:libre@localhost/imdb"
 THUMBNAIL_DEBUG = True
 THUMBNAIL_SUBDIR = 'thumbs'
 
-#if DEBUG:
-#    try:
-#        #Check if django-debug-toolbar is installed
-#        import debug_toolbar
-#        MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-#        INTERNAL_IPS = ('127.0.0.1',)
-#        INSTALLED_APPS += ('debug_toolbar', )
-#    except:
-#        pass
+if DEBUG:
+    try:
+        #Check if django-debug-toolbar is installed
+        import debug_toolbar
+        MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+        INTERNAL_IPS = ('127.0.0.1',)
+        INSTALLED_APPS += ('debug_toolbar', )
+        DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS' : False }
+    except:
+        pass
 
 HAYSTACK_SITECONF = 'liberweb.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
 
-AUTH_PROFILE_MODULE='liberweb.userdata.UserProfile'
+AUTH_PROFILE_MODULE='userdata.UserProfile'
+ACCOUNT_ACTIVATION_DAYS=7
+
+AUTHENTICATION_BACKENDS = (
+    'userdata.models.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+#RECAPTCHA_PUBLIC_KEY = '6LfR9L8SAAAAACMxoRCZL5LGLuJYWxFzE6OYds1f'
+#RECAPTCHA_PRIVATE_KEY = '6LfR9L8SAAAAAKQiSXtrCZkzlDDhbO0aGob-xuk9'
+
+FORCE_LOWERCASE_TAGS=True
+
+LOGIN_REDIRECT_URL = '/'
+
 

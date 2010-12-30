@@ -7,11 +7,13 @@ liberweb.egg-info/*
 distribute*
 *.mo
 liberweb/bots/libercopy/liberbot/cache/*
+liberweb/bots/libercopy/liberbot/cache/*
 liberweb/bots/libercopy/sites/*/debug/*
 liberweb/static/img/serie/thumbs/*.jpg
 liberweb/static/img/serie/*.jpg
 liberweb/static/img/actor/*.jpg
 liberweb/static/img/blog/*.jpg
+liberweb/static/cache/*
 debug.json
 build
 liberweb/.coverage

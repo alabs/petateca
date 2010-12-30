@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load thumbnail %}
 {% block contents %}
 <h1>{{ serie.name }}</h1>
 <ul>
@@ -9,6 +10,12 @@
   <li>Descripción: {{ episode.description }}</li>
 </ul>
 <ul>
+
+{% if episode.images.all.0.src %}
+  {% thumbnail episode.images.all.0.src "200x200" as img_episode %}
+    <img src="{{ img_episode.url }}">
+  {% endthumbnail %}
+{% endif %}
   <li>
     Enlaces:
     <ul>

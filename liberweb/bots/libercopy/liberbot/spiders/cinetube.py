@@ -64,9 +64,9 @@ class CineTubeSpider(BaseSpider):
         serie['serie'], n_temp, n_epi = hxs.select('//a[@class="link"]/text()').extract()
         serie['temp'] = n_temp.replace('Temporada ','')
         serie['epi'] = n_epi.replace('Capitulo ','')
-        serie['serie'] = serie['serie'].encode('utf-8')
-        serie['temp'] = serie['temp'].encode('utf-8')
-        serie['epi'] = serie['epi'].encode('utf-8') 
+        #serie['serie'] = serie['serie'].encode('utf-8')
+        #serie['temp'] = serie['temp'].encode('utf-8')
+        #serie['epi'] = serie['epi'].encode('utf-8') 
 
         links_raw = hxs.select('//div[@class="tit_opts"]')
         
@@ -74,12 +74,12 @@ class CineTubeSpider(BaseSpider):
             last_link = link.select('.//a/@href')[0]
             lang = link.select('.//span/text()').re(r'IDIOMA: (.*)')
             if lang == [u'LATINO']:
-                serie['lang'] = "Latin"
+                serie['lang'] = "es"
             elif lang == [u'ESPA\xd1OL']:
-                serie['lang'] = "Spanish"
+                serie['lang'] = "es-es"
             elif lang == [u'SUB']:
-                serie['lang'] = "English"
-                serie['sublang'] = 'Spanish'
+                serie['lang'] = "en"
+                serie['sublang'] = 'es-es'
             # Last redirection for getting the fucking link, really??
             last_link = 'http://www.cinetube.es' + last_link.extract()
             # We can't do another callback, scrapy forgets the serie element :S

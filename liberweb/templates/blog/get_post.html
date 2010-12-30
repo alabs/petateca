@@ -1,24 +1,27 @@
 {% extends "base.html" %}  
 {% load i18n %}
 {% load thumbnail %}
+{% load comments %}
 {% block contents %}  
-
 <div class="post">
   <h3>{{post.title}}</h3>
-  
   <div class="image_post"> 
-  {% if image %}
-    {% thumbnail image "300x200" as img_post %}
-  <img  src="{{ img_post.url }}" />
-    {% endthumbnail %}
-  {% else %}
-  Esta serie no tiene imagen de portada
-  {% endif %}
+  {% if image %}  {% thumbnail image "300x200" as img_post %} <img src="{{ img_post.url }}" /> {% endthumbnail %} {% endif %}
   </div>
-
   <p>{% trans "Written on" %}: {{post.date}}</p>
-  <p>{{post.post}}</p>
-
+  <p>{{ post.post|safe }}</p>
+<br />
+<ul>
+{% for tag in tag_list %}
+  <li> {{ tag.name }}
+{% endfor %}
+</ul>
 </div>
-
+<div class="comments">
+<br/> {% get_comment_count for post as comment_count %}
+{{ comment_count }} comentarios 
+<br/>
+{% render_comment_list for post %}
+{% render_comment_form for post %}
+</div>
 {% endblock %}

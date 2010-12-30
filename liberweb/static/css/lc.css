@@ -179,3 +179,7 @@ a.dock-item { display: block; width: 50px; position: absolute; bottom: 0; text-a
 	float: left;
         margin: 1em;
 }
+
+#login{
+        float: right;
+}

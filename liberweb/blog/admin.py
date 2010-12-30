@@ -13,7 +13,11 @@ class PostAdmin(admin.ModelAdmin):
         #EpisodeInline,
         ImageInline,
     ]
+    list_display = ['title', 'slug', 'summary',]
 
+    class Media:
+        js = ('js/tiny_mce/tiny_mce.js',
+              'js/tiny_mce/textareas.js',)
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(ImagePost)

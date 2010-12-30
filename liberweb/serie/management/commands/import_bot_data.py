@@ -262,6 +262,14 @@ class Command(BaseCommand):
                         db_episode.title_es = "%sx%s" % (n_season, n_episode)
                         db_episode.description_es = "No disponible"
                     db_episode.save()
+                    if reg_en[n_season][n_episode]["filename"]:
+                        img = urllib.urlretrieve(reg_en[n_season][n_episode]["filename"])
+                        db_img = m.ImageEpisode(is_poster=True, title=reg_es[n_season][n_episode]["episodename"])
+                        db_img.episode = db_episode
+                        file_content = ContentFile(open(img[0]).read())
+                        db_img.src.save(os.path.basename(reg_en[n_season][n_episode]["filename"]), file_content)
+                        db_img.save()
+
 
     def populate_network(self, network):
         try:
