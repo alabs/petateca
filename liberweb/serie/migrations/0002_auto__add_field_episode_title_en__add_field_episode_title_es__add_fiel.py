@@ -9,34 +9,34 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding field 'Episode.title_en'
-        db.add_column('serie_episode', 'title_en', self.gf('django.db.models.fields.CharField')(max_length=255), keep_default=False)
+        db.add_column('serie_episode', 'title_en', self.gf('django.db.models.fields.CharField')(null=True, max_length=255), keep_default=False)
 
         # Adding field 'Episode.title_es'
-        db.add_column('serie_episode', 'title_es', self.gf('django.db.models.fields.CharField')(max_length=255), keep_default=False)
+        db.add_column('serie_episode', 'title_es', self.gf('django.db.models.fields.CharField')(null=True, max_length=255), keep_default=False)
 
         # Adding field 'Episode.description_en'
-        db.add_column('serie_episode', 'description_en', self.gf('django.db.models.fields.TextField')(), keep_default=False)
+        db.add_column('serie_episode', 'description_en', self.gf('django.db.models.fields.TextField')(null=True), keep_default=False)
 
         # Adding field 'Episode.description_es'
-        db.add_column('serie_episode', 'description_es', self.gf('django.db.models.fields.TextField')(), keep_default=False)
+        db.add_column('serie_episode', 'description_es', self.gf('django.db.models.fields.TextField')(null=True), keep_default=False)
 
         # Adding field 'Serie.name_en'
-        db.add_column('serie_serie', 'name_en', self.gf('django.db.models.fields.CharField')(max_length=255), keep_default=False)
+        db.add_column('serie_serie', 'name_en', self.gf('django.db.models.fields.CharField')(null=True, max_length=255), keep_default=False)
 
         # Adding field 'Serie.name_es'
-        db.add_column('serie_serie', 'name_es', self.gf('django.db.models.fields.CharField')(max_length=255), keep_default=False)
+        db.add_column('serie_serie', 'name_es', self.gf('django.db.models.fields.CharField')(null=True, max_length=255), keep_default=False)
 
         # Adding field 'Serie.description_en'
-        db.add_column('serie_serie', 'description_en', self.gf('django.db.models.fields.TextField')(), keep_default=False)
+        db.add_column('serie_serie', 'description_en', self.gf('django.db.models.fields.TextField')(null=True), keep_default=False)
 
         # Adding field 'Serie.description_es'
-        db.add_column('serie_serie', 'description_es', self.gf('django.db.models.fields.TextField')(), keep_default=False)
+        db.add_column('serie_serie', 'description_es', self.gf('django.db.models.fields.TextField')(null=True), keep_default=False)
 
         # Adding field 'Genre.name_en'
-        db.add_column('serie_genre', 'name_en', self.gf('django.db.models.fields.CharField')(max_length=25), keep_default=False)
+        db.add_column('serie_genre', 'name_en', self.gf('django.db.models.fields.CharField')(null=True, max_length=25), keep_default=False)
 
         # Adding field 'Genre.name_es'
-        db.add_column('serie_genre', 'name_es', self.gf('django.db.models.fields.CharField')(max_length=25), keep_default=False)
+        db.add_column('serie_genre', 'name_es', self.gf('django.db.models.fields.CharField')(null=True, max_length=25), keep_default=False)
 
 
     def backwards(self, orm):
