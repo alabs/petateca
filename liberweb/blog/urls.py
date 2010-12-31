@@ -5,4 +5,3 @@ urlpatterns = patterns('blog.views',
     url(r'^(?P<post_slug>[-\w]+)/$', 'get_post', name="get_post"),
     (r'^comments/', include('django.contrib.comments.urls')),
 )
-

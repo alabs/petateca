@@ -3,11 +3,13 @@ from liberweb.blog.models import Post
 
 from liberweb.decorators import render_to
 
+
 @render_to('blog/post_list.html')
 def index(request):
     all_posts = Post.objects.all().order_by('-date')
-    template_data = {'posts' : all_posts}
+    template_data = {'posts': all_posts}
     return template_data
+
 
 @render_to('blog/get_post.html')
 def get_post(request, post_slug):

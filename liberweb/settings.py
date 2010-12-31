@@ -1,6 +1,7 @@
 # Django settings for liberweb project.
 
-import os, sys
+import os
+import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -15,12 +16,15 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'liberweb.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        # Add 'postgresql_psycopg2', 'postgresql',
+        # 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3',
+        # Or path to database file if using sqlite3.
+        'NAME': 'liberweb.db',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     },
 #    'imdb': {
 #        'ENGINE': 'postgresql_psycopg2',
@@ -47,7 +51,7 @@ LANGUAGES = (
  ('en', ugettext('English')),
  ('es', ugettext('Spanish')),
 )
-TRANSLATION_REGISTRY='liberweb.translation'
+TRANSLATION_REGISTRY = 'liberweb.translation'
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -135,11 +139,11 @@ INSTALLED_APPS = (
     'taggit',
     'django.contrib.comments',
 )
- 
+
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
 
 #Valid values are http, sql
-IMDB_ACCESS_SYSTEM = "http"  #XXX: sql search is worse
+IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
 
 #uri for use with sql
 IMDB_ACCESS_DB_URI = "postgres://liberweb:libre@localhost/imdb"
@@ -151,10 +155,12 @@ if DEBUG:
     try:
         #Check if django-debug-toolbar is installed
         import debug_toolbar
-        MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+        MIDDLEWARE_CLASSES += (
+            'debug_toolbar.middleware.DebugToolbarMiddleware',
+        )
         INTERNAL_IPS = ('127.0.0.1',)
         INSTALLED_APPS += ('debug_toolbar', )
-        DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS' : False }
+        DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
     except:
         pass
 
@@ -162,8 +168,9 @@ HAYSTACK_SITECONF = 'liberweb.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
 
-AUTH_PROFILE_MODULE='userdata.UserProfile'
-ACCOUNT_ACTIVATION_DAYS=7
+AUTH_PROFILE_MODULE = 'userdata.UserProfile'
+ACCOUNT_ACTIVATION_DAYS = 7
+LOGIN_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
     'userdata.models.EmailBackend',
@@ -173,8 +180,4 @@ AUTHENTICATION_BACKENDS = (
 #RECAPTCHA_PUBLIC_KEY = '6LfR9L8SAAAAACMxoRCZL5LGLuJYWxFzE6OYds1f'
 #RECAPTCHA_PRIVATE_KEY = '6LfR9L8SAAAAAKQiSXtrCZkzlDDhbO0aGob-xuk9'
 
-FORCE_LOWERCASE_TAGS=True
-
-LOGIN_REDIRECT_URL = '/'
-
-
+FORCE_LOWERCASE_TAGS = True

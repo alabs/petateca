@@ -1,4 +1,5 @@
-from liberweb.serie.models import Serie, Episode, Actor, Genre, Network, Link, Role
+from liberweb.serie.models import Serie, Episode, Actor, Role
+from liberweb.serie.models import Genre, Network, Link
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 
@@ -13,10 +14,15 @@ from liberweb.decorators import render_to
 from django.contrib.auth.models import User
 from voting.models import Vote
 
+
 @render_to('serie/serie_list.html')
 def get_serie_list(request):
     serie_list = Serie.objects.order_by('name').all()
-    paginator = NamePaginator(serie_list, on="name", per_page=25) # Show 25 series per page
+    paginator = NamePaginator(
+        serie_list,
+        on="name",
+        per_page=25
+    )
 
     # Make sure page request is an int. If not, deliver first page.
     try:
@@ -34,16 +40,20 @@ def get_serie_list(request):
         'page': page,
     }
 
+
 @render_to('serie/get_serie.html')
 @csrf_protect
 def get_serie(request, serie_slug):
-    ''' Request a serie, returns images and episodes, also treats star-rating, courtesy of django-ratings'''
+    ''' Request a serie, returns images and episodes,
+    also treats star-rating, courtesy of django-ratings'''
     serie = get_object_or_404(Serie, slug_name=serie_slug)
     imgs = serie.images.filter(is_poster=True)
     img_src = imgs[0].src if imgs else None
     #episodes = serie.episodes.all().order_by('season')
     # Hacemos un listado de las temporadas:
-    seasons = list(set([epi.season for epi in serie.episodes.all().order_by('season')]))
+    seasons = list(set(
+        [epi.season for epi in serie.episodes.all().order_by('season')]
+    ))
     score = int(round(serie.rating_user.get_rating()))
     # Preparamos serie_info con la serie, titulo, imagenes, episodios...
     serie_info = {
@@ -53,9 +63,10 @@ def get_serie(request, serie_slug):
         'season_list': seasons,
         'score': score,
     }
-    # Si el metodo es GET devuelve serie_info asi nomas, si es POST trata el rating:
+    # Si el metodo es GET devuelve serie_info asi nomas
     if request.method == 'GET':
         return serie_info
+    # si es POST trata el rating:
     if request.method == 'POST':
         if not request.user.is_authenticated():
             serie_info.update({
@@ -70,12 +81,12 @@ def get_serie(request, serie_slug):
             params = {
                 'content_type_id': '12',
                 'object_id': serie.id,
-                'field_name': 'rating_user', # este es el el campo en el modelo
+                'field_name': 'rating_user',  # campo en el modelo
                 'score': request.POST['user_rating'],
             }
             response = AddRatingView()(request, **params)
             try:
-                # Distintas respuestas a la peticion: Voto grabado, Ya ha votado, Error en la votacion
+            # Distintas respuestas a la peticion: grabado, Ya ha votado, Error
                 if response.content == 'Vote recorded':
                     serie_info.update({
                         'message': 'Vote recorded',
@@ -87,18 +98,23 @@ def get_serie(request, serie_slug):
                     })
             except:
                 serie_info.update({
-                    'message': response.content, 
+                    'message': response.content,
                     'error': 9,
                 })
         return serie_info
 
+
 @render_to('serie/get_season.html')
 def get_season(request, serie_slug, season):
-    ''' Get season, returns episode_list also handles link voting (courtesy of django-voting) ''' 
+    ''' Get season, returns episode_list
+    also handles link voting (courtesy of django-voting) '''
     serie = get_object_or_404(Serie, slug_name=serie_slug)
-    episode_list = Episode.objects.filter(season=season, serie=serie).order_by('episode')
-    season_info =  {
-        'serie': serie, 
+    episode_list = Episode.objects.filter(
+        season=season,
+        serie=serie
+    ).order_by('episode')
+    season_info = {
+        'serie': serie,
         'episode_list': episode_list,
     }
 
@@ -111,36 +127,47 @@ def get_season(request, serie_slug, season):
             Vote.objects.record_vote(link, user, +1)
         elif request.POST['vote'] == 'downvote':
             Vote.objects.record_vote(link, user, -1)
-        return season_info 
+        return season_info
 
-# DEPRECATED, ahora se tira de get_season
+
 @render_to('serie/get_episodes.html')
+# DEPRECATED, ahora se tira de get_season
 def get_episodes(request, serie_slug):
     serie = get_object_or_404(Serie, slug_name=serie_slug)
     episodes = serie.episodes.all().order_by('season')
     return {
         'serie': serie,
         'episode_list': episodes,
-        'title': _("Episodes of %(name)s") % {"name": serie.name}, 
+        'title': _("Episodes of %(name)s") % {"name": serie.name},
     }
 
-# Es Interesnte tener una ficha por episodio?? dejo la pregunta en el aire
+
 @render_to('serie/get_episode.html')
+# Es Interesnte tener una ficha por episodio?? dejo la pregunta en el aire
 def get_episode(request, serie_slug, season, episode):
     serie = get_object_or_404(Serie, slug_name=serie_slug)
-    episode = get_object_or_404(Episode, serie=serie, season=season, episode=episode)
+    episode = get_object_or_404(
+        Episode,
+        serie=serie,
+        season=season,
+        episode=episode
+    )
     return {
-        'serie': serie, 
-        'episode': episode, 
+        'serie': serie,
+        'episode': episode,
     }
+
 
 def list_user_favorite(request):
     return "TODO: listar las favoritas del usuario"
 
+
 def list_user_recommendation(request):
     return "TODO: listar las recomendaciones para el usuario"
 
-# FIXME: probablemente todas estas cosas tan repetitivas y estupidas es por lo que existe el object_list en el url.
+# FIXME: probablemente todas estas cosas tan repetitivas y estupidas
+# sean por lo que existe el object_list en el url.
+
 
 @render_to('serie/get_actor.html')
 def get_actor(request, slug_name):
@@ -155,6 +182,7 @@ def get_actor(request, slug_name):
         'image': img_src,
     }
 
+
 @render_to('serie/get_genre.html')
 def get_genre(request, slug_name):
     genre = get_object_or_404(Genre, slug_name=slug_name)
@@ -165,6 +193,7 @@ def get_genre(request, slug_name):
         'serie_list': serie_list,
     }
 
+
 @render_to('serie/get_network.html')
 def get_network(request, slug_name):
     network = get_object_or_404(Network, slug_name=slug_name)
@@ -174,5 +203,3 @@ def get_network(request, slug_name):
         'network': network,
         'serie_list': serie_list,
     }
-
-

@@ -1,9 +1,11 @@
 from django.contrib import admin
 from liberweb.blog.models import Post, ImagePost
 
+
 class ImageInline(admin.TabularInline):
     model = ImagePost
     extra = 1
+
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
@@ -11,7 +13,7 @@ class PostAdmin(admin.ModelAdmin):
         #EpisodeInline,
         ImageInline,
     ]
-    list_display = ['title', 'slug', 'summary',]
+    list_display = ['title', 'slug', 'summary', ]
 
     class Media:
         js = ('js/tiny_mce/tiny_mce.js',
@@ -19,4 +21,3 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(ImagePost)
-

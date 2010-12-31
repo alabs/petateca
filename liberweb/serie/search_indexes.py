@@ -12,7 +12,7 @@ class SerieIndex(SearchIndex):
     description = CharField(model_attr='description', null=True)
     description_es = CharField(model_attr='description_es', null=True)
     description_en = CharField(model_attr='description_en', null=True)
-     
+
 site.register(Serie, SerieIndex)
 
 

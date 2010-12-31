@@ -3,6 +3,7 @@ from liberweb.serie.models import Link
 from liberweb.blog.models import Post
 from django.utils.feedgenerator import Atom1Feed
 
+
 class RSSLatestLinksFeed(Feed):
     title = "LiberCopy lastest serie links"
     link = "/series/"
@@ -30,6 +31,7 @@ class AtomLatestLinksFeed(RSSLatestLinksFeed):
     feed_type = Atom1Feed
     subtitle = RSSLatestLinksFeed.description
 
+
 class RSSBlogFeed(Feed):
     title = "LiberCopy lastest blog post"
     link = "/blog/"
@@ -51,4 +53,3 @@ class RSSBlogFeed(Feed):
 class AtomBlogFeed(RSSBlogFeed):
     feed_type = Atom1Feed
     subtitle = RSSBlogFeed.description
-
