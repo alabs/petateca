@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import get_object_or_404
 from liberweb.blog.models import Post
 
 from liberweb.decorators import render_to
@@ -7,7 +7,6 @@ from liberweb.decorators import render_to
 def index(request):
     all_posts = Post.objects.all().order_by('-date')
     template_data = {'posts' : all_posts}
-    # TODO return image
     return template_data
 
 @render_to('blog/get_post.html')

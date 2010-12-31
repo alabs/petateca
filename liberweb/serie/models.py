@@ -63,7 +63,7 @@ class Episode(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('liberweb.serie.views.get_episode', (),{
+            return ('liberweb.serie.views.get_episode', (),{
                 'serie_slug': self.serie.slug_name,
                 'season': self.season,
                 'episode': self.episode,
