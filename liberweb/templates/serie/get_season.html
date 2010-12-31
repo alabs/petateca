@@ -16,7 +16,6 @@
         <td>Name</td>
         <td>Description</td>
         <td>Image</td>
-        <td>Links</td>
       </tr>
     {% for episode in episode_list %} 
       <tr> 
@@ -31,12 +30,14 @@
             {% else %}
                No image episode available
             {% endif %}</td> 
-      <td>
+      </tr>
+      <tr>
       {% if episode.links.all %}
         <table class="links">
-          <tr> <td> Domain </td> <td> Audio </td> <td> Subtitles </td> </tr>
+            <tr> <td> </td>  <td> Domain </td> <td> Audio </td> <td> Subtitles </td> <td> Votes </td> </tr>
           {% for link in episode.links.all %}
             <tr>
+              <td> </td>
               <td> <a href="{{ link.url }}"> {{ link.url|extract_domain }}</a> </td>
               <td> {{ link.audio_lang }} </td><td> {{ link.subtitle }}</td>
               <!-- Voting -->
@@ -48,20 +49,20 @@
                   <input type="image" id="linkuparrow{{ link.id }}" src="/static/img/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
                 </form>
 
-                <form class="linkvote" id="linkdown{{ link.id }}" action="/links/{{ link.id }}/{% if vote and vote.is_downvote %}clear{% else %}down{% endif %}vote/" method="POST">
-                  <input type="hidden" name="vote" value="downvote"/>
-                  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-                  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/img/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
-                </form>
-              </td>
-              <td class="item">
                 <a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
                 <p class="details">
                   <span class="score" id="linkscore{{ link.id }}"
                         title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">
-                   {{ score.score|default:0 }} point{{ score.score|default:0|pluralize }}
+                   {{ score.score|default:0 }} 
                   </span>
-                </p>
+                    </p>
+
+                <form class="linkvote" id="linkdown{{ link.id }}" action="." method="POST">
+                  <input type="hidden" name="vote" value="downvote"/>
+                  <input type="hidden" name="linkid" value="{{ link.id }}"/>
+                  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/img/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+                </form>
+
               </td>
             </tr>
           {% endfor %}
