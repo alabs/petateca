@@ -1,4 +1,3 @@
-import datetime
 from haystack.indexes import SearchIndex, CharField
 from haystack import site
 

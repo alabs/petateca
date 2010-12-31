@@ -6,7 +6,7 @@
 
 <ul>
   {% for genre in object_list %}
-    <li><a href="{% url get_genre id=genre.id %}">{{ genre.name }}</a></li>
+      <li><a href="{{ genre.get_absolute_url }}">{{ genre.name }}</a></li>
   {% endfor %}
 </ul>
 

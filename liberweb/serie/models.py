@@ -105,9 +105,19 @@ class Languages(models.Model):
 class Network(models.Model):
     name = models.CharField(max_length=25)
     url = models.URLField(null=True, blank=True)
+    slug_name = models.SlugField(unique=True)
+
+    def save(self, force_insert=False, force_update=False, using=None):
+        if not self.slug_name:
+            self.slug_name = slugify( self.name )
+        super( Network, self ).save(force_insert, force_update, using)
 
     def __unicode__(self):
         return self.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('liberweb.serie.views.get_network', [str(self.slug_name)])
 
 class Genre(models.Model):
     name = models.CharField(max_length=25)
@@ -121,15 +131,25 @@ class Genre(models.Model):
     def __unicode__(self):
         return self.name
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('liberweb.serie.views.get_genre', [str(self.slug_name)])
+
 class Actor(models.Model):
     name = models.CharField(max_length=100)
+    slug_name = models.SlugField(unique=True)
+
+    def save(self, force_insert=False, force_update=False, using=None):
+        if not self.slug_name:
+            self.slug_name = slugify( self.name )
+        super( Actor, self ).save(force_insert, force_update, using)
     
     def __unicode__(self):
         return self.name
 
     @models.permalink
     def get_absolute_url(self):
-        return ('liberweb.serie.views.get_actor', [str(self.id)])
+        return ('liberweb.serie.views.get_actor', [str(self.slug_name)])
 
 class IsPosterManager(models.Manager):
     def get_is_poster(self):

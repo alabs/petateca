@@ -1,4 +1,4 @@
-from liberweb.serie.models import Serie, Episode, Actor, Genre, Network, Link
+from liberweb.serie.models import Serie, Episode, Actor, Genre, Network, Link, Role
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 
@@ -143,19 +143,21 @@ def list_user_recommendation(request):
 # FIXME: probablemente todas estas cosas tan repetitivas y estupidas es por lo que existe el object_list en el url.
 
 @render_to('serie/get_actor.html')
-def get_actor(request, id):
-    actor = get_object_or_404(Actor, id=id)
-    imgs = actor.images.all()
+def get_actor(request, slug_name):
+    a = get_object_or_404(Actor, slug_name=slug_name)
+    role = get_object_or_404(Role, actor=a)
+    imgs = a.images.all()
     img_src = imgs[0].src if imgs else None
     return {
-        'actor': actor,
-        'title': actor.name,
+        'actor': a,
+        'title': a.name,
+        'role': role,
         'image': img_src,
     }
 
 @render_to('serie/get_genre.html')
-def get_genre(request, id):
-    genre = get_object_or_404(Genre, id=id)
+def get_genre(request, slug_name):
+    genre = get_object_or_404(Genre, slug_name=slug_name)
     serie_list = Serie.objects.filter(genres=genre.id)
     serie_list = serie_list.order_by("name")
     return {
@@ -164,8 +166,8 @@ def get_genre(request, id):
     }
 
 @render_to('serie/get_network.html')
-def get_network(request, id):
-    network = get_object_or_404(Network, id=id)
+def get_network(request, slug_name):
+    network = get_object_or_404(Network, slug_name=slug_name)
     serie_list = Serie.objects.filter(network=network.id)
     serie_list = serie_list.order_by("name")
     return {

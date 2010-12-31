@@ -4,9 +4,15 @@
 {% block contents %}
 
 <h1>{{ actor.name }}</h1>
-    {% thumbnail actors.images.all.0 300x200 as img %}
-      <img src="{{ img.url }}" />
-    {% endthumbnail %}
+
+  {% if image %}{% thumbnail image "400x300" as img_actor %}
+      <img id="poster" src="{{ img_actor.url }}" />{% endthumbnail %}
+  {% else %}<div class="image_not_found"> Este actor no tiene imagen</div>
+  {% endif %}
+
+    <ul> 
+      <li> {{role.role}} - <a href="{{ role.serie.get_absolute_url }}">{{role.serie}}</a> </li>
+    </ul>
 
 <br />
 <a href="{% url actor-serie-list %}">{% trans "Actors list" %}</a>

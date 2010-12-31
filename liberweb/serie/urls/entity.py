@@ -20,16 +20,16 @@ urlpatterns = patterns('liberweb.serie.views',
         'queryset': Actor.objects.order_by('name').all(),
         'paginate_by': 100,
     }, name="actor-serie-list"),
-    url(r'^actor/(\d+)$', 'get_actor', name="get_actor"),
+    url(r'^actor/(?P<slug_name>[-\w]+)$', 'get_actor', name="get_actor"),
 
     url(r'^genres$', object_list, { 
         'queryset': Genre.objects.order_by('name').all(),
     }, name="genre-list"),
-    url(r'^genre/(?P<id>\d+)$', 'get_genre', name="get_genre"),
+    url(r'^genre/(?P<slug_name>[-\w]+)$', 'get_genre', name="get_genre"),
 
     url(r'^networks$', object_list, { 
         'queryset': Network.objects.order_by('name').all(),
     }, name="network-list"),
-    url(r'^network/(?P<id>\d+)$', 'get_network', name="get_network"),
+    url(r'^network/(?P<slug_name>[-\w]+)$', 'get_network', name="get_network"),
 
 )

@@ -47,20 +47,13 @@
 
 <ul>
   {% if serie.network.name %}
-    <h2><li>{% trans "Network" %}:</h2> <a href="{% url get_network id=serie.network.id %}">{{ serie.network.name }}</a></li>
+  <h2><li>{% trans "Network" %}:</h2> <a href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a></li>
   {% endif %}
   <li>
   <h2>{% trans "Genre" %}:</h2>
     <ul>
       {% for genre in serie.genres.all %}
-        <li><a href={% url get_genre id=genre.id %}>{{ genre.name }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
-  <li>
-  <h2>{% trans "Actors" %}:</h2>
-    <ul>
-      {% for actor in serie.actors.all %}   <li><a href={% url get_actor actor.id %}>{{ actor.name }}</a> 
+      <li><a href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
       {% endfor %}
     </ul>
   </li>
@@ -74,6 +67,18 @@
       {% endfor %}
      </table>
 </ul>
+
+  <h2>{% trans "Actors" %}:</h2>
+    <ul>
+        {% for actor in serie.actors.all %}   
+          <li><a href={{ actor.get_absolute_url }}>{{ actor.name }}
+               {% if actor.images.get %}{% thumbnail actor.images.get.src "280x280" as img_actor %}
+                   <img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
+                   {% else %}<img id="actor_unknown" width="187" height="280" src="/static/images/actor_unknown.gif">
+               {% endif %}
+              </a> 
+      {% endfor %}
+    </ul>
 
 <br />
 <a href="{% url serie-index %}">{% trans "Series list" %}</a>
