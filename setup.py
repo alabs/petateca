@@ -31,6 +31,7 @@ setup(
         'django-taggit',
         'django-localeurl',
         'twitter',
+        'simplejson',
     ],
     classifiers=[
         'Environment :: Web Environment',
