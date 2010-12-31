@@ -3,7 +3,7 @@
 {% block contents %}
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Your username and password didn't match. Please try again.</div>
 {% endif %}
 
 <form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}

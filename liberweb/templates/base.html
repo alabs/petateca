@@ -29,25 +29,10 @@
               <li><a href="{% url faq %}">FAQ</a></li>
               <li>{% spaceless %}
                 {% if request.user.is_authenticated %}
-                   <a href="/accounts/logout?next={{request.path}}">LOGOUT</a>
+                   <a href="/accounts/logout/?next={{request.path}}">LOGOUT</a>
                 {% else %}
                    <div id="login">
-                     <form method="post" action="{% url registration_register %}?next={{request.path}}">{% csrf_token %}
-                     <table>
-                     <tr> 
-                         <td><label for="id_username">Username</label></td> 
-                         <td><input id="id_username" type="text" name="username" maxlength="30" /></td> 
-                     </tr> 
-                     <tr> 
-                         <td><label for="id_password">Password</label></td> 
-                         <td><input type="password" name="password" id="id_password" /></td> 
-                     </tr> 
-                     </table>
-                     <p><a href="{% url auth_password_reset %}">Forgot</a> your password?  <a href="{% url registration_register %}">Need an account</a>?</p>
-                     
-                     <input type="submit" value="login" />
-                     <input type="hidden" name="next" value="{{ next }}" />
-                     </form>
+                   <a href="/accounts/login/?next={{request.path}}">LOGIN</a>
                    </div>
                 {% endif %}
               </li>{% endspaceless %}
