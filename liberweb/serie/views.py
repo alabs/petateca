@@ -1,14 +1,11 @@
 from liberweb.serie.models import Serie, Episode, Actor, Genre, Network, Link
-from liberweb.blog.models import Post
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 
 from django.core.paginator import InvalidPage, EmptyPage
 from liberweb.lib.namepaginator import NamePaginator
 
-from django.contrib.contenttypes.models import ContentType
 from djangoratings.views import AddRatingView
-from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 
 from liberweb.decorators import render_to
@@ -66,6 +63,7 @@ def get_serie(request, serie_slug):
             })
         else:
             # Si el usuario esta autenticado, prepara el voto
+            #from django.contrib.contenttypes.models import ContentType
             #ct = ContentType.objects.get(app_label='serie', name='serie')
             #El resultado es ct.id = 12
             #serie = Serie.objects.get(slug_name=serie_slug)
@@ -137,10 +135,10 @@ def get_episode(request, serie_slug, season, episode):
     }
 
 def list_user_favorite(request):
-    return "TODO"
+    return "TODO: listar las favoritas del usuario"
 
 def list_user_recommendation(request):
-    return "TODO"
+    return "TODO: listar las recomendaciones para el usuario"
 
 # FIXME: probablemente todas estas cosas tan repetitivas y estupidas es por lo que existe el object_list en el url.
 
