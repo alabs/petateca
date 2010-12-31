@@ -30,6 +30,7 @@ setup(
         'django-voting',
         'django-taggit',
         'django-localeurl',
+        'twitter',
     ],
     classifiers=[
         'Environment :: Web Environment',
