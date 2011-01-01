@@ -29,7 +29,10 @@
               <li><a href="{% url faq %}">FAQ</a></li>
               <li>{% spaceless %}
                 {% if request.user.is_authenticated %}
-                Logged in as {{ request.user }} - <a href="/accounts/logout/?next={{request.path}}">LOGOUT</a>
+                Logged in as {{ request.user }}
+                <a href="{% url user-favorite %}">View your favorites</a>
+                <a href="/accounts/logout/?next={{request.path}}">LOGOUT</a>
+                
                 {% else %}
                    <div id="login">
                    <a href="/accounts/login/?next={{request.path}}">LOGIN</a>

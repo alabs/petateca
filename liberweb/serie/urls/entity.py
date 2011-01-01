@@ -13,7 +13,7 @@ urlpatterns = patterns('liberweb.serie.views',
     (r'^last$', object_list, {
         'queryset': Serie.objects.order_by('-name').all(), #XXX: Bad order
     }),
-    (r'^favorite$', 'list_user_favorite'),
+    url(r'^favorite$', 'list_user_favorite', name='user-favorite'),
     (r'^recommended$', 'list_user_recommendation'),
 
     url(r'^actors$', object_list, {

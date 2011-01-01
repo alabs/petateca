@@ -17,6 +17,8 @@ from liberweb.decorators import render_to
 from django.contrib.auth.models import User
 from voting.models import Vote
 
+from django.contrib.auth.decorators import login_required
+
 
 @render_to('serie/serie_list.html')
 def get_serie_list(request):
@@ -58,6 +60,12 @@ def get_serie(request, serie_slug):
         [epi.season for epi in serie.episodes.all().order_by('season')]
     ))
     score = int(round(serie.rating_user.get_rating()))
+    # Vemos si el usuario tiene la serie como favorita
+    try:
+        serie.favorite_of.get(user=request.user.profile)
+        favorite_status = 'yes'
+    except:
+        favorite_status = 'no'
     # Preparamos serie_info con la serie, titulo, imagenes, episodios...
     serie_info = {
         'serie': serie,
@@ -65,6 +73,7 @@ def get_serie(request, serie_slug):
         'image': img_src,
         'season_list': seasons,
         'score': score,
+        'favorite': favorite_status,
     }
     # Si el metodo es GET devuelve serie_info asi nomas
     if request.method == 'GET':
@@ -106,7 +115,13 @@ def get_serie(request, serie_slug):
                 user = User.objects.get(username=request.user)
                 serie.favorite_of.add(user.profile)
                 serie_info.update({
-                    'favorite': 'successful',
+                    'favorite': 'yes',
+                })
+            elif request.POST.has_key('no-favorite'):
+                user = User.objects.get(username=request.user)
+                serie.favorite_of.remove(user.profile)
+                serie_info.update({
+                    'favorite': 'no',
                 })
         return serie_info
 
@@ -165,8 +180,12 @@ def get_episode(request, serie_slug, season, episode):
     }
 
 
+@login_required
+@render_to('serie/list_user_favorite.html')
 def list_user_favorite(request):
-    return "TODO: listar las favoritas del usuario"
+    profile = request.user.profile
+    favorite_series = profile.favorite_series.all()
+    return { 'series': favorite_series }
 
 
 def list_user_recommendation(request):

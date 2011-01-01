@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load extract_domain %}
+{% block contents %}
+
+{% if series %}
+  {% for serie in series %}
+    <a href="{{ serie.get_absolute_url }}"> {{ serie.name }}
+    {% if serie.images.get_is_poster.0.src %}
+        {% thumbnail serie.images.get_is_poster.0.src "100x100" as img_serie %}
+          <img src="{{ img_serie.url }}" />
+        {% endthumbnail %}
+    {% else %}
+      Esta serie no tiene imagen de portada
+      {% endif %}
+  </a>
+  {% endfor %}
+{% else %} 
+No tienes series favoritas :(
+{% endif %}
+
+{% endblock %}

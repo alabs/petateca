@@ -10,10 +10,19 @@
 {% block contents %}
 <div class="titulo_serie">{{ serie.name }}
 
+    {% if favorite == "no" %}
   <form class="favorite" id="favorite" action="." method="POST">
     <input type="hidden" name="favorite" value="favorite"/>
     <input type="image" id="heart" src="/static/images/heart_black.png">
   </form>
+  {% else %} {% if favorite == "yes" %}
+  <form class="favorite" id="favorite" action="." method="POST">
+    <input type="hidden" name="no-favorite" value="no-favorite"/>
+    <input type="image" id="heart" src="/static/images/heart_red.png">
+  </form>
+    {% endif %}
+    {% endif %}
+    
 
   <div id="rating">
     <form action="." method="POST">
