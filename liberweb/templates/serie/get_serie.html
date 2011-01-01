@@ -52,7 +52,9 @@
   <br>
   {% if image %}{% thumbnail image "400x300" as img_serie %}
       <img id="poster" src="{{ img_serie.url }}" />{% endthumbnail %}
-  {% else %}<div class="image_not_found"> Esta serie no tiene imagen de portada </div>
+  {% else %}<div class="image_not_found"> 
+            <img src="/static/images/image_not_available.png" height=100> 
+ </div>
   {% endif %}
 </div>
 
@@ -89,7 +91,7 @@
           <li><a href={{ actor.get_absolute_url }}>{{ actor.name }}
                {% if actor.images.get %}{% thumbnail actor.images.get.src "280x280" as img_actor %}
                    <img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
-                   {% else %}<img id="actor_unknown" width="187" height="280" src="/static/images/actor_unknown.gif">
+                   {% else %}<img id="actor_unknown" width="180" src="/static/images/image_not_available.png">
                {% endif %}
               </a> 
       {% endfor %}

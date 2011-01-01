@@ -13,7 +13,7 @@
           <img src="{{ img_serie.url }}" />
         {% endthumbnail %}
     {% else %}
-      Esta serie no tiene imagen de portada
+            <img src="/static/images/image_not_available.png" height=100> 
       {% endif %}
   </a> - {{ serie.rating_user_score }}
   {% endfor %}

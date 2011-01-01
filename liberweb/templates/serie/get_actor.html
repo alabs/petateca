@@ -7,7 +7,8 @@
 
   {% if image %}{% thumbnail image "400x300" as img_actor %}
       <img id="poster" src="{{ img_actor.url }}" />{% endthumbnail %}
-  {% else %}<div class="image_not_found"> Este actor no tiene imagen</div>
+  {% else %}
+            <img src="/static/images/image_not_available.png" height=400> 
   {% endif %}
 
     <ul> 
@@ -19,7 +20,7 @@
         {% endthumbnail %}
       </a>
     {% else %}
-      Esta serie no tiene imagen de portada
+            <img src="/static/images/image_not_available.png" height=100> 
     {% endif %}
     </ul>
 

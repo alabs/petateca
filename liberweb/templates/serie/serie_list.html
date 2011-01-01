@@ -18,16 +18,15 @@
 
 <ul>
   {% for serie in page.object_list %}
+    <a href="{{ serie.get_absolute_url }}">
     {% if serie.images.get_is_poster.0.src %}
-      <a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">
         {% thumbnail serie.images.get_is_poster.0.src "100x100" as img_serie %}
           <img src="{{ img_serie.url }}" />
         {% endthumbnail %}
-      </a>
     {% else %}
-      Esta serie no tiene imagen de portada
+            <img src="/static/images/image_not_available.png" height=100> 
     {% endif %}
-  <li><a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">{{ serie.name }}</a></li>
+  <li>{{ serie.name }}</a></li>
   {% endfor %}
 </ul>
 <br/>
