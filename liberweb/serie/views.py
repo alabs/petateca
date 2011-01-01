@@ -8,7 +8,10 @@ from liberweb.lib.namepaginator import NamePaginator
 
 from djangoratings.views import AddRatingView
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.contenttypes.models import ContentType
 
+# Un atajo para que el return sea solo el diccionario
+# Mete el RequestContext
 from liberweb.decorators import render_to
 
 from django.contrib.auth.models import User
@@ -73,33 +76,37 @@ def get_serie(request, serie_slug):
                 'message': 'No registrado',
             })
         else:
-            # Si el usuario esta autenticado, prepara el voto
-            #from django.contrib.contenttypes.models import ContentType
-            #ct = ContentType.objects.get(app_label='serie', name='serie')
-            #El resultado es ct.id = 12
-            #serie = Serie.objects.get(slug_name=serie_slug)
-            params = {
-                'content_type_id': '12',
-                'object_id': serie.id,
-                'field_name': 'rating_user',  # campo en el modelo
-                'score': request.POST['user_rating'],
-            }
-            response = AddRatingView()(request, **params)
-            try:
-            # Distintas respuestas a la peticion: grabado, Ya ha votado, Error
-                if response.content == 'Vote recorded':
+            if request.POST.has_key('user_rating'):
+                # Si el usuario esta autenticado, prepara el voto
+                ct = ContentType.objects.get(app_label='serie', name='serie')
+                params = {
+                    'content_type_id': ct.id,
+                    'object_id': serie.id,
+                    'field_name': 'rating_user',  # campo en el modelo
+                    'score': request.POST['user_rating'],
+                }
+                response = AddRatingView()(request, **params)
+                try:
+                # Distintas respuestas a la peticion: grabado, Ya ha votado, Error
+                    if response.content == 'Vote recorded':
+                        serie_info.update({
+                            'message': 'Vote recorded',
+                            'score': params['score'],
+                        })
+                    elif response.content == 'You have already voted.':
+                        serie_info.update({
+                                'message': 'You have already voted',
+                        })
+                except:
                     serie_info.update({
-                        'message': 'Vote recorded',
-                        'score': params['score'],
+                        'message': response.content,
+                        'error': 9,
                     })
-                elif response.content == 'You have already voted.':
-                    serie_info.update({
-                            'message': 'You have already voted',
-                    })
-            except:
+            elif request.POST.has_key('favorite'):
+                user = User.objects.get(username=request.user)
+                serie.favorite_of.add(user.profile)
                 serie_info.update({
-                    'message': response.content,
-                    'error': 9,
+                    'favorite': 'successful',
                 })
         return serie_info
 

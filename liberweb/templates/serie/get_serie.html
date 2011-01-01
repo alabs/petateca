@@ -9,6 +9,12 @@
     <script type="text/javascript" src="/static/js/jquery.rating.js"></script>{% endblock %}
 {% block contents %}
 <div class="titulo_serie">{{ serie.name }}
+
+  <form class="favorite" id="favorite" action="." method="POST">
+    <input type="hidden" name="favorite" value="favorite"/>
+    <input type="image" id="heart" src="/static/images/heart_black.png">
+  </form>
+
   <div id="rating">
     <form action="." method="POST">
       <input type="radio" name="user_rating" value="1" class="star" {% if score == 1 %}checked="checked"{% endif %}/>
