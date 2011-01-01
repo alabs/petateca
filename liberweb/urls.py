@@ -26,11 +26,14 @@ urlpatterns = patterns('',
 
     (r'^blog/', include('liberweb.blog.urls')),
 
+    (r'^search/lookup/$', 'liberweb.search.views.search_lookup'),
+
     (r'^search/$', search_view_factory(
         view_class=SearchView,
         searchqueryset=SearchQuerySet(),
         form_class=ModelSearchForm
     )),
+
 
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^localeurl/', include('localeurl.urls')),
@@ -47,10 +50,16 @@ urlpatterns = patterns('',
 
 
     (r'^accounts/profile/$', 'liberweb.userdata.views.view_profile'),
-    url(r'^accounts/register/$', 'registration.views.register', {
-        'backend': 'registration.backends.default.DefaultBackend',
-        'form_class': RegistrationFormUniqueEmail,
-    }, name='registration_register'),
+
+    #  url(r'^accounts/register/$', 'registration.views.register', {
+    #      'backend': 'registration.backends.default.DefaultBackend',
+    #      'form_class': RegistrationFormUniqueEmail,
+    #  }, name='registration_register'),
+
+    #  url(r'^accounts/login/$', 'registration.views.register', {
+    #      'backend': 'registration.backends.default.DefaultBackend',
+    #      'form_class': RegistrationFormUniqueEmail,
+    #  }, name='registration_register'),
 
     (r'^accounts/', include('registration.urls')),
 

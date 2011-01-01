@@ -9,6 +9,7 @@
 {% endspaceless %}<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
   <head>
     <title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/autocomplete.css" type="text/css" />
     <link rel="stylesheet" href="/static/css/lc.css" type="text/css" />{% block extrastyle %}{% endblock %}
     <link rel="alternate" type="application/atom+xml" href="{% url rssblogfeed %}">
     <link rel="alternate" type="application/atom+xml" href="{% url rsslinksfeed %}">
@@ -17,6 +18,8 @@
     <script type="text/javascript" src="/static/js/jquery-min.js"></script>
     <script type="text/javascript" src="/static/js/fisheyes-iutils-min.js"></script>
     <script type="text/javascript" src="/static/js/lc.js"></script>{% block extrahead %}{% endblock %}
+    <script type="text/javascript" src="/static/js/autocomplete.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.dimensions.min.js"></script>
   </head>
   <body>
     <div id="back">
@@ -59,9 +62,14 @@
         <div id="dropdown_series"> {# dropdown_series #} </div>
         <div id="search">
           <form action="/search/">
+        <script type="text/javascript" >
+            $(function(){
+                  setAutoComplete("SearchField", "SearchResults", "/search/lookup/?q=");
+              });
+        </script>
           <fieldset>
             <legend></legend>
-            <input type="text" name="q" value="{% trans "Search" %}..." class="field" 
+            <input id="SearchField" type="text" name="q" value="{% trans "Search" %}..." class="field" 
                 onblur="this.value='{% trans "Search" %}...'" onfocus="this.value=''" />
             <input type="submit" value="" class="button" / >
           </fieldset>
