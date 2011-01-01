@@ -27,18 +27,17 @@
               <li><a href="{% url serie-index %}">SERIES</a></li>
               <li><a href="{% url blog-index %}">BLOG</a></li>
               <li><a href="{% url faq %}">FAQ</a></li>
-              <li>{% spaceless %}
-                {% if request.user.is_authenticated %}
-                Logged in as {{ request.user }}
-                <a href="{% url user-favorite %}">View your favorites</a>
-                <a href="/accounts/logout/?next={{request.path}}">LOGOUT</a>
-                
-                {% else %}
+              {% spaceless %}
                    <div id="login">
-                   <a href="/accounts/login/?next={{request.path}}">LOGIN</a>
-                   </div>
+                {% if request.user.is_authenticated %}
+                <li></li></b><a href="/accounts/logout/?next={{request.path}}">LOGOUT</a></li>
+            <li> <b>{{ request.user }}</b></li></b></li>
+        <li><b><a href="{% url user-favorite %}">Favorites</a></b></li>
+                {% else %}
+                <li><a href="/accounts/login/?next={{request.path}}">LOGIN</a>
                 {% endif %}
-              </li>{% endspaceless %}
+                   </div>
+              {% endspaceless %}
               <li>{% spaceless %}{% if LANGUAGE_CODE == 'en' %} 
                   <a href="{{ request.path|chlocale:'es' }}"><img src="/static/img/flag_es.gif"></a>
                 {% else %}{% if LANGUAGE_CODE == 'es' %} 
