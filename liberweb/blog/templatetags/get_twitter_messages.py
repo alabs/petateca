@@ -39,15 +39,15 @@ def twitter_status(parser, token):
     if len(bits) != 7:
         raise template.TemplateSyntaxError, "%s takes 7 arguments" % bits[0]
     if bits[1] != "user":
-        raise template.TemplateSyntaxError,\
+        raise template.TemplateSyntaxError, \
                 "First argument for %s should be 'user'" % bits[0]
 
     if bits[3] != "limit":
-        raise template.TemplateSyntaxError,\
+        raise template.TemplateSyntaxError, \
                 "Second argument for %s should be 'limit'" % bits[0]
 
     if bits[5] != "as":
-        raise template.TemplateSyntaxError,\
+        raise template.TemplateSyntaxError, \
                 "Third argument for %s should be 'as'" % bits[0]
 
     return TwitterLattestMsgNode(bits[2], bits[4], bits[6])
