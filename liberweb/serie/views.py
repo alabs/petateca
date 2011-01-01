@@ -188,6 +188,13 @@ def list_user_favorite(request):
     return { 'series': favorite_series }
 
 
+@render_to('serie/list_popular.html')
+def list_popular(request):
+    series = Serie.objects.all()
+    popular_series = series.order_by('-rating_user_score')
+    return { 'series': popular_series }
+
+
 def list_user_recommendation(request):
     return "TODO: listar las recomendaciones para el usuario"
 

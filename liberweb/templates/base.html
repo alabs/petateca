@@ -32,6 +32,7 @@
                 {% if request.user.is_authenticated %}
                 <li></li></b><a href="/accounts/logout/?next={{request.path}}">LOGOUT</a></li>
             <li> <b>{{ request.user }}</b></li></b></li>
+        <li><b><a href="{% url list-popular %}">Popular</a></b></li>
         <li><b><a href="{% url user-favorite %}">Favorites</a></b></li>
                 {% else %}
                 <li><a href="/accounts/login/?next={{request.path}}">LOGIN</a>
