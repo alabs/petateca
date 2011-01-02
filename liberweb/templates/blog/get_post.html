@@ -21,13 +21,14 @@
 <br/> {% get_comment_count for post as comment_count %}
 {{ comment_count }} comentarios 
 <br/>
+<br/>
 {% render_comment_list for post %}
 </div>
+<br/>
+<br/>
 
-{% if request.user.is_authenticated %}
+{% with request.path as next %}
 {% render_comment_form for post %}
-{% else %}
-Para comentar debe <a href="/accounts/login/?next={{request.path}}">registrarse o iniciar sesion</a>.
-{% endif %}
+{% endwith %}
 
 {% endblock %}

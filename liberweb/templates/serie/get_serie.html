@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% load comments %}
 {% load extract_domain %}
 {% block extrastyle %}   
     <link rel="stylesheet" href="/static/css/jquery.rating.css" type="text/css" />{% endblock %}
@@ -101,4 +102,22 @@
 <a href="{% url serie-index %}">{% trans "Series list" %}</a>
 <br /> 
 </a>
+
+<br/>
+<br/>
+
+<div class="comments">
+<br/> {% get_comment_count for serie as comment_count %}
+{{ comment_count }} comentarios 
+<br/>
+<br/>
+{% render_comment_list for serie %}
+</div>
+<br/>
+<br/>
+
+{% with request.path as next %}
+{% render_comment_form for serie %}
+{% endwith %}
+
 {% endblock %}
