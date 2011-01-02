@@ -1,0 +1,21 @@
+{% load comments i18n %}
+{% if user.is_authenticated %}
+   <form action="{% comment_form_target %}" method="post">
+        {% if next %}<input name="next" type="hidden" value="{{ next }}" />{% endif %}
+        {% for field in form %}
+            {% if field.is_hidden %}
+                {{ field }}
+            {% else %}
+                {% if field.name != "name" and field.name != "email" and field.name != "url" %}
+                    {% if field.errors %}{{ field.errors }}{% endif %}
+                    <p {% if field.errors %} class="error"{% endif %} {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+                    {{ field }}
+                    </p>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <input type="submit" name="post" class="submit-post" value="{% trans "Add Comment" %}" />
+   </form>
+{% else %}
+    I'm sorry, but you must be <a href="/accounts/login/?next={{request.path}}">logged in</a> to submit comments.
+{% endif %}
