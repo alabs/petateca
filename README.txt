@@ -17,6 +17,13 @@ Para importar los jsonses crawleados por scrapy: (Cambiar el sitio (eztv) y la l
 
 python manage.py import_bot_data bots/libercopy/sites/eztv/dump/W.json 
 
+Indice de Busquedas
+==================
+
+Si se importan datos hay que actualizar el indice de busquedas:
+
+python manage.py update_index
+
 Crawling framework 
 ==================
 

@@ -143,6 +143,11 @@ def get_season(request, serie_slug, season):
     if request.method == 'GET':
         return season_info
     if request.method == 'POST':
+        if not request.user.is_authenticated():
+            season_info.update({
+                'message': 'No registrado',
+            })
+            return season_info
         user = User.objects.get(username=request.user)
         link = Link.objects.get(id=request.POST['linkid'])
         if request.POST['vote'] == 'upvote':

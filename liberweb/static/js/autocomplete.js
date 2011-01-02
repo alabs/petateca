@@ -13,7 +13,7 @@
 // global variables
 var acListTotal   =  0;
 var acListCurrent = -1;
-var acDelay		  = 500;
+var acDelay		  = 100;
 var acURL		  = null;
 var acSearchId	  = null;
 var acResultsId	  = null;
@@ -143,7 +143,7 @@ function repositionResultsDiv()
 	// apply the css styles - optimized for Firefox
 	acResultsDiv.css("position","absolute");
 	acResultsDiv.css("left", sf_left - 2);
-	acResultsDiv.css("top", sf_top + sf_height + 5);
+	acResultsDiv.css("top", sf_top + sf_height + 15);
 	acResultsDiv.css("width", sf_width - 2);
 }
 

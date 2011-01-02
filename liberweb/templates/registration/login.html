@@ -6,21 +6,32 @@
 <div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Your username and password didn't match. Please try again.</div>
 {% endif %}
 
-<form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+<form method="post" action="{% url django.contrib.auth.views.login %}">
+<table> 
+<tr> 
+    <td><label for="id_username">Username</label></td> 
+    <td><input id="id_username" type="text" name="username" maxlength="30" /></td> 
+</tr> 
+<tr> 
+    <td><label for="id_password">Password</label></td> 
+    <td><input type="password" name="password" id="id_password" /></td> 
+</tr> 
+</table> 
 <p><a href="{% url auth_password_reset %}">Forgot</a> your password?  <a href="{% url registration_register %}">Need an account</a>?</p>
 
 <input type="submit" value="login" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+<br/>
+<table> 
+    <form method='post' action="{% url registration_register %}">
+        <tr><th><label for="id_username">username:</label></th><td><input id="id_username" type="text" class="required" name="username" maxlength="30" /></td></tr> 
+        <tr><th><label for="id_email">email address:</label></th><td><input id="id_email" type="text" class="required" name="email" maxlength="75" /></td></tr> 
+        <tr><th><label for="id_password1">password:</label></th><td><input id="id_password1" type="password" class="required" name="password1" /></td></tr> 
+        <tr><th><label for="id_password2">password (again):</label></th><td><input id="id_password2" type="password" class="required" name="password2" /></td></tr> 
+        <tr><td></td><td><input type="submit" value="Send activation email" /></td> 
+    </form> 
+</table> 
 
 {% endblock %}

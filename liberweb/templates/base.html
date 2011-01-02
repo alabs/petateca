@@ -9,8 +9,8 @@
 {% endspaceless %}<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
   <head>
     <title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/autocomplete.css" type="text/css" />
     <link rel="stylesheet" href="/static/css/lc.css" type="text/css" />{% block extrastyle %}{% endblock %}
+    <link rel="stylesheet" href="/static/css/autocomplete.css" type="text/css" />
     <link rel="alternate" type="application/atom+xml" href="{% url rssblogfeed %}">
     <link rel="alternate" type="application/atom+xml" href="{% url rsslinksfeed %}">
     <link rel="alternate" type="application/atom+xml" href="{% url atomblogfeed %}">
@@ -31,7 +31,7 @@
               <li><a href="{% url blog-index %}">BLOG</a></li>
               <li><a href="{% url faq %}">FAQ</a></li>
               {% spaceless %}
-                   <div id="login">
+                   <div id="logon">
                 {% if request.user.is_authenticated %}
                 <li></li></b><a href="/accounts/logout/?next={{request.path}}">LOGOUT</a></li>
             <li> <b>{{ request.user }}</b></li></b></li>

@@ -17,6 +17,7 @@
 }
 
 #results .selected {
+    margin-top: 10px;
 	background-color: #666;
 	color: #fff;
 }
