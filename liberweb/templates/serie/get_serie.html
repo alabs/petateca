@@ -7,19 +7,33 @@
     <link rel="stylesheet" href="/static/css/jquery.rating.css" type="text/css" />{% endblock %}
 {% block extrahead %}
     <script type="text/javascript" src="/static/js/jquery.MetaData.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.rating.js"></script>{% endblock %}
+    <script type="text/javascript" src="/static/js/jquery.rating.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".redhearthover").hover(function() {
+       $(this).attr('src', '/static/images/heart_black.png');
+}, function(){
+       $(this).attr('src', '/static/images/heart_red.png');
+    });
+    $(".blackhearthover").hover(function() {
+       $(this).attr('src', '/static/images/heart_red.png');
+}, function(){
+       $(this).attr('src', '/static/images/heart_black.png');
+    });
+}); 
+</script>{% endblock %}
 {% block contents %}
 <div class="titulo_serie">{{ serie.name }}
 
     {% if favorite == "no" %}
   <form class="favorite" id="favorite" action="." method="POST">
     <input type="hidden" name="favorite" value="favorite"/>
-    <input type="image" id="heart" src="/static/images/heart_black.png">
+    <input type="image" class="blackhearthover" src="/static/images/heart_black.png">
   </form>
   {% else %} {% if favorite == "yes" %}
   <form class="favorite" id="favorite" action="." method="POST">
     <input type="hidden" name="no-favorite" value="no-favorite"/>
-    <input type="image" id="heart" src="/static/images/heart_red.png">
+    <input type="image" class="redhearthover" src="/static/images/heart_red.png">
   </form>
     {% endif %}
     {% endif %}
