@@ -52,8 +52,8 @@ urlpatterns = patterns('',
     (r'^accounts/profile/$', 'liberweb.userdata.views.view_profile'),
 
     url(r'^accounts/register/$', 'registration.views.register', {
-    #   'backend': 'registration.backends.default.DefaultBackend',
-        'form_class': RecaptchaRegistrationForm,
+        'backend': 'registration.backends.default.DefaultBackend',
+        'form_class': RegistrationFormUniqueEmail,
     }, name='registration_register'),
 
     (r'^accounts/', include('registration.urls')),
