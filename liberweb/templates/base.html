@@ -20,6 +20,7 @@
     <script type="text/javascript" src="/static/js/lc.js"></script>{% block extrahead %}{% endblock %}
     <script type="text/javascript" src="/static/js/autocomplete.js"></script>
     <script type="text/javascript" src="/static/js/jquery.dimensions.min.js"></script>
+    <script type="text/javascript" src="/static/js/popup.js"></script>
   </head>
   <body>
     <div id="back">
@@ -38,7 +39,7 @@
         <li><b><a href="{% url list-popular %}">Popular</a></b></li>
         <li><b><a href="{% url user-favorite %}">Favorites</a></b></li>
                 {% else %}
-                <li><a href="/accounts/login/?next={{request.path}}">LOGIN</a>
+                <li><div id="button"><a href="#">LOGIN</a>
                 {% endif %}
                    </div>
               {% endspaceless %}
@@ -86,5 +87,52 @@
       </div>
     </div>
     
+	<div id="popupContact">
+		<a id="popupContactClose">x</a>
+		<h1>Login</h1>
+		<p id="contactArea">
+          {% if form.errors %}
+          <div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Your username and password didn't match. Please try again.</div>
+          {% endif %}
+          <form method="post" action="{% url django.contrib.auth.views.login %}">
+          <table> 
+          <tr> 
+              <th><label for="id_username">Username or Email</label></th> 
+              <td><input id="id_username" type="text" name="username" maxlength="30" /></td> 
+          </tr> 
+          <br/>
+          <tr> 
+              <th><label for="id_password">Password</label></th> 
+              <td><input type="password" name="password" id="id_password" /></td> 
+          </tr> 
+          </table> 
+          <input type="hidden" name="next" value="{{ next }}" />
+                  <tr><td></td><td><a href="{% url auth_password_reset %}">Forgot your password?</a></td> 
+                  <tr><td></td><td><input type="submit" value="Login" /></td> 
+          <p></p>
+          
+          </form>
+		</p>
+        <br />
+        <br />
+		<h1>Register</h1>
+		<p id="contactArea">
+          <table> 
+              <form method='post' action="{% url registration_register %}">
+                  <tr><th><label for="id_username">Username</label></th>
+                      <td><input id="id_username" type="text" class="required" name="username" maxlength="30" /></td></tr> 
+                  <tr><th><label for="id_email">Email Address</label></th>
+                      <td><input id="id_email" type="text" class="required" name="email" maxlength="75" /></td></tr> 
+                  <tr><th><label for="id_password1">Password</label></th>
+                      <td><input id="id_password1" type="password" class="required" name="password1" /></td></tr> 
+                  <tr><th><label for="id_password2">Password (again)</label></th>
+                      <td><input id="id_password2" type="password" class="required" name="password2" /></td></tr> 
+                  <tr><td></td><td><input type="submit" value="Send activation email" /></td> 
+              </form> 
+          </table> 
+		</p>
+	</div>
+	<div id="backgroundPopup"></div>
+
   </body>
 </html>
