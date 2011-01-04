@@ -1,3 +1,4 @@
+# pylint: disable-msg=E1102
 from liberweb.serie.models import Serie, Episode, Actor, Role
 from liberweb.serie.models import Genre, Network, Link
 from django.shortcuts import get_object_or_404
@@ -87,9 +88,9 @@ def get_serie(request, serie_slug):
         else:
             if request.POST.has_key('user_rating'):
                 # Si el usuario esta autenticado, prepara el voto
-                ct = ContentType.objects.get(app_label='serie', name='serie')
+                content_type = ContentType.objects.get(app_label='serie', name='serie')
                 params = {
-                    'content_type_id': ct.id,
+                    'content_type_id': content_type.id,
                     'object_id': serie.id,
                     'field_name': 'rating_user',  # campo en el modelo
                     'score': request.POST['user_rating'],

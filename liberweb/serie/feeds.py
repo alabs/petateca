@@ -5,6 +5,7 @@ from django.utils.feedgenerator import Atom1Feed
 
 
 class RSSLatestLinksFeed(Feed):
+    # pylint: disable-msg=R0201
     title = "LiberCopy lastest serie links"
     link = "/series/"
     description = "Lastest added links to LC"
@@ -33,6 +34,7 @@ class AtomLatestLinksFeed(RSSLatestLinksFeed):
 
 
 class RSSBlogFeed(Feed):
+    # pylint: disable-msg=R0201
     title = "LiberCopy lastest blog post"
     link = "/blog/"
     description = "Lastest blog post on LC"
