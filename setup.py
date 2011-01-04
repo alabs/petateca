@@ -17,7 +17,7 @@ setup(
         'django',
         'PIL',
         'docutils',
-        'South',
+        'South>=0.7.3',
         'django-modeltranslation',
         'django-rosetta',
         'IMDbPY',
