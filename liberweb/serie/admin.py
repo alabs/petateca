@@ -26,22 +26,20 @@ class SerieAdmin(admin.ModelAdmin):
     list_filter = ('runtime', 'genres', 'network', )
     prepopulated_fields = {'slug_name': ('name', )}
     inlines = [
-        ImageInline,
         EpisodeInline,
     ]
-
+    search_fields = ['name', ]
+    ordering = ('name', )
     def image_serie_serie(self, obj):
-        img = obj.images.get_is_poster()[0]
-        file = img.src.file
-        if file:
+        try:
+            img = obj.images.get_is_poster()[0]
+            file = img.src.file
             thumb = default.backend.get_thumbnail(file, ADMIN_THUMBS_SIZE)
             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
-        else:
+        except:
             return "No Image"
     image_serie_serie.short_description = 'Thumbnail'
     image_serie_serie.allow_tags = True
-    search_fields = ['name', ]
-    ordering = ('name', )
 
 
 class LinkInline(admin.TabularInline):
@@ -92,13 +90,13 @@ class ImageSerieAdmin(admin.ModelAdmin):
     list_display = ['title', 'serie', 'image_serie', ]
 
     def image_serie(self, obj):
-        img = obj.src.file
-        if img:
+        try:
+            img = obj.src.file
             thumb = default.backend.get_thumbnail(img, ADMIN_THUMBS_SIZE)
             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
-        else:
+        except:
             return "No Image"
-
+    
     image_serie.short_description = 'Thumbnail'
     image_serie.allow_tags = True
 
