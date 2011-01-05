@@ -21,7 +21,7 @@ setup(
         'django-modeltranslation',
         'django-rosetta',
         'IMDbPY',
-        'sorl-thumbnail',
+        'sorl-thumbnail>=11.01',
         'tvdb_api',
         'django-haystack',
         'Whoosh',

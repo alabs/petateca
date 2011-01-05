@@ -7,7 +7,7 @@ sudo easy_install -U pip
 # Desde el directorio raiz (donde se encuentra README.txt)
 # Preparamos el entorno virtual de desarrollo (como si fuera una jaula)
 sudo pip install -U virtualenv virtualenvwrapper
-pip -E virtual install django ipython PIL
+pip -E virtual install django==1.2.3 ipython PIL
 
 # Con esto entramos a la jaula, vamos a tener que hacerlo siempre para entrar
 source virtual/bin/activate
