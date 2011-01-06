@@ -10,9 +10,8 @@
 			{% for serie in series %}
 				<li>
         			{% thumbnail serie.images.get_is_poster.0.src "600x300" crop="bottom" as img_serie %}
-          			<a widthhref="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">{{ serie.name }}</span><img alt="{{ serie.name }}" src="{{ img_serie.url }}">
-					<span>Read about this project</span>
-					<!--<img src="/static/images/600x300.gif" alt="" />-->
+          			<a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">{{ serie.name }}</span><img alt="{{ serie.name }}" src="{{ img_serie.url }}">
+					<span>{{ serie.name }}</span>
 				</a> 
         			{% endthumbnail %}
 				</li>
