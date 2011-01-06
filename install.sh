@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 # Instalacion de dependencias
-sudo aptitude install python-setuptools python-dev && 
+sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg-dev && 
 sudo easy_install -U pip &&
 
 # Desde el directorio raiz (donde se encuentra README.txt)
@@ -10,7 +10,7 @@ sudo pip install -U virtualenv virtualenvwrapper &&
 pip -E virtual install django==1.2.3 ipython PIL &&
 
 # Con esto entramos a la jaula, vamos a tener que hacerlo siempre para entrar
-source virtual/bin/activate &&
+. virtual/bin/activate &&
 
 # Instalamos las dependencias
 python setup.py develop && 
