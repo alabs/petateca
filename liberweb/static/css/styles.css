@@ -62,7 +62,9 @@ DESCRIPTION: A premium business and portfolio theme.
 	.grid_9,
 	.grid_10,
 	.grid_11,
-	.grid_12 							{display:inline; float:left; position:relative; margin-left:20px; margin-right:20px;}
+	.grid_12,
+        .grid_13                                                        {display:inline; float:left; position:relative; margin-left:20px; margin-right:20px;}
+        .grid_14                                                        {display:inline; float:right; position:relative; margin-left:20px; margin-right:20px;}
 	.container_12 .grid_1				{width:45px;}
 	.container_12 .grid_2 				{width:130px;}
 	.container_12 .grid_3 				{width:215px;}
@@ -75,6 +77,8 @@ DESCRIPTION: A premium business and portfolio theme.
 	.container_12 .grid_10 				{width:810px;}
 	.container_12 .grid_11 				{width:895px;}
 	.container_12 .grid_12 				{width:980px;}
+        .container_12 .grid_13, .grid_14                                {width:40%;}
+
 	
 /* Global Classes */
 

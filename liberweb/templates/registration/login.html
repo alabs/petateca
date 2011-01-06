@@ -6,32 +6,82 @@
 <div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Your username and password didn't match. Please try again.</div>
 {% endif %}
 
-<form method="post" action="{% url django.contrib.auth.views.login %}">
-<table> 
-<tr> 
-    <td><label for="id_username">Username or Email</label></td> 
-    <td><input id="id_username" type="text" name="username" maxlength="30" /></td> 
-</tr> 
-<tr> 
-    <td><label for="id_password">Password</label></td> 
-    <td><input type="password" name="password" id="id_password" /></td> 
-</tr> 
-</table> 
-<p><a href="{% url auth_password_reset %}">Forgot</a> your password?  <a href="{% url registration_register %}">Need an account</a>?</p>
+<!-- Caption Line -->
+		<h2 class="grid_12 caption clearfix">oking at our work? don't hesitate to <span>contact us</span>!</h2>
+		
+		<div class="hr grid_12 clearfix">&nbsp;</div>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+		<!-- column 1 / content -->
+		<div class="grid_13">
+			<p>lorem ipsum dolor sit amet, consectetur adipiscing elit. mauris vel porta erat. quisque sit amet risus at odio pellentesque sollicitudin. proin suscipit molestie facilisis. aenean vel massa magna. proin nec lacinia augue. mauris venenatis libero nec odio viverra consequat. in hac habitasse platea dictumst.</p>
+			<!-- contact form -->
+			<form method="post" action="{% url django.contrib.auth.views.login %}" id="contact_form">
+					<h3>login</h3>
+				<div class="hr dotted clearfix">&nbsp;</div>
+				<ul>						
+					<li class="clearfix"> 
+						<label for="name">username or email</label>
+						<input type='text' name='username' id='name' />
+						<div class="clear"></div>
+						<p id='name_error' class='error'>insert a name</p>
+					</li> 
+					<li class="clearfix"> 
+						<label for="name">password</label>
+						<input type='password' name='password' id='name' />
+						<div class="clear"></div>
+						<p id='password_error' class='error'>incorrect password</p>
+					</li> 
+                                        <p><a href="{% url auth_password_reset %}">forgot</a> your password?  <a href="{% url registration_register %}">need an account</a>?</p>
 
-<br/>
-<table> 
-    <form method='post' action="{% url registration_register %}">
-        <tr><th><label for="id_username">username:</label></th><td><input id="id_username" type="text" class="required" name="username" maxlength="30" /></td></tr> 
-        <tr><th><label for="id_email">email address:</label></th><td><input id="id_email" type="text" class="required" name="email" maxlength="75" /></td></tr> 
-        <tr><th><label for="id_password1">password:</label></th><td><input id="id_password1" type="password" class="required" name="password1" /></td></tr> 
-        <tr><th><label for="id_password2">password (again):</label></th><td><input id="id_password2" type="password" class="required" name="password2" /></td></tr> 
-        <tr><td></td><td><input type="submit" value="Send activation email" /></td> 
-    </form> 
-</table> 
+					<input type="hidden" name="next" value="{{ next }}" />
+
+					<p id='login_fail' class='error'>sorry, an error has occured. please try again later.</p>
+					<div id="button">
+					<input type='submit' id='send_message' class="button" value='login' />
+					</div>
+					</li> 
+				</ul> 
+			</form>  
+		</div>
+		<div class="grid_14">
+			<p>lorem ipsum dolor sit amet, consectetur adipiscing elit. mauris vel porta erat. quisque sit amet risus at odio pellentesque sollicitudin. proin suscipit molestie facilisis. aenean vel massa magna. proin nec lacinia augue. mauris venenatis libero nec odio viverra consequat. in hac habitasse platea dictumst.</p>
+			<!-- contact form -->
+			<form method='post' action="{% url registration_register %}" id="contact_form">
+					<h3>register</h3>
+				<div class="hr dotted clearfix">&nbsp;</div>
+				<ul>						
+					<li class="clearfix"> 
+						<label for="name">username</label>
+						<input type='text' name='username' id='name' />
+						<div class="clear"></div>
+						<p id='name_error' class='error'>insert a name</p>
+					</li> 
+					<li class="clearfix"> 
+						<label for="email">email</label>
+						<input type='text' name='email' id='name' />
+						<div class="clear"></div>
+						<p id='name_error' class='error'>insert a email</p>
+					</li> 
+					<li class="clearfix"> 
+						<label for="name">password</label>
+						<input type='password' name='password1' id='name' />
+						<div class="clear"></div>
+						<p id='password_error' class='error'>incorrect password</p>
+					</li> 
+					<li class="clearfix"> 
+						<label for="name">password</label>
+						<input type='password' name='password2' id='name' />
+						<div class="clear"></div>
+						<p id='password_error' class='error'>incorrect password</p>
+					</li> 
+					<p id='login_fail' class='error'>sorry, an error has occured. please try again later.</p>
+					<div id="button">
+					<input type='submit' id='send_message' class="button" value='send activation mail' />
+					</div>
+					</li> 
+				</ul> 
+			</form>  
+		</div>
+
 
 {% endblock %}
