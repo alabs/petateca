@@ -2,23 +2,65 @@
 {% load i18n %}
 {% load thumbnail %}
 {% block contents %}  
-<h2>Blog: All Postings</h2>  
-
+<div class="hr grid_12 clearfix">&nbsp;</div>
+			
+		<!-- Caption Line -->
+		<h2 class="grid_12 caption clearfix">Libertheca<span>blog</span>.</h2>
+		
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+	<div class="grid_8">
 {% for p in posts %}
- <li><a href="{% url get_post p.slug %}">{{ p.title }}</a></li>
-    <p>Written on {{p.date}}</p>
-    <p>{{p.summary}}</p>
+	<div class="post">
+		<h3 class="title"><a href="{% url get_post p.slug %}">{{ p.title }}</a></h3>
+    		<p class="sub"><a href="#">Written on {{p.date}}</a></p>
+		<div class="hr dotted clearfix">&nbsp;</div>
+  		<div class="image_post">
+			<p> {% if p.images.all.0 %}
+			{% thumbnail p.images.all.0.src "100x100" as img_post %}
+			<img class="thumb" src="{{ img_post.url }}" />
+			{% endthumbnail %}
+			{% else %}
+			Este post no tiene imagen
+			{% endif %}
+    			</p>
+  		</div>
+		<p>{{p.summary}}</p>
 
-    <div class="image_post">
-    {% if p.images.all.0 %}
-      {% thumbnail p.images.all.0.src "100x100" as img_post %}
-        <img src="{{ img_post.url }}" />
-      {% endthumbnail %}
-    {% else %}
-    Este post no tiene imagen
-    {% endif %} 
-    </div>
-
+		 <p><p class="clearfix"><a href="{% url get_post p.slug %}" class="button right"> Leer más...</a></p>
+    	</div>
+			<div class="hr clearfix">&nbsp;</div>
 {% endfor %}
+
+			<!-- Blog Navigation -->
+			<p class="clearfix">
+				<a href="#" class="button float">&lt;&lt; Previous Posts</a>
+				<a href="#" class="button float right">Newer Posts >></a>
+			</p>
+		</div>
+		
+		<!-- Column 2 / Sidebar -->
+		<div class="grid_4">
+		
+			<h4>Catagories</h4>
+			<ul class="sidebar">
+				<li><a href="">Series Nuevas</a></li>
+				<li><a href="">Ficción</a></li>
+				<li><a href="">Documental</a></li>
+				<li><a href="">Jobs</a></li>
+				<li><a href="">Staff</a></li>
+				<li><a href="">Clients</a></li>
+			</ul>
+			
+			<h4>Archives</h4>
+			<ul class="sidebar">
+				<li><a href="">January 2010</a></li>
+				<li><a href="">December 2009</a></li>
+				<li><a href="">Novemeber 2009</a></li>
+				<li><a href="">October 2009</a></li>
+				<li><a href="">September 2009</a></li>
+				<li><a href="">August 2009</a></li>
+			</ul>
+		</div>
+	
 
 {% endblock %}

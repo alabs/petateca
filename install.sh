@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Instalacion de dependencias
-sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg-dev && 
+sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg-dev subversion && 
 sudo easy_install -U pip &&
 
 # Desde el directorio raiz (donde se encuentra README.txt)
