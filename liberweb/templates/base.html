@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 {% spaceless %}
 {% load i18n %}
 {% load dropdown_series %}
@@ -7,21 +7,76 @@
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 {% endspaceless %}<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
-  <head>
-    <title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/lc.css" type="text/css" />{% block extrastyle %}{% endblock %}
-    <link rel="stylesheet" href="/static/css/autocomplete.css" type="text/css" />
-    <link rel="alternate" type="application/atom+xml" href="{% url rssblogfeed %}">
-    <link rel="alternate" type="application/atom+xml" href="{% url rsslinksfeed %}">
-    <link rel="alternate" type="application/atom+xml" href="{% url atomblogfeed %}">
-    <link rel="alternate" type="application/atom+xml" href="{% url atomlinksfeed %}">
-    <script type="text/javascript" src="/static/js/jquery-min.js"></script>
-    <script type="text/javascript" src="/static/js/fisheyes-iutils-min.js"></script>
-    <script type="text/javascript" src="/static/js/lc.js"></script>{% block extrahead %}{% endblock %}
-    <script type="text/javascript" src="/static/js/autocomplete.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.dimensions.min.js"></script>
-    <script type="text/javascript" src="/static/js/popup.js"></script>
-  </head>
+<head>
+	<title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="/static/css/reset.css" />
+	<link rel="stylesheet" href="/static/css/styles.css" />
+	<link rel="stylesheet" href="/static/css/autocomplete.css" type="text/css" />
+	<link rel="alternate" type="application/atom+xml" href="{% url rssblogfeed %}">
+	<link rel="alternate" type="application/atom+xml" href="{% url rsslinksfeed %}">
+	<link rel="alternate" type="application/atom+xml" href="{% url atomblogfeed %}">
+	<link rel="alternate" type="application/atom+xml" href="{% url atomlinksfeed %}">
+	{% block extrastyle %}{% endblock %}
+	<script type="text/javascript" src="/static/js/jquery-min.js"></script>
+	<script type="text/javascript" src="/static/js/fisheyes-iutils-min.js"></script>
+	<script type="text/javascript" src="/static/js/lc.js"></script>{% block extrahead %}{% endblock %}
+	<script type="text/javascript" src="/static/js/autocomplete.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.dimensions.min.js"></script>
+	<script type="text/javascript" src="/static/js/popup.js"></script>
+	<!-- Scripts -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/jquery.roundabout-1.0.min.js"></script> 
+	<script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript">		
+		$(document).ready(function() { //Start up our Featured Project Carosuel
+			$('#featured ul').roundabout({
+				easing: 'easeOutInCirc',
+				duration: 600
+			});
+		});
+	</script>  
+
+	<!--[if IE 6]>
+	<script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+	<script>
+	  /* EXAMPLE */
+	  DD_belatedPNG.fix('.button');
+	  
+	  /* string argument can be any CSS selector */
+	  /* .png_bg example is unnecessary */
+	  /* change it to what suits you! */
+	</script>
+	<![endif]-->
+</head>
+<body>
+	<div id="wrapper" class="container_12 clearfix">
+
+		<!-- Text Logo -->
+		<h1 id="logo" class="grid_4">{{ title }}</h1>
+		<!-- Navigation Menu -->
+		<ul id="navigation" class="grid_8">
+
+			<li><a href="/series"><span class="meta">las series</span><br />SERIES</a></li>
+			<li><a href="/"><span class="meta">página principal</span><br />INICIO</a></li>
+		</ul>
+		
+		<div class="hr grid_12">&nbsp;</div>
+		<div class="clear"></div>
+		{% block contents %}{% endblock %}
+		<!-- Footer -->
+		<p class="grid_12 footer clearfix">
+			<span class="float"><b>&copy; Copyright</b> <a href="">QwibbleDesigns</a> - remove upon purchase.</span>
+			<a class="float right" href="#">top</a>
+
+		</p>
+	</div><!--end wrapper-->
+</body>
+</html>
+<!--
   <body>
     <div id="back">
       <div id="main">
@@ -78,7 +133,7 @@
         </div>
         <div id="frase"><h2>Sharing is good</h2></div>
         <div id="content"> 
-          {% block contents %}{% endblock %}
+          
         </div>
       <div id="line"></div>
       <div id="footer">
@@ -136,3 +191,4 @@
 
   </body>
 </html>
+-->

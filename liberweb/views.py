@@ -3,7 +3,7 @@ from liberweb.serie.models import Serie
 from liberweb.blog.models import Post
 from django.contrib import messages
 from liberweb.decorators import render_to
-
+from liberweb.settings import SITE_NAME
 
 @render_to('index.html')
 def index(request):
@@ -15,6 +15,7 @@ def index(request):
                 'posts': post_list,
                 'posts2': post_list_2,
                 'series': serie_list,
+                'title': SITE_NAME,
          }
     else:
         request.session['visited'] = True

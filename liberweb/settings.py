@@ -4,6 +4,7 @@ import os
 import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+SITE_NAME = 'Libercopy'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

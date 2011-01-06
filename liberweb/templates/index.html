@@ -3,48 +3,56 @@
 {% load thumbnail %}
 {% load get_twitter_messages %}
 {% block contents %}
-<div id="series-menu">
-<ul>
-  {% for serie in series %}
-  {% endfor %}
-</ul>
-</div>
-<div id="panel">
-  <div id="dock"> 
-    <div class="dock-container" style="left: 200px; width: 500px;">
-      {% for serie in series %}
-        {% thumbnail serie.images.get_is_poster.0.src "300x200" as img_serie %}
-          <a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">{{ serie.name }}</span><img alt="{{ serie.name }}" src="{{ img_serie.url }}"></a> 
-        {% endthumbnail %}
-      {% endfor %}
-    </div>	
-  </div>
-</div>			
+	
+		<!-- Featured Image Slider -->
+		<div id="featured" class="clearfix grid_12">
+			<ul>
+			{% for serie in series %}
+				<li>
+        			{% thumbnail serie.images.get_is_poster.0.src "600x300" crop="bottom" as img_serie %}
+          			<a widthhref="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">{{ serie.name }}</span><img alt="{{ serie.name }}" src="{{ img_serie.url }}">
+					<span>Read about this project</span>
+					<!--<img src="/static/images/600x300.gif" alt="" />-->
+				</a> 
+        			{% endthumbnail %}
+				</li>
+      			{% endfor %}
+			</ul>
+		</div>
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+			
+		<!-- Caption Line -->
+		<h2 class="grid_12 caption clearfix">Welcome! This is <span>Aurelius</span>, a slick, professional <u>Business</u> &amp; <u>Portfolio</u> theme built to engage the user in your work.</h2>
 
-<div id="tweets">
-{% get_twitter_messages user libercopy limit 5 as tweets %} 
-<ul>
-  {% for tweet in tweets %} 
-  <li>{{ tweet.text }} {{ tweet.time }} {{ tweet.url }} 
-  {% endfor %} 
-</ul>
-</div>
+		
+		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
+		<div id="quicknav" class="grid_12">
+			<a class="quicknavgrid_3 quicknav alpha" href="portfolio.html">
+					<h4 class="title ">Recent Work</h4>
+					<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
+					<p style="text-align:center;"><img alt="" src="/static/images/Art_Artdesigner.lv.png" /></p>
+				
+			</a>
+			<a class="quicknavgrid_3 quicknav" href="about.html">
 
-<div id="textos">
-  {% for p in posts %}
-  <div class="text">
-    <h2><a href="{% url get_post p.slug %}">{{ p.title }}</a></h2>
-    <p>{{p.summary|safe}}</p>
-    {% thumbnail p.images.all.0.src "50x50" as img_post %} <img src="{{ img_post.url }}" /> {% endthumbnail %}
-  </div>
-  {% endfor %}
-  {% for p in posts2 %}
-  <div class="text2">
-    <h2><a href="{% url get_post p.slug %}">{{ p.title }}</a></h2>
-    <p>{{p.summary|safe}}</p>
-    {% thumbnail p.images.all.0.src "50x50" as img_post %} <img src="{{ img_post.url }}" /> {% endthumbnail %}
-  </div>
-  {% endfor %}
-</div>
-</div>
+					<h4 class="title ">Learn about us</h4>
+					<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
+					<p style="text-align:center;"><img alt="" src="/static/images/info.png" /></p>
+				
+			</a>
+			<a class="quicknavgrid_3 quicknav" href="blog.html">
+					<h4 class="title ">Read our blog</h4>
+					<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
+
+					<p style="text-align:center;"><img alt="" src="/static/images/Blog_Artdesigner.lv.png" /></p>
+				
+			</a>
+			<a class="quicknavgrid_3 quicknav" href="#">
+					<h4 class="title ">Follow on Twitter</h4>
+					<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
+					<p style="text-align:center;"><img alt="" src="/static/images/hungry_bird.png" /></p>
+			</a>
+		</div>
+
+		<div class="hr grid_12 clearfix">&nbsp;</div>
 {% endblock %}
