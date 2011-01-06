@@ -25,4 +25,5 @@ def index(request):
                 'posts2': post_list_2,
                 'series': serie_list,
                 'initial_message': initial_message,
+		'title': SITE_NAME,
          }

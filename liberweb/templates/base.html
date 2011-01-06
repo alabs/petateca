@@ -61,9 +61,9 @@
 		<!-- Navigation Menu -->
 		<ul id="navigation" class="grid_8">
 			{% if request.user.is_authenticated %}
-					<li><a href="/series"><span class="meta">cerrar sesión</span><br />CERRAR SESIÓN</a></li>
+					<li><a href="/accounts/logout"><span class="meta">cerrar sesión</span><br />CERRAR SESIÓN</a></li>
 				{% else %}
-					<li><a href="/series"><span class="meta">iniciar sesión</span><br />ACCEDER</a></li>	
+					<li><a href="/accounts/login"><span class="meta">iniciar sesión</span><br />ACCEDER</a></li>	
 			{% endif %}
 			<li><a href="/blog"><span class="meta">nuestro blog</span><br />BLOG</a></li>
 			<li><a href="/series"><span class="meta">las series</span><br />SERIES</a></li>

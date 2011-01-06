@@ -27,7 +27,7 @@ def get_serie_list(request):
     paginator = NamePaginator(
         serie_list,
         on="name",
-        per_page=25
+        per_page = 10
     )
 
     # Make sure page request is an int. If not, deliver first page.
