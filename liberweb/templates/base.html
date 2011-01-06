@@ -6,7 +6,8 @@
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
-{% endspaceless %}<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
+{% endspaceless %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
 <head>
 	<title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -59,7 +60,12 @@
 		<h1 id="logo" class="grid_4">{{ title }}</h1>
 		<!-- Navigation Menu -->
 		<ul id="navigation" class="grid_8">
-
+			{% if request.user.is_authenticated %}
+					<li><a href="/series"><span class="meta">cerrar sesión</span><br />CERRAR SESIÓN</a></li>
+				{% else %}
+					<li><a href="/series"><span class="meta">iniciar sesión</span><br />ACCEDER</a></li>	
+			{% endif %}
+			<li><a href="/blog"><span class="meta">nuestro blog</span><br />BLOG</a></li>
 			<li><a href="/series"><span class="meta">las series</span><br />SERIES</a></li>
 			<li><a href="/"><span class="meta">página principal</span><br />INICIO</a></li>
 		</ul>
