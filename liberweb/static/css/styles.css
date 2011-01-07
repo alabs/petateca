@@ -154,7 +154,8 @@ DESCRIPTION: A premium business and portfolio theme.
 /* Common Scroller Styles */
 
 	.roundabout-holder 					{list-style:none; width:500px; height:300px; margin:0px auto;}
-	.roundabout-moveable-item 			{font-size:12px!important; height:300px; width:600px; cursor:pointer; padding:5px; border:1px solid #aaaaaa; -webkit-border-radius:5px; -moz-border-radius:5px; background:#f9f9f9;}
+	.roundabout-moveable-item 			{font-size:12px!important; height:300px; width:250px; cursor:pointer; padding:5px; border:1px solid #aaaaaa; -webkit-border-radius:5px; -moz-border-radius:5px; background:#f9f9f9;}
+	/*.roundabout-moveable-item 			{font-size:12px!important; height:300px; width:600px; cursor:pointer; padding:5px; border:1px solid #aaaaaa; -webkit-border-radius:5px; -moz-border-radius:5px; background:#f9f9f9;} fixing the slideshow*/
 	.roundabout-moveable-item img 		{height:100%; width:100%; background-color:#FFFFFF; margin:0;}
 	.roundabout-in-focus 				{cursor:auto;}
 	.roundabout-in-focus:hover			{-webkit-box-shadow:0px 0px 20px #787878; -moz-box-shadow:0px 0px 20px #787878; background:#f9f9f9;}

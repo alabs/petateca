@@ -1,5 +1,5 @@
 # pylint: disable-msg=E1102
-from liberweb.serie.models import Serie, Episode, Actor, Role
+from liberweb.serie.models import Serie, Episode, Actor, Role, Genre, Network
 from liberweb.serie.models import Genre, Network, Link
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
@@ -24,6 +24,8 @@ from django.contrib.auth.decorators import login_required
 @render_to('serie/serie_list.html')
 def get_serie_list(request):
     serie_list = Serie.objects.order_by('name').all()
+    genre_list = Genre.objects.order_by('name').all()
+    network_list = Network.objects.order_by('name').all()
     paginator = NamePaginator(
         serie_list,
         on="name",
@@ -44,6 +46,9 @@ def get_serie_list(request):
 
     return {
         'page': page,
+        'genre_list': genre_list,
+        'network_list': network_list,
+        'title': 'LiberCopy',
     }
 
 
