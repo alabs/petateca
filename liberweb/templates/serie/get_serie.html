@@ -95,7 +95,9 @@ $(document).ready(function(){
 
 <h2>{% trans "Seasons" %}: </h2>
   {% for season in season_list %}<br/> 
-    <li><a href="{% url get_season serie_slug=serie.slug_name season=season %}">{% trans "Season" %} {{ season }}</a>
+    <li><a href="{% url get_season serie_slug=serie.slug_name season=season %}">{% trans "Season" %} {{ season }}
+						<img src="/static/images/image_not_available.png" height="180"> 
+</a>
       {% endfor %}
      </table>
 </ul>
