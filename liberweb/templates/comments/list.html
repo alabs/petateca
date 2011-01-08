@@ -1,0 +1,23 @@
+                        <div class="hr dotted clearfix">&nbsp;</div>
+
+  {% for comment in comment_list %}
+                        <ol class="commentlist" id="c{{ comment.id }}">
+                                <li class="comment">
+                                <div class="gravatar">
+                                        <img alt="" src='images/gravatar.png' height='48' width='48' />
+                                </div>
+                                <div class="comment_content">
+                                        <div class="clearfix">
+                                                <cite class="author_name">{{ comment.name }}</cite>
+                                                <div class="comment-meta commentmetadata">{{ comment.submit_date }}</div>
+                                        </div>
+                                        <div class="comment_text">
+                                                <p>{{comment.comment}}</p>
+                                        </div>
+                                </div>
+                                </li>
+                        </ol>
+
+{% endfor %}
+                        <div class="hr clearfix">&nbsp;</div>
+

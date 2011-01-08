@@ -1,6 +1,7 @@
 {% load comments i18n %}
-{% if user.is_authenticated %}
-   <form action="{% comment_form_target %}" method="post">
+<h2> Add a comment </h2>
+{% if request.user.is_authenticated %}
+   <form id="contact_form" action="{% comment_form_target %}" method="post">
         {% if next %}<input name="next" type="hidden" value="{{ next }}" />{% endif %}
         {% for field in form %}
             {% if field.is_hidden %}
@@ -14,7 +15,11 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-        <input type="submit" name="post" class="submit-post" value="{% trans "Add Comment" %}" />
+						<div id="button"> 
+        <input type="submit" id="send_message" style="margin-bottom:1em;margin-right:9em;margin-top:1em;" class="button" name="post" value="{% trans "Add Comment" %}" />
+</div>
+
+
    </form>
 {% else %}
     I'm sorry, but you must be <a href="/accounts/login/?next={{request.path}}">logged in</a> to submit comments.
