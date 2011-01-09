@@ -1,3 +1,4 @@
+/*
 $(function () {
 	$('#dock').Fisheye({
 		maxWidth: 60,
@@ -34,4 +35,4 @@ if (document.lcdropdown.series.options[document.lcdropdown.series.selectedIndex]
 location = document.lcdropdown.series.options[document.lcdropdown.series.selectedIndex].value 
 		} 
 	} 
-
+*/
