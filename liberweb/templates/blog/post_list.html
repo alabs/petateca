@@ -15,7 +15,7 @@
   		<div class="image_post">
 			<p> {% if p.images.all.0 %}
 			{% thumbnail p.images.all.0.src "100x100" as img_post %}
-			<img class="thumb" src="{{ img_post.url }}" />
+			<img src="{{ img_post.url }}" />
 			{% endthumbnail %}
 			{% else %}
 			Este post no tiene imagen
