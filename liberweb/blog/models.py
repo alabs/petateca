@@ -25,6 +25,11 @@ class Post(models.Model):
         self.slug = slugify(self.title)
         super(Post, self).save(force_insert, force_update, using)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('get_post', (),
+                {'post_slug': self.slug, })
+
 
 class ImagePost(models.Model):
     title = models.CharField(max_length=100)

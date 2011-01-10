@@ -27,20 +27,12 @@
 				
 				<!-- Post Title -->
 				<!-- Post Content -->
-<p>: </p>
   <p>{{ post.post|safe }}</p>
-<br />
-<ul>
-{% for tag in tag_list %}
-  <li> {{ tag.name }}
-{% endfor %}
-</ul>
 </div>
 								
 				<!-- Post Links -->
 				<p class="clearfix">
-					<a href="blog.html" class="button float" >&lt;&lt; Back to Blog</a>
-					<a href="#commentform" class="button float right" >Discuss this post</a>
+					<a href="{% url blog-index %}" class="button float" >&lt;&lt; Back to Blog</a>
 				</p>
 			<div class="hr clearfix">&nbsp;</div>
 
@@ -51,30 +43,19 @@
 {% with request.path as next %}
 {% render_comment_form for post %}
 {% endwith %}
+			
+		</div>
 	
-</div>
 		<!-- Column 2 / Sidebar -->
 		<div class="grid_4">
 		
-			<h4>Catagories</h4>
+			<h4>Tags</h4>
 			<ul class="sidebar">
-				<li><a href="">So who are we?</a></li>
-				<li><a href="">Philosophy</a></li>
-				<li><a href="">History</a></li>
-				<li><a href="">Jobs</a></li>
-				<li><a href="">Staff</a></li>
-				<li><a href="">Clients</a></li>
+ 			{% for tag in tag_list %}
+				<li><a href="{% url get_tag tag_slug=tag.slug %}">{{ tag }}</a></li>
+ 			{% endfor %}
 			</ul>
 			
-			<h4>Archives</h4>
-			<ul class="sidebar">
-				<li><a href="">January 2010</a></li>
-				<li><a href="">December 2009</a></li>
-				<li><a href="">Novemeber 2009</a></li>
-				<li><a href="">October 2009</a></li>
-				<li><a href="">September 2009</a></li>
-				<li><a href="">August 2009</a></li>
-			</ul>
 		</div>
 		
 		<div class="hr grid_12 clearfix">&nbsp;</div>
