@@ -84,7 +84,7 @@ class Command(BaseCommand):
             db_link = m.Link.objects.get(url=links)
             db_link.audio_lang = self.normalize_lang(lang)
             db_link.subtitle = self.normalize_lang(sublang)
-            db_link.bot = self.bot
+            db_link.user = self.bot
             db_link.save()
             return #It's already loaded, but update data
         except m.Link.DoesNotExist:
@@ -111,14 +111,15 @@ class Command(BaseCommand):
                     return
         #Search episode in database
         try:
-            db_episode = m.Episode.objects.get(serie=db_serie, season=temp, episode=epi)
+            db_season = self.populate_seasons(db_serie, temp)
+            db_episode = m.Episode.objects.get(season=db_season, episode=epi)
         except m.Episode.DoesNotExist:
             warn(u"Episode %sx%s of %s not populated yet" % (temp, epi, serie))
             #Create episode
             db_episode = m.Episode()
             db_episode.serie = db_serie
             db_episode.title_en = db_episode.title_es = "%sx%s" % (temp, epi)
-            db_episode.season = int(temp)
+            db_episode.season = db_season
             db_episode.episode = int(epi)
             db_episode.description_en = "Not available"
             db_episode.description_es = "No disponible"
@@ -181,6 +182,7 @@ class Command(BaseCommand):
         try:
             reg_en = tvdb_en[name]
             reg_es = tvdb_es[name]
+            print reg_en
         except:
             try:
                 reg_en = tvdb_en[orig_name]
@@ -227,32 +229,62 @@ class Command(BaseCommand):
                 continue #This field is needed
             db_actor = self.populate_actor(actor)
             db_role = m.Role(actor=db_actor, serie=db_serie, role=actor["role"] or "")
-            db_role.save()
+            try:
+                db_role.save()
+            except:
+                continue
 
         self.populate_episodes(db_serie, reg_en, reg_es)
 
         return db_serie
 
+    def populate_seasons(self, db_serie, ntemp):
+        try:
+            db_season = m.Season.objects.get(serie=db_serie, season=ntemp)
+        except m.Season.DoesNotExist:
+            db_season = m.Season()
+            
+        db_season.serie = db_serie
+        db_season.season = int(ntemp)
+
+        tvdb_en = Tvdb(actors=True, banners=True)
+        reg_en = tvdb_en[db_serie.name]
+     
+        season_banners = reg_en['_banners']['season']['season'] # seasonwide?
+        for img_banner in season_banners:
+            if int(ntemp) == int(season_banners[img_banner]['season']):
+                img_url = season_banners[img_banner]['_bannerpath']
+                img_title = season_banners[img_banner]['id'] + '.jpg'
+                img = urllib.urlretrieve(img_url)
+                db_img = m.ImageSeason(is_poster=True, title=img_title)
+                db_img.season = db_season
+                file_content = ContentFile(open(img[0]).read())
+                db_img.src.save(os.path.basename(img_title), file_content)
+                db_img.save()
+
+        db_season.save()
+        return db_season
+    
 
     def populate_episodes(self, db_serie, reg_en, reg_es):
         for n_season in reg_en:
+            db_season = self.populate_seasons(db_serie, n_season)
             for n_episode in reg_en[n_season]:
                 episode = reg_en[n_season][n_episode]
                 try:
                     db_episode = m.Episode.objects.get(
-                            serie = db_serie,
-                            season = n_season,
+                           # serie = db_serie,
+                            season = db_season,
                             episode = n_episode,)
                 except m.Episode.DoesNotExist:
                     db_episode = m.Episode()
-                    db_episode.serie = db_serie
+                    db_episode.season = db_season
                     try:
                         db_episode.air_date = datetime.datetime.strptime(
                             episode["firstaired"], "%Y-%m-%d")
                     except:
                         db_episode.air_date = None
                     db_episode.title_en = reg_en[n_season][n_episode]["episodename"]
-                    db_episode.season = n_season
                     db_episode.episode = n_episode
                     db_episode.description_en = reg_en[n_season][n_episode]["overview"] or "Not available"
                     try:

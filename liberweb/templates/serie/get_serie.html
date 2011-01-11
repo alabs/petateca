@@ -23,8 +23,14 @@ $(document).ready(function(){
 }); 
 </script>{% endblock %}
 {% block contents %}
-<div class="titulo_serie">{{ serie.name }}
+{# serie.rating_user_votes #}
+{# serie.rating_user.get_percent #}
 
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+		
+		<!-- Column 1 / Project Information -->
+		<div class="grid_4">
+		<h4 class="title">{{serie.name}}
     {% if favorite == "no" %}
   <form class="favorite" id="favorite" action="." method="POST">
     <input type="hidden" name="favorite" value="favorite"/>
@@ -37,7 +43,6 @@ $(document).ready(function(){
   </form>
     {% endif %}
     {% endif %}
-    
 
   <div id="rating">
     <form action="." method="POST">
@@ -64,73 +69,71 @@ $(document).ready(function(){
       <div class="error"> Couldn't vote :( </div>
     {% endif %}
   </div>{% endspaceless %}
-  <br>
+</h4>
+		<div class="hr dotted clearfix">&nbsp;</div>
+
+  {% if serie.network.name %}
+ <p> <b>{% trans "Network" %}:</b> <a href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a></p>
+  {% endif %}
+ <p><b>{% trans "Genre" %}:</b> 
+      {% for genre in serie.genres.all %}
+      <a href="{{ genre.get_absolute_url}}">{{ genre.name }}</a>
+      {% endfor %}</p>
+<p><b>{% trans "Runtime" %}:</b> {{ serie.runtime }} {% trans "minutes" %}</p>
+<p><b>{% trans "Description" %}:</b> {{ serie.description }}</p>
+
+			<p class="clearfix">
+				<a href="/series" class="button float">&lt;&lt; Back to Series</a>
+</p> <p>
+				<a href="#contactform" class="button float">&lt;&lt; Comments</a>
+			</p>
+		</div>
+		
+		<!-- Column 2 / Image Carosuel -->
+		<div id="folio_scroller_container" class="grid_8 cleafix">
+			<ul id="folio_scroller"> 
+
   {% if image %}{% thumbnail image "400x300" as img_serie %}
       <img id="poster" src="{{ img_serie.url }}" />{% endthumbnail %}
   {% else %}<div class="image_not_found"> 
             <img src="/static/images/image_not_available.png" height=100> 
  </div>
   {% endif %}
-</div>
+					<!-- li><span>Homepage</span><img alt="" src="images/600x300.gif" /></li --> 
+			</ul> 
+		</div>
+		
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+		<!-- Client pickup line -->
+		<h2 class="grid_12 caption" style="text-align:center;"><span>{% trans "Seasons" %}</span></h2>
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+			<div class="grid_9">{% for season in season_list %}
+				<a class="portfolio_item float alpha" href="{% url get_season serie_slug=serie.slug_name season=season.season %}">
+					<span>{% trans "Season" %} {{ season }}</span>
+					<img class="" src="/static/images/image_not_available.png" height="180" alt=""/>
+				</a>
+			</div>{% endfor %}
 
-<br />
-{# serie.rating_user_votes #}
-{# serie.rating_user.get_percent #}
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+		<!-- Client pickup line -->
+		<h2 class="grid_12 caption" style="text-align:center;"><span>{% trans "Actors" %}</span></h2>
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+			<div class="grid_9">{% for actor in serie.actors.all %}
+				<a class="portfolio_item float alpha" href="{{ actor.get_absolute_url }}">
+					<span>{{ actor.name }} as {{actor.role_set.all.0.role}}</span>
+				       {% if actor.images.get %}{% thumbnail actor.images.get.src "280x280" as img_actor %}
+					   <img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
+					   {% else %}<img id="actor_unknown" width="180" src="/static/images/image_not_available.png">
+				       {% endif %}
+				</a>
+			</div>{% endfor %}
 
-<ul>
-  {% if serie.network.name %}
-  <h2><li>{% trans "Network" %}:</h2> <a href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a></li>
-  {% endif %}
-  <li>
-  <h2>{% trans "Genre" %}:</h2>
-    <ul>
-      {% for genre in serie.genres.all %}
-      <li><a href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
-  <li><h2>{% trans "Runtime" %}:</h2> {{ serie.runtime }} {% trans "minutes" %}</li>
-  <li><h2>{% trans "Description" %}:</h2> {{ serie.description }}</li>
-</ul>
 
-<h2>{% trans "Seasons" %}: </h2>
-  {% for season in season_list %}<br/> 
-    <li><a href="{% url get_season serie_slug=serie.slug_name season=season %}">{% trans "Season" %} {{ season }}
-						<img src="/static/images/image_not_available.png" height="180"> 
-</a>
-      {% endfor %}
-     </table>
-</ul>
 
-  <h2>{% trans "Actors" %}:</h2>
-    <ul>
-        {% for actor in serie.actors.all %}   
-          <li><a href={{ actor.get_absolute_url }}>{{ actor.name }}
-               {% if actor.images.get %}{% thumbnail actor.images.get.src "280x280" as img_actor %}
-                   <img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
-                   {% else %}<img id="actor_unknown" width="180" src="/static/images/image_not_available.png">
-               {% endif %}
-              </a> 
-      {% endfor %}
-    </ul>
-
-<br />
-<a href="{% url serie-index %}">{% trans "Series list" %}</a>
-<br /> 
-</a>
-
-<br/>
-<br/>
-
-<div class="comments">
-<br/> {% get_comment_count for serie as comment_count %}
+{% get_comment_count for serie as comment_count %}
 {{ comment_count }} comentarios 
-<br/>
-<br/>
+
 {% render_comment_list for serie %}
-</div>
-<br/>
-<br/>
 
 {% with request.path as next %}
 {% render_comment_form for serie %}

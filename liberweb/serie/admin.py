@@ -47,7 +47,7 @@ class LinkInline(admin.TabularInline):
 
 
 class EpisodeAdmin(admin.ModelAdmin):
-    list_display = ['title', 'serie', 'season', 'episode', ]
+    list_display = ['title', 'season', 'episode', ]
 
 
 class SubtitleLinkInline(admin.TabularInline):
@@ -61,7 +61,7 @@ class LinkAdmin(admin.ModelAdmin):
         'get_epi_season',
         'get_epi_number',
         'get_serie',
-        'bot',
+        'user',
     ]
     inlines = [
         SubtitleLinkInline,
@@ -100,6 +100,21 @@ class ImageSerieAdmin(admin.ModelAdmin):
     image_serie.short_description = 'Thumbnail'
     image_serie.allow_tags = True
 
+
+class SeasonImageInline(admin.TabularInline):
+    model = m.ImageSeason
+    extra = 1
+
+
+class SeasonAdmin(admin.ModelAdmin):
+    model = m.Season
+    inlines = [
+        SeasonImageInline,
+        EpisodeInline,
+    ]
+
+
+
 admin.site.register(m.Actor)
 admin.site.register(m.Episode, EpisodeAdmin)
 admin.site.register(m.Genre, GenreAdmin)
@@ -110,4 +125,6 @@ admin.site.register(m.Languages)
 admin.site.register(m.Link, LinkAdmin)
 admin.site.register(m.Network)
 admin.site.register(m.Serie, SerieAdmin)
+admin.site.register(m.Season, SeasonAdmin)
 admin.site.register(m.SubtitleLink)
+admin.site.register(m.ImageSeason)

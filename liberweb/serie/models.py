@@ -56,8 +56,44 @@ class SerieAlias(models.Model):
     serie = models.ForeignKey("Serie", related_name="aliases")
 
 
+class Season(models.Model):
+    serie = models.ForeignKey('Serie', related_name="season")
+    season = models.IntegerField()
+
+    def __unicode__(self):
+        return self.serie.name + ' - ' + str(self.season)
+
+class ImageSeason(models.Model):
+    title = models.CharField(max_length=100)
+    src = models.ImageField(upload_to="img/season")
+    creator = models.CharField(max_length=100, null=True, blank=True)
+    is_poster = models.BooleanField()
+    season = models.ForeignKey("Season", related_name="images")
+
+    def __unicode__(self):
+        return self.title
+
+
+class LinkSeason(models.Model):
+    episode = models.ForeignKey("Season", related_name="links")
+    url = models.CharField(max_length=255, unique=True, db_index=True)
+    audio_lang = models.ForeignKey("Languages", related_name="audio_langs_season")
+    subtitle = models.ForeignKey(
+       "Languages",
+       related_name="sub_langs_season",
+       null=True,
+       blank=True,
+       help_text=_("integrated subtitles")
+    )
+    user = models.CharField(max_length=255, null=True, blank=True)
+    pub_date = models.DateTimeField(default=datetime.now)
+
+    def __unicode__(self):
+        return self.url
+
+
 class Episode(models.Model):
-    serie = models.ForeignKey('Serie', related_name="episodes")
+    season = models.ForeignKey('Season', related_name="episodes")
     air_date = models.DateField(
         _('air date'),
         blank=True,
@@ -66,7 +102,7 @@ class Episode(models.Model):
     )
     title = models.CharField(max_length=255)
     slug_title = models.SlugField(unique=False)
-    season = models.IntegerField()
+    #season = models.IntegerField()
     episode = models.IntegerField()
     description = models.TextField()
     created_time = models.DateField(auto_now_add=True)
@@ -100,7 +136,7 @@ class Link(models.Model):
        blank=True,
        help_text=_("integrated subtitles")
     )
-    bot = models.CharField(max_length=255, null=True, blank=True)
+    user = models.CharField(max_length=255, null=True, blank=True)
     pub_date = models.DateTimeField(default=datetime.now)
 
     def __unicode__(self):

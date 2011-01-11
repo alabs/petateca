@@ -1,5 +1,5 @@
 # pylint: disable-msg=E1102
-from liberweb.serie.models import Serie, Episode, Actor, Role, Genre, Network
+from liberweb.serie.models import Serie, Episode, Actor, Role, Genre, Network, Season
 from liberweb.serie.models import Genre, Network, Link
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
@@ -62,9 +62,7 @@ def get_serie(request, serie_slug):
     img_src = imgs[0].src if imgs else None
     #episodes = serie.episodes.all().order_by('season')
     # Hacemos un listado de las temporadas:
-    seasons = list(set(
-        [epi.season for epi in serie.episodes.all().order_by('season')]
-    ))
+    seasons = serie.season.all().order_by('season')
     score = int(round(serie.rating_user.get_rating()))
     # Vemos si el usuario tiene la serie como favorita
     try:
@@ -137,9 +135,9 @@ def get_season(request, serie_slug, season):
     ''' Get season, returns episode_list
     also handles link voting (courtesy of django-voting) '''
     serie = get_object_or_404(Serie, slug_name=serie_slug)
+    season = get_object_or_404(Season, serie=serie, season=season)
     episode_list = Episode.objects.filter(
         season=season,
-        serie=serie
     ).order_by('episode')
     season_info = {
         'serie': serie,
