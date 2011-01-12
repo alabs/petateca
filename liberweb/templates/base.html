@@ -57,7 +57,14 @@
 	<div id="wrapper" class="container_12 clearfix">
 
 		<!-- Text Logo -->
-		<h1 id="logo" class="grid_4">{{ title }}</h1>
+		<h1 id="logo" class="grid_4"><a href="/">LiberCopy</a></h1>
+
+        <script type="text/javascript" >
+            $(function(){
+                  setAutoComplete("SearchField", "SearchResults", "/search/lookup/?q=");
+              });
+        </script>
+
 		<!-- Navigation Menu -->
 		<ul id="navigation" class="grid_8">
 			{% if request.user.is_authenticated %}
@@ -67,7 +74,15 @@
 			{% endif %}
 			<li><a href="/blog"><span class="meta">nuestro blog</span><br />BLOG</a></li>
 			<li><a href="/series"><span class="meta">las series</span><br />SERIES</a></li>
-			<li><a href="/"><span class="meta">página principal</span><br />INICIO</a></li>
+			<div id="search_form">
+			          <fieldset>
+			            <legend></legend>
+			            <input id="SearchField" type="text" name="q" value="{% trans "Search" %}..." class="field" onblur="this.value='{% trans "Search" %}...'" onfocus="this.value=''" />
+			            <input type="submit" value="Go" class="button" / >
+          </fieldset>
+
+</div>
+
 		</ul>
 		
 		<div class="hr grid_12">&nbsp;</div>
@@ -75,7 +90,12 @@
 		{% block contents %}{% endblock %}
 		<!-- Footer -->
 		<p class="grid_12 footer clearfix">
-			<span class="float"><b>&copy; Copyright</b> <a href="">QwibbleDesigns</a> - remove upon purchase.</span>
+			<span class="float">
+			<p>Design based in Aurelius, made by <a href="http://qwibbledesigns.co.uk/"><b>QwibbleDesigns</b></a>.<br />
+			Images, Description and Information of series from <a href="http://thetvdb.com/"><b>TheTVDB</b></a>.<br />
+			Licensed <a href="#"><b>GPL Affero</b></a>. Use the Source, Luke.<br />
+			All contents <a href="#"><b>CC-BY-SA</b></a>. <br />
+			Powered by <a href="http://djangoproject.com/"><b>Django</b></a>.</p></span>
 			<a class="float right" href="#">top</a>
 
 		</p>
