@@ -1,0 +1,19 @@
+{% load i18n %}
+<p>
+        <h4 class="title ">{% trans "Browse by Genre" %}</h4>
+	<div class="hr clearfix dotted">&nbsp;</div>
+                <ul>
+		{% for g in genre_list %}
+			<li><a href="{% url get_genre slug_name=g.slug_name %}">{{g.name}}</a>
+		{% endfor %}
+		</ul>
+</p>
+<p>
+        <h4 class="title ">{% trans "Browse by Network" %}</h4>
+	<div class="hr clearfix dotted">&nbsp;</div>
+                <ul>
+		{% for n in network_list %}
+			<li><a href="{% url get_network slug_name=n.slug_name %}">{{n.name}}</a>
+		{% endfor %}
+		</ul>
+</p>

@@ -24,8 +24,6 @@ from django.contrib.auth.decorators import login_required
 @render_to('serie/serie_list.html')
 def get_serie_list(request):
     serie_list = Serie.objects.order_by('name').all()
-    genre_list = Genre.objects.order_by('name').all()
-    network_list = Network.objects.order_by('name').all()
     paginator = NamePaginator(
         serie_list,
         on="name",
@@ -46,9 +44,6 @@ def get_serie_list(request):
 
     return {
         'page': page,
-        'genre_list': genre_list,
-        'network_list': network_list,
-        'title': 'LiberCopy',
     }
 
 
@@ -225,23 +220,58 @@ def get_actor(request, slug_name):
     }
 
 
-@render_to('serie/get_genre.html')
+@render_to('serie/serie_list.html')
 def get_genre(request, slug_name):
     genre = get_object_or_404(Genre, slug_name=slug_name)
     serie_list = Serie.objects.filter(genres=genre.id)
     serie_list = serie_list.order_by("name")
+    paginator = NamePaginator(
+        serie_list,
+        on="name",
+        per_page = 10
+    )
+
+    # Make sure page request is an int. If not, deliver first page.
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    # If page request (9999) is out of range, deliver last page of results.
+    try:
+        page = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        page = paginator.page(paginator.num_pages)
     return {
         'genre': genre,
-        'serie_list': serie_list,
+        'page': page,
     }
 
 
-@render_to('serie/get_network.html')
+@render_to('serie/serie_list.html')
 def get_network(request, slug_name):
     network = get_object_or_404(Network, slug_name=slug_name)
     serie_list = Serie.objects.filter(network=network.id)
     serie_list = serie_list.order_by("name")
+    paginator = NamePaginator(
+        serie_list,
+        on="name",
+        per_page = 10
+    )
+
+    # Make sure page request is an int. If not, deliver first page.
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    # If page request (9999) is out of range, deliver last page of results.
+    try:
+        page = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        page = paginator.page(paginator.num_pages)
+
     return {
         'network': network,
-        'serie_list': serie_list,
+        'page': page,
     }
