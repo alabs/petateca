@@ -86,6 +86,7 @@ $(document).ready(function(){
 			</p>
 		</div>
 		
+{{image}}
   {% if image %}{% thumbnail image "400x300" as img_serie %}
       <img id="poster" src="{{ img_serie.url }}" />{% endthumbnail %}
   {% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" height=100> </div>
