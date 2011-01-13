@@ -13,69 +13,72 @@
   <div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Debe <a href="/accounts/login/?next={{request.path}}">registrarse o iniciar sesion</a> para votar</div>
 {% endif %}
 
-<div class="titulo_serie">{{serie.name}} - Season {{ episode.season }}</div>
-    <table style="width: 800px;" cellpadding="0" cellspacing="0">
-      <tr>
-        <td>E</td>
-        <td>Name</td>
-        <td>Description</td>
-        <td>Image</td>
-      </tr>
-    {% for episode in episode_list %} 
-      <tr> 
-       <td> {{ episode.episode }} </td> 
-       {% url liberweb.serie.views.get_episode serie_slug=serie.slug_name season=episode.season episode=episode.episode as url_epi %}
-       <td> <a href="{{ url_epi }}">{% if episode.title %} {{ episode.title }} {% else %} Episode {{ episode.episode }} {% endif %}</a></td> 
-       <td> {{ episode.description }} </td> 
-       <td> {% if episode.images.all.0.src %} 
-              {% thumbnail episode.images.all.0.src "200x200" as img_epi %} 
-                <img class="img_epi" src="{{ img_epi.url }}"> 
-              {% endthumbnail %} 
-            {% else %}
-            <img src="/static/images/image_not_available.png" height=100> 
-            {% endif %}</td> 
-      </tr>
-      <tr>
+		<!-- Catch Line and Link -->
+			<h2 class="grid_12 caption clearfix">{{serie.name}} - <span>Season {{season.season}}</span>.</h2>
+		
+		
+	{% for episode in episode_list %} 
+		<div class="catagory_1 clearfix">
+			<div class="grid_3 textright" >
+				<span class="meta">Episode {{episode.episode}}</span>
+				<h4 class="title "><a href="{{ url_epi }}">{% if episode.title %} {{ episode.title }} {% else %} Episode {{ episode.episode }} {% endif %}</a></h4>
+				<div class="hr clearfix dotted">&nbsp;</div>
+				<p>{{ episode.description }}</p>
+			</div>
+			<div class="grid_3">
+			{% if episode.images.all.0.src %}
+				{% thumbnail episode.images.all.0.src "200x200" as img_epi %}
+				<img class="img_epi" src="{{ img_epi.url }}">
+				{% endthumbnail %}
+			{% else %}
+				<img src="/static/images/image_not_available.png" height=100>
+			{% endif %}
+			</div>
+                        <div class="grid_6 right">
       {% if episode.links.all %}
-        <table class="links">
-            <tr> <td> </td>  <td> Domain </td> <td> Audio </td> <td> Subtitles </td> <td> Votes </td> </tr>
-          {% for link in episode.links.all %}
-            <tr>
-              <td> </td>
-              <td> <a href="{{ link.url }}"> {{ link.url|extract_domain }}</a> </td>
-              <td> {{ link.audio_lang }} </td><td> {{ link.subtitle }}</td>
-              <!-- Voting -->
-              <td class="vote">
+<table id="links">
+    <thead>
+    	<tr>
+		<th scope="col">Link</th>
+		<th scope="col">Audio</th>
+		<th scope="col">Subtitles</th>
+		<th scope="col">Votes</th>
+        </tr>
+    </thead>
+    <tbody>
+	{% for link in episode.links.all %}
+        <tr>
+		<td><a href="{{ link.url }}"> {{ link.url|extract_domain }}</a></td>
+		<td>{{ link.audio_lang }}</td>
+		<td>{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
+		<td>
                 {% score_for_object link as score %}
-                <form class="linkvote" id="linkup{{ link.id }}" action="." method="POST">
-                  <input type="hidden" name="vote" value="upvote"/>
-                  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-                  <input type="image" id="linkuparrow{{ link.id }}" src="/static/img/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
-                </form>
-
-                <a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
-                <p class="details">
-                  <span class="score" id="linkscore{{ link.id }}"
-                        title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">
-                   {{ score.score|default:0 }} 
-                  </span>
-                    </p>
-
-                <form class="linkvote" id="linkdown{{ link.id }}" action="." method="POST">
-                  <input type="hidden" name="vote" value="downvote"/>
-                  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-                  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/img/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
-                </form>
-
-              </td>
-            </tr>
-          {% endfor %}
-        </table>
+			<form class="linkvote" id="linkup{{ link.id }}" action="." method="POST">
+			  <input type="hidden" name="vote" value="upvote"/>
+			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
+			  <input type="image" id="linkuparrow{{ link.id }}" src="/static/img/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
+			</form>
+			<a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
+			  <span class="score" id="linkscore{{ link.id }}"
+				title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">
+			   {{ score.score|default:0 }} 
+			  </span>
+			<form class="linkvote" id="linkdown{{ link.id }}" action="." method="POST">
+			  <input type="hidden" name="vote" value="downvote"/>
+			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
+			  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/img/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+			</form>
+		</td>
+        </tr>
+	{% endfor %}
+    </tbody>
+</table>
       {% else %}
          No links available
       {% endif %}
-     </td>
-     </tr>
-    {% endfor %}
+			</div>
+		</div>
+		<div class="pr clearfix grid_12">&nbsp;</div>
+	{% endfor %}
 
 {% endblock %}
