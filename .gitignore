@@ -23,3 +23,4 @@ liberweb/.coverage
 liberweb/reports/
 liberweb/indexes/
 *.egg
+liberweb/local_settings.py

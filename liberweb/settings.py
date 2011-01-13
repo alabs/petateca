@@ -182,3 +182,8 @@ AUTHENTICATION_BACKENDS = (
 #RECAPTCHA_PRIVATE_KEY = '6LfR9L8SAAAAAKQiSXtrCZkzlDDhbO0aGob-xuk9'
 
 FORCE_LOWERCASE_TAGS = True
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
