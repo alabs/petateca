@@ -159,9 +159,20 @@ if DEBUG:
         MIDDLEWARE_CLASSES += (
             'debug_toolbar.middleware.DebugToolbarMiddleware',
         )
-        INTERNAL_IPS = ('127.0.0.1',) INSTALLED_APPS += ('debug_toolbar', ) DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False} except: pass HAYSTACK_SITECONF = 'liberweb.search_sites' HAYSTACK_SEARCH_ENGINE = 'whoosh'
+
+        INTERNAL_IPS = ('127.0.0.1',) 
+
+        INSTALLED_APPS += ('debug_toolbar', ) 
+
+        DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False} 
+    except: 
+        pass 
+
+HAYSTACK_SITECONF = 'liberweb.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
 
+# Registration
 AUTH_PROFILE_MODULE = 'userdata.UserProfile'
 ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = '/'
