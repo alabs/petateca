@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load comments %}
 {% load extract_domain %}
+{% load message_box %}
 {% block extrastyle %}   
     <link rel="stylesheet" href="/static/css/jquery.rating.css" type="text/css" />{% endblock %}
 {% block extrahead %}
@@ -23,7 +24,23 @@ $(document).ready(function(){
 }); 
 </script>{% endblock %}
 {% block contents %}
-
+{% spaceless %}
+    {% if message == "No registrado" %}
+     {% message_box "Debe <a href='/accounts/login/?next={{request.path}}'>registrarse o iniciar sesion</a> para votar" %} 
+    {% else %}{% if message == "Vote recorded" %}
+      {% message_box "Voto registrado" %}
+    {% else %}{% if message == "You have already voted" %}
+      {% message_box "Ya ha votado" %}
+    {% else %}{% if message %}
+      {% message_box "{{ message }}" %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% if error %}
+      {% message_box "Couldn't vote :/" %}
+    {% endif %}
+{% endspaceless %}
 		<!-- Column 1 / Project Information -->
 		<div class="grid_4">
 		<h4 class="title">{{serie.name}}
@@ -48,23 +65,8 @@ $(document).ready(function(){
       <input type="radio" name="user_rating" value="4" class="star" {% if score == 4 %}checked="checked"{% endif %}/>
       <input type="radio" name="user_rating" value="5" class="star" {% if score == 5 %}checked="checked"{% endif %}/>
       <button type="submit">Rate</button>
-    </form>{% spaceless %}
-    {% if message == "No registrado" %}
-      <div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Debe <a href="/accounts/login/?next={{request.path}}">registrarse o iniciar sesion</a> para votar</div>
-    {% else %}{% if message == "Vote recorded" %}
-      <div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Voto registrado</div>
-    {% else %}{% if message == "You have already voted" %}
-      <div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Ya ha votado</div>
-    {% else %}{% if message %}
-      <div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />{{ message }}</div>
-    {% endif %}
-    {% endif %}
-    {% endif %}
-    {% endif %}
-    {% if error %}
-      <div class="error"> Couldn't vote :( </div>
-    {% endif %}
-  </div>{% endspaceless %}
+    </form>
+  </div>
 </h4>
 		<div class="hr dotted clearfix">&nbsp;</div>
 

@@ -1,4 +1,5 @@
 {% extends "registration/registration_base.html" %}
+{% load message_box %}
 {% block title %}Login{% endblock %}
 {% block contents %}
 
@@ -6,7 +7,7 @@
 	<h2 class="grid_12 caption clearfix">You're already <span>logged in</span>! Go watch some <a href="/series">series</a></h2>
 {% else %}
 	{% if form.errors %}
-	<div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Your username and password didn't match. Please try again.</div>
+	{% message_box "Your username and password didn't match. Please try again." %}
 	{% endif %}
 
 	<!-- Caption Line -->

@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load extract_domain %}
 {% load voting_tags %}
+{% load message_box %}
 {% block title %} {{serie.name}} - Season {{ episode.season }} {% endblock %}
 {% block contents %}
 {% votes_by_user user on link_list as vote_dict %}
@@ -10,7 +11,7 @@
 {{ episode }}
 
 {% if message == "No registrado" %}
-  <div id="message_box" style="font-size:small;"><img id="close_message" style="float:right;cursor:pointer"  src="/static/img/close.png" />Debe <a href="/accounts/login/?next={{request.path}}">registrarse o iniciar sesion</a> para votar</div>
+  {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
 {% endif %}
 
 		<!-- Catch Line and Link -->

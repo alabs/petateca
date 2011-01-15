@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load dropdown_series %}
 {% load localeurl_tags %}
+{% load message_box %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -54,6 +55,9 @@
 	<![endif]-->
 </head>
 <body>
+{% if initial_message %}
+ {% message_box "Bienvenido a LiberCopy. Quiere leer nuestro <a href='/faq'>FAQ?</a>" %}
+{% endif %}
 <a href="/"><img src="http://quickribbon.com/ribbon/2011/01/6f990afc2ea0d0e80e61c49280e0732b.gif" border="0" width="150" height="150" style="position:absolute; right:0px; top:0px; margin:0px; padding:0px"></a>
 	<div id="wrapper" class="container_12 clearfix">
 
