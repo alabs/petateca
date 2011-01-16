@@ -58,17 +58,18 @@ def get_serie(request, serie_slug):
     #episodes = serie.episodes.all().order_by('season')
     # Hacemos un listado de las temporadas:
     seasons = serie.season.all().order_by('season')
-    score = int(round(serie.rating_user.get_rating()))
+    score = int(round(serie.rating.get_rating()))
     # Vemos si el usuario tiene la serie como favorita
     try:
         serie.favorite_of.get(user=request.user.profile)
         favorite_status = 'yes'
     except:
         favorite_status = 'no'
+    serie_title = serie.name.title()
     # Preparamos serie_info con la serie, titulo, imagenes, episodios...
     serie_info = {
         'serie': serie,
-        'title': serie.name,
+        'title': serie_title,
         'image': img_src,
         'season_list': seasons,
         'score': score,
@@ -84,14 +85,14 @@ def get_serie(request, serie_slug):
                 'message': 'No registrado',
             })
         else:
-            if request.POST.has_key('user_rating'):
+            if request.POST.has_key('rating'):
                 # Si el usuario esta autenticado, prepara el voto
                 content_type = ContentType.objects.get(app_label='serie', name='serie')
                 params = {
                     'content_type_id': content_type.id,
                     'object_id': serie.id,
-                    'field_name': 'rating_user',  # campo en el modelo
-                    'score': request.POST['user_rating'],
+                    'field_name': 'rating',  # campo en el modelo
+                    'score': request.POST['rating'],
                 }
                 response = AddRatingView()(request, **params)
                 try:

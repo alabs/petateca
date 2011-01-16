@@ -19,14 +19,8 @@ class Serie(models.Model):
     )
     actors = models.ManyToManyField("Actor", through='Role')
     description = models.TextField()
-    rating = models.FloatField(
-        blank=True,
-        null=True,
-        help_text=('rating from eztv')
-    )
-    rating_count = models.IntegerField(default=0)
     finished = models.BooleanField(default=False)
-    rating_user = RatingField(range=5, can_change_vote=True)
+    rating = RatingField(range=5, can_change_vote=True)
 
     def __unicode__(self):
         return self.name
@@ -62,6 +56,13 @@ class Season(models.Model):
 
     def __unicode__(self):
         return self.serie.name + ' - ' + str(self.season)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('liberweb.serie.views.get_season', (), {
+                'serie_slug': self.serie.slug_name,
+                'season': self.season,
+        })
 
 class ImageSeason(models.Model):
     title = models.CharField(max_length=100)

@@ -94,7 +94,6 @@ class Command(BaseCommand):
             except m.SerieAlias.DoesNotExist:
                 #Normalize serie name in imdb
                 normalized_serie = self.normalize_name(serie)
-                print normalized_serie
                 if normalized_serie:
                     db_serie = self.populate_serie(normalized_serie, serie)
                     if not db_serie:
@@ -125,21 +124,20 @@ class Command(BaseCommand):
             db_episode.description_en = "Not available"
             db_episode.description_es = "No disponible"
             db_episode.save()
+            print "finalized importing episode, so what now?"
 
         db_lang = self.normalize_lang(lang)
         if not db_lang:
             warn(u"Invalid lang %s" % lang)
             return
-        try:
-            db_link = m.Link()
-            db_link.episode = db_episode
-            db_link.url = links
-            db_link.audio_lang = self.normalize_lang(lang)
-            db_link.subtitle = self.normalize_lang(sublang)
-            db_link.bot = self.bot
-            db_link.save()
-        except:
-            "WTF, AN ERROR!!!!!1"
+
+        db_link = m.Link()
+        db_link.episode = db_episode
+        db_link.url = links
+        db_link.audio_lang = self.normalize_lang(lang)
+        db_link.subtitle = self.normalize_lang(sublang)
+        db_link.bot = self.bot
+        db_link.save()
 
     def normalize_name(self, name, retries=3):
         if retries:
@@ -205,8 +203,8 @@ class Command(BaseCommand):
         if reg_en["network"]:
             db_serie.network = self.populate_network(reg_en["network"])
 
-        db_serie.rating = reg_en["rating"]
-        db_serie.rating_count = reg_en["ratingcount"]
+        #db_serie.rating = reg_en["rating"]
+        #db_serie.rating_count = reg_en["ratingcount"]
         db_serie.runtime = reg_en["runtime"]
 
         db_serie.description_en = reg_en["overview"]
@@ -255,23 +253,20 @@ class Command(BaseCommand):
      
         db_season.save()
 
-        try:
-            m.ImageSeason(is_poster=True, season=db_season)
-        except:
-        
-            # seasonwide?
-            if reg_en['_banners']['season']['season']:
-                season_banners = reg_en['_banners']['season']['season']
-                for img_banner in season_banners:
-                    if int(ntemp) == int(season_banners[img_banner]['season']):
-                        img_url = season_banners[img_banner]['_bannerpath']
-                        img_title = season_banners[img_banner]['id']
-                        img = urllib.urlretrieve(img_url)
-                        db_img = m.ImageSeason(is_poster=True, title=img_title)
-                        db_img.season = db_season
-                        file_content = ContentFile(open(img[0]).read())
-                        db_img.src.save(os.path.basename(img_url), file_content)
-                        db_img.save()
+        # seasonwide?
+        if reg_en['_banners']['season']['season']:
+            season_banners = reg_en['_banners']['season']['season']
+            for img_banner in season_banners:
+                if int(ntemp) == int(season_banners[img_banner]['season']):
+                    img_url = season_banners[img_banner]['_bannerpath']
+                    img_title = season_banners[img_banner]['id']
+                    img = urllib.urlretrieve(img_url)
+                    db_img = m.ImageSeason(is_poster=True, title=img_title)
+                    db_img.season = db_season
+                    file_content = ContentFile(open(img[0]).read())
+                    db_img.src.save(os.path.basename(img_url), file_content)
+                    db_img.save()
+                    continue
         return db_season
 
     
@@ -308,7 +303,6 @@ class Command(BaseCommand):
                     try:
                         db_episode.title_es = reg_es[n_season][n_episode]["episodename"]
                         db_episode.description_es = reg_es[n_season][n_episode]["overview"] or "No disponible"
-                        print db_episode.description_es
                     except:
                         db_episode.title_es = "%sx%s" % (n_season, n_episode)
                         db_episode.description_es = "No disponible"
