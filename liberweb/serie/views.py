@@ -138,6 +138,7 @@ def get_season(request, serie_slug, season):
     season_info = {
         'serie': serie,
         'episode_list': episode_list,
+        'season': season,
     }
 
     if request.method == 'GET':

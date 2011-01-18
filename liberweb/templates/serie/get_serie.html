@@ -107,7 +107,9 @@ $(document).ready(function(){
 		
 <!-- COLUMN 2 -->
 <div class="grid_7">
+	<!-- DESCRIPTION -->
 	<p class="clearfix"> {{ serie.description }}</p>
+	<!-- ACTORS -->
 	<h2><span>{% trans "Actors" %}</span></h2>
 	{% for actor in serie.actors.all %}
 		{% if actor.role_set.all.0.role %}
@@ -122,7 +124,9 @@ $(document).ready(function(){
 	{% endfor %}
 </div>
 
+<!-- COLUMN 3 -->
 <div class="grid_1">
+	<!-- SEASONS -->
 	<h2><span>{% trans "Seasons" %}</span></h2>{% for season in season_list %}
 	<a class="portfolio_item float alpha" href="{{ season.get_absolute_url }}">
 	<span>{% trans "Season" %} {{ season.season }}</span> 
@@ -134,15 +138,16 @@ $(document).ready(function(){
 	</a>{% endfor %}
 		
 </div>
-		<!-- Client pickup line -->
 
+<!-- COMMENTS -->
 <h2> Comments </h2>
 
 {% render_comment_list for serie %}
 
+<!-- ADD A COMMENT -->
 {% with request.path as next %}
 {% render_comment_form for serie %}
 {% endwith %}
-	<div class="hr clearfix">&nbsp;</div>
+<div class="hr clearfix">&nbsp;</div>
 
 {% endblock %}

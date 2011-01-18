@@ -14,45 +14,51 @@
   {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
 {% endif %}
 
-		<!-- Catch Line and Link -->
-			<h2 class="grid_12 caption clearfix">{{serie.name}} - <span>Season {{season.season}}</span>.</h2>
-		
-		
-	{% for episode in episode_list %} 
-		<div class="catagory_1 clearfix">
-			<div class="grid_3 textright" >
-				<span class="meta">Episode {{episode.episode}}</span>
-				<h4 class="title "><a href="{{ url_epi }}">{% if episode.title %} {{ episode.title }} {% else %} Episode {{ episode.episode }} {% endif %}</a></h4>
-				<div class="hr clearfix dotted">&nbsp;</div>
-				<p>{{ episode.description }}</p>
-			</div>
-			<div class="grid_3">
-			{% if episode.images.all.0.src %}
-				{% thumbnail episode.images.all.0.src "200x200" as img_epi %}
-				<img class="img_epi" src="{{ img_epi.url }}">
-				{% endthumbnail %}
-			{% else %}
-				<img src="/static/images/image_not_available.png" height=100>
-			{% endif %}
-			</div>
-                        <div class="grid_6 right">
-      {% if episode.links.all %}
-<table id="links">
-    <thead>
-    	<tr>
-		<th scope="col">Link</th>
-		<th scope="col">Audio</th>
-		<th scope="col">Subtitles</th>
-		<th scope="col">Votes</th>
-        </tr>
-    </thead>
-    <tbody>
-	{% for link in episode.links.all %}
-        <tr>
+<!-- TITLE -->
+<h2 class="grid_12 caption clearfix">{{serie.name|title}} - <span>Season {{season.season}}</span>.</h2>
+<div class="hr clearfix dotted">&nbsp;</div>
+
+{% for episode in episode_list %} 
+<div class="catagory_1 clearfix">
+<!-- COLUMN 1 -->
+<div class="grid_4 textright" >
+	<span class="meta">Episode {{episode.episode}}</span>
+	<h4 class="title "><a href="{{ url_epi }}">{% if episode.title %} {{ episode.title }} {% else %} Episode {{ episode.episode }} {% endif %}</a></h4>
+	<p><span>First Aired</span> {{episode.air_date }} </p> 
+	<div class="hr clearfix dotted">&nbsp;</div>
+	<p>{{ episode.description }}</p>
+</div>
+<!-- COLUMN 2 -->
+<div class="grid_3">
+	{% if episode.images.all.0.src %}
+	{% thumbnail episode.images.all.0.src "200x200" as img_epi %}
+	<img class="img_epi" src="{{ img_epi.url }}">
+	{% endthumbnail %}
+	{% else %}
+	<img src="/static/images/image_not_available.png" height=100>
+	{% endif %}
+</div>
+
+<!-- COLUMN 3 -->
+<div class="grid_5 right">
+	{% if episode.links.all %}
+	<table id="links">
+	    <thead>
+		<tr>
+			<th scope="col">Link</th>
+			<th scope="col">Audio</th>
+			<th scope="col">Subtitles</th>
+			<th scope="col">Votes</th>
+		</tr>
+	    </thead>
+	    <tbody>
+		{% for link in episode.links.all %}
+		<tr>
 		<td><a href="{{ link.url }}"> {{ link.url|extract_domain }}</a></td>
 		<td>{{ link.audio_lang }}</td>
 		<td>{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
 		<td>
+		<!-- VOTING -->
                 {% score_for_object link as score %}
 			<form class="linkvote" id="linkup{{ link.id }}" action="." method="POST">
 			  <input type="hidden" name="vote" value="upvote"/>
@@ -69,11 +75,11 @@
 			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
 			  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/img/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
 			</form>
-		</td>
-        </tr>
-	{% endfor %}
-    </tbody>
-</table>
+			</td>
+		</tr>
+		{% endfor %}
+	    </tbody>
+	</table>
       {% else %}
          No links available
       {% endif %}
