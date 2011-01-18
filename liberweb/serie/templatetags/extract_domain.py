@@ -8,7 +8,10 @@ register = template.Library()
 @stringfilter
 def extract_domain(value):  # Only one argument.
     "Extract domain from url"
-    domain = value.split('http://')[1].split('/')[0]
-    if domain.startswith('www.'):
-        domain = domain.replace('www.', '')
+    try:
+        domain = value.split('http://')[1].split('/')[0]
+        if domain.startswith('www.'):
+            domain = domain.replace('www.', '')
+    except:
+        domain = "WRONG URL???"
     return domain
