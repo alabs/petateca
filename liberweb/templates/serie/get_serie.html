@@ -79,20 +79,18 @@ $(document).ready(function(){
 		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- NETWORK -->
 	{% if serie.network.name %}
-	<p><h4>{% trans "Network" %}:</h4> 
+	<h4>{% trans "Network" %}:</h4> 
 		<a class="button float" href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a>
-	</p>
 	{% endif %}
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- GENRE -->
-	<p><h4>{% trans "Genre" %}:</h4> 
+	<h4>{% trans "Genre" %}:</h4> 
       		{% for genre in serie.genres.all %}
-		      <a class="button float" href="{{ genre.get_absolute_url}}">{{ genre.name }}</a>
+			<a class="button float" href="{{ genre.get_absolute_url}}">{{ genre.name }}</a>
 		{% endfor %}
-	</p>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- RUNTIME -->
-	<p><h4>{% trans "Runtime" %}:</h4> {{ serie.runtime }} {% trans "minutes" %}</p>
+	<h4>{% trans "Runtime" %}:</h4> {{ serie.runtime }} {% trans "minutes" %}
 		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- BUTTONS -->
 		<p class="clearfix">
@@ -117,7 +115,7 @@ $(document).ready(function(){
 			<span>{{ actor.name }} as {{actor.role_set.all.0.role}}</span>
 		       {% if actor.images.get %}{% thumbnail actor.images.get.src "180x180" as img_actor %}
 			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
-			{% else %}<img id="actor_unknown" width="180" src="/static/images/image_not_available.png">
+			{% else %}<img id="actor_unknown" width="120" height="180" src="/static/images/image_not_available.png">
 			{% endif %}
 			</a>
 		{% endif %}
@@ -133,16 +131,19 @@ $(document).ready(function(){
 	{% if season.images.all.0 %} {% thumbnail season.images.all.0.src "180x160" as img_season %} 
 	<img src="{{ img_season.url }}" alt=""/>{% endthumbnail %}
 	{% else %}<div class="image_not_found">
-	<img src="/static/images/image_not_available.png" width=150></div>
+	<img src="/static/images/image_not_available.png" width=110></div>
 	{% endif %}
 	</a>{% endfor %}
 		
 </div>
 
+<div class="hr clearfix">&nbsp;</div>
 <!-- COMMENTS -->
 <h2> Comments </h2>
-
 {% render_comment_list for serie %}
+{% if comment_count == 0 %}
+<p> There are no comments yet. Be the first!</p>
+{% endif %}
 
 <!-- ADD A COMMENT -->
 {% with request.path as next %}

@@ -21,30 +21,6 @@ from voting.models import Vote
 from django.contrib.auth.decorators import login_required
 
 
-@render_to('serie/serie_list.html')
-def get_serie_list(request):
-    serie_list = Serie.objects.order_by('name').all()
-    paginator = NamePaginator(
-        serie_list,
-        on="name",
-        per_page = 10
-    )
-
-    # Make sure page request is an int. If not, deliver first page.
-    try:
-        page = int(request.GET.get('page', '1'))
-    except ValueError:
-        page = 1
-
-    # If page request (9999) is out of range, deliver last page of results.
-    try:
-        page = paginator.page(page)
-    except (EmptyPage, InvalidPage):
-        page = paginator.page(paginator.num_pages)
-
-    return {
-        'page': page,
-    }
 
 
 @render_to('serie/get_serie.html')
@@ -158,28 +134,17 @@ def get_season(request, serie_slug, season):
         return season_info
 
 
-@render_to('serie/get_episodes.html')
-# DEPRECATED, ahora se tira de get_season
-def get_episodes(request, serie_slug):
-    serie = get_object_or_404(Serie, slug_name=serie_slug)
-    episodes = serie.episodes.all().order_by('season')
-    return {
-        'serie': serie,
-        'episode_list': episodes,
-        'title': _("Episodes of %(name)s") % {"name": serie.name},
-    }
-
-
 @render_to('serie/get_episode.html')
-# Es Interesnte tener una ficha por episodio?? dejo la pregunta en el aire
 def get_episode(request, serie_slug, season, episode):
     serie = get_object_or_404(Serie, slug_name=serie_slug)
+    season = get_object_or_404(Season, serie=serie, season=season)
     episode = get_object_or_404(
         Episode,
         serie=serie,
         season=season,
         episode=episode
     )
+    print serie, season, episode
     return {
         'serie': serie,
         'episode': episode,
@@ -222,8 +187,12 @@ def get_actor(request, slug_name):
     }
 
 
+# SERIES_LIST: todas van a serie_list 
+
 @render_to('serie/serie_list.html')
 def get_genre(request, slug_name):
+    genre_list = Genre.objects.order_by('name').all()
+    network_list = Network.objects.order_by('name').all()
     genre = get_object_or_404(Genre, slug_name=slug_name)
     serie_list = Serie.objects.filter(genres=genre.id)
     serie_list = serie_list.order_by("name")
@@ -247,11 +216,15 @@ def get_genre(request, slug_name):
     return {
         'genre': genre,
         'page': page,
+        'genre_list': genre_list,
+        'network_list': network_list,
     }
 
 
 @render_to('serie/serie_list.html')
 def get_network(request, slug_name):
+    genre_list = Genre.objects.order_by('name').all()
+    network_list = Network.objects.order_by('name').all()
     network = get_object_or_404(Network, slug_name=slug_name)
     serie_list = Serie.objects.filter(network=network.id)
     serie_list = serie_list.order_by("name")
@@ -276,4 +249,36 @@ def get_network(request, slug_name):
     return {
         'network': network,
         'page': page,
+        'genre_list': genre_list,
+        'network_list': network_list,
+    }
+
+
+@render_to('serie/serie_list.html')
+def get_serie_list(request):
+    genre_list = Genre.objects.order_by('name').all()
+    network_list = Network.objects.order_by('name').all()
+    serie_list = Serie.objects.order_by('name').all()
+    paginator = NamePaginator(
+        serie_list,
+        on="name",
+        per_page = 10
+    )
+
+    # Make sure page request is an int. If not, deliver first page.
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    # If page request (9999) is out of range, deliver last page of results.
+    try:
+        page = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        page = paginator.page(paginator.num_pages)
+
+    return {
+        'page': page,
+        'genre_list': genre_list,
+        'network_list': network_list,
     }

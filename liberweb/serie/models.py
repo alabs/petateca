@@ -102,8 +102,6 @@ class Episode(models.Model):
         help_text=_('first broadcast date')
     )
     title = models.CharField(max_length=255)
-    #slug_title = models.SlugField(unique=False)
-    #season = models.IntegerField()
     episode = models.IntegerField()
     description = models.TextField()
     created_time = models.DateField(auto_now_add=True)
@@ -111,11 +109,6 @@ class Episode(models.Model):
 
     def __unicode__(self):
         return self.title
-
-    #def save(self, force_insert=False, force_update=False, using=None):
-    #    if not self.slug_title:
-    #        self.slug_title = slugify(self.title)
-    #    super(Episode, self).save() #(force_insert, force_update, using)
 
     @models.permalink
     def get_absolute_url(self):

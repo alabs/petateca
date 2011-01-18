@@ -1,37 +1,62 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
-{% load serie_sidebar %}
 {% block title %} Serie List {% endblock %}
 {% block contents %}
 	<h2 class="grid_12 caption clearfix"> Watch the best <span>series</span>{% if network %} of the Network <span>{{network.name}}</span>{% endif %}{% if genre %} of the Genre <span>{{genre.name}}</span>{% endif %}.</h2>
 	<div class="pr grid_12 clearfix">&nbsp;</div>
-		<!-- Section 3 -->
+		<!-- COLUMN 1 -->
 		<div class="catagory_1 clearfix">
-			<!-- Row 1 -->
+			<!-- BROWSE -->
 			<div class="grid_3 textright" >
-			<p>	<!-- span class="meta">Cross-browser tested</span -->
-				<h4 class="title ">{% trans "Browse by Letter" %}</h4>
-
-				<div class="hr clearfix dotted">&nbsp;</div>
+			<!-- BY GENRE -->
+			<p>
+			<h4 class="title ">{% trans "Browse by Genre" %}</h4>
+			<div class="hr clearfix dotted">&nbsp;</div>
+				<ul>
+				{% for g in genre_list %}
+					{% if g.name == genre.name %}
+						<li>{{g.name}}
+					{% else %}
+						<li><a href="{% url get_genre slug_name=g.slug_name %}">{{g.name}}</a>
+					{% endif %}
+				{% endfor %}
+				</ul>
+			</p>
+			<!-- BY NETWORK -->
+			<p>
+			<h4 class="title ">{% trans "Browse by Network" %}</h4>
+			<div class="hr clearfix dotted">&nbsp;</div>
+				<ul>
+				{% for n in network_list %}
+					{% if n.name == network.name %}
+						<li>{{n.name}}
+					{% else %}
+						<li><a href="{% url get_network slug_name=n.slug_name %}">{{n.name}}</a>
+					{% endif %}
+				{% endfor %}
+				</ul>
+			</p>
+			</div>
+			<div class="grid_9">
+			<!-- ALPHABETHICAL PAGINATION -->
+			<p>
 				<div class="pagination">
+					<h2 style="text-align:center;">
 					{% for p in page.paginator.pages %}
-    						{% ifequal p serie %}
+    						{% ifequal p page %}
       							<span class="selected">{{ page }}</span>
     						{% else %}
       						<a href="?page={{ p.number }}">{{ p }}</a>
     						{% endifequal %}
   					{% endfor %}
+					</h4>
 				</div>
 			</p>
-			{% serie_sidebar %}
-				<p><!--Cras vestibulum lorem et dui mollis sed posuere leo semper. Integer ac ultrices neque. Cras lacinia orci a augue tempor egestas. Sed cursus, sem ut vehicula vehicula, ipsum est mattis justo, at volutpat nibh arcu sit amet risus.--></p>
-
-			</div>
-			<div class="grid_9">
+			<!-- THUMBNAILS -->
 				{% for serie in page.object_list %}
     					<a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
-						<span>{{ serie.name }}</span>
+						<span>{{ serie.name|title }}</span>
     					{% if serie.images.get_is_poster.0.src %}
         					{% thumbnail serie.images.get_is_poster.0.src "300x300" as img_serie %}
           						<img src="{{ img_serie.url }}" />

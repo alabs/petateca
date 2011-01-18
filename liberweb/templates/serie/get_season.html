@@ -23,7 +23,7 @@
 <!-- COLUMN 1 -->
 <div class="grid_4 textright" >
 	<span class="meta">Episode {{episode.episode}}</span>
-	<h4 class="title "><a href="{{ url_epi }}">{% if episode.title %} {{ episode.title }} {% else %} Episode {{ episode.episode }} {% endif %}</a></h4>
+	<h4 class="title "><a href="{{ episode.get_absolute_url }}">{% if episode.title %}{{ episode.title }}{% else %}Episode {{ episode.episode }}{% endif %}</a></h4>
 	<p><span>First Aired</span> {{episode.air_date }} </p> 
 	<div class="hr clearfix dotted">&nbsp;</div>
 	<p>{{ episode.description }}</p>
@@ -31,11 +31,11 @@
 <!-- COLUMN 2 -->
 <div class="grid_3">
 	{% if episode.images.all.0.src %}
-	{% thumbnail episode.images.all.0.src "200x200" as img_epi %}
-	<img class="img_epi" src="{{ img_epi.url }}">
-	{% endthumbnail %}
+		{% thumbnail episode.images.all.0.src "200x200" as img_epi %}
+		<img class="img_epi" src="{{ img_epi.url }}">
+		{% endthumbnail %}
 	{% else %}
-	<img src="/static/images/image_not_available.png" height=100>
+		<img src="/static/images/image_not_available.png" height=100>
 	{% endif %}
 </div>
 
