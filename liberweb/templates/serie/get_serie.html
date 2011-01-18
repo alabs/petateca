@@ -45,28 +45,13 @@ $(document).ready(function(){
 
 <!-- COLUMN 1 -->
 <div class="grid_3">
-	<!-- TITLE -->
-	<h4 class="title">{{serie.name|title}}</h4>
 	<!-- IMAGE -->
 	{% if image %}{% thumbnail image "400x300" as img_serie %}
 	<img id="poster" src="{{ img_serie.url }}" />{% endthumbnail %}
 	{% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" height=100> </div>
 	{% endif %}
-	<!-- FAVORITE -->
-	    {% if favorite == "no" %}
-	  <form class="favorite" id="favorite" action="." method="POST">
-	    <input type="hidden" name="favorite" value="favorite"/>
-	    <input type="image" class="blackhearthover" src="/static/images/heart_black.png">
-	  </form>
-	  {% else %} {% if favorite == "yes" %}
-	  <form class="favorite" id="favorite" action="." method="POST">
-	    <input type="hidden" name="no-favorite" value="no-favorite"/>
-	    <input type="image" class="redhearthover" src="/static/images/heart_red.png">
-	  </form>
-	    {% endif %}
-	    {% endif %}
 	<!-- RATING -->
-	  <div id="rating">
+	  <div class="rating float right">
 	    <form action="." method="POST">
 	      <input type="radio" name="user_rating" value="1" class="star" {% if score == 1 %}checked="checked"{% endif %}/>
 	      <input type="radio" name="user_rating" value="2" class="star" {% if score == 2 %}checked="checked"{% endif %}/>
@@ -76,7 +61,7 @@ $(document).ready(function(){
 	      <button type="submit">Rate</button>
 	    </form>
 	  </div>
-		<div class="hr dotted clearfix">&nbsp;</div>
+	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- NETWORK -->
 	{% if serie.network.name %}
 	<h4>{% trans "Network" %}:</h4> 
@@ -105,10 +90,28 @@ $(document).ready(function(){
 		
 <!-- COLUMN 2 -->
 <div class="grid_7">
+	<!-- TITLE -->
+	<h1 class="title float" style="text-align:center;">{{serie.name|title}}</h1>
+	<!-- FAVORITE -->
+	    {% if favorite == "no" %}
+	  <form class="favorite float right" action="." method="POST">
+	    <input type="hidden" name="favorite" value="favorite"/>
+	    <input type="image" class="blackhearthover" src="/static/images/heart_black.png">
+	  </form>
+	  {% else %} {% if favorite == "yes" %}
+	  <form class="favorite float right" action="." method="POST">
+	    <input type="hidden" name="no-favorite" value="no-favorite"/>
+	    <input type="image" class="redhearthover" src="/static/images/heart_red.png">
+	  </form>
+	    {% endif %}
+	    {% endif %}
+	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- DESCRIPTION -->
 	<p class="clearfix"> {{ serie.description }}</p>
 	<!-- ACTORS -->
-	<h2><span>{% trans "Actors" %}</span></h2>
+	<div class="hr clearfix">&nbsp;</div>
+	<h2>{% trans "Actors" %}</h2>
+	<div class="hr dotted clearfix">&nbsp;</div>
 	{% for actor in serie.actors.all %}
 		{% if actor.role_set.all.0.role %}
 			<a class="portfolio_item float alpha" href="{{ actor.get_absolute_url }}">
