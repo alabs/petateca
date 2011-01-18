@@ -1,3 +1,5 @@
+# pylint: disable-msg=W0611
+# pylint: disable-msg=W0401
 from django.conf.urls.defaults import *
 from blog.models import Post
 
