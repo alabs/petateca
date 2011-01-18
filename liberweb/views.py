@@ -14,7 +14,6 @@ def index(request):
                 'count_episode': count_episode,
                 'count_serie': count_serie,
          }
-    print index_response
     if request.session.get('visited', False):
         return index_response
     else:
@@ -23,6 +22,5 @@ def index(request):
         index_response.update({
                 'initial_message': initial_message,
          })
-        print index_response
         return index_response
 
