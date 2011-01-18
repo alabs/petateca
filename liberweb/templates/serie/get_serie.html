@@ -98,7 +98,7 @@ $(document).ready(function(){
 		</p>
 		<p class="clearfix">
 		{% get_comment_count for serie as comment_count %}
-		<a href="#contact_form" class="button float">{{comment_count}} Comments</a>
+		<a href="#comments" class="button float">{{comment_count}} Comments</a>
 		</p>
 </div>
 
@@ -138,17 +138,19 @@ $(document).ready(function(){
 </div>
 
 <div class="hr clearfix">&nbsp;</div>
-<!-- COMMENTS -->
-<h2> Comments </h2>
-{% render_comment_list for serie %}
-{% if comment_count == 0 %}
-<p> There are no comments yet. Be the first!</p>
-{% endif %}
+<div id="comments">
+	<!-- COMMENTS -->
+	<h2> Comments </h2>
+	{% render_comment_list for serie %}
+	{% if comment_count == 0 %}
+	<p> There are no comments yet. Be the first!</p>
+	{% endif %}
 
-<!-- ADD A COMMENT -->
-{% with request.path as next %}
-{% render_comment_form for serie %}
-{% endwith %}
+	<!-- ADD A COMMENT -->
+	{% with request.path as next %}
+	{% render_comment_form for serie %}
+	{% endwith %}
+</div>
 <div class="hr clearfix">&nbsp;</div>
 
 {% endblock %}
