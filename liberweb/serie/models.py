@@ -6,6 +6,12 @@ from djangoratings.fields import RatingField
 from datetime import datetime
 
 
+class IsPosterManager(models.Manager):
+    ''' Get if an image is the poster '''
+    def get_is_poster(self):
+        return self.filter(is_poster=True)
+
+
 class Serie(models.Model):
     name = models.CharField(max_length=255)
     slug_name = models.SlugField(unique=True, help_text=_('name in URL'))
@@ -17,15 +23,16 @@ class Serie(models.Model):
         null=True,
         help_text=_('duration of episodes in minutes')
     )
-    actors = models.ManyToManyField("Actor", through='Role')
+    actors = models.ManyToManyField("Actor", through='Role', help_text=_('actors that worked in the serie'))
     description = models.TextField()
-    finished = models.BooleanField(default=False)
-    rating = RatingField(range=5, can_change_vote=True)
+    finished = models.BooleanField(default=False, help_text=_('the serie is finished running?'))
+    rating = RatingField(range=5, can_change_vote=True, help_text=_('star rating'))
 
     def __unicode__(self):
         return self.name
 
     def save(self, force_insert=False, force_update=False, using=None):
+        ''' When is saved, the title is converted to slug - aka URL''' 
         self.slug_name = slugify(self.name)
         super(Serie, self).save(force_insert, force_update, using)
 
@@ -39,22 +46,23 @@ class Role(models.Model):
     serie = models.ForeignKey("Serie")
     actor = models.ForeignKey("Actor")
     sortorder = models.IntegerField(blank=True, null=True)
-    role = models.CharField(max_length=255)
+    role = models.CharField(max_length=255, help_text=_('character the actor played in the serie'))
 
     class Meta:
         unique_together = ("serie", "actor", "role")
 
 
 class SerieAlias(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=True, help_text=_('aliases for the same serie'))
     serie = models.ForeignKey("Serie", related_name="aliases")
 
 
 class Season(models.Model):
     serie = models.ForeignKey('Serie', related_name="season")
-    season = models.IntegerField()
+    season = models.IntegerField(help_text=_('season number for the serie'))
 
     def __unicode__(self):
+        ''' Serie Name - Season '''
         return self.serie.name + ' - ' + str(self.season)
 
     @models.permalink
@@ -68,8 +76,9 @@ class ImageSeason(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/season")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField()
+    is_poster = models.BooleanField(help_text=_('between several imgs, which one is the selected poster?'))
     season = models.ForeignKey("Season", related_name="images")
+    get_is_poster = IsPosterManager()
 
     def __unicode__(self):
         return self.title
@@ -102,7 +111,7 @@ class Episode(models.Model):
         help_text=_('first broadcast date')
     )
     title = models.CharField(max_length=255)
-    episode = models.IntegerField()
+    episode = models.IntegerField(help_text=_('episode number - in season'))
     description = models.TextField()
     created_time = models.DateField(auto_now_add=True)
     modified_time = models.DateField(auto_now=True)
@@ -120,11 +129,13 @@ class Episode(models.Model):
 
     @models.permalink
     def get_add_link_url(self):
+        ''' Link for adding a link to the episode '''
         return ('liberweb.serie.views.add_link', (), {
                 'serie_slug': self.season.serie.slug_name,
                 'season': self.season.season,
                 'episode': self.episode,
         })
+
 
 class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")
@@ -137,14 +148,15 @@ class Link(models.Model):
        blank=True,
        help_text=_("integrated subtitles")
     )
-    user = models.CharField(max_length=255, null=True, blank=True)
-    pub_date = models.DateTimeField(default=datetime.now)
+    user = models.CharField(max_length=255, null=True, blank=True, help_text=_('user that uploaded the link'))
+    pub_date = models.DateTimeField(default=datetime.now, help_text=_('when the link was added? default when it is saved'))
 
     def __unicode__(self):
         return self.url
 
 
 class SubtitleLink(models.Model):
+    ''' For external subtitles '''
     url = models.CharField(max_length=255)
     lang = models.ForeignKey("Languages")
     link = models.ForeignKey("Link", related_name="subtitles")
@@ -154,6 +166,7 @@ class SubtitleLink(models.Model):
 
 
 class Languages(models.Model):
+    ''' Languages for links ''' 
     iso_code = models.CharField(max_length=2)
     country = models.CharField(max_length=2, null=True, blank=True)
 
@@ -169,9 +182,10 @@ class Languages(models.Model):
 class Network(models.Model):
     name = models.CharField(max_length=25)
     url = models.URLField(null=True, blank=True)
-    slug_name = models.SlugField(unique=True)
+    slug_name = models.SlugField(unique=True, help_text=_('name in URL'))
 
     def save(self, force_insert=False, force_update=False, using=None):
+        ''' When is saved, the name is converted to slug - aka URL''' 
         if not self.slug_name:
             self.slug_name = slugify(self.name)
         super(Network, self).save(force_insert, force_update, using)
@@ -186,9 +200,10 @@ class Network(models.Model):
 
 class Genre(models.Model):
     name = models.CharField(max_length=25)
-    slug_name = models.SlugField(unique=True)
+    slug_name = models.SlugField(unique=True, help_text=_('name in URL'))
 
     def save(self, force_insert=False, force_update=False, using=None):
+        ''' When is saved, the name is converted to slug - aka URL''' 
         if not self.slug_name:
             self.slug_name = slugify(self.name)
         super(Genre, self).save(force_insert, force_update, using)
@@ -203,9 +218,10 @@ class Genre(models.Model):
 
 class Actor(models.Model):
     name = models.CharField(max_length=100)
-    slug_name = models.SlugField(unique=True)
+    slug_name = models.SlugField(unique=True, help_text=_('name in URL'))
 
     def save(self, force_insert=False, force_update=False, using=None):
+        ''' When is saved, the name is converted to slug - aka URL''' 
         if not self.slug_name:
             self.slug_name = slugify(self.name)
         super(Actor, self).save(force_insert, force_update, using)
@@ -218,16 +234,12 @@ class Actor(models.Model):
         return ('liberweb.serie.views.get_actor', [str(self.slug_name)])
 
 
-class IsPosterManager(models.Manager):
-    def get_is_poster(self):
-        return self.filter(is_poster=True)
-
 
 class ImageSerie(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/serie")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField()
+    is_poster = models.BooleanField(help_text=_('between several imgs, which one is the selected poster?'))
     serie = models.ForeignKey("Serie", related_name="images")
     get_is_poster = IsPosterManager()
 
@@ -239,8 +251,9 @@ class ImageActor(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/actor")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField()
+    is_poster = models.BooleanField(help_text=_('between several imgs, which one is the selected poster?'))
     actor = models.ForeignKey("Actor", related_name="images")
+    get_is_poster = IsPosterManager()
 
     def __unicode__(self):
         return self.title
@@ -250,7 +263,7 @@ class ImageEpisode(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/episodes")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField()
+    is_poster = models.BooleanField(help_text=_('between several imgs, which one is the selected poster?'))
     episode = models.ForeignKey("Episode", related_name="images")
     get_is_poster = IsPosterManager()
 
