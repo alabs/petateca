@@ -1,26 +1,20 @@
 # pylint: disable-msg=E1102
-from liberweb.serie.models import Serie, Episode, Actor, Role, Genre, Network, Season
-from liberweb.serie.models import Genre, Network, Link
+from datetime import datetime
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import InvalidPage, EmptyPage
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
-
-from django.core.paginator import InvalidPage, EmptyPage
-from liberweb.lib.namepaginator import NamePaginator
-
-from djangoratings.views import AddRatingView
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.contenttypes.models import ContentType
-
-# Un atajo para que el return sea solo el diccionario
-# Mete el RequestContext
+from djangoratings.views import AddRatingView
 from liberweb.decorators import render_to
-
-from django.contrib.auth.models import User
+from liberweb.lib.namepaginator import NamePaginator
+from liberweb.serie.forms import LinkForm
+from liberweb.serie.models import Genre, Network, Link, Languages
+from liberweb.serie.models import Serie, Episode, Actor, Role, Season
 from voting.models import Vote
-
-from django.contrib.auth.decorators import login_required
-
-
 
 
 @render_to('serie/get_serie.html')
@@ -140,15 +134,32 @@ def get_episode(request, serie_slug, season, episode):
     season = get_object_or_404(Season, serie=serie, season=season)
     episode = get_object_or_404(
         Episode,
-        serie=serie,
         season=season,
         episode=episode
     )
-    print serie, season, episode
-    return {
+    episode_info = {
         'serie': serie,
         'episode': episode,
+        'season': season,
     }
+    if request.method == 'GET':
+        return episode_info
+    if request.method == 'POST':
+        if not request.user.is_authenticated():
+            episode_info.update({
+                'message': 'No registrado',
+            })
+            return episode_info
+        user = User.objects.get(username=request.user)
+        link = Link.objects.get(id=request.POST['linkid'])
+        if request.POST['vote'] == 'upvote':
+            Vote.objects.record_vote(link, user, +1)
+        elif request.POST['vote'] == 'downvote':
+            Vote.objects.record_vote(link, user, -1)
+        episode_info.update({
+            'message': 'Vote recorded',
+        })
+        return episode_info
 
 
 @login_required
@@ -282,3 +293,66 @@ def get_serie_list(request):
         'genre_list': genre_list,
         'network_list': network_list,
     }
+
+
+@login_required
+@render_to('serie/add_link.html')
+def add_link(request, serie_slug, season, episode):
+    ''' 
+    Formulario que agrega links
+    ''' 
+    serie = get_object_or_404(Serie, slug_name=serie_slug)
+    season = get_object_or_404(Season, serie=serie, season=season)
+    episode = get_object_or_404(
+        Episode,
+        season=season,
+        episode=episode
+    )
+    link_info = {
+        'serie': serie,
+        'episode': episode,
+        'season': season,
+    }
+    if request.method == 'POST':
+        # Capturamos lo que nos pasa, agregamos el episode
+        # fecha de publicacion y usuario que hace la peticion
+        data = {
+            'url': request.POST['url'],
+            'audio_lang': request.POST['audio_lang'],
+            'subtitle': request.POST['subtitle'],
+            'user': request.user.username,
+            'episode': episode.pk,
+            'pub_date': datetime.now(),
+        }
+        form = LinkForm(data)
+        link_info.update({'form': form})
+        if form.is_valid():
+            if not data['url'].startswith('http://'):
+                link_info.update({ 'message': 'URL Invalida',})
+                return link_info
+            # Audio Lang, Subtitle y Episode hay que pasarlos como instancias
+            # Episode ya lo tenemos, vamos a buscar audio_lang
+            lang = Languages.objects.get(pk=data['audio_lang'])
+            link = Link(
+                url=data['url'],
+                audio_lang=lang,
+                user=data['user'],
+                episode=episode,
+                pub_date=data['pub_date'],
+            )
+            # En caso de tener subtitulos, los tratamos
+            if data['subtitle']:
+                subt = Languages.objects.get(pk=data['subtitle'])
+                link.subtitle=subt
+            link.save()
+            link_info.update({ 'message': 'Gracias',})
+            return link_info
+        else:
+            link_info.update({ 'message': 'Error',})
+            return link_info
+    else:
+        # Este es el formulario inicial, si el request.method es GET
+        # pre-populamos con el episodio, que eso ya lo tenemos de la URL
+        form = LinkForm(initial={'episode':episode}) 
+        link_info.update({'form': form,})
+    return link_info

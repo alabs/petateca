@@ -9,34 +9,40 @@
 		<div class="catagory_1 clearfix">
 			<!-- BROWSE -->
 			<div class="grid_3 textright" >
-			<!-- BY GENRE -->
-			<p>
-			<h4 class="title ">{% trans "Browse by Genre" %}</h4>
-			<div class="hr clearfix dotted">&nbsp;</div>
-				<ul>
-				{% for g in genre_list %}
-					{% if g.name == genre.name %}
-						<li>{{g.name}}
-					{% else %}
-						<li><a href="{% url get_genre slug_name=g.slug_name %}">{{g.name}}</a>
-					{% endif %}
-				{% endfor %}
-				</ul>
-			</p>
-			<!-- BY NETWORK -->
-			<p>
-			<h4 class="title ">{% trans "Browse by Network" %}</h4>
-			<div class="hr clearfix dotted">&nbsp;</div>
-				<ul>
-				{% for n in network_list %}
-					{% if n.name == network.name %}
-						<li>{{n.name}}
-					{% else %}
-						<li><a href="{% url get_network slug_name=n.slug_name %}">{{n.name}}</a>
-					{% endif %}
-				{% endfor %}
-				</ul>
-			</p>
+				<!-- BY GENRE -->
+				<p>
+				<h4 class="title ">{% trans "Browse by Genre" %}</h4>
+				<div class="hr clearfix dotted">&nbsp;</div>
+					<ul>
+					{% for g in genre_list %}
+						{% if g.name == genre.name %}
+							<li>{{g.name}}
+						{% else %}
+							<li><a href="{% url get_genre slug_name=g.slug_name %}">{{g.name}}</a>
+						{% endif %}
+					{% endfor %}
+					</ul>
+				</p>
+				<!-- BY NETWORK -->
+				<p>
+				<h4 class="title ">{% trans "Browse by Network" %}</h4>
+				<div class="hr clearfix dotted">&nbsp;</div>
+					<ul>
+					{% for n in network_list %}
+						{% if n.name == network.name %}
+							<li>{{n.name}}
+						{% else %}
+							<li><a href="{% url get_network slug_name=n.slug_name %}">{{n.name}}</a>
+						{% endif %}
+					{% endfor %}
+					</ul>
+				</p>
+				{% if network or genre %}
+					<p>
+						<div class="hr clearfix dotted">&nbsp;</div>
+						<a class="button" href="{% url serie-index %}">{% trans "Go Back to Series List" %}</a>
+					</p>
+				{% endif %}
 			</div>
 			<div class="grid_9">
 			<!-- ALPHABETHICAL PAGINATION -->

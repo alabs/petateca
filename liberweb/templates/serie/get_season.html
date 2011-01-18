@@ -4,7 +4,17 @@
 {% load extract_domain %}
 {% load voting_tags %}
 {% load message_box %}
-{% block title %} {{serie.name}} - Season {{ episode.season }} {% endblock %}
+{% block title %} {{serie.name}} - Season {{ season.season }} {% endblock %}
+{% block extrastyle %}   
+    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />{% endblock %}
+{% block extrahead %}
+    <script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
+    <script>
+    $(document).ready(function(){
+      $(".add_link").colorbox({iframe:true, innerWidth:555, innerHeight:324});
+    });
+    </script>
+{% endblock %}
 {% block contents %}
 {% votes_by_user user on link_list as vote_dict %}
 {% scores_for_objects link_list as score_dict %}
@@ -63,7 +73,7 @@
 			<form class="linkvote" id="linkup{{ link.id }}" action="." method="POST">
 			  <input type="hidden" name="vote" value="upvote"/>
 			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-			  <input type="image" id="linkuparrow{{ link.id }}" src="/static/img/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
+			  <input type="image" id="linkuparrow{{ link.id }}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
 			</form>
 			<a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
 			  <span class="score" id="linkscore{{ link.id }}"
@@ -73,15 +83,24 @@
 			<form class="linkvote" id="linkdown{{ link.id }}" action="." method="POST">
 			  <input type="hidden" name="vote" value="downvote"/>
 			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-			  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/img/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+			  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
 			</form>
 			</td>
 		</tr>
 		{% endfor %}
+		{% if request.user.is_authenticated %}
+			<a class="add_link button" href="{{ episode.get_add_link_url }}">Add Link</a> 
+		{% else %}
+			Para añadir enlaces debes haber iniciado sesion.
+		{% endif %}
 	    </tbody>
 	</table>
       {% else %}
-         No links available
+		{% if request.user.is_authenticated %}
+			<a class="add_link button" href="{{ episode.get_add_link_url }}">Add Link</a> 
+		{% else %}
+			Para añadir enlaces debes haber iniciado sesion.
+		{% endif %}
       {% endif %}
 			</div>
 		</div>

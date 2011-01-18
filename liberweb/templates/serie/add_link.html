@@ -1,0 +1,42 @@
+{% extends "base_stripped.html" %}
+{% load message_box %}
+{% block contents %}
+<div class="hr clearfix dotted">&nbsp;</div>
+<h2 class="grid_12 caption clearfix"> Agregando link para {{serie.name}} - S{{episode.season.season}}E{{episode.episode}} - {{episode.title}}</h2>
+<div class="hr clearfix dotted">&nbsp;</div>
+<form action="{% url add_link serie_slug=serie.slug_name season=season.season episode=episode.episode %}" method="post">
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        <label for="id_url">URL:</label>
+        {{ form.url }}
+        {{ form.url.errors }}
+    </div>
+    <div class="fieldWrapper">
+        <label for="id_audio_lang">Audio Language:</label>
+        {{ form.audio_lang }}
+        {{ form.audio_lang.errors }}
+    </div>
+    <div class="fieldWrapper">
+        <label for="id_subtitle">Subtitle Language:</label>
+        {{ form.subtitle }}
+        {{ form.subtitle.errors }}
+    </div>
+    <p><input class="button" type="submit" value="Enviar" /></p>
+</form>
+
+{% if message == "No registrado" %}
+  {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
+{% endif %}
+
+{% if message == 'Gracias' %}
+	{% message_box "Gracias por aniadir el link. Tienes que cerrar la ventana a mano y recargar la pagina para ver el link :(" %}
+{% else %} 
+{% if message == 'URL Invalida' %}
+	{% message_box "La URL es invalida" %}
+{% else %} 
+{% if message == 'Error' %}
+	{% message_box "Error aniadiendo el link" %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endblock %}

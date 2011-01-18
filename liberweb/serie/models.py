@@ -113,11 +113,18 @@ class Episode(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('liberweb.serie.views.get_episode', (), {
-                'serie_slug': self.serie.slug_name,
-                'season': self.season,
+                'serie_slug': self.season.serie.slug_name,
+                'season': self.season.season,
                 'episode': self.episode,
         })
 
+    @models.permalink
+    def get_add_link_url(self):
+        return ('liberweb.serie.views.add_link', (), {
+                'serie_slug': self.season.serie.slug_name,
+                'season': self.season.season,
+                'episode': self.episode,
+        })
 
 class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")

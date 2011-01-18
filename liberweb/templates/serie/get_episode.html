@@ -1,34 +1,92 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% load voting_tags %}
+{% load extract_domain %}
+{% load message_box %}
+{% block extrastyle %}   
+    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />{% endblock %}
+{% block extrahead %}
+    <script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
+    <script>
+    $(document).ready(function(){
+      $(".add_link").colorbox({iframe:true, innerWidth:535, innerHeight:184});
+    });
+    </script>
+{% endblock %}
 {% block contents %}
-<h1>{{ serie.name }}</h1>
+<h1>{{ serie.name|title }}</h1>
 <ul>
-  <li>Temporada: {{ episode.season }}</li>
-  <li>Episodio: {{ episode.episode }}</li>
-  <li>Fecha de Emisión: {{ episode.air_date }}</li>
-  <li>Descripción: {{ episode.description }}</li>
+<li><h2> Temporada </h2> {{ episode.season.season }}</li>
+<li><h2> Episode </h2> {{ episode.episode }}</li>
+<li><h2> Air Date </h2> {{ episode.air_date }}</li>
+<li><h2> Description </h2> {{ episode.description }}</li>
 </ul>
 <ul>
+
+{% if message == "No registrado" %}
+  {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
+{% else %}{% if message == "Vote recorded" %}
+  {% message_box "Su voto ha sido guardado" %}
+{% endif %}
+{% endif %}
 
 {% if episode.images.all.0.src %}
   {% thumbnail episode.images.all.0.src "200x200" as img_episode %}
     <img src="{{ img_episode.url }}">
   {% endthumbnail %}
 {% endif %}
-  <li>
-    Enlaces:
-    <ul>
-      {% for link in episode.links.all %}
-        <li><a href="{{ link.url }}"> Ver en idioma {{ link.audio_lang }}. Subtitulos: {{ link.subtitle }}</a>
-      {% endfor %}
-    </ul>
-  </li>
+
+<h2> Links </h2>
+	{% if episode.links.all %}
+	<table id="links">
+	    <thead>
+		<tr>
+			<th scope="col">Link</th>
+			<th scope="col">Audio</th>
+			<th scope="col">Subtitles</th>
+			<th scope="col">Votes</th>
+		</tr>
+	    </thead>
+	    <tbody>
+		{% for link in episode.links.all %}
+		<tr>
+		<td><a href="{{ link.url }}"> {{ link.url|extract_domain }}</a></td>
+		<td>{{ link.audio_lang }}</td>
+		<td>{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
+		<td>
+		<!-- VOTING -->
+                {% score_for_object link as score %}
+			<form class="linkvote" id="linkup{{ link.id }}" action="." method="POST">
+			  <input type="hidden" name="vote" value="upvote"/>
+			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
+			  <input type="image" id="linkuparrow{{ link.id }}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
+			</form>
+			<a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
+			  <span class="score" id="linkscore{{ link.id }}"
+				title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">
+			   {{ score.score|default:0 }} 
+			  </span>
+			<form class="linkvote" id="linkdown{{ link.id }}" action="." method="POST">
+			  <input type="hidden" name="vote" value="downvote"/>
+			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
+			  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+			</form>
+			</td>
+		</tr>
+		{% endfor %}
+	    </tbody>
+	</table>
+      {% else %}
+         No links available
+      {% endif %}
 <br />
-  <a href="{% url serie-index %}">{% trans "Series list" %}</a>
+  <a href="{% url serie-index %}" class="button">{% trans "Series list" %}</a>
   <br/>
-  <a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}">{% trans "Back to" %} {{ serie.name }}</a>
+  <a href="{{ serie.get_absolute_url }}" class="button">{% trans "Back to" %} {{ serie.name }}</a>
   <br/>
-  <a href="{% url liberweb.serie.views.get_episodes serie_slug=serie.slug_name%}">{% trans "Episode list of" %} {{serie.name}}</a>
+  <a href="{{ season.get_absolute_url }}" class="button">{% trans "Back to Full Season" %} {{season.season}} of {{serie.name|title}}</a>
+
+<a class="add_link" href="{{ episode.get_add_link_url }}">Add Link</a> 
 {% endblock %}
 
