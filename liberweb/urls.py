@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import *
 from django.conf import settings
 
 from haystack.views import SearchView, search_view_factory
