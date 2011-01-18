@@ -14,6 +14,10 @@ class ImageInline(admin.TabularInline):
 class EpisodeInline(admin.TabularInline):
     model = m.Episode
 
+
+class SeasonInline(admin.TabularInline):
+    model = m.Season
+
 #class EpisodeInline(admin.ModelAdmin):
 #    prepopulated_fields = {'slug_title': ('title', )}
 #    inlines = [
@@ -26,7 +30,7 @@ class SerieAdmin(admin.ModelAdmin):
     list_filter = ('runtime', 'genres', 'network', )
     prepopulated_fields = {'slug_name': ('name', )}
     inlines = [
-        EpisodeInline,
+        SeasonInline,
     ]
     search_fields = ['name', ]
     ordering = ('name', )
