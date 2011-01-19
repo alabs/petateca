@@ -78,14 +78,14 @@
 			<li><a href="/blog"><span class="meta">nuestro blog</span><br />BLOG</a></li>
 			<li><a href="/series"><span class="meta">las series</span><br />SERIES</a></li>
 			<div id="search_form">
+			  <form action="/search/">
 			          <fieldset>
 			            <legend></legend>
 			            <input id="SearchField" type="text" name="q" value="{% trans "Search" %}..." class="field" onblur="this.value='{% trans "Search" %}...'" onfocus="this.value=''" />
 			            <input type="submit" value="Go" class="button" / >
-          </fieldset>
-
-</div>
-
+				  </fieldset>
+			  </form>
+			</div>
 		</ul>
 		
 		<div class="hr grid_12">&nbsp;</div>

@@ -53,11 +53,11 @@ $(document).ready(function(){
 	<!-- RATING -->
 	  <div class="rating float right">
 	    <form action="." method="POST">
-	      <input type="radio" name="user_rating" value="1" class="star" {% if score == 1 %}checked="checked"{% endif %}/>
-	      <input type="radio" name="user_rating" value="2" class="star" {% if score == 2 %}checked="checked"{% endif %}/>
-	      <input type="radio" name="user_rating" value="3" class="star" {% if score == 3 %}checked="checked"{% endif %}/>
-	      <input type="radio" name="user_rating" value="4" class="star" {% if score == 4 %}checked="checked"{% endif %}/>
-	      <input type="radio" name="user_rating" value="5" class="star" {% if score == 5 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="1" class="star" {% if score == 1 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="2" class="star" {% if score == 2 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="3" class="star" {% if score == 3 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="4" class="star" {% if score == 4 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="5" class="star" {% if score == 5 %}checked="checked"{% endif %}/>
 	      <button type="submit">Rate</button>
 	    </form>
 	  </div>
