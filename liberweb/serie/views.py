@@ -173,7 +173,7 @@ def list_user_favorite(request):
 @render_to('serie/list_popular.html')
 def list_popular(request):
     series = Serie.objects.all()
-    popular_series = series.order_by('-rating_user_score')
+    popular_series = series.order_by('-rating_score')
     return { 'series': popular_series }
 
 
