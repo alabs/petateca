@@ -3,7 +3,7 @@
 {% load thumbnail %}
 {% block contents %}  
 		<!-- Caption Line -->
-		<h2 class="grid_12 caption clearfix">Libertheca<span>blog</span>.</h2>
+		<h2 class="grid_12 caption clearfix"><span>Blog</span>.</h2>
 		
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 	<div class="grid_8">
@@ -55,6 +55,4 @@
 				{% for post in all_posts %}<li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li>{% endfor %}
 			</ul>
 		</div>
-	
-
 {% endblock %}
