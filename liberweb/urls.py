@@ -68,6 +68,8 @@ urlpatterns = patterns('',
         {'url': 'https://www.facebook.com/pages/LiberCopy/182462775103017'},
         name='facebook'
        ),
+
+    url(r'^user/(?P<user_name>[-\w]+)/series/favorite$', 'liberweb.userdata.views.get_series_favorite', name='get_series_favorite'),
 )
 
 if settings.DEBUG:
