@@ -163,11 +163,8 @@ def get_episode(request, serie_slug, season, episode):
 
 
 @login_required
-@render_to('serie/list_user_favorite.html')
 def list_user_favorite(request):
-    profile = request.user.profile
-    favorite_series = profile.favorite_series.all()
-    return { 'series': favorite_series }
+    return HttpResponseRedirect('/user/' + request.user.username + '/series/favorite') 
 
 
 @render_to('serie/list_popular.html')

@@ -34,7 +34,7 @@
 {% endif %}
 
 <!-- TITLE -->
-<h2 class="grid_12 caption clearfix"><a href="{{ serie.get_absolute_url }}">{{serie.name|title}}</a> - <span>Season {{season.season}}</span>.</h2>
+<h2 class="grid_12 caption clearfix"><a href="{{ serie.get_absolute_url }}">{{serie.name|title}}</a> - <span>Season {{season.season}}</span><a class="right button" href="{{ serie.get_absolute_url }}">Go back to {{serie.name|title}}</a></h2>
 <div class="hr clearfix dotted">&nbsp;</div>
 
 {% for episode in episode_list %} 
