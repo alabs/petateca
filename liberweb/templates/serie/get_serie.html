@@ -5,10 +5,12 @@
 {% load extract_domain %}
 {% load message_box %}
 {% block extrastyle %}   
-    <link rel="stylesheet" href="/static/css/jquery.rating.css" type="text/css" />{% endblock %}
+    <link rel="stylesheet" href="/static/css/jquery.rating.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/queryLoader.css" type="text/css" />{% endblock %}
 {% block extrahead %}
     <script type="text/javascript" src="/static/js/jquery.MetaData.js"></script>
     <script type="text/javascript" src="/static/js/jquery.rating.js"></script>
+    <script type="text/javascript" src="/static/js/queryLoader.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     $(".redhearthover").hover(function() {
@@ -157,5 +159,8 @@ $(document).ready(function(){
 	{% render_comment_form for serie %}
 	{% endwith %}
 </div>
+<script type='text/javascript'>
+	QueryLoader.init();
+</script>
 
 {% endblock %}

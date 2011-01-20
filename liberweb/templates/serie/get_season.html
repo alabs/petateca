@@ -4,11 +4,13 @@
 {% load extract_domain %}
 {% load voting_tags %}
 {% load message_box %}
-{% block title %}{{serie.name}} - {% trans "Season" %} {{ season.season }}{% endblock %}
+{% block title %}{{serie.name|title}} - {% trans "Season" %} {{ season.season }}{% endblock %}
 {% block extrastyle %}   
-    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />{% endblock %}
+    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/queryLoader.css" type="text/css" />{% endblock %}
 {% block extrahead %}
     <script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
+    <script type="text/javascript" src="/static/js/queryLoader.js"></script>
     <script>
     $(document).ready(function(){
       $(".add_link").colorbox({iframe:true, innerWidth:555, innerHeight:324});
@@ -115,5 +117,8 @@
 		</div>
 		<div class="pr clearfix grid_12">&nbsp;</div>
 	{% endfor %}
+<script type='text/javascript'>
+	QueryLoader.init();
+</script>
 
 {% endblock %}

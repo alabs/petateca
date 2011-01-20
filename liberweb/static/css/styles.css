@@ -225,22 +225,36 @@ DESCRIPTION: A premium business and portfolio theme.
 	#contact_form input#subject			{width:400px;}
 	#contact_form textarea				{width:500px;height:150px; resize: none;}
 	#contact_form input.button			{float:right;}
+
+/* Login Form */
+
+	p.error								{margin-left:140px; margin-top:10px;}
+	#login_form ul					{float:left;}
+	#login_form ul li					{margin:10px 0; list-style:none; position:relative; clear:both;}
+	#login_form label					{line-height:35px; text-align:right; float:left; margin-right:10px;}
+	#login_form input#name,
+	#login_form input#email,
+	#login_form input#subject,
+	#login_form textarea				{float:left; padding:8px; border:1px solid #CCCCCC; margin-left:10px; background:#fcfcfc; -moz-border-radius:5px; -webkit-border-radius:5px;}
+	#login_form input#name,
+	#login_form input#email,
+	#login_form input#subject			{width:400px;}
+	#login_form textarea				{width:500px;height:150px; resize: none;}
+	#login_form input.button			{float:right;}
 	
 /* Comment form */
 
 	#comment_form ul					{float:left;}
 	#comment_form ul li					{margin:10px 0; list-style:none; position:relative; clear:both;}
 	#comment_form label					{line-height:35px; width:100px; text-align:right; float:left; margin-right:10px;}
-	#comment_form input,
 	#comment_form textarea				{float:left; padding:8px; border:1px solid #CCCCCC; margin-left:10px; background:#fcfcfc; -moz-border-radius:5px; -webkit-border-radius:5px;}
-	#comment_form input					{width:400px;}
 	#comment_form textarea				{width:500px; height:150px; resize:none;}
 
 /* Search form */
 
         #search_form 					{float:right; margin-top: 24px;}
 	#search_form input				{float:left; padding:8px; border:1px solid #CCCCCC; margin-left:10px; background:#fcfcfc; -moz-border-radius:5px; -webkit-border-radius:5px;}
-	#search_form .SearchField					{width:250px;}
+	#search_form #SearchField					{width:200px;}
 	#search_form .button, .button:visited 			{background:#000000 url(../images/alert-overlay.png) repeat-x; display:inline-block; padding:5px 10px 6px; color:#fff; text-decoration:none; -moz-border-radius:5px; -webkit-border-radius:5px; -moz-box-shadow:0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5); text-shadow:0 -1px 1px rgba(0,0,0,0.25); border-bottom:1px solid rgba(0,0,0,0.25); position:relative; cursor:pointer; font-size:13px; font-weight:bold; line-height:1; border:0;}
 
 
@@ -280,6 +294,9 @@ DESCRIPTION: A premium business and portfolio theme.
 	color: #717171;
 	background: #CFCFCF;
 }
+
+#dropdown {float:left; padding:8px; border:1px solid #CCCCCC; margin-left:10px; background:#fcfcfc; -moz-border-radius:5px; -webkit-border-radius:5px; width:220px;}
+
 
 #message_box{ 
 	position: absolute; 

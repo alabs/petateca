@@ -11,7 +11,7 @@
 	{% endif %}
 
 	<!-- Caption Line -->
-			<h2 class="grid_12 caption clearfix">Do you want to vote for series? Vote for links? Have a list of your favorite series? Add links? <span>login or register</span>!</h2>
+			<h2 class="grid_12 caption clearfix">Do you want to vote for series? Vote for links? Add links? <span>Login or Register</span>!</h2>
 			
 			<div class="hr grid_12 clearfix">&nbsp;</div>
 
@@ -19,8 +19,8 @@
 			<div class="grid_13">
 				<h3>login</h3>
 				<div class="hr dotted clearfix">&nbsp;</div>
-				<!-- contact form -->
-				<form method="post" action="{% url django.contrib.auth.views.login %}" id="contact_form">
+				<!-- LOGIN form -->
+				<form method="post" action="{% url django.contrib.auth.views.login %}" id="login_form">
 				<p>If you already have an account, you can login.</p>
 					<ul>						
 						<li class="clearfix"> 
@@ -50,8 +50,8 @@
 			<div class="grid_14">
 				<h3>register</h3>
 				<div class="hr dotted clearfix">&nbsp;</div>
-				<!-- contact form -->
-				<form method='post' action="{% url registration_register %}" id="contact_form">
+				<!-- REGISTER form -->
+				<form method='post' action="{% url registration_register %}" id="login_form">
 				<p>You can register easily, the only thing you need is an email!</p>
 					<ul>						
 						<li class="clearfix"> 
@@ -86,8 +86,6 @@
 					</ul> 
 				</form>  
 			</div>
-
-				<div class="hr dotted clearfix">&nbsp;</div>
 
 {% endif %}
 
