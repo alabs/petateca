@@ -167,3 +167,4 @@ var QueryLoader = {
 		});
 	}
 }
+

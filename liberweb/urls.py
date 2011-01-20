@@ -69,7 +69,7 @@ urlpatterns = patterns('',
         name='facebook'
        ),
 
-    url(r'^user/(?P<user_name>[-\w]+)/series/favorite$', 'liberweb.userdata.views.get_series_favorite', name='get_series_favorite'),
+    url(r'^user/(?P<user_name>[-\w]+)$', 'liberweb.userdata.views.get_user_public_profile', name='get_user_public_profile'),
 )
 
 if settings.DEBUG:
