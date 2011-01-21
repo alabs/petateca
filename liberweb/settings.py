@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'registration',
     'taggit',
     'django.contrib.comments',
+    'avatar',
 )
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']

@@ -70,6 +70,7 @@ urlpatterns = patterns('',
        ),
 
     url(r'^user/(?P<user_name>[-\w]+)$', 'liberweb.userdata.views.get_user_public_profile', name='get_user_public_profile'),
+    (r'^avatar/', include('avatar.urls')),
 )
 
 if settings.DEBUG:
