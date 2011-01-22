@@ -1,10 +1,11 @@
+{% load avatar_tags %}
                         <div class="hr dotted clearfix">&nbsp;</div>
 
   {% for comment in comment_list %}
                         <ol class="commentlist" id="c{{ comment.id }}">
                                 <li class="comment">
                                 <div class="gravatar">
-                                        <img alt="" src='/static/images/gravatar.png' height='48' width='48' />
+					{% avatar comment.name %}
                                 </div>
                                 <div class="comment_content">
                                         <div class="clearfix">

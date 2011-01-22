@@ -2,86 +2,99 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load extract_domain %}
+{% load avatar_tags %}
 {% block contents %}
 
-{{user.username}}
-<h2> Avatar </h2>
+<!-- USER NAME -->
+<h2 class="grid_12 caption clearfix">Profile for user <span>{{user.username}}</span></h2>
 
-<h2>Favorite Series</h2>
-{% if series %}
-{{ series.count }}
-  {% for serie in series %}
-    <a href="{{ serie.get_absolute_url }}"> {{ serie.name }}
-    {% if serie.images.get_is_poster.0.src %}
-        {% thumbnail serie.images.get_is_poster.0.src "100x100" as img_serie %}
-          <img src="{{ img_serie.url }}" />
-        {% endthumbnail %}
-    {% else %}
-            <img src="/static/images/image_not_available.png" height=100> 
-      {% endif %}
-  </a>
-  {% endfor %}
-{% else %} 
-No tienes series favoritas :(
-{% endif %}
-
-
-<h2>Rated Series</h2>
-{% if rated_series %}
-Ha votado: {{rated_series.count}} 
-	{% for vote in rated_series %}
-    <a href="{{ vote.content_object.get_absolute_url }}"> {{ vote.content_object.name|title }} - {{ vote.score }}
-    {% if vote.content_object.images.get_is_poster.0.src %}
-        {% thumbnail vote.content_object.images.get_is_poster.0.src "100x100" as img_serie %}
-          <img src="{{ img_serie.url }}" />
-        {% endthumbnail %}
-    {% else %}
-            <img src="/static/images/image_not_available.png" height=100> 
-      {% endif %}
-  </a>
-  {% endfor %}
-{% else %}
-No has votado por ninguna serie.
-{% endif %}
-
-<h2> Voted Links </h2>
-{% if voted_links %}
-{{ voted_links.count }}
-<ul>
-	{% for vote in voted_links %}
-		<li>
-		{{vote.0.episode.season.serie|title}}
-		S{{vote.0.episode.season.season}}E{{vote.0.episode.episode}}
-		Vote {{vote.1}} - {{vote.0}}
-	{% endfor %}
-</ul>
-{% else %}
-No ha votado ningun link.
-{% endif %}
-
-<h2> Comments for Serie </h2>
-{% if comments_serie %}
-{{ comments_serie.count }}
-<ul>
-	{% for comment in comments_serie %}
-		<li> {{ comment.comment}} -  {{comment.submit_date }}
-	{% endfor %}
-</ul>
-{% else %}
-No ha comentado ninguna serie.
-{% endif %}
+<div class="grid_2">
+	<!-- AVATAR -->
+	<h2> Avatar </h2>
+	{% avatar user %}
+	<br />
+	{% if request.user == user %} <a href="{% url avatar_change %}">Change your avatar</a> {% endif %}
+	<!-- FAVORITE SERIES -->
+	<h2>Favorite Series</h2>
+	{% if series %}
+	{{ series.count }}
+	  {% for serie in series %}
+	    <a href="{{ serie.get_absolute_url }}"> {{ serie.name }}
+	    {% if serie.images.get_is_poster.0.src %}
+		{% thumbnail serie.images.get_is_poster.0.src "100x100" as img_serie %}
+		  <img src="{{ img_serie.url }}" />
+		{% endthumbnail %}
+	    {% else %}
+		    <img src="/static/images/image_not_available.png" height=100> 
+	      {% endif %}
+	  </a>
+	  {% endfor %}
+	{% else %} 
+	No tienes series favoritas :(
+	{% endif %}
+</div>
 
 
-<h2> Comments for Blog </h2>
-{% if comments_blog %}
-{{ comments_blog.count }}
-<ul>
-	{% for comment in comments_blog %}
-		<li> {{ comment.comment}} -  {{comment.submit_date }}
-	{% endfor %}
-</ul>
-{% else %}
-No ha comentado ninguna serie.
-{% endif %}
+<div class="grid_5">
+	<h2>Rated Series</h2>
+	{% if rated_series %}
+	Ha votado: {{rated_series.count}} 
+		{% for vote in rated_series %}
+	    <a href="{{ vote.content_object.get_absolute_url }}"> {{ vote.content_object.name|title }} - {{ vote.score }}
+	    {% if vote.content_object.images.get_is_poster.0.src %}
+		{% thumbnail vote.content_object.images.get_is_poster.0.src "100x100" as img_serie %}
+		  <img src="{{ img_serie.url }}" />
+		{% endthumbnail %}
+	    {% else %}
+		    <img src="/static/images/image_not_available.png" height=100> 
+	      {% endif %}
+	  </a>
+	  {% endfor %}
+	{% else %}
+	No has votado por ninguna serie.
+	{% endif %}
+
+	<h2> Voted Links </h2>
+	{% if voted_links %}
+	{{ voted_links.count }}
+	<ul>
+		{% for vote in voted_links %}
+			<li>
+			{{vote.0.episode.season.serie|title}}
+			S{{vote.0.episode.season.season}}E{{vote.0.episode.episode}}
+			Vote {{vote.1}} - {{vote.0}}
+		{% endfor %}
+	</ul>
+	{% else %}
+	No ha votado ningun link.
+	{% endif %}
+</div>
+
+<div class="grid_3">
+	<h2> Comments for Serie </h2>
+	{% if comments_serie %}
+	{{ comments_serie.count }}
+	<ul>
+		{% for comment in comments_serie %}
+			<li> {{ comment.comment}} -  {{comment.submit_date }}
+		{% endfor %}
+	</ul>
+	{% else %}
+	No ha comentado ninguna serie.
+	{% endif %}
+
+
+	<h2> Comments for Blog </h2>
+	{% if comments_blog %}
+	{{ comments_blog.count }}
+	<ul>
+		{% for comment in comments_blog %}
+			<li> {{ comment.comment}} -  {{comment.submit_date }}
+		{% endfor %}
+	</ul>
+	{% else %}
+	No ha comentado ninguna serie.
+	{% endif %}
+</div>
 
 {% endblock %}
