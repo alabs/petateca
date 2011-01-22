@@ -14,6 +14,12 @@
 		<div class="catagory_1 clearfix">
 			<!-- BROWSE -->
 			<div class="grid_3 textright" >
+				{% if network or genre %}
+					<p>
+						<a class="button" href="{% url serie-index %}">{% trans "Go Back to Series List" %}</a>
+						<div class="hr clearfix dotted">&nbsp;</div>
+					</p>
+				{% endif %}
 				<!-- BY GENRE -->
 				<p>
 				<h4 class="title ">{% trans "Browse by Genre" %}</h4>
@@ -42,12 +48,6 @@
 					{% endfor %}
 					</ul>
 				</p>
-				{% if network or genre %}
-					<p>
-						<div class="hr clearfix dotted">&nbsp;</div>
-						<a class="button" href="{% url serie-index %}">{% trans "Go Back to Series List" %}</a>
-					</p>
-				{% endif %}
 			</div>
 			<div class="grid_9">
 			<!-- ALPHABETHICAL PAGINATION -->
