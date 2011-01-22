@@ -32,6 +32,7 @@ setup(
         'django-localeurl',
         'twitter',
         'simplejson',
+        'django-avatar',
     ],
     classifiers=[
         'Environment :: Web Environment',
