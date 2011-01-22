@@ -1,8 +1,5 @@
-<form name="lcdropdown">
-  <select name="series">
-    <option value="none">Elige una serie...
-    {% for serie in all_series %} <option value="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}"> {{ serie.name }} 
+  <select id="dropdown" name="series" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+    <option value="none">Series
+    {% for serie in all_series %} <option value="{{serie.get_absolute_url}}"> {{ serie.name|title }} 
     {% endfor %}
   </select>
-<input type=submit onClick="location=document.lcdropdown.series.options[document.lcdropdown.series.selectedIndex].value;" value="Go" >
-</form>

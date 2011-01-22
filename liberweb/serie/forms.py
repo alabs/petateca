@@ -7,5 +7,3 @@ class LinkForm(ModelForm):
         widgets = {
             'url': TextInput(attrs={'size':80}),
      }
-
-

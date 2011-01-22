@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-09 01:02+0100\n"
-"PO-Revision-Date: 2010-12-09 01:02\n"
-"Last-Translator:   <lasi@lasi.es>\n"
+"POT-Creation-Date: 2011-01-20 10:04+0100\n"
+"PO-Revision-Date: 2011-01-20 10:07\n"
+"Last-Translator: <anders@sindominio.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,122 +19,344 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: settings.py:47
+#: settings.py:52
 msgid "English"
 msgstr "Inglés"
 
-#: settings.py:48
+#: settings.py:53
 msgid "Spanish"
 msgstr "Español"
 
-#: blog/models.py:9
+#: blog/models.py:13
 msgid "Body of the Post - the post itself"
 msgstr "Cuerpo del mensaje - el mensaje en sí"
 
-#: blog/models.py:11
+#: blog/models.py:17
 msgid "Summary of the Post seeing in the homepage"
 msgstr "Resumen del mensaje para ver en la página de inicio"
 
-#: serie/models.py:9
+#: serie/models.py:17 serie/models.py:185 serie/models.py:203
+#: serie/models.py:221
 msgid "name in URL"
 msgstr "nombre en la URL"
 
-#: serie/models.py:12
+#: serie/models.py:21
 msgid "runtime duration"
 msgstr "Duración de emisión"
 
-#: serie/models.py:12
+#: serie/models.py:24
 msgid "duration of episodes in minutes"
 msgstr "la duración de los episodios en minutos"
 
-#: serie/models.py:47
+#: serie/models.py:26
+msgid "actors that worked in the serie"
+msgstr ""
+
+#: serie/models.py:28
+msgid "the serie is finished running?"
+msgstr ""
+
+#: serie/models.py:29
+msgid "star rating"
+msgstr ""
+
+#: serie/models.py:49
+msgid "character the actor played in the serie"
+msgstr ""
+
+#: serie/models.py:56
+msgid "aliases for the same serie"
+msgstr ""
+
+#: serie/models.py:62
+msgid "season number for the serie"
+msgstr ""
+
+#: serie/models.py:79 serie/models.py:242 serie/models.py:254
+#: serie/models.py:266
+msgid "between several imgs, which one is the selected poster?"
+msgstr ""
+
+#: serie/models.py:96 serie/models.py:149
+msgid "integrated subtitles"
+msgstr ""
+
+#: serie/models.py:108
 msgid "air date"
 msgstr "Fecha de estreno"
 
-#: serie/models.py:47
+#: serie/models.py:111
 msgid "first broadcast date"
 msgstr "la fecha de la primera emisión"
 
-#: serie/views.py:88
-#, python-format
-msgid "Episodes of %(name)s"
-msgstr "Los episodios de %(name)s "
+#: serie/models.py:114
+msgid "episode number - in season"
+msgstr ""
 
-#: templates/base.html:31 templates/base.html.py:32
+#: serie/models.py:151
+msgid "user that uploaded the link"
+msgstr ""
+
+#: serie/models.py:152
+msgid "when the link was added? default when it is saved"
+msgstr ""
+
+#: templates/base.html:81
+msgid "cerrar sesión"
+msgstr "logout"
+
+#: templates/base.html:81
+msgid "CERRAR SESIÓN"
+msgstr "LOGOUT"
+
+#: templates/base.html:83
+msgid "iniciar sesión"
+msgstr "login"
+
+#: templates/base.html:83
+msgid "ACCEDER"
+msgstr "LOGIN"
+
+#: templates/base.html:85
+msgid "nuestro blog"
+msgstr "our blog"
+
+#: templates/base.html:85
+msgid "BLOG"
+msgstr "BLOG"
+
+#: templates/base.html:86
+msgid "las series"
+msgstr "the series"
+
+#: templates/base.html:86
+msgid "SERIES"
+msgstr "SERIES"
+
+#: templates/base.html:91
 msgid "Search"
 msgstr "Búsqueda"
 
-#: templates/blog/get_post.html:9
-msgid "Written on"
-msgstr "Escrito el"
+#: templates/base.html:92
+msgid "Go"
+msgstr "Ir"
 
-#: templates/serie/actor_list.html:4 templates/serie/get_actor.html:16
+#: templates/base.html:105
+msgid "Design based in Aurelius, made by"
+msgstr ""
+
+#: templates/base.html:106
+msgid "Images, Description and Information of series from "
+msgstr ""
+
+#: templates/base.html:107
+msgid "Licensed "
+msgstr ""
+
+#: templates/base.html:107
+msgid "Use the Source, Luke."
+msgstr ""
+
+#: templates/base.html:108
+msgid "All contents "
+msgstr ""
+
+#: templates/base.html:109
+msgid "Powered by "
+msgstr ""
+
+#: templates/base.html:110
+msgid "top"
+msgstr ""
+
+#: templates/index.html:30
+#, fuzzy
+msgid "Series"
+msgstr "Lista de series"
+
+#: templates/index.html:31
+msgid "listado de todas las series"
+msgstr ""
+
+#: templates/index.html:37
+msgid "FAQ"
+msgstr ""
+
+#: templates/index.html:38
+msgid "Preguntas más frecuentes"
+msgstr ""
+
+#: templates/index.html:43
+msgid "Ver nuestro blog"
+msgstr ""
+
+#: templates/index.html:44
+msgid "Blog de libercopy para ver entradas y comentar"
+msgstr ""
+
+#: templates/index.html:51
+msgid "Tenemos cuenta en Twitter para que puedas opinar"
+msgstr ""
+
+#: templates/comments/form.html:21
+msgid "Add Comment"
+msgstr ""
+
+#: templates/comments/posted.html:4
+msgid "Thanks for commenting"
+msgstr ""
+
+#: templates/comments/posted.html:7
+msgid "Thank you for your comment"
+msgstr ""
+
+#: templates/comments/preview.html:4 templates/comments/preview.html.py:13
+msgid "Preview your comment"
+msgstr ""
+
+#: templates/comments/preview.html:11
+msgid "Please correct the error below"
+msgid_plural "Please correct the errors below"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/comments/preview.html:16
+msgid "and"
+msgstr ""
+
+#: templates/comments/preview.html:16
+msgid "Post your comment"
+msgstr ""
+
+#: templates/comments/preview.html:16
+msgid "or make changes"
+msgstr ""
+
+#: templates/comments/preview.html:32
+#, fuzzy
+msgid "Post"
+msgstr "Imagen"
+
+#: templates/comments/preview.html:33
+msgid "Preview"
+msgstr ""
+
+#: templates/serie/actor_list.html:4 templates/serie/get_actor.html:28
 #, fuzzy
 msgid "Actors list"
 msgstr "Actores"
 
-#: templates/serie/get_episode.html:21 templates/serie/get_episodes.html:35
-#: templates/serie/get_serie.html:98 templates/serie/serie_list.html:5
+#: templates/serie/genre_list.html:4 templates/serie/network_list.html:4
+#, fuzzy
+msgid "Genre list"
+msgstr "Lista de series"
+
+#: templates/serie/get_episode.html:84
 msgid "Series list"
 msgstr "Lista de series"
 
-#: templates/serie/get_episode.html:23 templates/serie/get_episodes.html:37
+#: templates/serie/get_episode.html:86
 msgid "Back to"
 msgstr "Volver a"
 
-#: templates/serie/get_episode.html:25
-#, fuzzy
-msgid "Episode list of"
-msgstr "Episodios"
+#: templates/serie/get_episode.html:88
+msgid "Back to Full Season"
+msgstr ""
 
-#: templates/serie/get_episodes.html:9 templates/serie/get_serie.html:71
-msgid "Episodes"
-msgstr "Episodios"
-
-#: templates/serie/get_episodes.html:13 templates/serie/get_serie.html:75
-#: templates/serie/get_serie.html.py:79
+#: templates/serie/get_season.html:7 templates/serie/get_serie.html:134
 msgid "Season"
 msgstr "Temporada"
 
-#: templates/serie/get_serie.html:46
+#: templates/serie/get_season.html:44
+#, fuzzy
+msgid "Episodio "
+msgstr "Episodios"
+
+#: templates/serie/get_season.html:45
+msgid "Emitido el "
+msgstr ""
+
+#: templates/serie/get_season.html:67
+msgid "Link"
+msgstr ""
+
+#: templates/serie/get_season.html:68
+msgid "Audio"
+msgstr ""
+
+#: templates/serie/get_season.html:69
+msgid "Subtitulos"
+msgstr ""
+
+#: templates/serie/get_season.html:70
+msgid "Votos"
+msgstr ""
+
+#: templates/serie/get_season.html:101 templates/serie/get_season.html:109
+msgid "Add Link"
+msgstr ""
+
+#: templates/serie/get_season.html:103 templates/serie/get_season.html:111
+msgid "Para añadir enlaces debes haber iniciado sesion."
+msgstr ""
+
+#: templates/serie/get_serie.html:67
 msgid "Network"
 msgstr "Compañía"
 
-#: templates/serie/get_serie.html:48
+#: templates/serie/get_serie.html:72
 msgid "Genre"
 msgstr "Género"
 
-#: templates/serie/get_serie.html:56
-msgid "Actors"
-msgstr "Actores"
-
-#: templates/serie/get_serie.html:63
+#: templates/serie/get_serie.html:78
 msgid "Runtime"
 msgstr "Duración"
 
-#: templates/serie/get_serie.html:63
+#: templates/serie/get_serie.html:78
 msgid "minutes"
 msgstr "minutos"
 
-#: templates/serie/get_serie.html:64
-msgid "Description"
-msgstr "Descripción"
+#: templates/serie/get_serie.html:113
+msgid "Actors"
+msgstr "Actores"
 
-#: templates/serie/get_serie.html:80
+#: templates/serie/get_serie.html:131
 #, fuzzy
-msgid "Episode"
-msgstr "Episodios"
+msgid "Seasons"
+msgstr "Temporada"
 
-#: templates/serie/get_serie.html:81
-msgid "Name"
-msgstr "Nombre"
-
-#: templates/serie/serie_list.html:8 templates/serie/serie_list.html.py:35
-msgid "Browse by letter"
+#: templates/serie/serie_list.html:14 templates/serie/serie_sidebar.html:7
+#, fuzzy
+msgid "Browse by Genre"
 msgstr "Navegar por letra"
 
-#~ msgid "Poster"
-#~ msgstr "Imagen"
+#: templates/serie/serie_list.html:28 templates/serie/serie_sidebar.html:16
+#, fuzzy
+msgid "Browse by Network"
+msgstr "Navegar por letra"
+
+#: templates/serie/serie_list.html:43
+#, fuzzy
+msgid "Go Back to Series List"
+msgstr "Lista de series"
+
+#~ msgid "Episodes of %(name)s"
+#~ msgstr "Los episodios de %(name)s "
+
+#~ msgid "Written on"
+#~ msgstr "Escrito el"
+
+#~ msgid "Episode list of"
+#~ msgstr "Episodios"
+
+#~ msgid "Episodes"
+#~ msgstr "Episodios"
+
+#~ msgid "Description"
+#~ msgstr "Descripción"
+
+#~ msgid "Name"
+#~ msgstr "Nombre"
 
 #~ msgid ""
 #~ "\n"

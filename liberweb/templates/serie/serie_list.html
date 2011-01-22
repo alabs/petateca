@@ -2,6 +2,11 @@
 {% load i18n %}
 {% load thumbnail %}
 {% block title %} Serie List {% endblock %}
+{% block extrastyle %}   
+    <link rel="stylesheet" href="/static/css/queryLoader.css" type="text/css" />{% endblock %}
+{% block extrahead %}
+    <script type="text/javascript" src="/static/js/queryLoader.js"></script>
+{% endblock %}
 {% block contents %}
 	<h2 class="grid_12 caption clearfix"> Watch the best <span>series</span>{% if network %} of the Network <span>{{network.name}}</span>{% endif %}{% if genre %} of the Genre <span>{{genre.name}}</span>{% endif %}.</h2>
 	<div class="pr grid_12 clearfix">&nbsp;</div>
@@ -75,5 +80,8 @@
 			</div>
 		</div>
 			
-		<div class="pr clearfix grid_12">&nbsp;</div>
+<script type='text/javascript'>
+		QueryLoader.selectorPreload = "body";
+	QueryLoader.init();
+</script>
 {% endblock %}

@@ -31,6 +31,11 @@
 	<script type="text/javascript" src="/static/js/popup.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.roundabout-1.0.min.js"></script> 
 	<script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>{% block extrahead %}{% endblock %}
+        <script type="text/javascript" >
+            $(function(){
+                  setAutoComplete("SearchField", "SearchResults", "/search/lookup/?q=");
+              });
+        </script>
 	<script type="text/javascript">		
 		$(document).ready(function() { //Start up our Featured Project Carosuel
 			$('#featured ul').roundabout({
@@ -60,29 +65,31 @@
 	<div id="wrapper" class="container_12 clearfix">
 
 		<!-- Text Logo -->
-		<h1 id="logo" class="grid_4"><a href="/">LiberCopy</a></h1>
-
-        <script type="text/javascript" >
-            $(function(){
-                  setAutoComplete("SearchField", "SearchResults", "/search/lookup/?q=");
-              });
-        </script>
+		<div id="logo" class="grid_4">
+			<h1 id="logo"><a href="/">LiberCopy</a></h1>
+			{% if LANGUAGE_CODE == "es" %}
+				<span class="slogan meta">View in <a href="{{ request.path|chlocale:"en" }}">English</a>.</span>
+			{% else %}
+				<span class="slogan meta">Ver en <a href="{{ request.path|chlocale:"es" }}">Español</a>.</span>
+			{% endif %}
+		</div>
 
 		<!-- Navigation Menu -->
 		<ul id="navigation" class="grid_8">
+
 			{% if request.user.is_authenticated %}
-					<li><a href="/accounts/logout"><span class="meta">cerrar sesión</span><br />CERRAR SESIÓN</a></li>
+					<li><a href="/accounts/logout"><span class="meta">{% trans "cerrar sesión" %}</span><br />{% trans "CERRAR SESIÓN" %}</a></li>
 				{% else %}
-					<li><a href="/accounts/login"><span class="meta">iniciar sesión</span><br />ACCEDER</a></li>	
+					<li><a href="/accounts/login"><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>	
 			{% endif %}
-			<li><a href="/blog"><span class="meta">nuestro blog</span><br />BLOG</a></li>
-			<li><a href="/series"><span class="meta">las series</span><br />SERIES</a></li>
+			<li><a href="{% url blog-index %}"><span class="meta">{% trans "nuestro blog" %}</span><br />{% trans "BLOG" %}</a></li>
+			<li><a href="{% url serie-index %}"><span class="meta">{% trans "las series" %}</span><br />{% trans "SERIES" %}</a></li>
 			<div id="search_form">
 			  <form action="/search/">
 			          <fieldset>
 			            <legend></legend>
 			            <input id="SearchField" type="text" name="q" value="{% trans "Search" %}..." class="field" onblur="this.value='{% trans "Search" %}...'" onfocus="this.value=''" />
-			            <input type="submit" value="Go" class="button" / >
+			            <input type="submit" value="{% trans "Go" %}" class="button" / >
 				  </fieldset>
 			  </form>
 			</div>
@@ -91,17 +98,18 @@
 		<div class="hr grid_12">&nbsp;</div>
 		<div class="clear"></div>
 		{% block contents %}{% endblock %}
-		<!-- Footer -->
+		<!-- FOOTER -->
 		<p class="grid_12 footer clearfix">
+		<div class="hr grid_12">&nbsp;</div>
 			<span class="float">
-			<p>Design based in Aurelius, made by <a href="http://qwibbledesigns.co.uk/"><b>QwibbleDesigns</b></a>.<br />
-			Images, Description and Information of series from <a href="http://thetvdb.com/"><b>TheTVDB</b></a>.<br />
-			Licensed <a href="#"><b>GPL Affero</b></a>. Use the Source, Luke.<br />
-			All contents <a href="#"><b>CC-BY-SA</b></a>. <br />
-			Powered by <a href="http://djangoproject.com/"><b>Django</b></a>.</p></span>
-			<a class="float right" href="#">top</a>
+			<p>{% trans "Design based in Aurelius, made by" %} <a href="http://qwibbledesigns.co.uk/"><b>QwibbleDesigns</b></a>.<br />
+			{% trans "Images, Description and Information of series from " %}<a href="http://thetvdb.com/"><b>TheTVDB</b></a>.<br />
+			{% trans "Licensed " %}<a href="#"><b>GPL Affero</b></a>. {% trans "Use the Source, Luke." %}<br />
+			{% trans "All contents " %}<a href="#"><b>CC-BY-SA</b></a>. <br />
+			{% trans "Powered by " %}<a href="http://djangoproject.com/"><b>Django</b></a>.</p></span>
+			<a class="float right" href="#">{% trans "top" %}</a>
 
 		</p>
-	</div><!--end wrapper-->
+	</div>
 </body>
 </html>
