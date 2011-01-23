@@ -4,7 +4,7 @@
 {% load extract_domain %}
 {% load voting_tags %}
 {% load message_box %}
-{% block title %}{{serie.name|title}} - {% trans "Season" %} {{ season.season }}{% endblock %}
+{% block title %}{{serie.name|title}} - {% trans "Temporada" %} {{ season.season }}{% endblock %}
 {% block extrastyle %}   
     <link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />
     <link rel="stylesheet" href="/static/css/queryLoader.css" type="text/css" />{% endblock %}
@@ -36,11 +36,21 @@
 {% endif %}
 
 <!-- TITLE -->
-<h2 class="grid_12 caption clearfix"><a href="{{ serie.get_absolute_url }}">{{serie.name|title}}</a> - <span>Season {{season.season}}</span><a class="right button" href="{{ serie.get_absolute_url }}">Go back to {{serie.name|title}}</a></h2>
+<h2 class="grid_12 caption clearfix"><a href="{{ serie.get_absolute_url }}">{{serie.name|title}}</a> - <span>Season {{season.season}}</span><a class="right button" href="{{ serie.get_absolute_url }}">{% trans "Regresar a" %} {{serie.name|title}}</a></h2>
 <div class="hr clearfix dotted">&nbsp;</div>
 
+<!-- EPISODES MINI-LIST -->
+<center>
+<h2 class="grid_12 caption clearfix">Episodes
 {% for episode in episode_list %} 
-<div class="catagory_1 clearfix">
+	<a href="#epi{{episode.episode}}" class="button">{{episode.episode}}</a>
+{% endfor %}</h2>
+</center>
+<div class="hr clearfix dotted">&nbsp;</div>
+
+<!-- EPISODE LIST -->
+{% for episode in episode_list %} 
+<div id="epi{{episode.episode}}" class="catagory_1 clearfix">
 <!-- COLUMN 1 -->
 <div class="grid_4 textright" >
 	<span class="meta">{% trans "Episodio "%}{{episode.episode}}</span><br />
@@ -58,6 +68,11 @@
 	{% else %}
 		<img src="/static/images/image_not_available.png" height=100>
 	{% endif %}
+		{% if request.user.is_authenticated %}
+			<a class="add_link button" style="margin-left:40px;" href="{{ episode.get_add_link_url }}">{% trans "Añadir Enlace" %}</a> 
+		{% else %}
+			{% trans "Para añadir enlaces debes haber iniciado sesion." %}
+		{% endif %}
 </div>
 
 <!-- COLUMN 3 -->
@@ -81,37 +96,29 @@
 		<td>
 		<!-- VOTING -->
                 {% score_for_object link as score %}
-			<form class="linkvote" id="linkup{{ link.id }}" action="." method="POST">
-			  <input type="hidden" name="vote" value="upvote"/>
-			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-			  <input type="image" id="linkuparrow{{ link.id }}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
-			</form>
-			<a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
-			  <span class="score" id="linkscore{{ link.id }}"
+			<div class="left">
+				<form class="linkvote" id="linkup{{ link.id }}" action="." method="POST">
+				  <input type="hidden" name="vote" value="upvote"/>
+				  <input type="hidden" name="linkid" value="{{ link.id }}"/>
+				  <input type="image" id="linkuparrow{{ link.id }}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
+				</form>
+				<a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
+				<form class="linkvote" id="linkdown{{ link.id }}" action="." method="POST">
+				  <input type="hidden" name="vote" value="downvote"/>
+				  <input type="hidden" name="linkid" value="{{ link.id }}"/>
+				  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+				</form>
+			</div>
+			  <span class="score right" style="position:relative; top:-25%;" id="linkscore{{ link.id }}"
 				title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">
 			   {{ score.score|default:0 }} 
 			  </span>
-			<form class="linkvote" id="linkdown{{ link.id }}" action="." method="POST">
-			  <input type="hidden" name="vote" value="downvote"/>
-			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-			  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
-			</form>
 			</td>
 		</tr>
 		{% endfor %}
-		{% if request.user.is_authenticated %}
-			<a class="add_link button" href="{{ episode.get_add_link_url }}">{% trans "Add Link" %}</a> 
-		{% else %}
-			{% trans "Para añadir enlaces debes haber iniciado sesion." %}
-		{% endif %}
 	    </tbody>
 	</table>
       {% else %}
-		{% if request.user.is_authenticated %}
-			<a class="add_link button" href="{{ episode.get_add_link_url }}">{% trans "Add Link" %}</a> 
-		{% else %}
-			{% trans "Para añadir enlaces debes haber iniciado sesion." %}
-		{% endif %}
       {% endif %}
 			</div>
 		</div>
