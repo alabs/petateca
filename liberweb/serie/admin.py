@@ -37,8 +37,8 @@ class SerieAdmin(admin.ModelAdmin):
     def image_serie_serie(self, obj):
         try:
             img = obj.images.get_is_poster()[0]
-            file = img.src.file
-            thumb = default.backend.get_thumbnail(file, ADMIN_THUMBS_SIZE)
+            file_img = img.src.file
+            thumb = default.backend.get_thumbnail(file_img, ADMIN_THUMBS_SIZE)
             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
         except:
             return "No Image"
