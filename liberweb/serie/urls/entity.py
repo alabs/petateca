@@ -1,4 +1,4 @@
-# pylint: disable-msg=W0611,W0401
+# pylint: disable-msg=W0401,W0614
 from django.conf.urls.defaults import *
 from django.views.generic.list_detail import object_list
 from liberweb.serie.models import Serie
