@@ -1,5 +1,4 @@
-# pylint: disable-msg=W0611,W0401
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import *  # pylint: disable-msg=W0611,W0401
 from blog.models import Post
 
 urlpatterns = patterns('blog.views',
