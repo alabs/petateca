@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import InvalidPage, EmptyPage
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
@@ -336,7 +335,7 @@ def add_link(request, serie_slug, season, episode):
             # En caso de tener subtitulos, los tratamos
             if data['subtitle']:
                 subt = Languages.objects.get(pk=data['subtitle'])
-                link.subtitle=subt
+                link.subtitle = subt
             link.save()
             link_info.update({ 'message': 'Gracias',})
             return link_info
