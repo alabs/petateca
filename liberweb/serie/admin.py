@@ -42,8 +42,9 @@ class SerieAdmin(admin.ModelAdmin):
             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
         except:
             return "No Image"
-    image_serie_serie.short_description = 'Thumbnail'
-    image_serie_serie.allow_tags = True
+    image_serie_serie.short_description = 'Thumbnail'  #pylint: disable-msg=W0612
+    image_serie_serie.allow_tags = True  #pylint: disable-msg=W0612
+
 
 
 class LinkInline(admin.TabularInline):
@@ -80,9 +81,10 @@ class LinkAdmin(admin.ModelAdmin):
     def get_epi_number(self, obj):
         return '%s' % (obj.episode.episode)
 
-    get_serie.short_description = 'Serie'
-    get_epi_season.short_description = 'Season'
-    get_epi_number.short_description = 'Episode'
+    get_serie.short_description = 'Serie'  #pylint: disable-msg=W0612
+    get_epi_season.short_description = 'Season'  #pylint: disable-msg=W0612
+    get_epi_number.short_description = 'Episode'  #pylint: disable-msg=W0612
+
 
 
 class GenreAdmin(admin.ModelAdmin):
@@ -101,8 +103,8 @@ class ImageSerieAdmin(admin.ModelAdmin):
         except:
             return "No Image"
     
-    image_serie.short_description = 'Thumbnail'
-    image_serie.allow_tags = True
+    image_serie.short_description = 'Thumbnail'  #pylint: disable-msg=W0612
+    image_serie.allow_tags = True  #pylint: disable-msg=W0612
 
 
 class SeasonImageInline(admin.TabularInline):
