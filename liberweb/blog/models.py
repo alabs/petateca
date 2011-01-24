@@ -10,11 +10,11 @@ from taggit.managers import TaggableManager
 class Post(models.Model):
     title = models.CharField(max_length=64)
     date = models.DateTimeField(default=datetime.now)
-    post = models.TextField(help_text=_('Body of the Post - the post itself'))
+    post = models.TextField(help_text=_('Cuerpo del post'))
     slug = models.SlugField(unique=True)
     summary = models.TextField(
         max_length=200,
-        help_text=_('Summary of the Post seeing in the homepage')
+        help_text=_('Resumen del post que se ve en la principal')
     )
     tags = TaggableManager()
 

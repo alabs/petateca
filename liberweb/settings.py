@@ -49,8 +49,8 @@ TIME_ZONE = 'Europe/Madrid'
 LANGUAGE_CODE = 'es'
 ugettext = lambda s: s
 LANGUAGES = (
- ('en', ugettext('English')),
  ('es', ugettext('Spanish')),
+ ('en', ugettext('English')),
 )
 TRANSLATION_REGISTRY = 'liberweb.translation'
 SITE_ID = 1

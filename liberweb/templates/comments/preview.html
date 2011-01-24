@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Preview your comment" %}{% endblock %}
+{% block title %}{% trans "Previsualiza tu comentario" %}{% endblock %}
 
 {% block contents %}
   {% load comments %}
   <form action="{% comment_form_target %}" method="post">
     {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
     {% if form.errors %}
-    <h1>{% blocktrans count form.errors|length as counter %}Please correct the error below{% plural %}Please correct the errors below{% endblocktrans %}</h1>
+    <h1>{% blocktrans count form.errors|length as counter %}Por favor corrige el siguiente error{% plural %}Por favor corrige los siguientes errores{% endblocktrans %}</h1>
     {% else %}
-    <h1>{% trans "Preview your comment" %}</h1>
+    <h1>{% trans "Previsualiza tu comentario" %}</h1>
       <blockquote>{{ comment|linebreaks }}</blockquote>
       <p>
-      {% trans "and" %} <input type="submit" name="submit" class="submit-post" value="{% trans "Post your comment" %}" id="submit" /> {% trans "or make changes" %}:
+      {% trans "y" %} <input type="submit" name="submit" class="submit-post" value="{% trans "Publica tu comentario" %}" id="submit" /> {% trans "o realiza cambios" %}:
       </p>
     {% endif %}
     {% for field in form %}
@@ -29,8 +29,8 @@
       {% endif %}
     {% endfor %}
     <p class="submit">
-    <input type="submit" name="submit" class="submit-post" value="{% trans "Post" %}" />
-    <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
+    <input type="submit" name="submit" class="submit-post" value="{% trans "Publicar" %}" />
+    <input type="submit" name="preview" class="submit-preview" value="{% trans "Previsualizar" %}" />
     </p>
   </form>
 {% endblock %}

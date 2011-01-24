@@ -2,6 +2,28 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load get_twitter_messages %}
+{% block extrahead %}
+	<script type="text/javascript">		
+		$(document).ready(function() { //Start up our Featured Project Carosuel
+			$('#featured ul').roundabout({
+				easing: 'easeOutInCirc',
+				duration: 600
+			});
+		});
+	</script>  
+
+	<!--[if IE 6]>
+	<script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+	<script>
+	  /* EXAMPLE */
+	  DD_belatedPNG.fix('.button');
+	  
+	  /* string argument can be any CSS selector */
+	  /* .png_bg example is unnecessary */
+	  /* change it to what suits you! */
+	</script>
+	<![endif]-->
+{% endblock %}
 {% block contents %}
 	
 <a href="htttp://libercopy.net" target=""><img src="http://quickribbon.com/ribbon/2011/01/6f990afc2ea0d0e80e61c49280e0732b.gif" border="0" width="150" height="150" style="position:absolute; right:0px; top:0px; margin:0px; padding:0px"></a>

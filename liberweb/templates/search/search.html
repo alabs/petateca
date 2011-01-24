@@ -3,21 +3,27 @@
 
 {% block contents %}
 <div>
-    <h2>Search</h2>
-
+	<h2 class="grid_12 caption clearfix">Search Results</h2>
+	<div class="pr grid_12 clearfix">&nbsp;</div>
         {% if query %}
-            <h3>Results</h3>
-
+	<div class="grid_10">
             {% for result in page.object_list %}
                 <p>
-                    {% thumbnail result.object.images.get_is_poster.0.src "300x200" as img_serie %}
-                      <a href="{{ result.object.get_absolute_url }}"> <img src="{{ img_serie.url }}">{{ result.object.name }}</a>
-                    {% endthumbnail %}
-                </p>
+		<a href="{{ result.object.get_absolute_url }}" class="portfolio_item float alpha">
+			<span>{{result.object.name|title}}</span>
+			{% if result.object.images.get_is_poster.0.src %}
+			    {% thumbnail result.object.images.get_is_poster.0.src "300x200" as img_serie %}
+			      <img src="{{ img_serie.url }}">
+			    {% endthumbnail %}
+			</p>
+			{% else %} 
+				<img src="/static/images/image_not_available.png" height="300" width="200"> 
+			{% endif %} 
+						</a>
             {% empty %}
-                <p>No results found.</p>
+		<h2 class="grid_10 caption clearfix"><span>No results</span>... But you can go to <a href="{% url serie-index %}">Series List</a> to find out if something you like!</h2>
             {% endfor %}
-
+	</div>
             {% if page.has_previous or page.has_next %}
                 <div>
                     {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
@@ -26,7 +32,7 @@
                 </div>
             {% endif %}
         {% else %}
-            {# Show some example queries to run, maybe query syntax, something else? #}
+		<h2 class="grid_10 caption clearfix"><span>No results</span>... But you can go to <a href="{% url serie-index %}">Series List</a> to find out if something you like!</h2>
         {% endif %}
 </div>
 {% endblock %}

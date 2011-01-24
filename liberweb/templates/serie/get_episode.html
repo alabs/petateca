@@ -78,15 +78,15 @@
 	    </tbody>
 	</table>
       {% else %}
-         No links available
+         {% trans "No hay enlaces disponibles" %}
       {% endif %}
 <br />
-  <a href="{% url serie-index %}" class="button">{% trans "Series list" %}</a>
+  <a href="{% url serie-index %}" class="button">{% trans "Listado de Series" %}</a>
   <br/>
-  <a href="{{ serie.get_absolute_url }}" class="button">{% trans "Back to" %} {{ serie.name }}</a>
+  <a href="{{ serie.get_absolute_url }}" class="button">{% trans "Regresar a " %} {{ serie.name }}</a>
   <br/>
-  <a href="{{ season.get_absolute_url }}" class="button">{% trans "Back to Full Season" %} {{season.season}} of {{serie.name|title}}</a>
+  <a href="{{ season.get_absolute_url }}" class="button">{% trans "Regresar a Temporada" %} {{season.season}} of {{serie.name|title}}</a>
 
-<a class="add_link" href="{{ episode.get_add_link_url }}">Add Link</a> 
+<a class="add_link" href="{{ episode.get_add_link_url }}">{% trans "Añadir enlace" %}</a> 
 {% endblock %}
 

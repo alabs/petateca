@@ -14,19 +14,19 @@ class IsPosterManager(models.Manager):
 
 class Serie(models.Model):
     name = models.CharField(max_length=255)
-    slug_name = models.SlugField(unique=True, help_text=_('name in URL'))
+    slug_name = models.SlugField(unique=True, help_text=_('nombre en la URL'))
     network = models.ForeignKey("Network", related_name="series")
     genres = models.ManyToManyField("Genre", related_name="series")
     runtime = models.IntegerField(
-        name=_('runtime duration'),
+        name=_('duracion de los episodios'),
         blank=True,
         null=True,
-        help_text=_('duration of episodes in minutes')
+        help_text=_('duracion del episodio en minutos')
     )
-    actors = models.ManyToManyField("Actor", through='Role', help_text=_('actors that worked in the serie'))
+    actors = models.ManyToManyField("Actor", through='Role', help_text=_('actores que trabajaron en la serie'))
     description = models.TextField()
-    finished = models.BooleanField(default=False, help_text=_('the serie is finished running?'))
-    rating = RatingField(range=5, can_change_vote=True, help_text=_('star rating'))
+    finished = models.BooleanField(default=False, help_text=_('la serie ha finalizado?'))
+    rating = RatingField(range=5, can_change_vote=True, help_text=_('puntuacion de estrellas'))
 
     def __unicode__(self):
         return self.name
@@ -46,20 +46,20 @@ class Role(models.Model):
     serie = models.ForeignKey("Serie")
     actor = models.ForeignKey("Actor")
     sortorder = models.IntegerField(blank=True, null=True)
-    role = models.CharField(max_length=255, help_text=_('character the actor played in the serie'))
+    role = models.CharField(max_length=255, help_text=_('personaje que el actor ha hecho en la serie'))
 
     class Meta:
         unique_together = ("serie", "actor", "role")
 
 
 class SerieAlias(models.Model):
-    name = models.CharField(max_length=255, unique=True, help_text=_('aliases for the same serie'))
+    name = models.CharField(max_length=255, unique=True, help_text=_('otros nombres para la misma serie'))
     serie = models.ForeignKey("Serie", related_name="aliases")
 
 
 class Season(models.Model):
     serie = models.ForeignKey('Serie', related_name="season")
-    season = models.IntegerField(help_text=_('season number for the serie'))
+    season = models.IntegerField(help_text=_('numero de temporada para la serie'))
 
     def __unicode__(self):
         ''' Serie Name - Season '''
@@ -76,7 +76,7 @@ class ImageSeason(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/season")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField(help_text=_('between several imgs, which one is the selected poster?'))
+    is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     season = models.ForeignKey("Season", related_name="images")
     get_is_poster = IsPosterManager()
 
@@ -93,7 +93,7 @@ class LinkSeason(models.Model):
        related_name="sub_langs_season",
        null=True,
        blank=True,
-       help_text=_("integrated subtitles")
+       help_text=_("subtitulos integrados")
     )
     user = models.CharField(max_length=255, null=True, blank=True)
     pub_date = models.DateTimeField(default=datetime.now)
@@ -105,13 +105,13 @@ class LinkSeason(models.Model):
 class Episode(models.Model):
     season = models.ForeignKey('Season', related_name="episodes")
     air_date = models.DateField(
-        _('air date'),
+        _('fecha de emision'),
         blank=True,
         null=True,
-        help_text=_('first broadcast date')
+        help_text=_('primera fecha de emision')
     )
     title = models.CharField(max_length=255)
-    episode = models.IntegerField(help_text=_('episode number - in season'))
+    episode = models.IntegerField(help_text=_('numero de episodio en temporada'))
     description = models.TextField()
     created_time = models.DateField(auto_now_add=True)
     modified_time = models.DateField(auto_now=True)
@@ -146,10 +146,10 @@ class Link(models.Model):
        related_name="sub_langs",
        null=True,
        blank=True,
-       help_text=_("integrated subtitles")
+       help_text=_("subtitulos integrados")
     )
-    user = models.CharField(max_length=255, null=True, blank=True, help_text=_('user that uploaded the link'))
-    pub_date = models.DateTimeField(default=datetime.now, help_text=_('when the link was added? default when it is saved'))
+    user = models.CharField(max_length=255, null=True, blank=True, help_text=_('usuario que subio el link'))
+    pub_date = models.DateTimeField(default=datetime.now, help_text=_('cuando se ha subido el link? por defecto cuando se guarda'))
 
     def __unicode__(self):
         return self.url
@@ -182,7 +182,7 @@ class Languages(models.Model):
 class Network(models.Model):
     name = models.CharField(max_length=25)
     url = models.URLField(null=True, blank=True)
-    slug_name = models.SlugField(unique=True, help_text=_('name in URL'))
+    slug_name = models.SlugField(unique=True, help_text=_('nombre en URL'))
 
     def save(self, force_insert=False, force_update=False, using=None):
         ''' When is saved, the name is converted to slug - aka URL''' 
@@ -200,7 +200,7 @@ class Network(models.Model):
 
 class Genre(models.Model):
     name = models.CharField(max_length=25)
-    slug_name = models.SlugField(unique=True, help_text=_('name in URL'))
+    slug_name = models.SlugField(unique=True, help_text=_('nombre en URL'))
 
     def save(self, force_insert=False, force_update=False, using=None):
         ''' When is saved, the name is converted to slug - aka URL''' 
@@ -218,7 +218,7 @@ class Genre(models.Model):
 
 class Actor(models.Model):
     name = models.CharField(max_length=100)
-    slug_name = models.SlugField(unique=True, help_text=_('name in URL'))
+    slug_name = models.SlugField(unique=True, help_text=_('nombre en URL'))
 
     def save(self, force_insert=False, force_update=False, using=None):
         ''' When is saved, the name is converted to slug - aka URL''' 
@@ -239,7 +239,7 @@ class ImageSerie(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/serie")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField(help_text=_('between several imgs, which one is the selected poster?'))
+    is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     serie = models.ForeignKey("Serie", related_name="images")
     get_is_poster = IsPosterManager()
 
@@ -251,7 +251,7 @@ class ImageActor(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/actor")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField(help_text=_('between several imgs, which one is the selected poster?'))
+    is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     actor = models.ForeignKey("Actor", related_name="images")
     get_is_poster = IsPosterManager()
 
@@ -263,7 +263,7 @@ class ImageEpisode(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/episodes")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField(help_text=_('between several imgs, which one is the selected poster?'))
+    is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     episode = models.ForeignKey("Episode", related_name="images")
     get_is_poster = IsPosterManager()
 

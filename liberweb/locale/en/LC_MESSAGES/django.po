@@ -1,0 +1,357 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-23 13:23+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: settings.py:52
+msgid "Spanish"
+msgstr ""
+
+#: settings.py:53
+msgid "English"
+msgstr ""
+
+#: blog/models.py:13
+msgid "Cuerpo del post"
+msgstr ""
+
+#: blog/models.py:17
+msgid "Resumen del post que se ve en la principal"
+msgstr ""
+
+#: serie/models.py:17
+msgid "nombre en la URL"
+msgstr ""
+
+#: serie/models.py:21
+msgid "duracion de los episodios"
+msgstr ""
+
+#: serie/models.py:24
+msgid "duracion del episodio en minutos"
+msgstr ""
+
+#: serie/models.py:26
+msgid "actores que trabajaron en la serie"
+msgstr ""
+
+#: serie/models.py:28
+msgid "la serie ha finalizado?"
+msgstr ""
+
+#: serie/models.py:29
+msgid "puntuacion de estrellas"
+msgstr ""
+
+#: serie/models.py:49
+msgid "personaje que el actor ha hecho en la serie"
+msgstr ""
+
+#: serie/models.py:56
+msgid "otros nombres para la misma serie"
+msgstr ""
+
+#: serie/models.py:62
+msgid "numero de temporada para la serie"
+msgstr ""
+
+#: serie/models.py:79 serie/models.py:242 serie/models.py:254
+#: serie/models.py:266
+msgid "entre varias imagenes, cual es el poster?"
+msgstr ""
+
+#: serie/models.py:96 serie/models.py:149
+msgid "subtitulos integrados"
+msgstr ""
+
+#: serie/models.py:108
+msgid "fecha de emision"
+msgstr ""
+
+#: serie/models.py:111
+msgid "primera fecha de emision"
+msgstr ""
+
+#: serie/models.py:114
+msgid "numero de episodio en temporada"
+msgstr ""
+
+#: serie/models.py:151
+msgid "usuario que subio el link"
+msgstr ""
+
+#: serie/models.py:152
+msgid "cuando se ha subido el link? por defecto cuando se guarda"
+msgstr ""
+
+#: serie/models.py:185 serie/models.py:203 serie/models.py:221
+msgid "nombre en URL"
+msgstr ""
+
+#: templates/base.html:61
+msgid "cerrar sesión"
+msgstr ""
+
+#: templates/base.html:61
+msgid "CERRAR SESIÓN"
+msgstr ""
+
+#: templates/base.html:63
+msgid "iniciar sesión"
+msgstr ""
+
+#: templates/base.html:63
+msgid "ACCEDER"
+msgstr ""
+
+#: templates/base.html:65
+msgid "informacion"
+msgstr ""
+
+#: templates/base.html:65
+msgid "BLOG"
+msgstr ""
+
+#: templates/base.html:66
+msgid "todas las"
+msgstr ""
+
+#: templates/base.html:66
+msgid "SERIES"
+msgstr ""
+
+#: templates/base.html:71
+msgid "Busqueda"
+msgstr ""
+
+#: templates/base.html:72
+msgid "Ir"
+msgstr ""
+
+#: templates/base.html:85
+msgid "Diseño basado en Aurelius, hecho por"
+msgstr ""
+
+#: templates/base.html:86
+msgid "Imagenes, Descripciones e Informacion de las series de "
+msgstr ""
+
+#: templates/base.html:87
+msgid "Todos los contenidos "
+msgstr ""
+
+#: templates/base.html:88
+msgid "Software licenciado "
+msgstr ""
+
+#: templates/base.html:88
+msgid "Usa el Codigo, Luke."
+msgstr ""
+
+#: templates/base.html:89
+msgid "Desarrollado en "
+msgstr ""
+
+#: templates/base.html:90
+msgid "arriba"
+msgstr ""
+
+#: templates/index.html:52 templates/serie/serie_list.html:4
+msgid "Series"
+msgstr ""
+
+#: templates/index.html:53
+msgid "listado de todas las series"
+msgstr ""
+
+#: templates/index.html:59
+msgid "FAQ"
+msgstr ""
+
+#: templates/index.html:60
+msgid "Preguntas más frecuentes"
+msgstr ""
+
+#: templates/index.html:65
+msgid "Ver nuestro blog"
+msgstr ""
+
+#: templates/index.html:66
+msgid "Blog de libercopy para ver entradas y comentar"
+msgstr ""
+
+#: templates/index.html:72
+msgid "Siguenos en Twitter"
+msgstr ""
+
+#: templates/index.html:73
+msgid "Tenemos cuenta en Twitter para que puedas opinar"
+msgstr ""
+
+#: templates/blog/get_post.html:23
+msgid "Publicado el"
+msgstr ""
+
+#: templates/blog/get_post.html:35
+msgid "Regresar al Blog"
+msgstr ""
+
+#: templates/blog/get_post.html:52
+msgid "Etiquetas"
+msgstr ""
+
+#: templates/comments/form.html:3
+msgid "Añade un comentario"
+msgstr ""
+
+#: templates/comments/form.html:20
+msgid "Añadir comentario"
+msgstr ""
+
+#: templates/comments/form.html:23
+msgid "Lo siento, debes haber"
+msgstr ""
+
+#: templates/comments/form.html:23
+msgid "iniciado sesion"
+msgstr ""
+
+#: templates/comments/form.html:23
+msgid "para enviar comentarios. Otra razon más para crearse una cuenta"
+msgstr ""
+
+#: templates/comments/posted.html:4 templates/comments/posted.html.py:7
+msgid "Gracias por comentar"
+msgstr ""
+
+#: templates/comments/preview.html:4 templates/comments/preview.html.py:13
+msgid "Previsualiza tu comentario"
+msgstr ""
+
+#: templates/comments/preview.html:11
+msgid "Por favor corrige el siguiente error"
+msgid_plural "Por favor corrige los siguientes errores"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/comments/preview.html:16
+msgid "y"
+msgstr ""
+
+#: templates/comments/preview.html:16
+msgid "Publica tu comentario"
+msgstr ""
+
+#: templates/comments/preview.html:16
+msgid "o realiza cambios"
+msgstr ""
+
+#: templates/comments/preview.html:32
+msgid "Publicar"
+msgstr ""
+
+#: templates/comments/preview.html:33
+msgid "Previsualizar"
+msgstr ""
+
+#: templates/serie/get_episode.html:81
+msgid "No hay enlaces disponibles"
+msgstr ""
+
+#: templates/serie/get_episode.html:84
+msgid "Listado de Series"
+msgstr ""
+
+#: templates/serie/get_episode.html:86
+msgid "Regresar a "
+msgstr ""
+
+#: templates/serie/get_episode.html:88
+msgid "Regresar a Temporada"
+msgstr ""
+
+#: templates/serie/get_episode.html:90
+msgid "Añadir enlace"
+msgstr ""
+
+#: templates/serie/get_season.html:7
+msgid "Temporada"
+msgstr ""
+
+#: templates/serie/get_season.html:46
+msgid "Episodio "
+msgstr ""
+
+#: templates/serie/get_season.html:47
+msgid "Emitido el "
+msgstr ""
+
+#: templates/serie/get_season.html:69
+msgid "Link"
+msgstr ""
+
+#: templates/serie/get_season.html:70
+msgid "Audio"
+msgstr ""
+
+#: templates/serie/get_season.html:71
+msgid "Subtitulos"
+msgstr ""
+
+#: templates/serie/get_season.html:72
+msgid "Votos"
+msgstr ""
+
+#: templates/serie/get_season.html:103 templates/serie/get_season.html:111
+msgid "Añadir Enlace"
+msgstr ""
+
+#: templates/serie/get_season.html:105 templates/serie/get_season.html:113
+msgid "Para añadir enlaces debes haber iniciado sesion."
+msgstr ""
+
+#: templates/serie/get_serie.html:69 templates/serie/serie_list.html:39
+msgid "Cadena"
+msgstr ""
+
+#: templates/serie/get_serie.html:74 templates/serie/serie_list.html:25
+msgid "Genero"
+msgstr ""
+
+#: templates/serie/get_serie.html:80
+msgid "Duracion"
+msgstr ""
+
+#: templates/serie/get_serie.html:80
+msgid "minutos"
+msgstr ""
+
+#: templates/serie/get_serie.html:115
+msgid "Actores"
+msgstr ""
+
+#: templates/serie/get_serie.html:133
+msgid "Temporadas"
+msgstr ""
+
+#: templates/serie/get_serie.html:136
+msgid "Temp"
+msgstr ""
+
+#: templates/serie/serie_list.html:19
+msgid "Regresar al listado de series"
+msgstr ""

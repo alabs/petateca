@@ -4,7 +4,7 @@
 {% load comments %}
 {% block contents %} 			
 		<!-- Caption Line -->
-		<h2 class="grid_12 caption clearfix">LiberCopy <span>blog</span>.</h2>
+		<h2 class="grid_12 caption clearfix"><span>Blog</span>.</h2>
 		
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 		
@@ -20,7 +20,7 @@
 -->
 				<h3 class="title"><a href="single.html">{{post.title}}</a></h3>
 				<!-- Post Title -->
-				<p class="sub"><a href="#">Written on</a>, <a href="#"></a> &bull; {{post.date}} &bull; <a href="#"></a></p>
+				<p class="sub"><a href="#">{% trans "Publicado el" %}</a>, <a href="#"></a> &bull; {{post.date}} &bull; <a href="#"></a></p>
 				<div class="hr dotted clearfix">&nbsp;</div>
 
   {% if image %}  {% thumbnail image "300x200" as img_post %} <img class="image_post" src="{{ img_post.url }}" /> {% endthumbnail %} {% endif %}
@@ -32,12 +32,12 @@
 								
 				<!-- Post Links -->
 				<p class="clearfix">
-					<a href="{% url blog-index %}" class="button float" >&lt;&lt; Back to Blog</a>
+					<a href="{% url blog-index %}" class="button float" >&lt;&lt; {% trans "Regresar al Blog" %}</a>
 				</p>
 			<div class="hr clearfix">&nbsp;</div>
 
 {% get_comment_count for post as comment_count %}
-<h3>{{ comment_count }} comments </h3> 
+<h3>{{ comment_count }} {% trans "comentarios" %}</h3> 
 {% render_comment_list for post %}
 
 {% with request.path as next %}
@@ -49,7 +49,7 @@
 		<!-- Column 2 / Sidebar -->
 		<div class="grid_4">
 		
-			<h4>Tags</h4>
+			<h4>{% trans "Etiquetas" %}</h4>
 			<ul class="sidebar">
  			{% for tag in tag_list %}
 				<li><a href="{% url get_tag tag_slug=tag.slug %}">{{ tag }}</a></li>

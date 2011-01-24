@@ -66,22 +66,22 @@ $(document).ready(function(){
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- NETWORK -->
 	{% if serie.network.name %}
-	<h4>{% trans "Network" %}:</h4> 
+	<h4>{% trans "Cadena" %}:</h4> 
 		<a class="button float" href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a>
 	{% endif %}
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- GENRE -->
-	<h4>{% trans "Genre" %}:</h4> 
+	<h4>{% trans "Genero" %}:</h4> 
       		{% for genre in serie.genres.all %}
 			<a class="button float" href="{{ genre.get_absolute_url}}">{{ genre.name }}</a>
 		{% endfor %}
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- RUNTIME -->
-	<h4>{% trans "Runtime" %}:</h4> {{ serie.runtime }} {% trans "minutes" %}
+	<h4>{% trans "Duracion" %}:</h4> {{ serie.runtime }} {% trans "minutos" %}
 		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- BUTTONS -->
 		<p class="clearfix">
-		<a href="/series" class="button float">&lt;&lt; Back to Series</a>
+		<a href="/series" class="button float">&lt;&lt; {% trans "Regresar a las Series" %}</a>
 		</p>
 		<p class="clearfix">
 		{% get_comment_count for serie as comment_count %}
@@ -112,7 +112,7 @@ $(document).ready(function(){
 	<p class="clearfix"> {{ serie.description }}</p>
 	<!-- ACTORS -->
 	<div class="hr clearfix">&nbsp;</div>
-	<h2>{% trans "Actors" %}</h2>
+	<h2>{% trans "Actores" %}</h2>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	{% for actor in serie.actors.all %}
 		{% if actor.role_set.all.0.role %}
@@ -130,10 +130,10 @@ $(document).ready(function(){
 <!-- COLUMN 3 -->
 <div class="grid_1">
 	<!-- SEASONS -->
-	<h2><span>{% trans "Seasons" %}</span></h2>
+	<h2><span>{% trans "Temporadas" %}</span></h2>
 	{% for season in season_list %}
 		<a class="portfolio_item float alpha" href="{{ season.get_absolute_url }}">
-		<span>{% trans "Season" %} {{ season.season }}</span> 
+		<span>{% trans "Temp" %} {{ season.season }}</span> 
 		{% if season.images.all.0 %} {% thumbnail season.images.all.0.src "180x160" as img_season %} 
 			<img src="{{ img_season.url }}" alt=""/>{% endthumbnail %}
 		{% else %}
@@ -151,7 +151,7 @@ $(document).ready(function(){
 	<h2> Comments </h2>
 	{% render_comment_list for serie %}
 	{% if comment_count == 0 %}
-	<p> There are no comments yet. Be the first!</p>
+	<p>{% trans "Aún no hay comentarios. ¡Sé el primero!" %}</p>
 	{% endif %}
 
 	<!-- ADD A COMMENT -->

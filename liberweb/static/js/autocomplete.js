@@ -144,7 +144,8 @@ function repositionResultsDiv()
 	acResultsDiv.css("position","absolute");
 	acResultsDiv.css("left", sf_left - 2);
 	acResultsDiv.css("top", sf_top + sf_height + 15);
-	acResultsDiv.css("width", sf_width - 2);
+	acResultsDiv.css("width", sf_width + 15);
+	//acResultsDiv.css("width", sf_width - 2);
 }
 
 

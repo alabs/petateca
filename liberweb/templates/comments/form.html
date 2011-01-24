@@ -1,6 +1,6 @@
 {% load comments i18n %}
 <div class="hr clearfix">&nbsp;</div>
-<h2> Add a comment </h2>
+<h2>{% trans "Añade un comentario" %}</h2>
 <div class="hr dotted clearfix">&nbsp;</div>
 {% if request.user.is_authenticated %}
    <form id="comment_form" action="{% comment_form_target %}" method="post">
@@ -17,8 +17,8 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-        <input type="submit" id="send_message" class="button" name="post" value="{% trans "Add Comment" %}" />
+        <input type="submit" id="send_message" class="button" name="post" value="{% trans "Añadir comentario" %}" />
    </form>
 {% else %}
-<p class="clearfix"> I'm sorry, but you must be <a href="/accounts/login/?next={{request.path}}">logged in</a> to submit comments. Another reason to create an <a href="/accounts/login/">account</a>! </p>
+<p class="clearfix">{% trans "Lo siento, debes haber" %} <a href="/accounts/login/?next={{request.path}}">{% trans "iniciado sesion" %}</a> {% trans "para enviar comentarios. Otra razon más para crearse una cuenta" %}</p>
 {% endif %}
