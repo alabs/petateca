@@ -291,7 +291,7 @@ def get_serie_list(request):
 @render_to('serie/add_link.html')
 def add_link(request, serie_slug, season, episode):
     ''' 
-    Formulario que agrega links
+    Formulario que agrega/edita links
     ''' 
     serie = get_object_or_404(Serie, slug_name=serie_slug)
     season = get_object_or_404(Season, serie=serie, season=season)

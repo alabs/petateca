@@ -2,32 +2,33 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-23 13:23+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-01-25 12:26+0100\n"
+"PO-Revision-Date: 2011-01-25 12:39\n"
+"Last-Translator: <lala@lala.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: django-rosetta 0.5.6\n"
 
 #: settings.py:52
 msgid "Spanish"
-msgstr ""
+msgstr "Spanish"
 
 #: settings.py:53
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: blog/models.py:13
 msgid "Cuerpo del post"
-msgstr ""
+msgstr "Body of the Post"
 
 #: blog/models.py:17
 msgid "Resumen del post que se ve en la principal"
@@ -35,323 +36,398 @@ msgstr ""
 
 #: serie/models.py:17
 msgid "nombre en la URL"
-msgstr ""
+msgstr "name in URL"
 
 #: serie/models.py:21
 msgid "duracion de los episodios"
-msgstr ""
+msgstr "episode duration"
 
 #: serie/models.py:24
 msgid "duracion del episodio en minutos"
-msgstr ""
+msgstr "episode duration in minutes"
 
 #: serie/models.py:26
 msgid "actores que trabajaron en la serie"
-msgstr ""
+msgstr "actors that worked in the serie"
 
 #: serie/models.py:28
 msgid "la serie ha finalizado?"
-msgstr ""
+msgstr "has the serie finished?"
 
 #: serie/models.py:29
 msgid "puntuacion de estrellas"
-msgstr ""
+msgstr "star rating"
 
 #: serie/models.py:49
 msgid "personaje que el actor ha hecho en la serie"
-msgstr ""
+msgstr "character that actor has played"
 
 #: serie/models.py:56
 msgid "otros nombres para la misma serie"
-msgstr ""
+msgstr "aliases for the serie"
 
 #: serie/models.py:62
 msgid "numero de temporada para la serie"
-msgstr ""
+msgstr "serie season number"
 
 #: serie/models.py:79 serie/models.py:242 serie/models.py:254
 #: serie/models.py:266
 msgid "entre varias imagenes, cual es el poster?"
-msgstr ""
+msgstr "between several images, which one is the poster?"
 
 #: serie/models.py:96 serie/models.py:149
 msgid "subtitulos integrados"
-msgstr ""
+msgstr "integrated subtitles"
 
 #: serie/models.py:108
 msgid "fecha de emision"
-msgstr ""
+msgstr "air date"
 
 #: serie/models.py:111
 msgid "primera fecha de emision"
-msgstr ""
+msgstr "first air date"
 
 #: serie/models.py:114
 msgid "numero de episodio en temporada"
-msgstr ""
+msgstr "episode number on season"
 
 #: serie/models.py:151
 msgid "usuario que subio el link"
-msgstr ""
+msgstr "user that uploaded the link"
 
 #: serie/models.py:152
 msgid "cuando se ha subido el link? por defecto cuando se guarda"
-msgstr ""
+msgstr "when was uploaded the link? defaults when it's saved"
 
 #: serie/models.py:185 serie/models.py:203 serie/models.py:221
 msgid "nombre en URL"
-msgstr ""
+msgstr "name in URL"
 
 #: templates/base.html:61
 msgid "cerrar sesión"
-msgstr ""
+msgstr "logout"
 
 #: templates/base.html:61
 msgid "CERRAR SESIÓN"
-msgstr ""
+msgstr "LOGOUT"
 
 #: templates/base.html:63
 msgid "iniciar sesión"
-msgstr ""
+msgstr "login"
 
 #: templates/base.html:63
 msgid "ACCEDER"
-msgstr ""
+msgstr "LOGIN"
 
 #: templates/base.html:65
 msgid "informacion"
-msgstr ""
+msgstr "information"
 
 #: templates/base.html:65
 msgid "BLOG"
-msgstr ""
+msgstr "BLOG"
 
 #: templates/base.html:66
 msgid "todas las"
-msgstr ""
+msgstr "all the"
 
 #: templates/base.html:66
 msgid "SERIES"
-msgstr ""
+msgstr "SERIES"
 
 #: templates/base.html:71
 msgid "Busqueda"
-msgstr ""
+msgstr "Search"
 
 #: templates/base.html:72
 msgid "Ir"
-msgstr ""
+msgstr "Go"
 
 #: templates/base.html:85
 msgid "Diseño basado en Aurelius, hecho por"
-msgstr ""
+msgstr "CSS Design based in Aurelius theme, made by"
 
 #: templates/base.html:86
 msgid "Imagenes, Descripciones e Informacion de las series de "
-msgstr ""
+msgstr "Series Images, Description and Information from"
 
 #: templates/base.html:87
 msgid "Todos los contenidos "
-msgstr ""
+msgstr "All the contents licensed as"
 
 #: templates/base.html:88
 msgid "Software licenciado "
-msgstr ""
+msgstr "Software licensed"
 
 #: templates/base.html:88
 msgid "Usa el Codigo, Luke."
-msgstr ""
+msgstr "Use the Source, Luke"
 
 #: templates/base.html:89
 msgid "Desarrollado en "
-msgstr ""
+msgstr "Developed on "
 
 #: templates/base.html:90
 msgid "arriba"
-msgstr ""
+msgstr "top"
+
+#: templates/index.html:47
+#, fuzzy
+msgid "<span>LiberCopy</span>, sitio de <u>enlaces</u> &amp; <u>magia</u> para disfrutar y difundir.<span> Compartir Es Bueno</span>. <br />Mas de"
+msgstr "<span>LiberCopy</span>, <u>links</u> &amp; <u>magic</u> to enjoy and share. <span> Sharing is good</span>. <br />More than {{ count_link }} links, {{count_episode }} episodes and {{count_serie}} series.</h2>"
+
+#: templates/index.html:47
+msgid "links,"
+msgstr "links,"
+
+#: templates/index.html:47
+#, fuzzy
+msgid "episodios y"
+msgstr "Episode"
+
+#: templates/index.html:47
+#, fuzzy
+msgid "series.</h2>"
+msgstr "Series"
 
 #: templates/index.html:52 templates/serie/serie_list.html:4
 msgid "Series"
-msgstr ""
+msgstr "Series"
 
 #: templates/index.html:53
 msgid "listado de todas las series"
-msgstr ""
+msgstr "Series List"
 
 #: templates/index.html:59
 msgid "FAQ"
-msgstr ""
+msgstr "FAQ"
 
 #: templates/index.html:60
 msgid "Preguntas más frecuentes"
-msgstr ""
+msgstr "Frequently Asked Questions"
 
 #: templates/index.html:65
 msgid "Ver nuestro blog"
-msgstr ""
+msgstr "View our blog"
 
 #: templates/index.html:66
 msgid "Blog de libercopy para ver entradas y comentar"
-msgstr ""
+msgstr "LiberCopy Blog to read posts and comment"
 
 #: templates/index.html:72
 msgid "Siguenos en Twitter"
-msgstr ""
+msgstr "Follow us on Twitter"
 
 #: templates/index.html:73
 msgid "Tenemos cuenta en Twitter para que puedas opinar"
 msgstr ""
 
-#: templates/blog/get_post.html:23
+#: templates/blog/get_post.html:23 templates/blog/post_list.html:13
 msgid "Publicado el"
-msgstr ""
+msgstr "Written on "
 
 #: templates/blog/get_post.html:35
 msgid "Regresar al Blog"
-msgstr ""
+msgstr "Back to Blog"
 
-#: templates/blog/get_post.html:52
+#: templates/blog/get_post.html:40
+#, fuzzy
+msgid "comentarios"
+msgstr "Add a comment"
+
+#: templates/blog/get_post.html:52 templates/blog/post_list.html:44
 msgid "Etiquetas"
-msgstr ""
+msgstr "Tags"
+
+#: templates/blog/post_list.html:25
+msgid "Leer más..."
+msgstr "Read More"
+
+#: templates/blog/post_list.html:33
+msgid "Posteriores"
+msgstr "Next"
+
+#: templates/blog/post_list.html:37
+#, fuzzy
+msgid "Anteriores"
+msgstr "Actors"
+
+#: templates/blog/post_list.html:51
+#, fuzzy
+msgid "Todos las Entradas"
+msgstr "All the contents licensed as"
 
 #: templates/comments/form.html:3
 msgid "Añade un comentario"
-msgstr ""
+msgstr "Add a comment"
 
 #: templates/comments/form.html:20
 msgid "Añadir comentario"
-msgstr ""
+msgstr "Add a comment"
 
 #: templates/comments/form.html:23
 msgid "Lo siento, debes haber"
-msgstr ""
+msgstr "I'm sorry, you should "
 
 #: templates/comments/form.html:23
 msgid "iniciado sesion"
-msgstr ""
+msgstr "log in"
 
 #: templates/comments/form.html:23
 msgid "para enviar comentarios. Otra razon más para crearse una cuenta"
-msgstr ""
+msgstr "to send comments. Another reason to create an accounts"
 
 #: templates/comments/posted.html:4 templates/comments/posted.html.py:7
 msgid "Gracias por comentar"
-msgstr ""
+msgstr "Thank you for commenting"
 
 #: templates/comments/preview.html:4 templates/comments/preview.html.py:13
 msgid "Previsualiza tu comentario"
-msgstr ""
+msgstr "Preview your comment"
 
 #: templates/comments/preview.html:11
 msgid "Por favor corrige el siguiente error"
 msgid_plural "Por favor corrige los siguientes errores"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Please correct the following error"
+msgstr[1] "Please correct the following errors"
 
 #: templates/comments/preview.html:16
 msgid "y"
-msgstr ""
+msgstr "and"
 
 #: templates/comments/preview.html:16
 msgid "Publica tu comentario"
-msgstr ""
+msgstr "Publish your comment"
 
 #: templates/comments/preview.html:16
 msgid "o realiza cambios"
-msgstr ""
+msgstr "or made changes"
 
 #: templates/comments/preview.html:32
 msgid "Publicar"
-msgstr ""
+msgstr "Post"
 
 #: templates/comments/preview.html:33
 msgid "Previsualizar"
-msgstr ""
+msgstr "Preview"
 
 #: templates/serie/get_episode.html:81
 msgid "No hay enlaces disponibles"
-msgstr ""
+msgstr "No links available"
 
 #: templates/serie/get_episode.html:84
 msgid "Listado de Series"
-msgstr ""
+msgstr "Series List"
 
 #: templates/serie/get_episode.html:86
 msgid "Regresar a "
-msgstr ""
+msgstr "Back to"
 
 #: templates/serie/get_episode.html:88
 msgid "Regresar a Temporada"
-msgstr ""
+msgstr "Back to Season"
 
 #: templates/serie/get_episode.html:90
 msgid "Añadir enlace"
-msgstr ""
+msgstr "Add Link"
 
 #: templates/serie/get_season.html:7
 msgid "Temporada"
-msgstr ""
+msgstr "Season"
 
-#: templates/serie/get_season.html:46
+#: templates/serie/get_season.html:39
+#, fuzzy
+msgid "Regresar a"
+msgstr "Back to"
+
+#: templates/serie/get_season.html:56
 msgid "Episodio "
-msgstr ""
+msgstr "Episode"
 
-#: templates/serie/get_season.html:47
+#: templates/serie/get_season.html:57
 msgid "Emitido el "
 msgstr ""
 
-#: templates/serie/get_season.html:69
-msgid "Link"
-msgstr ""
-
-#: templates/serie/get_season.html:70
-msgid "Audio"
-msgstr ""
-
-#: templates/serie/get_season.html:71
-msgid "Subtitulos"
-msgstr ""
-
 #: templates/serie/get_season.html:72
-msgid "Votos"
-msgstr ""
-
-#: templates/serie/get_season.html:103 templates/serie/get_season.html:111
 msgid "Añadir Enlace"
-msgstr ""
+msgstr "Add Link"
 
-#: templates/serie/get_season.html:105 templates/serie/get_season.html:113
+#: templates/serie/get_season.html:74
 msgid "Para añadir enlaces debes haber iniciado sesion."
-msgstr ""
+msgstr "To add links you must be logged in"
+
+#: templates/serie/get_season.html:84
+msgid "Link"
+msgstr "Link"
+
+#: templates/serie/get_season.html:85
+msgid "Audio"
+msgstr "Audio"
+
+#: templates/serie/get_season.html:86
+msgid "Subtitulos"
+msgstr "Subtitles"
+
+#: templates/serie/get_season.html:87
+msgid "Votos"
+msgstr "Votes"
 
 #: templates/serie/get_serie.html:69 templates/serie/serie_list.html:39
 msgid "Cadena"
-msgstr ""
+msgstr "Network"
 
 #: templates/serie/get_serie.html:74 templates/serie/serie_list.html:25
 msgid "Genero"
-msgstr ""
+msgstr "Genre"
 
 #: templates/serie/get_serie.html:80
 msgid "Duracion"
-msgstr ""
+msgstr "Duration"
 
 #: templates/serie/get_serie.html:80
 msgid "minutos"
-msgstr ""
+msgstr "minutes"
+
+#: templates/serie/get_serie.html:84
+#, fuzzy
+msgid "Regresar a las Series"
+msgstr "Back to Series List"
 
 #: templates/serie/get_serie.html:115
 msgid "Actores"
-msgstr ""
+msgstr "Actors"
 
 #: templates/serie/get_serie.html:133
 msgid "Temporadas"
-msgstr ""
+msgstr "Seasons"
 
 #: templates/serie/get_serie.html:136
 msgid "Temp"
-msgstr ""
+msgstr "Season "
+
+#: templates/serie/get_serie.html:154
+msgid "Aún no hay comentarios. ¡Sé el primero!"
+msgstr "There are no comments yet. Be the first!"
+
+#: templates/serie/serie_list.html:11
+msgid "Mira las mejores"
+msgstr "Watch the best"
+
+#: templates/serie/serie_list.html:11
+#, fuzzy
+msgid "series"
+msgstr "Series"
+
+#: templates/serie/serie_list.html:11
+#, fuzzy
+msgid "de la Cadena"
+msgstr "Network"
+
+#: templates/serie/serie_list.html:11
+#, fuzzy
+msgid "del Genero"
+msgstr "Genre"
 
 #: templates/serie/serie_list.html:19
 msgid "Regresar al listado de series"
-msgstr ""
+msgstr "Back to Series List"
