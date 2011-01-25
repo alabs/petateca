@@ -129,11 +129,21 @@ var QueryLoader = {
 			top: "50%",
 			width: "0%"
 		});
+		
+		QueryLoader.loadAmt = $("<div>0%</div>").appendTo($(QueryLoader.overlay));
+		$(QueryLoader.loadAmt).addClass("QAmt");
+		
+		$(QueryLoader.loadAmt).css({
+			position: "relative",
+			top: "50%",
+			left: "50%"
+		});
 	},
 	
 	animateLoader: function() {
 		var perc = (100 / QueryLoader.doneStatus) * QueryLoader.doneNow;
 		if (perc > 99) {
+			$(QueryLoader.loadAmt).html("100%");
 			$(QueryLoader.loadBar).stop().animate({
 				width: perc + "%"
 			}, 500, "linear", function() { 
@@ -143,6 +153,7 @@ var QueryLoader = {
 			$(QueryLoader.loadBar).stop().animate({
 				width: perc + "%"
 			}, 500, "linear", function() { });
+			$(QueryLoader.loadAmt).html(Math.floor(perc)+"%");
 		}
 	},
 	
@@ -158,6 +169,7 @@ var QueryLoader = {
 		}
 		
 		//The end animation, adjust to your likings
+		$(QueryLoader.loadAmt).hide();
 		$(QueryLoader.loadBar).animate({
 			height: height + "px",
 			top: 0
@@ -167,4 +179,3 @@ var QueryLoader = {
 		});
 	}
 }
-
