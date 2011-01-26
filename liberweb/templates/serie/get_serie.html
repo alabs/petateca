@@ -23,7 +23,14 @@ $(document).ready(function(){
 }, function(){
        $(this).attr('src', '/static/images/heart_black.png');
     });
-}); 
+    $('.ratingstar').rating({
+     callback: function(value, link){
+      //alert("The value selected was '" + value + "'\n\nWith this callback function I can automatically submit the form with this code:\nthis.form.submit();");
+      // To submit the form automatically:
+      this.form.submit();
+      }
+     });
+});
 </script>{% endblock %}
 {% block contents %}
 <!-- MESSAGES -->
@@ -53,14 +60,13 @@ $(document).ready(function(){
 	{% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" height=100> </div>
 	{% endif %}
 	<!-- RATING -->
-	  <div class="rating float right">
+	  <div id="rating">
 	    <form action="." method="POST">
-	      <input type="radio" name="rating" value="1" class="star" {% if score == 1 %}checked="checked"{% endif %}/>
-	      <input type="radio" name="rating" value="2" class="star" {% if score == 2 %}checked="checked"{% endif %}/>
-	      <input type="radio" name="rating" value="3" class="star" {% if score == 3 %}checked="checked"{% endif %}/>
-	      <input type="radio" name="rating" value="4" class="star" {% if score == 4 %}checked="checked"{% endif %}/>
-	      <input type="radio" name="rating" value="5" class="star" {% if score == 5 %}checked="checked"{% endif %}/>
-	      <button type="submit">Rate</button>
+	      <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="3" class="ratingstar" {% if score == 3 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="4" class="ratingstar" {% if score == 4 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
 	    </form>
 	  </div>
 	<div class="hr dotted clearfix">&nbsp;</div>

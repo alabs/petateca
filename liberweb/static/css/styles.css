@@ -147,7 +147,7 @@ DESCRIPTION: A premium business and portfolio theme.
 /* About Us Page Timeline */
 
 	dl.history							{margin:10px 10px;}
-	dl.history							{margin:0 0 10px 0; zoom:1}
+	dl.history							{margin:0 0 10px 0;}
 	dl.history dt						{width:50px; float:left; font-weight:bold;}
 	dl.history dd						{width:250px; float:left; padding:0; margin-bottom:20px;}
 	
@@ -201,7 +201,7 @@ DESCRIPTION: A premium business and portfolio theme.
 	.commentlist						{margin:0; padding:0; margin-bottom:20px; float:left; width:100%;}
 	.commentlist li						{width:100%; clear:both; float:left; padding:0; list-style-type:none; margin:0; position:relative;}
 	.gravatar							{float:left; width:60px; padding:0px 10px 0 0; text-align: center;}
-	.gravatar img						{display:block; padding:5px; padding-left:none; margin-bottom:0px;}
+	.gravatar img						{display:block; padding:5px; margin-bottom:0px;}
 	.comment_content					{float:right; width:539px;}
 	.commentmetadata					{float:right;}
 	.comment-reply-link					{text-decoration:none; font-size:10px;}
@@ -223,7 +223,7 @@ DESCRIPTION: A premium business and portfolio theme.
 	#contact_form input#name,
 	#contact_form input#email,
 	#contact_form input#subject			{width:400px;}
-	#contact_form textarea				{width:500px;height:150px; resize: none;}
+	#contact_form textarea				{width:500px;height:150px;}
 	#contact_form input.button			{float:right;}
 
 /* Login Form */
@@ -239,7 +239,7 @@ DESCRIPTION: A premium business and portfolio theme.
 	#login_form input#name,
 	#login_form input#email,
 	#login_form input#subject			{width:400px;}
-	#login_form textarea				{width:500px;height:150px; resize: none;}
+	#login_form textarea				{width:500px;height:150px;}
 	#login_form input.button			{float:right;}
 	
 /* Comment form */
@@ -248,7 +248,7 @@ DESCRIPTION: A premium business and portfolio theme.
 	#comment_form ul li					{margin:10px 0; list-style:none; position:relative; clear:both;}
 	#comment_form label					{line-height:35px; width:100px; text-align:right; float:left; margin-right:10px;}
 	#comment_form textarea				{float:left; padding:8px; border:1px solid #CCCCCC; margin-left:10px; background:#fcfcfc; -moz-border-radius:5px; -webkit-border-radius:5px;}
-	#comment_form textarea				{width:500px; height:150px; resize:none;}
+	#comment_form textarea				{width:500px; height:150px;}
 
 /* Search form */
 
@@ -302,32 +302,22 @@ DESCRIPTION: A premium business and portfolio theme.
 	position: absolute; 
 	top: 0; left: 0; 
 	z-index: 10; 
-    background: none repeat scroll 0 0 #CCCCCC;
+	background: none repeat scroll 0 0 #CCCCCC;
 	padding:5px;
-	border:1px solid ##3B3B3B;
+	border:1px solid #3B3B3B;
 	text-align:center; 
 	font-weight:bold; 
 	width:99%;
-    height: 20px;
-    opacity: 0.85;
-    overflow: visible;
-    font-family: Helvetica;
-    font-size: 18px;
-/*
-    background: none repeat scroll 0 0 #3B3B3B;
-    border-top: 1px solid #4F4A4A;
-    bottom: 0;
-    color: #FFFFFF;
-    font-family: Helvetica;
-    font-size: 18px;
-    height: 1px;
-    opacity: 0;
-    overflow: hidden;
-    position: fixed;
-    text-align: center;
-    width: 100%;
-    z-index: 10000;
-*/
+	height: 20px;
+	opacity: 0.85;
+	overflow: visible;
+	font-family: Helvetica;
+	font-size: 18px;
+}
+
+#rating{
+	margin-bottom: 2em;
+	padding-left: 5em;
 }
 
 /* Overiding Classes */
