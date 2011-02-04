@@ -44,7 +44,7 @@
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 			
 		<!-- Caption Line -->
-		<h2 class="grid_12 caption clearfix">{% trans "<span>LiberCopy</span>, sitio de <u>enlaces</u> &amp; <u>magia</u> para disfrutar y difundir.<span> Compartir Es Bueno</span>. <br />Mas de " %}{{ count_link }}{% trans " links," %}{{count_episode }}{% trans " episodios y" %} {{count_serie}}{% trans " series.</h2>" %}
+		<h2 class="grid_12 caption clearfix">{% trans "<span>LiberCopy</span>, sitio de <u>enlaces</u> &amp; <u>magia</u> para disfrutar y difundir.<span> Compartir Es Bueno</span>. <br />Mas de " %}{{ count_link }}{% trans " links," %}{{count_episode }}{% trans " episodios y" %} {{count_serie}}{% trans " series" %}</h2>
 		
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
@@ -68,9 +68,12 @@
 					<p style="text-align:center;"><img alt="" src="/static/images/Blog_Artdesigner.lv.png" /></p>
 				
 			</a>
-			<a class="quicknavgrid_3 quicknav" href="http://twitter.com/libercopy">
-					<h4 class="title ">{% trans "Siguenos en Twitter" %}</h4>
-					<p>{% trans "Tenemos cuenta en Twitter para que puedas opinar" %}</p>
+			<a class="quicknavgrid_3 quicknav" href="{% url invitation_invite %}">
+					<h4 class="title ">{% trans "Invita a tu gente!" %}</h4>
+					<p>{% trans "LiberCopy es tan cool que para acceder necesitas invitacion." %}</p>
+					{% if not request.user.is_authenticated %}
+						<p><b> OPCION DESACTIVADA EN LA ALPHA, EN LA BETA TODOS SERAN USUARIOS REGISTRADOS</b></p>
+					{% endif %}
 					<p style="text-align:center;"><img alt="" src="/static/images/hungry_bird.png" /></p>
 			</a>
 		</div>

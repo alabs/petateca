@@ -1,11 +1,12 @@
+{% load i18n %}
 {% extends "registration/registration_base.html" %}
-{% block title %}{% if account %}Activation complete{% else %}Activation problem{% endif %}{% endblock %}
+{% block title %}{% if account %}{% trans "Activación completa" %}{% else %}{% trans "Problema en la Activación" %}{% endif %}{% endblock %}
 {% block contents %}
 <h2 class="grid_12 caption clearfix">
 {% if account %}
-Thanks {{ account }}, activation complete!  You may now <span><a href='{% url auth_login %}'>login</a></span> using the username and password you set at registration.
+{% trans "Gracias" {{ account }}, {% trans "tu activación se ha completado. Ahora puedes" %} <span><a href='{% url auth_login %}'>{% trans "iniciar sesión" %}</a></span>.
 {% else %}
-Oops &ndash; it seems that your activation key is invalid.  Please check the url again.
+{% trans "Oops; parece que el codigo de activacion es invalido. Comprueba que la URL sea la correcta" %}
 {% endif %}
 </h2>
 {% endblock %}

@@ -1,11 +1,11 @@
-You (or someone pretending to be you) have asked to register an account at 
-{{ site.name }}.  If this wasn't you, please ignore this email
-and your address will be removed from our records.
+Tú (o alguien que se ha hecho pasar por ti) te has registrado en {{ site.name }}
 
-To activate this account, please click the following link within the next 
-{{ expiration_days }} days:
+Si no eres tú, puedes ignorar este correo y nos olvidaremos de ti. 
+
+Para activar la cuenta, por favor haz click en el siguiente link en los proximos
+{{ expiration_days }} días:
 
 http://{{site.domain}}/accounts/activate/{{ activation_key }}
 
-Sincerely,
-{{ site.name }} Management
+Saludos,
+{{ site.name }}

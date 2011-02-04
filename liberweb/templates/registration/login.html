@@ -1,91 +1,29 @@
-{% extends "registration/registration_base.html" %}
+{% extends "base_stripped.html" %}
+{% load i18n %}
 {% load message_box %}
-{% block title %}Login{% endblock %}
+{% block title %}{% trans "Iniciar Sesión" %}{% endblock %}
 {% block contents %}
-
 {% if request.user.is_authenticated %}
-	<h2 class="grid_12 caption clearfix">You're already <span>logged in</span>! Go watch some <a href="/series">series</a></h2>
+	<h2 class="grid_12 caption clearfix">{% trans "Ya has iniciado sesión." %}! {% trans "Vete a ver algunas" %} <a href="/series">series</a></h2>
 {% else %}
 	{% if form.errors %}
-	{% message_box "Your username and password didn't match. Please try again." %}
+	{% message_box "Tu nombre de usuario y contraseña no concuerdan. Intentalo de nuevo." %}
 	{% endif %}
 
-	<!-- Caption Line -->
-			<h2 class="grid_12 caption clearfix">Do you want to vote for series? Vote for links? Add links? <span>Login or Register</span>!</h2>
-			
-			<div class="hr grid_12 clearfix">&nbsp;</div>
-
-			<!-- column 1 / content -->
-			<div class="grid_13">
-				<h3>login</h3>
-				<div class="hr dotted clearfix">&nbsp;</div>
-				<!-- LOGIN form -->
-				<form method="post" action="{% url django.contrib.auth.views.login %}" id="login_form">
-				<p>If you already have an account, you can login.</p>
-					<ul>						
-						<li class="clearfix"> 
-							<label for="name">username or email</label>
-							<input type='text' name='username' id='name' />
-							<div class="clear"></div>
-							<p id='name_error' class='error'>insert a name</p>
-						</li> 
-						<li class="clearfix"> 
-							<label for="name">password</label>
-							<input type='password' name='password' id='name' />
-							<div class="clear"></div>
-							<p id='password_error' class='error'>incorrect password</p>
-						</li> 
-						<p><a href="{% url auth_password_reset %}">forgot</a> your password?  <a href="{% url registration_register %}">need an account</a>?</p>
-
-						<input type="hidden" name="next" value="{{ next }}" />
-
-						<p id='login_fail' class='error'>sorry, an error has occured. please try again later.</p>
-						<div id="button">
-						<input type='submit' id='send_message' class="button" value='login' />
-						</div>
-						</li> 
-					</ul> 
-				</form>  
-			</div>
-			<div class="grid_14">
-				<h3>register</h3>
-				<div class="hr dotted clearfix">&nbsp;</div>
-				<!-- REGISTER form -->
-				<form method='post' action="{% url registration_register %}" id="login_form">
-				<p>You can register easily, the only thing you need is an email!</p>
-					<ul>						
-						<li class="clearfix"> 
-							<label for="name">username</label>
-							<input type='text' name='username' id='name' />
-							<div class="clear"></div>
-							<p id='name_error' class='error'>insert a name</p>
-						</li> 
-						<li class="clearfix"> 
-							<label for="email">email</label>
-							<input type='text' name='email' id='name' />
-							<div class="clear"></div>
-							<p id='name_error' class='error'>insert a email</p>
-						</li> 
-						<li class="clearfix"> 
-							<label for="name">password</label>
-							<input type='password' name='password1' id='name' />
-							<div class="clear"></div>
-							<p id='password_error' class='error'>incorrect password</p>
-						</li> 
-						<li class="clearfix"> 
-							<label for="name">password</label>
-							<input type='password' name='password2' id='name' />
-							<div class="clear"></div>
-							<p id='password_error' class='error'>incorrect password</p>
-						</li> 
-						<p id='login_fail' class='error'>sorry, an error has occured. please try again later.</p>
-						<div id="button">
-						<input type='submit' id='send_message' class="button" value='send activation mail' />
-						</div>
-						</li> 
-					</ul> 
-				</form>  
-			</div>
+<h3>login</h3>
+<div class="hr dotted clearfix">&nbsp;</div>
+<!-- LOGIN form -->
+<form method="post" action="{% url django.contrib.auth.views.login %}" id="login_form">
+	<ul>
+	{{ form.as_ul }}
+		<p><a href="{% url auth_password_reset %}">forgot</a> your password?  </p>
+		<input type="hidden" name="next" value="{{ next }}" />
+		<div id="button">
+		<input type='submit' id='send_message' class="button" value='login' />
+		</div>
+		</li> 
+	</ul> 
+</form>  
 
 {% endif %}
 

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load message_box %}
+{% block title %}Login{% endblock %}
+{% block contents %}
+{% if request.user.is_authenticated %}
+	<h2 class="grid_12 caption clearfix">You're already <span>logged in</span>! Go watch some <a href="/series">series</a></h2>
+{% else %}
+	{% if form.errors %}
+	{% message_box "Your username and password didn't match. Please try again." %}
+	{% endif %}
+
+<h3>login</h3>
+<div class="hr dotted clearfix">&nbsp;</div>
+<!-- LOGIN form -->
+<form method="post" action="{% url django.contrib.auth.views.login %}" id="login_form">
+	<ul>						
+		<li class="clearfix"> 
+			<label for="name">username or email</label>
+			<input type='text' name='username' id='name' />
+			<div class="clear"></div>
+			<p id='name_error' class='error'>insert a name</p>
+		</li> 
+		<li class="clearfix"> 
+			<label for="name">password</label>
+			<input type='password' name='password' id='name' />
+			<div class="clear"></div>
+			<p id='password_error' class='error'>incorrect password</p>
+		</li> 
+		<p><a href="{% url auth_password_reset %}">forgot</a> your password?  </p>
+
+		<input type="hidden" name="next" value="{{ next }}" />
+
+		<p id='login_fail' class='error'>sorry, an error has occured. please try again later.</p>
+		<div id="button">
+		<input type='submit' id='send_message' class="button" value='login' />
+		</div>
+		</li> 
+	</ul> 
+</form>  
+
+{% endif %}
+
+{% endblock %}

@@ -1,8 +1,9 @@
+{% load i18n %}
 {% extends "registration/registration_base.html" %}
-{% block title %}Activation email sent{% endblock %}
+{% block title %}{% trans "Correo de activacion enviado" %}{% endblock %}
 {% block contents %}
 <h2 class="grid_12 caption clearfix">
-An activation email has been sent.  Please check your email and click on the link to activate your account.
+{% trans "Un correo de activación ha sido enviado. Por favor comprueba tu correo y haz click en el link para activar tu cuenta" %}
 </h2>
 {% endblock %}
 

@@ -1,7 +1,8 @@
+{% load i18n %}
 {% extends "registration/registration_base.html" %}
-{% block title %}Activation complete{% endblock %}
+{% block title %}{% trans "Activación completa" %}{% endblock %}
 {% block contents %}
-<h2 class="grid_12 caption clearfix">Thanks, activation complete!  You may now <span><a href='{% url auth_login %}'>login</a></span> using the username and password you set at registration.</h2>
+<h2 class="grid_12 caption clearfix">{% trans "La activación se ha completado con éxito. Ahora puedes" %} <span><a href='{% url auth_login %}'>{% trans "iniciar sesión" %}</a></span> {% trans "utilizando el usuario y la contraseña que has puesto en el registro" %}.</h2>
 {% endblock %}
 
 

@@ -95,6 +95,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'liberweb.invitation.middleware.LoginRequiredMiddleware',
     #'django.middleware.locale.LocaleMiddleware',
 )
 
@@ -140,6 +141,7 @@ INSTALLED_APPS = (
     'taggit',
     'django.contrib.comments',
     'avatar',
+    'invitation',
 )
 
 DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
@@ -193,3 +195,18 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+# django-invitation
+ACCOUNT_INVITATION_DAYS = 7
+INVITATIONS_PER_USER = 5
+
+# Si se pone como True, redirige a /accounts/signin
+INVITE_MODE = False
+
+LOGIN_EXEMPT_URLS = (
+    r'^static/css/*.css', 
+    r'^static/js/*.js', 
+    r'^static/images/*', 
+)
+
+LOGIN_URL_INDEX = '/accounts/signin/'

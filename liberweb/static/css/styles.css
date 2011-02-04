@@ -250,6 +250,12 @@ DESCRIPTION: A premium business and portfolio theme.
 	#comment_form textarea				{float:left; padding:8px; border:1px solid #CCCCCC; margin-left:10px; background:#fcfcfc; -moz-border-radius:5px; -webkit-border-radius:5px;}
 	#comment_form textarea				{width:500px; height:150px;}
 
+/* Invitation form */
+
+	#invitation_form ul					{float:left;}
+	#invitation_form ul li					{margin:10px 0; list-style:none; position:relative; clear:both;}
+	#invitation_form label					{line-height:35px; width:100px; text-align:right; float:left; margin-right:10px;}
+
 /* Search form */
 
         #search_form 					{float:right; margin-top: 24px;}

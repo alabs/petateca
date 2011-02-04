@@ -1,0 +1,21 @@
+{% extends "base_stripped.html" %}
+{% load message_box %}
+{% block title %}Login{% endblock %}
+{% block contents %}
+{% if request.user.is_authenticated %}
+	<h2 class="grid_12 caption clearfix">You're already <span>logged in</span>! Go watch some <a href="/series">series</a></h2>
+{% else %}
+<h3>login</h3>
+<div class="hr dotted clearfix">&nbsp;</div>
+<!-- LOGIN form -->
+<form method="post" action="." id="login_form">
+	<ul>						
+        {{ form.as_ul }}
+{% if form.errors %} {% with form as qq %} {% for error_name,desc in qq.items %}{% message_box "{{ error_name }}: {{ desc }}" %} {% endfor %} {% endwith %} {% endif %}
+		<div id="button">
+		<input type='submit' id='send_message' class="button" value='login' />
+		</div>
+	</ul> 
+</form>  
+{% endif %}
+{% endblock %}

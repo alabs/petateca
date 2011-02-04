@@ -16,6 +16,7 @@
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="/static/css/reset.css" />
 	<link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />
 	<link rel="stylesheet" href="/static/css/jquery.autocomplete.css" type="text/css" />
 	<link rel="alternate" type="application/atom+xml" href="{% url rssblogfeed %}">
 	<link rel="alternate" type="application/atom+xml" href="{% url rsslinksfeed %}">
@@ -25,6 +26,7 @@
 	<!-- Scripts -->
 	<script type="text/javascript" src="/static/js/jquery-min.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.dimensions.min.js"></script>
 	<script type="text/javascript" src="/static/js/popup.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.roundabout-1.0.min.js"></script> 
@@ -35,6 +37,11 @@ jQuery(function(){
   options = { serviceUrl:'/search/lookup/' };
   a = $('#query').autocomplete(options);
 });
+    $(document).ready(function(){
+      $(".login").colorbox({iframe:true, innerWidth:555, innerHeight:324});
+    });
+
+
         </script>
 </head>
 <body>
@@ -60,7 +67,7 @@ jQuery(function(){
 			{% if request.user.is_authenticated %}
 					<li><a href="/accounts/logout"><span class="meta">{% trans "cerrar sesión" %}</span><br />{% trans "CERRAR SESIÓN" %}</a></li>
 				{% else %}
-					<li><a href="/accounts/login"><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>	
+					<li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>	
 			{% endif %}
 			<li><a href="{% url blog-index %}"><span class="meta">{% trans "informacion" %}</span><br />{% trans "BLOG" %}</a></li>
 			<li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
