@@ -1,7 +1,7 @@
 # Ficheros de vim
 *.swp
 *.pyc
-liberweb/liberweb.db
+liberweb/*.db
 virtual
 liberweb.egg-info/*
 distribute*

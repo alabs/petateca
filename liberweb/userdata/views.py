@@ -1,8 +1,8 @@
-from liberweb.decorators import render_to
+from decorators import render_to
 from django.contrib.auth.decorators import login_required
-from liberweb.userdata.models import UserProfile, User
+from userdata.models import UserProfile, User
 from django.contrib.contenttypes.models import ContentType
-from liberweb.serie.models import Link
+from serie.models import Link
 
 
 @render_to('registration/profile.html')

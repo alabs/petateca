@@ -10,7 +10,7 @@ HunnyB implements the `bencode`_ encoding/decoding originally
 created by `Petru Paler`_ for use in the guts of `BitTorrent`_,
 brainchild of `Bram Cohen`_.  
         
-        >>> from liberweb.lib import bencode as hunnyb
+        >>> from lib import bencode as hunnyb
 
 Import of the hunnyb module will register the encode/decode functions 
 with the standard library `codecs`_ module, meaning strings may be 

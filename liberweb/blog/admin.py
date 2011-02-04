@@ -1,5 +1,5 @@
 from django.contrib import admin
-from liberweb.blog.models import Post, ImagePost
+from blog.models import Post, ImagePost
 
 
 class ImageInline(admin.TabularInline):

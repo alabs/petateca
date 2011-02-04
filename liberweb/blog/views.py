@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from liberweb.blog.models import Post
-from liberweb.decorators import render_to
+from blog.models import Post
+from decorators import render_to
 from taggit.models import Tag
 
 

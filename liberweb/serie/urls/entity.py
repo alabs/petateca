@@ -1,9 +1,9 @@
 # pylint: disable-msg=W0401,W0614
 from django.conf.urls.defaults import *
 from django.views.generic.list_detail import object_list
-from liberweb.serie.models import Serie
+from serie.models import Serie
 
-urlpatterns = patterns('liberweb.serie.views',
+urlpatterns = patterns('serie.views',
     # serie_list, genre y network van a una view distinta pero a la misma template
     url(r'^$', 'get_serie_list', name="serie-index"),
     url(r'^genre/(?P<slug_name>[-\w]+)$', 'get_genre', name="get_genre"),

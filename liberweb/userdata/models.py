@@ -1,5 +1,5 @@
 from django.db import models
-from liberweb.serie.models import Serie
+from serie.models import Serie
 
 from django.contrib.auth.models import User
 from django.core.validators import email_re

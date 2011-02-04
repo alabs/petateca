@@ -1,6 +1,6 @@
-from liberweb.serie.models import Serie, Episode, Link
-from liberweb.blog.models import Post
-from liberweb.decorators import render_to
+from serie.models import Serie, Episode, Link
+from blog.models import Post
+from decorators import render_to
 from invitation.models import InvitationKey
 
 @render_to('index.html')

@@ -1,4 +1,4 @@
-from liberweb.serie.models import Serie
+from serie.models import Serie
 from django import template
 
 register = template.Library()

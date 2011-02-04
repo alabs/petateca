@@ -20,7 +20,11 @@ def invited(request, invitation_key=None):
             template = 'invitation/invited.html'
         else:
             template = 'invitation/wrong_invitation_key.html'
-        return direct_to_template(request, template, {'invitation_key': invitation_key})
+        return direct_to_template(request, template, {
+            'invitation_key': invitation_key,
+            'INVITATION_MAIL': settings.INVITATION_MAIL,
+            'ADMIN_MAIL': settings.ADMIN_MAIL,
+        })
     else:
         return HttpResponseRedirect(reverse('registration_register'))
 
@@ -39,7 +43,10 @@ def register(request, success_url=None,
             return registration_register(request, success_url, form_class, 
                         profile_callback, template_name, extra_context)
         else:
-            return direct_to_template(request, 'invitation/wrong_invitation_key.html')
+            return direct_to_template(request, 'invitation/wrong_invitation_key.html', {
+            'INVITATION_MAIL': settings.INVITATION_MAIL,
+            'ADMIN_MAIL': settings.ADMIN_MAIL,
+        })
     else:
         return registration_register(request, success_url, form_class, 
                             profile_callback, template_name, extra_context)

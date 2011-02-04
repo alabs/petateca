@@ -25,15 +25,13 @@
 	<![endif]-->
 {% endblock %}
 {% block contents %}
-	
-<a href="htttp://libercopy.net" target=""><img src="http://quickribbon.com/ribbon/2011/01/6f990afc2ea0d0e80e61c49280e0732b.gif" border="0" width="150" height="150" style="position:absolute; right:0px; top:0px; margin:0px; padding:0px"></a>
 		<!-- Featured Image Slider -->
 		<div id="featured" class="clearfix grid_12">
 			<ul>
 			{% for serie in series %}
 				<li>
         			{% thumbnail serie.images.get_is_poster.0.src "250x300" as img_serie %}
-          			<a href="{% url liberweb.serie.views.get_serie serie_slug=serie.slug_name %}" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">{{ serie.name }}</span><img alt="{{ serie.name }}" src="{{ img_serie.url }}">
+          			<a href="{% url serie.views.get_serie serie_slug=serie.slug_name %}" class="dock-item" style="width: 50px; left: 0px;"><span style="display: none;">{{ serie.name }}</span><img alt="{{ serie.name }}" src="{{ img_serie.url }}">
 					<span>{{ serie.name }}</span>
 				</a> 
         			{% endthumbnail %}
@@ -44,7 +42,7 @@
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 			
 		<!-- Caption Line -->
-		<h2 class="grid_12 caption clearfix">{% trans "<span>LiberCopy</span>, sitio de <u>enlaces</u> &amp; <u>magia</u> para disfrutar y difundir.<span> Compartir Es Bueno</span>. <br />Mas de " %}{{ count_link }}{% trans " links," %}{{count_episode }}{% trans " episodios y" %} {{count_serie}}{% trans " series" %}</h2>
+		<h2 class="grid_12 caption clearfix">{% blocktrans %}<span>{{ SITE_NAME }}</span>, sitio de <u>enlaces</u> &amp; <u>magia</u> para disfrutar y difundir.<span> Compartir Es Bueno</span>. <br />Mas de {{ count_link }} links, {{count_episode }} episodios y {{count_serie}} series {% endblocktrans %}</h2>
 		
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
@@ -63,14 +61,14 @@
 			</a>
 			<a class="quicknavgrid_3 quicknav" href="/blog">
 					<h4 class="title ">{% trans "Ver nuestro blog" %}</h4>
-					<p>{% trans "Blog de libercopy para ver entradas y comentar" %}</p>
+					<p>{% blocktrans %}Blog de {{SITE_NAME}} para ver entradas y comentar{% endblocktrans %}</p>
 
 					<p style="text-align:center;"><img alt="" src="/static/images/Blog_Artdesigner.lv.png" /></p>
 				
 			</a>
 			<a class="quicknavgrid_3 quicknav" href="{% url invitation_invite %}">
 					<h4 class="title ">{% trans "Invita a tu gente!" %}</h4>
-					<p>{% trans "LiberCopy es tan cool que para acceder necesitas invitacion." %}</p>
+					<p>{% blocktrans %}{{SITE_NAME}} es tan cool que para acceder necesitas invitacion.{% endblocktrans %}</p>
 					{% if not request.user.is_authenticated %}
 						<p><b> OPCION DESACTIVADA EN LA ALPHA, EN LA BETA TODOS SERAN USUARIOS REGISTRADOS</b></p>
 					{% endif %}

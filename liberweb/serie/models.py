@@ -38,7 +38,7 @@ class Serie(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('liberweb.serie.views.get_serie', (),
+        return ('serie.views.get_serie', (),
                 {'serie_slug': self.slug_name, })
 
 
@@ -67,7 +67,7 @@ class Season(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('liberweb.serie.views.get_season', (), {
+        return ('serie.views.get_season', (), {
                 'serie_slug': self.serie.slug_name,
                 'season': self.season,
         })
@@ -121,7 +121,7 @@ class Episode(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('liberweb.serie.views.get_episode', (), {
+        return ('serie.views.get_episode', (), {
                 'serie_slug': self.season.serie.slug_name,
                 'season': self.season.season,
                 'episode': self.episode,
@@ -130,7 +130,7 @@ class Episode(models.Model):
     @models.permalink
     def get_add_link_url(self):
         ''' Link for adding a link to the episode '''
-        return ('liberweb.serie.views.add_link', (), {
+        return ('serie.views.add_link', (), {
                 'serie_slug': self.season.serie.slug_name,
                 'season': self.season.season,
                 'episode': self.episode,
@@ -195,7 +195,7 @@ class Network(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('liberweb.serie.views.get_network', [str(self.slug_name)])
+        return ('serie.views.get_network', [str(self.slug_name)])
 
 
 class Genre(models.Model):
@@ -213,7 +213,7 @@ class Genre(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('liberweb.serie.views.get_genre', [str(self.slug_name)])
+        return ('serie.views.get_genre', [str(self.slug_name)])
 
 
 class Actor(models.Model):
@@ -231,7 +231,7 @@ class Actor(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('liberweb.serie.views.get_actor', [str(self.slug_name)])
+        return ('serie.views.get_actor', [str(self.slug_name)])
 
 
 

@@ -1,4 +1,6 @@
 #!/bin/sh
+# Script de instalacion para Ubuntu, en otras plataformas hay que cambiar el 
+#  aptitude y los paquetes correspondientes
 
 # Instalacion de dependencias
 sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg-dev subversion && 
@@ -23,10 +25,6 @@ python manage.py syncdb --migrate &&
 
 # Actualizamos campos de traduccion
 python manage.py update_translation_fields &&
-
-# Datos de pruebas del blog
-# Los contenidos se autoimportan por estar en el fichero liberweb/blog/fixtures/initial_data.json
-cp -rp blog/fixtures/static/img/blog/blog/ static/img/ &&
 
 # Iniciamos el servidor de desarrollo
 python manage.py runserver

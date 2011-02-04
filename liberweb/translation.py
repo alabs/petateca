@@ -1,6 +1,6 @@
 from modeltranslation.translator import translator, TranslationOptions
-from liberweb.serie.models import Serie, Episode, Genre
-from liberweb.blog.models import Post
+from serie.models import Serie, Episode, Genre
+from blog.models import Post
 
 
 class SerieTranslationOptions(TranslationOptions):

@@ -1,1 +1,1 @@
-Invitacion a LiberCopy - la nueva biblioteca publica digital
+Invitacion a {{SITE_NAME}} - la nueva biblioteca publica digital

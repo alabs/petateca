@@ -1,10 +1,8 @@
-# Django settings for liberweb project.
-
 import os
 import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-SITE_NAME = 'Libercopy'
+SITE_NAME = 'LiberCopy'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -30,61 +28,34 @@ DATABASES = {
 #    'imdb': {
 #        'ENGINE': 'postgresql_psycopg2',
 #        'NAME': 'imdb',
-#        'USER': 'liberweb',
+#        'USER': 'libercopy',
 #        'PASSWORD': 'libre',
 #    },
 }
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = 'Europe/Madrid'
 
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'es'
 ugettext = lambda s: s
 LANGUAGES = (
  ('es', ugettext('Spanish')),
  ('en', ugettext('English')),
 )
-TRANSLATION_REGISTRY = 'liberweb.translation'
+TRANSLATION_REGISTRY = 'translation'
 SITE_ID = 1
 
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale
 USE_L10N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static')
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static') 
 MEDIA_URL = '/static/'
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/media/'
 
-# Make this unique, and don't share it with anybody.
 SECRET_KEY = 'd#1!3m895ycit%a9pflu%8cmg5llo&0ovnl(_2+h^0qsrn=d0&'
 
-# List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -95,11 +66,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'liberweb.invitation.middleware.LoginRequiredMiddleware',
-    #'django.middleware.locale.LocaleMiddleware',
+    'invitation.middleware.LoginRequiredMiddleware',
 )
 
-ROOT_URLCONF = 'liberweb.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates')
@@ -111,6 +81,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.request',
+    'context_processors.site_name',
 )
 
 FIXTURE_DIRS = (
@@ -126,10 +97,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'liberweb.serie',
-    'liberweb.blog',
-    'liberweb.userdata',
-    #'liberweb.imdblocal', #Don't use yet, sucks a lot
+    'serie',
+    'blog',
+    'userdata',
+    #'imdblocal', #Don't use yet, sucks a lot
     'south',
     'modeltranslation',
     'rosetta',
@@ -144,7 +115,7 @@ INSTALLED_APPS = (
     'invitation',
 )
 
-DATABASE_ROUTERS = ['liberweb.imdblocal.dbrouter.ImdbRouter']
+DATABASE_ROUTERS = ['imdblocal.dbrouter.ImdbRouter']
 
 #Valid values are http, sql
 IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
@@ -171,7 +142,7 @@ if DEBUG:
     except: 
         pass 
 
-HAYSTACK_SITECONF = 'liberweb.search_sites'
+HAYSTACK_SITECONF = 'search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
 
@@ -186,9 +157,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-#RECAPTCHA_PUBLIC_KEY = '6LfR9L8SAAAAACMxoRCZL5LGLuJYWxFzE6OYds1f'
-#RECAPTCHA_PRIVATE_KEY = '6LfR9L8SAAAAAKQiSXtrCZkzlDDhbO0aGob-xuk9'
-
 FORCE_LOWERCASE_TAGS = True
 
 try:
@@ -196,12 +164,11 @@ try:
 except ImportError:
     pass
 
-# django-invitation
+# Invitations
+# Si se pone como True, redirige a /accounts/signin
+INVITE_MODE = True
 ACCOUNT_INVITATION_DAYS = 7
 INVITATIONS_PER_USER = 5
-
-# Si se pone como True, redirige a /accounts/signin
-INVITE_MODE = False
 
 LOGIN_EXEMPT_URLS = (
     r'^static/css/*.css', 
@@ -210,3 +177,5 @@ LOGIN_EXEMPT_URLS = (
 )
 
 LOGIN_URL_INDEX = '/accounts/signin/'
+INVITATION_MAIL = 'invitaciones@libercopy.net'
+ADMIN_MAIL = 'admin@libercopy.net'

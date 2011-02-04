@@ -22,17 +22,17 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = patterns('',
-    (r'^$', 'liberweb.views.index'),
+    (r'^$', 'views.index'),
 
-    (r'^serie/', include('liberweb.serie.urls.obj')),
-    (r'^series/', include('liberweb.serie.urls.entity')),
+    (r'^serie/', include('serie.urls.obj')),
+    (r'^series/', include('serie.urls.entity')),
 
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
 
-    (r'^blog/', include('liberweb.blog.urls')),
+    (r'^blog/', include('blog.urls')),
 
-    (r'^search/lookup/$', 'liberweb.search.views.search_lookup'),
+    (r'^search/lookup/$', 'search.views.search_lookup'),
 
     (r'^search/$', search_view_factory(
         view_class=SearchView,
@@ -55,11 +55,8 @@ urlpatterns = patterns('',
     url(r'^atom/links/$', AtomLatestLinksFeed(), name='atomlinksfeed'),
 
     (r'^accounts/', include('invitation.urls')),
-    (r'^accounts/profile/$', 'liberweb.userdata.views.view_profile'),
-#    url(r'^accounts/register/$', 'registration.views.register', {
-#    #    'backend': 'registration.backends.default.DefaultBackend',
-#        'form_class': RegistrationFormUniqueEmail,
-#    }, name='registration_register'),
+    (r'^accounts/profile/$', 'userdata.views.view_profile'),
+    # invitation
     url(r'^accounts/register/$',
         register,
         {
@@ -72,19 +69,7 @@ urlpatterns = patterns('',
         {'template_name': 'registration/signin.html'},
         name='auth_login'),
     (r'^accounts/', include('registration.urls')),
-
-    url(r'^twitter/$',
-        redirect_to,
-        {'url': 'http://twitter.com/libercopy'},
-        name='twitter'
-       ),
-    url(r'^facebook/$',
-        redirect_to,
-        {'url': 'https://www.facebook.com/pages/LiberCopy/182462775103017'},
-        name='facebook'
-       ),
-
-    url(r'^user/(?P<user_name>[-\w]+)$', 'liberweb.userdata.views.get_user_public_profile', name='get_user_public_profile'),
+    url(r'^user/(?P<user_name>[-\w]+)$', 'userdata.views.get_user_public_profile', name='get_user_public_profile'),
     (r'^avatar/', include('avatar.urls')),
 )
 

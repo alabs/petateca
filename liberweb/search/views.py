@@ -1,6 +1,6 @@
 from django.utils import simplejson
 from django.http import HttpResponse
-from liberweb.serie.models import Serie
+from serie.models import Serie
 
 
 def search_lookup(request):

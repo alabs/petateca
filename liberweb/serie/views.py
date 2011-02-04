@@ -8,11 +8,11 @@ from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from djangoratings.views import AddRatingView
-from liberweb.decorators import render_to
-from liberweb.lib.namepaginator import NamePaginator
-from liberweb.serie.forms import LinkForm
-from liberweb.serie.models import Genre, Network, Link, Languages
-from liberweb.serie.models import Serie, Episode, Actor, Role, Season
+from decorators import render_to
+from lib.namepaginator import NamePaginator
+from serie.forms import LinkForm
+from serie.models import Genre, Network, Link, Languages
+from serie.models import Serie, Episode, Actor, Role, Season
 from voting.models import Vote
 
 

@@ -10,7 +10,7 @@
 {% endspaceless %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
 <head>
-	<title>{% block title %}{{title|default:"LiberCopy"}}{% endblock %}</title>
+	<title>{% block title %}{{title|default:SITE_NAME}}{%endblock %}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<!-- Stylesheets -->
@@ -46,14 +46,13 @@ jQuery(function(){
 </head>
 <body>
 {% if initial_message %}
- {% message_box "Bienvenido a LiberCopy. Quiere leer nuestro <a href='/faq'>FAQ?</a>" %}
+ {% message_box "Bienvenido!. Quiere leer nuestro <a href='/faq'>FAQ?</a>" %}
 {% endif %}
-<a href="/"><img src="http://quickribbon.com/ribbon/2011/01/6f990afc2ea0d0e80e61c49280e0732b.gif" border="0" width="150" height="150" style="position:absolute; right:0px; top:0px; margin:0px; padding:0px"></a>
 	<div id="wrapper" class="container_12 clearfix">
 
 		<!-- Text Logo -->
 		<div id="logo" class="grid_4">
-			<h1 id="logo"><a href="/">LiberCopy</a></h1>
+			<h1 id="logo"><a href="/">{{SITE_NAME}}</a></h1>
 			{% if LANGUAGE_CODE == "es" %}
 				<span class="slogan meta">View in <a href="{{ request.path|chlocale:"en" }}">English</a>.</span>
 			{% else %}

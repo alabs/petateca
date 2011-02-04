@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from liberweb.serie import models as m
+from serie import models as m
 
 from django.conf import settings
 
