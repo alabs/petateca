@@ -12,23 +12,54 @@
     <script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
     <script type="text/javascript" src="/static/js/queryLoader.js"></script>
     <script>
-    $(document).ready(function(){
-      $(".add_link").colorbox({iframe:true, innerWidth:555, innerHeight:324});
-    });
-	$(document).ready(function() {
-	    $('#links tr').click(function() {
+$(document).ready(function(){
+	$(".add_link").colorbox({iframe:true, innerWidth:555, innerHeight:324});
+	$("td.novote").click(function() {
 		var href = $(this).find("a").attr("href");
 		if(href) {
-		    window.location = href;
+			window.location = href;
 		}
-	    });
-
 	});
+
+  $('a[href*=#]').click(function() {
+ if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+ && location.hostname == this.hostname) {
+   var $target = $(this.hash);
+   $target = $target.length && $target
+   || $('[name=' + this.hash.slice(1) +']');
+   if ($target.length) {
+  var targetOffset = $target.offset().top;
+  $('html,body')
+  .animate({scrollTop: targetOffset}, 1000);
+    return false;
+   }
+ }
+  });
+
+});
+
+function vote(linkid, direction) {
+    var $linkscore = $("#linkscore" + linkid);
+    $linkscore.html('<img src="/static/images/ajax-loading.gif">');
+    // send the post petition with the required data
+    $.post("{{ request.path }}", { "vote": direction, "linkid": linkid }, 
+	function (data){ 
+		// change the value with the new score
+		$linkscore.html(data.score);
+		// change the image
+                if (direction == "upvote") {
+			$("#linkuparrow" + linkid + " img").attr('src', "/static/images/voting/aupmod.gif");
+			$("#linkdownarrow" + linkid + " img").attr('src', "/static/images/voting/adowngrey.gif");
+		} else if (direction == "downvote") {
+			$("#linkuparrow" + linkid + " img").attr('src', "/static/images/voting/aupgrey.gif");
+			$("#linkdownarrow" + linkid + " img").attr('src', "/static/images/voting/adownmod.gif");
+		};
+	}
+    );
+};
     </script>
 {% endblock %}
 {% block contents %}
-{% votes_by_user user on link_list as vote_dict %}
-{% scores_for_objects link_list as score_dict %}
 {{ episode }}
 
 {% if message == "No registrado" %}
@@ -36,12 +67,12 @@
 {% endif %}
 
 <!-- TITLE -->
-<h2 class="grid_12 caption clearfix"><a href="{{ serie.get_absolute_url }}">{{serie.name|title}}</a> - <span>Season {{season.season}}</span><a class="right button" href="{{ serie.get_absolute_url }}">{% trans "Regresar a" %} {{serie.name|title}}</a></h2>
+<h2 class="grid_12 caption clearfix"><a href="{{ serie.get_absolute_url }}">{{serie.name|title}}</a> - <span>{% trans "Temporada" %} {{season.season}}</span><a class="right button" href="{{ serie.get_absolute_url }}">{% trans "Regresar a" %} {{serie.name|title}}</a></h2>
 <div class="hr clearfix dotted">&nbsp;</div>
 
 <!-- EPISODES MINI-LIST -->
 <center>
-<h2 class="grid_12 caption clearfix">Episodes
+<h2 class="grid_12 caption clearfix">Episodios
 {% for episode in episode_list %} 
 	<a href="#epi{{episode.episode}}" class="button">{{episode.episode}}</a>
 {% endfor %}</h2>
@@ -78,6 +109,7 @@
 <!-- COLUMN 3 -->
 <div class="grid_5 right">
 	{% if episode.links.all %}
+	{% votes_by_user user on episode.links.all as vote_dict %}
 	<table id="links">
 	    <thead>
 		<tr>
@@ -90,29 +122,18 @@
 	    <tbody>
 		{% for link in episode.links.all %}
 		<tr>
-		<td><a href="{{ link.url }}"> {{ link.url|extract_domain }}</a></td>
-		<td>{{ link.audio_lang }}</td>
-		<td>{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
-		<td>
+		<td class="novote"><a href="{{ link.url }}"> {{ link.url|extract_domain }}</a></td>
+		<td class="novote">{{ link.audio_lang }}</td>
+		<td class="novote">{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
+		<td class="vote">
 		<!-- VOTING -->
+		{% dict_entry_for_item link from vote_dict as vote %}
                 {% score_for_object link as score %}
-			<div class="left">
-				<form class="linkvote" id="linkup{{ link.id }}" action="." method="POST">
-				  <input type="hidden" name="vote" value="upvote"/>
-				  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-				  <input type="image" id="linkuparrow{{ link.id }}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
-				</form>
-				<a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
-				<form class="linkvote" id="linkdown{{ link.id }}" action="." method="POST">
-				  <input type="hidden" name="vote" value="downvote"/>
-				  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-				  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
-				</form>
+			<div class="left linkvote">
+				<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'upvote');" id="linkuparrow{{ link.id }}"><img src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif"></a>
+				<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'downvote');" id="linkdownarrow{{ link.id }}"><img src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif"></a>
 			</div>
-			  <span class="score right" style="position:relative; top:-25%;" id="linkscore{{ link.id }}"
-				title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">
-			   {{ score.score|default:0 }} 
-			  </span>
+			  <span class="score right" style="position:relative; top:-25%;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
 			</td>
 		</tr>
 		{% endfor %}

@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import InvalidPage, EmptyPage
+from django.http import HttpResponse
+from django.core import serializers
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
@@ -14,6 +16,7 @@ from serie.forms import LinkForm
 from serie.models import Genre, Network, Link, Languages
 from serie.models import Serie, Episode, Actor, Role, Season
 from voting.models import Vote
+from django.utils import simplejson
 
 
 @render_to('serie/get_serie.html')
@@ -124,6 +127,9 @@ def get_season(request, serie_slug, season):
             Vote.objects.record_vote(link, user, +1)
         elif request.POST['vote'] == 'downvote':
             Vote.objects.record_vote(link, user, -1)
+        if request.is_ajax():
+            votes = Vote.objects.get_score(link)
+            return HttpResponse(simplejson.dumps(votes), mimetype='application/json')
         return season_info
 
 

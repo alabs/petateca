@@ -166,14 +166,12 @@ except ImportError:
 
 # Invitations
 # Si se pone como True, redirige a /accounts/signin
-INVITE_MODE = True
+INVITE_MODE = False
 ACCOUNT_INVITATION_DAYS = 7
 INVITATIONS_PER_USER = 5
 
 LOGIN_EXEMPT_URLS = (
-    r'^static/css/*.css', 
-    r'^static/js/*.js', 
-    r'^static/images/*', 
+    r'^static/', 
 )
 
 LOGIN_URL_INDEX = '/accounts/signin/'

@@ -292,14 +292,23 @@ DESCRIPTION: A premium business and portfolio theme.
 }
 
 #links td{
-	padding: 7px 17px 7px 17px;
+	padding: 7px 7px 7px 7px;
 	color: #717171;
+}
+
+#links td.vote {
+	width: 3em;
 }
 
 #links tbody tr:hover td{
 	color: #717171;
 	background: #CFCFCF;
 }
+
+.linkvote {
+	height:2em;
+}
+
 
 #dropdown {float:left; padding:8px; border:1px solid #CCCCCC; margin-left:10px; background:#fcfcfc; -moz-border-radius:5px; -webkit-border-radius:5px; width:220px;}
 
