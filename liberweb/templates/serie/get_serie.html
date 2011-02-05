@@ -13,45 +13,55 @@
     <script type="text/javascript" src="/static/js/queryLoader.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $(".redhearthover").hover(function() {
-       $(this).attr('src', '/static/images/heart_black.png');
-}, function(){
-       $(this).attr('src', '/static/images/heart_red.png');
-    });
-    $(".blackhearthover").hover(function() {
-       $(this).attr('src', '/static/images/heart_red.png');
-}, function(){
-       $(this).attr('src', '/static/images/heart_black.png');
-    });
-    $('.ratingstar').rating({
-     callback: function(value, link){
-      //alert("The value selected was '" + value + "'\n\nWith this callback function I can automatically submit the form with this code:\nthis.form.submit();");
-      // To submit the form automatically:
-      this.form.submit();
-      }
-     });
+//    $(".redhearthover").hover(function() {
+//       $(this).attr('src', '/static/images/heart_black.png');
+//}, function(){
+//       $(this).attr('src', '/static/images/heart_red.png');
+//    });
+//    $(".blackhearthover").hover(function() {
+//       $(this).attr('src', '/static/images/heart_red.png');
+//}, function(){
+//       $(this).attr('src', '/static/images/heart_black.png');
+//    });
+
+$('.ratingstar').rating({ callback: function(value, link){
+	$.post(url, { 'rating': value }); }
+});
+
+	var url = "/es{{ serie.get_absolute_url }}";
+
+if ($('input[value="favorite"]').val()){
+	$('form.favorite').submit(function() {
+			$.post(url, { 'favorite': "favorite" },
+				function(){
+					console.log("sending favorite");
+					$("form.favorite").load(url + " form.favorite > *");
+				    });
+			return false;
+	});
+} else if ($('input[value="no-favorite"]').val()){
+	$('form.favorite').submit(function() {
+			$.post(url, { 'no-favorite': "no-favorite" },
+				function(){
+					console.log("sending no-favorite YEAAAH");
+					$("form.favorite").load(url + " form.favorite > *");
+				    });
+			return false;
+	});
+}
+
 });
 </script>{% endblock %}
 {% block contents %}
 <!-- MESSAGES -->
 {% spaceless %}
-    {% if message == "No registrado" %}
-     {% message_box "Debe <a href='/accounts/login/'>registrarse o iniciar sesion</a> para votar" %} 
-    {% else %}{% if message == "Vote recorded" %}
-      {% message_box "Voto registrado" %}
-    {% else %}{% if message == "You have already voted" %}
-      {% message_box "Ya ha votado" %}
-    {% else %}{% if message %}
-      {% message_box "{{ message }}" %}
-    {% endif %}
-    {% endif %}
-    {% endif %}
-    {% endif %}
-    {% if error %}
-      {% message_box "Couldn't vote :/" %}
-    {% endif %}
+    {% if message == "No registrado" %}{% message_box "Debe <a href='/accounts/login/'>registrarse o iniciar sesion</a> para votar" %} 
+    {% else %}{% if message == "Vote recorded" %}{% message_box "Voto registrado" %}
+    {% else %}{% if message == "You have already voted" %}{% message_box "Ya ha votado" %}
+    {% else %}{% if message %}{% message_box "{{ message }}" %}
+    {% endif %}{% endif %}{% endif %}{% endif %}
+    {% if error %}{% message_box "Couldn't vote :/" %}{% endif %}
 {% endspaceless %}
-
 <!-- COLUMN 1 -->
 <div class="grid_3">
 	<!-- IMAGE -->
@@ -101,14 +111,13 @@ $(document).ready(function(){
 	<!-- TITLE -->
 	<h1 class="title float" style="text-align:center;">{{serie.name|title}}</h1>
 	<!-- FAVORITE -->
-	    {% if favorite == "no" %}
 	  <form class="favorite float right" action="." method="POST">
-	    <input type="hidden" name="favorite" value="favorite"/>
+	    {% if favorite == "no" %}
+	    <input type="hidden" value="favorite"/>
 	    <input type="image" class="blackhearthover" src="/static/images/heart_black.png">
 	  </form>
 	  {% else %} {% if favorite == "yes" %}
-	  <form class="favorite float right" action="." method="POST">
-	    <input type="hidden" name="no-favorite" value="no-favorite"/>
+	    <input type="hidden" value="no-favorite"/>
 	    <input type="image" class="redhearthover" src="/static/images/heart_red.png">
 	  </form>
 	    {% endif %}
@@ -122,7 +131,7 @@ $(document).ready(function(){
 	<div class="hr dotted clearfix">&nbsp;</div>
 	{% for actor in serie.actors.all %}
 		{% if actor.role_set.all.0.role %}
-			<a class="portfolio_item float alpha" href="{{ actor.get_absolute_url }}">
+			<a class="portfolio_item float alpha actor" href="{{ actor.get_absolute_url }}">
 			<span>{{ actor.name }} as {{actor.role_set.all.0.role}}</span>
 		       {% if actor.images.get %}{% thumbnail actor.images.get.src "180x180" as img_actor %}
 			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
