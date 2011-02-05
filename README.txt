@@ -24,9 +24,3 @@ Si se importan datos hay que actualizar el indice de busquedas:
 
 python manage.py update_index
 
-Crawling framework 
-==================
-
-la documentacion se encuentra en 
-
-liberweb/bots/README.txt
