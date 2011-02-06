@@ -20,6 +20,12 @@ from registration.forms import RegistrationFormTermsOfService
 from invitation.views import register 
 from django.contrib.auth import views as auth_views
 
+from serie.sitemap import SerieSitemap
+
+sitemaps = {
+    'serie': SerieSitemap
+}
+
 
 urlpatterns = patterns('',
     (r'^$', 'views.index'),
@@ -71,6 +77,8 @@ urlpatterns = patterns('',
     (r'^accounts/', include('registration.urls')),
     url(r'^user/(?P<user_name>[-\w]+)$', 'userdata.views.get_user_public_profile', name='get_user_public_profile'),
     (r'^avatar/', include('avatar.urls')),
+
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
 if settings.DEBUG:

@@ -12,6 +12,8 @@
     <script type="text/javascript" src="/static/js/jquery.rating.js"></script>
     <script type="text/javascript" src="/static/js/queryLoader.js"></script>
 <script type="text/javascript">
+
+var url = "{{request.path }}";
 $(document).ready(function(){
 //    $(".redhearthover").hover(function() {
 //       $(this).attr('src', '/static/images/heart_black.png');
@@ -23,34 +25,44 @@ $(document).ready(function(){
 //}, function(){
 //       $(this).attr('src', '/static/images/heart_black.png');
 //    });
+	$('.ratingstar').rating({ callback: function(value, link){
+		$.post(url, { 'rating': value }); }
+	});
 
-$('.ratingstar').rating({ callback: function(value, link){
-	$.post(url, { 'rating': value }); }
 });
 
-	var url = "/es{{ serie.get_absolute_url }}";
-
-if ($('input[value="favorite"]').val()){
-	$('form.favorite').submit(function() {
-			$.post(url, { 'favorite': "favorite" },
-				function(){
-					console.log("sending favorite");
-					$("form.favorite").load(url + " form.favorite > *");
-				    });
-			return false;
-	});
-} else if ($('input[value="no-favorite"]').val()){
-	$('form.favorite').submit(function() {
-			$.post(url, { 'no-favorite': "no-favorite" },
-				function(){
-					console.log("sending no-favorite YEAAAH");
-					$("form.favorite").load(url + " form.favorite > *");
-				    });
-			return false;
-	});
+function favorite(decision) {
+        $('#favorite').html('<img src="/static/images/ajax-loading.gif">');
+	if (decision == "yes") {
+		$.post(url, { 'favorite': "favorite" },
+			function(data){
+				if (data == 'yes'){
+				//	$('#favorite').html("<a href='' onclick='favorite('no');' id='favorite'><img class='redhearthover' src='/static/images/heart_red.png'></a>");
+					var html = "<a href='' onclick='favorite('no');' id='favorite'><img class='redhearthover' src='/static/images/heart_red.png'></a>";
+					$('#favorite').text(html).html();
+					console.log(data);
+				}
+			}
+		)
+		return false;
+	} else if (decision == "no"){
+		                $.post(url, { 'no-favorite': "no-favorite" },
+                        function(data){
+                                if (data == 'no'){
+					var html = "<a href='' onclick='favorite('yes');' id='favorite'><img class='blackhearthover' src='/static/images/heart_black.png'></a>";
+					$('#favorite').text(html).html();
+					//$('#favorite').html("&lt;a href=&quot;#&quot; onclick=&quot;favorite(&#39;yes&#39;);&quot; id=&quot;favorite&quot;&gt;&lt;img class=&quot;blackhearthover&quot; src=&quot;/static/images/heart_black.png&quot;&gt;&lt;/a&gt;");
+                                        console.log(data);
+                                        
+                                }
+                        }
+                )
+                return false;
+	}
 }
 
-});
+    //$linkscore.html('<img src="/static/images/ajax-loading.gif">');
+
 </script>{% endblock %}
 {% block contents %}
 <!-- MESSAGES -->
@@ -111,17 +123,15 @@ if ($('input[value="favorite"]').val()){
 	<!-- TITLE -->
 	<h1 class="title float" style="text-align:center;">{{serie.name|title}}</h1>
 	<!-- FAVORITE -->
-	  <form class="favorite float right" action="." method="POST">
-	    {% if favorite == "no" %}
-	    <input type="hidden" value="favorite"/>
-	    <input type="image" class="blackhearthover" src="/static/images/heart_black.png">
-	  </form>
-	  {% else %} {% if favorite == "yes" %}
-	    <input type="hidden" value="no-favorite"/>
-	    <input type="image" class="redhearthover" src="/static/images/heart_red.png">
-	  </form>
+	<div id="favorite">
+	  {% if favorite == "no" %}
+		<a href="#" onclick="favorite('yes');" id="favorite"><img class="blackhearthover" src="/static/images/heart_black.png"></a>
+	  {% else %} 
+	  {% if favorite == "yes" %}
+		<a href="#" onclick="favorite('no');" id="favorite"><img class="redhearthover" src="/static/images/heart_red.png"></a>
 	    {% endif %}
 	    {% endif %}
+	</div>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- DESCRIPTION -->
 	<p class="clearfix"> {{ serie.description }}</p>

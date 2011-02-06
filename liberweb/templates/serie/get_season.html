@@ -14,6 +14,8 @@
     <script>
 $(document).ready(function(){
 	$(".add_link").colorbox({iframe:true, innerWidth:555, innerHeight:324});
+
+// haciendo click en cualquier parte del link menos la votacion te envia al link
 	$("td.novote").click(function() {
 		var href = $(this).find("a").attr("href");
 		if(href) {
@@ -21,6 +23,7 @@ $(document).ready(function(){
 		}
 	});
 
+// Smooth jquery scrolling
   $('a[href*=#]').click(function() {
  if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
  && location.hostname == this.hostname) {

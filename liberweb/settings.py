@@ -56,6 +56,7 @@ SECRET_KEY = 'd#1!3m895ycit%a9pflu%8cmg5llo&0ovnl(_2+h^0qsrn=d0&'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.app_directories.load_template_source',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -113,6 +114,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'avatar',
     'invitation',
+    'django.contrib.sitemaps',
 )
 
 DATABASE_ROUTERS = ['imdblocal.dbrouter.ImdbRouter']

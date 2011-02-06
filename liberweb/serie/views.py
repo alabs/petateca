@@ -95,6 +95,8 @@ def get_serie(request, serie_slug):
                 serie_info.update({
                     'favorite': 'no',
                 })
+            if request.is_ajax():
+                return HttpResponse(simplejson.dumps(serie_info['favorite']), mimetype='application/json')
         return serie_info
 
 
