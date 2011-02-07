@@ -70,6 +70,7 @@ jQuery(function(){
 			{% endif %}
 			<li><a href="{% url blog-index %}"><span class="meta">{% trans "informacion" %}</span><br />{% trans "BLOG" %}</a></li>
 			<li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
+		</ul>
 			<div id="search_form">
 			  <form action="/search/">
 			          <fieldset>
@@ -79,7 +80,6 @@ jQuery(function(){
 				  </fieldset>
 			  </form>
 			</div>
-		</ul>
 		
 		<div class="hr grid_12">&nbsp;</div>
 		<div class="clear"></div>

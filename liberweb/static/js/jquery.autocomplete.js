@@ -39,7 +39,7 @@
       minChars: 1,
       maxHeight: 300,
       deferRequestBy: 0,
-      width: 0,
+      width: 240,
       highlight: true,
       params: {},
       fnFormatResult: fnFormatResult,
