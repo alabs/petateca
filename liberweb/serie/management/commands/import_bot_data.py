@@ -111,7 +111,10 @@ class Command(BaseCommand):
                     return
         #Search episode in database
         try:
+            db_season = m.Season.objects.get(serie=db_serie, season=temp)
+        except m.Season.DoesNotExist:
             db_season = self.populate_seasons(db_serie, temp)
+        try:
             db_episode = m.Episode.objects.get(season=db_season, episode=epi)
         except m.Episode.DoesNotExist:
             warn(u"Episode %sx%s of %s not populated yet" % (temp, epi, serie))
@@ -266,8 +269,7 @@ class Command(BaseCommand):
                     file_content = ContentFile(open(img[0]).read())
                     db_img.src.save(os.path.basename(img_url), file_content)
                     db_img.save()
-                    continue
-        return db_season
+                    return db_season
 
     
 #            if actor["image"]:
@@ -281,7 +283,10 @@ class Command(BaseCommand):
 
     def populate_episodes(self, db_serie, reg_en, reg_es):
         for n_season in reg_en:
-            db_season = self.populate_seasons(db_serie, n_season)
+            try: 
+                db_season = m.Season.objects.get(season=n_season, serie=db_serie)
+            except: 
+                db_season = self.populate_seasons(db_serie, n_season)
             for n_episode in reg_en[n_season]:
                 episode = reg_en[n_season][n_episode]
                 try:
@@ -306,6 +311,7 @@ class Command(BaseCommand):
                     except:
                         db_episode.title_es = "%sx%s" % (n_season, n_episode)
                         db_episode.description_es = "No disponible"
+                    #import ipdb; ipdb.set_trace()
                     db_episode.save()
                     if reg_en[n_season][n_episode]["filename"]:
                         img = urllib.urlretrieve(reg_en[n_season][n_episode]["filename"])

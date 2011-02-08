@@ -336,6 +336,17 @@ DESCRIPTION: A premium business and portfolio theme.
 	padding-left: 5em;
 }
 
+#season{
+	font-weight:bold;
+	font-family:'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif; 
+	font-size:13px; 
+	color:#999999 !important; 
+	line-height:16px; 
+	text-transform:none; 
+	text-shadow:0;
+	text-align:center;
+}
+
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 

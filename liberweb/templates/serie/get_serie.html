@@ -14,32 +14,38 @@
 <script type="text/javascript">
 
 var url = "{{request.path }}";
+
 $(document).ready(function(){
-//    $(".redhearthover").hover(function() {
-//       $(this).attr('src', '/static/images/heart_black.png');
-//}, function(){
-//       $(this).attr('src', '/static/images/heart_red.png');
-//    });
-//    $(".blackhearthover").hover(function() {
-//       $(this).attr('src', '/static/images/heart_red.png');
-//}, function(){
-//       $(this).attr('src', '/static/images/heart_black.png');
-//    });
+    $(".redhearthover").hover(function() {
+       $(this).attr('src', '/static/images/heart_black.png');
+}, function(){
+       $(this).attr('src', '/static/images/heart_red.png');
+    });
+    $(".blackhearthover").hover(function() {
+       $(this).attr('src', '/static/images/heart_red.png');
+}, function(){
+       $(this).attr('src', '/static/images/heart_black.png');
+    });
 	$('.ratingstar').rating({ callback: function(value, link){
 		$.post(url, { 'rating': value }); }
 	});
 
 });
 
-function favorite(decision) {
+function favorite() {
+	var imgsrc = $("#favorite img").attr('src') ; 
+	if ( imgsrc == "/static/images/heart_black.png") {
+		decision == "yes" ;
+	} else if (imgsrc == "/static/images/heart_red.png") {
+		decision == "no" ;
+	}
         $('#favorite').html('<img src="/static/images/ajax-loading.gif">');
 	if (decision == "yes") {
 		$.post(url, { 'favorite': "favorite" },
 			function(data){
 				if (data == 'yes'){
-				//	$('#favorite').html("<a href='' onclick='favorite('no');' id='favorite'><img class='redhearthover' src='/static/images/heart_red.png'></a>");
-					var html = "<a href='' onclick='favorite('no');' id='favorite'><img class='redhearthover' src='/static/images/heart_red.png'></a>";
-					$('#favorite').text(html).html();
+					var html = "<a href='' onclick='favorite();' id='favorite'><img class='redhearthover' src='/static/images/heart_red.png'></a>";
+					$('#favorite').text(html);
 					console.log(data);
 				}
 			}
@@ -49,9 +55,8 @@ function favorite(decision) {
 		                $.post(url, { 'no-favorite': "no-favorite" },
                         function(data){
                                 if (data == 'no'){
-					var html = "<a href='' onclick='favorite('yes');' id='favorite'><img class='blackhearthover' src='/static/images/heart_black.png'></a>";
-					$('#favorite').text(html).html();
-					//$('#favorite').html("&lt;a href=&quot;#&quot; onclick=&quot;favorite(&#39;yes&#39;);&quot; id=&quot;favorite&quot;&gt;&lt;img class=&quot;blackhearthover&quot; src=&quot;/static/images/heart_black.png&quot;&gt;&lt;/a&gt;");
+					var html = "<a href='' onclick='favorite();' id='favorite'><img class='blackhearthover' src='/static/images/heart_black.png'></a>";
+					$('#favorite').text(html);
                                         console.log(data);
                                         
                                 }
@@ -61,7 +66,6 @@ function favorite(decision) {
 	}
 }
 
-    //$linkscore.html('<img src="/static/images/ajax-loading.gif">');
 
 </script>{% endblock %}
 {% block contents %}
@@ -95,17 +99,22 @@ function favorite(decision) {
 	<!-- NETWORK -->
 	{% if serie.network.name %}
 	<h4>{% trans "Cadena" %}:</h4> 
-		<a class="button float" href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a>
+		<ul>
+			<li><a class="button float" href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a></li>
+		</ul>
 	{% endif %}
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- GENRE -->
 	<h4>{% trans "Genero" %}:</h4> 
+		<ul>
       		{% for genre in serie.genres.all %}
-			<a class="button float" href="{{ genre.get_absolute_url}}">{{ genre.name }}</a>
+		<li><a class="button" href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
 		{% endfor %}
+		</ul>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- RUNTIME -->
-	<h4>{% trans "Duracion" %}:</h4> {{ serie.runtime }} {% trans "minutos" %}
+	<h4>{% trans "Duracion" %}:</h4> 
+	<p>{{ serie.runtime }} {% trans "minutos" %}</p>
 		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- BUTTONS -->
 		<p class="clearfix">
@@ -113,52 +122,32 @@ function favorite(decision) {
 		</p>
 		<p class="clearfix">
 		{% get_comment_count for serie as comment_count %}
-		<a href="#comments" class="button float">{{comment_count}} Comments</a>
+		<a href="#comments" class="button float">{{comment_count}} {% trans "Comentarios" %}</a>
 		</p>
 </div>
 
 		
 <!-- COLUMN 2 -->
-<div class="grid_7">
+<div class="grid_9">
 	<!-- TITLE -->
 	<h1 class="title float" style="text-align:center;">{{serie.name|title}}</h1>
 	<!-- FAVORITE -->
-	<div id="favorite">
+	<div id="favorite" class="right">
 	  {% if favorite == "no" %}
-		<a href="#" onclick="favorite('yes');" id="favorite"><img class="blackhearthover" src="/static/images/heart_black.png"></a>
+		<a href="#" onclick="favorite();" id="favorite"><img class="blackhearthover" src="/static/images/heart_black.png"></a>
 	  {% else %} 
 	  {% if favorite == "yes" %}
-		<a href="#" onclick="favorite('no');" id="favorite"><img class="redhearthover" src="/static/images/heart_red.png"></a>
+		<a href="#" onclick="favorite();" id="favorite"><img class="redhearthover" src="/static/images/heart_red.png"></a>
 	    {% endif %}
 	    {% endif %}
 	</div>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- DESCRIPTION -->
 	<p class="clearfix"> {{ serie.description }}</p>
-	<!-- ACTORS -->
-	<div class="hr clearfix">&nbsp;</div>
-	<h2>{% trans "Actores" %}</h2>
-	<div class="hr dotted clearfix">&nbsp;</div>
-	{% for actor in serie.actors.all %}
-		{% if actor.role_set.all.0.role %}
-			<a class="portfolio_item float alpha actor" href="{{ actor.get_absolute_url }}">
-			<span>{{ actor.name }} as {{actor.role_set.all.0.role}}</span>
-		       {% if actor.images.get %}{% thumbnail actor.images.get.src "180x180" as img_actor %}
-			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
-			{% else %}<img id="actor_unknown" width="120" height="180" src="/static/images/image_not_available.png">
-			{% endif %}
-			</a>
-		{% endif %}
-	{% endfor %}
-</div>
-
-<!-- COLUMN 3 -->
-<div class="grid_1">
 	<!-- SEASONS -->
 	<h2><span>{% trans "Temporadas" %}</span></h2>
 	{% for season in season_list %}
 		<a class="portfolio_item float alpha" href="{{ season.get_absolute_url }}">
-		<span>{% trans "Temp" %} {{ season.season }}</span> 
 		{% if season.images.all.0 %} {% thumbnail season.images.all.0.src "180x160" as img_season %} 
 			<img src="{{ img_season.url }}" alt=""/>{% endthumbnail %}
 		{% else %}
@@ -167,13 +156,35 @@ function favorite(decision) {
 			{% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" width=110> </div>
 			{% endif %}
 		{% endif %}
+		<p class="season">{% trans "Temporada" %} {% if season.season == 0 %}Especiales{%else%} {{ season.season }}{%endif %}</p> 
 	</a>{% endfor %}
+	<div class="hr clearfix">&nbsp;</div>
+	<!-- ACTORS -->
+	<h2>{% trans "Actores" %}</h2>
+	<div class="hr dotted clearfix">&nbsp;</div>
+	{% for actor in serie.actors.all %}
+		{% if actor.role_set.all.0.role %}
+		<div class="actor" style="margin-left:auto; margin-right:auto;">
+			<a class="portfolio_item float alpha actor" href="{{ actor.get_absolute_url }}">
+		       {% if actor.images.get %}{% thumbnail actor.images.get.src "150x150" as img_actor %}
+			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
+			{% else %}<img id="actor_unknown" width="120" height="120" src="/static/images/image_not_available.png">
+			{% endif %}
+			<div class="meta"><b>{{actor.role_set.all.0.role}}</b><br/>{{ actor.name }}</div>
+			</a>
+		</div>
+		{% endif %}
+	{% endfor %}
+</div>
+
+<!-- COLUMN 3 -->
+<div class="grid_1">
 </div>
 
 <div class="hr clearfix">&nbsp;</div>
 <div id="comments">
 	<!-- COMMENTS -->
-	<h2> Comments </h2>
+	<h2>{% trans "Comentarios" %}</h2>
 	{% render_comment_list for serie %}
 	{% if comment_count == 0 %}
 	<p>{% trans "Aún no hay comentarios. ¡Sé el primero!" %}</p>
