@@ -42,7 +42,7 @@
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 			
 		<!-- Caption Line -->
-		<h2 class="grid_12 caption clearfix">{% blocktrans %}<span>{{ SITE_NAME }}</span>, sitio de <u>enlaces de criticas</u> para disfrutar y difundir.<span> Criticar Es Bueno</span>. <br />Mas de {{ count_link }} criticas, {{count_episode }} episodios y {{count_serie}} series {% endblocktrans %}</h2>
+		<h2 class="grid_12 caption clearfix">{% blocktrans %}<span>{{ SITE_NAME }}</span>, sitio de <u>enlaces</u> para disfrutar y difundir.<span> Compartir Es Bueno</span>. <br />Mas de {{ count_link }} enlaces, {{count_episode }} episodios y {{count_serie}} series {% endblocktrans %}</h2>
 		
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
@@ -69,8 +69,6 @@
 			<a class="quicknavgrid_3 quicknav" href="{% url invitation_invite %}">
 					<h4 class="title ">{% trans "Invita a tu gente!" %}</h4>
 					<p>{% blocktrans %}{{SITE_NAME}} es tan cool que para acceder necesitas invitacion.{% endblocktrans %}</p>
-					{% if not request.user.is_authenticated %}
-						<p><b> OPCION DESACTIVADA EN LA ALPHA, EN LA BETA TODOS SERAN USUARIOS REGISTRADOS</b></p>
 					{% endif %}
 					<p style="text-align:center;"><img alt="" src="/static/images/hungry_bird.png" /></p>
 			</a>

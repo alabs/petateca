@@ -10,12 +10,10 @@ Iniciando entorno de desarrollo
 
 source virtual/bin/activate
 
-Import_bot_data
+Salir del entorno de desarrollo
 ===================
 
-Para importar los jsonses crawleados por scrapy: (Cambiar el sitio (eztv) y la letra (W.json))
-
-python manage.py import_bot_data bots/libercopy/sites/eztv/dump/W.json 
+deactivate
 
 Indice de Busquedas
 ==================

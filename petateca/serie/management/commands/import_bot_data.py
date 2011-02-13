@@ -111,10 +111,7 @@ class Command(BaseCommand):
                     return
         #Search episode in database
         try:
-            db_season = m.Season.objects.get(serie=db_serie, season=temp)
-        except m.Season.DoesNotExist:
             db_season = self.populate_seasons(db_serie, temp)
-        try:
             db_episode = m.Episode.objects.get(season=db_season, episode=epi)
         except m.Episode.DoesNotExist:
             warn(u"Episode %sx%s of %s not populated yet" % (temp, epi, serie))
@@ -311,7 +308,6 @@ class Command(BaseCommand):
                     except:
                         db_episode.title_es = "%sx%s" % (n_season, n_episode)
                         db_episode.description_es = "No disponible"
-                    #import ipdb; ipdb.set_trace()
                     db_episode.save()
                     if reg_en[n_season][n_episode]["filename"]:
                         img = urllib.urlretrieve(reg_en[n_season][n_episode]["filename"])

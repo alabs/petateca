@@ -51,12 +51,16 @@ def get_serie(request, serie_slug):
     if request.method == 'GET':
         return serie_info
     # si es POST trata el rating:
-    if request.method == 'POST':
-        if not request.user.is_authenticated():
-            serie_info.update({
-                'message': 'No registrado',
-            })
-        else:
+    if request.method == 'POST' and request.is_ajax():
+        if request.user.is_authenticated():
+            if request.POST.has_key('favorite'):
+                user = User.objects.get(username=request.user)
+                serie.favorite_of.add(user.profile)
+                return HttpResponse(simplejson.dumps('yes'), mimetype='application/json')
+            elif request.POST.has_key('no-favorite'):
+                user = User.objects.get(username=request.user)
+                serie.favorite_of.remove(user.profile)
+                return HttpResponse(simplejson.dumps('no'), mimetype='application/json')
             if request.POST.has_key('rating'):
                 # Si el usuario esta autenticado, prepara el voto
                 content_type = ContentType.objects.get(app_label='serie', name='serie')
@@ -67,48 +71,18 @@ def get_serie(request, serie_slug):
                     'score': request.POST['rating'],
                 }
                 response = AddRatingView()(request, **params)
-                try:
-                # Distintas respuestas a la peticion: grabado, Ya ha votado, Error
-                    if response.content == 'Vote recorded':
-                        serie_info.update({
-                            'message': 'Vote recorded',
-                            'score': params['score'],
-                        })
-                    elif response.content == 'You have already voted.':
-                        serie_info.update({
-                                'message': 'You have already voted',
-                        })
-                except:
-                    serie_info.update({
-                        'message': response.content,
-                        'error': 9,
-                    })
-            elif request.POST.has_key('favorite'):
-                user = User.objects.get(username=request.user)
-                serie.favorite_of.add(user.profile)
-                serie_info.update({
-                    'favorite': 'yes',
-                })
-            elif request.POST.has_key('no-favorite'):
-                user = User.objects.get(username=request.user)
-                serie.favorite_of.remove(user.profile)
-                serie_info.update({
-                    'favorite': 'no',
-                })
-            if request.is_ajax():
-                return HttpResponse(simplejson.dumps(serie_info['favorite']), mimetype='application/json')
-        return serie_info
+                return HttpResponse(simplejson.dumps(response.content), mimetype='application/json')
+        else: 
+            return HttpResponse(simplejson.dumps('no-user'), mimetype='application/json')
 
 
 @render_to('serie/get_season.html')
 def get_season(request, serie_slug, season):
     ''' Get season, returns episode_list
     also handles link voting (courtesy of django-voting) '''
-    serie = get_object_or_404(Serie, slug_name=serie_slug)
-    season = get_object_or_404(Season, serie=serie, season=season)
-    episode_list = Episode.objects.filter(
-        season=season,
-    ).order_by('episode')
+    serie = Serie.objects.select_related().get(slug_name=serie_slug)
+    season = serie.season.select_related().get(season=season)
+    episode_list = season.episodes.select_related().order_by('episode')
     season_info = {
         'serie': serie,
         'episode_list': episode_list,

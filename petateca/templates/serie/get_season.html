@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load extract_domain %}
 {% load voting_tags %}
+{% load links_voting %}
 {% load message_box %}
 {% block title %}{{serie.name|title}} - {% trans "Temporada" %} {{ season.season }}{% endblock %}
 {% block extrastyle %}   
@@ -84,6 +85,7 @@ function vote(linkid, direction) {
 
 <!-- EPISODE LIST -->
 {% for episode in episode_list %} 
+
 <div id="epi{{episode.episode}}" class="catagory_1 clearfix">
 <!-- COLUMN 1 -->
 <div class="grid_4 textright" >
@@ -111,45 +113,9 @@ function vote(linkid, direction) {
 
 <!-- COLUMN 3 -->
 <div class="grid_5 right">
-	{% if episode.links.all %}
-	{% votes_by_user user on episode.links.all as vote_dict %}
-	<table id="links">
-	    <thead>
-		<tr>
-			<th scope="col">{% trans "Link" %}</th>
-			<th scope="col">{% trans "Audio" %}</th>
-			<th scope="col">{% trans "Subtitulos" %}</th>
-			<th scope="col">{% trans "Votos" %}</th>
-		</tr>
-	    </thead>
-	    <tbody>
-		{% for link in episode.links.all %}
-		<tr>
-		<td class="novote"><a href="{{ link.url }}"> {{ link.url|extract_domain }}</a></td>
-		<td class="novote">{{ link.audio_lang }}</td>
-		<td class="novote">{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
-		<td class="vote">
-		<!-- VOTING -->
-		{% dict_entry_for_item link from vote_dict as vote %}
-                {% score_for_object link as score %}
-			<div class="left linkvote">
-				<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'upvote');" id="linkuparrow{{ link.id }}"><img src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif"></a>
-				<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'downvote');" id="linkdownarrow{{ link.id }}"><img src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif"></a>
-			</div>
-			  <span class="score right" style="position:relative; top:-25%;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
-			</td>
-		</tr>
-		{% endfor %}
-	    </tbody>
-	</table>
-      {% else %}
-      {% endif %}
 			</div>
 		</div>
 		<div class="pr clearfix grid_12">&nbsp;</div>
-	{% endfor %}
-<script type='text/javascript'>
-	QueryLoader.init();
-</script>
+{% endfor %}
 
 {% endblock %}

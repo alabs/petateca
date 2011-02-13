@@ -4,14 +4,14 @@ distribute_setup.use_setuptools()
 from setuptools import setup
 
 setup(
-    name="liberweb",
+    name="petateca",
     version='0.1dev',
     author="",
     author_email="",
-    packages=['liberweb',],
+    packages=['petateca',],
     url='',
     license='',
-    description='Web de libercopy',
+    description='Web de petateca',
     long_description=open('README.txt').read(),
     install_requires=[
         'django',

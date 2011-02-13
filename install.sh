@@ -17,8 +17,8 @@ pip -E virtual install django==1.2.3 ipython PIL &&
 # Instalamos las dependencias
 python setup.py develop && 
 
-# Desde liberweb (donde esta manage.py)
-cd liberweb &&
+# Desde petateca (donde esta manage.py)
+cd petateca &&
 
 # Creamos la DDBB y hacemos las migraciones del South
 python manage.py syncdb --migrate &&

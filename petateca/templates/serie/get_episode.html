@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load voting_tags %}
+{% votes_by_user user on episode.links.all as vote_dict %}
 {% load extract_domain %}
 {% load message_box %}
 {% block extrastyle %}   
@@ -15,14 +16,22 @@
     </script>
 {% endblock %}
 {% block contents %}
-<h1>{{ serie.name|title }}</h1>
-<ul>
-<li><h2> Temporada </h2> {{ episode.season.season }}</li>
-<li><h2> Episode </h2> {{ episode.episode }}</li>
-<li><h2> Air Date </h2> {{ episode.air_date }}</li>
-<li><h2> Description </h2> {{ episode.description }}</li>
-</ul>
-<ul>
+	<h2 class="grid_12 caption clearfix"><a href="{{ serie.get_absolute_url }}">{{ serie.name|title }}</a> - {{ episode.season.season }}x{{ episode.episode }} - {{ episode.title|title }}
+  <a href="{{ season.get_absolute_url }}" class="button right">{% trans "Regresar a Temporada" %} {{season.season}}</a>
+</h2>
+<div class="grid_5 portfolio">
+	{% if episode.images.all.0.src %}
+	  {% thumbnail episode.images.all.0.src "300x300" as img_episode %}
+	    <img src="{{ img_episode.url }}">
+	  {% endthumbnail %}
+	{% endif %}
+</div>
+<div class="grid_5">
+	<span class="title"> 
+	<span class="meta">{% trans "Descripción" %}</span><p style="font-size:14px;">{{ episode.description }}</p>
+	<span class="meta">{% trans "Duración" %} </span><p>{{ serie.runtime }} {% trans "minutos" %}</p>
+	<span class="meta">{% trans "Fecha de Emisión" %} </span><p> {{ episode.air_date }}</p>
+</div>
 
 {% if message == "No registrado" %}
   {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
@@ -31,12 +40,8 @@
 {% endif %}
 {% endif %}
 
-{% if episode.images.all.0.src %}
-  {% thumbnail episode.images.all.0.src "200x200" as img_episode %}
-    <img src="{{ img_episode.url }}">
-  {% endthumbnail %}
-{% endif %}
-
+<div class="grid_12">
+<a class="add_link button" href="{{ episode.get_add_link_url }}">{% trans "Añadir enlace" %}</a> 
 <h2> Links </h2>
 	{% if episode.links.all %}
 	<table id="links">
@@ -56,23 +61,13 @@
 		<td>{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
 		<td>
 		<!-- VOTING -->
+{{vote_dict}}
+		{% dict_entry_for_item link from vote_dict as vote %}
                 {% score_for_object link as score %}
-			<form class="linkvote" id="linkup{{ link.id }}" action="." method="POST">
-			  <input type="hidden" name="vote" value="upvote"/>
-			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-			  <input type="image" id="linkuparrow{{ link.id }}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
-			</form>
-			<a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
-			  <span class="score" id="linkscore{{ link.id }}"
-				title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">
-			   {{ score.score|default:0 }} 
-			  </span>
-			<form class="linkvote" id="linkdown{{ link.id }}" action="." method="POST">
-			  <input type="hidden" name="vote" value="downvote"/>
-			  <input type="hidden" name="linkid" value="{{ link.id }}"/>
-			  <input type="image" id="linkdownarrow{{ link.id }}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
-			</form>
-			</td>
+			<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'upvote');" id="linkuparrow{{ link.id }}"><img src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif"></a>
+			<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'downvote');" id="linkdownarrow{{ link.id }}"><img src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif"></a>
+			  <span class="score right" style="position:relative; top:-25%;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
+		</td>
 		</tr>
 		{% endfor %}
 	    </tbody>
@@ -80,13 +75,8 @@
       {% else %}
          {% trans "No hay enlaces disponibles" %}
       {% endif %}
+</div>
 <br />
-  <a href="{% url serie-index %}" class="button">{% trans "Listado de Series" %}</a>
-  <br/>
-  <a href="{{ serie.get_absolute_url }}" class="button">{% trans "Regresar a " %} {{ serie.name }}</a>
-  <br/>
-  <a href="{{ season.get_absolute_url }}" class="button">{% trans "Regresar a Temporada" %} {{season.season}} of {{serie.name|title}}</a>
 
-<a class="add_link" href="{{ episode.get_add_link_url }}">{% trans "Añadir enlace" %}</a> 
 {% endblock %}
 

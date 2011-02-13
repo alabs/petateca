@@ -2,7 +2,7 @@ import os
 import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-SITE_NAME = 'LiberCopy'
+SITE_NAME = 'PetaTeca'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -19,7 +19,7 @@ DATABASES = {
         # 'mysql', 'sqlite3' or 'oracle'.
         'ENGINE': 'django.db.backends.sqlite3',
         # Or path to database file if using sqlite3.
-        'NAME': 'liberweb.db',
+        'NAME': 'petateca.db',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -28,7 +28,7 @@ DATABASES = {
 #    'imdb': {
 #        'ENGINE': 'postgresql_psycopg2',
 #        'NAME': 'imdb',
-#        'USER': 'libercopy',
+#        'USER': 'petateca',
 #        'PASSWORD': 'libre',
 #    },
 }
@@ -123,7 +123,7 @@ DATABASE_ROUTERS = ['imdblocal.dbrouter.ImdbRouter']
 IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
 
 #uri for use with sql
-IMDB_ACCESS_DB_URI = "postgres://liberweb:libre@localhost/imdb"
+IMDB_ACCESS_DB_URI = "postgres://petateca:libre@localhost/imdb"
 
 THUMBNAIL_DEBUG = True
 THUMBNAIL_SUBDIR = 'thumbs'
@@ -152,7 +152,7 @@ HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
 AUTH_PROFILE_MODULE = 'userdata.UserProfile'
 ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = '/'
-DEFAULT_FROM_EMAIL = 'noreply@libercopy.net'
+DEFAULT_FROM_EMAIL = 'noreply@petateca.net'
 
 AUTHENTICATION_BACKENDS = (
     'userdata.models.EmailBackend',
@@ -177,5 +177,5 @@ LOGIN_EXEMPT_URLS = (
 )
 
 LOGIN_URL_INDEX = '/accounts/signin/'
-INVITATION_MAIL = 'invitaciones@libercopy.net'
-ADMIN_MAIL = 'admin@libercopy.net'
+INVITATION_MAIL = 'invitaciones@petateca.net'
+ADMIN_MAIL = 'admin@petateca.net'
