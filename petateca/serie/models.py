@@ -138,15 +138,6 @@ class Episode(models.Model):
         })
 
 
-#class LinkGetTopScores(models.Manager):
-#    def get_top_score(self):
-#        return sorted(Link.objects.all(), key=lambda a: a.get_score)
-
-
-class LinkGetTopScores(models.Manager):
-    def get_top_scores(self):
-        return sorted(self.all(), key=lambda n: n.get_score())
-
 class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")
     url = models.CharField(max_length=255, unique=True, db_index=True)
@@ -160,7 +151,6 @@ class Link(models.Model):
     )
     user = models.CharField(max_length=255, null=True, blank=True, help_text=_('usuario que subio el link'))
     pub_date = models.DateTimeField(default=datetime.now, help_text=_('cuando se ha subido el link? por defecto cuando se guarda'))
-    get_top_score = LinkGetTopScores()
 
     def __unicode__(self):
         return self.url

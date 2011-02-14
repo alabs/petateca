@@ -26,5 +26,6 @@ python manage.py syncdb --migrate &&
 # Actualizamos campos de traduccion
 python manage.py update_translation_fields &&
 
+
 # Iniciamos el servidor de desarrollo
 python manage.py runserver

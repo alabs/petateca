@@ -10,7 +10,7 @@ setup(
     author_email="",
     packages=['petateca',],
     url='',
-    license='',
+    license=open('LICENSE.txt').read(),
     description='Web de petateca',
     long_description=open('README.txt').read(),
     install_requires=[
