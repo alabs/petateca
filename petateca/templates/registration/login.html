@@ -1,0 +1,30 @@
+{% extends "base_stripped.html" %}
+{% load i18n %}
+{% load message_box %}
+{% block title %}{% trans "Iniciar Sesión" %}{% endblock %}
+{% block contents %}
+{% if request.user.is_authenticated %}
+	<h2 class="grid_12 caption clearfix">{% trans "Ya has iniciado sesión." %}! {% trans "Vete a ver algunas" %} <a href="/series">series</a></h2>
+{% else %}
+	{% if form.errors %}
+	{% message_box "Tu nombre de usuario y contraseña no concuerdan. Intentalo de nuevo." %}
+	{% endif %}
+
+<h3>login</h3>
+<div class="hr dotted clearfix">&nbsp;</div>
+<!-- LOGIN form -->
+<form method="post" action="{% url django.contrib.auth.views.login %}" id="login_form">
+	<ul>
+	{{ form.as_ul }}
+		<p><a href="{% url auth_password_reset %}">forgot</a> your password?  </p>
+		<input type="hidden" name="next" value="{{ next }}" />
+		<div id="button">
+		<input type='submit' id='send_message' class="button" value='login' />
+		</div>
+		</li> 
+	</ul> 
+</form>  
+
+{% endif %}
+
+{% endblock %}

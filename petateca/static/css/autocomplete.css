@@ -1,0 +1,30 @@
+#results {
+	background-color: #fff;
+	border-bottom: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	display: none;
+	font-family: arial;
+	font-size:15px;
+	margin-left: 2px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+}
+
+#results div{
+	width: 215px;
+}
+
+.results {
+	background-color: #000;
+}
+
+#results .selected {
+	background-color: #666;
+	color: #fff;
+}
+
+#results .unselected {
+	background-color: #fff;
+	color: #666;
+}

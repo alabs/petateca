@@ -1,0 +1,5 @@
+  <select id="dropdown" name="series" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+    <option value="none">Series
+    {% for serie in all_series %} <option value="{{serie.get_absolute_url}}"> {{ serie.name|title }} 
+    {% endfor %}
+  </select>

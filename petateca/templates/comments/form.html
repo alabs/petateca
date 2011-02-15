@@ -1,0 +1,24 @@
+{% load comments i18n %}
+<div class="hr clearfix">&nbsp;</div>
+<h2>{% trans "Añade un comentario" %}</h2>
+<div class="hr dotted clearfix">&nbsp;</div>
+{% if request.user.is_authenticated %}
+   <form id="comment_form" action="{% comment_form_target %}" method="post">
+        {% if next %}<input name="next" type="hidden" value="{{ next }}" />{% endif %}
+        {% for field in form %}
+            {% if field.is_hidden %}
+                {{ field }}
+            {% else %}
+                {% if field.name != "name" and field.name != "email" and field.name != "url" %}
+                    {% if field.errors %}{{ field.errors }}{% endif %}
+                    <p {% if field.errors %} class="error"{% endif %} {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+                    {{ field }}
+                    </p>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <input type="submit" id="send_message" class="button" name="post" value="{% trans "Añadir comentario" %}" />
+   </form>
+{% else %}
+<p class="clearfix">{% trans "Lo siento, debes haber" %} <a href="/accounts/login/?next={{request.path}}">{% trans "iniciado sesion" %}</a> {% trans "para enviar comentarios. Otra razon más para crearse una cuenta" %}</p>
+{% endif %}

@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load comments %}
+{% load extract_domain %}
+{% load message_box %}
+{% block extrastyle %}   
+	<link rel="stylesheet" href="/static/css/queryLoader.css" type="text/css" />{% endblock %}
+{% block extrahead %}
+	<script type="text/javascript" src="/static/js/jquery.MetaData.js"></script>
+	<script type="text/javascript" src="/static/js/queryLoader.js"></script>
+<script>
+var url = "{{request.path }}";
+$(document).ready(function(){
+    $(".redhearthover").hover(function() {
+       $(this).attr('src', '/static/images/heart_black.png');
+}, function(){
+       $(this).attr('src', '/static/images/heart_red.png');
+    });
+    $(".blackhearthover").hover(function() {
+       $(this).attr('src', '/static/images/heart_red.png');
+}, function(){
+       $(this).attr('src', '/static/images/heart_black.png');
+    });
+	$('.ratingstar').rating({ callback: function(value, link){
+		$.post(url, { 'rating': value }, function(data){ disc_rat_data(data); } ); }
+	});
+
+});
+
+$(document).ready(function(){
+$(‘img’).css(‘background’, ‘transparent url(../images/ajax-loading.gif) no-repeat center center’)
+$(‘img’).load(function(){$(this).css(‘background’,”);});
+});
+
+function disc_rat_data(data){
+switch(data)
+	{
+	case 'no-user':
+		$.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", { header: 'Error' });
+		break;
+	case 'Vote recorded.':
+		$.jGrowl("Su voto ha sido guardado"); 
+		break;
+	case 'Vote changed.':
+		$.jGrowl("Su voto ha sido cambiado"); 
+		break;
+	}
+}
+
+function disc_fav_data(data){
+switch(data)
+	{
+	case 'yes':
+		$("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="redhearthover" src="/static/images/heart_red.png"></a>');
+                $.jGrowl("Has agregado esta serie como favorita");
+		break;
+	case 'no':
+		var html = 
+		$("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="blackhearthover" src="/static/images/heart_black.png"></a>');
+                $.jGrowl("Has quitado esta serie de tus favoritas");
+		break;
+	case 'no-user':
+		$.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", { header: 'Error' });
+		break;
+	}
+}
+
+function favorite() {
+	var imgsrc = $("#favorite img").attr('src') ; 
+	if ( imgsrc == "/static/images/heart_black.png") 
+	{ 
+		decision = "yes"; 
+	} else if (imgsrc == "/static/images/heart_red.png") 
+	{ 
+		decision = "no";
+	}
+	console.log(decision);
+	$('#favorite').html('<img src="/static/images/ajax-loading.gif">');
+	if (decision == "yes") {
+		$.post(url, { 'favorite': "favorite" },	function(data){ disc_fav_data(data); })
+	} else if (decision == "no"){
+		$.post(url, { 'no-favorite': "no-favorite" }, function(data){ disc_fav_data(data); })
+	} 
+}
+
+</script>
+{% endblock %}
+{% block contents %}
+<!-- COLUMN 1 -->
+<div class="grid_3">
+	<!-- IMAGE -->
+	{% if image %}{% thumbnail image "400x300" as img_serie %}
+	<img id="poster" src="{{ img_serie.url }}" />{% endthumbnail %}
+	{% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" height=100> </div>
+	{% endif %}
+	<!-- RATING -->
+	  <div id="rating">
+	    <form action="." method="POST">
+	      <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="3" class="ratingstar" {% if score == 3 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="4" class="ratingstar" {% if score == 4 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
+	    </form>
+	  </div>
+	<div class="hr dotted clearfix">&nbsp;</div>
+	<!-- NETWORK -->
+	{% if serie.network.name %}
+	<h4>{% trans "Cadena" %}</h4> 
+		<ul>
+			<li><a class="button float" href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a></li>
+		</ul>
+	{% endif %}
+	<div class="hr dotted clearfix">&nbsp;</div>
+	<!-- GENRE -->
+	<h4>{% trans "Genero" %}</h4> 
+		<ul>
+      		{% for genre in serie.genres.all %}
+		<li><a class="button" href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
+		{% endfor %}
+		</ul>
+	<div class="hr dotted clearfix">&nbsp;</div>
+	<!-- RUNTIME -->
+	<h4>{% trans "Duracion" %}</h4> 
+	<p>{{ serie.runtime }} {% trans "minutos" %}</p>
+		<div class="hr dotted clearfix">&nbsp;</div>
+	<!-- BUTTONS -->
+		<p class="clearfix">
+		<a href="/series" class="button float">&lt;&lt; {% trans "Regresar a las Series" %}</a>
+		</p>
+		<p class="clearfix">
+		{% get_comment_count for serie as comment_count %}
+		<a href="#comments" class="button float">{{comment_count}} {% trans "Comentarios" %}</a>
+		</p>
+</div>
+
+<!-- COLUMN 2 -->
+<div class="grid_9">
+	<!-- TITLE -->
+	<h1 class="title float">{{serie.name|title}}</h1>
+	<!-- FAVORITE -->
+	<div id="favorite" class="right">
+	  {% if favorite == "no" %}
+		<a href="#" onclick="favorite();" id="favorite"><img class="blackhearthover" src="/static/images/heart_black.png"></a>
+	  {% else %} 
+	  {% if favorite == "yes" %}
+		<a href="#" onclick="favorite();" id="favorite"><img class="redhearthover" src="/static/images/heart_red.png"></a>
+	    {% endif %}
+	    {% endif %}
+	</div>
+	<div class="hr dotted clearfix">&nbsp;</div>
+	<!-- DESCRIPTION -->
+	<p class="clearfix"> {{ serie.description }}</p>
+	<!-- SEASONS -->
+	<h2><span>{% trans "Temporadas" %}</span></h2>
+	{% for season in season_list %}
+		<a class="portfolio_item float alpha" href="{{ season.get_absolute_url }}">
+		{% if season.images.all.0 %} {% thumbnail season.images.all.0.src "180x160" as img_season %} 
+			<img src="{{ img_season.url }}" alt=""/>{% endthumbnail %}
+		{% else %}
+			{% if image %}{% thumbnail image "180x160" as img_serie %}
+			<img src="{{ img_serie.url }}" />{% endthumbnail %}
+			{% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" width=110> </div>
+			{% endif %}
+		{% endif %}
+		<p class="season">{% trans "Temporada" %} {% if season.season == 0 %}Especiales{%else%} {{ season.season }}{%endif %}</p> 
+	</a>{% endfor %}
+	<div class="hr clearfix">&nbsp;</div>
+	<!-- ACTORS -->
+	<h2>{% trans "Actores" %}</h2>
+	<div class="hr dotted clearfix">&nbsp;</div>
+	{% for actor in serie.actors.all %}
+		{% if actor.role_set.all.0.role %}
+		<div class="actor" style="margin-left:auto; margin-right:auto;">
+			<a class="portfolio_item float alpha actor" href="{{ actor.get_absolute_url }}">
+		       {% if actor.images.get %}{% thumbnail actor.images.get.src "150x150" as img_actor %}
+			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
+			{% else %}<img id="actor_unknown" width="100"  src="/static/images/image_not_available.png">
+			{% endif %}
+			<div class="meta">{% for role in actor.role_set.all %}<b>{{role.role}}</b>{% endfor %}
+			<br/>{{ actor.name }}</div>
+			</a>
+		</div>
+		{% endif %}
+	{% endfor %}
+</div>
+
+<!-- COLUMN 3 -->
+<div class="grid_1">
+</div>
+
+<div id="comments">
+	{% if not comment_count == 0 %}
+	<div class="hr clearfix">&nbsp;</div>
+	<!-- COMMENTS -->
+	<h2>{% trans "Comentarios" %}</h2>
+	{% render_comment_list for serie %}
+	{% endif %}
+
+	<!-- ADD A COMMENT -->
+	{% with request.path as next %}
+	{% render_comment_form for serie %}
+	{% endwith %}
+</div>
+
+{% endblock %}

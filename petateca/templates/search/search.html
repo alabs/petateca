@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load i18n %}
+{% block contents %}
+	<div id="wrapper" class="container_12 clearfix">
+	<h2 class="grid_12 caption clearfix">Search Results</h2>
+	<div class="pr grid_12 clearfix">&nbsp;</div>
+        {% if query %}
+	<div class="grid_3 left">
+            {% for result in page.object_list %}
+                <p>
+		<a href="{{ result.object.get_absolute_url }}" class="portfolio_item float alpha">
+			{% if result.object.images.get_is_poster.0.src %}
+			    {% thumbnail result.object.images.get_is_poster.0.src "300x200" as img_serie %}
+			      <img src="{{ img_serie.url }}">
+			    {% endthumbnail %}
+			</p>
+			{% else %} 
+				<img src="/static/images/image_not_available.png" height="300" width="200"> 
+			{% endif %} 
+		</a>
+	</div>
+	<div class="grid_9 right">
+		<a href="{{ result.object.get_absolute_url }}"> <h2>{{result.object.name|title}}</h2></a>
+		{% with result.object.rating_score as score %}
+	  <div id="rating">
+	    <form action="{{result.object.get_absolute_url}}" method="POST">
+	      <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="3" class="ratingstar" {% if score == 3 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="4" class="ratingstar" {% if score == 4 %}checked="checked"{% endif %}/>
+	      <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
+	    </form>
+	  </div>{% endwith %}
+		<p>Cadena: <a href="{{result.object.network.get_absolute_url}}" class="button"> {{ result.object.network }}</a></p>
+		<p>Generos: {% for genre in result.object.genres.all %}<a href="{{ genre.get_absolute_url }}" class="button">{{genre.name}}</a>{% endfor %}</p>
+		<p>Actores: {% for actor in result.object.actors.all %}<a href="{{actor.get_absolute_url}}">{{actor.name}}, <a>{% endfor %}</p>
+		<p>{{result.object.description}}</p>
+	</div>
+            {% empty %}
+		<h2 class="grid_10 caption clearfix"><span>No results</span>... But you can go to <a href="{% url serie-index %}">Series List</a> to find out if something you like!</h2>
+            {% endfor %}
+	</div>
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+		<h2 class="grid_10 caption clearfix"><span>No results</span>... But you can go to <a href="{% url serie-index %}">Series List</a> to find out if something you like!</h2>
+        {% endif %}
+</div>
+{% endblock %}

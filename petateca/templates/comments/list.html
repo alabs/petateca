@@ -1,0 +1,23 @@
+{% load avatar_tags %}
+                        <div class="hr dotted clearfix">&nbsp;</div>
+
+  {% for comment in comment_list %}
+                        <ol class="commentlist" id="c{{ comment.id }}">
+                                <li class="comment">
+                                <div class="gravatar">
+					{% avatar comment.name %}
+                                </div>
+                                <div class="comment_content">
+                                        <div class="clearfix">
+                                                <cite class="author_name">{{ comment.name }}</cite>
+                                                <div class="comment-meta commentmetadata">{{ comment.submit_date }}</div>
+                                        </div>
+                                        <div class="comment_text">
+                                                <p>{{comment.comment}}</p>
+                                        </div>
+                                </div>
+                                </li>
+                        </ol>
+
+{% endfor %}
+

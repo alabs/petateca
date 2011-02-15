@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load extract_domain %}
+{% load voting_tags %}
+{% load links_voting %}
+{% load message_box %}
+{% block title %}{{serie.name|title}} - {% trans "Temporada" %} {{ season.season }}{% endblock %}
+{% block extrastyle %}   
+    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/queryLoader.css" type="text/css" />{% endblock %}
+{% block extrahead %}
+    <script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
+    <script type="text/javascript" src="/static/js/queryLoader.js"></script>
+    <script>
+$(document).ready(function(){
+	$(".add_link").colorbox({iframe:true, innerWidth:555, innerHeight:324});
+
+// haciendo click en cualquier parte del link menos la votacion te envia al link
+	$("td.novote").click(function() {
+		var href = $(this).find("a").attr("href");
+		if(href) {
+			window.location = href;
+		}
+	});
+
+// Smooth jquery scrolling
+  $('a[href*=#]').click(function() {
+ if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+ && location.hostname == this.hostname) {
+   var $target = $(this.hash);
+   $target = $target.length && $target
+   || $('[name=' + this.hash.slice(1) +']');
+   if ($target.length) {
+  var targetOffset = $target.offset().top;
+  $('html,body')
+  .animate({scrollTop: targetOffset}, 1000);
+    return false;
+   }
+ }
+  });
+
+});
+
+function vote(linkid, direction) {
+    var $linkscore = $("#linkscore" + linkid);
+    $linkscore.html('<img src="/static/images/ajax-loading.gif">');
+    // send the post petition with the required data
+    $.post("{{ request.path }}", { "vote": direction, "linkid": linkid }, 
+	function (data){ 
+		// change the value with the new score
+		$linkscore.html(data.score);
+		// change the image
+                if (direction == "upvote") {
+			$("#linkuparrow" + linkid + " img").attr('src', "/static/images/voting/aupmod.gif");
+			$("#linkdownarrow" + linkid + " img").attr('src', "/static/images/voting/adowngrey.gif");
+		} else if (direction == "downvote") {
+			$("#linkuparrow" + linkid + " img").attr('src', "/static/images/voting/aupgrey.gif");
+			$("#linkdownarrow" + linkid + " img").attr('src', "/static/images/voting/adownmod.gif");
+		};
+	}
+    );
+};
+    </script>
+{% endblock %}
+{% block contents %}
+{{ episode }}
+
+{% if message == "No registrado" %}
+  {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
+{% endif %}
+
+<!-- TITLE -->
+<h2 class="grid_12 caption clearfix"><a href="{{ serie.get_absolute_url }}">{{serie.name|title}}</a> - <span>{% trans "Temporada" %} {{season.season}}</span><a class="right button" href="{{ serie.get_absolute_url }}">{% trans "Regresar a" %} {{serie.name|title}}</a></h2>
+<div class="hr clearfix dotted">&nbsp;</div>
+
+<!-- EPISODES MINI-LIST -->
+<center>
+<h2 class="grid_12 caption clearfix">Episodios
+{% for episode in episode_list %} 
+	<a href="#epi{{episode.episode}}" class="button">{{episode.episode}}</a>
+{% endfor %}</h2>
+</center>
+<div class="hr clearfix dotted">&nbsp;</div>
+
+<!-- EPISODE LIST -->
+{% for episode in episode_list %} 
+
+<div id="epi{{episode.episode}}" class="catagory_1 clearfix">
+<!-- COLUMN 1 -->
+<div class="grid_4 textright" >
+	<span class="meta">{% trans "Episodio "%}{{episode.episode}}</span><br />
+	<span class="meta">{% trans "Emitido el "%}{{episode.air_date }}</span>
+	<h4 class="title "><a href="{{ episode.get_absolute_url }}">{% if episode.title %}{{ episode.title }}{% else %}Episode {{ episode.episode }}{% endif %}</a></h4>
+	<div class="hr clearfix dotted">&nbsp;</div>
+	<p>{{ episode.description }}</p>
+</div>
+<!-- COLUMN 2 -->
+<div class="grid_3">
+	{% if episode.images.all.0.src %}
+		{% thumbnail episode.images.all.0.src "200x200" as img_epi %}
+		<img class="img_epi" src="{{ img_epi.url }}">
+		{% endthumbnail %}
+	{% else %}
+		<img src="/static/images/image_not_available.png" height=100>
+	{% endif %}
+		{% if request.user.is_authenticated %}
+			<a class="add_link button" style="margin-left:40px;" href="{{ episode.get_add_link_url }}">{% trans "Añadir Enlace" %}</a> 
+		{% else %}
+			{% trans "Para añadir enlaces debes haber iniciado sesion." %}
+		{% endif %}
+</div>
+
+<!-- COLUMN 3 -->
+<div class="grid_5 right">
+			</div>
+		</div>
+		<div class="pr clearfix grid_12">&nbsp;</div>
+{% endfor %}
+
+{% endblock %}

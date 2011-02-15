@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans %}Invitaciones a formar parte de {{SITE_NAME}} {% endblocktrans %}{% endblock %}
+{% block contents %}
+<h2 class="grid_12 caption clearfix">
+{% if remaining_invitations == 0 %}
+	{% trans "Ya has gastado todas las invitaciones :(" %}
+{% else %}
+	{% trans "Tienes" %} {{remaining_invitations}} {% trans "invitaciones restantes" %}
+	</h2>
+
+	<form action="." method="post" id="invitation_form">
+	<ul>
+	{{ form.as_ul }}
+	</ul>
+	<input class="button" type="submit" value="{% trans "Enviar invitacion" %}" />
+	</form>
+{% endif %}
+{% endblock %}

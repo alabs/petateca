@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+{% spaceless %}
+{% load i18n %}
+{% load dropdown_series %}
+{% load localeurl_tags %}
+{% load message_box %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+{% endspaceless %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
+<head>
+	<title>{% block title %}{{title|default:SITE_NAME}}{%endblock %}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="/static/css/reset.css" />
+	<link rel="stylesheet" href="/static/css/styles.css" />
+	{% block extrastyle %}{% endblock %}
+	<!-- Scripts -->
+	<script type="text/javascript" src="/static/js/jquery-min.js"></script>
+	{% block extrahead %}{% endblock %}
+</head>
+<body>
+<div class="hr clearfix dotted">&nbsp;</div>
+{% block contents %}{% endblock %}
+</body>
+</html>
+

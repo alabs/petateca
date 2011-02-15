@@ -1,0 +1,11 @@
+Tú (o alguien que se ha hecho pasar por ti) te has registrado en {{ site.name }}
+
+Si no eres tú, puedes ignorar este correo y nos olvidaremos de ti. 
+
+Para activar la cuenta, por favor haz click en el siguiente link en los proximos
+{{ expiration_days }} días:
+
+http://{{site.domain}}/accounts/activate/{{ activation_key }}
+
+Saludos,
+{{ site.name }}
