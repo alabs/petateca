@@ -9,6 +9,7 @@ Instalacion del entorno de Desarrollo
 -------------------------------------
 
 Ejecutar install.sh en este mismo directorio:
+
   ./install.sh
 
 Iniciando entorno de desarrollo
@@ -20,6 +21,7 @@ Importar datos de pruebas
 -------------------------
 
   python manage.py loaddata serie/fixtures/test_data.json 
+
   cp -rp serie/fixtures/img/* static/img/
 
 Salir del entorno de desarrollo
@@ -31,5 +33,6 @@ Indice de Búsquedas
 -------------------
 
 Si se importan datos hay que actualizar el indice de busquedas:
+
   python manage.py update_index
 
