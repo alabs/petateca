@@ -4,11 +4,9 @@
 petateca/*.db
 virtual
 petateca.egg-info/*
-distribute*
+distribute*.egg
+distribute*.tar.gz
 *.mo
-petateca/bots/libercopy/liberbot/cache/*
-petateca/bots/libercopy/liberbot/cache/*
-petateca/bots/libercopy/sites/*/debug/*
 petateca/static/avatars/*
 petateca/static/cache/*
 petateca/static/img/actor/*.jpg
