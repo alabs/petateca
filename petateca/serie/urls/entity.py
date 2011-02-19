@@ -17,4 +17,6 @@ urlpatterns = patterns('serie.views',
     url(r'^popular$', 'list_popular', name='list-popular'), 
 
     url(r'^actor/(?P<slug_name>[-\w]+)$', 'get_actor', name="get_actor"),
+
+    url(r'^sneak$', 'sneak_links', name="sneak_links"),
 )

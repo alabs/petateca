@@ -4,84 +4,89 @@
 {% load comments %}
 {% load extract_domain %}
 {% load message_box %}
-{% block extrastyle %}   
-	<link rel="stylesheet" href="/static/css/queryLoader.css" type="text/css" />{% endblock %}
 {% block extrahead %}
-	<script type="text/javascript" src="/static/js/jquery.MetaData.js"></script>
-	<script type="text/javascript" src="/static/js/queryLoader.js"></script>
 <script>
 var url = "{{request.path }}";
-$(document).ready(function(){
-    $(".redhearthover").hover(function() {
-       $(this).attr('src', '/static/images/heart_black.png');
-}, function(){
-       $(this).attr('src', '/static/images/heart_red.png');
-    });
-    $(".blackhearthover").hover(function() {
-       $(this).attr('src', '/static/images/heart_red.png');
-}, function(){
-       $(this).attr('src', '/static/images/heart_black.png');
-    });
-	$('.ratingstar').rating({ callback: function(value, link){
-		$.post(url, { 'rating': value }, function(data){ disc_rat_data(data); } ); }
-	});
 
+$(document).ready(function () {
+    $(".redhearthover").hover(function () {
+        $(this).attr('src', '/static/images/heart_black.png');
+    }, function () {
+        $(this).attr('src', '/static/images/heart_red.png');
+    });
+    $(".blackhearthover").hover(function () {
+        $(this).attr('src', '/static/images/heart_red.png');
+    }, function () {
+        $(this).attr('src', '/static/images/heart_black.png');
+    });
+    $('.ratingstar').rating({
+        callback: function (value, link) {
+            $.post(url, {
+                'rating': value
+            }, function (data) {
+                disc_rat_data(data);
+            });
+        }
+    }); 
 });
 
-$(document).ready(function(){
-$(‘img’).css(‘background’, ‘transparent url(../images/ajax-loading.gif) no-repeat center center’)
-$(‘img’).load(function(){$(this).css(‘background’,”);});
-});
 
-function disc_rat_data(data){
-switch(data)
-	{
-	case 'no-user':
-		$.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", { header: 'Error' });
-		break;
-	case 'Vote recorded.':
-		$.jGrowl("Su voto ha sido guardado"); 
-		break;
-	case 'Vote changed.':
-		$.jGrowl("Su voto ha sido cambiado"); 
-		break;
-	}
+function disc_rat_data(data) {
+    switch (data) {
+    case 'no-user':
+        $.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", {
+            header: 'Error'
+        });
+        break;
+    case 'Vote recorded.':
+        $.jGrowl("Su voto ha sido guardado");
+        break;
+    case 'Vote changed.':
+        $.jGrowl("Su voto ha sido cambiado");
+        break;
+    }
 }
 
-function disc_fav_data(data){
-switch(data)
-	{
-	case 'yes':
-		$("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="redhearthover" src="/static/images/heart_red.png"></a>');
-                $.jGrowl("Has agregado esta serie como favorita");
-		break;
-	case 'no':
-		var html = 
-		$("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="blackhearthover" src="/static/images/heart_black.png"></a>');
-                $.jGrowl("Has quitado esta serie de tus favoritas");
-		break;
-	case 'no-user':
-		$.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", { header: 'Error' });
-		break;
-	}
+function disc_fav_data(data) {
+    switch (data) {
+    case 'yes':
+        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="redhearthover" src="/static/images/heart_red.png"></a>');
+        $.jGrowl("Has agregado esta serie como favorita");
+        break;
+    case 'no':
+        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="blackhearthover" src="/static/images/heart_black.png"></a>');
+        $.jGrowl("Has quitado esta serie de tus favoritas");
+        break;
+    case 'no-user':
+        $.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", {
+            header: 'Error'
+        });
+        break;
+    }
 }
 
 function favorite() {
-	var imgsrc = $("#favorite img").attr('src') ; 
-	if ( imgsrc == "/static/images/heart_black.png") 
-	{ 
-		decision = "yes"; 
-	} else if (imgsrc == "/static/images/heart_red.png") 
-	{ 
-		decision = "no";
-	}
-	console.log(decision);
-	$('#favorite').html('<img src="/static/images/ajax-loading.gif">');
-	if (decision == "yes") {
-		$.post(url, { 'favorite': "favorite" },	function(data){ disc_fav_data(data); })
-	} else if (decision == "no"){
-		$.post(url, { 'no-favorite': "no-favorite" }, function(data){ disc_fav_data(data); })
-	} 
+    var imgsrc = $("#favorite img").attr('src');
+    if (imgsrc == "/static/images/heart_black.png") {
+        decision = "yes";
+    } else if (imgsrc == "/static/images/heart_red.png") {
+        decision = "no";
+    }
+    console.log(decision);
+    $('#favorite').html('<img src="/static/images/ajax-loading.gif">');
+    if (decision == "yes") {
+        $.post(url, {
+            'favorite': "favorite"
+        }, function (data) {
+            disc_fav_data(data);
+        })
+    } else if (decision == "no") {
+        $.post(url, {
+            'no-favorite': "no-favorite"
+        }, function (data) {
+            disc_fav_data(data);
+        })
+    }
 }
 
 </script>
@@ -150,22 +155,25 @@ function favorite() {
 	    {% endif %}
 	</div>
 	<div class="hr dotted clearfix">&nbsp;</div>
-	<!-- DESCRIPTION -->
-	<p class="clearfix"> {{ serie.description }}</p>
 	<!-- SEASONS -->
 	<h2><span>{% trans "Temporadas" %}</span></h2>
 	{% for season in season_list %}
 		<a class="portfolio_item float alpha" href="{{ season.get_absolute_url }}">
+		<div class="preload" style="width:120px; height:170px">
 		{% if season.images.all.0 %} {% thumbnail season.images.all.0.src "180x160" as img_season %} 
-			<img src="{{ img_season.url }}" alt=""/>{% endthumbnail %}
+			<img class="prel" src="{{ img_season.url }}" alt="{{serie.name}} - {{season.season}}"/>{% endthumbnail %}
 		{% else %}
 			{% if image %}{% thumbnail image "180x160" as img_serie %}
-			<img src="{{ img_serie.url }}" />{% endthumbnail %}
+			<img class="prel" src="{{ img_serie.url }}" />{% endthumbnail %}
 			{% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" width=110> </div>
 			{% endif %}
 		{% endif %}
-		<p class="season">{% trans "Temporada" %} {% if season.season == 0 %}Especiales{%else%} {{ season.season }}{%endif %}</p> 
+		</div>
+		<p class="season">{% trans "Temporada" %} {% if season.season == 0 %}Esp{%else%} {{ season.season }}{%endif %}</p> 
 	</a>{% endfor %}
+	<div class="hr clearfix">&nbsp;</div>
+	<!-- DESCRIPTION -->
+	<p class="clearfix"> {{ serie.description }}</p>
 	<div class="hr clearfix">&nbsp;</div>
 	<!-- ACTORS -->
 	<h2>{% trans "Actores" %}</h2>

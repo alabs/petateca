@@ -1,17 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
-{% load extract_domain %}
-{% load voting_tags %}
-{% load links_voting %}
 {% load message_box %}
 {% block title %}{{serie.name|title}} - {% trans "Temporada" %} {{ season.season }}{% endblock %}
-{% block extrastyle %}   
-    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />
-    <link rel="stylesheet" href="/static/css/queryLoader.css" type="text/css" />{% endblock %}
 {% block extrahead %}
-    <script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
-    <script type="text/javascript" src="/static/js/queryLoader.js"></script>
     <script>
 $(document).ready(function(){
 	$(".add_link").colorbox({iframe:true, innerWidth:555, innerHeight:324});

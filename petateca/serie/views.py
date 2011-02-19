@@ -1,22 +1,26 @@
 # pylint: disable-msg=E1102
-from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.core import serializers
 from django.core.paginator import InvalidPage, EmptyPage
 from django.http import HttpResponse
-from django.core import serializers
 from django.shortcuts import get_object_or_404
+from django.utils import simplejson
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
+
 from djangoratings.views import AddRatingView
-from decorators import render_to
-from lib.namepaginator import NamePaginator
+from voting.models import Vote
+
 from serie.forms import LinkForm
 from serie.models import Genre, Network, Link, Languages
 from serie.models import Serie, Episode, Actor, Role, Season
-from voting.models import Vote
-from django.utils import simplejson
+
+from datetime import datetime
+from lib.namepaginator import NamePaginator
+from decorators import render_to
 
 
 @render_to('serie/get_serie.html')
@@ -38,6 +42,35 @@ def get_serie(request, serie_slug):
     except:
         favorite_status = 'no'
     serie_title = serie.name.title()
+    # preparamos a los actores en un dict
+#    actors = []
+#    for actor in serie.actors.select_related().all():
+#        a = {}
+#        try:
+#            a.update({ 'name': actor.name })
+#            a.update({ 'url': actor.get_absolute_url() })
+#            a.update({ 'image': actor.images.get().src })
+#            for role in actor.role_set.all():
+#                r = []
+#                r.append(role.role)
+#            a.update({ 'roles': r })
+#            actors.append(a)
+#        except:
+#            pass
+#    seasons = []
+#    for season in serie.season.select_related().all().order_by('season'):
+#        s = {}
+#        s.update({ 'season': season.season })
+#        s.update({ 'url': season.get_absolute_url() })
+#        try:
+#            season_img = season.images.all()[0].src
+#        except:
+#            try:
+#                season_img = img_src
+#            except: 
+#                season_img = None
+#        s.update({ 'image': season_img })
+#        seasons.append(s)
     # Preparamos serie_info con la serie, titulo, imagenes, episodios...
     serie_info = {
         'serie': serie,
@@ -109,6 +142,7 @@ def get_season(request, serie_slug, season):
         return season_info
 
 
+@csrf_protect
 @render_to('serie/get_episode.html')
 def get_episode(request, serie_slug, season, episode):
     ''' Get the episode itsef ''' 
@@ -123,6 +157,7 @@ def get_episode(request, serie_slug, season, episode):
         'serie': serie,
         'episode': episode,
         'season': season,
+        'link_list': episode.links.all(),
     }
     if request.method == 'GET':
         return episode_info
@@ -138,6 +173,9 @@ def get_episode(request, serie_slug, season, episode):
             Vote.objects.record_vote(link, user, +1)
         elif request.POST['vote'] == 'downvote':
             Vote.objects.record_vote(link, user, -1)
+        if request.is_ajax():
+            votes = Vote.objects.get_score(link)
+            return HttpResponse(simplejson.dumps(votes), mimetype='application/json')
         episode_info.update({
             'message': 'Vote recorded',
         })
@@ -287,46 +325,84 @@ def add_link(request, serie_slug, season, episode):
         'episode': episode,
         'season': season,
     }
+    # Si es para editar, devolvemos la instancia del link ya existente ;)
+    if request.method == 'GET' and request.GET.get('edit') and request.GET.get('linkid'):
+        linkid = request.GET.get('linkid')
+        link = Link.objects.get(pk=linkid)
+        if request.user.username == link.user:
+            form = LinkForm(instance=link) 
+            link_info.update({ 'form': form, 'edit': 'yes', 'link': link, })
+            return link_info
+    # Este es el formulario inicial, si el request.method es GET
+    # pre-populamos con el episodio, que eso ya lo tenemos de la URL
+    if request.method == 'GET':
+        form = LinkForm(initial={ 'episode':episode }) 
+        link_info.update({ 'form': form, })
+        return link_info
+    # Cuando se envia el formulario...
     if request.method == 'POST':
         # Capturamos lo que nos pasa, agregamos el episode
         # fecha de publicacion y usuario que hace la peticion
         data = {
-            'url': request.POST['url'],
-            'audio_lang': request.POST['audio_lang'],
-            'subtitle': request.POST['subtitle'],
-            'user': request.user.username,
-            'episode': episode.pk,
-            'pub_date': datetime.now(),
-        }
+            'url': request.POST['url'], 
+            'audio_lang': request.POST['audio_lang'], 
+            'subtitle': request.POST['subtitle'], 
+            'user': request.user.username, 
+            'episode': episode.pk, 
+            'pub_date': datetime.now(), 
+        } 
         form = LinkForm(data)
         link_info.update({'form': form})
         if form.is_valid():
-            if not data['url'].startswith('http://'):
+            if not form.cleaned_data['url'].startswith('http://'):  # TODO: agregar magnet/ed2k, otros URIs
                 link_info.update({ 'message': 'URL Invalida',})
                 return link_info
             # Audio Lang, Subtitle y Episode hay que pasarlos como instancias
             # Episode ya lo tenemos, vamos a buscar audio_lang
             lang = Languages.objects.get(pk=data['audio_lang'])
-            link = Link(
-                url=data['url'],
-                audio_lang=lang,
-                user=data['user'],
-                episode=episode,
-                pub_date=data['pub_date'],
-            )
-            # En caso de tener subtitulos, los tratamos
-            if data['subtitle']:
-                subt = Languages.objects.get(pk=data['subtitle'])
-                link.subtitle = subt
-            link.save()
-            link_info.update({ 'message': 'Gracias',})
-            return link_info
+            # si en el POST encontramos el edit, pues esta editando :S
+            if request.GET.get('edit'):
+                print "editando un link existente"
+                # capturamos el link q esta editando y agregamos las modificaciones
+                link = Link.objects.get(pk=request.GET.get('linkid'))
+                link.url=form.cleaned_data['url']
+                link.audio_lang=lang
+        ##If request.user.username == link.user:
+        ##    form = LinkForm(instance=link) 
+        ##    link_info.update({ 'form': form, 'edit': 'yes', })
+        ##    return link_info
+                link.user=form.cleaned_data['user']
+                link.episode=episode
+                link.pub_date=form.cleaned_data['pub_date']
+                if form.cleaned_data['subtitle']:
+                    subt = Languages.objects.get(pk=data['subtitle'])
+                    link.subtitle = subt
+                link.save()
+                link_info.update({ 'message': 'Gracias',})
+                return link_info
+            # sino, es un link nuevo
+            else:
+                link = Link(
+                    url=form.cleaned_data['url'],
+                    audio_lang=lang,
+                    user=form.cleaned_data['user'],
+                    episode=episode,
+                    pub_date=form.cleaned_data['pub_date'],
+                )
+                if form.cleaned_data['subtitle']:
+                    subt = Languages.objects.get(pk=data['subtitle'])
+                    link.subtitle = subt
+                link.save()
+                link_info.update({ 'message': 'Gracias',})
+                return link_info
         else:
             link_info.update({ 'message': 'Error',})
             return link_info
-    else:
-        # Este es el formulario inicial, si el request.method es GET
-        # pre-populamos con el episodio, que eso ya lo tenemos de la URL
-        form = LinkForm(initial={'episode':episode}) 
-        link_info.update({'form': form,})
-    return link_info
+
+
+
+@render_to('serie/sneak_links.html')
+def sneak_links(request):
+    last_links = Link.objects.order_by('-pub_date')[:30]
+    return { 'last_links' : last_links }
+

@@ -33,7 +33,7 @@
 	<script type="text/javascript" src="/static/js/jquery.jgrowl.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.rating.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.roundabout-1.0.min.js"></script> 
-	<script type="text/javascript" src="/static/js/popup.js"></script>{% block extrahead %}{% endblock %}
+	{% block extrahead %}{% endblock %}
 	<script type="text/javascript" src="/static/js/petateca.js"></script>
 	<script>
 		{% if initial_message %}
@@ -91,5 +91,8 @@
 
 		</p>
 	</div>
+<noscript>
+        <div id="noscript-warning"> {{SITE_NAME}} funciona mejor con JavaScript activado.</div>
+</noscript>    
 </body>
 </html>

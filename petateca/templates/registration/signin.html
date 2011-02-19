@@ -1,21 +1,66 @@
 {% extends "base_stripped.html" %}
-{% load message_box %}
-{% block title %}Login{% endblock %}
+{% block title %}LiberTeca: la bilioteca del siglo XXI{% endblock %}
+{% block extrastyle %}
+	<style type="text/css"> 
+		body { background-color: #fff; color: #eeeeee; text-align: center; font-family: arial, sans-serif; }
+		div.dialog {
+			width: 50em;
+			padding: 0 4em;
+			margin: 4em auto 0 auto;
+			border: 1px solid #ccc;
+			border-right-color: #b6e19f;
+			border-bottom-color: #b6e19f;
+			background-color: #717171;
+			font-size: 120%;
+		}
+		h1 { font-size: 130%; color: #fff; line-height: 1.5em; }
+	</style> 
+{% endblock %}
+{% block extrahead %}
+<script>
+$(document).ready(function () {
+        var msg = $(".errorlist li").text();
+	if (msg){
+		$(".errorlist li").empty();
+		$.jGrowl(msg, { sticky: true });
+	}
+});
+</script>
+{% endblock %}
 {% block contents %}
-{% if request.user.is_authenticated %}
-	<h2 class="grid_12 caption clearfix">You're already <span>logged in</span>! Go watch some <a href="/series">series</a></h2>
-{% else %}
-<h3>login</h3>
-<div class="hr dotted clearfix">&nbsp;</div>
-<!-- LOGIN form -->
-<form method="post" action="." id="login_form">
-	<ul>						
-        {{ form.as_ul }}
-{% if form.errors %} {% with form as qq %} {% for error_name,desc in qq.items %}{% message_box "{{ error_name }}: {{ desc }}" %} {% endfor %} {% endwith %} {% endif %}
-		<div id="button">
-		<input type='submit' id='send_message' class="button" value='login' />
-		</div>
-	</ul> 
-</form>  
-{% endif %}
+<div class="dialog"> 
+	<br/>
+    <img src="/static/images/logo.png" alt="liberteca" />
+    
+    <p> 
+	<b>LiberTeca</b> es la biblioteca del siglo XXI. Aunque en principio solo tengamos series, proximamente tendremos libros, peliculas, musica, y todo lo que puedes encontrar en la biblioteca de tu barrio: <b>sin coste</b>, <b>sin publicidad</b>, y lo mejor de todo, <b>sin moverte de tu sofa</b>. 
+    </p> 
+	<div class="hr dotted clearfix">&nbsp;</div>
+	<!-- LOGIN form -->
+	<form method="post" action="." id="signin_form">
+		<ul>						
+		{{ form.as_ul }}
+			<div id="button">
+			<input type='submit' id='send_message' class="button" value='iniciar sesión' />
+			</div>
+		</ul> 
+	</form>  
+	<div class="hr dotted clearfix">&nbsp;</div>
+    <p> 
+	<ul>
+		<li>Puedes <b>votar, comentar y valorar</b> tanto las series como los enlaces, asi como <b>agregar nuevos enlaces</b>.
+		<li>Proximamente <b>liberaremos el codigo</b> con el que esta hecha la web para que puedas modificarla y mejorarla. 
+		<li>Tendremos una <b>API</b> para que puedas hacer otras webs o servicios para la plataforma que quieras. 
+		<li>Daremos de una forma sencilla nuestra <b>base de datos con todos los enlaces</b> que tenemos, porque sabemos que estos no nos pertenecen.
+	</ul>
+    </p> 
+    <p>
+	Ahora mismo y por un tiempo funcionara bajo un sistema de <b>invitaciones</b> para poder ir creciendo de a poco (y creando el buzz xD), puedes conseguir tu invitación a través de nuestro <b>Twitter</b>.
+    </p>
+        
+<p style="text-align:right;"><i>Omnia Sunt Communia</i> -- <b>Equipo de LiberTeca</b></p>
+</div>
+<br />
+<br />
+<br />
 {% endblock %}

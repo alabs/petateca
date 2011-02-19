@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load message_box %}
+{% load extract_domain %}
+{% block extrahead %}
+<meta http-equiv="refresh" content="30" />
+{% endblock %}
+{% block title %}Ultimos Links Añadidos{% endblock %}
+{% block contents %}
+<table id="links" style="width:100%">
+    <tr>
+        <td> Hora </td>
+        <td> Link </td>
+        <td> Serie </td>
+        <td> Temporada </td>
+        <td> Episodio </td>
+    </tr>
+{% for link in last_links %}
+    <tr>
+        <td>{{ link.pub_date }}</td> 
+        <td><a href="{{ link.url }} ">{{ link.url|extract_domain }} </a></td> 
+        <td><a href="{{ link.episode.season.serie.get_absolute_url }}"> {{ link.episode.season.serie }}</a></td> 
+        <td><a href="{{ link.episode.season.get_absolute_url }}">{{ link.episode.season.season }}</a></td> 
+        <td><a href="{{ link.episode.get_absolute_url }}">{{ link.episode.episode }}</a></td> 
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

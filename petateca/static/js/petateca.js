@@ -9,6 +9,15 @@ $(document).ready(function(){
         $('.ratingstar').rating({ callback: function(value, link){
                 $.post(url, { 'rating': value }, function(data){ disc_rat_data(data); } ); }
         });
+
+
+    /*$('.prel').each(function () {
+        $(this).hide();
+        $(this).load(function () {
+            $(this).width($(this).parent().width()).height($(this).parent().height());
+            $(this).fadeIn("slow");
+        });
+    });*/
 });
 
 

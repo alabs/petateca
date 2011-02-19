@@ -157,14 +157,15 @@ class Command(BaseCommand):
 
     def normalize_lang(self, lang_code):
         langs = {
-            "spanish": ("es", "es"),
-            "japanese": ("jp", None),
-            "latin": ("es", None),
-            "english": ("en", None),
+            "ca": ("ca", None),
+            "en": ("en", None),
+            "es": ("es", None),
             "es-es": ("es", "es"),
             "jp": ("jp", None),
-            "es": ("es", None),
-            "en": ("en", None),
+            "english": ("en", None),
+            "japanese": ("jp", None),
+            "latin": ("es", None),
+            "spanish": ("es", "es"),
         }
         if not lang_code:
             return None
@@ -254,7 +255,7 @@ class Command(BaseCommand):
         db_season.save()
 
         # seasonwide?
-        if reg_en['_banners']['season']['season']:
+        try:
             season_banners = reg_en['_banners']['season']['season']
             for img_banner in season_banners:
                 if int(ntemp) == int(season_banners[img_banner]['season']):
@@ -266,7 +267,10 @@ class Command(BaseCommand):
                     file_content = ContentFile(open(img[0]).read())
                     db_img.src.save(os.path.basename(img_url), file_content)
                     db_img.save()
-                    return db_season
+        except:
+            pass
+        finally:
+            return db_season
 
     
 #            if actor["image"]:
