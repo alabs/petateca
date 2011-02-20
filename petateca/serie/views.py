@@ -33,7 +33,7 @@ def get_serie(request, serie_slug):
     img_src = imgs[0].src if imgs else None
     #episodes = serie.episodes.all().order_by('season')
     # Hacemos un listado de las temporadas:
-    seasons = Season.objects.filter(serie=serie).order_by('season')
+    seasons = Season.objects.select_related('poster', 'serie').filter(serie=serie).order_by('season')
     score = int(round(serie.rating.get_rating()))
     # Vemos si el usuario tiene la serie como favorita
     try:
@@ -52,7 +52,7 @@ def get_serie(request, serie_slug):
             'season_list': seasons,
             'score': score,
             'favorite': favorite_status,
-            'roles': Role.objects.select_related().filter(serie = serie),
+            'roles': Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie),
         }
         return serie_info
     # si es POST trata el rating:

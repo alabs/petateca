@@ -173,7 +173,7 @@ $(document).ready(function(){
 	{% for season in season_list %}
 		<a class="portfolio_item float alpha" href="{{ season.get_absolute_url }}">
 		<div class="preload" style="width:120px; height:170px">
-		{% if season.images.all.0 %} {% thumbnail season.images.all.0.src "180x160" as img_season %} 
+		{% if season.poster %} {% thumbnail season.poster.src "180x160" as img_season %} 
 			<img class="prel" src="{{ img_season.url }}" alt="{{serie.name}} - {{season.season}}"/>{% endthumbnail %}
 		{% else %}
 			{% if image %}{% thumbnail image "180x160" as img_serie %}
@@ -194,13 +194,12 @@ $(document).ready(function(){
 	{% for role in roles %}
 		{% if role.role %}
             <a class="portfolio_item float alpha actor" href="{{ role.actor.get_absolute_url }}">
-		       {% if role.actor.images.get %}{% thumbnail role.actor.images.get.src "150x150" as img_actor %}
+		       {% if role.actor.poster %}{% thumbnail role.actor.poster.src "150x150" as img_actor %}
 			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
 			{% else %}<img id="actor_unknown" width="100"  src="/static/images/image_not_available.png">
 			{% endif %}
 
-			<div class="meta">{% for role in role.actor.role_set.all %}<b>{{role.role}}</b><br />{% endfor %}
-			{{ role.actor.name }}</div>
+			<div class="meta"><b>{{role.role}}</b><br /> {{ role.actor.name }}</div>
 			</a>
 		{% endif %}
     {% endfor %}

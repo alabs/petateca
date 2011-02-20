@@ -6,6 +6,9 @@ from djangoratings.fields import RatingField
 from datetime import datetime
 from voting.models import Vote
 
+from django.db.models.signals import post_save, post_delete
+
+#XXX: poster deberia ser on_delete null en vez de cascade
 
 class Serie(models.Model):
     name = models.CharField(max_length=255)
@@ -22,6 +25,7 @@ class Serie(models.Model):
     description = models.TextField()
     finished = models.BooleanField(default=False, help_text=_('la serie ha finalizado?'))
     rating = RatingField(range=5, can_change_vote=True, help_text=_('puntuacion de estrellas'))
+    poster = models.OneToOneField('ImageSerie', related_name='poster_of', null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -55,6 +59,7 @@ class SerieAlias(models.Model):
 class Season(models.Model):
     serie = models.ForeignKey('Serie', related_name="season")
     season = models.IntegerField(help_text=_('numero de temporada para la serie'))
+    poster = models.OneToOneField('ImageSeason', related_name='poster_of', null=True, blank=True)
 
     def get_next_season(self):
         next_season = self.season + 1
@@ -124,6 +129,7 @@ class Episode(models.Model):
     description = models.TextField()
     created_time = models.DateField(auto_now_add=True)
     modified_time = models.DateField(auto_now=True)
+    poster = models.OneToOneField('ImageEpisode', related_name='poster_of', null=True, blank=True)
 
     def get_next_episode(self):
         next_epi = self.episode + 1
@@ -245,6 +251,7 @@ class Genre(models.Model):
 class Actor(models.Model):
     name = models.CharField(max_length=100)
     slug_name = models.SlugField(unique=True, help_text=_('nombre en URL'))
+    poster = models.OneToOneField('ImageActor', related_name='poster_of', null=True, blank=True)
 
     def save(self, force_insert=False, force_update=False, using=None):
         ''' When is saved, the name is converted to slug - aka URL''' 
@@ -295,3 +302,38 @@ class ImageEpisode(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+poster_dispatch = {
+    ImageSerie: "serie",
+    ImageSeason: "season",
+    ImageEpisode: "episode",
+    ImageActor: "actor",
+}
+
+def update_poster(sender, instance, **kwargs):
+    obj = getattr(instance, poster_dispatch[sender])
+    if instance.is_poster:
+        obj.poster = instance
+    else:
+        other_poster = sender.objects.filter(**{poster_dispatch[sender]:obj, "is_poster":True}).all()
+        if other_poster:
+            obj.poster = other_poster[0]
+        else:
+            obj.poster = None
+    obj.save()
+
+def delete_poster(sender, instance, **kwargs):
+    obj = getattr(instance, poster_dispatch[sender])
+    other_poster = sender.objects.filter(**{poster_dispatch[sender]:obj, "is_poster":True}).all()
+    if other_poster:
+        obj.poster = other_poster[0]
+    else:
+        obj.poster = None
+    obj.save()
+
+
+for sender in poster_dispatch.keys():
+    post_save.connect(update_poster, sender=sender)
+    post_delete.connect(update_poster, sender=sender)
+
