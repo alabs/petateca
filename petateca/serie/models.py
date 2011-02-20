@@ -7,12 +7,6 @@ from datetime import datetime
 from voting.models import Vote
 
 
-class IsPosterManager(models.Manager):
-    ''' Get if an image is the poster '''
-    def get_is_poster(self):
-        return self.filter(is_poster=True)
-
-
 class Serie(models.Model):
     name = models.CharField(max_length=255)
     slug_name = models.SlugField(unique=True, help_text=_('nombre en la URL'))
@@ -93,7 +87,6 @@ class ImageSeason(models.Model):
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     season = models.ForeignKey("Season", related_name="images")
-    get_is_poster = IsPosterManager()
     objects = models.Manager()
 
     def __unicode__(self):
@@ -274,7 +267,6 @@ class ImageSerie(models.Model):
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     serie = models.ForeignKey("Serie", related_name="images")
-    get_is_poster = IsPosterManager()
     objects = models.Manager()
 
     def __unicode__(self):
@@ -287,7 +279,6 @@ class ImageActor(models.Model):
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     actor = models.ForeignKey("Actor", related_name="images")
-    get_is_poster = IsPosterManager()
     objects = models.Manager()
 
     def __unicode__(self):
@@ -300,7 +291,6 @@ class ImageEpisode(models.Model):
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     episode = models.ForeignKey("Episode", related_name="images")
-    get_is_poster = IsPosterManager()
     objects = models.Manager()
 
     def __unicode__(self):

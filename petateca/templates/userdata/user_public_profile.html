@@ -20,8 +20,8 @@
 	{{ series.count }}
 	  {% for serie in series %}
 	    <a href="{{ serie.get_absolute_url }}"> {{ serie.name }}
-	    {% if serie.images.get_is_poster.0.src %}
-		{% thumbnail serie.images.get_is_poster.0.src "100x100" as img_serie %}
+	    {% if serie.images.all.0.src %}
+		{% thumbnail serie.images.all.0.src "100x100" as img_serie %}
 		  <img src="{{ img_serie.url }}" />
 		{% endthumbnail %}
 	    {% else %}
@@ -41,8 +41,8 @@
 	Ha votado: {{rated_series.count}} 
 		{% for vote in rated_series %}
 	    <a href="{{ vote.content_object.get_absolute_url }}"> {{ vote.content_object.name|title }} - {{ vote.score }}
-	    {% if vote.content_object.images.get_is_poster.0.src %}
-		{% thumbnail vote.content_object.images.get_is_poster.0.src "100x100" as img_serie %}
+	    {% if vote.content_object.images.all.0.src %}
+		{% thumbnail vote.content_object.images.all.0.src "100x100" as img_serie %}
 		  <img src="{{ img_serie.url }}" />
 		{% endthumbnail %}
 	    {% else %}

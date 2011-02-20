@@ -8,8 +8,8 @@
 {% if series %}
   {% for serie in series %}
   <li><a href="{{ serie.get_absolute_url }}"> {{ serie.name }}
-    {% if serie.images.get_is_poster.0.src %}
-        {% thumbnail serie.images.get_is_poster.0.src "100x100" as img_serie %}
+    {% if serie.images.all.0.src %}
+        {% thumbnail serie.images.all.0.src "100x100" as img_serie %}
           <img src="{{ img_serie.url }}" />
         {% endthumbnail %}
     {% else %}

@@ -67,8 +67,8 @@
 						<span>{{ serie.name|title }}</span>
 					<div class="preload" style="width:200px; height:300px">
 					{% spaceless %}
-    					{% if serie.images.get_is_poster.0.src %}
-        					{% thumbnail serie.images.get_is_poster.0.src "300x300" as img_serie %}
+    					{% if serie.images.all.0.src %}
+        					{% thumbnail serie.images.all.0.src "300x300" as img_serie %}
           						<img class="prel" src="{{ img_serie.url }}" />
         					{% endthumbnail %}
     					{% else %}

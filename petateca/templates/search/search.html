@@ -20,8 +20,8 @@
             {% for result in page.object_list %}
                 <p>
 		<a href="{{ result.object.get_absolute_url }}" class="portfolio_item float alpha">
-			{% if result.object.images.get_is_poster.0.src %}
-			    {% thumbnail result.object.images.get_is_poster.0.src "300x200" as img_serie %}
+			{% if result.object.images.all.0.src %}
+			    {% thumbnail result.object.images.all.0.src "300x200" as img_serie %}
 			      <img src="{{ img_serie.url }}">
 			    {% endthumbnail %}
 			</p>
