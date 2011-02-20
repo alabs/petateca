@@ -11,13 +11,13 @@ $(document).ready(function(){
         });
 
 
-    /*$('.prel').each(function () {
+    $('.prel').each(function () {
         $(this).hide();
         $(this).load(function () {
             $(this).width($(this).parent().width()).height($(this).parent().height());
             $(this).fadeIn("slow");
         });
-    });*/
+    });
 });
 
 
