@@ -94,6 +94,7 @@ class ImageSeason(models.Model):
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     season = models.ForeignKey("Season", related_name="images")
     get_is_poster = IsPosterManager()
+    objects = models.Manager()
 
     def __unicode__(self):
         return self.title
@@ -274,6 +275,7 @@ class ImageSerie(models.Model):
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     serie = models.ForeignKey("Serie", related_name="images")
     get_is_poster = IsPosterManager()
+    objects = models.Manager()
 
     def __unicode__(self):
         return self.title
@@ -286,6 +288,7 @@ class ImageActor(models.Model):
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     actor = models.ForeignKey("Actor", related_name="images")
     get_is_poster = IsPosterManager()
+    objects = models.Manager()
 
     def __unicode__(self):
         return self.title
@@ -298,6 +301,7 @@ class ImageEpisode(models.Model):
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     episode = models.ForeignKey("Episode", related_name="images")
     get_is_poster = IsPosterManager()
+    objects = models.Manager()
 
     def __unicode__(self):
         return self.title

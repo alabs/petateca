@@ -191,19 +191,19 @@ $(document).ready(function(){
 	<!-- ACTORS -->
 	<h2>{% trans "Actores" %}</h2>
 	<div class="hr dotted clearfix">&nbsp;</div>
-	{% for actor in serie.actors.all %}
-		{% if actor.role_set.all.0.role %}
-			<a class="portfolio_item float alpha actor" href="{{ actor.get_absolute_url }}" alt="{% for role in actor.role_set.all %}<b>{{role.role}}</b><br />{% endfor %}">
-		       {% if actor.images.get %}{% thumbnail actor.images.get.src "150x150" as img_actor %}
+	{% for role in roles %}
+		{% if role.role %}
+            <a class="portfolio_item float alpha actor" href="{{ role.actor.get_absolute_url }}">
+		       {% if role.actor.images.get %}{% thumbnail role.actor.images.get.src "150x150" as img_actor %}
 			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
 			{% else %}<img id="actor_unknown" width="100"  src="/static/images/image_not_available.png">
 			{% endif %}
 
-			<div class="meta">{% for role in actor.role_set.all %}<b>{{role.role}}</b><br />{% endfor %}
-			{{ actor.name }}</div>
+			<div class="meta">{% for role in role.actor.role_set.all %}<b>{{role.role}}</b><br />{% endfor %}
+			{{ role.actor.name }}</div>
 			</a>
 		{% endif %}
-	{% endfor %}
+    {% endfor %}
 </div>
 
 <!-- COLUMN 3 -->

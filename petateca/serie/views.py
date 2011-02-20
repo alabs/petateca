@@ -16,7 +16,7 @@ from voting.models import Vote
 
 from serie.forms import LinkForm
 from serie.models import Genre, Network, Link, Languages
-from serie.models import Serie, Episode, Actor, Role, Season
+from serie.models import Serie, Episode, Actor, Role, Season, ImageSerie, ImageActor
 
 from datetime import datetime
 from lib.namepaginator import NamePaginator
@@ -28,12 +28,12 @@ from decorators import render_to
 def get_serie(request, serie_slug):
     ''' Request a serie, returns images and episodes,
     also treats star-rating, courtesy of django-ratings'''
-    serie = get_object_or_404(Serie, slug_name=serie_slug)
-    imgs = serie.images.filter(is_poster=True)
+    serie = get_object_or_404(Serie.objects.select_related(), slug_name=serie_slug)
+    imgs = ImageSerie.objects.filter(is_poster=True, serie=serie)
     img_src = imgs[0].src if imgs else None
     #episodes = serie.episodes.all().order_by('season')
     # Hacemos un listado de las temporadas:
-    seasons = serie.season.all().order_by('season')
+    seasons = Season.objects.filter(serie=serie).order_by('season')
     score = int(round(serie.rating.get_rating()))
     # Vemos si el usuario tiene la serie como favorita
     try:
@@ -42,46 +42,18 @@ def get_serie(request, serie_slug):
     except:
         favorite_status = 'no'
     serie_title = serie.name.title()
-    # preparamos a los actores en un dict
-#    actors = []
-#    for actor in serie.actors.select_related().all():
-#        a = {}
-#        try:
-#            a.update({ 'name': actor.name })
-#            a.update({ 'url': actor.get_absolute_url() })
-#            a.update({ 'image': actor.images.get().src })
-#            for role in actor.role_set.all():
-#                r = []
-#                r.append(role.role)
-#            a.update({ 'roles': r })
-#            actors.append(a)
-#        except:
-#            pass
-#    seasons = []
-#    for season in serie.season.select_related().all().order_by('season'):
-#        s = {}
-#        s.update({ 'season': season.season })
-#        s.update({ 'url': season.get_absolute_url() })
-#        try:
-#            season_img = season.images.all()[0].src
-#        except:
-#            try:
-#                season_img = img_src
-#            except: 
-#                season_img = None
-#        s.update({ 'image': season_img })
-#        seasons.append(s)
-    # Preparamos serie_info con la serie, titulo, imagenes, episodios...
-    serie_info = {
-        'serie': serie,
-        'title': serie_title,
-        'image': img_src,
-        'season_list': seasons,
-        'score': score,
-        'favorite': favorite_status,
-    }
     # Si el metodo es GET devuelve serie_info asi nomas
     if request.method == 'GET':
+        # Preparamos serie_info con la serie, titulo, imagenes, episodios...
+        serie_info = {
+            'serie': serie,
+            'title': serie_title,
+            'image': img_src,
+            'season_list': seasons,
+            'score': score,
+            'favorite': favorite_status,
+            'roles': Role.objects.select_related().filter(serie = serie),
+        }
         return serie_info
     # si es POST trata el rating:
     if request.method == 'POST' and request.is_ajax():
