@@ -151,8 +151,8 @@ ol { padding: 0 0 0 5px }
     text-transform: none;
     text-shadow: none;
 }
-.right { float: right }
-.left { float: left }
+.right { float: right; text-align:right; }
+.left { float: left; text-align:left; }
 .img_left {
     float: left;
     margin: 10px 20px 10px 0;

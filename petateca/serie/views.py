@@ -95,7 +95,6 @@ def get_serie(request, serie_slug):
                 serie.favorite_of.remove(user.profile)
                 return HttpResponse(simplejson.dumps('no'), mimetype='application/json')
             if request.POST.has_key('rating'):
-                # Si el usuario esta autenticado, prepara el voto
                 content_type = ContentType.objects.get(app_label='serie', name='serie')
                 params = {
                     'content_type_id': content_type.id,

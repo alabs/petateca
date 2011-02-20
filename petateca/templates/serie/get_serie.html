@@ -22,7 +22,8 @@ $(document).ready(function () {
     $('.ratingstar').rating({
         callback: function (value, link) {
             $.post(url, {
-                'rating': value
+                'rating': value,
+                'csrfmiddlewaretoken': getCookie('csrftoken'),
             }, function (data) {
                 disc_rat_data(data);
             });
@@ -76,22 +77,36 @@ function favorite() {
     $('#favorite').html('<img src="/static/images/ajax-loading.gif">');
     if (decision == "yes") {
         $.post(url, {
-            'favorite': "favorite"
+            'favorite': "favorite",
+            'csrfmiddlewaretoken': getCookie('csrftoken'),
         }, function (data) {
             disc_fav_data(data);
         })
     } else if (decision == "no") {
         $.post(url, {
-            'no-favorite': "no-favorite"
+            'no-favorite': "no-favorite",
+            'csrfmiddlewaretoken': getCookie('csrftoken'),
         }, function (data) {
             disc_fav_data(data);
         })
     }
 }
 
+$(document).ready(function(){
+        //create a bubble popup for each DOM element with class attribute as "text", "button" or "link" and LI, P, IMG elements.
+        $('.actor').CreateBubblePopup({ position : 'top', align    : 'center',
+                                    innerHtml: 'Take a look to the HTML source of this page <br /> ',
+                                    innerHtmlStyle: { color:'#FFFFFF', 'text-align':'center' },
+                                    themeName:  'all-black', themePath:  '/static/images/jquerybubblepopup-theme'
+                                });
+});
+
+
 </script>
 {% endblock %}
 {% block contents %}
+<!-- BREADCRUMB -->
+<a href="{% url serie-index %}" class="button">Series</a> > <a href="#" class="button">{{ serie.name|title }}</a>
 <!-- COLUMN 1 -->
 <div class="grid_3">
 	<!-- IMAGE -->
@@ -180,16 +195,15 @@ function favorite() {
 	<div class="hr dotted clearfix">&nbsp;</div>
 	{% for actor in serie.actors.all %}
 		{% if actor.role_set.all.0.role %}
-		<div class="actor" style="margin-left:auto; margin-right:auto;">
-			<a class="portfolio_item float alpha actor" href="{{ actor.get_absolute_url }}">
+			<a class="portfolio_item float alpha actor" href="{{ actor.get_absolute_url }}" alt="{% for role in actor.role_set.all %}<b>{{role.role}}</b><br />{% endfor %}">
 		       {% if actor.images.get %}{% thumbnail actor.images.get.src "150x150" as img_actor %}
 			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
 			{% else %}<img id="actor_unknown" width="100"  src="/static/images/image_not_available.png">
 			{% endif %}
+
 			<div class="meta">{% for role in actor.role_set.all %}<b>{{role.role}}</b><br />{% endfor %}
 			{{ actor.name }}</div>
 			</a>
-		</div>
 		{% endif %}
 	{% endfor %}
 </div>
