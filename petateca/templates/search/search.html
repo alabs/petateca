@@ -2,6 +2,16 @@
 {% load thumbnail %}
 {% load i18n %}
 {% block contents %}
+{% if query %}
+    {% if page.object_list|length == 1 %} 
+	<h2 class="grid_12 caption clearfix">
+    Encontrado un solo resultado, redireccionando a <a href="{{ page.object_list.0.object.get_absolute_url }}">{{ page.object_list.0.object.name }}</a>.
+    </h2>
+        <script>
+        window.location.replace("{{ page.object_list.0.object.get_absolute_url }}");
+        </script>
+    {% endif %}
+{% endif %}
 	<div id="wrapper" class="container_12 clearfix">
 	<h2 class="grid_12 caption clearfix">Search Results</h2>
 	<div class="pr grid_12 clearfix">&nbsp;</div>
