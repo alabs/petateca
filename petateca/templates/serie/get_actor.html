@@ -14,7 +14,7 @@
   {% endif %}
 
 </div>
-
+{% for role in actor.role_set.all %}
 <div class="grid_6">
     <a class="portfolio_item float alpha" href="{{ role.serie.get_absolute_url }}">
 	<span>{{role.role}} - {{role.serie|title}}</span>
@@ -26,6 +26,7 @@
     {% else %}
             <img src="/static/images/image_not_available.png" height=100> 
     {% endif %}
+{% endfor %}
 </div>
 
 {% endblock %}

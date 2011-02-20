@@ -186,8 +186,8 @@ function favorite() {
 			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
 			{% else %}<img id="actor_unknown" width="100"  src="/static/images/image_not_available.png">
 			{% endif %}
-			<div class="meta">{% for role in actor.role_set.all %}<b>{{role.role}}</b>{% endfor %}
-			<br/>{{ actor.name }}</div>
+			<div class="meta">{% for role in actor.role_set.all %}<b>{{role.role}}</b><br />{% endfor %}
+			{{ actor.name }}</div>
 			</a>
 		</div>
 		{% endif %}

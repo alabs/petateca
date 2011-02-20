@@ -788,7 +788,10 @@ p.error {
     width: 100%;
     z-index: 101;
 }
-
+.center{
+    text-align: center;
+    display: block;
+}
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {

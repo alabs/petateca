@@ -199,13 +199,11 @@ def list_user_recommendation(request):
 @render_to('serie/get_actor.html')
 def get_actor(request, slug_name):
     actor = get_object_or_404(Actor, slug_name=slug_name)
-    role = get_object_or_404(Role, actor=actor)
     imgs = actor.images.all()
     img_src = imgs[0].src if imgs else None
     return {
         'actor': actor,
         'title': actor.name,
-        'role': role,
         'image': img_src,
     }
 
