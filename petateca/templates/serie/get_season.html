@@ -93,8 +93,8 @@ function vote(linkid, direction) {
 </div>
 <!-- COLUMN 2 -->
 <div class="grid_3">
-	{% if episode.images.all.0.src %}
-		{% thumbnail episode.images.all.0.src "200x200" as img_epi %}
+	{% if episode.poster.src %}
+		{% thumbnail episode.poster.src "200x200" as img_epi %}
 		<img class="img_epi" src="{{ img_epi.url }}">
 		{% endthumbnail %}
 	{% else %}

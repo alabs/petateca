@@ -84,9 +84,16 @@ def get_serie(request, serie_slug):
 def get_season(request, serie_slug, season):
     ''' Get season, returns episode_list
     also handles link voting (courtesy of django-voting) '''
-    serie = Serie.objects.select_related().get(slug_name=serie_slug)
-    season = serie.season.select_related().get(season=season)
-    episode_list = season.episodes.select_related().order_by('episode')
+    #serie = Serie.objects.select_related().get(slug_name=serie_slug)
+    #season = serie.season.select_related().get(season=season)
+    #episode_list = season.episodes.select_related().order_by('episode')
+    episode_list = Episode.objects.select_related('poster', 'season', 'season__serie'). \
+                    filter(season__season=season, season__serie__slug_name=serie_slug).order_by('episode')
+    if episode_list:
+        season = episode_list[0].season
+    else:
+        season = get_object_or_404(Season.objects.select_related(), serie__slug_name=serie_slug, season=season)
+    serie = season.serie
     season_info = {
         'serie': serie,
         'episode_list': episode_list,
