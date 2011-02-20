@@ -792,6 +792,9 @@ p.error {
     text-align: center;
     display: block;
 }
+.prev_next{
+    margin: 1em;
+}
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {

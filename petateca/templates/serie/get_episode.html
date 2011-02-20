@@ -42,6 +42,11 @@ function vote(linkid, direction) {
     <a class="button" href="{{ serie.get_absolute_url }}">{{ serie.name|title }}</a>
     <a class="button" href="{{ season.get_absolute_url }}">Temporada {{ season.season }}</a> 
     <a class="button" href="{{ episode.get_absolute_url }}">Episodio {{ episode.episode }}</a>
+    <br/>
+    <div class="prev_next">
+        {% if episode.get_previous_episode %}<a class="button" href="{{ episode.get_previous_episode.get_absolute_url }}"><< Episodio {{ episode.get_previous_episode.episode }}</a>{% endif %}
+        {% if episode.get_next_episode %}<a class="button" href="{{ episode.get_next_episode.get_absolute_url }}">Episodio {{ episode.get_next_episode.episode }} >></a>{% endif %}
+    </div>
 </div>
 	<h2 class="grid_6 caption clearfix right">{{ episode.season.season }}x{{ episode.episode }} - {{ episode.title|title }} </h2>
 <div class="hr clearfix dotted">&nbsp;</div>

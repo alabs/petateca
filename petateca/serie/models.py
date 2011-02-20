@@ -62,6 +62,20 @@ class Season(models.Model):
     serie = models.ForeignKey('Serie', related_name="season")
     season = models.IntegerField(help_text=_('numero de temporada para la serie'))
 
+    def get_next_season(self):
+        next_season = self.season + 1
+        try: 
+            return Season.objects.get(season=next_season, serie=self.serie)
+        except:
+            return None
+
+    def get_previous_season(self):
+        prev_season = self.season - 1
+        try: 
+            return Season.objects.get(season=prev_season, serie=self.serie)
+        except:
+            return None
+
     def __unicode__(self):
         ''' Serie Name - Season '''
         return self.serie.name + ' - ' + str(self.season)
@@ -117,6 +131,20 @@ class Episode(models.Model):
     created_time = models.DateField(auto_now_add=True)
     modified_time = models.DateField(auto_now=True)
 
+    def get_next_episode(self):
+        next_epi = self.episode + 1
+        try: 
+            return Episode.objects.get(episode=next_epi, season=self.season)
+        except:
+            return None
+
+    def get_previous_episode(self):
+        prev_epi = self.episode - 1
+        try: 
+            return Episode.objects.get(episode=prev_epi, season=self.season)
+        except:
+            return None
+            
     def __unicode__(self):
         return self.title
 

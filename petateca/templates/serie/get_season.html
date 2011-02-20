@@ -64,6 +64,10 @@ function vote(linkid, direction) {
     <a class="button" href="{% url serie-index %}">Series</a>
     <a class="button" href="{{ serie.get_absolute_url }}">{{ serie.name|title }}</a>
     <a class="button" href="{{ season.get_absolute_url }}">Temporada {{ season.season }}</a> 
+    <div class="prev_next">
+        {% if season.get_previous_season %}<a class="button" href="{{ season.get_previous_season.get_absolute_url }}"><< Temporada {{ season.get_previous_season.season }}</a>{% endif %}
+        {% if season.get_next_season %}<a class="button" href="{{ season.get_next_season.get_absolute_url }}">Temporada {{ season.get_next_season.season }} >></a>{% endif %}
+    </div>
 </div>
 
 <!-- EPISODES MINI-LIST -->
