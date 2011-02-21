@@ -361,6 +361,10 @@ def serie_lookup(request, serie_id):
     if request.is_ajax(): 
         serie = Serie.objects.get(id=serie_id)
         result = '<h3>' + serie.name + '</h3>'
-        result += '<b>Cadena</b>:' + serie.network.name + '<br />'
+        genres = serie.genres.all()
+        genre_list = ''
+        for genre in genres: genre_list += genre.name + ', '
+        result += '<b>Genero</b>: ' + genre_list[:-2] + '<br />'
+        result += '<b>Cadena</b>: ' + serie.network.name + '<br /><br />'
         result += serie.description[:300] + '...'
         return HttpResponse(result)

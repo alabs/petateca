@@ -59,8 +59,9 @@ $(document).ready(function(){
         $('.serie').CreateBubblePopup({
                                         position: 'top',
                                         align: 'center',
+                                        width: '300',
                                         innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
-                                        innerHtmlStyle: { color:'#FFFFFF', 'text-align':'left' },
+                                        innerHtmlStyle: { color:'#FFFFFF', 'text-align':'left', 'font-size':'110%' },
                                         themeName: 'all-black',
                                         themePath: '/static/images/jquerybubblepopup-theme'
                                       });

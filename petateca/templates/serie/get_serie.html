@@ -9,16 +9,6 @@
 var url = "{{request.path }}";
 
 $(document).ready(function () {
-    $(".redhearthover").hover(function () {
-        $(this).attr('src', '/static/images/heart_black.png');
-    }, function () {
-        $(this).attr('src', '/static/images/heart_red.png');
-    });
-    $(".blackhearthover").hover(function () {
-        $(this).attr('src', '/static/images/heart_red.png');
-    }, function () {
-        $(this).attr('src', '/static/images/heart_black.png');
-    });
     $('.ratingstar').rating({
         callback: function (value, link) {
             $.post(url, {
@@ -51,11 +41,11 @@ function disc_rat_data(data) {
 function disc_fav_data(data) {
     switch (data) {
     case 'yes':
-        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="redhearthover" src="/static/images/heart_red.png"></a>');
+        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_red.png"></a>');
         $.jGrowl("Has agregado esta serie como favorita");
         break;
     case 'no':
-        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="blackhearthover" src="/static/images/heart_black.png"></a>');
+        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_black.png"></a>');
         $.jGrowl("Has quitado esta serie de tus favoritas");
         break;
     case 'no-user':
@@ -136,8 +126,6 @@ function favorite() {
 	<!-- BUTTONS -->
 		<p class="clearfix">
 		<a href="/series" class="button float">&lt;&lt; {% trans "Regresar a las Series" %}</a>
-		</p>
-		<p class="clearfix">
 		{% get_comment_count for serie as comment_count %}
 		<a href="#comments" class="button float">{{comment_count}} {% trans "Comentarios" %}</a>
 		</p>
@@ -150,10 +138,10 @@ function favorite() {
 	<!-- FAVORITE -->
 	<div id="favorite" class="right">
 	  {% if favorite == "no" %}
-		<a href="#" onclick="favorite();" id="favorite"><img class="blackhearthover" src="/static/images/heart_black.png"></a>
+		<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_black.png"></a>
 	  {% else %} 
 	  {% if favorite == "yes" %}
-		<a href="#" onclick="favorite();" id="favorite"><img class="redhearthover" src="/static/images/heart_red.png"></a>
+		<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_red.png"></a>
 	    {% endif %}
 	    {% endif %}
 	</div>
@@ -199,11 +187,11 @@ function favorite() {
 <div class="grid_1">
 </div>
 
-<div id="comments">
+<div>
 	{% if not comment_count == 0 %}
 	<div class="hr clearfix">&nbsp;</div>
 	<!-- COMMENTS -->
-	<h2>{% trans "Comentarios" %}</h2>
+	<h2><a name="comments">{% trans "Comentarios" %}</a></h2>
 	{% render_comment_list for serie %}
 	{% endif %}
 
