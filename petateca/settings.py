@@ -5,6 +5,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 SITE_NAME = 'PetaTeca'
 
 DEBUG = True
+SENTRY_TESTING = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -68,6 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'invitation.middleware.LoginRequiredMiddleware',
+    'sentry.client.middleware.Sentry404CatchMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
