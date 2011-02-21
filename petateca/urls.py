@@ -30,6 +30,8 @@ sitemaps = {
 urlpatterns = patterns('',
     (r'^$', 'views.index'),
 
+    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/images/favicon.ico'}),
+
     (r'^sentry/', include('sentry.urls')),
 
     (r'^serie/', include('serie.urls.obj')),
