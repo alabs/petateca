@@ -356,3 +356,11 @@ def sneak_links(request):
     last_links = Link.objects.order_by('-pub_date')[:30]
     return { 'last_links' : last_links }
 
+
+def serie_lookup(request, serie_id):
+    if request.is_ajax(): 
+        serie = Serie.objects.get(id=serie_id)
+        result = '<h3>' + serie.name + '</h3>'
+        result += '<b>Cadena</b>:' + serie.network.name + '<br />'
+        result += serie.description[:300] + '...'
+        return HttpResponse(result)

@@ -64,12 +64,11 @@
 			<!-- THUMBNAILS -->
 				{% for serie in page.object_list %}
     					<a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
-						<span>{{ serie.name|title }}</span>
 					<div class="preload" style="width:200px; height:300px">
 					{% spaceless %}
     					{% if serie.poster.src %}
         					{% thumbnail serie.poster.src "300x300" as img_serie %}
-          						<img class="prel" src="{{ img_serie.url }}" />
+          						<img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" />
         					{% endthumbnail %}
     					{% else %}
 						<img class="prel" src="/static/images/image_not_available.png" height="300" width="200" /> 
