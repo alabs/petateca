@@ -3,58 +3,6 @@
 {% load thumbnail %}
 {% load message_box %}
 {% block title %}{{serie.name|title}} - {% trans "Temporada" %} {{ season.season }}{% endblock %}
-{% block extrahead %}
-    <script>
-$(document).ready(function(){
-	$(".add_link").colorbox({iframe:true, innerWidth:555, innerHeight:324});
-
-// haciendo click en cualquier parte del link menos la votacion te envia al link
-	$("td.novote").click(function() {
-		var href = $(this).find("a").attr("href");
-		if(href) {
-			window.location = href;
-		}
-	});
-
-// Smooth jquery scrolling
-  $('a[href*=#]').click(function() {
- if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
- && location.hostname == this.hostname) {
-   var $target = $(this.hash);
-   $target = $target.length && $target
-   || $('[name=' + this.hash.slice(1) +']');
-   if ($target.length) {
-  var targetOffset = $target.offset().top;
-  $('html,body')
-  .animate({scrollTop: targetOffset}, 1000);
-    return false;
-   }
- }
-  });
-
-});
-
-function vote(linkid, direction) {
-    var $linkscore = $("#linkscore" + linkid);
-    $linkscore.html('<img src="/static/images/ajax-loading.gif">');
-    // send the post petition with the required data
-    $.post("{{ request.path }}", { "vote": direction, "linkid": linkid }, 
-	function (data){ 
-		// change the value with the new score
-		$linkscore.html(data.score);
-		// change the image
-                if (direction == "upvote") {
-			$("#linkuparrow" + linkid + " img").attr('src', "/static/images/voting/aupmod.gif");
-			$("#linkdownarrow" + linkid + " img").attr('src', "/static/images/voting/adowngrey.gif");
-		} else if (direction == "downvote") {
-			$("#linkuparrow" + linkid + " img").attr('src', "/static/images/voting/aupgrey.gif");
-			$("#linkdownarrow" + linkid + " img").attr('src', "/static/images/voting/adownmod.gif");
-		};
-	}
-    );
-};
-    </script>
-{% endblock %}
 {% block contents %}
 {% if message == "No registrado" %}
   {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
@@ -64,6 +12,10 @@ function vote(linkid, direction) {
     <a class="button" href="{% url serie-index %}">Series</a>
     <a class="button" href="{{ serie.get_absolute_url }}">{{ serie.name|title }}</a>
     <a class="button" href="{{ season.get_absolute_url }}">Temporada {{ season.season }}</a> 
+    <div class="prev_next">
+        {% if prev_season %}<a class="button" href="{{ prev_season.get_absolute_url }}"><< Temporada {{ prev_season.season }}</a>{% endif %}
+        {% if next_season %}<a class="button" href="{{ next_season.get_absolute_url }}">Temporada {{ next_season.season }} >></a>{% endif %}
+    </div>
 </div>
 
 <!-- EPISODES MINI-LIST -->
@@ -89,18 +41,13 @@ function vote(linkid, direction) {
 </div>
 <!-- COLUMN 2 -->
 <div class="grid_3">
-	{% if episode.images.all.0.src %}
-		{% thumbnail episode.images.all.0.src "200x200" as img_epi %}
+	{% if episode.poster.src %}
+		{% thumbnail episode.poster.src "200x200" as img_epi %}
 		<img class="img_epi" src="{{ img_epi.url }}">
 		{% endthumbnail %}
 	{% else %}
 		<img src="/static/images/image_not_available.png" height=100>
 	{% endif %}
-		{% if request.user.is_authenticated %}
-			<a class="add_link button" style="margin-left:40px;" href="{{ episode.get_add_link_url }}">{% trans "Añadir Enlace" %}</a> 
-		{% else %}
-			{% trans "Para añadir enlaces debes haber iniciado sesion." %}
-		{% endif %}
 </div>
 
 <!-- COLUMN 3 -->

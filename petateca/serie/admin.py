@@ -36,7 +36,7 @@ class SerieAdmin(admin.ModelAdmin):
     ordering = ('name', )
     def image_serie_serie(self, obj):
         try:
-            img = obj.images.get_is_poster()[0]
+            img = obj.images.all()[0]
             file_img = img.src.file
             thumb = default.backend.get_thumbnail(file_img, ADMIN_THUMBS_SIZE)
             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)

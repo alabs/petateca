@@ -105,8 +105,6 @@ $(document).ready(function(){
 </script>
 {% endblock %}
 {% block contents %}
-<!-- BREADCRUMB -->
-<a href="{% url serie-index %}" class="button">Series</a> > <a href="#" class="button">{{ serie.name|title }}</a>
 <!-- COLUMN 1 -->
 <div class="grid_3">
 	<!-- IMAGE -->
@@ -175,7 +173,7 @@ $(document).ready(function(){
 	{% for season in season_list %}
 		<a class="portfolio_item float alpha" href="{{ season.get_absolute_url }}">
 		<div class="preload" style="width:120px; height:170px">
-		{% if season.images.all.0 %} {% thumbnail season.images.all.0.src "180x160" as img_season %} 
+		{% if season.poster %} {% thumbnail season.poster.src "180x160" as img_season %} 
 			<img class="prel" src="{{ img_season.url }}" alt="{{serie.name}} - {{season.season}}"/>{% endthumbnail %}
 		{% else %}
 			{% if image %}{% thumbnail image "180x160" as img_serie %}
@@ -193,19 +191,18 @@ $(document).ready(function(){
 	<!-- ACTORS -->
 	<h2>{% trans "Actores" %}</h2>
 	<div class="hr dotted clearfix">&nbsp;</div>
-	{% for actor in serie.actors.all %}
-		{% if actor.role_set.all.0.role %}
-			<a class="portfolio_item float alpha actor" href="{{ actor.get_absolute_url }}" alt="{% for role in actor.role_set.all %}<b>{{role.role}}</b><br />{% endfor %}">
-		       {% if actor.images.get %}{% thumbnail actor.images.get.src "150x150" as img_actor %}
+	{% for role in roles %}
+		{% if role.role %}
+            <a class="portfolio_item float alpha actor" href="{{ role.actor.get_absolute_url }}">
+		       {% if role.actor.poster %}{% thumbnail role.actor.poster.src "150x150" as img_actor %}
 			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
 			{% else %}<img id="actor_unknown" width="100"  src="/static/images/image_not_available.png">
 			{% endif %}
 
-			<div class="meta">{% for role in actor.role_set.all %}<b>{{role.role}}</b><br />{% endfor %}
-			{{ actor.name }}</div>
+			<div class="meta"><b>{{ role.role|slice:":20" }}</b><br /> {{ role.actor.name|slice:":20"}}</div>
 			</a>
 		{% endif %}
-	{% endfor %}
+    {% endfor %}
 </div>
 
 <!-- COLUMN 3 -->

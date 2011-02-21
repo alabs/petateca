@@ -18,8 +18,8 @@
 <div class="grid_6">
     <a class="portfolio_item float alpha" href="{{ role.serie.get_absolute_url }}">
 	<span>{{role.role}} - {{role.serie|title}}</span>
-    {% if role.serie.images.get_is_poster.0.src %}
-        {% thumbnail role.serie.images.get_is_poster.0.src "250x250" as img_serie %}
+    {% if role.serie.images.all.0.src %}
+        {% thumbnail role.serie.images.all.0.src "250x250" as img_serie %}
           <img src="{{ img_serie.url }}" />
         {% endthumbnail %}
       </a>
