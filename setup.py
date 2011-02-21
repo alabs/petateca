@@ -33,6 +33,7 @@ setup(
         'twitter',
         'simplejson',
         'django-avatar',
+        'django-sentry',
     ],
     classifiers=[
         'Environment :: Web Environment',

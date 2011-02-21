@@ -30,6 +30,8 @@ sitemaps = {
 urlpatterns = patterns('',
     (r'^$', 'views.index'),
 
+    (r'^sentry/', include('sentry.urls')),
+
     (r'^serie/', include('serie.urls.obj')),
     (r'^series/', include('serie.urls.entity')),
 

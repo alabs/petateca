@@ -115,6 +115,14 @@ INSTALLED_APPS = (
     'avatar',
     'invitation',
     'django.contrib.sitemaps',
+
+    #Sentry
+    # don't forget to add the dependencies!
+    'indexer',
+    'paging',
+    'sentry',
+    'sentry.client',
+
 )
 
 DATABASE_ROUTERS = ['imdblocal.dbrouter.ImdbRouter']
