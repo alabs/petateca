@@ -31,26 +31,21 @@ def get_serie(request, serie_slug):
     serie = get_object_or_404(Serie.objects.select_related(), slug_name=serie_slug)
     imgs = ImageSerie.objects.filter(is_poster=True, serie=serie)
     img_src = imgs[0].src if imgs else None
-    #episodes = serie.episodes.all().order_by('season')
-    # Hacemos un listado de las temporadas:
-    seasons = Season.objects.select_related('poster', 'serie').filter(serie=serie).order_by('season')
-    score = int(round(serie.rating.get_rating()))
     # Vemos si el usuario tiene la serie como favorita
     try:
         serie.favorite_of.get(user=request.user.profile)
         favorite_status = 'yes'
     except:
         favorite_status = 'no'
-    serie_title = serie.name.title()
     # Si el metodo es GET devuelve serie_info asi nomas
     if request.method == 'GET':
         # Preparamos serie_info con la serie, titulo, imagenes, episodios...
         serie_info = {
             'serie': serie,
-            'title': serie_title,
+            'title': serie.name.title(),
             'image': img_src,
-            'season_list': seasons,
-            'score': score,
+            'season_list': Season.objects.select_related('poster', 'serie').filter(serie=serie).order_by('season'),
+            'score': int(round(serie.rating.get_rating())),
             'favorite': favorite_status,
             'roles': Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie),
         }
@@ -82,35 +77,18 @@ def get_serie(request, serie_slug):
 
 @render_to('serie/get_season.html')
 def get_season(request, serie_slug, season):
-    ''' Get season, returns episode_list
-    also handles link voting (courtesy of django-voting) '''
-    serie = Serie.objects.select_related().get(slug_name=serie_slug)
-    season = serie.season.select_related().get(season=season)
-    episode_list = season.episodes.select_related().order_by('episode')
+    ' Get season, returns episode_list '
+    serie = Serie.objects.get(slug_name=serie_slug)
+    season = serie.season.get(season=season)
+    episode_list = Episode.objects.select_related('poster').filter(season=season).order_by('episode')
     season_info = {
         'serie': serie,
         'episode_list': episode_list,
         'season': season,
+        'next_season': season.get_next_season(),
+        'prev_season': season.get_previous_season(),
     }
-
-    if request.method == 'GET':
-        return season_info
-    if request.method == 'POST':
-        if not request.user.is_authenticated():
-            season_info.update({
-                'message': 'No registrado',
-            })
-            return season_info
-        user = User.objects.get(username=request.user)
-        link = Link.objects.get(id=request.POST['linkid'])
-        if request.POST['vote'] == 'upvote':
-            Vote.objects.record_vote(link, user, +1)
-        elif request.POST['vote'] == 'downvote':
-            Vote.objects.record_vote(link, user, -1)
-        if request.is_ajax():
-            votes = Vote.objects.get_score(link)
-            return HttpResponse(simplejson.dumps(votes), mimetype='application/json')
-        return season_info
+    return season_info
 
 
 @csrf_protect
@@ -128,7 +106,9 @@ def get_episode(request, serie_slug, season, episode):
         'serie': serie,
         'episode': episode,
         'season': season,
-        'link_list': episode.links.all(),
+        'link_list': Link.objects.select_related().filter(episode=episode),
+        'next_epi': episode.get_next_episode(),
+        'prev_epi': episode.get_previous_episode(),
     }
     if request.method == 'GET':
         return episode_info
@@ -186,8 +166,7 @@ def get_genre(request, slug_name):
     genre_list = Genre.objects.order_by('name').all()
     network_list = Network.objects.order_by('name').all()
     genre = get_object_or_404(Genre, slug_name=slug_name)
-    serie_list = Serie.objects.filter(genres=genre.id)
-    serie_list = serie_list.order_by("name")
+    serie_list = Serie.objects.select_related('poster').filter(genres=genre.id).order_by('name')
     paginator = NamePaginator(
         serie_list,
         on="name",
@@ -218,8 +197,7 @@ def get_network(request, slug_name):
     genre_list = Genre.objects.order_by('name').all()
     network_list = Network.objects.order_by('name').all()
     network = get_object_or_404(Network, slug_name=slug_name)
-    serie_list = Serie.objects.filter(network=network.id)
-    serie_list = serie_list.order_by("name")
+    serie_list = Serie.objects.select_related('poster').filter(network=network.id).order_by('name')
     paginator = NamePaginator(
         serie_list,
         on="name",
@@ -250,7 +228,7 @@ def get_network(request, slug_name):
 def get_serie_list(request):
     genre_list = Genre.objects.order_by('name').all()
     network_list = Network.objects.order_by('name').all()
-    serie_list = Serie.objects.order_by('name').all()
+    serie_list = Serie.objects.select_related('poster').order_by('name')
     paginator = NamePaginator(
         serie_list,
         on="name",
@@ -295,6 +273,7 @@ def add_link(request, serie_slug, season, episode):
         'season': season,
     }
     # Si es para editar, devolvemos la instancia del link ya existente ;)
+    # Esto es solo para presentar el form, para el post viene mas adelante...
     if request.method == 'GET' and request.GET.get('edit') and request.GET.get('linkid'):
         linkid = request.GET.get('linkid')
         link = Link.objects.get(pk=linkid)
@@ -336,10 +315,6 @@ def add_link(request, serie_slug, season, episode):
                 link = Link.objects.get(pk=request.GET.get('linkid'))
                 link.url=form.cleaned_data['url']
                 link.audio_lang=lang
-        ##If request.user.username == link.user:
-        ##    form = LinkForm(instance=link) 
-        ##    link_info.update({ 'form': form, 'edit': 'yes', })
-        ##    return link_info
                 link.user=form.cleaned_data['user']
                 link.episode=episode
                 link.pub_date=form.cleaned_data['pub_date']

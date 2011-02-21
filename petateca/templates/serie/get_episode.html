@@ -44,16 +44,16 @@ function vote(linkid, direction) {
     <a class="button" href="{{ episode.get_absolute_url }}">Episodio {{ episode.episode }}</a>
     <br/>
     <div class="prev_next">
-        {% if episode.get_previous_episode %}<a class="button" href="{{ episode.get_previous_episode.get_absolute_url }}"><< Episodio {{ episode.get_previous_episode.episode }}</a>{% endif %}
-        {% if episode.get_next_episode %}<a class="button" href="{{ episode.get_next_episode.get_absolute_url }}">Episodio {{ episode.get_next_episode.episode }} >></a>{% endif %}
+        {% if prev_epi %}<a class="button" href="{{ prev_epi.get_absolute_url }}"><< Episodio {{ prev_epi.episode }}</a>{% endif %}
+        {% if next_epi %}<a class="button" href="{{ next_epi.get_absolute_url }}">Episodio {{ next_epi.episode }} >></a>{% endif %}
     </div>
 </div>
 	<h2 class="grid_6 caption clearfix right">{{ episode.season.season }}x{{ episode.episode }} - {{ episode.title|title }} </h2>
 <div class="hr clearfix dotted">&nbsp;</div>
 
 <div class="grid_5 portfolio">
-	{% if episode.images.all.0.src %}
-	  {% thumbnail episode.images.all.0.src "300x300" as img_episode %}
+	{% if episode.poster.src %}
+	  {% thumbnail episode.poster.src "300x300" as img_episode %}
 	    <img src="{{ img_episode.url }}">
 	  {% endthumbnail %}
 	{% endif %}

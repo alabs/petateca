@@ -12,6 +12,7 @@ $(document).ready(function(){
 
 
     $('.prel').each(function () {
+        if (this.complete) { return; } 
         $(this).hide();
         $(this).load(function () {
             $(this).width($(this).parent().width()).height($(this).parent().height());
