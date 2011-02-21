@@ -20,22 +20,23 @@ class Migration(SchemaMigration):
         # Adding field 'Actor.poster'
         db.add_column('serie_actor', 'poster', self.gf('django.db.models.fields.related.OneToOneField')(blank=True, related_name='poster_of', unique=True, null=True, to=orm['serie.ImageActor']), keep_default=False)
 
-        #data migration
-        for img in orm.ImageSeason.objects.filter(is_poster=True):
-            img.season.poster = img
-            img.season.save()
+        if not db.dry_run:
+            #data migration
+            for img in orm.ImageSeason.objects.filter(is_poster=True):
+                img.season.poster = img
+                img.season.save()
 
-        for img in orm.ImageSerie.objects.filter(is_poster=True):
-            img.serie.poster = img
-            img.serie.save()
+            for img in orm.ImageSerie.objects.filter(is_poster=True):
+                img.serie.poster = img
+                img.serie.save()
 
-        for img in orm.ImageActor.objects.filter(is_poster=True):
-            img.actor.poster = img
-            img.actor.save()
+            for img in orm.ImageActor.objects.filter(is_poster=True):
+                img.actor.poster = img
+                img.actor.save()
 
-        for img in orm.ImageEpisode.objects.filter(is_poster=True):
-            img.episode.poster = img
-            img.episode.save()
+            for img in orm.ImageEpisode.objects.filter(is_poster=True):
+                img.episode.poster = img
+                img.episode.save()
 
 
     def backwards(self, orm):
