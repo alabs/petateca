@@ -61,7 +61,7 @@ $(document).ready(function(){
                                         align: 'center',
                                         innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
                                         innerHtmlStyle: { color:'#FFFFFF', 'text-align':'left' },
-                                        themeName: 'all-grey',
+                                        themeName: 'all-black',
                                         themePath: '/static/images/jquerybubblepopup-theme'
                                       });
         $('.serie').mouseover(function(){
