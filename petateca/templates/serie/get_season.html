@@ -41,6 +41,7 @@
 </div>
 <!-- COLUMN 2 -->
 <div class="grid_3">
+<a href="{{ episode.get_absolute_url }}">
 	{% if episode.poster.src %}
 		{% thumbnail episode.poster.src "200x200" as img_epi %}
 		<img class="img_epi" src="{{ img_epi.url }}">
@@ -48,6 +49,7 @@
 	{% else %}
 		<img src="/static/images/image_not_available.png" height=100>
 	{% endif %}
+</a>
 </div>
 
 <!-- COLUMN 3 -->

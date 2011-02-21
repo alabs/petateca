@@ -2,7 +2,7 @@
 {% load message_box %}
 {% block contents %}
 <div class="hr clearfix dotted">&nbsp;</div>
-<h2 class="grid_12 caption clearfix"> Agregando link para <br />{{serie.name}} - S{{episode.season.season}}E{{episode.episode}} - {{episode.title}}</h2>
+<h2 class="grid_12 caption clearfix"> Agregando link para <br />{{ serie.name }} - {{ episode.season_episode }} - {{ episode.title }}</h2>
 <div class="hr clearfix dotted">&nbsp;</div>
 <form class="add_link_form" action="{% url add_link serie_slug=serie.slug_name season=season.season episode=episode.episode %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
     {{ form.non_field_errors }}

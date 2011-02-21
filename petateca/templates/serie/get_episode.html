@@ -34,7 +34,7 @@ function vote(linkid, direction) {
 };
     </script>
 {% endblock %}
-{% block title %}S{{ episode.season.season }}E{{episode.episode}} - {{ serie.name }}{% endblock %}
+{% block title %}{{ episode.season_episode }} - {{ serie.name }}{% endblock %}
 {% block contents %}
 <!-- BREADCRUMB -->
 <div class="breadcrumb left">
@@ -48,7 +48,7 @@ function vote(linkid, direction) {
         {% if next_epi %}<a class="button" href="{{ next_epi.get_absolute_url }}">Episodio {{ next_epi.episode }} >></a>{% endif %}
     </div>
 </div>
-	<h2 class="grid_6 caption clearfix right">{{ episode.season.season }}x{{ episode.episode }} - {{ episode.title|title }} </h2>
+	<h2 class="grid_6 caption clearfix right">{{ episode.season_episode }} - {{ episode.title|title }} </h2>
 <div class="hr clearfix dotted">&nbsp;</div>
 
 <div class="grid_5 portfolio">
