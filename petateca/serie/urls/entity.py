@@ -19,4 +19,6 @@ urlpatterns = patterns('serie.views',
     url(r'^actor/(?P<slug_name>[-\w]+)$', 'get_actor', name="get_actor"),
 
     url(r'^sneak$', 'sneak_links', name="sneak_links"),
+
+    url(r'^lookup/(?P<serie_id>[-\w]+)$', 'serie_lookup')
 )

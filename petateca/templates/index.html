@@ -11,7 +11,7 @@
         		{% thumbnail serie.images.all.0.src "150x200" as img_serie %}
           			<a href="{% url serie.views.get_serie serie_slug=serie.slug_name %}" class="portfolio_item float alpha">
                         <div class="preload" style="width:140px; height:190px;">
-                            <img alt="{{ serie.name }}" src="{{ img_serie.url }}" class="prel">
+                            <img class="prel serie" id="{{ serie.id }}" alt="{{ serie.name }}" src="{{ img_serie.url }}">
                         </div>
                     </a> 
         		{% endthumbnail %}
