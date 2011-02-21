@@ -52,8 +52,8 @@ function vote(linkid, direction) {
 <div class="hr clearfix dotted">&nbsp;</div>
 
 <div class="grid_5 portfolio">
-	{% if episode.images.all.0.src %}
-	  {% thumbnail episode.images.all.0.src "300x300" as img_episode %}
+	{% if episode.poster.src %}
+	  {% thumbnail episode.poster.src "300x300" as img_episode %}
 	    <img src="{{ img_episode.url }}">
 	  {% endthumbnail %}
 	{% endif %}
