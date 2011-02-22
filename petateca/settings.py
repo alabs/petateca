@@ -42,6 +42,7 @@ LANGUAGES = (
  ('es', ugettext('Spanish')),
  ('en', ugettext('English')),
 )
+LOCALEURL_USE_ACCEPT_LANGUAGE = True
 TRANSLATION_REGISTRY = 'translation'
 SITE_ID = 1
 
