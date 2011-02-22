@@ -7,27 +7,29 @@
 {% block extrahead %}
     <script>
 $(document).ready(function(){
-	$("#add_link").colorbox({width:"50%", height:"60%", iframe:true});
+	$('.add_link').colorbox({width:'50%', height:'60%', iframe:true, 
+         onClosed:function(){ location.reload(true); } 
+     });
 });
 
 function vote(linkid, direction) {
-    var $linkscore = $("#linkscore" + linkid);
+    var $linkscore = $('#linkscore' + linkid);
     $linkscore.html('<img src="/static/images/ajax-loading.gif">');
     // send the post petition with the required data
-    $.post("{{ request.path }}", { 
-                "vote": direction, 
-                "linkid": linkid,
+    $.post('{{ request.path }}', { 
+                'vote': direction, 
+                'linkid': linkid,
                 'csrfmiddlewaretoken': getCookie('csrftoken'),
     }, function (data){ 
 		// change the value with the new score
 		$linkscore.html(data.score);
 		// change the image
-                if (direction == "upvote") {
-			$("#linkuparrow" + linkid + " img").attr('src', "/static/images/voting/aupmod.gif");
-			$("#linkdownarrow" + linkid + " img").attr('src', "/static/images/voting/adowngrey.gif");
-		} else if (direction == "downvote") {
-			$("#linkuparrow" + linkid + " img").attr('src', "/static/images/voting/aupgrey.gif");
-			$("#linkdownarrow" + linkid + " img").attr('src', "/static/images/voting/adownmod.gif");
+                if (direction == 'upvote') {
+			$('#linkuparrow' + linkid + ' img').attr('src', '/static/images/voting/aupmod.gif');
+			$('#linkdownarrow' + linkid + ' img').attr('src', '/static/images/voting/adowngrey.gif');
+		} else if (direction == 'downvote') {
+			$('#linkuparrow' + linkid + ' img').attr('src', '/static/images/voting/aupgrey.gif');
+			$('#linkdownarrow' + linkid + ' img').attr('src', '/static/images/voting/adownmod.gif');
 		};
 	   }
     );
@@ -90,9 +92,9 @@ function vote(linkid, direction) {
 	    <tbody>
 		{% for link in link_list %}
 		{% score_for_object link as score %}
-	        {% dict_entry_for_item link from vote_dict as vote %}
+	    {% dict_entry_for_item link from vote_dict as vote %}
 		<tr>
-		<td><a href="{{ link.url }}"> {{ link.url|extract_domain }}</a></td>
+		<td><a href="{{ link.url }}" rel="nofollow"> {{ link.url|extract_domain }}</a></td>
 		<td>{{ link.audio_lang }}</td>
 		<td>{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
 		<td>
@@ -103,7 +105,7 @@ function vote(linkid, direction) {
 		</td>
 		<td>
 			{% if request.user.username == link.user %}
-<a id="add_link" class="button" href="{{ episode.get_add_link_url }}?edit=yes&linkid={{ link.id }}">{% trans "Editar" %}</a> 
+<a class="add_link button" href="{{ episode.get_add_link_url }}?edit=yes&linkid={{ link.id }}">{% trans "Editar" %}</a> 
 {% endif %}
 		</td>
 		</tr>
@@ -116,7 +118,7 @@ function vote(linkid, direction) {
 </div>
 <br />
 
-<a id="add_link" class="button" href="{{ episode.get_add_link_url }}">{% trans "Añadir enlace" %}</a> 
+<a class="add_link button" href="{{ episode.get_add_link_url }}">{% trans "Añadir enlace" %}</a> 
 
 {% endblock %}
 

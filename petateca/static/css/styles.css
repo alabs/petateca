@@ -617,16 +617,26 @@ p.error {
     margin-right: 10px;
 }
 /* Add Link form */
-#add_link_form label {
-    line-height: 35px;
-    width: 100px;
-    text-align: right;
-    float: left;
-    margin-right: 10px;
+#add_link_form label{
+    margin-left: 2em;
+    margin-right:1em;
+    font-size: 110%;
+    font-weight: bold;
 }
-#add_link_form textarea {
-    float: left;
+#add_link_form .button{
+    margin-left: auto;
+    margin-right: auto;
+}
+#add_link_form #id_url{
     padding: 8px;
+    border: 1px solid #CCCCCC;
+    margin-left: 10px;
+    background: #fcfcfc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+#add_link_form select {
+    padding: 2px;
     border: 1px solid #CCCCCC;
     margin-left: 10px;
     background: #fcfcfc;
@@ -753,7 +763,7 @@ p.error {
     margin-bottom: 2em;
     padding-left: 5em;
 }
-.season {
+.subtitle {
     font-weight: bold;
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif;
     font-size: 13px;
@@ -795,6 +805,19 @@ p.error {
 }
 .prev_next{
     margin: 1em;
+}
+#avatar_list li
+{
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+.errorlist li {        
+    display: block;        
+    color: #C00;        
+    font-size: 85%;        
+    font-weight: normal;        
+    text-transform: uppercase;       
 }
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
