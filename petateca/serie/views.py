@@ -358,7 +358,7 @@ def sneak_links(request):
 
 
 def serie_lookup(request, serie_id):
-    if request.is_ajax(): 
+    if request.is_ajax():
         serie = Serie.objects.get(id=serie_id)
         result = '<h3>' + serie.name + '</h3>'
         genres = serie.genres.all()

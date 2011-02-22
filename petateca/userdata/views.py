@@ -2,7 +2,8 @@ from decorators import render_to
 from django.contrib.auth.decorators import login_required
 from userdata.models import UserProfile, User
 from django.contrib.contenttypes.models import ContentType
-from serie.models import Link
+from djangoratings.models import Vote
+from serie.models import Link, Serie
 
 
 @render_to('registration/profile.html')
@@ -19,16 +20,17 @@ def get_user_public_profile(request, user_name):
     user = User.objects.get(username=user_name)
     profile = UserProfile.objects.get(user=user)
     # for series marked as favorite
-    favorite_series = profile.favorite_series.all()
+    #favorite_series = profile.favorite_series.all()
+    favorite_series = Serie.objects.select_related("poster").filter(favorite_of=user)
     # for django-ratings of Series
-    rated_series = user.votes.all()
+    #rated_series = user.votes.all()
+    rated_series = Vote.objects.select_related("serie").filter(user=user.id)
     # for django-voting of Links
     # ok, so don't look at this, it's a little hack
     # first we get the voted links in raw 
-    all_voted_links = user.vote_set.values()
+    all_voted_links = user.vote_set.values()[:5]
     # all_voted_links[0] looks like this {'vote': 1, 'user_id': 1, 'id': 1, 'object_id': 100, 'content_type_id': 24}
     # fuck
-    # so, we prepare a dict with a tuple with the link instance and the vote value 
     voted_links = []
     for vote in all_voted_links: 
         list_vote = Link.objects.get(id = vote['object_id']), (vote['vote'])
@@ -41,7 +43,7 @@ def get_user_public_profile(request, user_name):
     comments_serie = user.comment_comments.filter(content_type=serie.id)
     return {
         'user': user,
-        'series': favorite_series,
+        'favorite_series': favorite_series,
         'rated_series': rated_series,
         'voted_links': voted_links,
         'comments_blog': comments_blog,

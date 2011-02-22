@@ -1,0 +1,22 @@
+{% extends "base_stripped.html" %}
+{% load avatar_tags %}
+{% block contents %}
+    <h2>Tu Avatar actual: </h2>
+    <div class="hr clearfix dotted">&nbsp;</div>
+    {% avatar user %}
+    {% if not avatars %}
+        <p>No tienes ningun Avatar, por favor añade alguno.</p>
+    {% else %}
+        <form method="POST" action="">
+        <ul id="avatar_list">
+            {{ primary_avatar_form.as_ul }}
+        </ul>
+            <input class="button" type="submit" value="Elegir como Avatar" />
+        </form>
+    {% endif %}
+    <div class="hr clearfix dotted">&nbsp;</div>
+    <form enctype="multipart/form-data" method="POST" action="">
+        <input type="file" name="avatar" value="Avatar Image" />
+        <input class="button" type="submit" value="Subir nuevo Avatar" />
+    </form>
+{% endblock %}
