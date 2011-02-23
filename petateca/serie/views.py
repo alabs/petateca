@@ -147,15 +147,6 @@ def list_user_recommendation(request):
     return "TODO: listar las recomendaciones para el usuario"
 
 
-@render_to('serie/get_actor.html')
-def get_actor(request, slug_name):
-    actor = get_object_or_404(Actor, slug_name=slug_name)
-    return {
-        'actor': actor,
-        'title': actor.name,
-    }
-
-
 @render_to('serie/serie_list.html')
 def get_serie_list(request, slug_name=None, query_type=None):
     genre_list = Genre.objects.order_by('name').all()
