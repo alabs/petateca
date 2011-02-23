@@ -149,9 +149,6 @@ def list_popular(request):
 def list_user_recommendation(request):
     return "TODO: listar las recomendaciones para el usuario"
 
-# FIXME: probablemente todas estas cosas tan repetitivas y estupidas
-# sean por lo que existe el object_list en el url.
-
 
 @render_to('serie/get_actor.html')
 def get_actor(request, slug_name):
@@ -165,99 +162,42 @@ def get_actor(request, slug_name):
     }
 
 
-# SERIES_LIST: todas van a serie_list 
-
 @render_to('serie/serie_list.html')
-def get_genre(request, slug_name):
+def get_serie_list(request, slug_name=None, query_type=None):
     genre_list = Genre.objects.order_by('name').all()
     network_list = Network.objects.order_by('name').all()
-    genre = get_object_or_404(Genre, slug_name=slug_name)
-    serie_list = Serie.objects.select_related('poster').filter(genres=genre.id).order_by('name')
+    initial_query = {
+            'genre_list': genre_list,
+            'network_list': network_list,
+        }
+    if not query_type:
+        serie_list = Serie.objects.select_related('poster').order_by('name')
+    elif query_type == 'genre' and slug_name:
+        genre = get_object_or_404(Genre, slug_name=slug_name)
+        serie_list = Serie.objects.select_related('poster').filter(genres=genre.id).order_by('name')
+        initial_query.update({'genre': genre,})
+    elif query_type == 'network' and slug_name:
+        network = get_object_or_404(Network, slug_name=slug_name)
+        serie_list = Serie.objects.select_related('poster').filter(network=network.id).order_by('name')
+        initial_query.update({'network': network,})
     paginator = NamePaginator(
         serie_list,
         on="name",
         per_page = 10
     )
-
-    # Make sure page request is an int. If not, deliver first page.
+    
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
         page = 1
 
-    # If page request (9999) is out of range, deliver last page of results.
-    try:
-        page = paginator.page(page)
-    except (EmptyPage, InvalidPage):
-        page = paginator.page(paginator.num_pages)
-    return {
-        'genre': genre,
-        'page': page,
-        'genre_list': genre_list,
-        'network_list': network_list,
-    }
-
-
-@render_to('serie/serie_list.html')
-def get_network(request, slug_name):
-    genre_list = Genre.objects.order_by('name').all()
-    network_list = Network.objects.order_by('name').all()
-    network = get_object_or_404(Network, slug_name=slug_name)
-    serie_list = Serie.objects.select_related('poster').filter(network=network.id).order_by('name')
-    paginator = NamePaginator(
-        serie_list,
-        on="name",
-        per_page = 10
-    )
-
-    # Make sure page request is an int. If not, deliver first page.
-    try:
-        page = int(request.GET.get('page', '1'))
-    except ValueError:
-        page = 1
-
-    # If page request (9999) is out of range, deliver last page of results.
     try:
         page = paginator.page(page)
     except (EmptyPage, InvalidPage):
         page = paginator.page(paginator.num_pages)
 
-    return {
-        'network': network,
-        'page': page,
-        'genre_list': genre_list,
-        'network_list': network_list,
-    }
-
-
-@render_to('serie/serie_list.html')
-def get_serie_list(request):
-    genre_list = Genre.objects.order_by('name').all()
-    network_list = Network.objects.order_by('name').all()
-    serie_list = Serie.objects.select_related('poster').order_by('name')
-    paginator = NamePaginator(
-        serie_list,
-        on="name",
-        per_page = 10
-    )
-
-    # Make sure page request is an int. If not, deliver first page.
-    try:
-        page = int(request.GET.get('page', '1'))
-    except ValueError:
-        page = 1
-
-    # If page request (9999) is out of range, deliver last page of results.
-    try:
-        page = paginator.page(page)
-    except (EmptyPage, InvalidPage):
-        page = paginator.page(paginator.num_pages)
-
-    return {
-        'page': page,
-        'genre_list': genre_list,
-        'network_list': network_list,
-    }
+    initial_query.update({'page': page,})
+    return initial_query 
 
 
 @login_required
@@ -358,13 +298,12 @@ def sneak_links(request):
 
 
 def serie_lookup(request, serie_id):
-    if request.is_ajax():
-        serie = Serie.objects.get(id=serie_id)
-        result = '<h3>' + serie.name + '</h3>'
-        genres = serie.genres.all()
-        genre_list = ''
-        for genre in genres: genre_list += genre.name + ', '
-        result += '<b>Genero</b>: ' + genre_list[:-2] + '<br />'
-        result += '<b>Cadena</b>: ' + serie.network.name + '<br /><br />'
-        result += serie.description[:300] + '...'
-        return HttpResponse(result)
+    serie = Serie.objects.get(id=serie_id)
+    result = '<h3>' + serie.name + '</h3>'
+    genres = serie.genres.all()
+    genre_list = ''
+    for genre in genres: genre_list += genre.name + ', '
+    result += '<b>Genero</b>: ' + genre_list[:-2] + '<br />'
+    result += '<b>Cadena</b>: ' + serie.network.name + '<br /><br />'
+    result += serie.description[:300] + '...'
+    return HttpResponse(result)

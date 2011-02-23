@@ -23,7 +23,7 @@
 						{% if g.name == genre.name %}
 							<li>{{g.name}}
 						{% else %}
-							<li><a href="{% url get_genre slug_name=g.slug_name %}">{{g.name}}</a>
+							<li><a href="{% url get_by_type query_type='genre' slug_name=g.slug_name %}">{{g.name}}</a>
 						{% endif %}
 					{% endspaceless %}
 					{% endfor %}
@@ -39,7 +39,7 @@
 						{% if n.name == network.name %}
 							<li>{{n.name}}
 						{% else %}
-							<li><a href="{% url get_network slug_name=n.slug_name %}">{{n.name}}</a>
+							<li><a href="{% url get_by_type query_type='network' slug_name=n.slug_name %}">{{n.name}}</a>
 						{% endif %}
 					{% endspaceless %}
 					{% endfor %}
