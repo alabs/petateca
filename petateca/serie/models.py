@@ -237,7 +237,10 @@ class Network(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.get_network', [str(self.slug_name)])
+        return ('serie.views.get_serie_list', (), {
+                'slug_name': self.slug_name, 
+                'query_type': 'network',
+                })
 
 
 class Genre(models.Model):
@@ -255,7 +258,10 @@ class Genre(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.get_genre', [str(self.slug_name)])
+        return ('serie.views.get_serie_list', (), {
+                'slug_name': self.slug_name, 
+                'query_type': 'genre',
+                })
 
 
 class Actor(models.Model):
@@ -274,7 +280,7 @@ class Actor(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.get_actor', [str(self.slug_name)])
+        return ('get_actor', [str(self.slug_name)])
 
 
 

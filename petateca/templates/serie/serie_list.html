@@ -9,7 +9,7 @@
 			<div class="grid_3 textright" >
 				{% if network or genre %}
 					<p>
-						<a class="button" href="{% url serie-index %}">{% trans "Regresar al listado de series" %}</a>
+						<a class="button" href="{% url serie-index %}">{% trans "Ver todas las Series" %}</a>
 						<div class="hr clearfix dotted">&nbsp;</div>
 					</p>
 				{% endif %}
@@ -23,7 +23,7 @@
 						{% if g.name == genre.name %}
 							<li>{{g.name}}
 						{% else %}
-							<li><a href="{% url get_by_type query_type='genre' slug_name=g.slug_name %}">{{g.name}}</a>
+							<li><a href="{{ g.get_absolute_url }}">{{g.name}}</a>
 						{% endif %}
 					{% endspaceless %}
 					{% endfor %}
@@ -39,7 +39,7 @@
 						{% if n.name == network.name %}
 							<li>{{n.name}}
 						{% else %}
-							<li><a href="{% url get_by_type query_type='network' slug_name=n.slug_name %}">{{n.name}}</a>
+							<li><a href="{{ n.get_absolute_url }}">{{n.name}}</a>
 						{% endif %}
 					{% endspaceless %}
 					{% endfor %}
