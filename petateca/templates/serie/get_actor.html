@@ -7,7 +7,7 @@
 <div class="hr clearfix dotted">&nbsp;</div>
 
 <div class="grid_4">
-  {% if image %}{% thumbnail image "400x300" as img_actor %}
+  {% if actor.poster.src %}{% thumbnail actor.poster.src "400x300" as img_actor %}
       <img id="poster" src="{{ img_actor.url }}" />{% endthumbnail %}
   {% else %}
             <img src="/static/images/image_not_available.png" height=400> 

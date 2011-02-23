@@ -29,8 +29,6 @@ def get_serie(request, serie_slug):
     ''' Request a serie, returns images and episodes,
     also treats star-rating, courtesy of django-ratings'''
     serie = get_object_or_404(Serie.objects.select_related(), slug_name=serie_slug)
-    imgs = ImageSerie.objects.filter(is_poster=True, serie=serie)
-    img_src = imgs[0].src if imgs else None
     # Vemos si el usuario tiene la serie como favorita
     try:
         serie.favorite_of.get(user=request.user.profile)
@@ -43,7 +41,6 @@ def get_serie(request, serie_slug):
         serie_info = {
             'serie': serie,
             'title': serie.name.title(),
-            'image': img_src,
             'season_list': Season.objects.select_related('poster', 'serie').filter(serie=serie).order_by('season'),
             'score': int(round(serie.rating.get_rating())),
             'favorite': favorite_status,
@@ -153,12 +150,9 @@ def list_user_recommendation(request):
 @render_to('serie/get_actor.html')
 def get_actor(request, slug_name):
     actor = get_object_or_404(Actor, slug_name=slug_name)
-    imgs = actor.images.all()
-    img_src = imgs[0].src if imgs else None
     return {
         'actor': actor,
         'title': actor.name,
-        'image': img_src,
     }
 
 
@@ -170,9 +164,8 @@ def get_serie_list(request, slug_name=None, query_type=None):
             'genre_list': genre_list,
             'network_list': network_list,
         }
-    if not query_type:
-        serie_list = Serie.objects.select_related('poster').order_by('name')
-    elif query_type == 'genre' and slug_name:
+    serie_list = Serie.objects.select_related('poster').order_by('name')
+    if query_type == 'genre' and slug_name:
         genre = get_object_or_404(Genre, slug_name=slug_name)
         serie_list = Serie.objects.select_related('poster').filter(genres=genre.id).order_by('name')
         initial_query.update({'genre': genre,})
@@ -185,7 +178,6 @@ def get_serie_list(request, slug_name=None, query_type=None):
         on="name",
         per_page = 10
     )
-    
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
