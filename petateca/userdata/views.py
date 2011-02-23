@@ -24,7 +24,7 @@ def get_user_public_profile(request, user_name):
     favorite_series = Serie.objects.select_related("poster").filter(favorite_of=user)
     # for django-ratings of Series
     #rated_series = user.votes.all()
-    rated_series = Vote.objects.select_related("serie").filter(user=user.id)
+    rated_series = Vote.objects.select_related("content_object").filter(user=user.id)
     # for django-voting of Links
     # ok, so don't look at this, it's a little hack
     # first we get the voted links in raw 
@@ -33,14 +33,14 @@ def get_user_public_profile(request, user_name):
     # fuck
     voted_links = []
     for vote in all_voted_links: 
-        list_vote = Link.objects.get(id = vote['object_id']), (vote['vote'])
+        list_vote = Link.objects.select_related("episode").get(id = vote['object_id']), (vote['vote'])
         voted_links.append(list_vote)
     # comments for posts of blog
     blog = ContentType.objects.get(app_label='blog', name='post')
-    comments_blog = user.comment_comments.filter(content_type=blog.id)
+    comments_blog = user.comment_comments.filter(content_type=blog.id).order_by('-submit_date')[:10]
     # comments for series
     serie = ContentType.objects.get(app_label='serie', name='serie')
-    comments_serie = user.comment_comments.filter(content_type=serie.id)
+    comments_serie = user.comment_comments.filter(content_type=serie.id).order_by('-submit_date')[:10]
     return {
         'user': user,
         'favorite_series': favorite_series,

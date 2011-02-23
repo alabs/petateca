@@ -51,6 +51,7 @@ $(document).ready(function(){
         <h2>Series Votadas</h2>
         {% if rated_series %}
             {% for vote in rated_series %}
+            <div class="grid_2" style="margin-bottom:1em">
                 <a class="portfolio_item float alpha" href="{{ vote.content_object.get_absolute_url }}">
                 <div class="preload" style="width:120px; height:170px">
                 {% if vote.content_object.poster.src %} {% thumbnail vote.content_object.poster.src "180x160" as img_serie %} 
@@ -59,7 +60,7 @@ $(document).ready(function(){
                     <div class="image_not_found">  <img src="/static/images/image_not_available.png" width=110> </div>
                 {% endif %}
                 </div>
-                <p class="subtitle"> {{ vote.content_object.name|title }}</a></p>
+                <span class="subtitle"> {{ vote.content_object.name|title }}</a></span>
                 {% with vote.score as score %}
                     <form action="." method="POST">
                       <input type="radio" name="rating" value="1" class="ratingstar" disabled="disabled" {% if score == 1 %}checked="checked"{% endif %}/>
@@ -69,6 +70,7 @@ $(document).ready(function(){
                       <input type="radio" name="rating" value="5" class="ratingstar" disabled="disabled" {% if score == 5 %}checked="checked"{% endif %}/>
                     </form>
                 {% endwith %}
+            </div>
           {% endfor %}
 	{% else %}
         No has votado por ninguna serie.
@@ -77,7 +79,7 @@ $(document).ready(function(){
 
     <p class="clearfix">
         <!-- VOTED LINKS -->
-        <h2> Voted Links </h2>
+        <h2> Últimos Enlaces Votados </h2>
         {% if voted_links %}
         <table id="links">
             <thead>
@@ -108,13 +110,11 @@ $(document).ready(function(){
         {% endif %}
     </p>
 
-	<h2> Comments for Serie </h2>
+	<h2> Últimos 10 Comentarios de Series </h2>
 	{% if comments_serie %}
-	{{ comments_serie.count }}
 	<ul>
-        FALTA EN QUE SERIE COMENTO
 		{% for comment in comments_serie %}
-			<li> {{ comment.comment}} -  {{comment.submit_date }}
+			<li> <a href="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.name }}</a> - {{ comment.comment}} -  {{comment.submit_date }}
 		{% endfor %}
 	</ul>
 	{% else %}
@@ -122,16 +122,15 @@ $(document).ready(function(){
 	{% endif %}
 
 
-	<h2> Comments for Blog </h2>
+	<h2> Últimos 10 Comentarios en Blog </h2>
 	{% if comments_blog %}
-	{{ comments_blog.count }}
 	<ul>
 		{% for comment in comments_blog %}
 			<li> {{ comment.comment}} -  {{comment.submit_date }}
 		{% endfor %}
 	</ul>
 	{% else %}
-	No ha comentado ninguna serie.
+	No ha comentado ninguna entrada del blog.
 	{% endif %}
 </div>
 
