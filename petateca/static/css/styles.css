@@ -474,7 +474,7 @@ a img {
 }
 .comment_content {
     float: right;
-    width: 539px;
+    width: 90%;
 }
 .commentmetadata { float: right }
 .comment-reply-link {
@@ -802,6 +802,8 @@ p.error {
 .center{
     text-align: center;
     display: block;
+    margin-right: auto;
+    margin-left: auto;
 }
 .prev_next{
     margin: 1em;

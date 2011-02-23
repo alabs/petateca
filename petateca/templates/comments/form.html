@@ -3,7 +3,7 @@
 <h2>{% trans "Añade un comentario" %}</h2>
 <div class="hr dotted clearfix">&nbsp;</div>
 {% if request.user.is_authenticated %}
-   <form id="comment_form" action="{% comment_form_target %}" method="post">
+   <form id="comment_form" class="grid_6" action="{% comment_form_target %}" method="post">
         {% if next %}<input name="next" type="hidden" value="{{ next }}" />{% endif %}
         {% for field in form %}
             {% if field.is_hidden %}
@@ -17,7 +17,7 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-        <input type="submit" id="send_message" class="button" name="post" value="{% trans "Añadir comentario" %}" />
+        <input style="margin-top:15em;" type="submit" id="send_message" class="button center" name="post" value="{% trans "Añadir comentario" %}" />
    </form>
 {% else %}
 <p class="clearfix">{% trans "Lo siento, debes haber" %} <a href="/accounts/login/?next={{request.path}}">{% trans "iniciado sesion" %}</a> {% trans "para enviar comentarios. Otra razon más para crearse una cuenta" %}</p>
