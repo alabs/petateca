@@ -71,8 +71,9 @@
           						<img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" />
         					{% endthumbnail %}
     					{% else %}
-						<img class="prel" src="/static/images/image_not_available.png" height="300" width="200" /> 
+						<img class="prel serie" id="{{ serie.id }}" src="/static/images/image_not_available.png" height="300" width="200" /> 
     					{% endif %}
+                        <span class="subtitle">{{ serie.name }}</span>
 					{% endspaceless %}
 					</div>
   					</a>
