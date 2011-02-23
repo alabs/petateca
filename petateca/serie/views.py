@@ -136,13 +136,6 @@ def get_episode(request, serie_slug, season, episode):
         return episode_info
 
 
-@render_to('serie/list_popular.html')
-def list_popular(request):
-    series = Serie.objects.all()
-    popular_series = series.order_by('-rating_score')
-    return { 'series': popular_series }
-
-
 def list_user_recommendation(request):
     return "TODO: listar las recomendaciones para el usuario"
 
