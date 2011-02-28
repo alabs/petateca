@@ -217,7 +217,7 @@ ul#navigation li {
 ul#navigation li a {
     font-family: arial, sans-serif !important;
     display: block;
-    padding: 24px 0 0;
+    padding: 10px 0 0;
     text-decoration: none;
     color: #000000;
     font-size: 14px;
@@ -821,6 +821,15 @@ p.error {
     font-weight: normal;        
     text-transform: uppercase;       
 }
+
+.vermas_head{border:1px solid #998675;}
+
+.vermas_body {display:none; width:184px;border-right:1px solid #998675;border-bottom:1px solid #998675;border-left:1px solid #998675;}
+.vermas_body li{background:#493e3b;}
+.vermas_body li.alt{background:#362f2d;}
+.vermas_body li a{color:#FFFFFF; text-decoration:none; padding:10px; display:block;}
+.vermas_body li a:hover{padding:15px 10px; font-weight:bold;}
+
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {

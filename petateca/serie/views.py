@@ -74,8 +74,7 @@ def get_serie(request, serie_slug):
 
 @render_to('serie/get_season.html')
 def get_season(request, serie_slug, season):
-    ''' Get season, returns episode_list
-    also handles link voting (courtesy of django-voting) '''
+    ''' Get season, returns episode_list '''
     episode_list = Episode.objects.select_related('poster', 'season', 'season__serie'). \
                     filter(season__season=season, season__serie__slug_name=serie_slug).order_by('episode')
     if episode_list:
@@ -116,6 +115,7 @@ def get_episode(request, serie_slug, season, episode):
     if request.method == 'GET':
         return episode_info
     if request.method == 'POST':
+        ''' Trata las votaciones '''
         if not request.user.is_authenticated():
             episode_info.update({
                 'message': 'No registrado',
@@ -142,6 +142,7 @@ def list_user_recommendation(request):
 
 @render_to('serie/serie_list.html')
 def get_serie_list(request, slug_name=None, query_type=None):
+    ''' Listado de series con paginacion, genero y cadena '''
     genre_list = Genre.objects.order_by('name').all()
     network_list = Network.objects.order_by('name').all()
     initial_query = {
@@ -269,11 +270,13 @@ def add_link(request, serie_slug, season, episode):
 
 @render_to('serie/sneak_links.html')
 def sneak_links(request):
+    ''' Ultimos enlaces agregados '''
     last_links = Link.objects.order_by('-pub_date')[:30]
     return { 'last_links' : last_links }
 
 
 def serie_lookup(request, serie_id):
+    ''' JQuery PopUp en las imagenes '''
     serie = Serie.objects.get(id=serie_id)
     result = '<h3>' + serie.name + '</h3>'
     genres = serie.genres.all()

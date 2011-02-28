@@ -139,21 +139,21 @@ IMDB_ACCESS_DB_URI = "postgres://petateca:libre@localhost/imdb"
 THUMBNAIL_DEBUG = True
 THUMBNAIL_SUBDIR = 'thumbs'
 
-if DEBUG:
-    try:
-        #Check if django-debug-toolbar is installed
-        import debug_toolbar
-        MIDDLEWARE_CLASSES += (
-            'debug_toolbar.middleware.DebugToolbarMiddleware',
-        )
+#if DEBUG:
+#    try:
+#        #Check if django-debug-toolbar is installed
+#        import debug_toolbar
+#        MIDDLEWARE_CLASSES += (
+#            'debug_toolbar.middleware.DebugToolbarMiddleware',
+#        )
+#
+#        INTERNAL_IPS = ('127.0.0.1',) 
 
-        INTERNAL_IPS = ('127.0.0.1',) 
+#        INSTALLED_APPS += ('debug_toolbar', ) 
 
-        INSTALLED_APPS += ('debug_toolbar', ) 
-
-        DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False} 
-    except: 
-        pass 
+#        DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False} 
+#    except: 
+#        pass 
 
 HAYSTACK_SITECONF = 'search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
