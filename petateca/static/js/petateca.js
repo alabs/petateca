@@ -54,8 +54,7 @@ switch(data)
     }
 
 
-
-$(document).ready(function(){
+function series_bubble(){
         $('.serie').CreateBubblePopup({
                                         position: 'right',
                                         align: 'center',
@@ -84,18 +83,25 @@ $(document).ready(function(){
                     };pause();
                 }); 
         });
-});
+    };
 
 $(document).ready(function() {
-    // Muestra y oculta los menús
+    // para el popup bubble ajax
+    series_bubble();
+    // Muestra el dropdown de las seasons en series
     $('.cssdropdown li:has(ul)').hover(
         function(e)
         {
-            $(this).find('ul').slideDown();
+            $(this).find('ul').slideDown('fast', function() {
+                // Evita que aparezca el bubble sobre las temporadas
+                $(".serie").FreezeAllBubblePopups();
+            });
         },
         function(e)
         {
-            $(this).find('ul').slideUp();
+            $(this).find('ul').slideUp('fast', function(){ 
+                $(".serie").UnfreezeAllBubblePopups();
+            });
         }
     );
 });

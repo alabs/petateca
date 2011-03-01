@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load comments %}
 {% load extract_domain %}
+{% load background_color %}
 {% load message_box %}
 {% block extrahead %}
 <script>
@@ -102,6 +103,11 @@ function favorite() {
 	      <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
 	    </form>
 	  </div>
+	<div class="hr dotted clearfix">&nbsp;</div>
+    <!-- RATING -->
+    <div class="center rating_num {{ serie.rating.get_rating|background_color }}"> {{ serie.rating.get_rating }}
+        <div class="mt_3">de 5</div>
+    </div>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- NETWORK -->
 	{% if serie.network.name %}

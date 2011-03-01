@@ -278,11 +278,19 @@ def sneak_links(request):
 def serie_lookup(request, serie_id):
     ''' JQuery PopUp en las imagenes '''
     serie = Serie.objects.get(id=serie_id)
-    result = '<h3>' + serie.name + '</h3>'
+    result = '<div><div class="left"><h3>' + serie.name + '</h3>'
     genres = serie.genres.all()
     genre_list = ''
     for genre in genres: genre_list += genre.name + ', '
     result += '<b>Genero</b>: ' + genre_list[:-2] + '<br />'
-    result += '<b>Cadena</b>: ' + serie.network.name + '<br /><br />'
-    result += serie.description[:300] + '...'
+    result += '<b>Cadena</b>: ' + serie.network.name + '<br /><br /></div>'
+    rating = serie.rating.get_rating()
+    if rating > 3: background = 'positive_bg'
+    elif rating > 2: background = 'neutral_bg'
+    elif rating > 0: background = 'negative_bg'
+    elif rating == 0: background = 'no_bg'
+    result += '<div class="right"> <div class="center rating_num ' + background + ' ">' 
+    result += str(rating) + '<div class="mt_3">de 5</div></div></div></div>'
+    result += '<p style="margin-top:7em;">' + serie.description[:300] + '... </p>'
+    print result
     return HttpResponse(result)
