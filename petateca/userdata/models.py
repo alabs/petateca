@@ -37,3 +37,6 @@ class EmailBackend(ModelBackend):
                 return None
         return None
 
+
+class UserToInvite(ModelBackend):
+    mail = models.EmailField()

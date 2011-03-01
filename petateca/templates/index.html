@@ -8,6 +8,7 @@
 
         <div class="center">
 			{% for serie in series %}
+                <div class="grid_2">
         		{% thumbnail serie.images.all.0.src "150x200" as img_serie %}
           			<a href="{% url serie.views.get_serie serie_slug=serie.slug_name %}" class="portfolio_item float alpha">
                         <div class="preload" style="width:140px; height:190px;">
@@ -15,7 +16,17 @@
                         </div>
                         <span class="subtitle">{{ serie.name }}</span>
                     </a> 
+                     <ul class="cssdropdown"> 
+                          <li><a class="button" href="{{ serie.get_absolute_url }}">Ver Serie</a> 
+                              <ul> 
+                                    {% for season in serie.season.all %}
+                                        <li><a href="{{ season.get_absolute_url }}">Temporada {{ season.season }}</a>
+                                    {% endfor %}
+                             </ul> 
+                          </li> 
+                     </ul> 
         		{% endthumbnail %}
+                </div>
       		{% endfor %}
         </div>
 			

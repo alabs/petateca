@@ -830,6 +830,43 @@ p.error {
 .vermas_body li a{color:#FFFFFF; text-decoration:none; padding:10px; display:block;}
 .vermas_body li a:hover{padding:15px 10px; font-weight:bold;}
 
+
+.cssdropdown {
+    list-style: url(none) none;
+}
+.cssdropdown li {
+    display: inline;
+    float: left;
+    position: relative;
+    width: 150px;
+    margin: 0;
+    z-index: 999;
+}
+.cssdropdown li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    width: 140px;
+    padding: 2px 5px;
+}
+.cssdropdown li a:hover, ul li a:active {
+    background-color: #f93;
+}
+.cssdropdown li ul {
+    background-color: #3a3a3a;
+    position: absolute;
+    display: none;
+}
+.cssdropdown li ul li {
+    display: list-item;
+    float: none;
+    margin: 0;
+}
+.cssdropdown li ul li a {
+    font-size: 1em;
+}
+
+
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {

@@ -68,7 +68,8 @@
 			</p>
 			<!-- THUMBNAILS -->
 				{% for serie in page.object_list %}
-    					<a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
+                <div class="grid_2">
+    				<a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
 					<div class="preload" style="width:140px; height:200px;">
 					{% spaceless %}
     					{% if serie.poster.src %}
@@ -82,6 +83,16 @@
 					{% endspaceless %}
 					</div>
   					</a>
+                     <ul class="cssdropdown"> 
+                          <li><a class="button center" href="{{ serie.get_absolute_url }}">Ver Serie</a> 
+                              <ul> 
+                                    {% for season in serie.season.all %}
+                                        <li><a href="{{ season.get_absolute_url }}">Temporada {{ season.season }}</a>
+                                    {% endfor %}
+                             </ul> 
+                          </li> 
+                     </ul> 
+                </div>
   				{% endfor %}
 			</div>
 		</div>

@@ -49,3 +49,7 @@ def get_user_public_profile(request, user_name):
         'comments_blog': comments_blog,
         'comments_serie': comments_serie,
     }
+
+
+def request_invitation(request):
+    return "TODO"

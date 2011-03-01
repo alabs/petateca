@@ -61,8 +61,8 @@ $(document).ready(function(){
                                         align: 'center',
                                         width: '300',
                                         innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
-                                        innerHtmlStyle: { color:'#000', 'text-align':'left', 'font-size':'110%' },
-                                        themeName: 'grey',
+                                        innerHtmlStyle: { color:'#fff', 'text-align':'left', 'font-size':'110%' },
+                                        themeName: 'all-grey',
                                         themePath: '/static/images/jquerybubblepopup-theme'
                                       });
         $('.serie').mouseover(function(){
@@ -84,4 +84,18 @@ $(document).ready(function(){
                     };pause();
                 }); 
         });
+});
+
+$(document).ready(function() {
+    // Muestra y oculta los menús
+    $('.cssdropdown li:has(ul)').hover(
+        function(e)
+        {
+            $(this).find('ul').slideDown();
+        },
+        function(e)
+        {
+            $(this).find('ul').slideUp();
+        }
+    );
 });

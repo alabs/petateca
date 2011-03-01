@@ -62,6 +62,7 @@ urlpatterns = patterns('',
     url(r'^atom/blog/$', AtomBlogFeed(), name='atomblogfeed'),
     url(r'^atom/links/$', AtomLatestLinksFeed(), name='atomlinksfeed'),
 
+
     (r'^accounts/', include('invitation.urls')),
     (r'^accounts/profile/$', 'userdata.views.view_profile'),
     # invitation
@@ -79,6 +80,8 @@ urlpatterns = patterns('',
     (r'^accounts/', include('registration.urls')),
     url(r'^user/(?P<user_name>[-\w]+)$', 'userdata.views.get_user_public_profile', name='get_user_public_profile'),
     (r'^avatar/', include('avatar.urls')),
+    url(r'^accounts/user-invitation$', 'userdata.views.request_invitation', name='request_invitation'),
+
 
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )

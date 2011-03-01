@@ -2,7 +2,7 @@ import os
 import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-SITE_NAME = 'PetaTeca'
+SITE_NAME = 'LiberaTeca'
 
 DEBUG = True
 SENTRY_TESTING = True
@@ -148,9 +148,9 @@ THUMBNAIL_SUBDIR = 'thumbs'
 #        )
 #
 #        INTERNAL_IPS = ('127.0.0.1',) 
-
+#
 #        INSTALLED_APPS += ('debug_toolbar', ) 
-
+#
 #        DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False} 
 #    except: 
 #        pass 

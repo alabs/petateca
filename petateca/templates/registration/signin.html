@@ -15,17 +15,21 @@
 		}
 		h1 { font-size: 130%; color: #fff; line-height: 1.5em; }
 	</style> 
-{% endblock %}
-{% block extrahead %}
-<script>
-$(document).ready(function () {
-        var msg = $(".errorlist li").text();
-	if (msg){
-		$(".errorlist li").empty();
-		$.jGrowl(msg, { sticky: true });
-	}
+    <script>
+$(document).ready(function() {
+  $('#mas-informacion').hide();
+  $('#invitacion').hide();
+
+  $('#mostrar-mas-informacion').click(function() {
+    $('#mas-informacion').show('slow');
+    return false;
+  });
+  $('#mostrar-invitacion').click(function() {
+    $('#invitacion').show('slow');
+    return false;
+  });
 });
-</script>
+    </script>
 {% endblock %}
 {% block contents %}
 <div class="dialog"> 
@@ -46,17 +50,30 @@ $(document).ready(function () {
 		</ul> 
 	</form>  
 	<div class="hr dotted clearfix">&nbsp;</div>
-    <p> 
-	<ul>
-		<li>Puedes <b>votar, comentar y valorar</b> tanto las series como los enlaces, asi como <b>agregar nuevos enlaces</b>.
-		<li>Proximamente <b>liberaremos el codigo</b> con el que esta hecha la web para que puedas modificarla y mejorarla. 
-		<li>Tendremos una <b>API</b> para que puedas hacer otras webs o servicios para la plataforma que quieras. 
-		<li>Daremos de una forma sencilla nuestra <b>base de datos con todos los enlaces</b> que tenemos, porque sabemos que estos no nos pertenecen.
-	</ul>
-    </p> 
-    <p>
-	Ahora mismo y por un tiempo funcionara bajo un sistema de <b>invitaciones</b> para poder ir creciendo de a poco (y creando el buzz xD), puedes conseguir tu invitación a través de nuestro <b>Twitter</b>.
-    </p>
+    <a id="mostrar-invitacion" class="button" href="#" style="font-color:#666;">Pedir Invitacion</a>
+    <div id="invitacion"> 
+            <p> Puedes pedir una invitacion rellenando tu correo </p>
+                <form method="post" action="{% url request_invitation %}" id="invitation_form">
+                    <label> Email </label>
+                    <input type="text" /> 
+                    <input type='submit' id='request_invitation' class="button" value='Pedir Invitacion' />
+                </form>  
+    </div>
+	<div class="hr dotted clearfix">&nbsp;</div>
+    <a id="mostrar-mas-informacion" class="button" href="#" style="font-color:#666;">Mas Información</a>
+    <div id="mas-informacion">
+        <p>
+            <ul>
+                <li>Puedes <b>votar, comentar y valorar</b> tanto las series como los enlaces, asi como <b>agregar nuevos enlaces</b>.
+                <li>Proximamente <b>liberaremos el codigo</b> con el que esta hecha la web para que puedas modificarla y mejorarla. 
+                <li>Tendremos una <b>API</b> para que puedas hacer otras webs o servicios para la plataforma que quieras. 
+                <li>Daremos de una forma sencilla nuestra <b>base de datos con todos los enlaces</b> que tenemos, porque sabemos que estos no nos pertenecen.
+            </ul>
+        </p>
+        <p>
+            Ahora mismo y por un tiempo funcionara bajo un sistema de <b>invitaciones</b> para poder ir creciendo de a poco (y creando el buzz xD), puedes conseguir tu invitación a través de nuestro <b>Twitter</b>.
+        </p>
+    </div>
         
 <p style="text-align:right;"><i>Omnia Sunt Communia</i> -- <b>Equipo de LiberTeca</b></p>
 </div>
