@@ -84,12 +84,7 @@
 					</div>
   					</a>
                      <ul class="cssdropdown"> 
-                          <li><a class="button center" href="{{ serie.get_absolute_url }}">Ver Serie</a> 
-                              <ul> 
-                                    {% for season in serie.season.all %}
-                                        <li><a href="{{ season.get_absolute_url }}">Temporada {{ season.season }}</a>
-                                    {% endfor %}
-                             </ul> 
+                          <li><a class="button center season_list" id="{{ serie.id }}" href="{{ serie.get_absolute_url }}">Ver Serie</a> 
                           </li> 
                      </ul> 
                 </div>

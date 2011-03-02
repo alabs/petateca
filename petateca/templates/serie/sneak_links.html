@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load message_box %}
 {% load extract_domain %}
+{% load echo_language %}
 {% block extrahead %}
 <meta http-equiv="refresh" content="30" />
 {% endblock %}
@@ -10,19 +11,31 @@
 {% block contents %}
 <table id="links" style="width:100%">
     <tr>
-        <td> Hora </td>
+        <td width="45%" colspan="2"> Serie </td>
         <td> Link </td>
-        <td> Serie </td>
-        <td> Temporada </td>
-        <td> Episodio </td>
+        <td> Idioma </td>
+        <td> Fecha </td>
     </tr>
 {% for link in last_links %}
     <tr>
-        <td>{{ link.pub_date }}</td> 
-        <td><a href="{{ link.url }} ">{{ link.url|extract_domain }} </a></td> 
-        <td><a href="{{ link.episode.season.serie.get_absolute_url }}"> {{ link.episode.season.serie }}</a></td> 
-        <td><a href="{{ link.episode.season.get_absolute_url }}">{{ link.episode.season.season }}</a></td> 
-        <td><a href="{{ link.episode.get_absolute_url }}">{{ link.episode.episode }}</a></td> 
+        <td>
+            <a href="{{ link.episode.season.serie.get_absolute_url }}">
+                {% thumbnail link.episode.season.serie.poster.src "90x90" as img_serie %}
+                    <img src="{{ img_serie.url }}">
+                {% endthumbnail %}
+            </a>
+        </td>
+        <td>
+            <a style="font-weight:bold;" href="{{ link.episode.season.serie.get_absolute_url }}">{{ link.episode.season.serie }}</a> - <span style="font-weight:bold;"><a href="{{ link.episode.get_absolute_url }}">{{ link.episode.season_episode }}</span>
+            <p>{{ link.episode.description }}</p></a>
+        </td>
+        <td>
+            <a href="{{ link.url }} ">{{ link.url|extract_domain }} </a></td> 
+        <td>
+            <p>{{ link.audio_lang.iso_code|echo_language }}</p>
+            {% if link.subtitle.iso_code %}<p>Sub: {{ link.subtitle.iso_code|echo_language }}</p>{% endif %}
+        </td>
+        <td>{{ link.pub_date|date:"d/m/y H:i" }}</td> 
     </tr>
 {% endfor %}
 </table>

@@ -29,6 +29,7 @@ urlpatterns = patterns('serie.views',
     url(r'^popular$', object_list, list_popular, name='list-popular'), 
 
     url(r'^sneak$', 'sneak_links', name="sneak_links"),
-    url(r'^lookup/(?P<serie_id>[-\w]+)$', 'serie_lookup'),
+    url(r'^lookup/serie/(?P<serie_id>[-\w]+)$', 'serie_lookup'),
+    url(r'^lookup/season/(?P<serie_id>[-\w]+)$', 'season_lookup'),
 
 )

@@ -67,7 +67,7 @@ function series_bubble(){
         $('.serie').mouseover(function(){
                 var serie = $(this);
                 var serie_id = serie.attr('id');
-                $.get('/series/lookup/' + serie_id, function(data) {
+                $.get('/series/lookup/serie/' + serie_id, function(data) {
                 var seconds_to_wait = 0;
                     function pause(){
                         var timer = setTimeout(function(){
@@ -85,23 +85,64 @@ function series_bubble(){
         });
     };
 
+function seasons_bubble(){
+    $('.season_list').CreateBubblePopup({
+        selectable: true,
+        position: 'top',
+        align: 'center',
+        width: '300',
+        innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
+        innerHtmlStyle: { 'text-align':'left', 'font-size':'110%' },
+        themeName: 'all-grey',
+        themePath: '/static/images/jquerybubblepopup-theme',
+    });
+    $('.season_list').hover(
+        function(){
+             var serie = $(this);
+             var serie_id = serie.attr('id');
+             $.get('/series/lookup/season/' + serie_id, function(data) {
+                 serie.SetBubblePopupInnerHtml(data, false);
+                 $(".serie").FreezeAllBubblePopups();
+             });
+        },
+        function(){
+             $(".serie").UnfreezeAllBubblePopups();
+        }
+    );
+};
+
 $(document).ready(function() {
     // para el popup bubble ajax
     series_bubble();
+    seasons_bubble();
     // Muestra el dropdown de las seasons en series
-    $('.cssdropdown li:has(ul)').hover(
-        function(e)
-        {
-            $(this).find('ul').slideDown('fast', function() {
-                // Evita que aparezca el bubble sobre las temporadas
-                $(".serie").FreezeAllBubblePopups();
-            });
-        },
-        function(e)
-        {
-            $(this).find('ul').slideUp('fast', function(){ 
-                $(".serie").UnfreezeAllBubblePopups();
-            });
-        }
-    );
+//    $('.season_list').hover(
+//        function(){
+//            var serie = $(this);
+//            var serie_id = serie.attr('id');
+//            $.get('/series/lookup/season/' + serie_id, function(data) {
+//                serie.append(data);
+//                serie.find('ul').slideDown('fast');
+//            })
+//        },
+//        function(){
+//            serie.slideUp('fast');
+//        }
+//    );
+//
+    //$('.cssdropdown li:has(ul)').hover(
+    //    function(e)
+    //    {
+    //        $(this).find('ul').slideDown('fast', function() {
+    //            // Evita que aparezca el bubble sobre las temporadas
+    //            $(".serie").FreezeAllBubblePopups();
+    //        });
+    //    },
+    //    function(e)
+    //    {
+    //        $(this).find('ul').slideUp('fast', function(){ 
+    //            $(".serie").UnfreezeAllBubblePopups();
+    //        });
+    //    }
+    //);
 });

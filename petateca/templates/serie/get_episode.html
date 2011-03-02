@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load voting_tags %}
 {% load extract_domain %}
+{% load echo_language %}
 {% load message_box %}
 {% block extrahead %}
     <script>
@@ -95,13 +96,15 @@ function vote(linkid, direction) {
 	    {% dict_entry_for_item link from vote_dict as vote %}
 		<tr>
 		<td><a href="{{ link.url }}" rel="nofollow"> {{ link.url|extract_domain }}</a></td>
-		<td>{{ link.audio_lang }}</td>
-		<td>{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
+		<td>{{ link.audio_lang.iso_code|echo_language }}</td>
+		<td>{% if link.subtitle %}{{ link.subtitle.iso_code|echo_language }}{% endif %}</td>
 		<td>
 		<!-- VOTING -->
-			<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'upvote');" id="linkuparrow{{ link.id }}"><img src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif"></a>
-			<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'downvote');" id="linkdownarrow{{ link.id }}"><img src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif"></a>
-			  <span class="score right" style="position:relative; top:-25%;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
+            <div class="left">
+                <a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'upvote');" id="linkuparrow{{ link.id }}"><img src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif"></a>
+                <a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'downvote');" id="linkdownarrow{{ link.id }}"><img src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif"></a>
+            </div>
+			<span class="score right" style="position:relative; top:-25%;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
 		</td>
 		<td>
 			{% if request.user.username == link.user %}

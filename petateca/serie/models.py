@@ -157,24 +157,6 @@ class Episode(models.Model):
     def get_add_link_url(self):
         return '/serie/%s/episode/S%02dE%02d/add' % (self.season.serie.slug_name, self.season.season, self.episode)
 
-   # Es mejor usar el permalink pero de la otra forma podemos poner le S01E01 con los 0s
-   # @models.permalink
-   # def get_absolute_url(self):
-   #     return ('serie.views.get_episode', (), {
-   #             'serie_slug': self.season.serie.slug_name,
-   #             'season': self.season.season,
-   #             'episode': self.episode,
-   #     })
-
-   # @models.permalink
-   # def get_add_link_url(self):
-   #     ''' Link for adding a link to the episode '''
-   #     return ('serie.views.add_link', (), {
-   #             'serie_slug': self.season.serie.slug_name,
-   #             'season': self.season.season,
-   #             'episode': self.episode,
-   #     })
-
 
 class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")

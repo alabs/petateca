@@ -717,13 +717,14 @@ p.error {
 }
 #links th {
     padding: 12px 17px 12px 17px;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 14px;
     color: #717171;
     border-bottom: 1px dashed #CFCFCF;
 }
 #links td {
-    padding: 7px 7px 7px 7px;
+    vertical-align: middle;
+    padding-left: 1em;
     color: #717171;
 }
 #links td.vote { width: 3em }

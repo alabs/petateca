@@ -292,5 +292,14 @@ def serie_lookup(request, serie_id):
     result += '<div class="right"> <div class="center rating_num ' + background + ' ">' 
     result += str(rating) + '<div class="mt_3">de 5</div></div></div></div>'
     result += '<p style="margin-top:7em;">' + serie.description[:300] + '... </p>'
-    print result
     return HttpResponse(result)
+
+
+def season_lookup(request, serie_id):
+    serie = Serie.objects.get(id=serie_id)
+    seasons_list = Season.objects.filter(serie=serie)
+    seasons_string = '<ul>'
+    for season in seasons_list:
+        seasons_string += '<li><a style="color: #fff; font-weight: bold;" href="' + season.get_absolute_url() + '"> Temporada ' + str(season.season) + '</a>'
+    seasons_string += '</ul>'
+    return HttpResponse(seasons_string)
