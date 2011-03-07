@@ -3,6 +3,18 @@
 {% load thumbnail %}
 {% load message_box %}
 {% block title %}{{serie.name|title}} - {% trans "Temporada" %} {{ season.season }}{% endblock %}
+{% block extrahead %}
+<script>
+$(document).ready(function() {
+  $('.epi_detail').hide();
+
+  $('.show_epi_detail').click(function() {
+    $('.epi_detail').toggle('slow');
+    return false;
+  });
+});
+</script>
+{% endblock %}
 {% block contents %}
 {% if message == "No registrado" %}
   {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
@@ -27,6 +39,8 @@
 </center>
 <div class="hr clearfix dotted">&nbsp;</div>
 
+<p class="show_epi_detail button">Ver Spoilers</p>
+
 <!-- EPISODE LIST -->
 {% for episode in episode_list %} 
 
@@ -37,14 +51,14 @@
 	<span class="meta">{% trans "Emitido el "%}{{episode.air_date }}</span>
 	<h4 class="title "><a href="{{ episode.get_absolute_url }}">{% if episode.title %}{{ episode.title }}{% else %}Episode {{ episode.episode }}{% endif %}</a></h4>
 	<div class="hr clearfix dotted">&nbsp;</div>
-	<p>{{ episode.description }}</p>
+	<p class="epi_detail">{{ episode.description }}</p>
 </div>
 <!-- COLUMN 2 -->
 <div class="grid_3">
 <a href="{{ episode.get_absolute_url }}">
 	{% if episode.poster.src %}
 		{% thumbnail episode.poster.src "200x200" as img_epi %}
-		<img class="img_epi" src="{{ img_epi.url }}">
+		<img class="img_epi epi_detail" src="{{ img_epi.url }}">
 		{% endthumbnail %}
 	{% else %}
 		<img src="/static/images/image_not_available.png" height=100>

@@ -7,6 +7,14 @@
 {% load message_box %}
 {% block extrahead %}
     <script>
+$(document).ready(function() {
+  $('.epi_detail').hide();
+
+  $('.show_epi_detail').click(function() {
+    $('.epi_detail').toggle('slow');
+    return false;
+  });
+});
 $(document).ready(function(){
 	$('.add_link').colorbox({width:'50%', height:'60%', iframe:true, 
          onClosed:function(){ location.reload(true); } 
@@ -54,30 +62,20 @@ function vote(linkid, direction) {
 	<h2 class="grid_6 caption clearfix right">{{ episode.season_episode }} - {{ episode.title|title }} </h2>
 <div class="hr clearfix dotted">&nbsp;</div>
 
-<div class="grid_5 portfolio">
+<span class="button show_epi_detail">Ver Spoiler</span>
+
+<div class="grid_5 portfolio epi_detail left">
 	{% if episode.poster.src %}
 	  {% thumbnail episode.poster.src "300x300" as img_episode %}
 	    <img src="{{ img_episode.url }}">
 	  {% endthumbnail %}
 	{% endif %}
-</div>
-<div class="grid_5">
-	<span class="title"> 
 	<span class="meta">{% trans "Descripción" %}</span><p style="font-size:14px;">{{ episode.description }}</p>
 	<span class="meta">{% trans "Duración" %} </span><p>{{ serie.runtime }} {% trans "minutos" %}</p>
 	<span class="meta">{% trans "Fecha de Emisión" %} </span><p> {{ episode.air_date }}</p>
 </div>
 
-{% if message == "No registrado" %}
-  {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
-{% else %}{% if message == "Vote recorded" %}
-  {% message_box "Su voto ha sido guardado" %}
-{% endif %}
-{% endif %}
-{{vote_dict}} {{score_dict}}
-
-<div class="hr clearfix dotted">&nbsp;</div>
-<div class="grid_12">
+<div class="grid_5 right">
 <h2> Links </h2>
 	{% if link_list %}
 	{% votes_by_user user on link_list as vote_dict %}
@@ -118,6 +116,17 @@ function vote(linkid, direction) {
       {% else %}
          {% trans "No hay enlaces disponibles" %}
       {% endif %}
+</div>
+
+{% if message == "No registrado" %}
+  {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
+{% else %}{% if message == "Vote recorded" %}
+  {% message_box "Su voto ha sido guardado" %}
+{% endif %}
+{% endif %}
+
+<div class="hr clearfix dotted">&nbsp;</div>
+<div class="grid_12">
 </div>
 <br />
 

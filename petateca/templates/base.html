@@ -2,7 +2,6 @@
 {% spaceless %}
 {% load i18n %}
 {% load dropdown_series %}
-{% load localeurl_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -38,6 +37,16 @@
 			$.jGrowl("¿Has visto nuestro \u003Ca href=\"\/faq\" rel=\"nofollow\"\u003EFAQ\u003C\/a\u003E?", { header: 'Bienvenido', sticky: true });
 		});
 		{% endif %}
+		$(document).ready(function(){
+            $(".slogan").click( function(){
+                var lang = $(this).attr('id');
+                $.post('/i18n/setlang/', { 
+                    'next': '{{ request.path }}', 
+                    'language': lang,
+                    'csrfmiddlewaretoken': getCookie('csrftoken')
+                }) 
+            });
+		});
 	</script>
 </head>
 <body>
@@ -46,10 +55,11 @@
 		<div id="logo" class="grid_4">
 			<h1 id="logo"><a href="/">{{SITE_NAME}}</a></h1>
 			{% if LANGUAGE_CODE == "es" %}
-				<span class="slogan meta">View in <a href="{{ request.path|chlocale:"en" }}">English</a>.</span>
+				<span class="slogan meta" id="en">View in <a href="{{ request.path }}">English</a>.</span>
 			{% else %}
-				<span class="slogan meta">Ver en <a href="{{ request.path|chlocale:"es" }}">Español</a>.</span>
+				<span class="slogan meta" id="es">Ver en <a href="{{ request.path }}">Español</a>.</span>
 			{% endif %}
+            {{LANGUAGE_CODE }}
 		</div>
 
 		<!-- Navigation Menu -->

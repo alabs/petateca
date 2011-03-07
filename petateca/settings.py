@@ -62,7 +62,6 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'localeurl.middleware.LocaleURLMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -93,7 +92,6 @@ FIXTURE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'localeurl',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
