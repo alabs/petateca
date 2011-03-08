@@ -177,6 +177,7 @@ except ImportError:
 
 # Invitations
 # Si se pone como True, redirige a /accounts/signin
+# y permite el registro solo a traves de invitaciones de otros usuarios
 INVITE_MODE = False
 ACCOUNT_INVITATION_DAYS = 7
 INVITATIONS_PER_USER = 5

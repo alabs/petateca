@@ -40,11 +40,13 @@
 		$(document).ready(function(){
             $(".slogan").click( function(){
                 var lang = $(this).attr('id');
+                alert(lang);
                 $.post('/i18n/setlang/', { 
                     'next': '{{ request.path }}', 
                     'language': lang,
                     'csrfmiddlewaretoken': getCookie('csrftoken')
                 }) 
+                return false;
             });
 		});
 	</script>
@@ -54,12 +56,7 @@
 		<!-- Text Logo -->
 		<div id="logo" class="grid_4">
 			<h1 id="logo"><a href="/">{{SITE_NAME}}</a></h1>
-			{% if LANGUAGE_CODE == "es" %}
-				<span class="slogan meta" id="en">View in <a href="{{ request.path }}">English</a>.</span>
-			{% else %}
-				<span class="slogan meta" id="es">Ver en <a href="{{ request.path }}">Español</a>.</span>
-			{% endif %}
-            {{LANGUAGE_CODE }}
+				<span class="slogan meta">Omnia Sunt Communia</span>
 		</div>
 
 		<!-- Navigation Menu -->
@@ -71,6 +68,7 @@
 				{% else %}
 					<li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>	
 			{% endif %}
+            <li><a href="{% url faq %}"><span class="meta">{% trans "preguntas" %}</span><br />{% trans "FAQ" %}</a></li>
 			<li><a href="{% url blog-index %}"><span class="meta">{% trans "informacion" %}</span><br />{% trans "BLOG" %}</a></li>
 			<li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
 		</ul>

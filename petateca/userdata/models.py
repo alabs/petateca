@@ -40,3 +40,4 @@ class EmailBackend(ModelBackend):
 
 class UserToInvite(ModelBackend):
     mail = models.EmailField()
+    invited = models.BooleanField()

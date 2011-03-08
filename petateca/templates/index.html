@@ -3,7 +3,7 @@
 {% load thumbnail %}
 {% load get_twitter_messages %}
 {% block contents %}
-        <h2 class="grid_12 caption clearfix center">{% blocktrans %}<span>{{ SITE_NAME }}</span>, sitio de <u>enlaces</u> para disfrutar y difundir.<span> Compartir Es Bueno</span>. <br />Mas de {{ count_link }} enlaces, {{count_episode }} episodios y {{count_serie}} series {% endblocktrans %}</h2>
+        <h2 class="grid_12 caption clearfix center">{% blocktrans %}<span>{{ SITE_NAME }}</span>. Comparte tus series, porque <span>compartir es bueno</span>. <br />Mas de {{ count_link }} enlaces, {{count_episode }} episodios y {{count_serie}} series {% endblocktrans %}</h2>
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 
         <div class="center">
@@ -14,17 +14,8 @@
                         <div class="preload" style="width:140px; height:190px;">
                             <img class="prel serie" id="{{ serie.id }}" alt="{{ serie.name }}" src="{{ img_serie.url }}">
                         </div>
-                        <span class="subtitle">{{ serie.name }}</span>
+                        <span>{{ serie.name }}</span>
                     </a> 
-                     <ul class="cssdropdown"> 
-                          <li><a class="button" href="{{ serie.get_absolute_url }}">Ver Serie</a> 
-                              <ul> 
-                                    {% for season in serie.season.all %}
-                                        <li><a href="{{ season.get_absolute_url }}">Temporada {{ season.season }}</a>
-                                    {% endfor %}
-                             </ul> 
-                          </li> 
-                     </ul> 
         		{% endthumbnail %}
                 </div>
       		{% endfor %}
@@ -35,27 +26,27 @@
 			<a class="quicknavgrid_3 quicknav alpha" href="/series">
 					<h4 class="title ">{% trans "Series" %}</h4>
 					<p>{% trans "listado de todas las series" %}</p>
-					<p style="text-align:center;"><img alt="" src="/static/images/Art_Artdesigner.lv.png" /></p>
+					<p style="text-align:center;"><img alt="{% trans "Todas las series" %}" src="/static/images/Art_Artdesigner.lv.png" /></p>
 				
 			</a>
 			<a class="quicknavgrid_3 quicknav" href="/faq">
 
 					<h4 class="title ">{% trans "FAQ" %}</h4>
 					<p>{% trans "Preguntas más frecuentes" %}</p>
-					<p style="text-align:center;"><img alt="" src="/static/images/info.png" /></p>
+					<p style="text-align:center;"><img alt="{% trans "Preguntas más frecuentes" %}" src="/static/images/info.png" /></p>
 				
 			</a>
 			<a class="quicknavgrid_3 quicknav" href="/blog">
 					<h4 class="title ">{% trans "Ver nuestro blog" %}</h4>
 					<p>{% blocktrans %}Blog de {{SITE_NAME}} para ver entradas y comentar{% endblocktrans %}</p>
 
-					<p style="text-align:center;"><img alt="" src="/static/images/Blog_Artdesigner.lv.png" /></p>
+					<p style="text-align:center;"><img alt="{% trans "Ir al blog" %}" src="/static/images/Blog_Artdesigner.lv.png" /></p>
 				
 			</a>
 			<a class="quicknavgrid_3 quicknav" href="#">
 					<h4 class="title ">{% trans "Redes Sociales" %}</h4>
 					<p>{% blocktrans %}{{SITE_NAME}} se encuentra en Twitter, Facebook y etc.{% endblocktrans %}</p>
-					<p style="text-align:center;"><img alt="" src="/static/images/hungry_bird.png" /></p>
+					<p style="text-align:center;"><img alt="{% trans "Redes Sociales" %}" src="/static/images/hungry_bird.png" /></p>
 			</a>
 		</div>
 {% endblock %}

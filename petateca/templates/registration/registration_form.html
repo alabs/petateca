@@ -3,7 +3,7 @@
 {% block contents %}
 			<div class="grid_13">
 <p>
-	.			Bienvenido a la version beta de {{SITE_NAME}}. De momento el acceso es solo bajo invitacion, mas que nada para hacer el buzz que tuvo GMail y Google Wave y todos los chicos cool del barrio.
+{% trans "Bienvenido a la version beta de {{SITE_NAME}}. De momento el acceso es solo bajo invitacion, mas que nada para hacer el buzz que tuvo GMail y Google Wave y todos los chicos cool del barrio." %}
 </p>
 			</div>
 			<div class="grid_14">
@@ -13,7 +13,7 @@
 				<form method='post' action="{% url registration_register %}?invitation_key={{invitation_key}}" id="login_form">
 					{{ form.as_p }}
 						<div id="button">
-						<input type='submit' id='send_message' class="button" value='send activation mail' />
+						<input type='submit' id='send_message' class="button" value='{% trans "Enviar correo de activación" %}' />
 						</div>
 						</li> 
 					</ul> 
