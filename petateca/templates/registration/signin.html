@@ -1,6 +1,6 @@
 {% extends "base_stripped.html" %}
 {% load i18n %}
-{% block title %}LiberTeca: la bilioteca del siglo XXI{% endblock %}
+{% block title %}LiberaTeca: la bilioteca del siglo XXI - Omnia Sunt Communia{% endblock %}
 {% block extrastyle %}
 	<style type="text/css"> 
 		body { background-color: #fff; color: #eeeeee; text-align: center; font-family: arial, sans-serif; }
@@ -35,10 +35,11 @@
 {% block contents %}
 <div class="dialog"> 
 	<br/>
-    <img src="/static/images/logo.png" alt="liberateca" />
+    <img src="/static/images/logo.png" alt="liberateca" width="100" />
+    <h2>{{ SITE_NAME }}</h2>
     <p> 
         {% blocktrans %}
-        <b>{{ SITE_NAME }}</b> es la biblioteca del siglo XXI. Aunque en principio solo tengamos series, proximamente tendremos libros, peliculas, musica, y todo lo que puedes encontrar en la biblioteca de tu barrio: <b>sin coste</b>, <b>sin publicidad</b>, y lo mejor de todo, <b>sin moverte de tu sofa</b>. 
+        Somos la biblioteca del siglo XXI, una pagina de enlaces de nueva generación. Libros, peliculas, musica, series y todo lo que puedes encontrar en la biblioteca de tu barrio: <b>sin coste</b>, <b>sin publicidad</b>, y lo mejor de todo, <b>sin moverte de tu sofa</b>.
         {% endblocktrans %}
     </p> 
     <div id="accordion">
