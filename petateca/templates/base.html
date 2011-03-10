@@ -2,7 +2,6 @@
 {% spaceless %}
 {% load i18n %}
 {% load dropdown_series %}
-{% load compressed %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -13,8 +12,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico" />
 	<!-- Stylesheets -->
-    {# compressed_css 'screen' #}
-    {# compressed_js 'all' #}
 	<link rel="stylesheet" href="/static/css/reset.css" />
 	<link rel="stylesheet" href="/static/css/styles.css" />
 	<link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />
