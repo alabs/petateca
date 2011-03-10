@@ -2,6 +2,7 @@
 {% spaceless %}
 {% load i18n %}
 {% load dropdown_series %}
+{% load compressed %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
@@ -12,6 +13,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico" />
 	<!-- Stylesheets -->
+    {# compressed_css 'screen' #}
+    {# compressed_js 'all' #}
 	<link rel="stylesheet" href="/static/css/reset.css" />
 	<link rel="stylesheet" href="/static/css/styles.css" />
 	<link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />
@@ -29,26 +32,14 @@
 	<script type="text/javascript" src="/static/js/jquery.jgrowl.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.rating.js"></script>
     <script type="text/javascript" src="/static/js/jquery.bubblepopup.v2.3.1.min.js"></script>
-	{% block extrahead %}{% endblock %}
 	<script type="text/javascript" src="/static/js/petateca.js"></script>
+	{% block extrahead %}{% endblock %}
 	<script>
 		{% if initial_message %}
 		$(document).ready(function(){
 			$.jGrowl("¿Has visto nuestro \u003Ca href=\"\/faq\" rel=\"nofollow\"\u003EFAQ\u003C\/a\u003E?", { header: 'Bienvenido', sticky: true });
 		});
 		{% endif %}
-		$(document).ready(function(){
-            $(".slogan").click( function(){
-                var lang = $(this).attr('id');
-                alert(lang);
-                $.post('/i18n/setlang/', { 
-                    'next': '{{ request.path }}', 
-                    'language': lang,
-                    'csrfmiddlewaretoken': getCookie('csrftoken')
-                }) 
-                return false;
-            });
-		});
 	</script>
 </head>
 <body>
@@ -99,5 +90,25 @@
 <noscript>
         <div id="noscript-warning"> {{SITE_NAME}} funciona mejor con JavaScript activado.</div>
 </noscript>    
+<script type="text/javascript">
+  var uservoiceOptions = {
+    key: 'liberateca',
+    host: 'liberateca.uservoice.com', 
+    forum: '106199',
+    alignment: 'left',
+    background_color:'#000000', 
+    text_color: 'white',
+    hover_color: '#0066CC',
+    lang: 'es',
+    showTab: true
+  };
+  function _loadUserVoice() {
+    var s = document.createElement('script');
+    s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
+    document.getElementsByTagName('head')[0].appendChild(s);
+  }
+  _loadSuper = window.onload;
+  window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+</script>
 </body>
 </html>

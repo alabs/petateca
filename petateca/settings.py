@@ -103,6 +103,8 @@ INSTALLED_APPS = (
     'blog',
     'userdata',
     #'imdblocal', #Don't use yet, sucks a lot
+    'registration',
+    'invitation',
     'south',
     'modeltranslation',
     'rosetta',
@@ -110,20 +112,15 @@ INSTALLED_APPS = (
     'haystack',
     'djangoratings',
     'voting',
-    'registration',
     'taggit',
     'django.contrib.comments',
     'avatar',
-    'invitation',
-    'django.contrib.sitemaps',
-
     #Sentry
     # don't forget to add the dependencies!
     'indexer',
     'paging',
     'sentry',
     'sentry.client',
-
 )
 
 DATABASE_ROUTERS = ['imdblocal.dbrouter.ImdbRouter']

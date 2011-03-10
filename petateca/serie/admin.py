@@ -18,12 +18,6 @@ class EpisodeInline(admin.TabularInline):
 class SeasonInline(admin.TabularInline):
     model = m.Season
 
-#class EpisodeInline(admin.ModelAdmin):
-#    prepopulated_fields = {'slug_title': ('title', )}
-#    inlines = [
-#        LinkInline,
-#    ]
-
 
 class SerieAdmin(admin.ModelAdmin):
     list_display = ['name', 'network', 'runtime', 'image_serie_serie', ]
