@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'paging',
     'sentry',
     'sentry.client',
+    'compress',
 )
 
 DATABASE_ROUTERS = ['imdblocal.dbrouter.ImdbRouter']
@@ -186,3 +187,41 @@ LOGIN_EXEMPT_URLS = (
 LOGIN_URL_INDEX = '/accounts/signin/'
 INVITATION_MAIL = 'invitaciones@petateca.net'
 ADMIN_MAIL = 'admin@petateca.net'
+
+# compress app settings
+COMPRESS_CSS = {
+    'all': {
+        'source_filenames': (
+            'css/reset.css',
+            'css/styles.css',
+            'css/jquery.colorbox.css',
+            'css/jquery.jgrowl.css',
+            'css/jquery.rating.css',
+            'css/jquery.autocomplete.css',
+            'css/jquery.bubblepopup.v2.3.1.css',
+            'css/jquery.sorter_blue.css',
+        ),
+        'output_filename': 'css/compressed-?.css',
+    },
+}
+
+COMPRESS_JS = {
+    'all': {
+        'source_filenames': (
+            'js/jquery-min.js',
+            'js/jquery.autocomplete.js',
+            'js/jquery.colorbox.js',
+            'js/jquery.dimensions.min.js',
+            'js/jquery.easing.1.3.js',
+            'js/jquery.jgrowl.js',
+            'js/jquery.rating.js',
+            'js/jquery.bubblepopup.v2.3.1.min.js',
+            'js/petateca.js',
+# Da un error de Undetermined Regular Expression     'js/jquery.tablesorter.js',
+        ),
+        'output_filename': 'js/compressed-?.js',
+    },
+}
+
+COMPRESS = True
+COMPRESS_VERSION = True

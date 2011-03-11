@@ -3,20 +3,7 @@
 {% load thumbnail %}
 {% load message_box %}
 {% block title %}{{serie.name|title}} - {% trans "Temporada" %} {{ season.season }}{% endblock %}
-{% block extrahead %}
-<script>
-    $(document).ready(function() {
-        $('.show_epi_detail').click(function() {
-            $('.epi_detail').toggle('slow');
-            return false;
-        });
-    });
-</script>
-{% endblock %}
 {% block contents %}
-{% if message == "No registrado" %}
-  {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
-{% endif %}
 <!-- BREADCRUMB -->
 <div class="breadcrumb left">
     <a class="button" href="{% url serie-index %}">Series</a>

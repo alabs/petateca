@@ -1,93 +1,79 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
 {% spaceless %}
 {% load i18n %}
-{% load dropdown_series %}
+{% load compressed %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 {% endspaceless %}
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
 <head>
-	<title>{% block title %}{{title|default:SITE_NAME}}{%endblock %}</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}{{title|default:SITE_NAME}}{%endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico" />
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="/static/css/reset.css" />
-	<link rel="stylesheet" href="/static/css/styles.css" />
-	<link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />
-	<link rel="stylesheet" href="/static/css/jquery.jgrowl.css" type="text/css" />
-	<link rel="stylesheet" href="/static/css/jquery.rating.css" type="text/css" />
-	<link rel="stylesheet" href="/static/css/jquery.autocomplete.css" type="text/css" />
-    <link rel="stylesheet" href="/static/css/jquery.bubblepopup.v2.3.1.css" type="text/css" />
-	{% block extrastyle %}{% endblock %}
-	<!-- Scripts -->
-	<script type="text/javascript" src="/static/js/jquery-min.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.autocomplete.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.dimensions.min.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.jgrowl.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.rating.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.bubblepopup.v2.3.1.min.js"></script>
-	<script type="text/javascript" src="/static/js/petateca.js"></script>
-	{% block extrahead %}{% endblock %}
-	<script>
-		{% if initial_message %}
-		$(document).ready(function(){
-			$.jGrowl("¿Has visto nuestro \u003Ca href=\"\/faq\" rel=\"nofollow\"\u003EFAQ\u003C\/a\u003E?", { header: 'Bienvenido', sticky: true });
-		});
-		{% endif %}
-	</script>
+    <!-- Stylesheets -->
+    {% compressed_css 'all' %}
+    {% block extrastyle %}{% endblock %}
+    {% block extrahead %}{% endblock %}
 </head>
 <body>
-	<div id="wrapper" class="container_12 clearfix">
-		<!-- Text Logo -->
-		<div id="logo" class="grid_4">
+    <div id="wrapper" class="container_12 clearfix">
+        <!-- Text Logo -->
+        <div id="logo" class="grid_4">
             <img src="/static/images/logo.png" class="left" alt="liberateca" width="50" style="margin-top:2em;" />
-			<h1 class="right" id="logo"><a href="/">{{SITE_NAME}}</a></h1>
-			<span class="slogan meta right">Omnia Sunt Communia</span>
-		</div>
+            <h1 class="right" id="logo"><a href="/">{{SITE_NAME}}</a></h1>
+            <span class="slogan meta right">Omnia Sunt Communia</span>
+        </div>
 
-		<!-- Navigation Menu -->
-		<ul id="navigation" class="grid_8">
+        <!-- Navigation Menu -->
+        <ul id="navigation" class="grid_8">
 
-			{% if request.user.is_authenticated %}
-					<li><a href="/accounts/logout"><span class="meta">{% trans "cerrar sesión" %}</span><br />{% trans "CERRAR SESIÓN" %}</a></li>
-					<li><a href="{% url get_user_public_profile user_name=request.user.username %}"><span class="meta">{{request.user.username}}</span><br />{% trans "PERFIL" %}</a></li>
-				{% else %}
-					<li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>	
-			{% endif %}
+            {% if request.user.is_authenticated %}
+                    <li><a href="/accounts/logout"><span class="meta">{% trans "cerrar sesión" %}</span><br />{% trans "CERRAR SESIÓN" %}</a></li>
+                    <li><a href="{% url get_user_public_profile user_name=request.user.username %}"><span class="meta">{{request.user.username}}</span><br />{% trans "PERFIL" %}</a></li>
+                {% else %}
+                    <li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>    
+            {% endif %}
             <li><a href="{% url faq %}"><span class="meta">{% trans "preguntas" %}</span><br />{% trans "FAQ" %}</a></li>
-			<li><a href="{% url blog-index %}"><span class="meta">{% trans "informacion" %}</span><br />{% trans "BLOG" %}</a></li>
-			<li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
-		</ul>
-			<div id="search_form">
-			  <form action="/search/">
-			          <fieldset>
-			            <legend></legend>
-			            <input id="query" type="text" name="q" value="{% trans "Busqueda" %}..." class="field" onblur="this.value='{% trans "Busqueda" %}...'" onfocus="this.value=''" />
-			            <input type="submit" value="{% trans "Ir" %}" class="button" / >
-				  </fieldset>
-			  </form>
-			</div>
-		
-		<div class="hr grid_12">&nbsp;</div>
-		<div class="clear"></div>
-		{% block contents %}{% endblock %}
-		<!-- FOOTER -->
-		<p class="grid_12 footer clearfix">
-		<div class="hr grid_12">&nbsp;</div>
-			<span class="float">
-			<p>{% trans "Diseño basado en Aurelius, hecho por" %} <a href="http://qwibbledesigns.co.uk/"><b>QwibbleDesigns</b></a>.<br />
-			{% trans "Software licenciado " %}<a href="#"><b>GPL Affero</b></a>.
-			{% trans "Desarrollado en " %}<a href="http://djangoproject.com/"><b>Django</b></a>.</p></span>
-			<a class="float right" href="#">{% trans "arriba" %}</a>
+            <li><a href="{% url blog-index %}"><span class="meta">{% trans "informacion" %}</span><br />{% trans "BLOG" %}</a></li>
+            <li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
+        </ul>
+            <div id="search_form">
+              <form action="/search/">
+                      <fieldset>
+                        <legend></legend>
+                        <input id="query" type="text" name="q" value="{% trans "Busqueda" %}..." class="field" onblur="this.value='{% trans "Busqueda" %}...'" onfocus="this.value=''" />
+                        <input type="submit" value="{% trans "Ir" %}" class="button" / >
+                  </fieldset>
+              </form>
+            </div>
+        
+        <div class="hr grid_12">&nbsp;</div>
+        <div class="clear"></div>
+        {% block contents %}{% endblock %}
+        <!-- FOOTER -->
+        <p class="grid_12 footer clearfix">
+        <div class="hr grid_12">&nbsp;</div>
+            <span class="float">
+            <p>{% trans "Diseño basado en Aurelius, hecho por" %} <a href="http://qwibbledesigns.co.uk/"><b>QwibbleDesigns</b></a>.<br />
+            {% trans "Software licenciado " %}<a href="#"><b>GPL Affero</b></a>.
+            {% trans "Desarrollado en " %}<a href="http://djangoproject.com/"><b>Django</b></a>.</p></span>
+            <a class="float right" href="#">{% trans "arriba" %}</a>
 
-		</p>
-	</div>
+        </p>
+    </div>
 <noscript>
         <div id="noscript-warning"> {{SITE_NAME}} funciona mejor con JavaScript activado.</div>
 </noscript>    
+<!-- Scripts -->
+{% compressed_js 'all' %}
+{% if initial_message %}
+    <script>
+        $(document).ready(function(){
+            $.jGrowl("LiberaTeca es la nueva biblioteca del siglo XXI. ¿Has visto nuestro \u003Ca href=\"\/faq\" rel=\"nofollow\"\u003EFAQ\u003C\/a\u003E?", { header: 'Bienvenido', sticky: true });
+        });
+    </script>
+{% endif %}
 <script type="text/javascript">
   var uservoiceOptions = {
     key: 'liberateca',
@@ -108,5 +94,6 @@
   _loadSuper = window.onload;
   window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
 </script>
+{% block extrascript %}{% endblock %}
 </body>
 </html>

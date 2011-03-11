@@ -34,6 +34,7 @@ setup(
         'simplejson',
         'django-avatar',
         'django-sentry',
+        'django-compress',
     ],
     classifiers=[
         'Environment :: Web Environment',

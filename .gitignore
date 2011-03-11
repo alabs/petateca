@@ -11,6 +11,8 @@ petateca/bots/libercopy/liberbot/cache/*
 petateca/bots/libercopy/sites/*/debug/*
 petateca/static/avatars/*
 petateca/static/cache/*
+petateca/static/css/compress*.css
+petateca/static/js/compress*.js
 petateca/static/img/actor/*.jpg
 petateca/static/img/blog/*.jpg
 petateca/static/img/blog/*.png

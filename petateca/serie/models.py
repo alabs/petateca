@@ -152,10 +152,10 @@ class Episode(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return '/serie/%s/episode/S%02dE%02d' % (self.season.serie.slug_name, self.season.season, self.episode)
+        return '/serie/%s/episode/S%02dE%02d/' % (self.season.serie.slug_name, self.season.season, self.episode)
 
     def get_add_link_url(self):
-        return '/serie/%s/episode/S%02dE%02d/add' % (self.season.serie.slug_name, self.season.season, self.episode)
+        return '/serie/%s/episode/S%02dE%02d/add/' % (self.season.serie.slug_name, self.season.season, self.episode)
 
 
 class Link(models.Model):
