@@ -2,7 +2,11 @@ import os
 import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-SITE_NAME = 'LiberaTeca'
+
+# Hay algunas partes en las que no se puede cambiar, 
+# asi que si se va a cambiar es recomendable hacer antes un
+# egre -R "(petateca|liberateca)" * 
+SITE_NAME = 'Liberateca'
 
 DEBUG = True
 SENTRY_TESTING = True
