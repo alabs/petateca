@@ -48,7 +48,7 @@
             <!-- LOGIN form -->
             <form method="post" action="." id="signin_form">
                 <ul class="signin_list">						
-                {{ form.as_ul }}
+                    {{ form.as_ul }}
                     <input type='submit' id='send_message' class="button" value='{% trans "Ir a LiberaTeca" %}' />
                 </ul> 
             </form>  
@@ -56,9 +56,9 @@
         <h3 class="header"><a href="#">{% trans "Pedir Invitación" %}</a></h3>
         <div>
                     <p> Puedes pedir una invitacion rellenando tu correo </p>
-                        <form method="post" action="{% url request_invitation %}" id="invitation_form">
+                        <form method="post" action="{% url request_invitation %}" id="ask_invitation_form">
                             <label> Email </label>
-                            <input type="text" /> 
+                            <input id='id_mail' name='mail' type='text' /> 
                             <input type='submit' id='request_invitation' class="button" value='Pedir Invitacion' />
                         </form>  
         </div>

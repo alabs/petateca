@@ -629,6 +629,26 @@ p.error {
     float: left;
     margin-right: 10px;
 }
+#invitation_form input#id_email {
+    padding: 8px;
+    border: 1px solid #CCCCCC;
+    margin-left: 10px;
+    background: #fcfcfc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+#invitation_form input.button {
+    margin-left: 10em;
+}
+/* Ask Invitation Form */ 
+#ask_invitation_form input#id_email {
+    padding: 8px;
+    border: 1px solid #CCCCCC;
+    margin-left: 10px;
+    background: #fcfcfc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
 /* Add Link form */
 #add_link_form label{
     margin-left: 2em;

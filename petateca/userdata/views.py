@@ -1,22 +1,25 @@
-from decorators import render_to
 from django.contrib.auth.decorators import login_required
-from userdata.models import UserProfile, User
 from django.contrib.contenttypes.models import ContentType
-from djangoratings.models import Vote
-from serie.models import Link, Serie
+from django.http import HttpResponseRedirect
 
+from serie.models import Link, Serie
+from userdata.forms import UserToInviteForm
+from userdata.models import UserProfile, User, UserToInvite
+
+from decorators import render_to
+from djangoratings.models import Vote
 
 @render_to('registration/profile.html')
 @login_required
 def view_profile(request):
+    ''' TODO: Para cambiar cosas del perfil ''' 
     user_profile = request.user.get_profile()
     return {
-      'profile': user_profile,
-    }
-
+      'profile': user_profile, } 
 
 @render_to('userdata/user_public_profile.html')
 def get_user_public_profile(request, user_name):
+    ''' Perfil publico del usuario ''' 
     user = User.objects.get(username=user_name)
     profile = UserProfile.objects.get(user=user)
     # for series marked as favorite
@@ -51,5 +54,16 @@ def get_user_public_profile(request, user_name):
     }
 
 
+@render_to('registration/invitation.html')
 def request_invitation(request):
-    return "TODO"
+    ''' Para que los futuros usuarios puedan pedir invitaciones '''
+    if request.method =='GET':
+        form = UserToInviteForm()
+    elif request.method == 'POST': 
+        form = UserToInviteForm(request.POST)
+        if form.is_valid(): 
+            u = UserToInvite()
+            u.mail = form.cleaned_data['mail']
+            u.save()
+            return HttpResponseRedirect('/accounts/invitation/thanks/') # Redirect after POST
+    return { 'form' : form }

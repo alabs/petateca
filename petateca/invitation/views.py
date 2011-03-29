@@ -66,7 +66,6 @@ def invite(request, success_url=None,
             return HttpResponseRedirect(success_url or reverse('invitation_complete'))
     else:
         form = form_class()
-    print InvitationKey.objects.remaining_invitations_for_user(request.user)
     return direct_to_template(request, template_name, {
         'form': form,
         'remaining_invitations': abs(InvitationKey.objects.remaining_invitations_for_user(request.user)),

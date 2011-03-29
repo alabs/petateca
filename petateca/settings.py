@@ -159,7 +159,7 @@ HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
 AUTH_PROFILE_MODULE = 'userdata.UserProfile'
 ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = '/'
-DEFAULT_FROM_EMAIL = 'noreply@petateca.net'
+DEFAULT_FROM_EMAIL = 'noreply@liberateca.net'
 
 AUTHENTICATION_BACKENDS = (
     'userdata.models.EmailBackend',
@@ -168,25 +168,24 @@ AUTHENTICATION_BACKENDS = (
 
 FORCE_LOWERCASE_TAGS = True
 
-try:
-    from local_settings import *
-except ImportError:
-    pass
 
 # Invitations
 # Si se pone como True, redirige a /accounts/signin
 # y permite el registro solo a traves de invitaciones de otros usuarios
 INVITE_MODE = False
 ACCOUNT_INVITATION_DAYS = 7
-INVITATIONS_PER_USER = 5
+INVITATIONS_PER_USER = 6
 
 LOGIN_EXEMPT_URLS = (
     r'^static/', 
+    r'^accounts/invitation/request/$', 
+    r'^accounts/invitation/thanks/$', 
+    r'^admin/',
 )
 
 LOGIN_URL_INDEX = '/accounts/signin/'
-INVITATION_MAIL = 'invitaciones@petateca.net'
-ADMIN_MAIL = 'admin@petateca.net'
+INVITATION_MAIL = 'invitaciones@liberateca.net'
+ADMIN_MAIL = 'admin@liberateca.net'
 
 # compress app settings
 COMPRESS_CSS = {
@@ -225,3 +224,8 @@ COMPRESS_JS = {
 
 COMPRESS = True
 COMPRESS_VERSION = True
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

@@ -48,7 +48,6 @@ urlpatterns = patterns('',
         form_class=ModelSearchForm
     )),
 
-
     (r'^i18n/', include('django.conf.urls.i18n')),
 
     url(r'^faq/$', 'django.views.generic.simple.direct_to_template',
@@ -62,9 +61,9 @@ urlpatterns = patterns('',
     url(r'^atom/links/$', AtomLatestLinksFeed(), name='atomlinksfeed'),
 
 
+    # Usuarios, invitaciones, registros, avatar, etc
     (r'^accounts/', include('invitation.urls')),
     (r'^accounts/profile/$', 'userdata.views.view_profile'),
-    # invitation
     url(r'^accounts/register/$',
         register,
         {
@@ -78,11 +77,10 @@ urlpatterns = patterns('',
         name='auth_login'),
     (r'^accounts/', include('registration.urls')),
     url(r'^user/(?P<user_name>[-\w]+)$', 'userdata.views.get_user_public_profile', name='get_user_public_profile'),
-    (r'^avatar/', include('avatar.urls')),
-    url(r'^accounts/user-invitation$', 'userdata.views.request_invitation', name='request_invitation'),
+    (r'^accounts/avatar/', include('avatar.urls')),
+    url(r'^accounts/invitation/request/$', 'userdata.views.request_invitation', name='request_invitation'),
+    url(r'^accounts/invitation/thanks/$', 'django.views.generic.simple.direct_to_template', {'template': 'invitation/thanks.html'},),
 
-
-    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
 if settings.DEBUG:
