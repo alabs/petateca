@@ -2,7 +2,7 @@ Has recibido una invitacion a {{ site }}, la nueva biblioteca publica digital.
 
 {{site}} es una web de enlaces sin publicidad, con contenidos Creative Commons, donde puedes agregar enlaces, votar las series, comentarlas y los links. El proyecto es codigo libre y estas invitado a mejorarlo.
 
-Para crearte un usuario y acceder a la web debes dirigirte a: http://{{site}}/accounts/register/?invitation_key={{ invitation_key }}/
+Para crearte un usuario y acceder a la web debes dirigirte a: http://{{site}}/accounts/register/?invitation_key={{ invitation_key }}
 
 Tienes {{ expiration_days }} dias para hacerlo, sino la invitacion expirara.
 
