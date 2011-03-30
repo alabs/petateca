@@ -97,7 +97,6 @@ class InvitationKey(models.Model):
                                      'expiration_days': settings.ACCOUNT_INVITATION_DAYS,
                                      'site': current_site })
         
-        print subject, message, settings.DEFAULT_FROM_EMAIL, [email]
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
 
         

@@ -7,12 +7,8 @@ Para que este funcione es necesario que haya un usuario llamado liberateca
 """
 
 from django.core.management.base import NoArgsCommand
-
 from invitation.models import InvitationKey
-
 from userdata.models import UserToInvite, User
-
-
 
 class Command(NoArgsCommand):
     help = "Envia invitaciones a los primeros 5 usuarios no invitados de UserToInvite"
@@ -25,3 +21,4 @@ class Command(NoArgsCommand):
             invitation.send_to(user.mail)
             user.has_been_invited = True
             user.save()
+            print 'Invited %s' % user.mail
