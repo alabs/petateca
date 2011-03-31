@@ -30,6 +30,6 @@ urlpatterns = patterns('serie.views',
 
     url(r'^sneak$', 'sneak_links', name="sneak_links"),
     url(r'^lookup/serie/(?P<serie_id>[-\w]+)$', 'serie_lookup'),
-    url(r'^lookup/season/(?P<serie_id>[-\w]+)$', 'season_lookup'),
+    url(r'^lookup/serie/(?P<serie_id>[-\w]/+)/(?P<season>[-\w]/+)$', 'season_lookup'),
 
 )

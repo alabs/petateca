@@ -5,7 +5,7 @@
 {% load extract_domain %}
 {% load background_color %}
 {% load message_box %}
-{% block extrahead %}
+{% block extrascript %}
 <script>
 var url = "{{request.path }}";
 
@@ -20,6 +20,17 @@ $(document).ready(function () {
             });
         }
     }); 
+    $('.season').click( 
+        function(){ 
+            $.get($(this).attr('href'), {},
+                function(data){
+                    $('#season_list').html(data)
+                }
+            ); 
+            return false; 
+        }
+    );
+
 });
 
 
@@ -155,7 +166,7 @@ function favorite() {
 	<!-- SEASONS -->
 	<h2><span>{% trans "Temporadas" %}</span></h2>
 	{% for season in season_list %}
-		<a class="portfolio_item float alpha" href="{{ season.get_absolute_url }}">
+		<a class="portfolio_item float alpha season" href="{{ season.get_absolute_url }}">
 		<div class="preload" style="width:120px; height:170px">
 		{% if season.poster %} {% thumbnail season.poster.src "180x160" as img_season %} 
 			<img class="prel" src="{{ img_season.url }}" alt="{{serie.name}} - {{season.season}}"/>{% endthumbnail %}
@@ -168,6 +179,7 @@ function favorite() {
 		</div>
 		<p class="subtitle">{% trans "Temporada" %} {% if season.season == 0 %}Esp{%else%} {{ season.season }}{%endif %}</p> 
 	</a>{% endfor %}
+    <div id="season_list"></div>
 	<div class="hr clearfix">&nbsp;</div>
 	<!-- DESCRIPTION -->
 	<p class="clearfix"> {{ serie.description }}</p>

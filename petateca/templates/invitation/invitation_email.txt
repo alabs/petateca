@@ -1,10 +1,14 @@
-Has recibido una invitacion a {{ site }}, la nueva biblioteca publica digital. 
+{% load i18n %}
+{% blocktrans with site.name as sitename and invitation_key.from_user.username as username %}Has recibido una invitacion de parte de {{ username }} para formar parte de {{ sitename }}, la nueva biblioteca publica digital.
 
-{{site}} es una web de enlaces sin publicidad, con contenidos Creative Commons, donde puedes agregar enlaces, votar las series, comentarlas y los links. El proyecto es codigo libre y estas invitado a mejorarlo.
+{{ sitename }} es una web de enlaces sin publicidad, con contenidos Creative Commons, donde puedes agregar enlaces, votar las series, comentarlas y tambien votar por los links. El proyecto es software libre y estas invitado a mejorarlo, ayudandonos con sugerencias, bugs y todo lo que se te ocurra.
+{% endblocktrans %}
 
-Para crearte un usuario y acceder a la web debes dirigirte a: http://{{site}}/accounts/register/?invitation_key={{ invitation_key }}
+{% trans "Para crearte un usuario y acceder a la web debes dirigirte a" %}
+http://{{site.domain}}/accounts/register/?invitation_key={{ invitation_key.key }}
 
-Tienes {{ expiration_days }} dias para hacerlo, sino la invitacion expirara.
+{% blocktrans with site.name as sitename %}Saludos,
 
-Saludos,
-{{ site }}
+{{ sitename }}
+Omnia Sunt Communia
+{% endblocktrans %}

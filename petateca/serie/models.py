@@ -81,7 +81,7 @@ class Season(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.get_season', (), {
+        return ('serie.views.season_lookup', (), {
                 'serie_slug': self.serie.slug_name,
                 'season': self.season,
         })

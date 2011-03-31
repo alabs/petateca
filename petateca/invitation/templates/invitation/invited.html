@@ -1,0 +1,10 @@
+{% extends "invitation/base.html" %}
+{% load i18n %}
+
+{% block invitation_content %}
+
+<h2>{% trans "You have been invited!" %}</h2>
+
+<a href="{% url registration_register %}?invitation_key={{ invitation_key }}">-&gt; {% trans "proceed to registration" %}</a>
+
+{% endblock %}

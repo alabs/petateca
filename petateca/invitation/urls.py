@@ -17,5 +17,6 @@ urlpatterns = patterns('',
                 name='invitation_invited'),
     url(r'^register/$',
                 register,
+                { 'backend': 'registration.backends.default.DefaultBackend' },
                 name='registration_register'),
 )

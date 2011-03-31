@@ -295,11 +295,12 @@ def serie_lookup(request, serie_id):
     return HttpResponse(result)
 
 
-def season_lookup(request, serie_id):
-    serie = Serie.objects.get(id=serie_id)
-    seasons_list = Season.objects.filter(serie=serie)
-    seasons_string = '<ul>'
-    for season in seasons_list:
-        seasons_string += '<li><a style="color: #fff; font-weight: bold;" href="' + season.get_absolute_url() + '"> Temporada ' + str(season.season) + '</a>'
-    seasons_string += '</ul>'
-    return HttpResponse(seasons_string)
+def season_lookup(request, serie_slug, season):
+    serie = Serie.objects.get(slug_name=serie_slug)
+    season = Season.objects.get(serie=serie, season=season)
+    episode_list = season.episodes.all()
+    episode_string = '<div class="hr clearfix">&nbsp;</div><ul>'
+    for episode in episode_list:
+        episode_string += '<li><a href="' + episode.get_absolute_url() + '"> Episodio ' + str(episode.episode) + '</a>'
+    episode_string += '</ul>'
+    return HttpResponse(episode_string)
