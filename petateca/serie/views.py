@@ -298,9 +298,9 @@ def serie_lookup(request, serie_id):
 def season_lookup(request, serie_slug, season):
     serie = Serie.objects.get(slug_name=serie_slug)
     season = Season.objects.get(serie=serie, season=season)
-    episode_list = season.episodes.all()
-    episode_string = '<div class="hr clearfix">&nbsp;</div><ul>'
+    episode_list = season.episodes.all().order_by('episode')
+    episode_string = '<div id="episode_list"><ul>\n'
     for episode in episode_list:
-        episode_string += '<li><a href="' + episode.get_absolute_url() + '"> Episodio ' + str(episode.episode) + '</a>'
-    episode_string += '</ul>'
+        episode_string += '<li><a href="%s"><strong>%s</strong> - %s </a></li>\n' % ( episode.get_absolute_url(), episode.season_episode(), episode.title )
+    episode_string += '</ul></div>'
     return HttpResponse(episode_string)
