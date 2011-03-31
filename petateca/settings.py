@@ -186,6 +186,7 @@ LOGIN_EXEMPT_URLS = (
     r'^accounts/invitation/request/$', 
     r'^accounts/invitation/thanks/$', 
     r'^admin/',
+    r'^accounts/register/',
 )
 
 LOGIN_URL_INDEX = '/accounts/signin/'
