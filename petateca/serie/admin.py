@@ -116,6 +116,7 @@ class SeasonAdmin(admin.ModelAdmin):
 
 
 admin.site.register(m.Actor)
+admin.site.register(m.Role)
 admin.site.register(m.Episode, EpisodeAdmin)
 admin.site.register(m.Genre, GenreAdmin)
 admin.site.register(m.ImageActor)

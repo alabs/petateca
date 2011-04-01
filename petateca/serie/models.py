@@ -50,6 +50,8 @@ class Role(models.Model):
     class Meta:
         unique_together = ("serie", "actor", "role")
 
+    def __unicode__(self):
+        return self.role
 
 class SerieAlias(models.Model):
     name = models.CharField(max_length=255, unique=True, help_text=_('otros nombres para la misma serie'))
