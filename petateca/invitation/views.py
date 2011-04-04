@@ -31,7 +31,10 @@ def register(request, backend, success_url=None, form_class=None,
              disallowed_url='registration_disallowed',
              template_name='registration/registration_form.html',
              wrong_template_name='invitation/wrong_invitation_key.html',
-             extra_context=None):
+             extra_context={
+                'ADMIN_MAIL': settings.ADMIN_MAIL,
+                'INVITATION_MAIL': settings.INVITATION_MAIL,
+            }):
     extra_context = extra_context is not None and extra_context.copy() or {}
     if getattr(settings, 'INVITE_MODE', False):
         invitation_key = request.REQUEST.get('invitation_key', False)
