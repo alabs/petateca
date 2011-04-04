@@ -114,9 +114,14 @@ class SeasonAdmin(admin.ModelAdmin):
     ]
 
 
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ['role', 'actor', 'serie', ]
+    model = m.Role
+
+
 
 admin.site.register(m.Actor)
-admin.site.register(m.Role)
+admin.site.register(m.Role, RoleAdmin)
 admin.site.register(m.Episode, EpisodeAdmin)
 admin.site.register(m.Genre, GenreAdmin)
 admin.site.register(m.ImageActor)
