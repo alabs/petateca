@@ -55,10 +55,13 @@
         </div>
         <h3 class="header"><a href="#">{% trans "Pedir Invitación" %}</a></h3>
         <div>
-                    <p> Puedes pedir una invitacion rellenando tu correo </p>
-                        <form method="post" action="{% url request_invitation %}" id="ask_invitation_form">
-                            <label> Email </label>
-                            <input id='id_mail' name='mail' type='text' /> 
+                    <p> Puedes pedir una invitacion rellenando tu correo y proximamente te la enviaremos </p>
+                        <form method="post" action="{% url request_invitation %}" id="signin_form">
+                        <ul>
+                            <li>
+                                <label> Email </label>
+                                <input id='id_username' name='mail' type='text' /> 
+                            </li>
                             <input type='submit' id='request_invitation' class="button" value='Pedir Invitacion' />
                         </form>  
         </div>
