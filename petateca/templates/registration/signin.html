@@ -1,21 +1,91 @@
 {% extends "base_stripped.html" %}
-{% load message_box %}
-{% block title %}Login{% endblock %}
+{% load i18n %}
+{% block title %}LiberaTeca: la bilioteca del siglo XXI - Omnia Sunt Communia{% endblock %}
+{% block extrastyle %}
+	<style type="text/css"> 
+		body { background-color: #fff; color: #eeeeee; text-align: center; font-family: arial, sans-serif; }
+		div.dialog {
+			width: 60em;
+			padding: 0 4em;
+			margin: 4em auto 0 auto;
+			border: 1px solid #ccc;
+			border-right-color: #b6e19f;
+			border-bottom-color: #b6e19f;
+			background-color: #717171;
+			font-size: 120%;
+		}
+		.header { 
+            font-size: 130%; 
+            line-height: 1.5em; 
+            background-color: #333333;
+        }
+        a:link {
+            color: #fff;
+        }
+	</style> 
+{% endblock %}
+{% block extrahead %}
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+<script>
+    $(function() {
+            $( "#accordion" ).accordion();
+                });
+</script>
+{% endblock %}
 {% block contents %}
-{% if request.user.is_authenticated %}
-	<h2 class="grid_12 caption clearfix">You're already <span>logged in</span>! Go watch some <a href="/series">series</a></h2>
-{% else %}
-<h3>login</h3>
-<div class="hr dotted clearfix">&nbsp;</div>
-<!-- LOGIN form -->
-<form method="post" action="." id="login_form">
-	<ul>						
-        {{ form.as_ul }}
-{% if form.errors %} {% with form as qq %} {% for error_name,desc in qq.items %}{% message_box "{{ error_name }}: {{ desc }}" %} {% endfor %} {% endwith %} {% endif %}
-		<div id="button">
-		<input type='submit' id='send_message' class="button" value='login' />
-		</div>
-	</ul> 
-</form>  
-{% endif %}
+<div class="dialog"> 
+	<br/>
+    <img src="/static/images/logo.png" alt="liberateca" width="100" />
+    <h2>{{ SITE_NAME }}</h2>
+    <p> 
+        {% blocktrans %}
+        Somos la biblioteca del siglo XXI, una pagina de enlaces de nueva generación. Libros, peliculas, musica, series y todo lo que puedes encontrar en la biblioteca de tu barrio: <b>sin coste</b>, <b>sin publicidad</b>, y lo mejor de todo, <b>sin moverte de tu sofa</b>.
+        {% endblocktrans %}
+    </p> 
+    <div id="accordion">
+        <h3 class="header"><a href="#">{% trans "Iniciar Sesión" %}</a></h3>
+        <div>
+            <!-- LOGIN form -->
+            <form method="post" action="." id="signin_form">
+                <ul class="signin_list">						
+                    {{ form.as_ul }}
+                    <input type='submit' id='send_message' class="button" value='{% trans "Ir a LiberaTeca" %}' />
+                </ul> 
+            </form>  
+        </div>
+        <h3 class="header"><a href="#">{% trans "Pedir Invitación" %}</a></h3>
+        <div>
+                    <p> Puedes pedir una invitacion rellenando tu correo y proximamente te la enviaremos </p>
+                        <form method="post" action="{% url request_invitation %}" id="signin_form">
+                        <ul>
+                            <li>
+                                <label> Email </label>
+                                <input id='id_username' name='mail' type='text' /> 
+                            </li>
+                            <input type='submit' id='request_invitation' class="button" value='Pedir Invitacion' />
+                        </form>  
+        </div>
+        <h3 class="header"><a href="#">{% trans "Más Información" %}</a></h3>
+        <div>
+        {% blocktrans %}
+            <p>
+                <ul>
+                    <li>Puedes <b>votar, comentar y valorar</b> tanto las series como los enlaces, asi como <b>agregar nuevos enlaces</b>.
+                    <li>Proximamente <b>liberaremos el codigo</b> con el que esta hecha la web para que puedas modificarla y mejorarla. 
+                    <li>Tendremos una <b>API</b> para que puedas hacer otras webs o servicios para la plataforma que quieras. 
+                    <li>Daremos de una forma sencilla nuestra <b>base de datos con todos los enlaces</b> que tenemos, porque sabemos que estos no nos pertenecen.
+                </ul>
+            </p>
+            <p>
+                Ahora mismo y por un tiempo funcionara bajo un sistema de <b>invitaciones</b> para poder ir creciendo de a poco (y creando el buzz xD), puedes conseguir tu invitación a través de nuestro <b>Twitter</b>.
+            </p>
+        {% endblocktrans %}
+        </div>
+     </div>
+        
+<p style="text-align:right;"><i>Omnia Sunt Communia</i> -- <b>Equipo de {{ SITE_NAME }}</b></p>
+</div>
+<br />
+<br />
+<br />
 {% endblock %}

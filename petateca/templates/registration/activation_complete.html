@@ -1,6 +1,6 @@
-{% load i18n %}
 {% extends "registration/registration_base.html" %}
-{% block title %}{% trans "Activación completa" %}{% endblock %}
+{% load i18n %}
+{% block title %}Activació completa{% endblock %}
 {% block contents %}
 <h2 class="grid_12 caption clearfix">{% trans "La activación se ha completado con éxito. Ahora puedes" %} <span><a href='{% url auth_login %}'>{% trans "iniciar sesión" %}</a></span> {% trans "utilizando el usuario y la contraseña que has puesto en el registro" %}.</h2>
 {% endblock %}
