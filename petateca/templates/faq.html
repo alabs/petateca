@@ -1,21 +1,150 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% block extrastyle %}
+<style>
+.header {
+font-size: 200%;
+line-height: 1.5em;
+background-color: #333;
+color: #FFF;
+text-align:center;
+} 
+p,li {
+font-size: 120%; 
+}
+</style>
+{% endblock %}
 {% block contents %}
 
-<h2>Que es {{SITE_NAME}}?</h2>
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-Why do we use it?
 
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+<h1 class="header"> Sobre el proyecto Liberateca </h1>
+
+<h2>¿Qué es Liberateca?</h2>
+
+<p>Liberateca es una comunidad formada por extrañas personas que sin razón aparente comparten información.</p>
+
+<h2>¿Es una página de enlaces?</h2>
  
-<h2>Con que se come?</h2>
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+<p>¿Y cuál no?</p>
+ 
+<h2>¿Tienen ánimo de lucro?</h2>
+ 
+<p>No.</p>
 
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-Where can I get some?
+<h2>¿Como pagan el hosting y el dominio?</h2>
+ 
+<p>Pues palmando pasta cuando no queda otra opción, pero estamos habilitando una forma en que puedas donar.</p>
 
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+<h2>¿Van a agregar peliculas, documentales, música, libros, etc?</h2>
+ 
+<p>Esta en nuestros planes. Las series son solo el principio.</p>
+
+<h2> ¿Como puedo ayudar a LiberCopy?</h2>
+ 
+<p>Libercopy busca un ejército de mutantes cyborg para:
+<ul>
+  <li>Apoyar con donaciones el hosting y mantenerlo entre todas las personas que lo usamos
+  <li>Desarrollar nuevas funcionalidades: puedes ver como esta hecho 
+  <li>Mejorar el diseño de la web. 
+</ul>
+</p>
+
+<h2>¿De donde consiguieron todos los enlaces?</h2>
+ 
+<p>De todos los usuarios que colaboran asiduamente. No nos mires, únete.</p>
+
+<p>Bueno, hay que admitir que recibimos una ayudita de este <a href="http://scrapy.org">colega</a>.</p>
+ 
+<h2>¿Quieren dominar el mundo?</h2>
+ 
+<p>Libercopy es parte del plan denominado "World Des-Domination Proyect"</p>
+ 
+<h1 class="header">Derechos de autor y licencias</h1>
+
+<h2>¿Qué piensan de la Ley Sinde?</h2>
+ 
+<p>Explicación corta: FUUUUUUUUUUUU</p>
+
+<p>Explicación larga: "Existen leyes injustas. ¿Nos contentaremos con obedecerlas? ¿Nos esforzaremos en enmendarlas, obedeciéndolas mientras tanto? ¿O las transgredimos de una vez? Si la injusticia requiere de tu colaboración, rompe la ley. Sé una contrafricción para detener la máquina [...] Bajo un estado que encarcela injustamente, el lugar del hombre justo es también la cárcel". H.D. Thoreau. Resistance to Civil Government. 1849 </p>
+ 
+<h2>¿De donde consiguieron todos los datos de las series?</h2>
+ 
+<p>De <a href="http://thetvdb.com">TheTVDB</a>, una base de datos abierta para fans de las series de televisión. Te invitamos a mejorarlo, es la hostia. </p>
+ 
+<h2>¿Como pueden ser contenidos Creative Commons si esta claro que las fotos de las series/actores tienen copyright?</h2>
+ 
+<p>No lo tenemos muy claro. Te animamos a preguntarles a los de TheTVDB.</p>
+
+<h1 class="header">Dudas de uso</h1>
+
+<h2>¡¡Hay descripciones/imagenes/actores que faltan!! ¿Como hago para agregarlas?</h2>
+
+<p>Puedes ponerlas en TheTVDB, nosotros las importaremos. </p>
+ 
+<h2>¿Se pueden cambiar las descripciones de las series o episodios?</h2>
+
+<p>No, Liberateca se encarga de mostrarlas tal y como se encuentran en TheTVDB. Si quieres mejorarlas puedes hacerlo ahí mismo.<p>
+
+<h1 class="header">Software y aspectos tecnicos</h1>
+
+<h2>¿Cómo esta hecho LiberCopy?</h2>
+ 
+<p>Con Python, Django, JQuery, CSS, mucho amor y un poco de magia...</p>
+
+<h2>Y si es Software Libre ¿donde puedo ver el codigo?</h2>
+ 
+<p>Aquí mismo: <a href="http://github.com/alabs/petateca">http://github.com/alabs/petateca</a>
+ 
+<h2>¿Tienen una API?</h2>
+ 
+<p>Todavía no, pero estamos trabajando en ello. Te invitamos a ayudarnos ;)</p>
+ 
+<h2>¿Tienen versión para movil?</h2>
+ 
+<p>Todavía no, pero estamos trabajando en ello. Te invitamos a ayudarnos ;)</p>
+ 
+<h2>¿Como hago para proponer nuevas funcionalidades?</h2>
+ 
+<p>Puedes hacerlo en <a href="http://liberateca.uservoice.com">nuestra pagina en UserVoice</a> o bien mejor desarrolla esa funcionalidad y haznos un pull request al <a href="http://github.com/alabs/petateca">GitHub</a></p>
+ 
+<h1 class="header">Otras preguntas</h1>
+
+<h2>¿Cual es el sentido de la vida, el Universo y todo lo demas?</h2>
+ 
+<p>42</p> 
+ 
+<h2>¿Son unos piratas?</h2>
+ 
+<p>Los piratas asaltaban barcos y se llevaban "botines"; si por "botín" entendemos la sensación de haber pasado por este planeta y hacer algo mas interesante que comprar en Zara pues sí, pero si por botín entendemos dinero o lucro no.</p>
+ 
+<h2>¡¡Son unos ladrones!!</h2>
+ 
+<p><a href="http://www.youtube.com/watch?v=ef-OExpQEcU">Copiar no es robar</a></p>
+ 
+<h2>¿Qué significa "Temporada Especiales"?</h2>
+ 
+<p>Son episodios que no pertenecen a ninguna temporada en particular, como webisodios, o especiales.</p>
+ 
+<h2>Y si son tan guays ¿por qué no dan todos los enlaces?</h2>
+ 
+<p>Esta en nuestros planes de futuro inmediato.</p>
+ 
+<h2>¿Quien está detras de todo esto?</h2>
+ 
+<p>"Los señores de la red". Y la asociacion <a href="http://alabs.es">Alabs</a>, que amablemente se encarga de nuestro hosting y recibir todos los marrones legales. </p>
+ 
+<h2>Es cierto que si busco LiberCopy dentro de LiberCopy se puede romper Internet?</h2>
+ 
+<p>Por lo que más quieras no lo intentes. No sabríamos vivir sin fotos de gatitos.</p>
+ 
+<h2>¿Por que hacen todo esto?</h2>
+ 
+<p>La pregunta correcta es porque no lo hicimos antes.</p>
+ 
+<h2>¿Verdaderamente todas estas preguntas las hizo alguna vez la gente?</h2>
+ 
+<p>Te sorprendería bastante todas las que no hemos incluido.</p>
 
 
 {% endblock %}

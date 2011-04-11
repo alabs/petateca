@@ -5,14 +5,14 @@ from invitation.models import InvitationKey
 
 @render_to('index.html')
 def index(request):
-    serie_list = Serie.objects.order_by('?')[:5]  # ?=random
+    serie_list = Serie.objects.order_by('-rating_score')[:6] 
     count_link = Link.objects.all().count()
     count_episode = Episode.objects.all().count()
     count_serie = Serie.objects.all().count()
     if request.user.is_authenticated():
         remaining_invitations = abs(InvitationKey.objects.remaining_invitations_for_user(request.user))
     else:
-	remaining_invitations = 'anonymous'
+        remaining_invitations = 'anonymous'
     index_response = {
                 'series': serie_list,
                 'count_link': count_link,

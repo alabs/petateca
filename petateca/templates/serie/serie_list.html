@@ -2,58 +2,60 @@
 {% load i18n %}
 {% load thumbnail %}
 {% block title %}{% trans "Series" %}{% endblock %}
-{% block extrastyle %}   
-    <link rel="stylesheet" href="/static/css/queryLoader.css" type="text/css" />{% endblock %}
-{% block extrahead %}
-    <script type="text/javascript" src="/static/js/queryLoader.js"></script>
-{% endblock %}
 {% block contents %}
-	<h2 class="grid_12 caption clearfix"> {%trans "Mira las mejores" %} <span>{% trans "series" %}</span>{% if network %} {% trans "de la Cadena" %}<span> {{network.name}}</span>{% endif %}{% if genre %} {% trans "del Genero" %} <span>{{genre.name}}</span>{% endif %}.</h2>
-	<div class="pr grid_12 clearfix">&nbsp;</div>
 		<!-- COLUMN 1 -->
 		<div class="catagory_1 clearfix">
 			<!-- BROWSE -->
-			<div class="grid_3 textright" >
+			<div class="grid_2 textright" >
 				{% if network or genre %}
 					<p>
-						<a class="button" href="{% url serie-index %}">{% trans "Regresar al listado de series" %}</a>
+						<a class="button" href="{% url serie-index %}">{% trans "Series" %}</a>
 						<div class="hr clearfix dotted">&nbsp;</div>
 					</p>
 				{% endif %}
 				<!-- BY GENRE -->
 				<p>
-				<h4 class="title ">{% trans "Genero" %}</h4>
-				<div class="hr clearfix dotted">&nbsp;</div>
-					<ul>
+                <form name="genre">
+					<select name="go" OnChange="location.href=genre.go.options[selectedIndex].value">
+                    {% if not genre %} 
+                            <option selected>Elige un Genero</option>
+                    {% endif %}
 					{% for g in genre_list %}
 						{% if g.name == genre.name %}
-							<li>{{g.name}}
+							<option selected>{{g.name}}</option>
 						{% else %}
-							<li><a href="{% url get_genre slug_name=g.slug_name %}">{{g.name}}</a>
+							<option value="{{ g.get_absolute_url }}">{{g.name}}</option>
 						{% endif %}
 					{% endfor %}
-					</ul>
+					</select>
+                </form>
 				</p>
 				<!-- BY NETWORK -->
 				<p>
-				<h4 class="title ">{% trans "Cadena" %}</h4>
 				<div class="hr clearfix dotted">&nbsp;</div>
-					<ul>
+                <form name="network">
+					<select name="go" OnChange="location.href=network.go.options[selectedIndex].value">
+                    {% if not network %} 
+                            <option selected>Elige una Cadena</option>
+                    {% endif %}
 					{% for n in network_list %}
+					{% spaceless %}
 						{% if n.name == network.name %}
-							<li>{{n.name}}
+							<option selected>{{n.name}}</option>
 						{% else %}
-							<li><a href="{% url get_network slug_name=n.slug_name %}">{{n.name}}</a>
+							<option value="{{ n.get_absolute_url }}">{{n.name}}</option>
 						{% endif %}
+					{% endspaceless %}
 					{% endfor %}
-					</ul>
+					</select>
+                </form>
 				</p>
 			</div>
-			<div class="grid_9">
+			<div class="grid_10">
 			<!-- ALPHABETHICAL PAGINATION -->
 			<p>
 				<div class="pagination">
-					<h2 style="text-align:center;">
+					<h2 class="center">
 					{% for p in page.paginator.pages %}
     						{% ifequal p page %}
       							<span class="selected">{{ page }}</span>
@@ -66,22 +68,23 @@
 			</p>
 			<!-- THUMBNAILS -->
 				{% for serie in page.object_list %}
-    					<a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
-						<span>{{ serie.name|title }}</span>
-    					{% if serie.images.get_is_poster.0.src %}
-        					{% thumbnail serie.images.get_is_poster.0.src "300x300" as img_serie %}
-          						<img src="{{ img_serie.url }}" />
+                <div class="grid_2">
+    				<a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
+					<div class="preload" style="width:140px; height:200px;">
+					{% spaceless %}
+    					{% if serie.poster.src %}
+        					{% thumbnail serie.poster.src "150x200" as img_serie %}
+          						<img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" />
         					{% endthumbnail %}
     					{% else %}
-						<img src="/static/images/image_not_available.png" height="300" width="200"> 
+						<img class="prel serie" id="{{ serie.id }}" src="/static/images/image_not_available.png" height="140" width="200" /> 
     					{% endif %}
+                        <span class="subtitle">{{ serie.name }}</span>
+					{% endspaceless %}
+					</div>
   					</a>
+                </div>
   				{% endfor %}
 			</div>
 		</div>
-			
-<script type='text/javascript'>
-	QueryLoader.selectorPreload = "body";
-	QueryLoader.init();
-</script>
 {% endblock %}

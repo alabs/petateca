@@ -2,72 +2,85 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load voting_tags %}
-{% votes_by_user user on episode.links.all as vote_dict %}
 {% load extract_domain %}
-{% load message_box %}
-{% block extrastyle %}   
-    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" type="text/css" />{% endblock %}
-{% block extrahead %}
-    <script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
-    <script>
-    $(document).ready(function(){
-      $(".add_link").colorbox({iframe:true, innerWidth:535, innerHeight:184});
-    });
-    </script>
-{% endblock %}
+{% load extract_type %}
+{% load echo_language %}
+{% block title %}{{ episode.season_episode }} - {{ serie.name }}{% endblock %}
 {% block contents %}
-	<h2 class="grid_12 caption clearfix"><a href="{{ serie.get_absolute_url }}">{{ serie.name|title }}</a> - {{ episode.season.season }}x{{ episode.episode }} - {{ episode.title|title }}
-  <a href="{{ season.get_absolute_url }}" class="button right">{% trans "Regresar a Temporada" %} {{season.season}}</a>
-</h2>
-<div class="grid_5 portfolio">
-	{% if episode.images.all.0.src %}
-	  {% thumbnail episode.images.all.0.src "300x300" as img_episode %}
-	    <img src="{{ img_episode.url }}">
-	  {% endthumbnail %}
-	{% endif %}
+<!-- BREADCRUMB -->
+<div class="breadcrumb left">
+    <a class="button" href="{% url serie-index %}">Series</a>
+    <a class="button" href="{{ serie.get_absolute_url }}">{{ serie.name|title }}</a>
+    <a class="button" href="{{ season.get_absolute_url }}">Temporada {{ season.season }}</a> 
+    <a class="button" href="{{ episode.get_absolute_url }}">Episodio {{ episode.episode }}</a>
+    <br/>
+    <div class="prev_next">
+        {% if prev_epi %}<a class="button" href="{{ prev_epi.get_absolute_url }}"><< Episodio {{ prev_epi.episode }}</a>{% endif %}
+        {% if next_epi %}<a class="button" href="{{ next_epi.get_absolute_url }}">Episodio {{ next_epi.episode }} >></a>{% endif %}
+    </div>
 </div>
-<div class="grid_5">
-	<span class="title"> 
-	<span class="meta">{% trans "Descripción" %}</span><p style="font-size:14px;">{{ episode.description }}</p>
-	<span class="meta">{% trans "Duración" %} </span><p>{{ serie.runtime }} {% trans "minutos" %}</p>
-	<span class="meta">{% trans "Fecha de Emisión" %} </span><p> {{ episode.air_date }}</p>
+	<h2 class="grid_6 caption clearfix right">{{ episode.season_episode }} - {{ episode.title|title }} </h2>
+<div class="hr clearfix dotted">&nbsp;</div>
+
+
+<div style="margin-left:10em; display:none;" id="epi_detail" class="grid_10 portfolio">
+    <div class="grid_4 left">
+        {% if episode.poster.src %}
+          {% thumbnail episode.poster.src "300x300" as img_episode %}
+            <img src="{{ img_episode.url }}">
+          {% endthumbnail %}
+        {% endif %}
+    </div>
+    <div class="grid_5 rigth">
+        <p>
+            <span class="meta">{% trans "Duración" %} </span><p>{{ serie.runtime }} {% trans "minutos" %}</p>
+            <span class="meta">{% trans "Fecha de Emisión" %} </span><p> {{ episode.air_date }}</p>
+            <span class="meta">{% trans "Descripción" %}</span><p style="font-size:14px;">{{ episode.description }}</p>
+        </p>
+    </div>
 </div>
 
-{% if message == "No registrado" %}
-  {% message_box "Debe <a href='/accounts/login'>registrarse o iniciar sesion</a> para votar" %}
-{% else %}{% if message == "Vote recorded" %}
-  {% message_box "Su voto ha sido guardado" %}
-{% endif %}
-{% endif %}
-
-<div class="grid_12">
-<a class="add_link button" href="{{ episode.get_add_link_url }}">{% trans "Añadir enlace" %}</a> 
-<h2> Links </h2>
-	{% if episode.links.all %}
-	<table id="links">
-	    <thead>
+<div class="grid_10 right">
+    <h2 style="text-align:left;">
+        {% trans "Enlaces" %}
+        <span id="show_epi_detail" class="button right">Ver Spoiler</span>
+        <a class="add_link button right" href="{{ episode.get_add_link_url }}">{% trans "Añadir enlace" %}</a> 
+    </h2>
+	{% if link_list %}
+	{% votes_by_user user on link_list as vote_dict %}
+	<table class="tablesorter">
+    <thead>
 		<tr>
-			<th scope="col">Link</th>
-			<th scope="col">Audio</th>
-			<th scope="col">Subtitles</th>
-			<th scope="col">Votes</th>
+			<th scope="col">{% trans "Enlace" %}</th>
+			<th scope="col" width="20%">{% trans "Tipo" %}</th>
+			<th scope="col">{% trans "Idioma" %}</th>
+			<th scope="col">{% trans "Subtitulos" %}</th>
+			<th scope="col">{% trans "Votos" %}</th>
+            <th scope="col"><!-- EDIT --></th>
 		</tr>
-	    </thead>
-	    <tbody>
-		{% for link in episode.links.all %}
-		<tr>
-		<td><a href="{{ link.url }}"> {{ link.url|extract_domain }}</a></td>
-		<td>{{ link.audio_lang }}</td>
-		<td>{% if link.subtitle %}{{ link.subtitle }}{% else %}{% endif%}</td>
-		<td>
-		<!-- VOTING -->
-{{vote_dict}}
-		{% dict_entry_for_item link from vote_dict as vote %}
-                {% score_for_object link as score %}
-			<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'upvote');" id="linkuparrow{{ link.id }}"><img src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif"></a>
-			<a href="#epi{{ episode.episode }}" onclick="vote('{{ link.id }}', 'downvote');" id="linkdownarrow{{ link.id }}"><img src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif"></a>
-			  <span class="score right" style="position:relative; top:-25%;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
-		</td>
+    </thead>
+    <tbody>
+		{% for link in link_list %}
+		{% score_for_object link as score %}
+	    {% dict_entry_for_item link from vote_dict as vote %}
+        <tr>
+            <td><a href="{{ link.url }}" rel="nofollow"> {{ link.url|extract_domain }}</a></td>
+            <td width="10">{{ link.url|extract_type }}</a></td>
+            <td>{{ link.audio_lang.iso_code|echo_language }}</td>
+            <td>{% if link.subtitle %}{{ link.subtitle.iso_code|echo_language }}{% endif %}</td>
+            <td>
+            <!-- VOTING -->
+                <span class="score left" style="position:relative; top:-25%;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
+                <div class="right">
+                    <a href="#epi{{ episode.episode }}" onclick="vote('{{ request.path }}', '{{ link.id }}', 'upvote');" id="linkuparrow{{ link.id }}"><img src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif"></a>
+                    <a href="#epi{{ episode.episode }}" onclick="vote('{{ request.path }}', '{{ link.id }}', 'downvote');" id="linkdownarrow{{ link.id }}"><img src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif"></a>
+                </div>
+            </td>
+            <td>
+                {% if request.user.username == link.user %}
+                    <a class="add_link button" href="{{ episode.get_add_link_url }}?edit=yes&linkid={{ link.id }}">{% trans "Editar" %}</a> 
+                {% endif %}
+            </td>
 		</tr>
 		{% endfor %}
 	    </tbody>
@@ -76,7 +89,22 @@
          {% trans "No hay enlaces disponibles" %}
       {% endif %}
 </div>
+
+<div class="hr clearfix dotted">&nbsp;</div>
+<div class="grid_12">
+</div>
 <br />
 
+{% block extrascript %}
+<script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+<script>
+$(document).ready(function(){
+    // ordena los links por votos y permite sortear
+    // FIXME: el ordenamiento lo tendria que hacer en el servidor, no en el cliente
+    $('.tablesorter').tablesorter({
+        sortList: [[4,1],[1,1]]
+    });
+});
+</script> 
 {% endblock %}
-
+{% endblock %}

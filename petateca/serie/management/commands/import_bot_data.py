@@ -157,14 +157,15 @@ class Command(BaseCommand):
 
     def normalize_lang(self, lang_code):
         langs = {
-            "spanish": ("es", "es"),
-            "japanese": ("jp", None),
-            "latin": ("es", None),
-            "english": ("en", None),
+            "ca": ("ca", None),
+            "en": ("en", None),
+            "es": ("es", None),
             "es-es": ("es", "es"),
             "jp": ("jp", None),
-            "es": ("es", None),
-            "en": ("en", None),
+            "english": ("en", None),
+            "japanese": ("jp", None),
+            "latin": ("es", None),
+            "spanish": ("es", "es"),
         }
         if not lang_code:
             return None
@@ -253,30 +254,18 @@ class Command(BaseCommand):
      
         db_season.save()
 
-        # seasonwide?
-        if reg_en['_banners']['season']['season']:
-            season_banners = reg_en['_banners']['season']['season']
-            for img_banner in season_banners:
-                if int(ntemp) == int(season_banners[img_banner]['season']):
-                    img_url = season_banners[img_banner]['_bannerpath']
-                    img_title = season_banners[img_banner]['id']
-                    img = urllib.urlretrieve(img_url)
-                    db_img = m.ImageSeason(is_poster=True, title=img_title)
-                    db_img.season = db_season
-                    file_content = ContentFile(open(img[0]).read())
-                    db_img.src.save(os.path.basename(img_url), file_content)
-                    db_img.save()
-                    return db_season
-
-    
-#            if actor["image"]:
-#                img = urllib.urlretrieve(actor["image"])
-#                db_img = m.ImageActor(is_poster=True, title=actor["name"])
-#                db_img.actor = db_actor
-#                file_content = ContentFile(open(img[0]).read())
-#                db_img.src.save(os.path.basename(actor["image"]), file_content)
-#                db_img.save()
-#            return db_actor
+        season_banners = reg_en['_banners']['season']['season']
+        for img_banner in season_banners:
+            if int(ntemp) == int(season_banners[img_banner]['season']):
+                img_url = season_banners[img_banner]['_bannerpath']
+                img_title = season_banners[img_banner]['id']
+                img = urllib.urlretrieve(img_url)
+                db_img = m.ImageSeason(is_poster=True, title=img_title)
+                db_img.season = db_season
+                file_content = ContentFile(open(img[0]).read())
+                db_img.src.save(os.path.basename(img_url), file_content)
+                db_img.save()
+        return db_season
 
     def populate_episodes(self, db_serie, reg_en, reg_es):
         for n_season in reg_en:

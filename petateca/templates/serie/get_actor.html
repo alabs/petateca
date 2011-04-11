@@ -1,31 +1,33 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% block title %}{{ actor.name }}{% endblock %}
 {% block contents %}
 
 <h2 class="grid_12 caption clearfix">{{ actor.name }} <a class="right button" href="{{ request.META.HTTP_REFERER }}">Go to previous page</a></h2>
 <div class="hr clearfix dotted">&nbsp;</div>
 
 <div class="grid_4">
-  {% if image %}{% thumbnail image "400x300" as img_actor %}
+  {% if actor.poster.src %}{% thumbnail actor.poster.src "400x300" as img_actor %}
       <img id="poster" src="{{ img_actor.url }}" />{% endthumbnail %}
   {% else %}
             <img src="/static/images/image_not_available.png" height=400> 
   {% endif %}
 
 </div>
-
+{% for role in actor.role_set.all %}
 <div class="grid_6">
     <a class="portfolio_item float alpha" href="{{ role.serie.get_absolute_url }}">
 	<span>{{role.role}} - {{role.serie|title}}</span>
-    {% if role.serie.images.get_is_poster.0.src %}
-        {% thumbnail role.serie.images.get_is_poster.0.src "250x250" as img_serie %}
+    {% if role.serie.images.all.0.src %}
+        {% thumbnail role.serie.images.all.0.src "250x250" as img_serie %}
           <img src="{{ img_serie.url }}" />
         {% endthumbnail %}
       </a>
     {% else %}
             <img src="/static/images/image_not_available.png" height=100> 
     {% endif %}
+{% endfor %}
 </div>
 
 {% endblock %}

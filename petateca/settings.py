@@ -2,9 +2,14 @@ import os
 import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-SITE_NAME = 'PetaTeca'
+
+# Hay algunas partes en las que no se puede cambiar, 
+# asi que si se va a cambiar es recomendable hacer antes un
+# egre -R "(petateca|liberateca)" * 
+SITE_NAME = 'Liberateca'
 
 DEBUG = True
+SENTRY_TESTING = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -41,6 +46,7 @@ LANGUAGES = (
  ('es', ugettext('Spanish')),
  ('en', ugettext('English')),
 )
+LOCALEURL_USE_ACCEPT_LANGUAGE = True
 TRANSLATION_REGISTRY = 'translation'
 SITE_ID = 1
 
@@ -60,7 +66,6 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'localeurl.middleware.LocaleURLMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -68,6 +73,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'invitation.middleware.LoginRequiredMiddleware',
+    'sentry.client.middleware.Sentry404CatchMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -90,7 +96,6 @@ FIXTURE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'localeurl',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -102,6 +107,8 @@ INSTALLED_APPS = (
     'blog',
     'userdata',
     #'imdblocal', #Don't use yet, sucks a lot
+    'registration',
+    'invitation',
     'south',
     'modeltranslation',
     'rosetta',
@@ -109,12 +116,16 @@ INSTALLED_APPS = (
     'haystack',
     'djangoratings',
     'voting',
-    'registration',
     'taggit',
     'django.contrib.comments',
     'avatar',
-    'invitation',
-    'django.contrib.sitemaps',
+    #Sentry
+    # don't forget to add the dependencies!
+    'indexer',
+    'paging',
+    'sentry',
+    'sentry.client',
+    'compress',
 )
 
 DATABASE_ROUTERS = ['imdblocal.dbrouter.ImdbRouter']
@@ -152,7 +163,7 @@ HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
 AUTH_PROFILE_MODULE = 'userdata.UserProfile'
 ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = '/'
-DEFAULT_FROM_EMAIL = 'noreply@petateca.net'
+DEFAULT_FROM_EMAIL = 'noreply@liberateca.net'
 
 AUTHENTICATION_BACKENDS = (
     'userdata.models.EmailBackend',
@@ -161,21 +172,67 @@ AUTHENTICATION_BACKENDS = (
 
 FORCE_LOWERCASE_TAGS = True
 
+
+# Invitations
+# Si se pone como True, redirige a /accounts/signin
+# y permite el registro solo a traves de invitaciones de otros usuarios
+INVITE_MODE = False
+ACCOUNT_INVITATION_DAYS = 7
+INVITATIONS_PER_USER = 6
+USER_WHO_INVITES = 'liberateca'
+
+LOGIN_EXEMPT_URLS = (
+    r'^static/', 
+    r'^accounts/invitation/request/$', 
+    r'^accounts/invitation/thanks/$', 
+    r'^admin/',
+    r'^accounts/register/',
+    r'^accounts/activate/',
+)
+
+LOGIN_URL_INDEX = '/accounts/signin/'
+INVITATION_MAIL = 'invitaciones@liberateca.net'
+ADMIN_MAIL = 'admin@liberateca.net'
+
+# compress app settings
+COMPRESS_CSS = {
+    'all': {
+        'source_filenames': (
+            'css/reset.css',
+            'css/styles.css',
+            'css/jquery.colorbox.css',
+            'css/jquery.jgrowl.css',
+            'css/jquery.rating.css',
+            'css/jquery.autocomplete.css',
+            'css/jquery.bubblepopup.v2.3.1.css',
+            'css/jquery.sorter_blue.css',
+        ),
+        'output_filename': 'css/compressed-?.css',
+    },
+}
+
+COMPRESS_JS = {
+    'all': {
+        'source_filenames': (
+            'js/jquery-min.js',
+            'js/jquery.autocomplete.js',
+            'js/jquery.colorbox.js',
+            'js/jquery.dimensions.min.js',
+            'js/jquery.easing.1.3.js',
+            'js/jquery.jgrowl.js',
+            'js/jquery.rating.js',
+            'js/jquery.bubblepopup.v2.3.1.min.js',
+            'js/petateca.js',
+# Da un error de Undetermined Regular Expression     'js/jquery.tablesorter.js',
+        ),
+        'output_filename': 'js/compressed-?.js',
+    },
+}
+
+COMPRESS = True
+COMPRESS_VERSION = True
+
 try:
     from local_settings import *
 except ImportError:
     pass
-
-# Invitations
-# Si se pone como True, redirige a /accounts/signin
-INVITE_MODE = False
-ACCOUNT_INVITATION_DAYS = 7
-INVITATIONS_PER_USER = 5
-
-LOGIN_EXEMPT_URLS = (
-    r'^static/', 
-)
-
-LOGIN_URL_INDEX = '/accounts/signin/'
-INVITATION_MAIL = 'invitaciones@petateca.net'
-ADMIN_MAIL = 'admin@petateca.net'

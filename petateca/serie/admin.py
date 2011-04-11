@@ -18,12 +18,6 @@ class EpisodeInline(admin.TabularInline):
 class SeasonInline(admin.TabularInline):
     model = m.Season
 
-#class EpisodeInline(admin.ModelAdmin):
-#    prepopulated_fields = {'slug_title': ('title', )}
-#    inlines = [
-#        LinkInline,
-#    ]
-
 
 class SerieAdmin(admin.ModelAdmin):
     list_display = ['name', 'network', 'runtime', 'image_serie_serie', ]
@@ -36,7 +30,7 @@ class SerieAdmin(admin.ModelAdmin):
     ordering = ('name', )
     def image_serie_serie(self, obj):
         try:
-            img = obj.images.get_is_poster()[0]
+            img = obj.images.all()[0]
             file_img = img.src.file
             thumb = default.backend.get_thumbnail(file_img, ADMIN_THUMBS_SIZE)
             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
@@ -120,8 +114,14 @@ class SeasonAdmin(admin.ModelAdmin):
     ]
 
 
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ['role', 'actor', 'serie', ]
+    model = m.Role
+
+
 
 admin.site.register(m.Actor)
+admin.site.register(m.Role, RoleAdmin)
 admin.site.register(m.Episode, EpisodeAdmin)
 admin.site.register(m.Genre, GenreAdmin)
 admin.site.register(m.ImageActor)

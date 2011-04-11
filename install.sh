@@ -3,7 +3,7 @@
 #  aptitude y los paquetes correspondientes
 
 # Instalacion de dependencias
-sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg-dev subversion && 
+sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg-dev subversion csstidy && 
 sudo easy_install -U pip &&
 
 # Desde el directorio raiz (donde se encuentra README.txt)
@@ -25,6 +25,7 @@ python manage.py syncdb --migrate &&
 
 # Actualizamos campos de traduccion
 python manage.py update_translation_fields &&
+
 
 # Iniciamos el servidor de desarrollo
 python manage.py runserver

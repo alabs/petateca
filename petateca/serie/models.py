@@ -6,12 +6,9 @@ from djangoratings.fields import RatingField
 from datetime import datetime
 from voting.models import Vote
 
+from django.db.models.signals import post_save, post_delete
 
-class IsPosterManager(models.Manager):
-    ''' Get if an image is the poster '''
-    def get_is_poster(self):
-        return self.filter(is_poster=True)
-
+#XXX: poster deberia ser on_delete null en vez de cascade
 
 class Serie(models.Model):
     name = models.CharField(max_length=255)
@@ -28,6 +25,7 @@ class Serie(models.Model):
     description = models.TextField()
     finished = models.BooleanField(default=False, help_text=_('la serie ha finalizado?'))
     rating = RatingField(range=5, can_change_vote=True, help_text=_('puntuacion de estrellas'))
+    poster = models.OneToOneField('ImageSerie', related_name='poster_of', null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -52,6 +50,8 @@ class Role(models.Model):
     class Meta:
         unique_together = ("serie", "actor", "role")
 
+    def __unicode__(self):
+        return self.role
 
 class SerieAlias(models.Model):
     name = models.CharField(max_length=255, unique=True, help_text=_('otros nombres para la misma serie'))
@@ -61,6 +61,21 @@ class SerieAlias(models.Model):
 class Season(models.Model):
     serie = models.ForeignKey('Serie', related_name="season")
     season = models.IntegerField(help_text=_('numero de temporada para la serie'))
+    poster = models.OneToOneField('ImageSeason', related_name='poster_of', null=True, blank=True)
+
+    def get_next_season(self):
+        next_season = self.season + 1
+        try: 
+            return Season.objects.get(season=next_season, serie=self.serie)
+        except:
+            return None
+
+    def get_previous_season(self):
+        prev_season = self.season - 1
+        try: 
+            return Season.objects.get(season=prev_season, serie=self.serie)
+        except:
+            return None
 
     def __unicode__(self):
         ''' Serie Name - Season '''
@@ -68,7 +83,7 @@ class Season(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.get_season', (), {
+        return ('serie.views.season_lookup', (), {
                 'serie_slug': self.serie.slug_name,
                 'season': self.season,
         })
@@ -79,7 +94,7 @@ class ImageSeason(models.Model):
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     season = models.ForeignKey("Season", related_name="images")
-    get_is_poster = IsPosterManager()
+    objects = models.Manager()
 
     def __unicode__(self):
         return self.title
@@ -116,37 +131,34 @@ class Episode(models.Model):
     description = models.TextField()
     created_time = models.DateField(auto_now_add=True)
     modified_time = models.DateField(auto_now=True)
+    poster = models.OneToOneField('ImageEpisode', related_name='poster_of', null=True, blank=True)
 
+    def get_next_episode(self):
+        next_epi = self.episode + 1
+        try: 
+            return Episode.objects.get(episode=next_epi, season=self.season)
+        except:
+            return None
+
+    def get_previous_episode(self):
+        prev_epi = self.episode - 1
+        try: 
+            return Episode.objects.get(episode=prev_epi, season=self.season)
+        except:
+            return None
+
+    def season_episode(self):
+        return "S%02dE%02d" % (self.season.season, self.episode)
+            
     def __unicode__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.get_episode', (), {
-                'serie_slug': self.season.serie.slug_name,
-                'season': self.season.season,
-                'episode': self.episode,
-        })
+        return '/serie/%s/episode/S%02dE%02d/' % (self.season.serie.slug_name, self.season.season, self.episode)
 
-    @models.permalink
     def get_add_link_url(self):
-        ''' Link for adding a link to the episode '''
-        return ('serie.views.add_link', (), {
-                'serie_slug': self.season.serie.slug_name,
-                'season': self.season.season,
-                'episode': self.episode,
-        })
+        return '/serie/%s/episode/S%02dE%02d/add/' % (self.season.serie.slug_name, self.season.season, self.episode)
 
-
-# TODO: OBTENER LOS LINKS MEJOR PUNTUADOS
-#class LinkGetTopScores(models.Manager):
-#    def get_top_score(self):
-#        return sorted(Link.objects.all(), key=lambda a: a.get_score)
-
-
-#class LinkGetTopScores(models.Manager):
-#    def get_top_scores(self):
-#        return sorted(self.all(), key=lambda n: n.get_score())
 
 class Link(models.Model):
     episode = models.ForeignKey("Episode", related_name="links")
@@ -161,7 +173,6 @@ class Link(models.Model):
     )
     user = models.CharField(max_length=255, null=True, blank=True, help_text=_('usuario que subio el link'))
     pub_date = models.DateTimeField(default=datetime.now, help_text=_('cuando se ha subido el link? por defecto cuando se guarda'))
-#    get_top_score = LinkGetTopScores()
 
     def __unicode__(self):
         return self.url
@@ -210,7 +221,10 @@ class Network(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.get_network', [str(self.slug_name)])
+        return ('serie.views.get_serie_list', (), {
+                'slug_name': self.slug_name, 
+                'query_type': 'network',
+                })
 
 
 class Genre(models.Model):
@@ -228,12 +242,16 @@ class Genre(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.get_genre', [str(self.slug_name)])
+        return ('serie.views.get_serie_list', (), {
+                'slug_name': self.slug_name, 
+                'query_type': 'genre',
+                })
 
 
 class Actor(models.Model):
     name = models.CharField(max_length=100)
     slug_name = models.SlugField(unique=True, help_text=_('nombre en URL'))
+    poster = models.OneToOneField('ImageActor', related_name='poster_of', null=True, blank=True)
 
     def save(self, force_insert=False, force_update=False, using=None):
         ''' When is saved, the name is converted to slug - aka URL''' 
@@ -246,7 +264,7 @@ class Actor(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.get_actor', [str(self.slug_name)])
+        return ('get_actor', [str(self.slug_name)])
 
 
 
@@ -256,7 +274,7 @@ class ImageSerie(models.Model):
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     serie = models.ForeignKey("Serie", related_name="images")
-    get_is_poster = IsPosterManager()
+    objects = models.Manager()
 
     def __unicode__(self):
         return self.title
@@ -268,7 +286,7 @@ class ImageActor(models.Model):
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     actor = models.ForeignKey("Actor", related_name="images")
-    get_is_poster = IsPosterManager()
+    objects = models.Manager()
 
     def __unicode__(self):
         return self.title
@@ -280,7 +298,42 @@ class ImageEpisode(models.Model):
     creator = models.CharField(max_length=100, null=True, blank=True)
     is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
     episode = models.ForeignKey("Episode", related_name="images")
-    get_is_poster = IsPosterManager()
+    objects = models.Manager()
 
     def __unicode__(self):
         return self.title
+
+
+poster_dispatch = {
+    ImageSerie: "serie",
+    ImageSeason: "season",
+    ImageEpisode: "episode",
+    ImageActor: "actor",
+}
+
+def update_poster(sender, instance, **kwargs):
+    obj = getattr(instance, poster_dispatch[sender])
+    if instance.is_poster:
+        obj.poster = instance
+    else:
+        other_poster = sender.objects.filter(**{poster_dispatch[sender]:obj, "is_poster":True}).all()
+        if other_poster:
+            obj.poster = other_poster[0]
+        else:
+            obj.poster = None
+    obj.save()
+
+def delete_poster(sender, instance, **kwargs):
+    obj = getattr(instance, poster_dispatch[sender])
+    other_poster = sender.objects.filter(**{poster_dispatch[sender]:obj, "is_poster":True}).all()
+    if other_poster:
+        obj.poster = other_poster[0]
+    else:
+        obj.poster = None
+    obj.save()
+
+
+for sender in poster_dispatch.keys():
+    post_save.connect(update_poster, sender=sender)
+    post_delete.connect(update_poster, sender=sender)
+

@@ -36,3 +36,10 @@ Si se importan datos hay que actualizar el indice de busquedas:
 
   python manage.py update_index
 
+
+Compresion de CSS/JS
+-------------------
+
+Para optimizar las consultas HTTP, se comprimen con django-compress. Para iniciar la compresion o si realizas algun cambio en el CSS/JS, tienes que regenerar el fichero comprimido
+
+  python manage.py synccompress
