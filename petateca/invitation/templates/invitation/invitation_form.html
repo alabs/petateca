@@ -1,0 +1,21 @@
+{% extends "invitation/base.html" %}
+{% load i18n %}
+
+{% block invitation_content %}
+
+<h2>{% trans "Invite a friend" %}</h2>
+
+{% ifequal remaining_invitations 0 %}
+<p>{% trans "You currently have no invitations to send." %}</p>
+{% else %}
+
+<form action="{% url invitation_invite %}" method="POST">
+<table>
+{{form.as_table}}
+</table>
+
+<input type="submit" value="{% trans "Send Invitation" %}" />
+</form>
+{% endifequal %}
+
+{% endblock %}
