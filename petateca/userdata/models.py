@@ -1,9 +1,11 @@
 from django.db import models
-from serie.models import Serie
-
 from django.contrib.auth.models import User
 from django.core.validators import email_re
 from django.contrib.auth.backends import ModelBackend
+
+from datetime import datetime
+
+from serie.models import Serie
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
@@ -37,3 +39,11 @@ class EmailBackend(ModelBackend):
                 return None
         return None
 
+
+class UserToInvite(models.Model):
+    mail = models.EmailField()
+    date = models.DateTimeField(default=datetime.now, null=True, blank=True)
+    has_been_invited = models.BooleanField()
+
+    def __unicode__(self):
+        return self.mail
