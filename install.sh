@@ -20,12 +20,14 @@ python setup.py develop &&
 # Desde petateca (donde esta manage.py)
 cd petateca &&
 
-# Creamos la DDBB y hacemos las migraciones del South
-python manage.py syncdb --migrate &&
+# Creamos la DDBB y
+python manage.py syncdb &&
+
+# Hacemos las migraciones del South
+python manage.py migrate &&
 
 # Actualizamos campos de traduccion
 python manage.py update_translation_fields &&
-
 
 # Iniciamos el servidor de desarrollo
 python manage.py runserver

@@ -72,7 +72,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'invitation.middleware.LoginRequiredMiddleware',
+    'userdata.middleware.LoginRequiredMiddleware',
     'sentry.client.middleware.Sentry404CatchMiddleware',
 )
 
