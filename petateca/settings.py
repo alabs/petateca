@@ -3,6 +3,8 @@ import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
+
 # Hay algunas partes en las que no se puede cambiar, 
 # asi que si se va a cambiar es recomendable hacer antes un
 # egre -R "(petateca|liberateca)" * 
