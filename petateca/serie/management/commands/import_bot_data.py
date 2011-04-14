@@ -254,6 +254,7 @@ class Command(BaseCommand):
      
         db_season.save()
 
+        # seasonwide?
         season_banners = reg_en['_banners']['season']['season']
         for img_banner in season_banners:
             if int(ntemp) == int(season_banners[img_banner]['season']):
@@ -265,7 +266,7 @@ class Command(BaseCommand):
                 file_content = ContentFile(open(img[0]).read())
                 db_img.src.save(os.path.basename(img_url), file_content)
                 db_img.save()
-        return db_season
+    
 
     def populate_episodes(self, db_serie, reg_en, reg_es):
         for n_season in reg_en:
