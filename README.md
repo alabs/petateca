@@ -43,3 +43,9 @@ Compresion de CSS/JS
 Para optimizar las consultas HTTP, se comprimen con django-compress. Para iniciar la compresion o si realizas algun cambio en el CSS/JS, tienes que regenerar el fichero comprimido
 
   python manage.py synccompress
+
+
+Django-Invitation
+-------------------
+
+Al no tener migraciones, se tuvo que copiar la app al directorio petateca/
