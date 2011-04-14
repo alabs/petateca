@@ -16,6 +16,7 @@ pip -E virtual install django==1.2.3 ipython PIL &&
 
 # Instalamos las dependencias
 python setup.py develop && 
+pip install src/django-registration-0.8-alpha-1.tar.gz && 
 
 # Desde petateca (donde esta manage.py)
 cd petateca &&
