@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 
 from serie.models import Link, Serie
 from userdata.forms import UserToInviteForm
@@ -20,7 +21,7 @@ def view_profile(request):
 @render_to('userdata/user_public_profile.html')
 def get_user_public_profile(request, user_name):
     ''' Perfil publico del usuario ''' 
-    user = User.objects.get(username=user_name)
+    user = get_object_or_404(User, username=user_name)
     profile = UserProfile.objects.get(user=user)
     # for series marked as favorite
     #favorite_series = profile.favorite_series.all()
