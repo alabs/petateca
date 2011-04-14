@@ -255,32 +255,18 @@ class Command(BaseCommand):
         db_season.save()
 
         # seasonwide?
-        try:
-            season_banners = reg_en['_banners']['season']['season']
-            for img_banner in season_banners:
-                if int(ntemp) == int(season_banners[img_banner]['season']):
-                    img_url = season_banners[img_banner]['_bannerpath']
-                    img_title = season_banners[img_banner]['id']
-                    img = urllib.urlretrieve(img_url)
-                    db_img = m.ImageSeason(is_poster=True, title=img_title)
-                    db_img.season = db_season
-                    file_content = ContentFile(open(img[0]).read())
-                    db_img.src.save(os.path.basename(img_url), file_content)
-                    db_img.save()
-        except:
-            pass
-        finally:
-            return db_season
-
+        season_banners = reg_en['_banners']['season']['season']
+        for img_banner in season_banners:
+            if int(ntemp) == int(season_banners[img_banner]['season']):
+                img_url = season_banners[img_banner]['_bannerpath']
+                img_title = season_banners[img_banner]['id']
+                img = urllib.urlretrieve(img_url)
+                db_img = m.ImageSeason(is_poster=True, title=img_title)
+                db_img.season = db_season
+                file_content = ContentFile(open(img[0]).read())
+                db_img.src.save(os.path.basename(img_url), file_content)
+                db_img.save()
     
-#            if actor["image"]:
-#                img = urllib.urlretrieve(actor["image"])
-#                db_img = m.ImageActor(is_poster=True, title=actor["name"])
-#                db_img.actor = db_actor
-#                file_content = ContentFile(open(img[0]).read())
-#                db_img.src.save(os.path.basename(actor["image"]), file_content)
-#                db_img.save()
-#            return db_actor
 
     def populate_episodes(self, db_serie, reg_en, reg_es):
         for n_season in reg_en:

@@ -10,9 +10,9 @@ setup(
     author_email="",
     packages=['petateca',],
     url='',
-    license=open('LICENSE.txt').read(),
+    license=open('LICENSE').read(),
     description='Web de petateca',
-    long_description=open('README.txt').read(),
+    long_description=open('README.md').read(),
     install_requires=[
         'django',
         'PIL',
