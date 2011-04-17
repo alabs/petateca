@@ -1,6 +1,6 @@
 {% extends "base_stripped.html" %}
 {% load i18n %}
-{% block title %}LiberaTeca: la bilioteca del siglo XXI - Omnia Sunt Communia{% endblock %}
+{% block title %}LiberaTeca: Omnia Sunt Communia{% endblock %}
 {% block extrastyle %}
 	<style type="text/css"> 
 		body { background-color: #fff; color: #eeeeee; text-align: center; font-family: arial, sans-serif; }
@@ -39,7 +39,7 @@
     <h2>{{ SITE_NAME }}</h2>
     <p> 
         {% blocktrans %}
-        Somos la biblioteca del siglo XXI, una pagina de enlaces de nueva generación. Libros, peliculas, musica, series y todo lo que puedes encontrar en la biblioteca de tu barrio: <b>sin coste</b>, <b>sin publicidad</b>, y lo mejor de todo, <b>sin moverte de tu sofa</b>.
+        Liberateca es una pagina de enlaces de nueva generación. 
         {% endblocktrans %}
     </p> 
     <div id="accordion">
@@ -70,14 +70,12 @@
         {% blocktrans %}
             <p>
                 <ul>
-                    <li>Puedes <b>votar, comentar y valorar</b> tanto las series como los enlaces, asi como <b>agregar nuevos enlaces</b>.
-                    <li>Proximamente <b>liberaremos el codigo</b> con el que esta hecha la web para que puedas modificarla y mejorarla. 
+                <li>Puedes <b>votar, comentar y valorar</b> tanto las series como los enlaces, asi como <b>agregar nuevos enlaces</b>.
+                    <li>Hemos <a href="http://github.com/alabs/petateca"><b>liberado el codigo</b></a> con el que esta hecha la web para que puedas modificarla y mejorarla. 
+                    <li>Nos coordinamos a traves de una <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev"><b>lista de correo</b></a> para ir mejorando la web. Cualquiera puede participar. 
                     <li>Tendremos una <b>API</b> para que puedas hacer otras webs o servicios para la plataforma que quieras. 
                     <li>Daremos de una forma sencilla nuestra <b>base de datos con todos los enlaces</b> que tenemos, porque sabemos que estos no nos pertenecen.
                 </ul>
-            </p>
-            <p>
-                Ahora mismo y por un tiempo funcionara bajo un sistema de <b>invitaciones</b> para poder ir creciendo de a poco (y creando el buzz xD), puedes conseguir tu invitación a través de nuestro <b>Twitter</b>.
             </p>
         {% endblocktrans %}
         </div>
