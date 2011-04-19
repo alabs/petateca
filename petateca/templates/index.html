@@ -20,6 +20,55 @@
                 </div>
       		{% endfor %}
         </div>
+
+		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
+		<div id="quicknav" class="grid_12">
+			<div class="quicknavgrid_3 quicknav alpha left">
+                <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+                <script>
+                new TWTR.Widget({
+                  version: 2,
+                  type: 'profile',
+                  rpp: 4,
+                  interval: 6000,
+                  width: 450,
+                  height: 300,
+                  theme: {
+                    shell: {
+                      background: '#333333',
+                      color: '#ffffff'
+                    },
+                    tweets: {
+                      background: '#bababa',
+                      color: '#000000',
+                      links: '#474747'
+                    }
+                  },
+                  features: {
+                    scrollbar: false,
+                    loop: false,
+                    live: false,
+                    hashtags: true,
+                    timestamp: true,
+                    avatars: false,
+                    behavior: 'all'
+                  }
+                }).render().setUser('liberateca').start();
+                </script>
+			</div>
+			<div class="quicknavgrid_3 quicknav alpha left">
+            </div>
+			<div class="quicknavgrid_3 quicknav alpha right">
+					<h4 class="title ">{% trans "Errores o sugerencias" %}</h4>
+                    <p style="font-size:120%;">Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustaria que tuviese</a>.</p>
+			</div>
+			<div class="quicknavgrid_3 quicknav alpha right">
+					<h4 class="title ">{% trans "Desarrollo" %}</h4>
+                    <p style="font-size:120%;">Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
+			</div>
+        </div>
+
+
 			
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
@@ -27,26 +76,19 @@
 					<h4 class="title ">{% trans "Series" %}</h4>
 					<p>{% trans "listado de todas las series" %}</p>
 					<p style="text-align:center;"><img alt="{% trans "Todas las series" %}" src="/static/images/Art_Artdesigner.lv.png" /></p>
-				
 			</a>
 			<a class="quicknavgrid_3 quicknav" href="/faq">
-
 					<h4 class="title ">{% trans "FAQ" %}</h4>
 					<p>{% trans "Preguntas más frecuentes" %}</p>
 					<p style="text-align:center;"><img alt="{% trans "Preguntas más frecuentes" %}" src="/static/images/info.png" /></p>
-				
 			</a>
-			<a class="quicknavgrid_3 quicknav" href="/blog">
-					<h4 class="title ">{% trans "Ver nuestro blog" %}</h4>
-					<p>{% blocktrans %}Blog de {{SITE_NAME}} para ver entradas y comentar{% endblocktrans %}</p>
-
-					<p style="text-align:center;"><img alt="{% trans "Ir al blog" %}" src="/static/images/Blog_Artdesigner.lv.png" /></p>
-				
+			<a class="quicknavgrid_3 quicknav" href="/accounts/invite">
+					<h4 class="title ">{% trans "Invitaciones" %}</h4>
+					<p style="text-align:center; font-size:120%;">Tienes {{ remaining_invitations }} invitaciones restantes. ¡Invita a tus colegas!</p>
 			</a>
-			<a class="quicknavgrid_3 quicknav" href="#">
-					<h4 class="title ">{% trans "Redes Sociales" %}</h4>
-					<p>{% blocktrans %}{{SITE_NAME}} se encuentra en Twitter, Facebook y etc.{% endblocktrans %}</p>
-					<p style="text-align:center;"><img alt="{% trans "Redes Sociales" %}" src="/static/images/hungry_bird.png" /></p>
+			<a class="quicknavgrid_3 quicknav" href="/series/sneak">
+					<h4 class="title ">{% trans "Ultimos enlaces" %}</h4>
+					<p style="text-align:center; font-size:120%;">Ver los ultimos enlaces agregados</p>
 			</a>
 		</div>
 {% endblock %}

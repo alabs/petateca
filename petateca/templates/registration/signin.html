@@ -1,6 +1,6 @@
 {% extends "base_stripped.html" %}
 {% load i18n %}
-{% block title %}LiberaTeca: Omnia Sunt Communia{% endblock %}
+{% block title %}Liberateca: Omnia sunt communia{% endblock %}
 {% block extrastyle %}
 	<style type="text/css"> 
 		body { background-color: #fff; color: #eeeeee; text-align: center; font-family: arial, sans-serif; }
@@ -50,17 +50,17 @@
         {% endblocktrans %}
     </p> 
     <div id="accordion">
-        <h3 class="header"><a href="#">{% trans "Iniciar Sesión" %}</a></h3>
+        <h3 class="header"><a href="#">{% trans "Ingresar" %}</a></h3>
         <div>
             <!-- LOGIN form -->
             <form method="post" action="." id="signin_form">
                 <ul class="signin_list">						
                     {{ form.as_ul }}
-                    <input type='submit' id='send_message' class="button" value='{% trans "Ir a LiberaTeca" %}' />
+                    <input type='submit' id='send_message' class="button" value='{% trans "Ir a Liberateca" %}' />
                 </ul> 
             </form>  
         </div>
-        <h3 class="header"><a href="#">{% trans "Pedir Invitación" %}</a></h3>
+        <h3 class="header"><a href="#">{% trans "Pedir invitación" %}</a></h3>
         <div>
                     <p> Puedes pedir una invitacion rellenando tu correo y proximamente te la enviaremos </p>
                         <form method="post" action="{% url request_invitation %}" id="signin_form">
@@ -74,7 +74,7 @@
         </div>
      </div>
         
-<p style="text-align:right;"><i>Omnia Sunt Communia</i> -- <b>Equipo de {{ SITE_NAME }}</b></p>
+<p style="text-align:right;"><i>Omnia sunt communia</i> -- <b>Equipo de {{ SITE_NAME }}</b></p>
 </div>
 <br />
 <br />
