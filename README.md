@@ -20,9 +20,9 @@ Iniciando entorno de desarrollo
 Importar datos de pruebas
 -------------------------
 
-  python manage.py loaddata serie/fixtures/test_data.json 
+  python manage.py loaddata apps/serie/fixtures/test_data.json 
 
-  cp -rp serie/fixtures/img/* static/img/
+  cp -rp apps/serie/fixtures/img/* static/img/
 
 Salir del entorno de desarrollo
 -------------------------------
@@ -48,4 +48,4 @@ Para optimizar las consultas HTTP, se comprimen con django-compress. Para inicia
 Django-Invitation
 -------------------
 
-Al no tener migraciones, se tuvo que copiar la app al directorio petateca/
+Al no tener migraciones, se tuvo que copiar la app al directorio petateca/apps/invitation
