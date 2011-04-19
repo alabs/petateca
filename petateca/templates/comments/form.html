@@ -1,6 +1,4 @@
 {% load comments i18n %}
-<div class="hr clearfix">&nbsp;</div>
-<h2>{% trans "Añade un comentario" %}</h2>
 <div class="hr dotted clearfix">&nbsp;</div>
 {% if request.user.is_authenticated %}
    <form id="comment_form" class="grid_6" action="{% comment_form_target %}" method="post">

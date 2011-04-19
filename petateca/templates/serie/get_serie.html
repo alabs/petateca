@@ -154,7 +154,7 @@ function favorite() {
 		<p class="clearfix">
 		<a href="/series" class="button float">&lt;&lt; {% trans "Regresar a las Series" %}</a>
 		{% get_comment_count for serie as comment_count %}
-		<a href="#comments" class="button float">{{comment_count}} {% trans "Comentarios" %}</a>
+		<a href="#comments" class="button float">{{comment_count}} {% trans "reseñas" %}</a>
 		</p>
 </div>
 
@@ -227,13 +227,15 @@ function favorite() {
 
 <div>
 	{% if not comment_count == 0 %}
-	<div class="hr clearfix">&nbsp;</div>
-	<!-- COMMENTS -->
-	<h2><a name="comments">{% trans "Comentarios" %}</a></h2>
-	{% render_comment_list for serie %}
+        <div class="hr clearfix">&nbsp;</div>
+        <!-- RESEÑAS -->
+        <h2><a name="comments">{% trans "Reseñas" %}</a></h2>
+        {% render_comment_list for serie %}
 	{% endif %}
 
-	<!-- ADD A COMMENT -->
+	<!-- RESEÑA -->
+    <div class="hr clearfix">&nbsp;</div>
+    <h2>{% trans "Añade tu reseña" %}</h2>
 	{% with request.path as next %}
 	{% render_comment_form for serie %}
 	{% endwith %}
