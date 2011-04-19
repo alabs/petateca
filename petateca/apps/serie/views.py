@@ -304,3 +304,11 @@ def season_lookup(request, serie_slug, season):
         episode_string += '<li><a href="%s"><strong>%s</strong> - %s </a></li>\n' % ( episode.get_absolute_url(), episode.season_episode(), episode.title )
     episode_string += '</ul></div>'
     return HttpResponse(episode_string)
+
+
+@render_to('serie/actors_lookup.html')
+def actors_lookup(request, serie_slug):
+    serie = Serie.objects.get(slug_name=serie_slug)
+    roles = Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie)
+    return { 'roles': roles }
+

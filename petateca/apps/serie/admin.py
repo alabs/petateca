@@ -1,6 +1,6 @@
 #pylint: disable-msg=R0201
 from django.contrib import admin
-from . import models as m
+from serie import models as m
 
 from sorl.thumbnail import default
 ADMIN_THUMBS_SIZE = '60x60'

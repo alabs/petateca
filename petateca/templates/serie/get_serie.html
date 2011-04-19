@@ -40,6 +40,15 @@ $(document).ready(function () {
             return false; 
         }
     );
+    $('#get_actors').click(
+        function(){
+            $.get('/series/lookup/actors/{{ serie.slug_name }}', {}, 
+                function(data){
+                    $('#actors_list').html(data)
+                }
+            ); 
+        }
+    );
 
 });
 
@@ -175,7 +184,8 @@ function favorite() {
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- SEASONS -->
 	<h2><span>{% trans "Temporadas" %}</span></h2>
-    <table class="left"> 
+    <div class="left">
+    <table>
 	{% for season in season_list %}
         <tr>
             <td>
@@ -199,33 +209,14 @@ function favorite() {
         </tr>
     {% endfor %}
     </table>
-    <div class="right" id="season_list"></div>
-	<div class="hr clearfix">&nbsp;</div>
-	<!-- DESCRIPTION -->
-	<p class="clearfix"> {{ serie.description }}</p>
+    </div>
+    <div class="right" id="season_list" ></div>
+    <!-- DESCRIPTION -->
+    <p class="right" style="width:500px; font-size:150%;">{{ serie.description }}</p>
 	<div class="hr clearfix">&nbsp;</div>
 	<!-- ACTORS -->
-	<h2>{% trans "Actores" %}</h2>
-	<div class="hr dotted clearfix">&nbsp;</div>
-	{% for role in roles %}
-		{% if role.role %}
-            <a class="portfolio_item float alpha actor" href="{{ role.actor.get_absolute_url }}">
-		       {% if role.actor.poster %}{% thumbnail role.actor.poster.src "150x150" as img_actor %}
-			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
-			{% else %}<img id="actor_unknown" width="100"  src="/static/images/image_not_available.png">
-			{% endif %}
-
-			<div class="meta"><b>{{ role.role|slice:":20" }}</b><br /> {{ role.actor.name|slice:":20"}}</div>
-			</a>
-		{% endif %}
-    {% endfor %}
-</div>
-
-<!-- COLUMN 3 -->
-<div class="grid_1">
-</div>
-
-<div>
+        <h2><a id="get_actors" name="get_actors" href="#get_actors">{% trans "Ver actores" %}</a></h2>
+        <div id="actors_list"></div>
 	{% if not comment_count == 0 %}
         <div class="hr clearfix">&nbsp;</div>
         <!-- RESEÑAS -->
@@ -239,6 +230,13 @@ function favorite() {
 	{% with request.path as next %}
 	{% render_comment_form for serie %}
 	{% endwith %}
+</div>
+
+<!-- COLUMN 3 -->
+<div class="grid_1">
+</div>
+
+<div>
 </div>
 
 {% endblock %}

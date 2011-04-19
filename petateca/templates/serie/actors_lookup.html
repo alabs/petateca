@@ -1,0 +1,15 @@
+{% load thumbnail %}
+
+
+	{% for r in roles %}
+		{% if r.role %}
+            <a class="portfolio_item float alpha actor" href="{{ r.actor.get_absolute_url }}">
+		       {% if r.actor.poster %}{% thumbnail r.actor.poster.src "150x150" as img_actor %}
+			<img id="actor_list" src="{{ img_actor.url }}" />{% endthumbnail %}
+			{% else %}<img id="actor_unknown" width="100"  src="/static/images/image_not_available.png">
+			{% endif %}
+
+			<div class="meta"><b>{{ r.role|slice:":20" }}</b><br /> {{ r.actor.name|slice:":20"}}</div>
+			</a>
+		{% endif %}
+    {% endfor %}
