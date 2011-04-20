@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'serie',
+    'api',
     'blog',
     'userdata',
     #'imdblocal', #Don't use yet, sucks a lot
@@ -238,3 +239,5 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+APPEND_SLASH = False

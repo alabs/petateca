@@ -47,17 +47,18 @@ def get_serie(request, serie_slug):
             'roles': Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie),
         }
         return serie_info
-    # si es POST trata el rating:
+    # si es POST trata el favorito/rating:
     if request.method == 'POST' and request.is_ajax():
         if request.user.is_authenticated():
+            user = User.objects.get(username=request.user)
+            # Si es favorito (corazon)
             if request.POST.has_key('favorite'):
-                user = User.objects.get(username=request.user)
                 serie.favorite_of.add(user.profile)
                 return HttpResponse(simplejson.dumps('yes'), mimetype='application/json')
             elif request.POST.has_key('no-favorite'):
-                user = User.objects.get(username=request.user)
                 serie.favorite_of.remove(user.profile)
                 return HttpResponse(simplejson.dumps('no'), mimetype='application/json')
+            # Si es rating de estrellas
             if request.POST.has_key('rating'):
                 content_type = ContentType.objects.get(app_label='serie', name='serie')
                 params = {
@@ -69,6 +70,7 @@ def get_serie(request, serie_slug):
                 response = AddRatingView()(request, **params)
                 return HttpResponse(simplejson.dumps(response.content), mimetype='application/json')
         else: 
+            # El usuario no esta autenticado
             return HttpResponse(simplejson.dumps('no-user'), mimetype='application/json')
 
 
