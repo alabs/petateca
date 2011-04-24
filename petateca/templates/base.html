@@ -29,14 +29,15 @@
         <ul id="navigation" class="grid_8">
 
             {% if request.user.is_authenticated %}
-                    <li><a href="/accounts/logout"><span class="meta">{% trans "cerrar sesión" %}</span><br />{% trans "CERRAR SESIÓN" %}</a></li>
-                    <li><a href="{% url get_user_public_profile user_name=request.user.username %}"><span class="meta">{{request.user.username}}</span><br />{% trans "PERFIL" %}</a></li>
+                    <li><a href="/accounts/logout"><span class="meta">{% trans "cerrar sesión" %}</span><br />{% trans "Salir" %}</a></li>
+                    <li><a href="{% url get_user_public_profile user_name=request.user.username %}"><span class="meta">{{request.user.username}}</span><br />{% trans "Perfil" %}</a></li>
                 {% else %}
-                    <li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>    
+                    <li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "Ingresar" %}</a></li>    
             {% endif %}
             <li><a href="{% url faq %}"><span class="meta">{% trans "preguntas" %}</span><br />{% trans "FAQ" %}</a></li>
-            <li><a href="{% url blog-index %}"><span class="meta">{% trans "informacion" %}</span><br />{% trans "BLOG" %}</a></li>
-            <li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
+            <li><a href="{% url api %}"><span class="meta">{% trans "para hackers" %}</span><br />{% trans "API" %}</a></li>
+            <li><a href="{% url blog-index %}"><span class="meta">{% trans "informacion" %}</span><br />{% trans "Blog" %}</a></li>
+            <li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "Series" %}</a></li>
         </ul>
             <div id="search_form">
               <form action="/search/">
