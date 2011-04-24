@@ -93,19 +93,8 @@ function series_bubble(){
             var serie = $(this);
             var serie_id = serie.attr('id');
             $.get('/series/lookup/serie/' + serie_id, function(data) {
-            var seconds_to_wait = 0;
-                function pause(){
-                    var timer = setTimeout(function(){
-                        seconds_to_wait--;
-                        if(seconds_to_wait > 0){
-                            pause();
-                        }else{
                             //set new innerHtml for the Bubble Popup
                             serie.SetBubblePopupInnerHtml(data, false); //false -> it shows new innerHtml but doesn't save it, then the script is forced to load everytime the innerHtml... 
-                            // take a look in documentation for SetBubblePopupInnerHtml() method
-                        };
-                    },1000);
-                };pause();
             }); 
     });
 };
