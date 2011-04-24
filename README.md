@@ -5,8 +5,6 @@ PetaTeca es un proyecto basado en un simple concepto: La capacidad de autogesti�
 
 Tras esta sencilla idea, encontramos un proyecto que pretende ofrecer una herramienta de Software Libre a quienes deseen dotarse de una aplicación web que les permita mantener de manera colectiva enlaces a los contenidos que gestionen (como bibliotecas, asociaciones o cualquier tipo de institución) o también a comunidades y colectivos que deseen mantener un espacio común donde compartir enlaces a cualquier tipo de información de manera que los mismos puedan ser validados por ellas mismas.
 
-PetaTeca es el software que mantiene a Liberateca ( http://liberateca.net/ ), donde se pueden compartir gustos y recomendaciones de series, aunque en un futuro soportara tambien libros, peliculas, musica y otras cosas. Para comentar nuevas funcionalidades a agregar en Liberateca, se puede hacer a traves del foro en UserVoice ( http://liberateca.uservoice.com/ )
-
 Instalacion del entorno de Desarrollo
 -------------------------------------
 
@@ -51,12 +49,3 @@ Django-Invitation
 -------------------
 
 Al no tener migraciones, se tuvo que copiar la app al directorio petateca/apps/invitation
-
-
-Django-Rosetta
--------------------
-
-Por un bug con los tests:
-https://code.google.com/p/django-rosetta/issues/detail?id=107
-
-  patch virtual/lib/python*/site-packages/django_rosetta*/rosetta/tests/__init__.py < src/rosetta.patch 

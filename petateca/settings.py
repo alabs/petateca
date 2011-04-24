@@ -240,3 +240,4 @@ try:
 except ImportError:
     pass
 
+APPEND_SLASH = False
