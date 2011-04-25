@@ -135,7 +135,7 @@ function favorite() {
 	  </div>
 	<div class="hr dotted clearfix">&nbsp;</div>
     <!-- RATING -->
-    <div class="center rating_num {{ serie.rating.get_rating|background_color }}"> {{ serie.rating.get_rating }}
+    <div class="center rating_num {{ serie.rating.get_rating|background_color }}"> {{ serie.rating.get_rating|slice:":4" }}
         <div class="mt_3">de 5</div>
     </div>
 	<div class="hr dotted clearfix">&nbsp;</div>

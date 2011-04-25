@@ -254,9 +254,11 @@ def serie_lookup(request, serie_id):
     elif rating > 2: background = 'neutral_bg'
     elif rating > 0: background = 'negative_bg'
     elif rating == 0: background = 'no_bg'
-    result += '<div class="right"> <div class="center rating_num ' + background + ' ">' 
-    result += str(rating) + '<div class="mt_3">de 5</div></div></div></div>'
-    result += '<p style="margin-top:7em;">' + serie.description[:300] + '... </p>'
+    result += '''
+        <div class="right"> <div class="center rating_num %s">
+        %s <div class="mt_3">de 5</div></div></div></div>
+        <p style="margin-top:7em;"> %s... </p>
+        ''' % ( background, str(rating)[:4], serie.description[:300] )
     return HttpResponse(result)
 
 
