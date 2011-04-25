@@ -2,11 +2,25 @@
 {% load i18n %}
 {% load thumbnail %}
 {% block title %}{% trans "Series" %}{% endblock %}
+{% block extrastyle %}
+<style>
+#tagcloud{ font-family:Tahoma,Verdana,sans-serif;  padding:10px 5px 10px 5px;}
+ 
+.tag1{ font-size:1em; color:#555555; line-height:1em; }
+.tag2{ font-size:1.4em; color:#606060; line-height:1em; }
+.tag3{ font-size:1.8em; color:#808080; line-height:1em; }
+
+.nolink { color: #000000; } 
+ 
+#tagcloud a{ text-decoration:none; }
+#tagcloud a:hover{ text-decoration:underline; }
+</style>
+{% endblock %}
 {% block contents %}
 		<!-- COLUMN 1 -->
 		<div class="catagory_1 clearfix">
 			<!-- BROWSE -->
-			<div class="grid_2 textright" >
+			<div class="grid_3 textright" >
 				{% if network or genre %}
 					<p>
 						<a class="button" href="{% url serie-index %}">{% trans "Series" %}</a>
@@ -14,77 +28,102 @@
 					</p>
 				{% endif %}
 				<!-- BY GENRE -->
-				<p>
-                <form name="genre">
-					<select name="go" OnChange="location.href=genre.go.options[selectedIndex].value">
-                    {% if not genre %} 
-                            <option selected>Elige un Genero</option>
-                    {% endif %}
-					{% for g in genre_list %}
-						{% if g.name == genre.name %}
-							<option selected>{{g.name}}</option>
-						{% else %}
-							<option value="{{ g.get_absolute_url }}">{{g.name}}</option>
-						{% endif %}
-					{% endfor %}
-					</select>
-                </form>
-				</p>
+                <h4 class="title ">Géneros</h4>
+                <div class="hr clearfix dotted">&nbsp;</div>
+                <p>
+                    <div id="tagcloud">
+                        {% for g in genre_list %}
+                            <a class="genre {{ g.tag }}" href="#{{ g.slug_name }}">{{ g.name }}</a>
+                        {% endfor %}
+                    </div>
+                </p>
 				<!-- BY NETWORK -->
-				<p>
-				<div class="hr clearfix dotted">&nbsp;</div>
-                <form name="network">
-					<select name="go" OnChange="location.href=network.go.options[selectedIndex].value">
-                    {% if not network %} 
-                            <option selected>Elige una Cadena</option>
-                    {% endif %}
-					{% for n in network_list %}
-					{% spaceless %}
-						{% if n.name == network.name %}
-							<option selected>{{n.name}}</option>
-						{% else %}
-							<option value="{{ n.get_absolute_url }}">{{n.name}}</option>
-						{% endif %}
-					{% endspaceless %}
-					{% endfor %}
-					</select>
-                </form>
-				</p>
+                <h4 class="title ">Cadenas</h4>
+                <div class="hr clearfix dotted">&nbsp;</div>
+                <p>
+                    <div id="tagcloud">
+                        {% for n in network_list %}
+                            <a class="network {{ n.tag }}" href="#{{ n.slug_name }}">{{ n.name }}</a>
+                        {% endfor %}
+                    </div>
+                </p>
 			</div>
-			<div class="grid_10">
+			<div class="grid_9">
 			<!-- ALPHABETHICAL PAGINATION -->
 			<p>
 				<div class="pagination">
-					<h2 class="center">
-					{% for p in page.paginator.pages %}
-    						{% ifequal p page %}
-      							<span class="selected">{{ page }}</span>
-    						{% else %}
-      						<a href="?page={{ p.number }}">{{ p }}</a>
-    						{% endifequal %}
-  					{% endfor %}
-					</h4>
+                    <h2 class="center">
+                        <a class="abc" href="#0">0-9</a>
+                        <a class="abc" href="#A">A</a>
+                        <a class="abc" href="#B">B</a>
+                        <a class="abc" href="#C">C</a>
+                        <a class="abc" href="#D">D</a>
+                        <a class="abc" href="#E">E</a>
+                        <a class="abc" href="#F">F</a>
+                        <a class="abc" href="#G">G</a>
+                        <a class="abc" href="#H">H</a>
+                        <a class="abc" href="#I">I</a>
+                        <a class="abc" href="#J">J</a>
+                        <a class="abc" href="#K">K</a>
+                        <a class="abc" href="#L">L</a>
+                        <a class="abc" href="#M">M</a>
+                        <a class="abc" href="#N">N</a>
+                        <a class="abc" href="#O">O</a>
+                        <a class="abc" href="#P">P</a>
+                        <a class="abc" href="#Q">Q</a>
+                        <a class="abc" href="#R">R</a>
+                        <a class="abc" href="#S">S</a>
+                        <a class="abc" href="#T">T</a>
+                        <a class="abc" href="#U">U</a>
+                        <a class="abc" href="#V">V</a>
+                        <a class="abc" href="#W">W</a>
+                        <a class="abc" href="#Y">Y</a>
+                        <a class="abc" href="#Z">Z</a>
+                    </h2>
 				</div>
 			</p>
-			<!-- THUMBNAILS -->
-				{% for serie in page.object_list %}
-                <div class="grid_2">
-    				<a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
-					<div class="preload" style="width:140px; height:200px;">
-					{% spaceless %}
-    					{% if serie.poster.src %}
-        					{% thumbnail serie.poster.src "150x200" as img_serie %}
-          						<img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" />
-        					{% endthumbnail %}
-    					{% else %}
-						<img class="prel serie" id="{{ serie.id }}" src="/static/images/image_not_available.png" height="140" width="200" /> 
-    					{% endif %}
-                        <span class="subtitle">{{ serie.name }}</span>
-					{% endspaceless %}
-					</div>
-  					</a>
+                <div id="series_list">
+                <!-- THUMBNAILS -->
+                    {% for serie in serie_list %}
+                    <div class="grid_2">
+                        <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
+                        <div class="preload" style="width:140px; height:200px;">
+                        {% spaceless %}
+                            {% if serie.poster.src %}
+                                {% thumbnail serie.poster.src "150x200" as img_serie %}
+                                    <img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" />
+                                {% endthumbnail %}
+                            {% else %}
+                            <img class="prel serie" id="{{ serie.id }}" src="/static/images/image_not_available.png" height="140" width="200" /> 
+                            {% endif %}
+                        {% endspaceless %}
+                        </div>
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
-  				{% endfor %}
 			</div>
 		</div>
+{% endblock %}
+{% block extrascript %}
+<script>
+function lookup( selector, type ) {
+  $(selector).click(
+    function() { 
+      $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+      letter = $(this).attr('href');
+      newlet = letter.substring(1);
+      $('#series_list').load('/series/lookup/' + type + '/' + newlet);
+      $(this).addClass('nolink');
+      if (typeof ($last) != 'undefined') { $last.removeClass('nolink'); } 
+      $last = $(this);
+    }
+  );
+}
+
+lookup('.abc', 'letter'); 
+lookup('.genre', 'genre'); 
+lookup('.network', 'network'); 
+
+</script>
 {% endblock %}

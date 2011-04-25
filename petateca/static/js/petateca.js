@@ -78,58 +78,25 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function series_bubble(){
-    // los popups de las series cuando se va a /series y que haga la magia :)
-    $('.serie').CreateBubblePopup({
-            position: 'right',
-            align: 'center',
-            width: '500',
-            innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
-            innerHtmlStyle: { color:'#fff', 'text-align':'left', 'font-size':'110%' },
-            themeName: 'all-grey',
-            themePath: '/static/images/jquerybubblepopup-theme'
-          });
-    $('.serie').mouseover(function(){
-            var serie = $(this);
-            var serie_id = serie.attr('id');
-            $.get('/series/lookup/serie/' + serie_id, function(data) {
-                            //set new innerHtml for the Bubble Popup
-                            serie.SetBubblePopupInnerHtml(data, false); //false -> it shows new innerHtml but doesn't save it, then the script is forced to load everytime the innerHtml... 
-            }); 
-    });
-};
-
-function seasons_bubble(){
-    // una prueba, para que el popup traiga las temporadas, no funciona bien... Igual se puede poner con el otro? 
-    $('.season_list').CreateBubblePopup({
-        selectable: true,
-        position: 'top',
-        align: 'center',
-        width: '300',
-        innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
-        innerHtmlStyle: { 'text-align':'left', 'font-size':'110%' },
-        themeName: 'all-grey',
-        themePath: '/static/images/jquerybubblepopup-theme',
-    });
-    $('.season_list').hover(
-        function(){
-             var serie = $(this);
-             var serie_id = serie.attr('id');
-             $.get('/series/lookup/season/' + serie_id, function(data) {
-                 serie.SetBubblePopupInnerHtml(data, false);
-                 $(".serie").FreezeAllBubblePopups();
-             });
-        },
-        function(){
-             $(".serie").UnfreezeAllBubblePopups();
-        }
-    );
-};
-
 $(document).ready(function() {
-    // para el popup bubble ajax, llamamos a las funciones
-    series_bubble();
-    seasons_bubble();
+    // los popups de las series cuando se va a /series y que haga la magia :)
+  $('.serie').CreateBubblePopup({
+    position: 'right',
+    align: 'center',
+    width: '500',
+    innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
+    innerHtmlStyle: { color:'#fff', 'text-align':'left', 'font-size':'110%' },
+    themeName: 'all-grey',
+    themePath: '/static/images/jquerybubblepopup-theme'
+  });
+  $('.serie').mouseover(function(){
+    // Obtenemos el id de la serie y lo buscamos
+    var serie = $(this);
+    var serie_id = serie.attr('id');
+    $.get('/series/lookup/serie/' + serie_id, function(data) {
+      serie.SetBubblePopupInnerHtml(data);
+    }); 
+  });
 });
 
 

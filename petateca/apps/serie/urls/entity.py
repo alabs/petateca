@@ -29,8 +29,13 @@ urlpatterns = patterns('serie.views',
     url(r'^popular$', object_list, list_popular, name='list-popular'), 
 
     url(r'^sneak$', 'sneak_links', name="sneak_links"),
+
+    # AJAX
     url(r'^lookup/serie/(?P<serie_id>[-\w]+)$', 'serie_lookup'),
     url(r'^lookup/serie/(?P<serie_id>[-\w]/+)/(?P<season>[-\w]/+)$', 'season_lookup'),
     url(r'^lookup/actors/(?P<serie_slug>[-\w]+)$', 'actors_lookup'),
+    url(r'^lookup/letter/(?P<letter>[-\w]+)$', 'ajax_letter'),
+    url(r'^lookup/genre/(?P<genre_slug>[-\w]+)$', 'ajax_genre'),
+    url(r'^lookup/network/(?P<network_slug>[-\w]+)$', 'ajax_network'),
 
 )
