@@ -18,8 +18,6 @@ serie_list = {
 urlpatterns = patterns('serie.views',
     url(r'^$', object_list, serie_list, name='serie-index'), 
 
-    url(r'^by/(?P<query_type>[-\w]+)/(?P<slug_name>[-\w]+)$', 'get_serie_list', name="get_by_type"),
-
     url(r'^actor/(?P<slug>[-\w]+)$', object_detail, get_actor, name="get_actor"),
 
     (r'^last$', object_list, {

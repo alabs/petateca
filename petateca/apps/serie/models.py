@@ -219,13 +219,6 @@ class Network(models.Model):
     def __unicode__(self):
         return self.name
 
-    @models.permalink
-    def get_absolute_url(self):
-        return ('serie.views.get_serie_list', (), {
-                'slug_name': self.slug_name, 
-                'query_type': 'network',
-                })
-
 
 class Genre(models.Model):
     name = models.CharField(max_length=25)
@@ -240,12 +233,6 @@ class Genre(models.Model):
     def __unicode__(self):
         return self.name
 
-    @models.permalink
-    def get_absolute_url(self):
-        return ('serie.views.get_serie_list', (), {
-                'slug_name': self.slug_name, 
-                'query_type': 'genre',
-                })
 
 
 class Actor(models.Model):
