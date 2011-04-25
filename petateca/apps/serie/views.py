@@ -258,7 +258,7 @@ def serie_lookup(request, serie_id):
         <div class="right"> <div class="center rating_num %s">
         %s <div class="mt_3">de 5</div></div></div></div>
         <p style="margin-top:7em;"> %s... </p>
-        ''' % ( background, str(rating)[:4], serie.description[:300] )
+        ''' % ( background, str(rating)[:3], serie.description[:300] )
     return HttpResponse(result)
 
 
