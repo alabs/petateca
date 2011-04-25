@@ -142,33 +142,6 @@ def list_user_recommendation(request):
     return "TODO: listar las recomendaciones para el usuario"
 
 
-@render_to('serie/serie_list.html')
-def get_serie_list(request, slug_name=None, query_type=None):
-    ''' Listado de series con paginacion, genero y cadena '''
-    genres = []
-    for g in Genre.objects.all():
-        countdown = g.series.count()
-        if countdown > 50: tag = "tag3"
-        elif countdown > 5 < 50: tag = "tag2"
-        elif countdown < 5: tag = "tag1" 
-        gdict = {}
-        gdict['tag'], gdict['name'], gdict['slug_name'] = tag, g.name, g.slug_name
-        genres.append(gdict)
-    networks = []
-    for n in Network.objects.all():
-        countdown = n.series.count()
-        if countdown > 20: tag = "tag3"
-        elif countdown > 5 < 20: tag = "tag2"
-        elif countdown < 5: tag = "tag1" 
-        ndict = {}
-        ndict['tag'], ndict['name'], ndict['slug_name'] = tag, n.name, n.slug_name
-        networks.append(ndict)
-    return {
-            'genre_list': genres,
-            'network_list': networks,
-            'serie_list': Serie.objects.select_related('poster').order_by('-rating_score').all()[:16],
-        }
-
 @login_required
 @render_to('serie/add_link.html')
 def add_link(request, serie_slug, season, episode):
@@ -305,19 +278,19 @@ def actors_lookup(request, serie_slug):
     return { 'roles': roles }
 
 
-@render_to('serie/list_popular.html')
+@render_to('serie/generic_list.html')
 def ajax_letter(request, letter):
     series = Serie.objects.filter(name__startswith=letter)
     return { 'series_list': series }
 
 
-@render_to('serie/list_popular.html')
+@render_to('serie/generic_list.html')
 def ajax_genre(request, genre_slug):
     genre = Genre.objects.get(slug_name = genre_slug)
     return { 'series_list': genre.series.all() }
 
 
-@render_to('serie/list_popular.html')
+@render_to('serie/generic_list.html')
 def ajax_network(request, network_slug):
     network = Network.objects.get(slug_name = network_slug)
     return { 'series_list': network.series.all() }

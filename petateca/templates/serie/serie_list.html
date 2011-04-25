@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% load tagcloud %}
 {% block title %}{% trans "Series" %}{% endblock %}
 {% block extrastyle %}
 <style>
@@ -31,21 +32,13 @@
                 <h4 class="title ">Géneros</h4>
                 <div class="hr clearfix dotted">&nbsp;</div>
                 <p>
-                    <div id="tagcloud">
-                        {% for g in genre_list %}
-                            <a class="genre {{ g.tag }}" href="#{{ g.slug_name }}">{{ g.name }}</a>
-                        {% endfor %}
-                    </div>
+                {% tagcloud "Genre" "50" "5"%}
                 </p>
 				<!-- BY NETWORK -->
                 <h4 class="title ">Cadenas</h4>
                 <div class="hr clearfix dotted">&nbsp;</div>
                 <p>
-                    <div id="tagcloud">
-                        {% for n in network_list %}
-                            <a class="network {{ n.tag }}" href="#{{ n.slug_name }}">{{ n.name }}</a>
-                        {% endfor %}
-                    </div>
+                {% tagcloud "Network" "20" "5" %}
                 </p>
 			</div>
 			<div class="grid_9">
@@ -84,7 +77,7 @@
 			</p>
                 <div id="series_list">
                 <!-- THUMBNAILS -->
-                    {% for serie in serie_list %}
+                    {% for serie in object_list %}
                     <div class="grid_2">
                         <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
                         <div class="preload" style="width:140px; height:200px;">

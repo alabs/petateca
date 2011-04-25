@@ -10,14 +10,14 @@ get_actor = {
     'slug_field': 'slug_name',
 }
 
-list_popular = {
+serie_list = {
     'queryset': Serie.objects.select_related('poster').order_by('-rating_score').all()[:16],
-    'template_name': 'serie/list_popular.html',
-    'template_object_name': 'series',
+    'template_name': 'serie/serie_list.html',
 }
 
 urlpatterns = patterns('serie.views',
-    url(r'^$', 'get_serie_list', name="serie-index"),
+    url(r'^$', object_list, serie_list, name='serie-index'), 
+
     url(r'^by/(?P<query_type>[-\w]+)/(?P<slug_name>[-\w]+)$', 'get_serie_list', name="get_by_type"),
 
     url(r'^actor/(?P<slug>[-\w]+)$', object_detail, get_actor, name="get_actor"),
@@ -26,7 +26,6 @@ urlpatterns = patterns('serie.views',
         'queryset': Serie.objects.order_by('-name').all(), #XXX: Bad order
     }),
     (r'^recommended$', 'list_user_recommendation'),
-    url(r'^popular$', object_list, list_popular, name='list-popular'), 
 
     url(r'^sneak$', 'sneak_links', name="sneak_links"),
 

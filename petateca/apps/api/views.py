@@ -63,22 +63,19 @@ def season_detail(request, id_serie, season):
 def episode_detail(request, id_serie, season, episode):
     ''' Devuelve los links de un episodio con su informacion '''
     season = get_object_or_404(Season, serie=Serie.objects.get(id=id_serie), season=season)
-    epi_detail = []
-    for epi in season.episodes.all():
-        episode = {}
-        episode['season'] = season.season
-        episode['episode'] = epi.episode
-        episode['title'] = epi.title
-        episode['url'] = urlprefix + epi.get_absolute_url()
-        link_list = []
-        for l in epi.links.all():
-            link = {}
-            link['url'] = l.url
-            link['audio'] = l.audio_lang.iso_code
-            if l.subtitle: link['subtitle'] = l.subtitle.iso_code
-            link_list.append(link)
-        episode['links'] = link_list
-        epi_detail.append(episode)
-    return HttpResponse(simplejson.dumps(epi_detail, indent=4, ensure_ascii=False), mimetype='application/json')
-
+    epi = get_object_or_404(Episode, season=season, episode=episode)
+    episode = {}
+    episode['season'] = season.season
+    episode['episode'] = epi.episode
+    episode['title'] = epi.title
+    episode['url'] = urlprefix + epi.get_absolute_url()
+    link_list = []
+    for l in epi.links.all():
+        link = {}
+        link['url'] = l.url
+        link['audio'] = l.audio_lang.iso_code
+        if l.subtitle: link['subtitle'] = l.subtitle.iso_code
+        link_list.append(link)
+    episode['links'] = link_list
+    return HttpResponse(simplejson.dumps(episode, indent=4, ensure_ascii=False), mimetype='application/json')
 
