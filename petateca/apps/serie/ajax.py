@@ -1,5 +1,4 @@
-
-from serie.models import Serie, Episode, Actor, Role, Season, ImageSerie, ImageActor
+from serie.models import Serie, Episode, Actor, Role, Season, Network, Genre
 
 from decorators import render_to
 
