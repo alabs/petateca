@@ -110,7 +110,7 @@
                 {% if request.user.is_authenticated %}
 						<li><a href="/accounts/logout/">Salir</a></li>
                         <li><a href="{% url get_user_public_profile user_name=request.user.username %}">{% trans "Ver perfil" %}</a></li>
-						<li><a href="{% url invitations_invite %}">Invitar</a></li>
+						<li><a href="{% url invitation_invite %}">Invitar</a></li>
                     {% else %}
                         <li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'>{% trans "Acceder" %}</a></li>    
                 {% endif %}
