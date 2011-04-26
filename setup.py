@@ -45,6 +45,7 @@ setup(
         'twitter',
         'uuid',
         'wsgiref',
+        'django-piston',
     ],
     classifiers=[
         'Environment :: Web Environment',
