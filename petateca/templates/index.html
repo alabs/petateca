@@ -72,21 +72,21 @@
 			
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
-			<a class="quicknavgrid_3 quicknav alpha" href="/series">
+			<a class="quicknavgrid_3 quicknav alpha" href="{% url serie-index %}">
 					<h4 class="title ">{% trans "Series" %}</h4>
 					<p>{% trans "listado de todas las series" %}</p>
 					<p style="text-align:center;"><img alt="{% trans "Todas las series" %}" src="/static/images/Art_Artdesigner.lv.png" /></p>
 			</a>
-			<a class="quicknavgrid_3 quicknav" href="/faq">
+			<a class="quicknavgrid_3 quicknav" href="{% url faq %}">
 					<h4 class="title ">{% trans "FAQ" %}</h4>
 					<p>{% trans "Preguntas más frecuentes" %}</p>
 					<p style="text-align:center;"><img alt="{% trans "Preguntas más frecuentes" %}" src="/static/images/info.png" /></p>
 			</a>
-			<a class="quicknavgrid_3 quicknav" href="/accounts/invite">
+			<a class="quicknavgrid_3 quicknav" href="{% url invitation_invite %}">
 					<h4 class="title ">{% trans "Invitaciones" %}</h4>
 					<p style="text-align:center; font-size:120%;">Tienes {{ remaining_invitations }} invitaciones restantes. ¡Invita a tus colegas!</p>
 			</a>
-			<a class="quicknavgrid_3 quicknav" href="/series/sneak">
+			<a class="quicknavgrid_3 quicknav" href="{% url sneak_links %}">
 					<h4 class="title ">{% trans "Ultimos enlaces" %}</h4>
 					<p style="text-align:center; font-size:120%;">Ver los ultimos enlaces agregados</p>
 			</a>
