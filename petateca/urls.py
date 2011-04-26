@@ -30,7 +30,8 @@ urlpatterns = patterns('',
         {'template': 'api.html'},
         name="api"
        ),
-    (r'^api/v1', include('api.urls')),
+    (r'^api/v1', include('serie.urls.api')),
+
 
     (r'^blog/', include('blog.urls')),
 
