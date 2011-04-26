@@ -1,0 +1,9 @@
+<div id="episode_list" class="left">
+  <ul>
+  {% for episode in episode_list %}
+    <li>
+      <a {% if episode.from_future %}id="future" {% endif %}href="{{ episode.get_absolute_url }}"><span id="datemeta">{{ episode.air_date|date:"SHORT_DATE_FORMAT" }}</span> - <strong>{{ episode.season_episode }}</strong>- {{ episode.title }} </a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>

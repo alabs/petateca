@@ -83,8 +83,8 @@ class Season(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('serie.views.season_lookup', (), {
-                'serie_slug': self.serie.slug_name,
+        return ('serie.ajax.season_lookup', (), {
+                'serie_id': self.serie.id,
                 'season': self.season,
         })
 
@@ -150,14 +150,22 @@ class Episode(models.Model):
     def season_episode(self):
         return "S%02dE%02d" % (self.season.season, self.episode)
             
-    def __unicode__(self):
-        return self.title
-
     def get_absolute_url(self):
         return '/serie/%s/episode/S%02dE%02d/' % (self.season.serie.slug_name, self.season.season, self.episode)
 
     def get_add_link_url(self):
         return '/serie/%s/episode/S%02dE%02d/add/' % (self.season.serie.slug_name, self.season.season, self.episode)
+
+    def from_future(self):
+        now = datetime.now().date()
+        air_date = self.air_date
+        if now < air_date:
+            return 'future'
+        else:
+            return ''
+
+    def __unicode__(self):
+        return self.title
 
 
 class Link(models.Model):

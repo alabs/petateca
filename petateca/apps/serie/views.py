@@ -19,7 +19,6 @@ from serie.models import Genre, Network, Link, Languages
 from serie.models import Serie, Episode, Actor, Role, Season, ImageSerie, ImageActor
 
 from datetime import datetime
-from lib.namepaginator import NamePaginator
 from decorators import render_to
 
 
@@ -239,60 +238,3 @@ def sneak_links(request):
     last_links = Link.objects.order_by('-pub_date')[:30]
     return { 'last_links' : last_links }
 
-
-def serie_lookup(request, serie_id):
-    ''' JQuery PopUp en las imagenes '''
-    serie = Serie.objects.get(id=serie_id)
-    result = '<div><div class="left"><h3>' + serie.name + '</h3>'
-    genres = serie.genres.all()
-    genre_list = ''
-    for genre in genres: genre_list += genre.name + ', '
-    result += '<b>Genero</b>: ' + genre_list[:-2] + '<br />'
-    result += '<b>Cadena</b>: ' + serie.network.name + '<br /><br /></div>'
-    rating = serie.rating.get_rating()
-    if rating > 3: background = 'positive_bg'
-    elif rating > 2: background = 'neutral_bg'
-    elif rating > 0: background = 'negative_bg'
-    elif rating == 0: background = 'no_bg'
-    result += '''
-        <div class="right"> <div class="center rating_num %s">
-        %s <div class="mt_3">de 5</div></div></div></div>
-        <p style="margin-top:7em;"> %s... </p>
-        ''' % ( background, str(rating)[:3], serie.description[:300] )
-    return HttpResponse(result)
-
-
-def season_lookup(request, serie_slug, season):
-    serie = Serie.objects.get(slug_name=serie_slug)
-    season = Season.objects.get(serie=serie, season=season)
-    episode_list = season.episodes.all().order_by('episode')
-    episode_string = '<div id="episode_list"><ul>\n'
-    for episode in episode_list:
-        episode_string += '<li><a href="%s"><strong>%s</strong> - %s </a></li>\n' % ( episode.get_absolute_url(), episode.season_episode(), episode.title )
-    episode_string += '</ul></div>'
-    return HttpResponse(episode_string)
-
-
-@render_to('serie/actors_lookup.html')
-def actors_lookup(request, serie_slug):
-    serie = Serie.objects.get(slug_name=serie_slug)
-    roles = Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie)
-    return { 'roles': roles }
-
-
-@render_to('serie/generic_list.html')
-def ajax_letter(request, letter):
-    series = Serie.objects.filter(name__startswith=letter)
-    return { 'series_list': series }
-
-
-@render_to('serie/generic_list.html')
-def ajax_genre(request, genre_slug):
-    genre = Genre.objects.get(slug_name = genre_slug)
-    return { 'series_list': genre.series.all() }
-
-
-@render_to('serie/generic_list.html')
-def ajax_network(request, network_slug):
-    network = Network.objects.get(slug_name = network_slug)
-    return { 'series_list': network.series.all() }
