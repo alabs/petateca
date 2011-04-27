@@ -12,31 +12,31 @@ Instalacion del entorno de Desarrollo
 
 Ejecutar install.sh en este mismo directorio:
 
-  ./install.sh
+`./install.sh`
 
 Iniciando entorno de desarrollo
 -------------------------------
 
-  source virtual/bin/activate
+`source virtual/bin/activate`
 
 Importar datos de pruebas
 -------------------------
 
-  python manage.py loaddata apps/serie/fixtures/test_data.json 
+`python manage.py loaddata apps/serie/fixtures/test_data.json`
 
-  cp -rp apps/serie/fixtures/img/* static/img/
+`cp -rp apps/serie/fixtures/img/* static/img/`
 
 Salir del entorno de desarrollo
 -------------------------------
 
-  deactivate
+`deactivate`
 
 Indice de Búsquedas
 -------------------
 
 Si se importan datos hay que actualizar el indice de busquedas:
 
-  python manage.py update_index
+`python manage.py update_index`
 
 
 Compresion de CSS/JS
@@ -44,7 +44,7 @@ Compresion de CSS/JS
 
 Para optimizar las consultas HTTP, se comprimen con django-compress. Para iniciar la compresion o si realizas algun cambio en el CSS/JS, tienes que regenerar el fichero comprimido
 
-  python manage.py synccompress
+`python manage.py synccompress`
 
 
 Django-Invitation
