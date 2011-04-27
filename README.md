@@ -60,4 +60,4 @@ Por un bug con los tests:
 
 https://code.google.com/p/django-rosetta/issues/detail?id=107
 
-  patch virtual/lib/python*/site-packages/django_rosetta*/rosetta/tests/__init__.py < src/rosetta.patch 
+`patch virtual/lib/python*/site-packages/django_rosetta*/rosetta/tests/__init__.py < src/rosetta.patch`
