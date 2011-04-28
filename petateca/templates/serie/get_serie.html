@@ -195,7 +195,7 @@ function favorite() {
 	{% for season in season_list %}
         <tr>
             <td>
-                <a class="portfolio_item float alpha season" href="#{{ season.season }}">
+                <a class="portfolio_item float alpha season" href="{{ season.get_absolute_url }}">
                 <div class="preload" style="width:44px; height:64px;">
                 {% if season.poster %} {% thumbnail season.poster.src "44x64" as img_season %} 
                     <img class="prel" src="{{ img_season.url }}" alt="{{serie.name}} - {{season.season}}"/>{% endthumbnail %}
