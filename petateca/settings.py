@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.markup',
     'serie',
     'blog',
     'userdata',
@@ -234,8 +235,11 @@ COMPRESS_JS = {
 COMPRESS = True
 COMPRESS_VERSION = True
 
+CACHE_BACKEND = 'dummy://'
+
 try:
     from local_settings import *
 except ImportError:
     pass
+
 
