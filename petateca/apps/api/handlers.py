@@ -27,9 +27,6 @@ class SerieListHandler(BaseHandler):
             serie_list.append(serie)
         return serie_list
 
-    @staticmethod
-    def resource_uri():
-        return ('API_serie_list')
 
 class SerieHandler(BaseHandler):
     ''' Detalle de Serie '''
@@ -52,10 +49,6 @@ class SerieHandler(BaseHandler):
         serie = get_object_or_404(Serie, id=serie_id)
         return serie
 
-    @staticmethod
-    def resource_uri():
-        return ('API_serie_detail', ['serie_id'])
-
 
 class SeasonListHandler(BaseHandler):
     ''' Listado de temporadas '''
@@ -71,9 +64,6 @@ class SeasonListHandler(BaseHandler):
         # TODO: Imagen de Temporadas
         return { 'seasons': season_list }
 
-    @staticmethod
-    def resource_uri():
-        return ('API_season_list', ['serie_id'])
 
 
 class SeasonHandler(BaseHandler):
@@ -101,9 +91,6 @@ class SeasonHandler(BaseHandler):
             epi_list.append(epi)
         return epi_list
 
-    @staticmethod
-    def resource_uri():
-        return ('API_season_detail', ['serie_id', 'season'])
 
 
 class EpisodeHandler(BaseHandler):
@@ -139,6 +126,3 @@ class EpisodeHandler(BaseHandler):
         episode['links'] = link_list
         return episode
 
-    @staticmethod
-    def resource_uri():
-        return ('API_episode_detail', ['serie_id', 'season', 'episode'])
