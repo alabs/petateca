@@ -15,12 +15,11 @@ seasonlist_resource = Resource(handler=SeasonListHandler, **ad)
 season_resource = Resource(handler=SeasonHandler, **ad)
 episode_resource = Resource(handler=EpisodeHandler, **ad)
 
-
 urlpatterns = patterns('',
-    (r'^/doc$', documentation_view),
-    url(r'^/serie$', serielist_resource, name='API_serie_list'),
-    url(r'^/serie/(?P<serie_id>\d+)$', serie_resource, name='API_serie_detail'),
-    url(r'^/serie/(?P<serie_id>\d+)/seasons$', seasonlist_resource, name='API_season_list'),
-    url(r'^/serie/(?P<serie_id>\d+)/(?P<season>\d+)$', season_resource, name='API_season_detail'),
-    url(r'^/serie/(?P<serie_id>\d+)/(?P<season>\d+)/(?P<episode>\d+)$', episode_resource, name='API_episode_detail'),
+    (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'api.html'}),
+    url(r'^series$', serielist_resource, name='API_serie_list'),
+    url(r'^series/(?P<serie_id>\d+)$', serie_resource, name='API_serie_detail'),
+    url(r'^series/(?P<serie_id>\d+)/seasons$', seasonlist_resource, name='API_season_list'),
+    url(r'^series/(?P<serie_id>\d+)/(?P<season>\d+)$', season_resource, name='API_season_detail'),
+    url(r'^series/(?P<serie_id>\d+)/(?P<season>\d+)/(?P<episode>\d+)$', episode_resource, name='API_episode_detail'),
 )
