@@ -18,6 +18,7 @@
             font-size: 130%; 
             line-height: 1.5em; 
             background-color: #333333;
+            margin-top: 2em; 
         }
         a:link {
             color: #fff;
@@ -59,6 +60,7 @@
                     <input type='submit' id='send_message' class="button" value='{% trans "Ir a Liberateca" %}' />
                 </ul> 
             </form>  
+                <a href="{% url auth_password_reset %}">¿Has olvidado tu contraseña?</a>
         </div>
         <h3 class="header"><a href="#">{% trans "Pedir invitación" %}</a></h3>
         <div>
