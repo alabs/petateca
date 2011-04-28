@@ -238,9 +238,10 @@ COMPRESS_VERSION = True
 
 CACHE_BACKEND = 'dummy://'
 
+USE_ETAGS = True
+
 try:
     from local_settings import *
 except ImportError:
     pass
-
 
