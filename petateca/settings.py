@@ -75,6 +75,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'userdata.middleware.LoginRequiredMiddleware',
+    'userdata.middleware.SSLRedirect',
     'sentry.client.middleware.Sentry404CatchMiddleware',
 )
 
@@ -192,6 +193,9 @@ LOGIN_EXEMPT_URLS = (
     r'^accounts/register/',
     r'^accounts/activate/',
     r'^accounts/password/reset/',
+    # la API se encarga de la autenticacion
+    # usuarios no registrados pueden entrar a la Doc
+    r'^api/',
 )
 
 LOGIN_URL_INDEX = '/accounts/signin/'
@@ -239,6 +243,8 @@ COMPRESS_VERSION = True
 CACHE_BACKEND = 'dummy://'
 
 USE_ETAGS = True
+
+SESSION_COOKIE_SECURE = True
 
 try:
     from local_settings import *
