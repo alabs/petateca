@@ -5,6 +5,108 @@ jQuery(function(){
     a = $('#query').autocomplete(options);
 });
 
+$(document).ready(function () {
+    // Rating de estrellas, se envia el rating por post a /serie/nombre
+    $('.ratingstar').rating({
+        callback: function (value, link) {
+            var url = window.location.pathname;
+            $.post(url, {
+                'rating': value,
+                'csrfmiddlewaretoken': getCookie('csrftoken'),
+            }, function (data) {
+                disc_rat_data(data);
+            });
+        }
+    }); 
+    // Listado de episodios por temporadas
+    $('.season').click( 
+        function(){ 
+            season = $(this).attr('href')
+            $('#season_list').load(season)
+            return false; 
+        }
+    );
+    // Listado de actores segun serie
+    $('#get_actors').click(
+        function(){
+            var url = window.location.pathname;
+            var serie = url.split('/')[2];
+            $.get('/series/lookup/actors/' + serie, {}, 
+                function(data){
+                    $('#actors_list').html(data)
+                }
+            ); 
+        }
+    );
+
+});
+
+
+function disc_rat_data(data) {
+    // Discriminacion de las votaciones dependiendo la respuesta que llegue
+    switch (data) {
+        case 'no-user':
+            $.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", {
+                header: 'Error'
+            });
+            break;
+        case 'Vote recorded.':
+            $.jGrowl("Su voto ha sido guardado");
+            break;
+        case 'Vote changed.':
+            $.jGrowl("Su voto ha sido cambiado");
+            break;
+    }
+}
+
+function disc_fav_data(data) {
+    // Discriminacion de los favorites dependiendo de la respuesta
+    // tambien actualiza el corazon 
+    switch (data) {
+    case 'yes':
+        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_red.png"></a>');
+        $.jGrowl("Has agregado esta serie como favorita");
+        break;
+    case 'no':
+        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_black.png"></a>');
+        $.jGrowl("Has quitado esta serie de tus favoritas");
+        break;
+    case 'no-user':
+        $.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", {
+            header: 'Error'
+        });
+        break;
+    }
+}
+
+function favorite() {
+    // Tratamiento del favorito
+    var imgsrc = $("#favorite img").attr('src');
+    if (imgsrc == "/static/images/heart_black.png") {
+        decision = "yes";
+    } else if (imgsrc == "/static/images/heart_red.png") {
+        decision = "no";
+    }
+    console.log(decision);
+    $('#favorite').html('<img src="/static/images/ajax-loading.gif">');
+    var url = window.location.pathname;
+    if (decision == "yes") {
+        $.post(url, {
+            'favorite': "favorite",
+            'csrfmiddlewaretoken': getCookie('csrftoken'),
+        }, function (data) {
+            disc_fav_data(data);
+        })
+    } else if (decision == "no") {
+        $.post(url, {
+            'no-favorite': "no-favorite",
+            'csrfmiddlewaretoken': getCookie('csrftoken'),
+        }, function (data) {
+            disc_fav_data(data);
+        })
+    }
+}
+
 $(document).ready(function(){
     // El popup cuando se hace click en login
 	$(".login").colorbox({iframe:true, innerWidth:555, innerHeight:324});
@@ -42,6 +144,10 @@ $(document).ready(function(){
     $('.add_link').colorbox({width:'50%', height:'60%', iframe:true, 
          onClosed:function(){ location.reload(true); } 
     });
+
+    // Popup de cambiar avatar
+	$(".avatar_change").colorbox({width:"600px", height:"500px", iframe:true,
+     onClosed:function(){ location.reload(true); } });
 });
 
 

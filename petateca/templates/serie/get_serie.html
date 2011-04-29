@@ -2,132 +2,17 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load comments %}
-{% load extract_domain %}
 {% load background_color %}
-{% load message_box %}
-{% block extrahead %}
-<style type="text/css">
-#episode_list { width:500px; font-family:Georgia, Times, serif; font-size:14px; }
-#episode_list ul { list-style: none; }
-#episode_list ul li { }
-#episode_list ul li a { display:block; text-decoration:none; color:#000000; background-color:#FFFFFF; line-height:30px; border-bottom-style:solid; border-bottom-width:1px; border-bottom-color:#CCCCCC; padding-left:10px; cursor:pointer; }
-#episode_list ul li a:hover { color:#FFFFFF; background-color:#999999; background-repeat:repeat-x; }
-#episode_list ul li a strong { margin-right:10px; }
-#future { color:#FFFFFF !important; background-color:#999999 !important; background-repeat:repeat-x; }
-#datemeta {
-    font-family: 'Lucida Grande','Lucida Sans Unicode',Tahoma,Arial,san-serif;
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 16px;
-    text-shadow: none;
-    text-transform: none;
-}
-</style>
-{% endblock %}
-{% block extrascript %}
-<script>
-var url = "{{request.path }}";
-
-$(document).ready(function () {
-    $('.ratingstar').rating({
-        callback: function (value, link) {
-            $.post(url, {
-                'rating': value,
-                'csrfmiddlewaretoken': getCookie('csrftoken'),
-            }, function (data) {
-                disc_rat_data(data);
-            });
-        }
-    }); 
-    $('.season').click( 
-        function(){ 
-            season = $(this).attr('href')
-            $('#season_list').load(season)
-            return false; 
-        }
-    );
-    $('#get_actors').click(
-        function(){
-            $.get('/series/lookup/actors/{{ serie.slug_name }}', {}, 
-                function(data){
-                    $('#actors_list').html(data)
-                }
-            ); 
-        }
-    );
-
-});
-
-
-function disc_rat_data(data) {
-    switch (data) {
-    case 'no-user':
-        $.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", {
-            header: 'Error'
-        });
-        break;
-    case 'Vote recorded.':
-        $.jGrowl("Su voto ha sido guardado");
-        break;
-    case 'Vote changed.':
-        $.jGrowl("Su voto ha sido cambiado");
-        break;
-    }
-}
-
-function disc_fav_data(data) {
-    switch (data) {
-    case 'yes':
-        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_red.png"></a>');
-        $.jGrowl("Has agregado esta serie como favorita");
-        break;
-    case 'no':
-        $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_black.png"></a>');
-        $.jGrowl("Has quitado esta serie de tus favoritas");
-        break;
-    case 'no-user':
-        $.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", {
-            header: 'Error'
-        });
-        break;
-    }
-}
-
-function favorite() {
-    var imgsrc = $("#favorite img").attr('src');
-    if (imgsrc == "/static/images/heart_black.png") {
-        decision = "yes";
-    } else if (imgsrc == "/static/images/heart_red.png") {
-        decision = "no";
-    }
-    console.log(decision);
-    $('#favorite').html('<img src="/static/images/ajax-loading.gif">');
-    if (decision == "yes") {
-        $.post(url, {
-            'favorite': "favorite",
-            'csrfmiddlewaretoken': getCookie('csrftoken'),
-        }, function (data) {
-            disc_fav_data(data);
-        })
-    } else if (decision == "no") {
-        $.post(url, {
-            'no-favorite': "no-favorite",
-            'csrfmiddlewaretoken': getCookie('csrftoken'),
-        }, function (data) {
-            disc_fav_data(data);
-        })
-    }
-}
-
-</script>
-{% endblock %}
 {% block contents %}
 <!-- COLUMN 1 -->
 <div class="grid_3">
 	<!-- IMAGE -->
-	{% if serie.poster.src %}{% thumbnail serie.poster.src "400x300" as img_serie %}
-	<img id="poster" src="{{ img_serie.url }}" />{% endthumbnail %}
-	{% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" height=100> </div>
+	{% if serie.poster.src %}
+        {% thumbnail serie.poster.src "400x300" as img_serie %}
+            <img id="poster" src="{{ img_serie.url }}" />
+        {% endthumbnail %}
+	{% else %}
+        <div class="image_not_found">  <img src="/static/images/image_not_available.png" height=100> </div>
 	{% endif %}
 	<!-- RATING -->
 	  <div id="rating">
