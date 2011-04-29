@@ -75,9 +75,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'userdata.middleware.LoginRequiredMiddleware',
-    'userdata.middleware.SSLRedirect',
     'sentry.client.middleware.Sentry404CatchMiddleware',
 )
+#    'userdata.middleware.SSLRedirect',
 
 ROOT_URLCONF = 'urls'
 
@@ -244,7 +244,7 @@ CACHE_BACKEND = 'dummy://'
 
 USE_ETAGS = True
 
-SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
 
 try:
     from local_settings import *
