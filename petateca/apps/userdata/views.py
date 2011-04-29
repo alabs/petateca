@@ -3,12 +3,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
+from invitation.models import InvitationKey
+from djangoratings.models import Vote
+from decorators import render_to
+
 from serie.models import Link, Serie
 from userdata.forms import UserToInviteForm
 from userdata.models import UserProfile, User, UserToInvite
 
-from decorators import render_to
-from djangoratings.models import Vote
 
 @render_to('registration/profile.html')
 @login_required
@@ -23,12 +25,12 @@ def get_user_public_profile(request, user_name):
     ''' Perfil publico del usuario ''' 
     user = get_object_or_404(User, username=user_name)
     profile = UserProfile.objects.get(user=user)
+    if request.user == user:
+        remaining_invitations = abs(InvitationKey.objects.remaining_invitations_for_user(request.user))
+    else:
+        remaining_invitations = None
     # for series marked as favorite
-    #favorite_series = profile.favorite_series.all()
     favorite_series = Serie.objects.select_related("poster").filter(favorite_of=user)
-    # for django-ratings of Series
-    #rated_series = user.votes.all()
-    rated_series = Vote.objects.select_related("content_object").filter(user=user.id)
     # for django-voting of Links
     # ok, so don't look at this, it's a little hack
     # first we get the voted links in raw 
@@ -42,16 +44,12 @@ def get_user_public_profile(request, user_name):
     # comments for posts of blog
     blog = ContentType.objects.get(app_label='blog', name='post')
     comments_blog = user.comment_comments.filter(content_type=blog.id).order_by('-submit_date')[:10]
-    # comments for series
-    serie = ContentType.objects.get(app_label='serie', name='serie')
-    comments_serie = user.comment_comments.filter(content_type=serie.id).order_by('-submit_date')[:10]
     return {
         'user': user,
         'favorite_series': favorite_series,
-        'rated_series': rated_series,
         'voted_links': voted_links,
         'comments_blog': comments_blog,
-        'comments_serie': comments_serie,
+        'remaining_invitations': remaining_invitations,
     }
 
 
