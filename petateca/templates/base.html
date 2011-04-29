@@ -5,49 +5,20 @@
 {% load compressed %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
-{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% endspaceless %}
+<!-- Si estas viendo esto por ahi te interesa ver nuestro código: http://github.com/alabs/petateca -->
 <head>
     <title>{% block title %}{{title|default:"Liberateca"}}{%endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico" />
     <!-- Stylesheets -->
     {% compressed_css 'all' %}
-    <style>
-#footer ul.footerbox {
-}
-#footer ul.footerbox li.footerbox {
-    border-right: 1px solid #E8E8E8;
-    display: inline;
-    float: left;
-    margin-left: 1em;
-    min-height: 6em;
-    width: 10.9em;
-}
-#footer ul.footerbox li.first {
-    margin-left: 15em;
-}
-#footer ul.footerbox li.last {
-    border-right: medium none;
-}
-#footer ul.footerbox li strong {
-    font-size: 0.8em;
-}
-#footer ul.footerbox li a {
-    font-size: 0.9em;
-    text-decoration: none;
-}
-#footer ul.footerbox li a:hover {
-    color: #000;
-}
-#footer ul.footerbox li.footerbox ul {
-    margin-top: 0.5em;
-}
-</style>
     {% block extrastyle %}{% endblock %}
     {% block extrahead %}{% endblock %}
 </head>
 <body>
+    <!-- RIBBON -->
+    <img src="/static/images/ribbon.gif" border="0" width="150" height="150" style="position:absolute; right:0px; top:0px; margin:0px; padding:0px">
     <div id="wrapper" class="container_12 clearfix">
         <!-- Text Logo -->
         <div id="logo" class="grid_4">
@@ -128,10 +99,14 @@
 	</div>
         <p class="grid_12 footer clearfix">
         <div class="hr grid_12">&nbsp;</div>
-            <span class="float">
-            <p>{% trans "Diseño basado en Aurelius, hecho por" %} <a href="http://qwibbledesigns.co.uk/"><b>QwibbleDesigns</b></a>.<br />
-            {% trans "Software licenciado " %}<a href="#"><b>GPL Affero</b></a>.
-            {% trans "Desarrollado en " %}<a href="http://djangoproject.com/"><b>Django</b></a>.</p></span>
+            <span class="float"><p>
+                {% trans "Diseño basado en Aurelius, hecho por" %} <a href="http://qwibbledesigns.co.uk/"><b>QwibbleDesigns</b></a>.<br />
+                {% trans "Software licenciado " %}<a href="http://www.gnu.org/licenses/agpl.html"><b>GPL Affero</b></a>.
+                {% trans "Desarrollado en " %}<a href="http://djangoproject.com/"><b>Django</b></a>.</br />
+                {% trans "Imágenes y descripciones de " %}<a href="http://thetvdb.com/"><b>TheTVDB</b></a>.<br />
+                {% trans "Forkeanos en " %}<a href="http://github.com/alabs/petateca"><b>GitHub</b></a>.
+                {% trans "Siguenos en " %}<a href="http://twitter.com/liberateca"><b>Twitter</b></a>.
+            </p></span>
             <a class="float right" href="#">{% trans "arriba" %}</a>
         </p>
     </div>
@@ -147,37 +122,6 @@
         });
     </script>
 {% endif %}
-<script type="text/javascript">
-  var uservoiceOptions = {
-    key: 'liberateca',
-    host: 'liberateca.uservoice.com', 
-    forum: '106199',
-    alignment: 'left',
-    background_color:'#000000', 
-    text_color: 'white',
-    hover_color: '#0066CC',
-    lang: 'es',
-    showTab: true
-  };
-  function _loadUserVoice() {
-    var s = document.createElement('script');
-    s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
-    document.getElementsByTagName('head')[0].appendChild(s);
-  }
-  _loadSuper = window.onload;
-  window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-</script>
-<script language="javascript" type="text/javascript" src="http://quickribbon.com/ribbon/2011/04/cd6e882f391eecc4ede5697bc6edda7d.js"></script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-22940195-1']);
-  _gaq.push(['_trackPageview']);
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 {% block extrascript %}{% endblock %}
 </body>
 </html>

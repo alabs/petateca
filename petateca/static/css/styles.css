@@ -950,6 +950,37 @@ p.error {
 }
 
 
+#footer ul.footerbox {
+}
+#footer ul.footerbox li.footerbox {
+    border-right: 1px solid #E8E8E8;
+    display: inline;
+    float: left;
+    margin-left: 1em;
+    min-height: 6em;
+    width: 10.9em;
+}
+#footer ul.footerbox li.first {
+    margin-left: 15em;
+}
+#footer ul.footerbox li.last {
+    border-right: medium none;
+}
+#footer ul.footerbox li strong {
+    font-size: 0.8em;
+}
+#footer ul.footerbox li a {
+    font-size: 0.9em;
+    text-decoration: none;
+}
+#footer ul.footerbox li a:hover {
+    color: #000;
+}
+#footer ul.footerbox li.footerbox ul {
+    margin-top: 0.5em;
+}
+
+
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {

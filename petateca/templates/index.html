@@ -23,7 +23,40 @@
 
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
-			<div class="quicknavgrid_3 quicknav alpha left">
+			<div class="quicknavgrid_3 quicknav" href="{% url invitation_invite %}">
+					<h4 class="title ">{% trans "Invitaciones" %}</h4>
+					<p style="text-align:center; font-size:120%;">Tienes {{ remaining_invitations }} invitaciones restantes. ¡Invita a tus colegas!</p>
+			</div>
+			<div class="quicknavgrid_3 quicknav" href="{% url sneak_links %}">
+					<h4 class="title ">{% trans "Ultimos enlaces" %}</h4>
+					<p style="text-align:center; font-size:120%;">Ver los ultimos enlaces agregados</p>
+			</div>
+			<div class="quicknavgrid_3 quicknav">
+					<h4 class="title ">{% trans "Errores o sugerencias" %}</h4>
+                    <p style="font-size:120%;">Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustaria que tuviese</a>.</p>
+			</div>
+			<div class="quicknavgrid_3 quicknav">
+					<h4 class="title ">{% trans "Desarrollo" %}</h4>
+                    <p style="font-size:120%;">Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
+			</div>
+        </div>
+
+
+			
+		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
+		<div id="quicknav" class="grid_12">
+			<a class="quicknavgrid_3 quicknav alpha" href="{% url serie-index %}">
+					<h4 class="title ">{% trans "Series" %}</h4>
+					<p>{% trans "listado de todas las series" %}</p>
+					<p style="text-align:center;"><img alt="{% trans "Todas las series" %}" src="/static/images/Art_Artdesigner.lv.png" /></p>
+			</a>
+			<a class="quicknavgrid_3 quicknav" href="{% url faq %}">
+					<h4 class="title ">{% trans "FAQ" %}</h4>
+					<p>{% trans "Preguntas más frecuentes" %}</p>
+					<p style="text-align:center;"><img alt="{% trans "Preguntas más frecuentes" %}" src="/static/images/info.png" /></p>
+			</a>
+
+			<div class="quicknavgrid_3 quicknav alpha right">
                 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
                 <script>
                 new TWTR.Widget({
@@ -56,39 +89,5 @@
                 }).render().setUser('liberateca').start();
                 </script>
 			</div>
-			<div class="quicknavgrid_3 quicknav alpha left">
-            </div>
-			<div class="quicknavgrid_3 quicknav alpha right">
-					<h4 class="title ">{% trans "Errores o sugerencias" %}</h4>
-                    <p style="font-size:120%;">Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustaria que tuviese</a>.</p>
-			</div>
-			<div class="quicknavgrid_3 quicknav alpha right">
-					<h4 class="title ">{% trans "Desarrollo" %}</h4>
-                    <p style="font-size:120%;">Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
-			</div>
-        </div>
-
-
-			
-		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
-		<div id="quicknav" class="grid_12">
-			<a class="quicknavgrid_3 quicknav alpha" href="{% url serie-index %}">
-					<h4 class="title ">{% trans "Series" %}</h4>
-					<p>{% trans "listado de todas las series" %}</p>
-					<p style="text-align:center;"><img alt="{% trans "Todas las series" %}" src="/static/images/Art_Artdesigner.lv.png" /></p>
-			</a>
-			<a class="quicknavgrid_3 quicknav" href="{% url faq %}">
-					<h4 class="title ">{% trans "FAQ" %}</h4>
-					<p>{% trans "Preguntas más frecuentes" %}</p>
-					<p style="text-align:center;"><img alt="{% trans "Preguntas más frecuentes" %}" src="/static/images/info.png" /></p>
-			</a>
-			<a class="quicknavgrid_3 quicknav" href="{% url invitation_invite %}">
-					<h4 class="title ">{% trans "Invitaciones" %}</h4>
-					<p style="text-align:center; font-size:120%;">Tienes {{ remaining_invitations }} invitaciones restantes. ¡Invita a tus colegas!</p>
-			</a>
-			<a class="quicknavgrid_3 quicknav" href="{% url sneak_links %}">
-					<h4 class="title ">{% trans "Ultimos enlaces" %}</h4>
-					<p style="text-align:center; font-size:120%;">Ver los ultimos enlaces agregados</p>
-			</a>
 		</div>
 {% endblock %}
