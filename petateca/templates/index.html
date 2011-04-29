@@ -23,14 +23,14 @@
 
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
-			<div class="quicknavgrid_3 quicknav" href="{% url invitation_invite %}">
+			<a class="quicknavgrid_3 quicknav" href="{% url invitation_invite %}">
 					<h4 class="title ">{% trans "Invitaciones" %}</h4>
 					<p style="text-align:center; font-size:120%;">Tienes {{ remaining_invitations }} invitaciones restantes. ¡Invita a tus colegas!</p>
-			</div>
-			<div class="quicknavgrid_3 quicknav" href="{% url sneak_links %}">
+			</a>
+			<a class="quicknavgrid_3 quicknav" href="{% url sneak_links %}">
 					<h4 class="title ">{% trans "Ultimos enlaces" %}</h4>
 					<p style="text-align:center; font-size:120%;">Ver los ultimos enlaces agregados</p>
-			</div>
+			</a>
 			<div class="quicknavgrid_3 quicknav">
 					<h4 class="title ">{% trans "Errores o sugerencias" %}</h4>
                     <p style="font-size:120%;">Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustaria que tuviese</a>.</p>
