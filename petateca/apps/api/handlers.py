@@ -1,6 +1,7 @@
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 from piston.handler import BaseHandler
 from piston.utils import rc, throttle
@@ -45,10 +46,16 @@ class SerieHandler(BaseHandler):
         * Generos: 'genre'
         * Puntuacion: 'rating_score'
         '''
-        # TODO: Actores, Posters, Posters de Actores
-        serie = get_object_or_404(Serie, id=serie_id)
+        try: 
+            serie = get_object_or_404(Serie, id=serie_id)
+        except Http404:
+            return rc.NOT_FOUND 
         return serie
 
+
+# TODO: Actores, Posters, Posters de Actores
+# /posters
+# /actors
 
 class SeasonListHandler(BaseHandler):
     ''' Listado de temporadas '''
@@ -57,7 +64,10 @@ class SeasonListHandler(BaseHandler):
 
     def read(self, request, serie_id):
         ''' Muestra el listado de URLs de temporadas que tiene una Serie'''
-        serie = get_object_or_404(Serie, id=serie_id)
+        try: 
+            serie = get_object_or_404(Serie, id=serie_id)
+        except Http404:
+            return rc.NOT_FOUND 
         season_list = []
         for s in serie.season.all():
             season_list.append(urlprefix + reverse("API_season_detail", kwargs=dict(serie_id=serie.id, season=s.season)))
@@ -78,8 +88,11 @@ class SeasonHandler(BaseHandler):
         * Fecha de emision: 'air_date'
         * Ubicacion del recurso del episodio: 'url'
         '''
-        serie = get_object_or_404(Serie, id=serie_id)
-        season = get_object_or_404(Season, serie=serie, season=season) 
+        try: 
+            serie = get_object_or_404(Serie, id=serie_id)
+            season = get_object_or_404(Season, serie=serie, season=season) 
+        except Http404:
+            return rc.NOT_FOUND 
         epi_list = []
         for e in season.episodes.all():
             # TODO: season y serie
@@ -107,9 +120,12 @@ class EpisodeHandler(BaseHandler):
         * Fecha de Emision: 'air_date'
         * Listado de URLs
         '''
-        serie = get_object_or_404(Serie, id=serie_id)
-        season = get_object_or_404(Season, serie=serie, season=season) 
-        epi = get_object_or_404(Episode, season=season, episode=episode)
+        try: 
+            serie = get_object_or_404(Serie, id=serie_id)
+            season = get_object_or_404(Season, serie=serie, season=season) 
+            epi = get_object_or_404(Episode, season=season, episode=episode)
+        except Http404:
+            return rc.NOT_FOUND 
         episode = {}
         # TODO: Imagen de episodio
         episode['season'] = season.season
