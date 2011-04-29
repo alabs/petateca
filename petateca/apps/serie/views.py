@@ -34,6 +34,10 @@ def get_serie(request, serie_slug):
         favorite_status = 'yes'
     except:
         favorite_status = 'no'
+    try:
+        score = int(serie.rating.get_rating_for_user(request.user))
+    except: 
+        score = None
     # Si el metodo es GET devuelve serie_info asi nomas
     if request.method == 'GET':
         # Preparamos serie_info con la serie, titulo, imagenes, episodios...
@@ -41,7 +45,7 @@ def get_serie(request, serie_slug):
             'serie': serie,
             'title': serie.name.title(),
             'season_list': Season.objects.select_related('poster', 'serie').filter(serie=serie).order_by('season'),
-            'score': int(round(serie.rating.get_rating())),
+            'score': score,
             'favorite': favorite_status,
             'roles': Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie),
         }
