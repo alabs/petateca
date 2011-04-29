@@ -41,9 +41,14 @@ class EmailBackend(ModelBackend):
 
 
 class UserToInvite(models.Model):
-    mail = models.EmailField()
-    date = models.DateTimeField(default=datetime.now, null=True, blank=True)
-    has_been_invited = models.BooleanField()
+    mail = models.EmailField(unique=True)
+    date = models.DateTimeField(default=datetime.now, null=True, blank=True, editable=False)
+    has_been_invited = models.BooleanField(editable=False)
 
     def __unicode__(self):
         return self.mail
+
+    def unique_error_message(self, model_class, unique_check):
+        if 'mail' in unique_check and len(unique_check) == 1:
+            return 'Ya existe un usuario invitado con ese correo'
+        return super(UserToInvite, self).unique_error_message(model_class, unique_check)

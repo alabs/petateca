@@ -1,0 +1,18 @@
+{% extends "base_stripped.html" %}
+{% block contents %}
+<div class="dialog"> 
+	<br/>
+    <img src="/static/images/logo.png" alt="liberateca" width="100" />
+    <h2>{{ SITE_NAME }}</h2>
+    <p> 
+    <form method="POST" action="/accounts/invitation/request/">
+        {% if error_registered %}
+            <ul class="error_list"> 
+                <li>{{ error_registered }}
+            </ul>
+        {% endif %}
+        {{ form.as_p }}
+        <input type="submit" class="button" value="Submit" />
+    </form>
+</div>
+{% endblock %}

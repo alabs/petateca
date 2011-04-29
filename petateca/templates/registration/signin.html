@@ -1,30 +1,6 @@
 {% extends "base_stripped.html" %}
 {% load i18n %}
 {% block title %}Liberateca: Omnia sunt communia{% endblock %}
-{% block extrastyle %}
-	<style type="text/css"> 
-		body { background-color: #fff; color: #eeeeee; text-align: center; font-family: arial, sans-serif; }
-		div.dialog {
-			width: 60em;
-			padding: 0 4em;
-			margin: 4em auto 0 auto;
-			border: 1px solid #ccc;
-			border-right-color: #b6e19f;
-			border-bottom-color: #b6e19f;
-			background-color: #717171;
-			font-size: 120%;
-		}
-		.header { 
-            font-size: 130%; 
-            line-height: 1.5em; 
-            background-color: #333333;
-            margin-top: 2em; 
-        }
-        a:link {
-            color: #fff;
-        }
-	</style> 
-{% endblock %}
 {% block extrahead %}
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
 <script>
@@ -44,8 +20,9 @@
             <p>
                 <ul>
                 <li>Puedes <b>votar, comentar y valorar</b> tanto las series como los enlaces.
-                    <li>Hemos <a href="http://github.com/alabs/petateca"><b>liberado el codigo</b></a> con el que esta hecha la web para que puedas modificarla y mejorarla. 
-                    <li>Nos coordinamos a traves de una <a href="http://listas.alabs.es/mailman/listinfo/liberateca-dev"><b>lista de correo</b></a> para ir mejorando la web. Cualquiera puede participar. 
+                    <li>Nos coordinamos a traves de una <a href="http://listas.alabs.es/mailman/listinfo/liberateca-dev">lista de correo</a> para ir mejorando la web. Cualquiera puede participar. 
+                    <li>Hemos <a href="http://github.com/alabs/petateca">liberado el codigo</a> con el que esta hecha la web para que puedas modificarla y mejorarla. 
+                    <li>Para los programadores, tenemos una <b>API</b> para que puedas acceder a nuestros datos y hacer tus aplicaciones
                 </ul>
             </p>
         {% endblocktrans %}

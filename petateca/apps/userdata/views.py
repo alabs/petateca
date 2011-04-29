@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
+from django.forms import ValidationError
 from django.shortcuts import get_object_or_404
 
 from invitation.models import InvitationKey
@@ -53,7 +54,7 @@ def get_user_public_profile(request, user_name):
     }
 
 
-@render_to('registration/invitation.html')
+@render_to('invitation/request.html')
 def request_invitation(request):
     ''' Para que los futuros usuarios puedan pedir invitaciones '''
     if request.method =='GET':
@@ -61,8 +62,16 @@ def request_invitation(request):
     elif request.method == 'POST': 
         form = UserToInviteForm(request.POST)
         if form.is_valid(): 
-            u = UserToInvite()
-            u.mail = form.cleaned_data['mail']
-            u.save()
-            return HttpResponseRedirect('/accounts/invitation/thanks/') # Redirect after POST
+            mail = form.cleaned_data['mail']
+            user_registered = User.objects.filter(email = mail)
+            if user_registered:
+                return { 
+                    'error_registered' : 'Ya existe un usuario con ese correo', 
+                    'form' : form 
+                } 
+            else:
+                u = UserToInvite()
+                u.mail = mail
+                u.save()
+                return HttpResponseRedirect('/accounts/invitation/thanks/') # Redirect after POST
     return { 'form' : form }
