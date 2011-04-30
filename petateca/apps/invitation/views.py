@@ -3,6 +3,7 @@ from django.views.generic.simple import direct_to_template
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from registration.views import register as registration_register
 from registration.forms import RegistrationForm
@@ -11,6 +12,8 @@ from registration.backends import default as registration_backend
 from invitation.models import InvitationKey
 from invitation.forms import InvitationKeyForm
 from invitation.backends import InvitationBackend
+
+from userdata.models import UserToInvite
 
 is_key_valid = InvitationKey.objects.is_key_valid
 remaining_invitations_for_user = InvitationKey.objects.remaining_invitations_for_user
@@ -62,6 +65,15 @@ def invite(request, success_url=None,
     if request.method == 'POST':
         form = form_class(data=request.POST, files=request.FILES)
         if remaining_invitations > 0 and form.is_valid():
+            mail = form.cleaned_data['email']
+            user_registered = User.objects.filter(email = mail)
+            user_to_invite = UserToInvite.objects.filter(mail = mail)
+            if user_registered or user_to_invite:
+                extra_context.update({ 
+                    'error_registered' : 'Ya existe un usuario registrado o invitado con ese correo', 
+                    'form' : form 
+                })
+                return direct_to_template(request, template_name, extra_context)
             invitation = InvitationKey.objects.create_invitation(request.user)
             invitation.send_to(form.cleaned_data["email"])
             # success_url needs to be dynamically generated here; setting a
