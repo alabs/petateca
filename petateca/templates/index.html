@@ -23,14 +23,20 @@
 
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
-			<a class="quicknavgrid_3 quicknav" href="{% url invitation_invite %}">
+			<div class="quicknavgrid_3 quicknav">
 					<h4 class="title ">{% trans "Invitaciones" %}</h4>
-					<p style="text-align:center; font-size:120%;">Tienes {{ remaining_invitations }} invitaciones restantes. ¡Invita a tus colegas!</p>
-			</a>
-			<a class="quicknavgrid_3 quicknav" href="{% url sneak_links %}">
-					<h4 class="title ">{% trans "Ultimos enlaces" %}</h4>
-					<p style="text-align:center; font-size:120%;">Ver los ultimos enlaces agregados</p>
-			</a>
+					<p style="text-align:center; font-size:120%;">
+                    {% if remaining_invitations %}
+                        Si te gusta {{ SITE_NAME }} puedes ayudarnos recomendandosela a tus amigos. <a href="{% url invitation_invite %}">Tienes {{ remaining_invitations }} invitaciones restantes. ¡Invita a tus colegas!</a>
+                    {% else %} 
+                        No te quedan invitaciones disponibles. ¡Gracias por recomendarnos!
+                    {% endif %}
+                    </p>
+			</div>
+			<div class="quicknavgrid_3 quicknav">
+					<h4 class="title ">{% trans "Concurso de Logos" %}</h4>
+					<p style="text-align:center; font-size:120%;">Queremos cambiar el logo de Liberateca. Participa en el concurso de logos enviando tu propuesta a logos(arroba)liberateca.net</p>
+			</div>
 			<div class="quicknavgrid_3 quicknav">
 					<h4 class="title ">{% trans "Errores o sugerencias" %}</h4>
                     <p style="font-size:120%;">Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustaria que tuviese</a>.</p>
