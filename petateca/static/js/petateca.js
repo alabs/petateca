@@ -207,31 +207,6 @@ $(document).ready(function() {
 });
 
 
-function vote(url, linkid, direction) {
-    // tratamiento de los votos de episodio
-    var $linkscore = $('#linkscore' + linkid);
-    $linkscore.html('<img src="/static/images/ajax-loading.gif">');
-    // send the post petition with the required data
-    $.post(url, { 
-                'vote': direction, 
-                'linkid': linkid,
-                'csrfmiddlewaretoken': getCookie('csrftoken'),
-    }, function (data){ 
-        // change the value with the new score
-        $linkscore.html(data.score);
-        // change the image
-                if (direction == 'upvote') {
-            $('#linkuparrow' + linkid + ' img').attr('src', '/static/images/voting/aupmod.gif');
-            $('#linkdownarrow' + linkid + ' img').attr('src', '/static/images/voting/adowngrey.gif');
-        } else if (direction == 'downvote') {
-            $('#linkuparrow' + linkid + ' img').attr('src', '/static/images/voting/aupgrey.gif');
-            $('#linkdownarrow' + linkid + ' img').attr('src', '/static/images/voting/adownmod.gif');
-        };
-       }
-    );
-    return false;
-};
-
 //Uservoice (Sugerencias)
   var uservoiceOptions = {
     key: 'liberateca',
@@ -261,3 +236,145 @@ function vote(url, linkid, direction) {
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
+
+
+    $(document).ready(function() {  
+$(".zoom").click( function(){
+    $(this).addClass('selected_list');
+    $inside = $(this).siblings();
+    $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+    href = $(this).attr('href');
+    $inside.load(href);
+    return false;
+});
+
+
+$(".espoiler").click( function(e){
+    e.preventDefault();
+    $(this).parent().addClass('selected_list');
+    episodeid = $(this).attr('id');
+    $inside = $('#inside' + episodeid);
+    $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+    espoiler_id = $(this).attr('rel');
+    $inside.load(espoiler_id);
+    return false;
+});
+
+
+$(".add_link").click( function(e){
+    e.preventDefault();
+    $(this).parent().addClass('selected_list');
+    episodeid = $(this).attr('id');
+    $inside = $('#inside' + episodeid);
+    $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+    episode_rel = $(this).attr('rel');
+    $inside.load(episode_rel + episodeid + '/');
+    return false;
+});
+
+      
+  //      $('#title').click(function(){  
+  //      $(this).addClass('selected_list');
+  //    
+  //      var toLoad = $(this).attr('href');
+  //      $('#content').hide('fast',loadContent);  
+  //      $('#load').remove();  
+  //      $('#wrapper').append('<span id="load">LOADING...</span>');  
+  //      $('#load').fadeIn('normal');  
+  //      function loadContent() {  
+  //          $('#content').load(toLoad,'',showNewContent())  
+  //      }  
+  //      function showNewContent() {  
+  //          $('#content').show('normal',hideLoader());  
+  //      }  
+  //      function hideLoader() {  
+  //          $('#load').fadeOut('normal');  
+  //      }  
+  //      $(this).slideDown();
+  //      return false;  
+  //    
+  //      });  
+    });  
+
+
+
+function voting( direction, linkid ){
+    var $linkscore = $('span#linkscore' + linkid);
+    $linkscore.html('<img style="margin-bottom:0 !important;" src="/static/images/ajax-loading.gif">');
+    $.post('/series/lookup/vote/', { 
+                'vote': direction,
+                'linkid': linkid,
+                'csrfmiddlewaretoken': getCookie('csrftoken'),
+    }, function (data){ 
+        // change the value with the new score
+        $linkscore.html(data.score);
+
+        dir_down = $('#down_' + linkid);
+        dir_up = $('#up_' + linkid);
+        // change the image
+        if (direction == 'downvote') {
+            dir_up.attr('src', '/static/images/voting/aupgrey.gif');
+            dir_down.attr('src', '/static/images/voting/adownmod.gif');
+        } else if (direction == 'upvote') {
+            dir_up.attr('src', '/static/images/voting/aupmod.gif');
+            dir_down.attr('src', '/static/images/voting/adowngrey.gif');
+        };
+      }
+    );
+    return false;
+};
+    
+
+$('.downvote').click(function(){
+    linkid_raw = $(this).attr('id');
+    linkid = linkid_raw.split('_')[1];
+    direction = $(this).attr('class');
+    voting(direction, linkid);
+    return false;
+});
+
+$('.upvote').click(function(){
+    linkid_raw = $(this).attr('id');
+    linkid = linkid_raw.split('_')[1];
+    direction = $(this).attr('class');
+    voting(direction, linkid);
+    return false;
+});
+
+$('#language_help').click( function() {
+    $.jGrowl('<b>Referencia de Idiomas:</b><li>en: Inglés<li>es: Español<li>es-es: Español Latino<li>ca: Català<li>jp: Japonés');
+});
+
+$('#submit').click(function (e) {       
+    e.preventDefault();
+    var url = $('input[name=url]');
+    var audio = $('select[name=audio_lang]');
+    var subtitle = $('select[name=subtitle]');
+    var post_url = $('form#add_link_form[action]').attr('action');
+      //Simple validation to make sure user entered something
+        //If error found, add hightlight class to the text field
+        if (url.val()==''||url.val()=='http://') {
+            url.addClass('hightlight');
+            return false;
+        } else url.removeClass('hightlight');
+
+        if (audio.val()=='') {
+            $('label[for=id_audio_lang]').addClass('hightlight');
+            return false;
+        } else $('label[for=id_audio_lang]').removeClass('hightlight');
+
+    var dataString = 'url='+ url.val() + '&audio_lang=' + audio.val() + '&subtitle=' + subtitle.val() + '&csrfmiddlewaretoken=' + getCookie('csrftoken');
+    //alert (dataString);return false;  
+    $.ajax({  
+      type: "POST",  
+      url: post_url,  
+      data: dataString,  
+      success: function(data) {  
+        if (data.mensaje  == 'Gracias'){
+            $.jGrowl("El enlace se ha guardado exitosamente");
+        }
+      }  
+    });  
+
+    return false;
+});

@@ -1036,6 +1036,10 @@ div.dialog a:link, div.dialog a:visited {
     margin-top:1em;
 }
 
+.nobottom{
+ margin-bottom:0 !important;
+}
+
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {
