@@ -9,13 +9,14 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
 from django.utils.translation import gettext_lazy as _
+from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
 
 from djangoratings.views import AddRatingView
 from voting.models import Vote
 
-from serie.forms import LinkForm
-from serie.models import Genre, Network, Link, Languages
+from serie.forms import LinkForm, LinkSeasonForm
+from serie.models import Genre, Network, Link, Languages, LinkSeason
 from serie.models import Serie, Episode, Actor, Role, Season, ImageSerie, ImageActor
 
 from datetime import datetime
@@ -77,24 +78,24 @@ def get_serie(request, serie_slug):
             return HttpResponse(simplejson.dumps('no-user'), mimetype='application/json')
 
 
-@render_to('serie/get_season.html')
-def get_season(request, serie_slug, season):
-    ''' Get season, returns episode_list '''
-    episode_list = Episode.objects.select_related('poster', 'season', 'season__serie'). \
-                    filter(season__season=season, season__serie__slug_name=serie_slug).order_by('episode')
-    if episode_list:
-        season = episode_list[0].season
-    else:
-        season = get_object_or_404(Season.objects.select_related(), serie__slug_name=serie_slug, season=season)
-    serie = season.serie
-    season_info = {
-        'serie': serie,
-        'episode_list': episode_list,
-        'season': season,
-        'next_season': season.get_next_season(),
-        'prev_season': season.get_previous_season(),
-    }
-    return season_info
+#@render_to('serie/get_season.html')
+#def get_season(request, serie_slug, season):
+#    ''' Get season, returns episode_list '''
+#    episode_list = Episode.objects.select_related('poster', 'season', 'season__serie'). \
+#                    filter(season__season=season, season__serie__slug_name=serie_slug).order_by('episode')
+#    if episode_list:
+#        season = episode_list[0].season
+#    else:
+#        season = get_object_or_404(Season.objects.select_related(), serie__slug_name=serie_slug, season=season)
+#    serie = season.serie
+#    season_info = {
+#        'serie': serie,
+#        'episode_list': episode_list,
+#        'season': season,
+#        'next_season': season.get_next_season(),
+#        'prev_season': season.get_previous_season(),
+#    }
+#    return season_info
 
 
 @csrf_protect
@@ -139,6 +140,18 @@ def get_episode(request, serie_slug, season, episode):
             'message': 'Vote recorded',
         })
         return episode_info
+
+#@csrf_protect
+#@render_to('serie/get_episode.html')
+#def get_season(request, serie_slug, season):
+#    ''' Get the season itsef ''' 
+#    season = get_object_or_404(
+#        Season,
+#        serie = Serie.objects.get(slug_name=serie_slug),
+#        season = season,
+#    )
+#    return { 'season': season, 'episode': season }
+
 
 
 def list_user_recommendation(request):
@@ -201,7 +214,6 @@ def add_link(request, serie_slug, season, episode):
             lang = Languages.objects.get(pk=data['audio_lang'])
             # si en el POST encontramos el edit, pues esta editando :S
             if request.GET.get('edit'):
-                print "editando un link existente"
                 # capturamos el link q esta editando y agregamos las modificaciones
                 link = Link.objects.get(pk=request.GET.get('linkid'))
                 link.url=form.cleaned_data['url']
@@ -234,6 +246,94 @@ def add_link(request, serie_slug, season, episode):
             link_info.update({ 'message': 'Error',})
             return link_info
 
+
+
+@login_required
+@render_to('serie/add_link2.html')
+def add_link_season(request, serie_slug, season):
+    ''' 
+    Formulario que agrega/edita links de temporada
+    ''' 
+    serie = get_object_or_404(Serie, slug_name=serie_slug)
+    season = get_object_or_404(Season, serie=serie, season=season)
+    link_info = {
+        'serie': serie,
+        'season': season,
+    }
+    # Si es para editar, devolvemos la instancia del link ya existente ;)
+    # Esto es solo para presentar el form, para el post viene mas adelante...
+    if request.method == 'GET' and request.GET.get('edit') and request.GET.get('linkid'):
+        linkid = request.GET.get('linkid')
+        link = LinkSeason.objects.get(pk=linkid)
+        if request.user.username == link.user:
+            form = LinkSeasonForm(instance=link) 
+            link_info.update({ 'form': form, 'edit': 'yes', 'link': link, })
+            return link_info
+    # Este es el formulario inicial, si el request.method es GET
+    # pre-populamos con el episodio, que eso ya lo tenemos de la URL
+    if request.method == 'GET':
+        form = LinkSeasonForm(initial={ 'season':season }) 
+        link_info.update({ 'form': form, })
+        return link_info
+    # Cuando se envia el formulario...
+    if request.method == 'POST':
+        # Capturamos lo que nos pasa, agregamos el episode
+        # fecha de publicacion y usuario que hace la peticion
+        data = {
+            'url': request.POST['url'], 
+            'audio_lang': request.POST['audio_lang'], 
+            'subtitle': request.POST['subtitle'], 
+            'user': request.user, 
+            'season': season.pk, 
+            'pub_date': datetime.now(), 
+        } 
+        form = LinkSeasonForm(data)
+        link_info.update({'form': form})
+        if form.is_valid():
+            if not form.cleaned_data['url'].startswith('http://'):  # TODO: agregar magnet/ed2k, otros URIs
+                messages.error(request, 'URL Invalida')
+                #link_info.update({ 'message': 'URL Invalida',})
+                return link_info
+            # Audio Lang, Subtitle y Episode hay que pasarlos como instancias
+            # Episode ya lo tenemos, vamos a buscar audio_lang
+            lang = Languages.objects.get(pk=data['audio_lang'])
+            user = User.objects.get(username=request.user.username)
+            # si en el POST encontramos el edit, pues esta editando :S
+            if request.GET.get('edit'):
+                # capturamos el link q esta editando y agregamos las modificaciones
+                link = LinkSeason.objects.get(pk=request.GET.get('linkid'))
+                link.url=form.cleaned_data['url']
+                link.audio_lang=lang
+                link.user=user
+                link.season=season
+                link.pub_date=form.cleaned_data['pub_date']
+                if form.cleaned_data['subtitle']:
+                    subt = Languages.objects.get(pk=data['subtitle'])
+                    link.subtitle = subt
+                link.save()
+                #link_info.update({ 'message': 'Gracias',})
+                messages.info(request, 'Gracias')
+                return link_info
+            # sino, es un link nuevo
+            else:
+                link = LinkSeason(
+                    url=form.cleaned_data['url'],
+                    audio_lang=lang,
+                    user=user,
+                    season=season,
+                    pub_date=datetime.now(),
+                )
+                if form.cleaned_data['subtitle']:
+                    subt = Languages.objects.get(pk=data['subtitle'])
+                    link.subtitle = subt
+                link.save()
+                #link_info.update({ 'message': 'Gracias',})
+                messages.info(request, 'Gracias')
+                return link_info
+        else:
+            #link_info.update({ 'message': 'Error',})
+            messages.error(request, 'Gracias')
+            return link_info
 
 
 @render_to('serie/sneak_links.html')

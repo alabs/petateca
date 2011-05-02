@@ -21,6 +21,7 @@ $(document).ready(function () {
     // Listado de episodios por temporadas
     $('.season').click( 
         function(){ 
+            $('#season_list').html('<img src="/static/images/ajax-loading-bar.gif">');
             season = $(this).attr('href')
             $('#season_list').load(season)
             return false; 
@@ -228,6 +229,7 @@ function vote(url, linkid, direction) {
         };
        }
     );
+    return false;
 };
 
 //Uservoice (Sugerencias)

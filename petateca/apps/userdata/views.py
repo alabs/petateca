@@ -43,13 +43,13 @@ def get_user_public_profile(request, user_name):
         list_vote = Link.objects.select_related("episode").get(id = vote['object_id']), (vote['vote'])
         voted_links.append(list_vote)
     # comments for posts of blog
-    blog = ContentType.objects.get(app_label='blog', name='post')
-    comments_blog = user.comment_comments.filter(content_type=blog.id).order_by('-submit_date')[:10]
+    serie = ContentType.objects.get(app_label='serie', name='serie')
+    comments_series = user.comment_comments.filter(content_type=serie.id).order_by('-submit_date')[:10]
     return {
         'user': user,
         'favorite_series': favorite_series,
         'voted_links': voted_links,
-        'comments_blog': comments_blog,
+        'comments_series': comments_series,
         'remaining_invitations': remaining_invitations,
     }
 

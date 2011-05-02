@@ -39,7 +39,7 @@
 	{% endif %}
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- GENRE -->
-	<h4>{% trans "Genero" %}</h4> 
+	<h4>{% trans "Género" %}</h4> 
 		<ul>
       		{% for genre in serie.genres.all %}
 		<li><a class="button" href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
@@ -47,7 +47,7 @@
 		</ul>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- RUNTIME -->
-	<h4>{% trans "Duracion" %}</h4> 
+	<h4>{% trans "Duración" %}</h4> 
 	<p>{{ serie.runtime }} {% trans "minutos" %}</p>
 		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- BUTTONS -->
@@ -87,7 +87,7 @@
                 {% else %}
                     {% if serie.poster.src %}{% thumbnail serie.poster.src "44x64" as img_serie %}
                     <img class="prel" src="{{ img_serie.url }}" />{% endthumbnail %}
-                    {% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" width=110> </div>
+                    {% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" width=44> </div>
                     {% endif %}
                 {% endif %}
                 </div>
@@ -95,7 +95,7 @@
             </td>
             <td>
                 <a class="portfolio_item float alpha season" href="{{ season.get_absolute_url }}">
-                <p class="subtitle">{% trans "Temporada" %} {% if season.season == 0 %}Esp{%else%} {{ season.season }}{%endif %}</p> 
+                <p class="subtitle">{% trans "Temporada" %} {% if season.season == 0 %}<br />Especial{%else%} {{ season.season }}{%endif %}</p> 
             </td>
         </tr>
     {% endfor %}
@@ -103,7 +103,7 @@
     </div>
     <div class="right" id="season_list" ></div>
     <!-- DESCRIPTION -->
-    <p class="right" style="width:500px; font-size:150%;">{{ serie.description }}</p>
+    <div class="right" style="width:500px;"><p style="font-size:120%;">{{ serie.description }}</p>
 	<div class="hr clearfix">&nbsp;</div>
 	<!-- ACTORS -->
         <h2><a id="get_actors" name="get_actors" href="#get_actors">{% trans "Ver actores" %}</a></h2>
@@ -121,6 +121,7 @@
 	{% with request.path as next %}
 	{% render_comment_form for serie %}
 	{% endwith %}
+    </div>
 </div>
 
 <!-- COLUMN 3 -->
