@@ -1,13 +1,15 @@
 # pylint: disable-msg=E1102
+from datetime import datetime
+
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
-from djangoratings.fields import RatingField
-from datetime import datetime
-from voting.models import Vote
-
+from django.conf import settings
 from django.db.models.signals import post_save, post_delete
+from django.contrib.auth.models import User
 
+from djangoratings.fields import RatingField
+from voting.models import Vote 
 #XXX: poster deberia ser on_delete null en vez de cascade
 
 class Serie(models.Model):
@@ -88,6 +90,14 @@ class Season(models.Model):
                 'season': self.season,
         })
 
+    @models.permalink
+    def get_season(self):
+        return ('serie.ajax.season_full_links_lookup', (), {
+                'serie_slug': self.serie.slug_name,
+                'season': self.season,
+        })
+
+
 class ImageSeason(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/season")
@@ -100,19 +110,23 @@ class ImageSeason(models.Model):
         return self.title
 
 
+def get_default_user_for_links():
+    return User.objects.get(username=settings.DEFAULT_USER_FOR_LINKS)
+
+
 class LinkSeason(models.Model):
-    episode = models.ForeignKey("Season", related_name="links")
-    url = models.CharField(max_length=255, unique=True, db_index=True)
-    audio_lang = models.ForeignKey("Languages", related_name="audio_langs_season")
+    season = models.ForeignKey("Season", related_name="links", editable=False)
+    url = models.CharField(max_length=255, unique=True, db_index=True, verbose_name="URL")
+    audio_lang = models.ForeignKey("Languages", related_name="audio_langs_season", verbose_name="Idioma")
     subtitle = models.ForeignKey(
        "Languages",
        related_name="sub_langs_season",
        null=True,
        blank=True,
-       help_text=_("subtitulos integrados")
+       verbose_name="Subtitulos",
     )
-    user = models.CharField(max_length=255, null=True, blank=True)
-    pub_date = models.DateTimeField(default=datetime.now)
+    user = models.ForeignKey(User, related_name="user", editable=False, default=get_default_user_for_links)
+    pub_date = models.DateTimeField(default=datetime.now, editable=False)
 
     def __unicode__(self):
         return self.url
@@ -169,18 +183,18 @@ class Episode(models.Model):
 
 
 class Link(models.Model):
-    episode = models.ForeignKey("Episode", related_name="links")
-    url = models.CharField(max_length=255, unique=True, db_index=True)
-    audio_lang = models.ForeignKey("Languages", related_name="audio_langs")
+    episode = models.ForeignKey("Episode", related_name="links", editable=False)
+    url = models.CharField(max_length=255, unique=True, db_index=True, verbose_name="URL")
+    audio_lang = models.ForeignKey("Languages", related_name="audio_langs", verbose_name="Idioma")
     subtitle = models.ForeignKey(
        "Languages",
        related_name="sub_langs",
        null=True,
        blank=True,
-       help_text=_("subtitulos integrados")
+       verbose_name="Subtitulos",
     )
-    user = models.CharField(max_length=255, null=True, blank=True, help_text=_('usuario que subio el link'))
-    pub_date = models.DateTimeField(default=datetime.now, help_text=_('cuando se ha subido el link? por defecto cuando se guarda'))
+    user = models.ForeignKey(User, related_name="link_user", editable=False, default=get_default_user_for_links)
+    pub_date = models.DateTimeField(default=datetime.now, help_text=_('cuando se ha subido el link? por defecto cuando se guarda'), editable=False)
 
     def __unicode__(self):
         return self.url
