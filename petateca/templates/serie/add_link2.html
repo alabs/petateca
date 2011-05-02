@@ -1,0 +1,27 @@
+{% extends "base_stripped.html" %}
+{% load message_box %}
+{% block contents %}
+<div class="hr clearfix dotted">&nbsp;</div>
+<h2 class="caption center"> Agregando link para <br />{{ serie.name }} - {{ season.season }}</h2>
+<div class="hr clearfix dotted">&nbsp;</div>
+<form id="add_link_form" action="{% url add_link_season serie_slug=serie.slug_name season=season.season %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
+<ul>
+{{ form.as_ul }}
+</ul>
+    <input class="button center" type="submit" value="Enviar" />
+</form>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <script>
+         $.jGrowl("{{message}}");
+         parent.$.fn.colorbox.close();
+    $('.add_link').colorbox({width:'50%', height:'60%', iframe:true, 
+         onClosed:function(){ location.reload(true); } 
+    });
+    </script>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,77 @@
+{% load i18n %}
+{% load voting_tags %}
+{% load extract_domain %}
+{% load extract_type %}
+{% load echo_language %}
+
+{% if link_list %}
+{% votes_by_user user on link_list as vote_dict %}
+{% for link in link_list %}
+{% score_for_object link as score %}
+{% dict_entry_for_item link from vote_dict as vote %}
+
+<li>
+    <a href="{{ link.url }}" rel="nofollow" id="datemeta">{# link.url|extract_type #} ({{ link.url|extract_domain }})<span>
+    Idioma: {{ link.audio_lang.iso_code|echo_language }}
+    {% if link.subtitle %} Subtitulos: {{ link.subtitle.iso_code|echo_language }}{% endif %}
+     <div class="right">
+     {% if request.user == link.user %}
+    <!-- EDICION --> 
+         <img style="margin-bottom:0 !important;" src="/static/images/pencil-edit.png" class="edit_link" href="{% url ajax_add_link episode_id=episode.id %}?edit=yes&linkid={{ link.id }}">
+     {% endif %}
+    <!-- VOTING -->
+     <span class="score" style="position:relative; top:-25%; margin-right:2em;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
+     <img style="margin-bottom:0 !important;" class="{{ link.id }}" id="upvote" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
+     <img style="margin-bottom:0 !important;" class="{{ link.id}}" id="downvote" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+     </div>
+	{% endfor %}
+  {% else %}
+    <li> <a class="add_link" href="#">{% trans "No hay enlaces disponibles" %} - haz click para empezar a agregarlos</a>
+  {% endif %}
+
+<script>
+
+function voting( direction, linkid ){
+    var $linkscore = $('span#linkscore' + linkid);
+    $linkscore.html('<img src="/static/images/ajax-loading.gif">');
+    $.post('/series/lookup/vote/', { 
+                'vote': direction,
+                'linkid': linkid,
+                'csrfmiddlewaretoken': getCookie('csrftoken'),
+    }, function (data){ 
+        // change the value with the new score
+        $linkscore.html(data.score);
+
+///        dir_down = $('img#' + linkid + '[@class=downvote]');
+///        dir_up = $('img#' + linkid + '[@class=upvote]');
+///        // change the image
+///        if (direction == 'downvote') {
+///            console.log(dir_down.attr('src'));
+///            dir_up.attr('src', '/static/images/voting/aupgrey.gif');
+///            dir_down.attr('src', '/static/images/voting/adownmod.gif');
+///        } else if (direction == 'upvote') {
+///            dir_down.attr('src', '/static/images/voting/aupmod.gif');
+///            dir_up.attr('src', '/static/images/voting/adowngrey.gif');
+///        };
+      }
+    );
+    return false;
+};
+    
+
+$('#downvote').click(function(){
+    direction = $(this).attr('id');
+    linkid = $(this).attr('class');
+    alert(direction);
+    voting(direction, linkid);
+    return false;
+});
+
+$('#upvote').click(function(){
+    direction = $(this).attr('id');
+    linkid = $(this).attr('class');
+    voting(direction, linkid);
+    return false;
+});
+
+</script>
