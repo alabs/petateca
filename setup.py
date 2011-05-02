@@ -16,6 +16,7 @@ setup(
     install_requires=[
         'django',
         'PIL',
+        'formencode',
         'docutils',
         'South>=0.7.3',
         'django-modeltranslation',
@@ -34,6 +35,10 @@ setup(
         'simplejson',
         'django-avatar',
         'django-piston',
+        'django-indexer',
+        'django-paging',
+        'django-sentry',
+        'django-compress',
     ],
     classifiers=[
         'Environment :: Web Environment',
