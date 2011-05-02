@@ -108,6 +108,7 @@
 	<!-- ACTORS -->
         <h2><a id="get_actors" name="get_actors" href="#get_actors">{% trans "Ver actores" %}</a></h2>
         <div id="actors_list"></div>
+    </div>
 	{% if not comment_count == 0 %}
         <div class="hr clearfix">&nbsp;</div>
         <!-- RESEÑAS -->
@@ -121,7 +122,6 @@
 	{% with request.path as next %}
 	{% render_comment_form for serie %}
 	{% endwith %}
-    </div>
 </div>
 
 <!-- COLUMN 3 -->

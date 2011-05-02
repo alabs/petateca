@@ -21,8 +21,8 @@
      {% endif %}
     <!-- VOTING -->
      <span class="score" style="position:relative; top:-25%; margin-right:2em;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
-     <img style="margin-bottom:0 !important;" class="{{ link.id }}" id="upvote" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
-     <img style="margin-bottom:0 !important;" class="{{ link.id}}" id="downvote" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+     <img style="margin-bottom:0 !important;" id="up_{{ link.id }}" class="upvote" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
+     <img style="margin-bottom:0 !important;" id="down_{{ link.id}}" class="downvote" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
      </div>
 	{% endfor %}
   {% else %}
@@ -33,7 +33,7 @@
 
 function voting( direction, linkid ){
     var $linkscore = $('span#linkscore' + linkid);
-    $linkscore.html('<img src="/static/images/ajax-loading.gif">');
+    $linkscore.html('<img style="margin-bottom:0 !important;" src="/static/images/ajax-loading.gif">');
     $.post('/series/lookup/vote/', { 
                 'vote': direction,
                 'linkid': linkid,
@@ -42,34 +42,34 @@ function voting( direction, linkid ){
         // change the value with the new score
         $linkscore.html(data.score);
 
-///        dir_down = $('img#' + linkid + '[@class=downvote]');
-///        dir_up = $('img#' + linkid + '[@class=upvote]');
-///        // change the image
-///        if (direction == 'downvote') {
-///            console.log(dir_down.attr('src'));
-///            dir_up.attr('src', '/static/images/voting/aupgrey.gif');
-///            dir_down.attr('src', '/static/images/voting/adownmod.gif');
-///        } else if (direction == 'upvote') {
-///            dir_down.attr('src', '/static/images/voting/aupmod.gif');
-///            dir_up.attr('src', '/static/images/voting/adowngrey.gif');
-///        };
+        dir_down = $('#down_' + linkid);
+        dir_up = $('#up_' + linkid);
+        // change the image
+        if (direction == 'downvote') {
+            dir_up.attr('src', '/static/images/voting/aupgrey.gif');
+            dir_down.attr('src', '/static/images/voting/adownmod.gif');
+        } else if (direction == 'upvote') {
+            dir_up.attr('src', '/static/images/voting/aupmod.gif');
+            dir_down.attr('src', '/static/images/voting/adowngrey.gif');
+        };
       }
     );
     return false;
 };
     
 
-$('#downvote').click(function(){
-    direction = $(this).attr('id');
-    linkid = $(this).attr('class');
-    alert(direction);
+$('.downvote').click(function(){
+    linkid_raw = $(this).attr('id');
+    linkid = linkid_raw.split('_')[1];
+    direction = $(this).attr('class');
     voting(direction, linkid);
     return false;
 });
 
-$('#upvote').click(function(){
-    direction = $(this).attr('id');
-    linkid = $(this).attr('class');
+$('.upvote').click(function(){
+    linkid_raw = $(this).attr('id');
+    linkid = linkid_raw.split('_')[1];
+    direction = $(this).attr('class');
     voting(direction, linkid);
     return false;
 });
