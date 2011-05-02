@@ -46,6 +46,14 @@ urlpatterns = patterns('',
         {'template': 'faq.html'},
         name="faq"
        ),
+    url(r'^aviso-legal/$', 'django.views.generic.simple.direct_to_template',
+        {'template': 'aviso-legal.html'},
+        name="aviso-legal"
+       ),
+    url(r'^politica-privacidad/$', 'django.views.generic.simple.direct_to_template',
+        {'template': 'politica-privacidad.html'},
+        name="politica-privacidad"
+       ),
 
     # Usuarios, invitaciones, registros, avatar, etc
     (r'^accounts/', include('invitation.urls')),

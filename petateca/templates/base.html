@@ -34,7 +34,6 @@
                 {% else %}
                     <li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>    
             {% endif %}
-            <li><a href="{% url faq %}"><span class="meta">{% trans "preguntas" %}</span><br />{% trans "FAQ" %}</a></li>
             <li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
         </ul>
             <div id="search_form">
@@ -89,9 +88,12 @@
 					</ul>
 			</li>
 			<li class="footerbox">
-				<strong>Ayuda</strong>
+				<strong>Liberateca</strong>
 					<ul>
 						<li><a href="{% url faq %}">FAQ</a></li>
+						<li><a href="http://twitter.com/liberateca">Twitter</a></li>
+						<li><a href="{% url aviso-legal %}">Aviso legal</a></li>
+						<li><a href="{% url politica-privacidad %}">Política de privacidad</a></li>
 					</ul>
 			</li>
 		</ul>
@@ -106,6 +108,7 @@
                 {% trans "Imágenes y descripciones de " %}<a href="http://thetvdb.com/"><b>TheTVDB</b></a>.<br />
                 {% trans "Forkeanos en " %}<a href="http://github.com/alabs/petateca"><b>GitHub</b></a>.
                 {% trans "Siguenos en " %}<a href="http://twitter.com/liberateca"><b>Twitter</b></a>.
+                {% trans "Una producción de " %}<a href="http://alabs.es"><b>aLabs</b></a>.
             </p></span>
             <a class="float right" href="#">{% trans "arriba" %}</a>
         </p>
