@@ -17,7 +17,7 @@
      <div class="right">
      {% if request.user == link.user %}
     <!-- EDICION --> 
-         <img style="margin-bottom:0 !important;" src="/static/images/pencil-edit.png" class="edit_link" href="{% url ajax_add_link episode_id=episode.id %}?edit=yes&linkid={{ link.id }}">
+         <!-- img style="margin-bottom:0 !important;" src="/static/images/pencil-edit.png" class="edit_link" href="{# url ajax_add_link episode_id=episode.id #}?edit=yes&linkid={{ link.id }}" -->
      {% endif %}
     <!-- VOTING -->
      <span class="score" style="position:relative; top:-25%; margin-right:2em;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>

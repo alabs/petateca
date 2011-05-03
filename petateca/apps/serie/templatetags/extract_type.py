@@ -14,11 +14,15 @@ def extract_type(value):  # Only one argument.
         if domain.startswith('www.'):
             domain = domain.replace('www.', '')
 
-        if domain.startswith('megavideo.com'):
-            domain_type = 'Visionado Online'
-        elif domain.startswith('megaupload.com') or domain.startswith('gigasize') or domain.startswith('fileflyer') or domain.startswith('fileserve.com'):
-            domain_type = 'Descarga Directa'
-        elif domain.startswith('torrent') or domain.startswith('bt-chat') or domain.startswith('mininova'):
+        visionado = ('megavideo')
+        descarga = ('megaupload', 'gigasize', 'fileflyer', 'fileserver')
+        torrent = ('torrent', 'bt-chat', 'mininova', 'torrage', 'zoink')
+
+        if domain.startswith(visionado):
+            domain_type = 'Visionado online'
+        elif domain.startswith(descarga):
+            domain_type = 'Descarga directa'
+        elif domain.startswith(torrent):
             domain_type = 'Torrent'
         else:
             domain_type = 'Desconocido'

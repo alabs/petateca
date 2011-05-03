@@ -22,4 +22,15 @@
 
 <script>
 
+    $(".zoom").click( function(){
+     // listado de episodios
+        $(this).addClass('selected_list');
+        $inside = $(this).siblings();
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+        href = $(this).attr('href');
+        $inside.load(href);
+        $.getScript("/static/js/petateca.js"); 
+        return false;
+    });
+
 </script>

@@ -238,63 +238,44 @@ $(document).ready(function() {
   })();
 
 
-    $(document).ready(function() {  
-$(".zoom").click( function(){
-    $(this).addClass('selected_list');
-    $inside = $(this).siblings();
-    $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-    href = $(this).attr('href');
-    $inside.load(href);
-    return false;
+$(document).ready(function() {  
+    $(".zoom").click( function(){
+    // listado de episodios
+        $(this).addClass('selected_list');
+        $inside = $(this).siblings();
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+        href = $(this).attr('href');
+        $inside.load(href);
+        return false;
+    });
+
+
+    $(".espoiler").click( function(e){
+    // descripcion del episodio
+        e.preventDefault();
+        $(this).parent().addClass('selected_list');
+        episodeid = $(this).attr('id');
+        $inside = $('#inside' + episodeid);
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+        espoiler_id = $(this).attr('rel');
+        $inside.load(espoiler_id);
+        return false;
+    });
+
+
+    $(".add_link").click( function(e){
+    // agregar enlace
+        e.preventDefault();
+        $(this).parent().addClass('selected_list');
+        episodeid = $(this).attr('id');
+        $inside = $('#inside' + episodeid);
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+        episode_rel = $(this).attr('rel');
+        $inside.load(episode_rel + episodeid + '/');
+        return false;
+    });
 });
 
-
-$(".espoiler").click( function(e){
-    e.preventDefault();
-    $(this).parent().addClass('selected_list');
-    episodeid = $(this).attr('id');
-    $inside = $('#inside' + episodeid);
-    $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-    espoiler_id = $(this).attr('rel');
-    $inside.load(espoiler_id);
-    return false;
-});
-
-
-$(".add_link").click( function(e){
-    e.preventDefault();
-    $(this).parent().addClass('selected_list');
-    episodeid = $(this).attr('id');
-    $inside = $('#inside' + episodeid);
-    $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-    episode_rel = $(this).attr('rel');
-    $inside.load(episode_rel + episodeid + '/');
-    return false;
-});
-
-      
-  //      $('#title').click(function(){  
-  //      $(this).addClass('selected_list');
-  //    
-  //      var toLoad = $(this).attr('href');
-  //      $('#content').hide('fast',loadContent);  
-  //      $('#load').remove();  
-  //      $('#wrapper').append('<span id="load">LOADING...</span>');  
-  //      $('#load').fadeIn('normal');  
-  //      function loadContent() {  
-  //          $('#content').load(toLoad,'',showNewContent())  
-  //      }  
-  //      function showNewContent() {  
-  //          $('#content').show('normal',hideLoader());  
-  //      }  
-  //      function hideLoader() {  
-  //          $('#load').fadeOut('normal');  
-  //      }  
-  //      $(this).slideDown();
-  //      return false;  
-  //    
-  //      });  
-    });  
 
 
 
