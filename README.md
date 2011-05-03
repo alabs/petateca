@@ -61,3 +61,12 @@ Por un bug con los tests:
 https://code.google.com/p/django-rosetta/issues/detail?id=107
 
 `patch virtual/lib/python*/site-packages/django_rosetta*/rosetta/tests/__init__.py < src/rosetta.patch`
+
+
+import-bot-data
+-------------------
+
+Para usar este comando hace falta instalar las siguientes dependencias
+
+ pip install IMDbPY tvdb_api simplejson
+

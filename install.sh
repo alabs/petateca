@@ -30,5 +30,8 @@ python manage.py migrate &&
 # Actualizamos campos de traduccion
 python manage.py update_translation_fields &&
 
+# Compilamos el CSS y el JS
+python manage.py synccompress &&
+
 # Iniciamos el servidor de desarrollo
 python manage.py runserver
