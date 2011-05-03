@@ -11,7 +11,7 @@
 {% dict_entry_for_item link from vote_dict as vote %}
 
 <li>
-    <a href="{{ link.url }}" rel="nofollow" id="datemeta">{% link.url|extract_type %} ({{ link.url|extract_domain }})<span>
+    <a href="{{ link.url }}" rel="nofollow" id="datemeta">{{ link.url|extract_type }} ({{ link.url|extract_domain }})<span>
     Idioma: {{ link.audio_lang.iso_code|echo_language }}
     {% if link.subtitle %} Subtitulos: {{ link.subtitle.iso_code|echo_language }}{% endif %}
      <div class="right">
