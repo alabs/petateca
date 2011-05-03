@@ -17,16 +17,10 @@ serie_list = {
 
 urlpatterns = patterns('serie.views',
     url(r'^$', object_list, serie_list, name='serie-index'), 
-
     url(r'^actor/(?P<slug>[-\w]+)$', object_detail, get_actor, name="get_actor"),
-
-    (r'^last$', object_list, {
-        'queryset': Serie.objects.order_by('-name').all(), #XXX: Bad order
-    }),
-    (r'^recommended$', 'list_user_recommendation'),
-
+    (r'^comments/', include('django.contrib.comments.urls')),
     url(r'^sneak$', 'sneak_links', name="sneak_links"),
-
+    (r'^recommended$', 'list_user_recommendation'),
 )
 
 urlpatterns += patterns('serie.ajax',
