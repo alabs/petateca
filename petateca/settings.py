@@ -48,7 +48,7 @@ LANGUAGES = (
  ('es', ugettext('Spanish')),
  ('en', ugettext('English')),
 )
-LOCALEURL_USE_ACCEPT_LANGUAGE = True
+#LOCALEURL_USE_ACCEPT_LANGUAGE = True
 TRANSLATION_REGISTRY = 'translation'
 SITE_ID = 1
 
@@ -94,9 +94,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'context_processors.site_name',
 )
 
-FIXTURE_DIRS = (
-    os.path.join(PROJECT_ROOT, 'blog/fixtures')
-)
+#FIXTURE_DIRS = (
+#    os.path.join(PROJECT_ROOT, 'blog/fixtures')
+#)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -106,11 +106,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.comments',
     'django.contrib.markup',
     'serie',
-    'blog',
     'userdata',
-    #'imdblocal', #Don't use yet, sucks a lot
     'registration',
     'invitation',
     'south',
@@ -120,16 +119,15 @@ INSTALLED_APPS = (
     'haystack',
     'djangoratings',
     'voting',
-    'taggit',
-    'django.contrib.comments',
     'avatar',
+    'compress',
+    'piston',
     #Sentry
     # don't forget to add the dependencies!
     'indexer',
     'paging',
     'sentry',
     'sentry.client',
-    'compress',
 )
 
 DATABASE_ROUTERS = ['imdblocal.dbrouter.ImdbRouter']
@@ -192,6 +190,7 @@ LOGIN_EXEMPT_URLS = (
     r'^accounts/invitation/thanks/$', 
     r'^admin/',
     r'^accounts/register/',
+    r'^accounts/login/',
     r'^accounts/activate/',
     r'^accounts/password/reset/',
     # la API se encarga de la autenticacion

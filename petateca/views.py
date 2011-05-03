@@ -1,5 +1,4 @@
 from serie.models import Serie, Episode, Link
-from blog.models import Post
 from decorators import render_to
 from invitation.models import InvitationKey
 

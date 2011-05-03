@@ -121,7 +121,7 @@
 {% if initial_message %}
     <script>
         $(document).ready(function(){
-            $.jGrowl("LiberaTeca es la nueva biblioteca del siglo XXI. ¿Has visto nuestro \u003Ca href=\"\/faq\" rel=\"nofollow\"\u003EFAQ\u003C\/a\u003E?", { header: 'Bienvenido', sticky: true });
+            $.jGrowl(escape("No olvides pasarte por las <a href='http://liberateca.uservoice.com'>sugerencias</a> y proponer los cambios que quisieras ver."), { header: 'Bienvenido', sticky: true });
         });
     </script>
 {% endif %}

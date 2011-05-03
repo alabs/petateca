@@ -1,7 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions
 from serie.models import Serie, Episode, Genre
-from blog.models import Post
-
 
 class SerieTranslationOptions(TranslationOptions):
     fields = ('name', 'description',)
@@ -21,8 +19,3 @@ class GenreTranslationOptions(TranslationOptions):
 translator.register(Genre, GenreTranslationOptions)
 
 
-class PostTranslationOptions(TranslationOptions):
-    fields = ('title', 'post',)
-
-
-translator.register(Post, PostTranslationOptions)

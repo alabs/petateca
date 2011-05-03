@@ -29,9 +29,6 @@ urlpatterns = patterns('',
     url(r'^api/$', redirect_to, { 'url': '/api/v1' }, name='api'),
     (r'^api/v1/', include('api.urls')),
 
-
-    (r'^blog/', include('blog.urls')),
-
     (r'^search/lookup/$', 'search.views.search_lookup'),
 
     (r'^search/$', search_view_factory(
