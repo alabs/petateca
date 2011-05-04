@@ -3,10 +3,10 @@
 {% load thumbnail %}
 {% load extract_domain %}
 {% load avatar_tags %}
-{% block title %}Perfil de {{ user.username|title }}{% endblock %}
+{% block title %}{{ user.username }} | Liberateca{% endblock %}
 {% block contents %}
 <!-- USER NAME -->
-<h2 class="grid_12 caption clearfix">Perfil de <span>{{ user.username|title }}</span></h2>
+<h2 class="grid_12 caption clearfix"><span>{{ user.username }}</span></h2>
 
 <div class="grid_2">
 	<!-- AVATAR -->
