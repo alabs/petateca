@@ -10,7 +10,6 @@
 
 <div class="grid_2">
 	<!-- AVATAR -->
-	<h2> Avatar </h2>
 	{% avatar user %}
 	<br />
 	{% if request.user == user %} 
@@ -33,7 +32,7 @@
 <div class="grid_10">
     <p class="clearfix">
         <!-- FAVORITE SERIES -->
-        <h2>Series Favoritas</h2>
+        <h2>Series favoritas</h2>
         {% if favorite_series %}
           {% for serie in favorite_series %}
             <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
@@ -53,7 +52,7 @@
 
     <p class="clearfix">
         <!-- VOTED LINKS -->
-        <h2> Últimos Enlaces Votados </h2>
+        <h2> Últimos enlaces votados </h2>
         {% if voted_links %}
         <table id="links">
             <thead>
@@ -84,7 +83,7 @@
         {% endif %}
     </p>
 
-	<h2> Últimas 10 Reseñas de Series </h2>
+	<h2> Últimas 10 reseñas de series </h2>
 	{% if comments_serie %}
 	<ul>
 		{% for comment in comments_serie %}
