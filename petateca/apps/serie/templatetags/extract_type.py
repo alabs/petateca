@@ -15,7 +15,7 @@ def extract_type(value):  # Only one argument.
             domain = domain.replace('www.', '')
 
         visionado = ('megavideo')
-        descarga = ('megaupload', 'gigasize', 'fileflyer', 'fileserver')
+        descarga = ('megaupload', 'gigasize', 'fileflyer', 'fileserve')
         torrent = ('torrent', 'bt-chat', 'mininova', 'torrage', 'zoink')
 
         if domain.startswith(visionado):
