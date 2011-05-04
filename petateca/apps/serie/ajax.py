@@ -13,15 +13,15 @@ from datetime import datetime
 @render_to('serie/ajax_serie.html')
 def serie_lookup(request, serie_id):
     ''' JQuery PopUp en las imagenes '''
-    serie = Serie.objects.get(id=serie_id)
+    serie = get_object_or_404(Serie, id=serie_id)
     genres = serie.genres.all()
     return { 'serie' : serie, 'genres': genres }
 
 
 @render_to('serie/ajax_season.html')
 def season_lookup(request, serie_id, season):
-    serie = Serie.objects.get(id=serie_id)
-    season = Season.objects.get(serie=serie, season=season)
+    serie = get_object_or_404(Serie, id=serie_id)
+    season = get_object_or_404(Season, serie=serie, season=season)
     episode_list = season.episodes.all().order_by('episode')
     return { 
         'season': season,
@@ -30,9 +30,9 @@ def season_lookup(request, serie_id, season):
 
 
 @render_to('serie/ajax_episodes.html')
-def links_season_lookup(request, serie_slug, season):
-    serie = Serie.objects.get(slug_name=serie_slug)
-    season = Season.objects.get(serie=serie, season=season)
+def links_season_lookup(request, serie_id, season):
+    serie = get_object_or_404(Serie, id=serie_id)
+    season = get_object_or_404(Season, serie=serie, season=season)
     link_list = season.links.all()
     return { 
         'season': season,
@@ -42,9 +42,9 @@ def links_season_lookup(request, serie_slug, season):
 
 @render_to('serie/ajax_episodes.html')
 def links_episode_lookup(request, serie_id, season, episode):
-    serie = Serie.objects.get(id=serie_id)
-    season = Season.objects.get(serie=serie, season=season)
-    episode = Episode.objects.get(episode=episode, season=season)
+    serie = get_object_or_404(Serie, id=serie_id)
+    season = get_object_or_404(Season, serie=serie, season=season)
+    episode = get_object_or_404(Episode, episode=episode, season=season)
     link_list = episode.links.all()
     return { 
         'season': season,
@@ -54,9 +54,9 @@ def links_episode_lookup(request, serie_id, season, episode):
 
 @render_to('serie/ajax_espoiler.html')
 def espoiler_lookup(request, serie_id, season, episode):
-    serie = Serie.objects.get(id=serie_id)
+    serie = get_object_or_404(Serie, id=serie_id)
     season = Season.objects.get(serie=serie, season=season)
-    episode = Episode.objects.get(episode=episode, season=season)
+    episode = get_object_or_404(Episode, episode=episode, season=season)
     return {
         'serie': serie,
         'episode': episode, 
@@ -93,13 +93,13 @@ def ajax_letter(request, letter):
 
 @render_to('serie/generic_list.html')
 def ajax_genre(request, genre_slug):
-    genre = Genre.objects.get(slug_name = genre_slug)
+    genre = get_object_or_404(Genre, slug_name = genre_slug)
     return { 'series_list': genre.series.all() }
 
 
 @render_to('serie/generic_list.html')
 def ajax_network(request, network_slug):
-    network = Network.objects.get(slug_name = network_slug)
+    network = get_object_or_404(Network, slug_name = network_slug)
     return { 'series_list': network.series.all() }
 
 
