@@ -34,9 +34,18 @@ urlpatterns += patterns('serie.ajax',
     url(r'^lookup/network/(?P<network_slug>[-\w]+)$', 'ajax_network'),
 
     # AJAX /serie/nombre
+    # - mostrar espoiler
     url(r'^lookup/espoiler/(?P<serie_id>[-\w]+)/(?P<season>\d+)/(?P<episode>\d+)/$', 'espoiler_lookup', name='ajax_espoiler'),
+
+    # -tratar votaciones
     url(r'^lookup/vote/$', 'vote_link', name='vote_link'),
+    url(r'^lookup/vote_season/$', 'vote_link_season', name='vote_link_season'),
+
+    # - listar links de episodios y temporada
     url(r'^lookup/links/(?P<serie_id>[-\w]+)/(?P<season>\d+)/(?P<episode>\d+)/$', 'links_episode_lookup', name='ajax_links_episodes'),
     url(r'^lookup/links/(?P<serie_id>[-\w]+)/season/(?P<season>\d+)/$', 'links_season_lookup', name='ajax_links_season'),
+
+    # - agregar links de episodios y temporada
     url(r'^lookup/add_link/(?P<episode_id>\d+)/$', 'ajax_add_link', name='ajax_add_link'),
+    url(r'^lookup/add_link_season/(?P<season_id>\d+)/$', 'ajax_add_link_season', name='ajax_add_link_season'),
 )
