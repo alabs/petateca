@@ -3,20 +3,6 @@
 {% load thumbnail %}
 {% load tagcloud %}
 {% block title %}{% trans "Series" %}{% endblock %}
-{% block extrastyle %}
-<style>
-#tagcloud{ font-family:Tahoma,Verdana,sans-serif;  padding:10px 5px 10px 5px;}
- 
-.tag1{ font-size:1em; color:#555555; line-height:1em; }
-.tag2{ font-size:1.4em; color:#606060; line-height:1em; }
-.tag3{ font-size:1.8em; color:#808080; line-height:1em; }
-
-.nolink { color: #000000; } 
- 
-#tagcloud a{ text-decoration:none; }
-#tagcloud a:hover{ text-decoration:underline; }
-</style>
-{% endblock %}
 {% block contents %}
 		<!-- COLUMN 1 -->
 		<div class="catagory_1 clearfix">
@@ -91,26 +77,4 @@
                 </div>
 			</div>
 		</div>
-{% endblock %}
-{% block extrascript %}
-<script>
-function lookup( selector, type ) {
-  $(selector).click(
-    function() { 
-      $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-      letter = $(this).attr('href');
-      newlet = letter.substring(1);
-      $('#series_list').load('/series/lookup/' + type + '/' + newlet);
-      $(this).addClass('nolink');
-      if (typeof ($last) != 'undefined') { $last.removeClass('nolink'); } 
-      $last = $(this);
-    }
-  );
-}
-
-lookup('.abc', 'letter'); 
-lookup('.genre', 'genre'); 
-lookup('.network', 'network'); 
-
-</script>
 {% endblock %}

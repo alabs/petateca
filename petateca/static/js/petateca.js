@@ -12,17 +12,16 @@ $(document).ready(function () {
             var url = window.location.pathname;
             $.post(url, {
                 'rating': value,
-                'csrfmiddlewaretoken': getCookie('csrftoken'),
+                'csrfmiddlewaretoken': getCookie('csrftoken')
             }, function (data) {
                 disc_rat_data(data);
             });
         }
     }); 
     // Listado de episodios por temporadas
-    $('.season').click( 
-        function(){ 
+    $('.season').live('click', function(){ 
             $('#season_list').html('<img src="/static/images/ajax-loading-bar.gif">');
-            season = $(this).attr('href')
+            season = $(this).attr('href');
             $('#season_list').load(season)
             return false; 
         }
@@ -94,14 +93,14 @@ function favorite() {
     if (decision == "yes") {
         $.post(url, {
             'favorite': "favorite",
-            'csrfmiddlewaretoken': getCookie('csrftoken'),
+            'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function (data) {
             disc_fav_data(data);
         })
     } else if (decision == "no") {
         $.post(url, {
             'no-favorite': "no-favorite",
-            'csrfmiddlewaretoken': getCookie('csrftoken'),
+            'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function (data) {
             disc_fav_data(data);
         })
@@ -219,13 +218,17 @@ $(document).ready(function() {
     lang: 'es',
     showTab: true
   };
+
   function _loadUserVoice() {
     var s = document.createElement('script');
     s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
     document.getElementsByTagName('head')[0].appendChild(s);
   }
+
   _loadSuper = window.onload;
   window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+
+
 
 // Google Analytics
   var _gaq = _gaq || [];
@@ -238,124 +241,28 @@ $(document).ready(function() {
   })();
 
 
-$(document).ready(function() {  
-    $(".zoom").click( function(){
-    // listado de episodios
-        $(this).addClass('selected_list');
-        $inside = $(this).siblings();
-        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-        href = $(this).attr('href');
-        $inside.load(href);
-        return false;
-    });
-
-
-    $(".espoiler").click( function(e){
-    // descripcion del episodio
-        e.preventDefault();
-        $(this).parent().addClass('selected_list');
-        episodeid = $(this).attr('id');
-        $inside = $('#inside' + episodeid);
-        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-        espoiler_id = $(this).attr('rel');
-        $inside.load(espoiler_id);
-        return false;
-    });
-
-
-    $(".add_link").click( function(e){
-    // agregar enlace
-        e.preventDefault();
-        $(this).parent().addClass('selected_list');
-        episodeid = $(this).attr('id');
-        $inside = $('#inside' + episodeid);
-        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-        episode_rel = $(this).attr('rel');
-        $inside.load(episode_rel + episodeid + '/');
-        return false;
-    });
-});
 
 
 
 
-function voting( direction, linkid ){
-    var $linkscore = $('span#linkscore' + linkid);
-    $linkscore.html('<img style="margin-bottom:0 !important;" src="/static/images/ajax-loading.gif">');
-    $.post('/series/lookup/vote/', { 
-                'vote': direction,
-                'linkid': linkid,
-                'csrfmiddlewaretoken': getCookie('csrftoken'),
-    }, function (data){ 
-        // change the value with the new score
-        $linkscore.html(data.score);
 
-        dir_down = $('#down_' + linkid);
-        dir_up = $('#up_' + linkid);
-        // change the image
-        if (direction == 'downvote') {
-            dir_up.attr('src', '/static/images/voting/aupgrey.gif');
-            dir_down.attr('src', '/static/images/voting/adownmod.gif');
-        } else if (direction == 'upvote') {
-            dir_up.attr('src', '/static/images/voting/aupmod.gif');
-            dir_down.attr('src', '/static/images/voting/adowngrey.gif');
-        };
-      }
-    );
-    return false;
-};
-    
 
-$('.downvote').click(function(){
-    linkid_raw = $(this).attr('id');
-    linkid = linkid_raw.split('_')[1];
-    direction = $(this).attr('class');
-    voting(direction, linkid);
-    return false;
-});
 
-$('.upvote').click(function(){
-    linkid_raw = $(this).attr('id');
-    linkid = linkid_raw.split('_')[1];
-    direction = $(this).attr('class');
-    voting(direction, linkid);
-    return false;
-});
 
-$('#language_help').click( function() {
-    $.jGrowl('<b>Referencia de Idiomas:</b><li>en: Inglés<li>es: Español<li>es-es: Español Latino<li>ca: Català<li>jp: Japonés');
-});
+function lookup( selector, type ) {
+  $(selector).click(
+    function() { 
+      $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+      letter = $(this).attr('href');
+      newlet = letter.substring(1);
+      $('#series_list').load('/series/lookup/' + type + '/' + newlet);
+      $(this).addClass('nolink');
+      if (typeof ($last) != 'undefined') { $last.removeClass('nolink'); } 
+      $last = $(this);
+    }
+  );
+}
 
-$('#submit').click(function (e) {       
-    e.preventDefault();
-    var url = $('input[name=url]');
-    var audio = $('select[name=audio_lang]');
-    var subtitle = $('select[name=subtitle]');
-    var post_url = $('form#add_link_form[action]').attr('action');
-      //Simple validation to make sure user entered something
-        //If error found, add hightlight class to the text field
-        if (url.val()==''||url.val()=='http://') {
-            url.addClass('hightlight');
-            return false;
-        } else url.removeClass('hightlight');
-
-        if (audio.val()=='') {
-            $('label[for=id_audio_lang]').addClass('hightlight');
-            return false;
-        } else $('label[for=id_audio_lang]').removeClass('hightlight');
-
-    var dataString = 'url='+ url.val() + '&audio_lang=' + audio.val() + '&subtitle=' + subtitle.val() + '&csrfmiddlewaretoken=' + getCookie('csrftoken');
-    //alert (dataString);return false;  
-    $.ajax({  
-      type: "POST",  
-      url: post_url,  
-      data: dataString,  
-      success: function(data) {  
-        if (data.mensaje  == 'Gracias'){
-            $.jGrowl("El enlace se ha guardado exitosamente");
-        }
-      }  
-    });  
-
-    return false;
-});
+lookup('.abc', 'letter'); 
+lookup('.genre', 'genre'); 
+lookup('.network', 'network'); 

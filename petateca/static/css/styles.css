@@ -1040,6 +1040,17 @@ div.dialog a:link, div.dialog a:visited {
  margin-bottom:0 !important;
 }
 
+#tagcloud{ font-family:Tahoma,Verdana,sans-serif;  padding:10px 5px 10px 5px;}
+ 
+.tag1{ font-size:1em; color:#555555; line-height:1em; }
+.tag2{ font-size:1.4em; color:#606060; line-height:1em; }
+.tag3{ font-size:1.8em; color:#808080; line-height:1em; }
+
+.nolink { color: #000000; } 
+ 
+#tagcloud a{ text-decoration:none; }
+#tagcloud a:hover{ text-decoration:underline; }
+
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {

@@ -1,11 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
-{% spaceless %}
-{% load i18n %}
+{% spaceless %} {% load i18n %}
 {% load compressed %}
 {% get_current_language as LANGUAGE_CODE %}
-{% get_available_languages as LANGUAGES %}
-{% endspaceless %}
+{% get_available_languages as LANGUAGES %}{% endspaceless %}
 <!-- Si estas viendo esto por ahi te interesa ver nuestro código: http://github.com/alabs/petateca -->
 <head>
     <title>{% block title %}{{title|default:"Liberateca"}}{%endblock %}</title>

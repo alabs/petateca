@@ -2,7 +2,7 @@
   <ul>
     <!-- li>
         <a class="zoom" href="{% url ajax_links_season serie_id=season.serie.id season=season.season %}"><strong>Temporada {{ season.season }} Completa</strong>
-        <img id="{{ season.id }}" rel="/series/lookup/add_link_season/" class="add_link nobttom right" src="/static/images/list-add.png"></a>
+        <img id="{{ season.id }}" rel="/series/lookup/add_link_season/" class="add_link nobottom right" src="/static/images/list-add.png"></a>
         <div class="list_inside"></div>
     </li -->
   {% for episode in episode_list %}
@@ -20,17 +20,40 @@
   </ul>
 </div>
 
-<script>
+<script type="text/javascript">
 
     $(".zoom").click( function(){
-     // listado de episodios
+    // listado de episodios
         $(this).addClass('selected_list');
         $inside = $(this).siblings();
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
         href = $(this).attr('href');
         $inside.load(href);
-        $.getScript("/static/js/petateca.js"); 
         return false;
     });
 
+    $(".espoiler").click( function(e){
+    // descripcion del episodio
+        e.preventDefault();
+        $(this).parent().addClass('selected_list');
+        episodeid = $(this).attr('id');
+        $inside = $('#inside' + episodeid);
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+        espoiler_id = $(this).attr('rel');
+        $inside.load(espoiler_id);
+        return false;
+    });
+
+
+    $(".add_link").click( function(e){
+    // agregar enlace
+        e.preventDefault();
+        $(this).parent().addClass('selected_list');
+        episodeid = $(this).attr('id');
+        $inside = $('#inside' + episodeid);
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+        episode_rel = $(this).attr('rel');
+        $inside.load(episode_rel + episodeid + '/');
+        return false;
+    });
 </script>
