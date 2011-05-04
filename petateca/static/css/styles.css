@@ -1019,6 +1019,14 @@ div.dialog a:link, div.dialog a:visited {
     margin-top: 2em; 
 }
 
+.header_api {
+    font-size: 200%;
+    line-height: 1.5em;
+    background-color: #333;
+    color: #FFF;
+    text-align:center;
+} 
+
 .hightlight {
     border:2px solid #9F1319 !important;
     background:url(/static/images/alert.png) no-repeat 2px !important;
