@@ -68,5 +68,7 @@ import-bot-data
 
 Para usar este comando hace falta instalar las siguientes dependencias
 
- pip install IMDbPY tvdb_api simplejson
+`pip install formencode`
+`pip install IMDbPY`
+`pip install tvdb_api simplejson`
 

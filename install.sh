@@ -22,10 +22,13 @@ pip install src/django-registration-0.8-alpha-1.tar.gz &&
 cd petateca &&
 
 # Creamos la DDBB y
-python manage.py syncdb &&
+python manage.py syncdb --noinput &&
 
 # Hacemos las migraciones del South
-python manage.py migrate &&
+python manage.py migrate &&  
+
+# Creamos el admin
+python manage.py createsuperuser &&
 
 # Actualizamos campos de traduccion
 python manage.py update_translation_fields &&
