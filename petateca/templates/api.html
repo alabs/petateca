@@ -2,17 +2,6 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load markup %}
-{% block extrastyle %}
-<style> 
-.header {
-font-size: 200%;
-line-height: 1.5em;
-background-color: #333;
-color: #FFF;
-text-align:center;
-} 
-</style>
-{% endblock %}
 {% block contents %}
 <h1>Documentación de la API - v0.1</h1>
 
@@ -20,12 +9,15 @@ text-align:center;
 
 <p>Por defecto devuelve la información en formato JSON, pero pasandole el querystring "?format=" se puede modificar (por ejemplo ?format=xml)
 
+<b>ACTUALIZACION 2011-05-04</b>: Se fuerza el uso de HTTPS
+
+
 <h3 id="serielist" class="header">Listado de Series</h3>
 <p>
     Lista las series que se encuentran en Liberateca así como la URL donde se encuentra el recurso (ver Serie)
 </p>
 <p>
-    URL: <b>http://liberateca.net/api/v1/series</b>
+    URL: <b>https://liberateca.net/api/v1/series</b>
 </p>
 <p>
     Métodos aceptados: <b> GET </b>
@@ -41,21 +33,21 @@ text-align:center;
 <h4> Ejemplo</h4>
 <code>
 <p>
-    $ curl -u usuario:contraseña http://liberateca.net/api/v1/series
+    $ curl -u usuario:contraseña https://liberateca.net/api/v1/series
 </p>
 
 <p>
 [
     {
-        "url": "http://liberateca.net/api/v1/serie/1", 
+        "url": "https://liberateca.net/api/v1/serie/1", 
         "name": "90210 Sensación de Vivir: La Nueva Generación"
     }, 
     {
-        "url": "http://liberateca.net/api/v1/serie/2", 
+        "url": "https://liberateca.net/api/v1/serie/2", 
         "name": "Ashes to Ashes"
     }, 
     {
-        "url": "http://liberateca.net/api/v1/serie/3", 
+        "url": "https://liberateca.net/api/v1/serie/3", 
         "name": "Archer"
     }, 
 (...)
@@ -67,7 +59,7 @@ text-align:center;
     Devuelve el detalle de una serie. Para obtener las series disponibles ver <a href="#serielist">Listado de Series</a>.
 </p>
 <p>
-    URL: <b>http://liberateca.net/api/v1/series/(serie_id)</b>
+    URL: <b>https://liberateca.net/api/v1/series/(serie_id)</b>
 </p>
 <p>
     Métodos aceptados: <b> GET </b>
@@ -92,7 +84,7 @@ text-align:center;
 <h4> Ejemplo</h4>
 <code>
 <p>
-    $ curl -u usuario:contraseña http://liberateca.net/api/v1/series/46
+    $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46
 </p>
 
 <p>
@@ -124,7 +116,7 @@ text-align:center;
 <p>
     Devuelve el listado de temporadas de una serie dada.
 </p> <p>
-    URL: <b>http://liberateca.net/api/v1/series/(serie_id)/seasons</b>
+    URL: <b>https://liberateca.net/api/v1/series/(serie_id)/seasons</b>
 </p>
 <p>
     Métodos aceptados: <b> GET </b>
@@ -140,16 +132,16 @@ text-align:center;
 <h4> Ejemplo</h4>
 <code>
 <p>
-    $ curl -u usuario:contraseña http://liberateca.net/api/v1/series/46/seasons
+    $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/seasons
 </p>
 
 <p>
 {
     "seasons": [
-        "http://liberateca.net/api/v1/serie/46/0", 
-        "http://liberateca.net/api/v1/serie/46/1", 
-        "http://liberateca.net/api/v1/serie/46/2", 
-        "http://liberateca.net/api/v1/serie/46/3"
+        "https://liberateca.net/api/v1/serie/46/0", 
+        "https://liberateca.net/api/v1/serie/46/1", 
+        "https://liberateca.net/api/v1/serie/46/2", 
+        "https://liberateca.net/api/v1/serie/46/3"
     ]
 }</p>
 
@@ -159,7 +151,7 @@ text-align:center;
     Devuelve el listado de episodios que tiene una temporada (ver <a href="#seasonlist">Listado de Temporadas</a>)
 </p>
 <p>
-    URL: <b>http://liberateca.net/api/v1/series/(serie_id)/(season)</b>
+    URL: <b>https://liberateca.net/api/v1/series/(serie_id)/(season)</b>
 </p>
 <p>
     Métodos aceptados: <b> GET </b>
@@ -180,19 +172,19 @@ text-align:center;
 <h4> Ejemplo</h4>
 <code>
 <p>
-    $ curl -u usuario:contraseña http://liberateca.net/api/v1/series/46/1
+    $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1
 </p>
 
 <p>
 [
     {
-        "url": "http://liberateca.net/api/v1/serie/46/1/1", 
+        "url": "https://liberateca.net/api/v1/serie/46/1/1", 
         "title": "Piloto", 
         "episode": 1, 
         "air_date": "2008-09-09"
     }, 
     {
-        "url": "http://liberateca.net/api/v1/serie/46/1/2", 
+        "url": "https://liberateca.net/api/v1/serie/46/1/2", 
         "title": "La historia de siempre", 
         "episode": 2, 
         "air_date": "2008-09-16"
@@ -208,7 +200,7 @@ text-align:center;
     Devuelve el detalle y los enlaces de un episodio.
 </p>
 <p>
-    URL: <b>http://liberateca.net/api/v1/series/(serie_id)/(season)/(episodio)</b>
+    URL: <b>https://liberateca.net/api/v1/series/(serie_id)/(season)/(episodio)</b>
 </p>
 <p>
     Métodos aceptados: <b> GET </b>
@@ -231,7 +223,7 @@ text-align:center;
 <h4> Ejemplo</h4>
 <code>
 <p>
-    $ curl -u usuario:contraseña http://liberateca.net/api/v1/series/46/1/1
+    $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/1
 </p>
 
 <p>
@@ -240,11 +232,11 @@ text-align:center;
     "episode": 1, 
     "links": [
         {
-            "url": "http://torrent.zoink.it/Fringe.S01E01.720p.HDTV.x264-E7.[eztv].torrent", 
+            "url": "https://torrent.zoink.it/Fringe.S01E01.720p.HDTV.x264-E7.[eztv].torrent", 
             "audio": "en"
         }, 
         {
-            "url": "http://www.bt-chat.com/download.php?info_hash=2750070c75ce4857e85aadc44cd99bbca913ec10", 
+            "url": "https://www.bt-chat.com/download.php?info_hash=2750070c75ce4857e85aadc44cd99bbca913ec10", 
             "audio": "en"
         }, 
     (...)
