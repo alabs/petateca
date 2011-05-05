@@ -2,8 +2,6 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 from re import compile
 
-SSL = 'SSL'
-
 # LOGIN REQUIRED
 
 EXEMPT_URLS = [compile(settings.LOGIN_URL_INDEX.lstrip('/'))]
@@ -33,23 +31,3 @@ class LoginRequiredMiddleware:
             if not any(m.match(path) for m in EXEMPT_URLS):
                 return HttpResponseRedirect(settings.LOGIN_URL_INDEX)
 
-
-# SSL REDIRECT MIDDLEWARE
-
-
-from django.http import HttpResponsePermanentRedirect
-from django.conf import settings
-
-class SecureRequiredMiddleware(object):
-    def __init__(self):
-        self.paths = getattr(settings, 'SECURE_REQUIRED_PATHS')
-        self.enabled = self.paths and getattr(settings, 'HTTPS_SUPPORT')
-
-    def process_request(self, request):
-        if self.enabled and not request.is_secure():
-            for path in self.paths:
-                if request.get_full_path().startswith(path):
-                    request_url = request.build_absolute_uri(request.get_full_path())
-                    secure_url = request_url.replace('http://', 'https://')
-                    return HttpResponsePermanentRedirect(secure_url)
-        return None

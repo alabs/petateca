@@ -76,7 +76,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'userdata.middleware.LoginRequiredMiddleware',
     'sentry.client.middleware.Sentry404CatchMiddleware',
-    'userdata.middleware.SecureRequiredMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -249,7 +248,6 @@ SECURE_REQUIRED_PATHS = (
     '/accounts/',
 )
 
-HTTPS_SUPPORT = False
 
 # Con local_settings podemos reescribir / agregar settings que sean 
 # propios de la maquina donde se encuentre, por ejemplo BBDD y DEBUG
@@ -259,7 +257,3 @@ try:
 except ImportError:
     pass
 
-# Comprobamos, si no estamos en DEBUG activamos el SSL:
-
-if not DEBUG:
-    HTTPS_SUPPORT = True
