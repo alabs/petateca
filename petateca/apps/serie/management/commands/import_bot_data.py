@@ -64,6 +64,8 @@ class Command(BaseCommand):
                     warn("Season and episode is not setted in %s" % link)
                 elif "lang" not in link:
                     warn(u"Serie %s with link %s has not lang" % (link["serie"], link["links"]))
+                elif "links" not in link:
+                    warn(u"URL is not setted in %s" % link)
                 else:
                     try:
                         #Check if temp and epi are ints
