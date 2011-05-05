@@ -111,7 +111,12 @@ class ImageSeason(models.Model):
 
 
 def get_default_user_for_links():
-    return User.objects.get(username=settings.DEFAULT_USER_FOR_LINKS)
+    default_user = settings.DEFAULT_USER_FOR_LINKS
+    try: 
+        user = User.objects.get(username=default_user)
+        return user
+    except User.DoesNotExist:
+        raise NameError("Debes crear un usuario valido para DEFAULT_USER_FOR_LINKS llamado %s" % (default_user))
 
 
 class LinkSeason(models.Model):

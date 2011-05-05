@@ -7,6 +7,8 @@ from imdb import IMDb
 from tvdb_api import Tvdb
 
 from django.core.files.base import ContentFile
+from django.conf import settings
+from django.contrib.auth.models import User
 import urllib
 import os.path
 import datetime
@@ -84,7 +86,14 @@ class Command(BaseCommand):
             db_link = m.Link.objects.get(url=links)
             db_link.audio_lang = self.normalize_lang(lang)
             db_link.subtitle = self.normalize_lang(sublang)
-            db_link.user = self.bot
+
+            try:
+                user = User.objects.get(username=settings.DEFAULT_USER_FOR_LINKS)
+            except User.DoesNotExist:
+                print "DEFAULT_USER_FOR_LINKS isn't a valid user. Please create one"
+
+            db_link.user = user
+
             db_link.save()
             return #It's already loaded, but update data
         except m.Link.DoesNotExist:
@@ -124,7 +133,6 @@ class Command(BaseCommand):
             db_episode.description_en = "Not available"
             db_episode.description_es = "No disponible"
             db_episode.save()
-            print "finalized importing episode, so what now?"
 
         db_lang = self.normalize_lang(lang)
         if not db_lang:
@@ -183,6 +191,7 @@ class Command(BaseCommand):
         tvdb_en = Tvdb(actors=True, banners=True)
         tvdb_es = Tvdb(language="es")
         try:
+        # Si la serie esta en solo en castellano no la reconoce
             reg_en = tvdb_en[name]
             reg_es = tvdb_es[name]
         except:
@@ -204,8 +213,7 @@ class Command(BaseCommand):
         if reg_en["network"]:
             db_serie.network = self.populate_network(reg_en["network"])
 
-        #db_serie.rating = reg_en["rating"]
-        #db_serie.rating_count = reg_en["ratingcount"]
+
         db_serie.runtime = reg_en["runtime"]
 
         db_serie.description_en = reg_en["overview"]
@@ -254,8 +262,14 @@ class Command(BaseCommand):
      
         db_season.save()
 
-        # seasonwide?
-        season_banners = reg_en['_banners']['season']['season']
+        # Try Season image, if it's do nothing..
+        # If not exists, then 
+        # check for banners
+        # create banners
+        try:
+             season_banners = reg_en['_banners']['season']['season']
+        except KeyError:
+             return db_season
         for img_banner in season_banners:
             if int(ntemp) == int(season_banners[img_banner]['season']):
                 img_url = season_banners[img_banner]['_bannerpath']
@@ -266,7 +280,8 @@ class Command(BaseCommand):
                 file_content = ContentFile(open(img[0]).read())
                 db_img.src.save(os.path.basename(img_url), file_content)
                 db_img.save()
-    
+        return db_season 
+
 
     def populate_episodes(self, db_serie, reg_en, reg_es):
         for n_season in reg_en:
@@ -345,3 +360,4 @@ class Command(BaseCommand):
                 db_img.src.save(os.path.basename(actor["image"]), file_content)
                 db_img.save()
             return db_actor
+
