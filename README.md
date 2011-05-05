@@ -72,3 +72,10 @@ Para usar este comando hace falta instalar las siguientes dependencias
 `pip install IMDbPY`
 `pip install tvdb_api simplejson`
 
+
+DEFAULT_USER_FOR_LINKS
+-------------------
+
+Para que funcione la APP es necesario que exista un usuario configurado en el settings.py en la variable
+DEFAULT_USER_FOR_LINKS. Este usuario es el que tendrá los links sin usuario.
+
