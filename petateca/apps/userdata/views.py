@@ -49,7 +49,7 @@ def get_user_public_profile(request, user_name):
         'user': user,
         'favorite_series': favorite_series,
         'voted_links': voted_links,
-        'comments_series': comments_series,
+        'comments_serie': comments_series,
         'remaining_invitations': remaining_invitations,
     }
 
