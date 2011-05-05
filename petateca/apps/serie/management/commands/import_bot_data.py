@@ -90,7 +90,8 @@ class Command(BaseCommand):
             try:
                 user = User.objects.get(username=settings.DEFAULT_USER_FOR_LINKS)
             except User.DoesNotExist:
-                print "DEFAULT_USER_FOR_LINKS isn't a valid user. Please create one"
+                print "DEFAULT_USER_FOR_LINKS no parece ser una usuario valido, prueba a crearlo" 
+                raise
 
             db_link.user = user
 
