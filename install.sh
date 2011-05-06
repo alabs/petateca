@@ -27,14 +27,17 @@ python manage.py syncdb --noinput &&
 # Hacemos las migraciones del South
 python manage.py migrate &&  
 
-# Creamos el admin
-python manage.py createsuperuser &&
+# Creamos un usuario liberateca para las importaciones del bot y los datos de ejemplo, va a ser el User.id = 1 
+python manage.py createsuperuser --noinput --username=liberateca --email=liberateca@liberateca.net &&
 
 # Actualizamos campos de traduccion
 python manage.py update_translation_fields &&
 
 # Compilamos el CSS y el JS
 python manage.py synccompress &&
+
+# Creamos el admin
+python manage.py createsuperuser &&
 
 # Iniciamos el servidor de desarrollo
 python manage.py runserver
