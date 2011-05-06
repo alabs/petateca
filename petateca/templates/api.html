@@ -5,11 +5,18 @@
 {% block contents %}
 <h1>Documentación de la API - v0.1</h1>
 
-<p>Para utilizar la API es necesario acceder a traves de una usuario registrado en Liberateca, con la aplicación cURL (utilizada en los ejemplos) es "-u usuario:contraseña".
+<p>Para utilizar la API es necesario acceder a través de una usuario registrado en Liberateca, con la aplicación cURL (utilizada en los ejemplos) es "-u usuario:contraseña".
 
-<p>Por defecto devuelve la información en formato JSON, pero pasandole el querystring "?format=" se puede modificar (por ejemplo ?format=xml)
+<p>Por defecto devuelve la información en formato JSON, pero pasándole el parámetro "?format=" se puede modificar (por ejemplo ?format=xml)
 
-<p><b>ACTUALIZACION 2011-05-04</b>: Se fuerza el uso de HTTPS
+<p><b>ACTUALIZACIÓN 2011-05-04</b>: Se fuerza el uso de HTTPS
+
+<p><b>ACTUALIZACIÓN 2011-05-06</b>: Implementaciones y librerías. Revisar que utilicen el HTTPs para conectar.
+<ul>
+    <li><a href="http://pastebin.com/UQpM7W2U">BASH</a></li>
+    <li><a href="http://pastebin.com/RZ4M15mm">Python</a></li>
+    <li><a href="https://github.com/karlosgliberal/liberateca">node.js</a></li>
+</ul>
 
 
 <h3 id="serielist" class="header_api">Listado de Series</h3>
@@ -161,7 +168,7 @@
     método <i>read</i>
     </dt>                           
     <dd>
-        Muestra el listado de episodios para una temporada dada, y lista la siguiente informacion de cada episodio: 
+        Muestra el listado de episodios para una temporada dada, y lista la siguiente información de cada episodio: 
         <ul>
             <li>Titulo: 'title'
             <li>Fecha de emision: 'air_date'
