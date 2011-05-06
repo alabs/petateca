@@ -12,7 +12,7 @@
             <img id="poster" src="{{ img_serie.url }}" />
         {% endthumbnail %}
 	{% else %}
-        <div class="image_not_found">  <img src="/static/images/image_not_available.png" height=100> </div>
+        <div class="image_not_found">  <img src="/static/images/image_not_available.png" height="200"> </div>
 	{% endif %}
 	<!-- RATING -->
 	  <div id="rating">
@@ -87,7 +87,7 @@
                 {% else %}
                     {% if serie.poster.src %}{% thumbnail serie.poster.src "44x64" as img_serie %}
                     <img class="prel" src="{{ img_serie.url }}" />{% endthumbnail %}
-                    {% else %}<div class="image_not_found">  <img src="/static/images/image_not_available.png" width=44> </div>
+                    {% else %}<div class="image_not_found"  height="60" width="40">  <img src="/static/images/image_not_available_small.png"> </div>
                     {% endif %}
                 {% endif %}
                 </div>
