@@ -7,7 +7,7 @@
 		<!-- COLUMN 1 -->
 		<div class="catagory_1 clearfix">
 			<!-- BROWSE -->
-			<div class="grid_3 textright" >
+			<div class="grid_3" style="margin-top:2em;" >
 				<!-- BY GENRE -->
                 <h4 class="title ">Géneros</h4>
                 <div class="hr clearfix dotted">&nbsp;</div>
@@ -57,23 +57,9 @@
 			</p>
                 <div id="series_list">
                 <!-- THUMBNAILS -->
-                    {% for serie in object_list %}
-                    <div class="grid_2">
-                        <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
-                        <div class="preload" style="width:140px; height:200px;">
-                        {% spaceless %}
-                            {% if serie.poster.src %}
-                                {% thumbnail serie.poster.src "150x200" as img_serie %}
-                                    <img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" />
-                                {% endthumbnail %}
-                            {% else %}
-                            <img class="prel serie" id="{{ serie.id }}" src="/static/images/image_not_available.png" height="140" width="200" /> 
-                            {% endif %}
-                        {% endspaceless %}
-                        </div>
-                        </a>
-                    </div>
-                    {% endfor %}
+                {% with object_list as series_list %}
+                {% include "serie/generic_list.html" %}
+                {% endwith %} 
                 </div>
 			</div>
 		</div>
