@@ -189,10 +189,10 @@ $(document).ready(function() {
   $('.serie').CreateBubblePopup({
     position: 'right',
     align: 'center',
-    width: '500',
+    width: '350',
     innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
-    innerHtmlStyle: { color:'#fff', 'text-align':'left', 'font-size':'110%' },
-    themeName: 'all-grey',
+    innerHtmlStyle: { color:'#fff', 'text-align':'left' },
+    themeName: 'all-black',
     themePath: '/static/images/jquerybubblepopup-theme'
   });
   $('.serie').mouseover(function(){
