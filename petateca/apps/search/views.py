@@ -46,6 +46,6 @@ def search_lookup(request):
     if request.method == "GET":
         if request.GET.has_key(u'query'):
             value = request.GET[u'query']
-            model_results = Serie.objects.filter( Q(name_es__icontains=value) | Q(name__icontains=value))
+            model_results = Serie.objects.filter( Q(name_es__icontains=value) | Q(name__icontains=value))[:4]
             return  { 'results': model_results }
 
