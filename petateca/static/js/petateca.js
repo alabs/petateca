@@ -1,9 +1,9 @@
-var options, a;
-jQuery(function(){
-    // autocomplete en la busqueda
-    options = { serviceUrl:'/search/lookup/' };
-    a = $('#query').autocomplete(options);
-});
+//var options, a;
+//jQuery(function(){
+//    // autocomplete en la busqueda
+//    options = { serviceUrl:'/search/lookup/' };
+//    a = $('#query').autocomplete(options);
+//});
 
 $(document).ready(function () {
     // Rating de estrellas, se envia el rating por post a /serie/nombre

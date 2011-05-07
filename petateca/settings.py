@@ -210,7 +210,6 @@ COMPRESS_CSS = {
             'css/jquery.colorbox.css',
             'css/jquery.jgrowl.css',
             'css/jquery.rating.css',
-            'css/jquery.autocomplete.css',
             'css/jquery.bubblepopup.v2.3.1.css',
             'css/jquery.sorter_blue.css',
         ),
@@ -222,7 +221,6 @@ COMPRESS_JS = {
     'all': {
         'source_filenames': (
             'js/jquery-min.js',
-            'js/jquery.autocomplete.js',
             'js/jquery.colorbox.js',
             'js/jquery.dimensions.min.js',
             'js/jquery.easing.1.3.js',
