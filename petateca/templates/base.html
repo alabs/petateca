@@ -19,7 +19,7 @@
 #suggestions{ position: relative; left:235px; width:320px; display:none; }
 /* SEARCHRESULTS */
 #searchresults { border-width:1px; border-color:#919191; border-style:solid; width:320px; background-color:#a0a0a0; font-size:10px; line-height:14px; position:absolute; z-index:100; }
-#searchresults a { display:block; background-color:#e4e4e4; clear:left; height:93px; text-decoration:none; }
+#searchresults a { display:block; background-color:#e4e4e4; clear:left; height:11.9em; text-decoration:none; }
 #searchresults a:hover { background-color:#b7b7b7; color:#ffffff; }
 #searchresults a img { float:left; padding:5px 10px; }
 #searchresults a span.searchheading { display:block; font-weight:bold; padding-top:5px; color:#191919; }
@@ -54,12 +54,10 @@
             {% endif %}
             <li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
         </ul>
-        <div id="search_form" class="grid_6">
               <form action="/search/" id="searchform">
                   <input onkeyup="lookup(this.value);" type="text" />
+            <div id="suggestions"></div>
               </form>           
-                  <div id="suggestions"></div>
-        </div>
         <div class="hr grid_12">&nbsp;</div>
         <div class="clear"></div>
         {% block contents %}{% endblock %}
