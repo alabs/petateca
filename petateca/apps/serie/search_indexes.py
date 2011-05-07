@@ -1,7 +1,7 @@
 from haystack.indexes import SearchIndex, CharField
 from haystack import site
 
-from .models import Serie, Actor
+from .models import Serie #, Actor
 
 
 class SerieIndex(SearchIndex):
@@ -9,15 +9,16 @@ class SerieIndex(SearchIndex):
     name = CharField(model_attr='name')
     name_es = CharField(model_attr='name_es')
     name_en = CharField(model_attr='name_en')
-    description = CharField(model_attr='description', null=True)
-    description_es = CharField(model_attr='description_es', null=True)
-    description_en = CharField(model_attr='description_en', null=True)
+    # Demasiados falsos positivos
+#    description = CharField(model_attr='description', null=True) 
+#    description_es = CharField(model_attr='description_es', null=True)
+#    description_en = CharField(model_attr='description_en', null=True)
 
 site.register(Serie, SerieIndex)
 
-
-class ActorIndex(SearchIndex):
-    text = CharField(document=True, model_attr='name')
-    name = CharField(model_attr='name')
-
-site.register(Actor, ActorIndex)
+# No se lista en el template
+# class ActorIndex(SearchIndex):
+#     text = CharField(document=True, model_attr='name')
+#     name = CharField(model_attr='name')
+# 
+# site.register(Actor, ActorIndex)
