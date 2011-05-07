@@ -20,7 +20,7 @@ urlpatterns = patterns('serie.views',
     url(r'^actor/(?P<slug>[-\w]+)$', object_detail, get_actor, name="get_actor"),
     (r'^comments/', include('django.contrib.comments.urls')),
     url(r'^sneak$', 'sneak_links', name="sneak_links"),
-    url(r'^add/$', 'add_serie', name="add_serie"),
+#    url(r'^add/$', 'add_serie', name="add_serie"), en desarrollo
     (r'^recommended$', 'list_user_recommendation'),
 )
 
@@ -47,5 +47,4 @@ urlpatterns += patterns('serie.ajax',
 
     # - agregar links de episodios y temporada
     url(r'^links/add/(?P<link_type>[-\w]+)/(?P<obj_id>\d+)/$', 'ajax_add_link', name='ajax_add_link'),
-   # url(r'^lookup/add_link_season/(?P<season_id>\d+)/$', 'ajax_add_link_season', name='ajax_add_link_season'),
 )

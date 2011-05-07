@@ -32,7 +32,7 @@ def season_lookup(request, serie_id, season):
 
 @render_to('serie/ajax_links_list.html')
 def ajax_links_list(request, serie_id, season, episode=None):
-    ''' Peticiones de listado de links, tanto de temporada como de episodio ''' 
+    ''' Listado de links, tanto de temporada como de episodio ''' 
     serie = get_object_or_404(Serie, id=serie_id)
     season = get_object_or_404(Season, serie=serie, season=season)
     if episode:

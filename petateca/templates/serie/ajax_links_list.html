@@ -31,24 +31,28 @@
 
   <script type="text/javascript">
 function voting( direction, linktype, linkid ){
+    // campos que vamos a tratar
     var $linkscore = $('span#linkscore' + linkid);
     var dir_down = $('#down_' + linktype + '_' + linkid);
     var dir_up = $('#up_' + linktype + '_' + linkid);
+    // loading
     $linkscore.html('<img style="margin-bottom:0 !important;" src="/static/images/ajax-loading.gif">');
+    // la url va por tipo
     if ( linktype === 'episode' ) {
         url = '/series/links/vote/episode/';
     } else {
         url = '/series/links/vote/season/';
     }
+    // el POST, aka jquery te amo
     $.post(url, { 
                 'vote': direction,
                 'linkid': linkid,
                 'csrfmiddlewaretoken': getCookie('csrftoken'),
     }, function (data){ 
-        // change the value with the new score
+        // actualizamos el valor
         $linkscore.html(data.score);
 
-        // change the image
+        // actualizamos las imagenes
         if (direction == 'downvote') {
             dir_up.attr('src', '/static/images/voting/aupgrey.gif');
             dir_down.attr('src', '/static/images/voting/adownmod.gif');
@@ -65,14 +69,19 @@ function voting( direction, linktype, linkid ){
 $('.votelink').click(function(){
     linkid_raw = $(this).attr('id');
     linksplit = linkid_raw.split('_');
+    // linkdir = [up, down]
     linkdir = linksplit[0];
+    // linktype = [season, episode]
     linktype = linksplit[1];
+    // linkid = link.id (ej: 666)
     linkid = linksplit[2];
+    // discrimina linkdir
     if (linkdir === 'down') {
         direction = 'downvote';
     } else if (linkdir === 'up') {
         direction ='upvote';
     }
+    // envia la votacion
     voting(direction, linktype, linkid);
     return false;
 });
