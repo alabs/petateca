@@ -29,6 +29,7 @@ setup(
         'django-paging',
         'django-sentry',
         'django-compress',
+        'unittest2',
       #  'docutils',
       #  'django-localeurl',
     ],
