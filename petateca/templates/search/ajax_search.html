@@ -1,0 +1,16 @@
+{% load thumbnail %}
+<p id="searchresults">
+    <span class="category">Serie</span>
+    {% for result in results %}
+        <a href="{{ result.get_absolute_url }}">
+            {% thumbnail result.poster.src "100x80" as img_serie %}
+             <img alt="{{ result.name }}" src="{{ img_serie.url }}"/>
+            {% endthumbnail %}
+             <span class="searchheading">{{ result.name }}</span>
+             <span>{{ result.description|slice:":200" }}...</span>
+        </a>
+    {% endfor %}
+    <span class="seperator">
+    <a href="/series/">Si no encuentras tu serie prueba en el listado</a>
+    </span>
+</p>
