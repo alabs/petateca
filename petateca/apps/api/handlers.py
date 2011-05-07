@@ -25,6 +25,7 @@ class SerieListHandler(BaseHandler):
             serie = {}
             serie['name'] = s.name
             serie['url'] = urlprefix + reverse("API_serie_detail", kwargs=dict(serie_id=s.id))
+            serie['id'] = s.id
             serie_list.append(serie)
         return serie_list
 
