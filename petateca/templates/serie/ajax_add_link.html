@@ -1,8 +1,8 @@
 <div class="center marginal">
-    <form id="add_link_form" action="{% url ajax_add_link episode_id=episode.id %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
+    <form id="add_link_form" action="{% if link_type == 'episode' %}{% url ajax_add_link link_type='episode' obj_id=episode.id %}{% else %}{% if link_type == 'season' %}{% url ajax_add_link link_type='season' obj_id=season.id %}{% endif %}{% endif %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
         <ul id="add_link_list">
             {{ form.as_ul }}
-            <li> <img style="position:relative; bottom:-2em;" alt="Busqueda" title="Buscar en The Pirate Bay" rel="{{ serie.name_en }} {{ episode.season_episode }}" id="search_pb" src="/static/images/system-search.png">
+            <li> <img style="position:relative; bottom:-2em;" alt="Busqueda" title="Buscar en The Pirate Bay" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_pb" src="/static/images/system-search.png">
             <li> <img style="position:relative; bottom:-2em;" alt="Ayuda" title="Ayuda de idiomas" id="language_help" src="/static/images/help-browser.png">
         </ul>
         <input style="margin-left:1em; margin-bottom: 1em;" class="button" id="submit" type="submit" value="Enviar" />

@@ -1,20 +1,20 @@
 <div id="episode_list" class="left">
   <ul>
     <li>
-        <a class="zoom" href="{% url ajax_links_season serie_id=season.serie.id season=season.season %}">
+        <a class="zoom" href="{% url ajax_list_links_season serie_id=season.serie.id season=season.season %}">
             <strong>Temporada {{ season.season }} Completa</strong>
         <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
-        <img alt="Añadir" title="Añadir un enlace" id="{{ season.id }}" rel="/series/lookup/add_link_season/" class="add_link nobottom right" src="/static/images/list-add.png"></a>
+        <img alt="Añadir" title="Añadir un enlace" id="{{ season.id }}" rel="/series/links/add/season/" class="add_link nobottom right" src="/static/images/list-add.png"></a>
         <div class="list_inside" id="inside{{ season.id }}"></div>
     </li>
   {% for episode in episode_list %}
     <li>
         <!-- input style="margin-left:1em;" type="checkbox" name="view" class="left" -->
-        <a class="zoom" {% if episode.from_future %}id="future" {% endif %}href="{% url ajax_links_episodes serie_id=season.serie.id season=season.season episode=episode.episode %}">
+        <a class="zoom" {% if episode.from_future %}id="future" {% endif %}href="{% url ajax_list_links_episodes serie_id=season.serie.id season=season.season episode=episode.episode %}">
             <strong>{{ episode.season_episode }}</strong>- {{ episode.title }} - <span id="datemeta">({{ episode.air_date|date:"SHORT_DATE_FORMAT" }})</span>
         <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
         <img alt="Descrición" title="Ver descripción" class="right espoiler" id="{{ episode.id }}" rel="{% url ajax_espoiler serie_id=season.serie.id season=season.season episode=episode.episode %}" src="/static/images/emblem-photos.png" style="margin-bottom:0 !important;">
-        <img alt="Añadir" title="Añadir un enlace" id="{{ episode.id }}" rel="/series/lookup/add_link/" class="add_link right nobottom" src="/static/images/list-add.png">
+        <img alt="Añadir" title="Añadir un enlace" id="{{ episode.id }}" rel="/series/links/add/episode/" class="add_link right nobottom" src="/static/images/list-add.png">
         </a>
         <div class="list_inside" id="inside{{episode.id}}"></div>
     </li>

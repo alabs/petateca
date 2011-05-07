@@ -21,8 +21,8 @@
      {% endif %}
     <!-- VOTING -->
      <span class="score" style="position:relative; top:-25%; margin-right:2em;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
-     <img class="votelink nobottom" id="up_{{link.id}}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
-     <img class="votelink nobottom" id="down_{{link.id}}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+     <img class="votelink nobottom" id="up_{% if is_season %}season{% else %}episode{% endif %}_{{link.id}}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
+     <img class="votelink nobottom" id="down_{% if is_season %}season{% else %}episode{% endif %}_{{link.id}}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
      </div>
 	{% endfor %}
   {% else %}
@@ -30,10 +30,17 @@
   {% endif %}
 
   <script type="text/javascript">
-function voting( direction, linkid ){
+function voting( direction, linktype, linkid ){
     var $linkscore = $('span#linkscore' + linkid);
+    var dir_down = $('#down_' + linktype + '_' + linkid);
+    var dir_up = $('#up_' + linktype + '_' + linkid);
     $linkscore.html('<img style="margin-bottom:0 !important;" src="/static/images/ajax-loading.gif">');
-    $.post('/series/lookup/vote/', { 
+    if ( linktype === 'episode' ) {
+        url = '/series/links/vote/episode/';
+    } else {
+        url = '/series/links/vote/season/';
+    }
+    $.post(url, { 
                 'vote': direction,
                 'linkid': linkid,
                 'csrfmiddlewaretoken': getCookie('csrftoken'),
@@ -41,8 +48,6 @@ function voting( direction, linkid ){
         // change the value with the new score
         $linkscore.html(data.score);
 
-        dir_down = $('#down_' + linkid);
-        dir_up = $('#up_' + linkid);
         // change the image
         if (direction == 'downvote') {
             dir_up.attr('src', '/static/images/voting/aupgrey.gif');
@@ -61,13 +66,14 @@ $('.votelink').click(function(){
     linkid_raw = $(this).attr('id');
     linksplit = linkid_raw.split('_');
     linkdir = linksplit[0];
-    linkid = linksplit[1];
+    linktype = linksplit[1];
+    linkid = linksplit[2];
     if (linkdir === 'down') {
         direction = 'downvote';
     } else if (linkdir === 'up') {
         direction ='upvote';
     }
-    voting(direction, linkid);
+    voting(direction, linktype, linkid);
     return false;
 });
 </script>
