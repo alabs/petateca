@@ -215,10 +215,13 @@ def ajax_add_link(request, link_type, obj_id):
                 if form.cleaned_data['subtitle']:
                     subt = Languages.objects.get(pk=data['subtitle'])
                     link.subtitle = subt
-                # El aguila esta en el nido
-                link.save()
-               # messages.info(request, 'Gracias')
-                return HttpResponse(simplejson.dumps({'mensaje': 'Gracias'}), mimetype='application/json')
+                try:
+                    # El aguila esta en el nido
+                    link.save()
+                   # messages.info(request, 'Gracias')
+                    return HttpResponse(simplejson.dumps({'mensaje': 'Gracias'}), mimetype='application/json')
+                except:
+                    return HttpResponse(simplejson.dumps({'mensaje': 'Error'}), mimetype='application/json')
             # sino, es un link nuevo
             else:
                 if link_type == 'episode':
@@ -244,5 +247,8 @@ def ajax_add_link(request, link_type, obj_id):
                 #messages.info(request, 'Gracias')
                 return HttpResponse(simplejson.dumps({'mensaje': 'Gracias'}), mimetype='application/json')
         else:
-            messages.error(request, 'Error')
-            return link_info
+            if form.errors['url'] == [u'Ya existe Link con este URL.']:
+                print 'dupli'
+                return HttpResponse(simplejson.dumps({'mensaje': 'Link duplicado'}), mimetype='application/json')
+            else: 
+                return HttpResponse(simplejson.dumps(form.errors), mimetype='application/json')

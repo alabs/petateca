@@ -38,18 +38,21 @@ $('#submit').click(function (e) {
             return false;
         } else $('label[for=id_audio_lang]').removeClass('hightlight');
 
-    var dataString = 'url='+ url.val() + '&audio_lang=' + audio.val() + '&subtitle=' + subtitle.val() + '&csrfmiddlewaretoken=' + getCookie('csrftoken');
-    //alert (dataString);return false;  
-    $.ajax({  
-      type: "POST",  
-      url: post_url,  
-      data: dataString,  
-      success: function(data) {  
+    $.post(post_url, {
+        'url': url.val(), 
+        'audio_lang': audio.val(), 
+        'subtitle': subtitle.val(),
+        'csrfmiddlewaretoken': getCookie('csrftoken')
+    }, function(data) {
         if (data.mensaje  == 'Gracias'){
             $.jGrowl("El enlace se ha guardado exitosamente");
+        } else if (data.mensaje == 'Link duplicado') {
+            $.jGrowl("Link duplicado, prueba a agregar otro");
+        } else {
+            $.jGrowl("Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net");
         }
       }  
-    });  
+    );  
 
     return false;
 });
