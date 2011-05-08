@@ -248,7 +248,6 @@ def ajax_add_link(request, link_type, obj_id):
                 return HttpResponse(simplejson.dumps({'mensaje': 'Gracias'}), mimetype='application/json')
         else:
             if form.errors['url'] == [u'Ya existe Link con este URL.']:
-                print 'dupli'
                 return HttpResponse(simplejson.dumps({'mensaje': 'Link duplicado'}), mimetype='application/json')
             else: 
                 return HttpResponse(simplejson.dumps(form.errors), mimetype='application/json')
