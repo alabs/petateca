@@ -14,6 +14,10 @@
 {% endif %}
 <h2 class="grid_12 caption clearfix">Resultados</h2>
 <div class="pr grid_12 clearfix">&nbsp;</div>
+{% if query == "liberateca" %}
+<iframe class="center" style="margin-bottom:2em;" width="560" height="349" src="http://www.youtube.com/embed/wn8scsbn6lI" frameborder="0" allowfullscreen></iframe>
+<div class="pr grid_12 clearfix">&nbsp;</div>
+{% endif %}
 {% if query %}
     {% for result in page.object_list %}
         <div class="grid_12" style="margin:3em;">
