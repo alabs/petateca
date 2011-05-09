@@ -2,10 +2,14 @@
     <form id="add_link_form" action="{% if link_type == 'episode' %}{% url ajax_add_link link_type='episode' obj_id=episode.id %}{% else %}{% if link_type == 'season' %}{% url ajax_add_link link_type='season' obj_id=season.id %}{% endif %}{% endif %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
         <ul id="add_link_list">
             {{ form.as_ul }}
-            <li> <img style="position:relative; bottom:-2em;" alt="Busqueda" title="Buscar en The Pirate Bay" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_pb" src="/static/images/system-search.png">
-            <li> <img style="position:relative; bottom:-2em;" alt="Ayuda" title="Ayuda de idiomas" id="language_help" src="/static/images/help-browser.png">
         </ul>
         <input style="margin-left:1em; margin-bottom: 1em;" class="button" id="submit" type="submit" value="Enviar" />
+        <ul id="add_link_help"> 
+            <li> <img alt="Busqueda TPB" title="Buscar en The Pirate Bay" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_pb" src="/static/images/search-tpb.ico">
+            <li> <img alt="Busqueda Torrentz" title="Buscar en Torrentz" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_torrentz" src="/static/images/search-torrentz.ico">
+            <li> <img alt="Busqueda Sinde" title="Buscar en la Lista de Sinde" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_listadesinde" src="/static/images/search-sinde.ico">
+            <li> <img alt="Ayuda" title="Ayuda de idiomas" id="language_help" src="/static/images/help-browser.png">
+        </ul>
     </form>
 </div>
 
@@ -19,6 +23,19 @@ $('#search_pb').click( function() {
     $.jGrowl('Abriendo búsqueda en The Pirate Bay para ' + query);
     window.open( 'http://thepiratebay.org/search/' + query + '/0/7/0');
 });
+
+$('#search_torrentz').click( function() {
+    query = $(this).attr('rel');
+    $.jGrowl('Abriendo búsqueda en Torrenz para ' + query);
+    window.open( 'http://torrentz.eu/search?f=' + query);
+});
+
+$('#search_listadesinde').click( function() {
+    query = $(this).attr('rel');
+    $.jGrowl('Abriendo búsqueda en La Lista de Sinde para ' + query);
+    window.open('http://www.google.com/cse?cx=004411908642504437083%3A1dyk2klbrj8&ie=UTF-8&q=' + query + '&sa=Buscar+descargas!&siteurl=lalistadesinde.net%2F');
+});
+
 
 $('#submit').click(function (e) {       
     e.preventDefault();
