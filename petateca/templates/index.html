@@ -2,13 +2,13 @@
 {% load i18n %}
 {% load thumbnail %}
 {% block contents %}
-        <h2 class="grid_12 caption clearfix center">{% blocktrans %}<span>{{ SITE_NAME }}</span>. Comparte tus series, porque <span>compartir es bueno</span>. <br />Mas de {{ count_link }} enlaces, {{count_episode }} episodios y {{count_serie}} series {% endblocktrans %}</h2>
+        <h2 class="grid_12 caption clearfix center">{% blocktrans %}<span>{{ SITE_NAME }}</span>. Comparte tus series, porque <span>compartir es bueno</span>.{% endblocktrans %}</h2>
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 
         <div class="center">
 			{% for serie in series %}
                 <div class="grid_2">
-        		{% thumbnail serie.images.all.0.src "150x200" as img_serie %}
+        		{% thumbnail serie.poster.src "150x200" as img_serie %}
           			<a href="{% url serie.views.get_serie serie_slug=serie.slug_name %}" class="portfolio_item float alpha">
                         <div class="preload" style="width:140px; height:190px;">
                             <img class="prel serie" id="{{ serie.id }}" alt="{{ serie.name }}" src="{{ img_serie.url }}">
