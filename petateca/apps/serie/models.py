@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # pylint: disable-msg=E1102
 from datetime import datetime
 
@@ -12,6 +13,7 @@ from djangoratings.fields import RatingField
 from voting.models import Vote 
 #XXX: poster deberia ser on_delete null en vez de cascade
 
+
 class Serie(models.Model):
     name = models.CharField(max_length=255)
     slug_name = models.SlugField(unique=True, help_text=_('nombre en la URL'))
@@ -21,19 +23,34 @@ class Serie(models.Model):
         name=_('duracion de los episodios'),
         blank=True,
         null=True,
-        help_text=_('duracion del episodio en minutos')
+        help_text=_( 'duracion del episodio en minutos' )
     )
-    actors = models.ManyToManyField("Actor", through='Role', help_text=_('actores que trabajaron en la serie'))
+    actors = models.ManyToManyField(
+        "Actor", 
+        through='Role',
+        help_text=_('actores que trabajaron en la serie'))
     description = models.TextField()
-    finished = models.BooleanField(default=False, help_text=_('la serie ha finalizado?'))
-    rating = RatingField(range=5, can_change_vote=True, help_text=_('puntuacion de estrellas'))
-    poster = models.OneToOneField('ImageSerie', related_name='poster_of', null=True, blank=True)
+    finished = models.BooleanField(
+        default=False,
+        help_text=_('la serie ha finalizado?')
+    )
+    rating = RatingField(
+        range=5,
+        can_change_vote=True,
+        help_text=_('puntuacion de estrellas')
+    )
+    poster = models.OneToOneField(
+        'ImageSerie',
+        related_name='poster_of',
+        null=True,
+        blank=True
+    )
 
     def __unicode__(self):
         return self.name
 
     def save(self, force_insert=False, force_update=False, using=None):
-        ''' When is saved, the title is converted to slug - aka URL''' 
+        ''' When is saved, the title is converted to slug - aka URL'''
         self.slug_name = slugify(self.name)
         super(Serie, self).save(force_insert, force_update, using)
 
@@ -47,7 +64,10 @@ class Role(models.Model):
     serie = models.ForeignKey("Serie")
     actor = models.ForeignKey("Actor")
     sortorder = models.IntegerField(blank=True, null=True)
-    role = models.CharField(max_length=255, help_text=_('personaje que el actor ha hecho en la serie'))
+    role = models.CharField(
+        max_length=255,
+        help_text=_('personaje que el actor ha hecho en la serie')
+    )
 
     class Meta:
         unique_together = ("serie", "actor", "role")
@@ -55,26 +75,38 @@ class Role(models.Model):
     def __unicode__(self):
         return self.role
 
+
 class SerieAlias(models.Model):
-    name = models.CharField(max_length=255, unique=True, help_text=_('otros nombres para la misma serie'))
+    name = models.CharField(
+        max_length=255,
+        unique=True,
+        help_text=_('otros nombres para la misma serie')
+    )
     serie = models.ForeignKey("Serie", related_name="aliases")
 
 
 class Season(models.Model):
     serie = models.ForeignKey('Serie', related_name="season")
-    season = models.IntegerField(help_text=_('numero de temporada para la serie'))
-    poster = models.OneToOneField('ImageSeason', related_name='poster_of', null=True, blank=True)
+    season = models.IntegerField(
+        help_text=_('numero de temporada para la serie')
+    )
+    poster = models.OneToOneField(
+        'ImageSeason',
+        related_name='poster_of',
+        null=True,
+        blank=True
+    )
 
     def get_next_season(self):
         next_season = self.season + 1
-        try: 
+        try:
             return Season.objects.get(season=next_season, serie=self.serie)
         except:
             return None
 
     def get_previous_season(self):
         prev_season = self.season - 1
-        try: 
+        try:
             return Season.objects.get(season=prev_season, serie=self.serie)
         except:
             return None
@@ -102,7 +134,9 @@ class ImageSeason(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/season")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
+    is_poster = models.BooleanField(
+        help_text=_('entre varias imagenes, cual es el poster?')
+    )
     season = models.ForeignKey("Season", related_name="images")
     objects = models.Manager()
 
@@ -112,16 +146,23 @@ class ImageSeason(models.Model):
 
 def get_default_user_for_links():
     default_user = settings.DEFAULT_USER_FOR_LINKS
-    try: 
+    try:
         user = User.objects.get(username=default_user)
         return user
     except User.DoesNotExist:
-        raise NameError("Debes crear un usuario valido para DEFAULT_USER_FOR_LINKS llamado %s" % (default_user))
+        raise NameError(
+            "Debes crear un usuario valido para DEFAULT_USER_FOR_LINKS llamado %s" % (default_user)
+        )
 
 
 class LinkSeason(models.Model):
     season = models.ForeignKey("Season", related_name="links", editable=False)
-    url = models.CharField(max_length=255, unique=True, db_index=True, verbose_name="URL")
+    url = models.CharField(
+        max_length=255,
+        unique=True,
+        db_index=True,
+        verbose_name="URL"
+    )
     audio_lang = models.ForeignKey("Languages", related_name="audio_langs_season", verbose_name="Idioma")
     subtitle = models.ForeignKey(
        "Languages",
@@ -130,7 +171,12 @@ class LinkSeason(models.Model):
        blank=True,
        verbose_name="Subtitulos",
     )
-    user = models.ForeignKey(User, related_name="user", editable=False, default=get_default_user_for_links)
+    user = models.ForeignKey(
+        User,
+        related_name="user",
+        editable=False,
+        default=get_default_user_for_links
+    )
     pub_date = models.DateTimeField(default=datetime.now, editable=False)
 
     def __unicode__(self):
@@ -138,30 +184,45 @@ class LinkSeason(models.Model):
 
 
 class Episode(models.Model):
-    season = models.ForeignKey('Season', related_name="episodes")
+    season = models.ForeignKey(
+        'Season',
+        related_name="episodes",
+        editable=False
+    )
     air_date = models.DateField(
-        _('fecha de emision'),
+        _('Fecha de emision'),
         blank=True,
         null=True,
-        help_text=_('primera fecha de emision')
     )
-    title = models.CharField(max_length=255)
-    episode = models.IntegerField(help_text=_('numero de episodio en temporada'))
-    description = models.TextField()
+    title = models.CharField(
+        _('Titulo'),
+        max_length=255
+    )
+    episode = models.IntegerField(
+        _('Episodio'),
+        help_text=_( 'Numero de episodio en temporada' ) 
+    )
+    description = models.TextField(editable=False)
     created_time = models.DateField(auto_now_add=True)
     modified_time = models.DateField(auto_now=True)
-    poster = models.OneToOneField('ImageEpisode', related_name='poster_of', null=True, blank=True)
+    poster = models.OneToOneField(
+        'ImageEpisode',
+        related_name='poster_of',
+        null=True,
+        blank=True,
+        editable=False
+    )
 
     def get_next_episode(self):
         next_epi = self.episode + 1
-        try: 
+        try:
             return Episode.objects.get(episode=next_epi, season=self.season)
         except:
             return None
 
     def get_previous_episode(self):
         prev_epi = self.episode - 1
-        try: 
+        try:
             return Episode.objects.get(episode=prev_epi, season=self.season)
         except:
             return None
@@ -170,10 +231,18 @@ class Episode(models.Model):
         return "S%02dE%02d" % (self.season.season, self.episode)
             
     def get_absolute_url(self):
-        return '/serie/%s/episode/S%02dE%02d/' % (self.season.serie.slug_name, self.season.season, self.episode)
+        return '/serie/%s/episode/S%02dE%02d/' % (
+            self.season.serie.slug_name, 
+            self.season.season,
+            self.episode
+        )
 
     def get_add_link_url(self):
-        return '/serie/%s/episode/S%02dE%02d/add/' % (self.season.serie.slug_name, self.season.season, self.episode)
+        return '/serie/%s/episode/S%02dE%02d/add/' % (
+            self.season.serie.slug_name, 
+            self.season.season,
+            self.episode
+        )
 
     def from_future(self):
         now = datetime.now().date()
@@ -188,9 +257,22 @@ class Episode(models.Model):
 
 
 class Link(models.Model):
-    episode = models.ForeignKey("Episode", related_name="links", editable=False)
-    url = models.CharField(max_length=255, unique=True, db_index=True, verbose_name="URL")
-    audio_lang = models.ForeignKey("Languages", related_name="audio_langs", verbose_name="Idioma")
+    episode = models.ForeignKey(
+        "Episode",
+        related_name="links",
+        editable=False
+    )
+    url = models.CharField(
+        max_length=255,
+        unique=True,
+        db_index=True,
+        verbose_name="URL"
+    )
+    audio_lang = models.ForeignKey(
+        "Languages",
+        related_name="audio_langs",
+        verbose_name="Idioma"
+    )
     subtitle = models.ForeignKey(
        "Languages",
        related_name="sub_langs",
@@ -198,8 +280,17 @@ class Link(models.Model):
        blank=True,
        verbose_name="Subtitulos",
     )
-    user = models.ForeignKey(User, related_name="link_user", editable=False, default=get_default_user_for_links)
-    pub_date = models.DateTimeField(default=datetime.now, help_text=_('cuando se ha subido el link? por defecto cuando se guarda'), editable=False)
+    user = models.ForeignKey(
+        User,
+        related_name="link_user",
+        editable=False,
+        default=get_default_user_for_links
+    )
+    pub_date = models.DateTimeField(
+        default=datetime.now,
+        help_text=_('cuando se ha subido el link? por defecto cuando se guarda'),
+        editable=False
+    )
 
     def __unicode__(self):
         return self.url
@@ -219,7 +310,7 @@ class SubtitleLink(models.Model):
 
 
 class Languages(models.Model):
-    ''' Languages for links ''' 
+    ''' Languages for links '''
     iso_code = models.CharField(max_length=2)
     country = models.CharField(max_length=2, null=True, blank=True)
 
@@ -238,7 +329,7 @@ class Network(models.Model):
     slug_name = models.SlugField(unique=True, help_text=_('nombre en URL'))
 
     def save(self, force_insert=False, force_update=False, using=None):
-        ''' When is saved, the name is converted to slug - aka URL''' 
+        ''' When is saved, the name is converted to slug - aka URL'''
         if not self.slug_name:
             self.slug_name = slugify(self.name)
         super(Network, self).save(force_insert, force_update, using)
@@ -252,7 +343,7 @@ class Genre(models.Model):
     slug_name = models.SlugField(unique=True, help_text=_('nombre en URL'))
 
     def save(self, force_insert=False, force_update=False, using=None):
-        ''' When is saved, the name is converted to slug - aka URL''' 
+        ''' When is saved, the name is converted to slug - aka URL'''
         if not self.slug_name:
             self.slug_name = slugify(self.name)
         super(Genre, self).save(force_insert, force_update, using)
@@ -261,14 +352,18 @@ class Genre(models.Model):
         return self.name
 
 
-
 class Actor(models.Model):
     name = models.CharField(max_length=100)
     slug_name = models.SlugField(unique=True, help_text=_('nombre en URL'))
-    poster = models.OneToOneField('ImageActor', related_name='poster_of', null=True, blank=True)
+    poster = models.OneToOneField(
+        'ImageActor',
+        related_name='poster_of',
+        null=True,
+        blank=True
+    )
 
     def save(self, force_insert=False, force_update=False, using=None):
-        ''' When is saved, the name is converted to slug - aka URL''' 
+        ''' When is saved, the name is converted to slug - aka URL'''
         if not self.slug_name:
             self.slug_name = slugify(self.name)
         super(Actor, self).save(force_insert, force_update, using)
@@ -281,12 +376,13 @@ class Actor(models.Model):
         return ('get_actor', [str(self.slug_name)])
 
 
-
 class ImageSerie(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/serie")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
+    is_poster = models.BooleanField(
+        help_text=_('entre varias imagenes, cual es el poster?')
+    )
     serie = models.ForeignKey("Serie", related_name="images")
     objects = models.Manager()
 
@@ -298,7 +394,9 @@ class ImageActor(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/actor")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
+    is_poster = models.BooleanField(
+        help_text=_('entre varias imagenes, cual es el poster?')
+    )
     actor = models.ForeignKey("Actor", related_name="images")
     objects = models.Manager()
 
@@ -310,7 +408,9 @@ class ImageEpisode(models.Model):
     title = models.CharField(max_length=100)
     src = models.ImageField(upload_to="img/episodes")
     creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField(help_text=_('entre varias imagenes, cual es el poster?'))
+    is_poster = models.BooleanField(
+        help_text=_('entre varias imagenes, cual es el poster?')
+    )
     episode = models.ForeignKey("Episode", related_name="images")
     objects = models.Manager()
 
@@ -324,6 +424,7 @@ poster_dispatch = {
     ImageEpisode: "episode",
     ImageActor: "actor",
 }
+
 
 def update_poster(sender, instance, **kwargs):
     obj = getattr(instance, poster_dispatch[sender])

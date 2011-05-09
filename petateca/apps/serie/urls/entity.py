@@ -25,14 +25,14 @@ urlpatterns = patterns('serie.views',
 )
 
 urlpatterns += patterns('serie.ajax',
-    url(r'^lookup/serie/(?P<serie_id>[-\w]+)$', 'serie_lookup'),
-    url(r'^lookup/serie/(?P<serie_id>[-\w]+)/season/(?P<season>\d+)$', 'season_lookup'),
-    url(r'^lookup/actors/(?P<serie_slug>[-\w]+)$', 'actors_lookup'),
+    url(r'^lookup/serie/(?P<serie_id>[-\w]+)/$', 'serie_lookup'),
+    url(r'^lookup/serie/(?P<serie_id>[-\w]+)/season/(?P<season>\d+)/$', 'season_lookup'),
+    url(r'^lookup/actors/(?P<serie_slug>[-\w]+)/$', 'actors_lookup'),
 
     # AJAX /series
-    url(r'^lookup/letter/(?P<letter>[-\w]+)$', 'ajax_letter'),
-    url(r'^lookup/genre/(?P<genre_slug>[-\w]+)$', 'ajax_genre'),
-    url(r'^lookup/network/(?P<network_slug>[-\w]+)$', 'ajax_network'),
+    url(r'^lookup/letter/(?P<letter>[-\w]+)/$', 'ajax_letter'),
+    url(r'^lookup/genre/(?P<genre_slug>[-\w]+)/$', 'ajax_genre'),
+    url(r'^lookup/network/(?P<network_slug>[-\w]+)/$', 'ajax_network'),
 
     # AJAX /serie/nombre
     # - mostrar espoiler
@@ -47,4 +47,9 @@ urlpatterns += patterns('serie.ajax',
 
     # - agregar links de episodios y temporada
     url(r'^links/add/(?P<link_type>[-\w]+)/(?P<obj_id>\d+)/$', 'ajax_add_link', name='ajax_add_link'),
+
+    # - agregar episodio 
+    url(r'^lookup/serie/(?P<serie_id>\d+)/season/(?P<season>\d+)/add/episode/$', 'ajax_add_episode', name="ajax_add_episode"),
+    #url(r'^(?P<serie_slug>[-\w]+)/add/episode/S(?P<season>[-\d]+)/$', 'add_episode', name="add_episode"), # en desarrollo
+
 )

@@ -1,6 +1,6 @@
 from serie.models import Serie, Episode, Actor, Role, Season, Network, Genre, Link, Languages, LinkSeason
 from django.contrib import messages
-from serie.forms import LinkForm, LinkSeasonForm
+from serie.forms import LinkForm, LinkSeasonForm, EpisodeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -251,3 +251,54 @@ def ajax_add_link(request, link_type, obj_id):
                 return HttpResponse(simplejson.dumps({'mensaje': 'Link duplicado'}), mimetype='application/json')
             else: 
                 return HttpResponse(simplejson.dumps(form.errors), mimetype='application/json')
+
+
+@login_required
+@render_to('serie/ajax_add_episode.html')
+def ajax_add_episode(request, serie_id, season):
+    '''
+    Formulario que agrega/edita Episodios
+    '''
+    serie = get_object_or_404(Serie, id=serie_id)
+    season = get_object_or_404(Season, serie=serie, season=season)
+    form_epi = EpisodeForm(initial={'season': season})
+    # TODO: editar episodio
+    #if request.GET.get('edit'):
+    #    episode_id = request.GET.get('edit')
+    #    episode = Episode.objects.get(pk=episode_id)
+    #    form = EpisodeForm(instance=episode)
+    #    return {'form': form,}
+    if request.method == 'POST':
+        form_epi = EpisodeForm(request.POST)
+        if form_epi.is_valid():
+            try:
+                # Comprueba que el episodio no exista ya
+                get_object_or_404( Episode, season=season, episode=form_epi.cleaned_data['episode'] )
+                return HttpResponse(
+                    simplejson.dumps('Duplicado'), 
+                    mimetype='application/json'
+                )
+            except: 
+                episode = Episode(
+                    air_date=form_epi.cleaned_data['air_date'],
+                    title=form_epi.cleaned_data['title'],
+                    title_es=form_epi.cleaned_data['title_es'],
+                    title_en=form_epi.cleaned_data['title_en'],
+                    episode=form_epi.cleaned_data['episode'],
+                    season=season
+                )
+                episode.save()
+                return HttpResponse(
+                    simplejson.dumps('OK'), 
+                    mimetype='application/json'
+                )
+        else:
+            return HttpResponse(
+                simplejson.dumps('Error'), 
+                mimetype='application/json'
+            )
+    return {
+        'form': form_epi,
+        'serie': serie,
+        'season': season,
+    }

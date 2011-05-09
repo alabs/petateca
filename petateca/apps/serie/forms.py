@@ -1,23 +1,31 @@
 from django.forms import ModelForm, TextInput
-from serie.models import Link, LinkSeason, Serie
+from serie import models as m
 
 class LinkForm(ModelForm):
     class Meta:
-        model = Link
+        model = m.Link
         widgets = {
-            'url': TextInput(attrs={'size':55}),
+            'url': TextInput(attrs={'size':40}),
      }
 
 
 class LinkSeasonForm(ModelForm):
     class Meta:
-        model = LinkSeason
+        model = m.LinkSeason
         widgets = {
-            'url': TextInput(attrs={'size':60}),
+            'url': TextInput(attrs={'size':40}),
      }
 
 
 class SerieForm(ModelForm):
     class Meta:
-        model = Serie
+        model = m.Serie
+        
+        
+class EpisodeForm(ModelForm):
+    class Meta:
+        model = m.Episode
+        widgets = {
+            'episode': TextInput(attrs={'size':2}),
+     }
         

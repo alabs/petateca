@@ -4,6 +4,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('serie.views',
     url(r'^(?P<serie_slug>[-\w]+)/$', 'get_serie', name='get_serie'),
 
+
     # Episode
 #    url(r'^(?P<serie_slug>[-\w]+)/episode/S(?P<season>\d+)E(?P<episode>\d+)/$', 'get_episode', name='get_episode'),
 
