@@ -18,7 +18,7 @@ setup(
         'South>=0.7.3',
         'django-modeltranslation',
         'sorl-thumbnail>=11.01',
-        'django-haystack',
+        'django-haystack>=1.2.0',
         'Whoosh',
         'django-ratings',
         'django-voting',
