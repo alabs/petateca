@@ -3,7 +3,7 @@
 #  aptitude y los paquetes correspondientes
 
 # Instalacion de dependencias
-sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg-dev subversion csstidy && 
+sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg8-dev subversion csstidy && 
 sudo easy_install -U pip &&
 
 # Desde el directorio raiz (donde se encuentra README.txt)
@@ -17,6 +17,9 @@ sudo easy_install -U pip &&
 # Instalamos las dependencias
 python setup.py develop && 
 pip install src/django-registration-0.8-alpha-1.tar.gz && 
+
+# Herramientas de debugging
+pip install ipdb django-debug-toolbar &&
 
 # Desde petateca (donde esta manage.py)
 cd petateca &&
