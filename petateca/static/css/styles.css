@@ -271,6 +271,7 @@ h2.caption {
     font-size: 23px;
     line-height: 30px;
     font-weight: normal;
+    margin-bottom:1em;
 }
 h2.caption span {
     color: #000000;
