@@ -67,7 +67,7 @@
             {% get_twitter_messages user liberateca limit 3 as tweets %}
             {% for tweet in tweets %}
             <ul>
-               <li><a href="{{ tweet.url }}">{{ tweet.text }} {{ tweet.time }} </li>
+               <li><a href="{{ tweet.url }}">{{ tweet.text }}</a> {{ tweet.time }} </li>
             </ul>
             {% endfor %} 
 			</div>
