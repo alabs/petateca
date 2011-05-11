@@ -17,6 +17,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = patterns('',
     (r'^$', 'views.index'),
+    # estadistcas
     (r'^stats/$', 'views.statistics'),
 
     (r'^sentry/', include('sentry.urls')),

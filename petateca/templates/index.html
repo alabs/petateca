@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load get_twitter_messages %}
 {% load thumbnail %}
 {% block contents %}
         <h2 class="grid_12 caption clearfix center">{% blocktrans %}<span>{{ SITE_NAME }}</span>. Comparte tus series, porque <span>compartir es bueno</span>.{% endblocktrans %}</h2>
@@ -61,38 +62,14 @@
 					<p style="text-align:center;"><img alt="{% trans "Preguntas más frecuentes" %}" src="/static/images/info.png" /></p>
 			</a>
 
-			<div class="quicknavgrid_3 quicknav alpha right">
-                <script type="text/javascript" src="http://widgets.twimg.com/j/2/widget.js"></script>
-                <script type="text/javascript">
-                new TWTR.Widget({
-                  version: 2,
-                  type: 'profile',
-                  rpp: 4,
-                  interval: 6000,
-                  width: 450,
-                  height: 300,
-                  theme: {
-                    shell: {
-                      background: '#333333',
-                      color: '#ffffff'
-                    },
-                    tweets: {
-                      background: '#bababa',
-                      color: '#000000',
-                      links: '#474747'
-                    }
-                  },
-                  features: {
-                    scrollbar: false,
-                    loop: false,
-                    live: false,
-                    hashtags: true,
-                    timestamp: true,
-                    avatars: false,
-                    behavior: 'all'
-                  }
-                }).render().setUser('liberateca').start();
-                </script>
+			<div class="quicknavgrid_6 quicknav">
+					<h4 class="title "><a href="http://twitter.com/liberateca/">{% trans "Síguenos en Twitter" %}</a></h4>
+            {% get_twitter_messages user liberateca limit 3 as tweets %}
+            {% for tweet in tweets %}
+            <ul>
+               <li><a href="{{ tweet.url }}">{{ tweet.text }} {{ tweet.time }} </li>
+            </ul>
+            {% endfor %} 
 			</div>
 		</div>
 {% endblock %}

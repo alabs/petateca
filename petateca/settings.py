@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'avatar',
     'compress',
     'piston',
+    'twitter_messages',
     #Sentry
     # don't forget to add the dependencies!
     'indexer',

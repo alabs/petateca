@@ -30,6 +30,7 @@ setup(
         'django-sentry',
         'django-compress',
         'unittest2',
+        'python-twitter',
       #  'docutils',
       #  'django-localeurl',
     ],

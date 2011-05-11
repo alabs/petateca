@@ -9,6 +9,7 @@ from djangoratings.models import Vote as Rating
 
 @render_to('index.html')
 def index(request):
+    ''' Para la home '''
     serie_list = Serie.objects.order_by('-rating_score').select_related('poster')[:6] 
     if request.user.is_authenticated():
         remaining_invitations = abs(InvitationKey.objects.remaining_invitations_for_user(request.user))
@@ -30,6 +31,7 @@ def index(request):
 
 @render_to('statistics.html')
 def statistics(request):
+    ''' Muestra estadisticas de los links, series, usuarios, etc '''
     count_links = Link.objects.count()
     count_series = Serie.objects.count()
     count_votes = Vote.objects.count()
