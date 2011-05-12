@@ -67,7 +67,7 @@ urlpatterns = patterns('',
     url(r'^accounts/signin/$',
         auth_views.login,
         {
-            'template_name': 'registration/signin.html', 
+            'template_name': 'invitation/signin.html', 
         },
         name='auth_login'),
     (r'^accounts/', include('registration.urls')),

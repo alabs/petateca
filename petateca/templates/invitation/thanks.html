@@ -30,7 +30,7 @@
     <img src="/static/images/logo.png" alt="liberateca" width="100" />
     <h2>{{ SITE_NAME }}</h2>
     <p> 
-    {% trans "Gracias por interesarte en LiberaTeca, te enviaremos una invitación proximamente" %}
+    {% blocktrans %}Gracias por interesarte en LiberaTeca, te enviaremos una invitación al correo <b>{{ invited_mail }}</b> próximamente.{% endblocktrans %}
     </p>
 <p style="text-align:right;"><i>Omnia Sunt Communia</i> -- <b>Equipo de {{ SITE_NAME }}</b></p>
 </div>

@@ -73,5 +73,5 @@ def request_invitation(request):
                 u = UserToInvite()
                 u.mail = mail
                 u.save()
-                return HttpResponseRedirect('/accounts/invitation/thanks/') # Redirect after POST
+                return { 'invited_mail': u.mail, 'TEMPLATE': 'invitation/thanks.html' }
     return { 'form' : form }
