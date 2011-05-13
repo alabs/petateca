@@ -179,7 +179,7 @@ FORCE_LOWERCASE_TAGS = True
 # Si se pone como True, redirige a /accounts/signin
 # y permite el registro solo a traves de invitaciones de otros usuarios
 INVITE_MODE = False
-ACCOUNT_INVITATION_DAYS = 7
+ACCOUNT_INVITATION_DAYS = 30 
 INVITATIONS_PER_USER = 6
 USER_WHO_INVITES = 'liberateca'
 DEFAULT_USER_FOR_LINKS = 'liberateca'
