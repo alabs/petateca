@@ -19,7 +19,9 @@
         		{% endthumbnail %}
                 </div>
       		{% endfor %}
-        </div>
+            <a href="{% url serie-index %}" class="float right alpha">
+                <img title="Ver más series" src="/static/images/go-next.png" id="go-next" />
+            </a>
 
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
@@ -51,10 +53,10 @@
 			
 		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 		<div id="quicknav" class="grid_12">
-			<a class="quicknavgrid_3 quicknav alpha" href="{% url serie-index %}">
-					<h4 class="title ">{% trans "Series" %}</h4>
-					<p>{% trans "listado de todas las series" %}</p>
-					<p style="text-align:center;"><img alt="{% trans "Todas las series" %}" src="/static/images/Art_Artdesigner.lv.png" /></p>
+			<a class="quicknavgrid_3 quicknav alpha" href="http://nolesvotes.com">
+					<h4 class="title ">{% trans "No les votes..." %}</h4>
+					<p>... a los mismos de siempre </p>
+					<p style="text-align:center;"><img alt="{% trans "No les votes" %}" src="/static/images/nolesvotes.png" /></p>
 			</a>
 			<a class="quicknavgrid_3 quicknav" href="{% url faq %}">
 					<h4 class="title ">{% trans "FAQ" %}</h4>

@@ -809,23 +809,6 @@ left:46em;
     -webkit-border-radius: 5px;
     width: 220px;
 }
-#message_box {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    background: none repeat scroll 0 0 #CCCCCC;
-    padding: 5px;
-    border: 1px solid #3B3B3B;
-    text-align: center;
-    font-weight: bold;
-    width: 99%;
-    height: 20px;
-    opacity: 0.85;
-    overflow: visible;
-    font-family: Helvetica;
-    font-size: 18px;
-}
 #rating {
     margin-bottom: 2em;
     padding-left: 5em;
@@ -1088,6 +1071,12 @@ div.dialog a:link, div.dialog a:visited {
  
 #tagcloud a{ text-decoration:none; }
 #tagcloud a:hover{ text-decoration:underline; }
+
+#go-next{
+    display:block;
+    margin-top:5em;
+    margin-right:4em;
+}
 
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
