@@ -74,8 +74,6 @@ urlpatterns = patterns('',
     url(r'^user/(?P<user_name>[-\w]+)$', 'userdata.views.get_user_public_profile', name='get_user_public_profile'),
     (r'^accounts/avatar/', include('avatar.urls')),
     url(r'^accounts/invitation/request/$', 'userdata.views.request_invitation', name='request_invitation'),
-    url(r'^accounts/invitation/thanks/$', 'django.views.generic.simple.direct_to_template', {'template': 'invitation/thanks.html'},),
-
 )
 
 if settings.DEBUG:

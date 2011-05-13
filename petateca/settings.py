@@ -187,7 +187,6 @@ DEFAULT_USER_FOR_LINKS = 'liberateca'
 LOGIN_EXEMPT_URLS = (
     r'^static/', 
     r'^accounts/invitation/request/$', 
-    r'^accounts/invitation/thanks/$', 
     r'^admin/',
     r'^accounts/register/',
     r'^accounts/login/',
