@@ -1,6 +1,6 @@
-from serie.models import Serie, Episode, Actor, Role, Season, Network, Genre, Link, Languages, LinkSeason
+from serie import models as m
 from django.contrib import messages
-from serie.forms import LinkForm, LinkSeasonForm, EpisodeForm
+from serie.forms import LinkForm, LinkSeasonForm, EpisodeForm, EpisodeImageForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -10,19 +10,19 @@ from django.http import HttpResponse
 from decorators import render_to
 from datetime import datetime
 
-@render_to('serie/ajax_serie.html')
+@render_to('serie/ajax/popup.html')
 def serie_lookup(request, serie_id):
     ''' JQuery PopUp en las imagenes de las Series '''
-    serie = get_object_or_404(Serie, id=serie_id)
+    serie = get_object_or_404(m.Serie, id=serie_id)
     genres = serie.genres.all()
     return { 'serie' : serie, 'genres': genres }
 
 
-@render_to('serie/ajax_season.html')
+@render_to('serie/ajax/season.html')
 def season_lookup(request, serie_id, season):
     ''' Listado de episodios para una temporada, ordenados por numero de episodio '''
-    serie = get_object_or_404(Serie, id=serie_id)
-    season = get_object_or_404(Season, serie=serie, season=season)
+    serie = get_object_or_404(m.Serie, id=serie_id)
+    season = get_object_or_404(m.Season, serie=serie, season=season)
     episode_list = season.episodes.all().order_by('episode')
     return { 
         'season': season,
@@ -30,13 +30,13 @@ def season_lookup(request, serie_id, season):
     }
 
 
-@render_to('serie/ajax_links_list.html')
+@render_to('serie/ajax/links_list.html')
 def ajax_links_list(request, serie_id, season, episode=None):
     ''' Listado de links, tanto de temporada como de episodio ''' 
-    serie = get_object_or_404(Serie, id=serie_id)
-    season = get_object_or_404(Season, serie=serie, season=season)
+    serie = get_object_or_404(m.Serie, id=serie_id)
+    season = get_object_or_404(m.Season, serie=serie, season=season)
     if episode:
-        epi = get_object_or_404(Episode, episode=episode, season=season)
+        epi = get_object_or_404(m.Episode, episode=episode, season=season)
         link_list = epi.links.all()
         is_season = False
     else:
@@ -50,12 +50,12 @@ def ajax_links_list(request, serie_id, season, episode=None):
 
 
 
-@render_to('serie/ajax_espoiler.html')
+@render_to('serie/ajax/espoiler.html')
 def espoiler_lookup(request, serie_id, season, episode):
     ''' Devuelve la descripcion e imagen del episodio, el espoiler '''
-    serie = get_object_or_404(Serie, id=serie_id)
+    serie = get_object_or_404(m.Serie, id=serie_id)
     season = Season.objects.get(serie=serie, season=season)
-    episode = get_object_or_404(Episode, episode=episode, season=season)
+    episode = get_object_or_404(m.Episode, episode=episode, season=season)
     return {
         'serie': serie,
         'episode': episode, 
@@ -81,11 +81,11 @@ def vote_link(request, link_type):
             return HttpResponse(simplejson.dumps(votes), mimetype='application/json')
 
 
-@render_to('serie/ajax_actors.html')
+@render_to('serie/ajax/actors.html')
 def actors_lookup(request, serie_slug):
     ''' Listado de actores para una serie '''
-    serie = Serie.objects.get(slug_name=serie_slug)
-    roles = Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie)
+    serie = m.Serie.objects.get(slug_name=serie_slug)
+    roles = m.Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie)
     return { 'roles': roles }
 
 
@@ -95,7 +95,7 @@ def ajax_letter(request, letter):
     Buscador de letras para el listado de series 
     TODO: generic_list / generic_object magik
     '''
-    series = Serie.objects.filter(name__startswith=letter)
+    series = m.Serie.objects.filter(name__startswith=letter)
     return { 'series_list': series }
 
 
@@ -105,7 +105,7 @@ def ajax_genre(request, genre_slug):
     Buscador de generos para el listado de series 
     TODO: generic_list / generic_object magik
     '''
-    genre = get_object_or_404(Genre, slug_name = genre_slug)
+    genre = get_object_or_404(m.Genre, slug_name = genre_slug)
     return { 'series_list': genre.series.all() }
 
 
@@ -115,25 +115,25 @@ def ajax_network(request, network_slug):
     Buscador de cadenas para el listado de series 
     TODO: generic_list / generic_object magik
     '''
-    network = get_object_or_404(Network, slug_name = network_slug)
+    network = get_object_or_404(m.Network, slug_name = network_slug)
     return { 'series_list': network.series.all() }
 
 
 
 @login_required
-@render_to('serie/ajax_add_link.html')
+@render_to('serie/ajax/add_link.html')
 def ajax_add_link(request, link_type, obj_id):
     ''' 
     Formulario que agrega/edita links en AJAX
     ''' 
     if link_type == 'episode':
         episode = get_object_or_404(
-            Episode,
+            m.Episode,
             id=obj_id
         )
     elif link_type == 'season':
         season = get_object_or_404(
-            Season,
+            m.Season,
             id=obj_id
         )
     if link_type == 'episode':
@@ -199,7 +199,7 @@ def ajax_add_link(request, link_type, obj_id):
                 return { 'mensaje' : 'Invalida' }
             # Audio Lang, Subtitle y Episode hay que pasarlos como instancias
             # Episode ya lo tenemos, vamos a buscar audio_lang
-            lang = Languages.objects.get(pk=data['audio_lang'])
+            lang = m.Languages.objects.get(pk=data['audio_lang'])
             # si en el POST encontramos el edit, pues esta editando :S
             if request.GET.get('edit'):
                 if link_type == 'episode':
@@ -213,7 +213,7 @@ def ajax_add_link(request, link_type, obj_id):
                 link.episode=episode
                 link.pub_date=now
                 if form.cleaned_data['subtitle']:
-                    subt = Languages.objects.get(pk=data['subtitle'])
+                    subt = m.Languages.objects.get(pk=data['subtitle'])
                     link.subtitle = subt
                 try:
                     # El aguila esta en el nido
@@ -254,13 +254,35 @@ def ajax_add_link(request, link_type, obj_id):
 
 
 @login_required
-@render_to('serie/ajax_add_episode.html')
+@render_to('serie/ajax/edit_episode_description.html')
+def ajax_edit_episode_description(request, serie_id, season, episode): 
+    ''' 
+    Formulario que edita descripciones e imagenes de episodios
+    '''
+    serie = get_object_or_404(m.Serie, id=serie_id)
+    season = get_object_or_404(m.Season, serie=serie, season=season)
+    episode = get_object_or_404(m.Episode, season=season, episode=episode) 
+    form_desc = EpisodeForm(instance=episode)
+    img_epi = get_object_or_404(m.ImageEpisode, episode=episode)
+    form_img = EpisodeImageForm(instance=img_epi)
+    # TODO
+    return { 
+        'form': form_desc,
+        'form_img': form_img,
+        'serie': serie,
+        'season': season,
+        'episode': episode,
+    } 
+
+
+@login_required
+@render_to('serie/ajax/add_episode.html')
 def ajax_add_episode(request, serie_id, season):
     '''
     Formulario que agrega/edita Episodios
     '''
-    serie = get_object_or_404(Serie, id=serie_id)
-    season = get_object_or_404(Season, serie=serie, season=season)
+    serie = get_object_or_404(m.Serie, id=serie_id)
+    season = get_object_or_404(m.Season, serie=serie, season=season)
     form_epi = EpisodeForm(initial={'season': season})
     # TODO: editar episodio
     #if request.GET.get('edit'):
@@ -273,7 +295,7 @@ def ajax_add_episode(request, serie_id, season):
         if form_epi.is_valid():
             try:
                 # Comprueba que el episodio no exista ya
-                get_object_or_404( Episode, season=season, episode=form_epi.cleaned_data['episode'] )
+                get_object_or_404( m.Episode, season=season, episode=form_epi.cleaned_data['episode'] )
                 return HttpResponse(
                     simplejson.dumps('Duplicado'), 
                     mimetype='application/json'

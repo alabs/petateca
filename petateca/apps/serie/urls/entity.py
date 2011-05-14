@@ -35,10 +35,10 @@ urlpatterns += patterns('serie.ajax',
     url(r'^lookup/network/(?P<network_slug>[-\w]+)/$', 'ajax_network'),
 
     # AJAX /serie/nombre
-    # - mostrar espoiler
+    # - mostrar espoiler para episodio
     url(r'^lookup/espoiler/(?P<serie_id>[-\w]+)/(?P<season>\d+)/(?P<episode>\d+)/$', 'espoiler_lookup', name='ajax_espoiler'),
 
-    # -tratar votaciones
+    # -tratar votaciones de los links
     url(r'^links/vote/(?P<link_type>[-\w]+)/$', 'vote_link', name='vote_link'),
 
     # - listar links de episodios y temporada
@@ -50,6 +50,7 @@ urlpatterns += patterns('serie.ajax',
 
     # - agregar episodio 
     url(r'^lookup/serie/(?P<serie_id>\d+)/season/(?P<season>\d+)/add/episode/$', 'ajax_add_episode', name="ajax_add_episode"),
-    #url(r'^(?P<serie_slug>[-\w]+)/add/episode/S(?P<season>[-\d]+)/$', 'add_episode', name="add_episode"), # en desarrollo
+    # - editar episodio (descripcion e imagen)
+    url(r'^lookup/serie/(?P<serie_id>\d+)/season/(?P<season>\d+)/edit/episode/(?P<episode>\d+)/$', 'ajax_edit_episode_description', name="ajax_edit_episode_description"),
 
 )

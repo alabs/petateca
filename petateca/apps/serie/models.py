@@ -202,7 +202,7 @@ class Episode(models.Model):
         _('Episodio'),
         help_text=_( 'Numero de episodio en temporada' ) 
     )
-    description = models.TextField(editable=False)
+    description = models.TextField()
     created_time = models.DateField(auto_now_add=True)
     modified_time = models.DateField(auto_now=True)
     poster = models.OneToOneField(

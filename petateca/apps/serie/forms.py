@@ -29,3 +29,7 @@ class EpisodeForm(ModelForm):
             'episode': TextInput(attrs={'size':2}),
      }
         
+
+class EpisodeImageForm(ModelForm):
+    class Meta:
+        model = m.ImageEpisode
