@@ -20,7 +20,8 @@ def tagcloud(tag_type, val_max, val_min):
         tdict = {
             'tag': tag,
             'name': t.name,
-            'slug_name': t.slug_name
+            'slug_name': t.slug_name,
+            'total': countdown,
         }
         if tag_type == 'Genre': tdict['class'] = 'genre'
         elif tag_type == 'Network': tdict['class'] = 'network'
