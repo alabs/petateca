@@ -54,7 +54,7 @@ def ajax_links_list(request, serie_id, season, episode=None):
 def espoiler_lookup(request, serie_id, season, episode):
     ''' Devuelve la descripcion e imagen del episodio, el espoiler '''
     serie = get_object_or_404(m.Serie, id=serie_id)
-    season = Season.objects.get(serie=serie, season=season)
+    season = m.Season.objects.get(serie=serie, season=season)
     episode = get_object_or_404(m.Episode, episode=episode, season=season)
     return {
         'serie': serie,
@@ -69,9 +69,9 @@ def vote_link(request, link_type):
         ''' Trata las votaciones '''
         user = User.objects.get(username=request.user)
         if link_type == 'episode':
-            link = Link.objects.get(id=request.POST['linkid'])
+            link = m.Link.objects.get(id=request.POST['linkid'])
         elif link_type == 'season':
-            link = LinkSeason.objects.get(id=request.POST['linkid'])
+            link = m.LinkSeason.objects.get(id=request.POST['linkid'])
         if request.POST['vote'] == 'upvote':
             Vote.objects.record_vote(link, user, +1)
         elif request.POST['vote'] == 'downvote':
@@ -156,9 +156,9 @@ def ajax_add_link(request, link_type, obj_id):
     if request.method == 'GET' and request.GET.get('edit') and request.GET.get('linkid'):
         linkid = request.GET.get('linkid')
         if link_type == 'episode':
-            link = Link.objects.get(pk=linkid)
+            link = m.Link.objects.get(pk=linkid)
         elif link_type == 'season':
-            link = SeasonLink.objects.get(pk=linkid)
+            link = m.SeasonLink.objects.get(pk=linkid)
         if request.user.username == link.user:
             form = Form(instance=link) 
             link_info.update({ 'form': form, 'edit': 'yes', 'link': link, })
@@ -203,9 +203,9 @@ def ajax_add_link(request, link_type, obj_id):
             # si en el POST encontramos el edit, pues esta editando :S
             if request.GET.get('edit'):
                 if link_type == 'episode':
-                    link = Link.objects.get(pk=request.GET.get('linkid'))
+                    link = m.Link.objects.get(pk=request.GET.get('linkid'))
                 elif link_type == 'season':
-                    link = LinkSeason.objects.get(pk=request.GET.get('linkid'))
+                    link = m.LinkSeason.objects.get(pk=request.GET.get('linkid'))
                 # capturamos el link q esta editando y agregamos las modificaciones
                 link.url=form.cleaned_data['url']
                 link.audio_lang=lang
@@ -225,7 +225,7 @@ def ajax_add_link(request, link_type, obj_id):
             # sino, es un link nuevo
             else:
                 if link_type == 'episode':
-                    link = Link(
+                    link = m.Link(
                         url=form.cleaned_data['url'],
                         audio_lang=lang,
                         user=user,
@@ -233,7 +233,7 @@ def ajax_add_link(request, link_type, obj_id):
                         pub_date=now,
                     )
                 elif link_type == 'season':
-                    link = LinkSeason(
+                    link = m.LinkSeason(
                         url=form.cleaned_data['url'],
                         audio_lang=lang,
                         user=user,
