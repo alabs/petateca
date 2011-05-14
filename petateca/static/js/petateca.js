@@ -31,7 +31,7 @@ $(document).ready(function () {
         function(){
             var url = window.location.pathname;
             var serie = url.split('/')[2];
-            $.get('/series/lookup/actors/' + serie, {}, 
+            $.get('/series/lookup/actors/' + serie + '/', {}, 
                 function(data){
                     $('#actors_list').html(data)
                 }
@@ -184,25 +184,25 @@ function getCookie(name) {
     return cookieValue;
 }
 
-$(document).ready(function() {
-    // los popups de las series cuando se va a /series y que haga la magia :)
-  $('.serie').CreateBubblePopup({
-    position: 'right',
-    align: 'center',
-    width: '350',
-    innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
-    innerHtmlStyle: { color:'#fff', 'text-align':'left' },
-    themeName: 'all-black',
-    themePath: '/static/images/jquerybubblepopup-theme'
-  });
-  $('.serie').mouseover(function(){
-    // Obtenemos el id de la serie y lo buscamos
-    var serie = $(this);
-    var serie_id = serie.attr('id');
-    $.get('/series/lookup/serie/' + serie_id, function(data) {
-      serie.SetBubblePopupInnerHtml(data);
-    }); 
-  });
+// Popup de las series, cuando se pone encima de la imagen
+// TIENE QUE REPETIRSE EN templates/serie/generic_list.html
+// Si, es una mierda, pero no consigo que el JS funcione dentro del load :S
+$('.serie').CreateBubblePopup({
+  position: 'right',
+  align: 'center',
+  width: '350',
+  innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
+  innerHtmlStyle: { color:'#fff', 'text-align':'left' },
+  themeName: 'all-black',
+  themePath: '/static/images/jquerybubblepopup-theme'
+});
+$('.serie').mouseover(function(){
+  // Obtenemos el id de la serie y lo buscamos
+  var serie = $(this);
+  var serie_id = serie.attr('id');
+  $.get('/series/lookup/serie/' + serie_id + '/', function(data) {
+    serie.SetBubblePopupInnerHtml(data);
+  }); 
 });
 
 
@@ -261,12 +261,13 @@ function search_lookup(inputString) {
 
 
 function lookup( selector, type ) {
+  // Magia de /series, se trae los generos, cadenas y listado alfabetico a traves dea jaax (.load)
   $(selector).click(
     function() { 
       $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
       letter = $(this).attr('href');
       newlet = letter.substring(1);
-      $('#series_list').load('/series/lookup/' + type + '/' + newlet);
+      $('#series_list').load('/series/lookup/' + type + '/' + newlet + '/');
       $(this).addClass('nolink');
       if (typeof ($last) != 'undefined') { $last.removeClass('nolink'); } 
       $last = $(this);
