@@ -1,13 +1,11 @@
 {% load background_color %}
 <div>
-    <div class="left"><h3> {{ serie.name }} / {{ serie.name_en }} </h3>
+    <div class="left"><h3 style="font-size:160%;"> {{ serie.name }}{% if serie.name != serie.name_en %} <br/>{{ serie.name_en }}{% endif %}</h3>
     <b>Género</b>: {% for g in genres %} {{ g.name }} {% endfor %}<br />
     <b>Cadena</b>: {{ serie.network.name }}<br />
     <b>Duración</b>: {{ serie.runtime }} minutos<br /></div>
-    <div class="right">
-        <div class="center rating_num {{ serie.rating.get_rating|background_color }}"> {{ serie.rating.get_rating|floatformat }}
+        <div class="center right rating_num {{ serie.rating.get_rating|background_color }}"> {{ serie.rating.get_rating|floatformat }}
             <div class="mt_3">de 5</div>
         </div>
-    </div>
 </div>
-<p style="margin-top:7em;"> {{ serie.description|truncatewords:50 }} </p>
+<p style="margin-top:9em;"> {{ serie.description|truncatewords:50 }} </p>
