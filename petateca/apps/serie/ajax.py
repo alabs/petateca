@@ -241,7 +241,7 @@ def ajax_add_link(request, link_type, obj_id):
                         pub_date=now,
                     )
                 if form.cleaned_data['subtitle']:
-                    subt = Languages.objects.get(pk=data['subtitle'])
+                    subt = m.Languages.objects.get(pk=data['subtitle'])
                     link.subtitle = subt
                 link.save()
                 #messages.info(request, 'Gracias')
