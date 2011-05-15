@@ -74,4 +74,13 @@
             {% endfor %} 
 			</div>
 		</div>
+
+
+{% endblock %}
+{% block extrascript %}
+    {% if logo_message %}
+    <script>
+        $.jGrowl("¿Te gusta nuestro logo actual? A nosotros tampoco. Ayúdanos a cambiarlo enviando tu propuesta a logos@liberateca.net", { header: 'Concurso de logos', sticky: true });
+    </script>
+    {% endif %}
 {% endblock %}

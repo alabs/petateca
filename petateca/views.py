@@ -19,13 +19,15 @@ def index(request):
                 'series': serie_list,
                 'remaining_invitations': remaining_invitations,
          }
-    if request.session.get('visited', False):
+    # Le damos una cookie que queramos, luego comprobamos que este
+    # para enviar los mensajes con jgrowl
+    if request.session.get('logo_mess', False):
         return index_response
     else:
-        request.session['visited'] = True
-        initial_message = 1
+        request.session['logo_mess'] = True
+        logo_message = 1
         index_response.update({
-                'initial_message': initial_message,
+                'logo_message': logo_message,
          })
         return index_response
 
