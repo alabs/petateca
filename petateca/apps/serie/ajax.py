@@ -291,7 +291,7 @@ def ajax_add_episode(request, serie_id, season):
     #    form = EpisodeForm(instance=episode)
     #    return {'form': form,}
     if request.method == 'POST':
-        form_epi = m.EpisodeForm(request.POST)
+        form_epi = EpisodeForm(request.POST)
         if form_epi.is_valid():
             try:
                 # Comprueba que el episodio no exista ya
