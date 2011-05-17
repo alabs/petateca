@@ -33,3 +33,7 @@ class EpisodeForm(ModelForm):
 class EpisodeImageForm(ModelForm):
     class Meta:
         model = m.ImageEpisode
+
+class RoleForm(ModelForm):
+    class Meta:
+        model = m.Role
