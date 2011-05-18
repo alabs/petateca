@@ -1,12 +1,12 @@
 {% extends "registration/registration_base.html" %}
 {% load i18n %}
-{% block title %}{% if account %}{% trans "Activación completa" %}{% else %}{% trans "Problema en la Activación" %}{% endif %}{% endblock %}
+{% block title %}{% if account %}{% trans "Activación completa" %}{% else %}{% trans "Problema en la Activación" %}{% endif %} | Liberateca{% endblock %}
 {% block contents %}
 <h2 class="grid_12 caption clearfix">
 {% if account %}
 {% blocktrans %}Gracias {{ account }}, tu activación se ha completado. Ahora puedes {% endblocktrans %}<span><a href='{% url auth_login %}'>{% trans "iniciar sesión" %}</a></span>.
 {% else %}
-{% trans "Oops; parece que el codigo de activacion es invalido. Comprueba que la URL sea la correcta" %}
+{% trans "Oops; parece que el codigo de activacion es invalido. Comprueba que la URL sea la correcta. Si se trata de un error contáctanos en admin[arroba]liberateca.net" %}
 {% endif %}
 </h2>
 {% endblock %}

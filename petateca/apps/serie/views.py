@@ -41,7 +41,6 @@ def get_serie(request, serie_slug):
         # Preparamos serie_info con la serie, titulo, imagenes, episodios...
         serie_info = {
             'serie': serie,
-            'title': serie.name.title(),
             'season_list': Season.objects.select_related('poster', 'serie') \
                 .filter(serie=serie).order_by('season'),
             'score': score,

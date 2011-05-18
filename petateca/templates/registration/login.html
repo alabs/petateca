@@ -1,7 +1,7 @@
 {% extends "base_stripped.html" %}
 {% load i18n %}
 {% load message_box %}
-{% block title %}Iniciar Sesió{% endblock %}
+{% block title %}Iniciar Sesión | Liberateca{% endblock %}
 {% block contents %}
 {% if request.user.is_authenticated %}
 	<h2 class="grid_12 caption clearfix">{% trans "Ya has iniciado sesión." %}! {% trans "Vete a ver algunas" %} <a href="/series">series</a></h2>
