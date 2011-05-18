@@ -28,6 +28,9 @@ class Serie(models.Model):
     actors = models.ManyToManyField(
         "Actor", 
         through='Role',
+        blank=True,
+        null=True,
+        editable=False,
         help_text=_('actores que trabajaron en la serie'))
     description = models.TextField()
     finished = models.BooleanField(

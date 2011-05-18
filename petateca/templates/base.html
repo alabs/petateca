@@ -12,7 +12,6 @@
     <!-- Stylesheets -->
     {% compressed_css 'all' %}
     {% block extrastyle %}{% endblock %}
-    {% block extrahead %}{% endblock %}
 </head>
 <body>
     <!-- RIBBON -->
@@ -113,7 +112,7 @@
         <div id="noscript-warning"> {{SITE_NAME}} funciona mejor con JavaScript activado.</div>
 </noscript>    
 </body>
-<!-- Scripts -->
-{% compressed_js 'all' %}
-{% block extrascript %}{% endblock %}
+    <!-- Scripts -->
+    {% compressed_js 'all' %}
+    {% block extrascript %}{% endblock %}
 </html>

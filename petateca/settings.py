@@ -74,9 +74,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'userdata.middleware.LoginRequiredMiddleware',
     'sentry.client.middleware.Sentry404CatchMiddleware',
 )
+
 
 ROOT_URLCONF = 'urls'
 
@@ -178,11 +178,16 @@ FORCE_LOWERCASE_TAGS = True
 # Invitations
 # Si se pone como True, redirige a /accounts/signin
 # y permite el registro solo a traves de invitaciones de otros usuarios
-INVITE_MODE = False
+INVITE_MODE = True
 ACCOUNT_INVITATION_DAYS = 30 
 INVITATIONS_PER_USER = 6
 USER_WHO_INVITES = 'liberateca'
 DEFAULT_USER_FOR_LINKS = 'liberateca'
+
+if INVITE_MODE:
+    MIDDLEWARE_CLASSES += (
+        'userdata.middleware.LoginRequiredMiddleware',
+    )
 
 LOGIN_EXEMPT_URLS = (
     r'^static/', 
@@ -212,6 +217,7 @@ COMPRESS_CSS = {
             'css/jquery.rating.css',
             'css/jquery.bubblepopup.v2.3.1.css',
             'css/jquery.sorter_blue.css',
+            'css/jquery.asmselect.css',
         ),
         'output_filename': 'css/compressed-?.css',
     },
@@ -228,7 +234,7 @@ COMPRESS_JS = {
             'js/jquery.rating.js',
             'js/jquery.bubblepopup.v2.3.1.min.js',
             'js/petateca.js',
-# Da un error de Undetermined Regular Expression     'js/jquery.tablesorter.js',
+            'js/jquery.asmselect.js',
         ),
         'output_filename': 'js/compressed-?.js',
     },
@@ -249,6 +255,7 @@ SECURE_REQUIRED_PATHS = (
 
 # Con local_settings podemos reescribir / agregar settings que sean 
 # propios de la maquina donde se encuentre, por ejemplo BBDD y DEBUG
+# MANTENER SIEMPRE ABAJO; PARA SOBREESCRIBIR
 
 try:
     from local_settings import *

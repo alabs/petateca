@@ -20,8 +20,9 @@ class LinkSeasonForm(ModelForm):
 class SerieForm(ModelForm):
     class Meta:
         model = m.Serie
-        
-        
+        excludes = ('role', )
+
+
 class EpisodeForm(ModelForm):
     class Meta:
         model = m.Episode

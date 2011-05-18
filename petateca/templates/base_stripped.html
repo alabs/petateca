@@ -1,17 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
+{% load compressed %}
 <head>
 	<title>{% block title %}{{ title|default:SITE_NAME }}{% endblock %}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="/static/css/reset.css" />
-	<link rel="stylesheet" href="/static/css/styles.css" />
-	<link rel="stylesheet" href="/static/css/jquery.jgrowl.css" type="text/css" />
-	{% block extrastyle %}{% endblock %}
-	<!-- Scripts -->
-	<script type="text/javascript" src="/static/js/jquery-min.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.jgrowl.js"></script>
-	{% block extrahead %}{% endblock %}
+    <!-- Stylesheets -->
+    {% compressed_css 'all' %}
+    {% block extrastyle %}{% endblock %}
+    <!-- Scripts -->
+    {% compressed_js 'all' %}
+    {% block extrascript %}{% endblock %}
 </head>
 <body>
 <div class="hr clearfix dotted">&nbsp;</div>

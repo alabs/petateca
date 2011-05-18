@@ -20,8 +20,7 @@ urlpatterns = patterns('serie.views',
     url(r'^actor/(?P<slug>[-\w]+)/$', object_detail, get_actor, name="get_actor"),
     (r'^comments/', include('django.contrib.comments.urls')),
     url(r'^sneak/$', 'sneak_links', name="sneak_links"),
-    url(r'^add/$', 'add_serie', name="add_serie"),
-    url(r'^edit/(?P<slug_serie>[-\w]+)/$', 'add_serie', name="edit_serie"),
+    url(r'^add/$', 'add_or_edit_serie', name="add_serie"),
     (r'^recommended/$', 'list_user_recommendation'),
 )
 

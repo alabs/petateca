@@ -196,7 +196,7 @@ $('.serie').CreateBubblePopup({
   themeName: 'all-black',
   themePath: '/static/images/jquerybubblepopup-theme'
 });
-$('.serie').mouseover(function(){
+$('.serie').live('mouseover', function(){
   // Obtenemos el id de la serie y lo buscamos
   var serie = $(this);
   var serie_id = serie.attr('id');

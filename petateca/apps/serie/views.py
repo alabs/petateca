@@ -2,22 +2,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
-from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify
 from django.views.decorators.csrf import csrf_protect
+from django.db import IntegrityError
 
 from djangoratings.views import AddRatingView
-from voting.models import Vote
-
-from serie.forms import LinkForm, LinkSeasonForm, SerieForm, EpisodeForm, RoleForm
-from serie.models import Genre, Network, Link, Languages, LinkSeason
-from serie.models import Serie, Episode, Actor, Role, Season, ImageSerie, ImageActor
-
-from datetime import datetime
 from decorators import render_to
-from django.forms.models import inlineformset_factory
+
+from serie.forms import SerieForm
+from serie.models import Serie, Season, Link, Genre
+
 
 
 @render_to('serie/get_serie.html')
@@ -106,58 +103,78 @@ def sneak_links(request):
 
 
 @login_required
-@render_to('serie/add_serie.html')
-def add_serie(request, slug_serie=None):
+@render_to('serie/add_or_edit_serie.html')
+def add_or_edit_serie(request, serie_slug=None):
     '''
     Formulario que agrega/edita series
     '''
-    form_serie = SerieForm()
-    if slug_serie:
-        serie = Serie.objects.get(slug_name=slug_serie)
+    if request.method == 'POST':
+        if request.POST['finished'] == 'on': 
+            serie_finished = True
+        # TODO: preparamos los actores/roles
+        # Convertimos los generos en una lista, separando el primero de los otros
+        genres = request.POST['genres_raw']
+        if ',' in genres: 
+            genre_split = genres.split(',')
+            genre = genre_split[0]
+            all_genres = genre_split
+        # TODO: posters
+        serie_post_clean = request.POST.copy()
+        serie_post_clean['slug_name'] = slugify(request.POST['name_es'])
+        serie_post_clean['name'] = request.POST['name_en']
+        serie_post_clean['description'] = request.POST['description_en']
+        serie_post_clean['finished'] = serie_finished
+        # pasamos el primer genre a taves de POST ...
+        serie_post_clean['genres'] = genre
+        # Si hay una serie no es add, es edit, ergo tratamos la instancia
+        if serie_slug:
+            serie = Serie.objects.get(slug_name=serie_slug)
+            form_serie = SerieForm(serie_post_clean, instance=serie)
+        else:
+            form_serie = SerieForm(serie_post_clean)
+        if form_serie.is_valid():
+            try:
+                form_serie.save()
+                slug = form_serie.data['slug_name']
+                s = Serie.objects.get(slug_name=slug)
+                # ... y ahora si tratamos toods los generos
+                s.genres.clear()
+                for g in all_genres:
+                    s.genres.add(Genre.objects.get(id=g))
+                # TODO: tratamiento de los actores
+                final_url = reverse('serie.views.get_serie', kwargs={
+                    'serie_slug': slug
+                })
+                if serie:
+                    result = 'Updated'
+                else:
+                    result = 'Created'
+                return HttpResponse(
+                    simplejson.dumps({ 'result': result, 'redirect': final_url }),
+                    mimetype='application/json'
+                )
+                #return HttpResponseRedirect(final_url)
+            except IntegrityError:
+                return HttpResponse(
+                    simplejson.dumps({ 'result': 'Duplicated' }),
+                    mimetype='application/json'
+                )
+        else:
+            return HttpResponse(
+                simplejson.dumps({ 'result': 'Error'} ), 
+                mimetype='application/json'
+            )
+    # Si hay una serie no es add, es edit, ergo devolvemos la instancia
+    if serie_slug:
+        serie = Serie.objects.get(slug_name=serie_slug)
         form_serie = SerieForm(instance=serie)
         return {
                 'form': form_serie,
                 'serie': serie,
             }
-    if request.method == 'POST':
-        print request.POST
-        serie_name = request.POST['name']
-        serie_name_es = request.POST['name_es']
-        serie_name_en = request.POST['name_en']
-        serie_slug = slugify(request.POST['name_en'])
-        serie_description = request.POST['description']
-        print request.POST['genres']
-        if request.POST['finished'] == 'on': 
-            serie_finished = True
-        # TODO: preparamos los actores/roles
-        serie_post_clean = {
-            'name': serie_name,
-            'name_es': serie_name_es,
-            'name_en': serie_name_en,
-            'slug_name': serie_slug,
-            'description': serie_description,
-            'description_es': request.POST['description_es'],
-            'description_en': request.POST['description_en'],
-            'runtime': request.POST['runtime'],
-            'finished': serie_finished,
-            'genres': list(request.POST['genres']),
-            'network': request.POST['network']
-            }
-        form_serie = SerieForm(serie_post_clean)
-
-        if form_serie.is_valid():
-            form_serie.save()
-            # TODO: guardamos tambien los actores
-            return HttpResponse(
-                simplejson.dumps('OK'), 
-                mimetype='application/json'
-            )
-        else:
-            # TODO: guardamos tambien los actores
-            return HttpResponse(
-                simplejson.dumps('Error'), 
-                mimetype='application/json'
-            )
-    return {
-        'form': form_serie,
-    }
+    else:
+        # Agregar una serie
+        form_serie = SerieForm()
+        return {
+            'form': form_serie,
+        }
