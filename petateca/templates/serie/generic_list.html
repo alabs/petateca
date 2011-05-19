@@ -21,24 +21,3 @@
 {% else %} 
 <h2 class="grid_12 caption clearfix">No hay series de este tipo todavia</h2>
 {% endif %}
-{% block extrascript %}
-<script type="text/javascript">
-  $('.serie').CreateBubblePopup({
-    position: 'right',
-    align: 'center',
-    width: '350',
-    innerHtml: '<img src="/static/images/ajax-loading.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
-    innerHtmlStyle: { color:'#fff', 'text-align':'left' },
-    themeName: 'all-black',
-    themePath: '/static/images/jquerybubblepopup-theme'
-  });
-  $('.serie').mouseover(function(){
-    // Obtenemos el id de la serie y lo buscamos
-    var serie = $(this);
-    var serie_id = serie.attr('id');
-    $.get('/series/lookup/serie/' + serie_id + '/', function(data) {
-      serie.SetBubblePopupInnerHtml(data);
-    }); 
-  });
-</script>
-{% endblock %}

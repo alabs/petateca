@@ -3,7 +3,7 @@
         <ul id="add_link_list">
             {{ form.as_ul }}
         </ul>
-        <input style="margin-left:1em; margin-bottom: 1em;" class="button" id="submit" type="submit" value="Enviar" />
+        <input style="margin-left:1em; margin-bottom: 1em;" class="button" id="submit_link" type="submit" value="Enviar" />
         <!-- TODO: Templatetag pasandole el query string, que devuelva el listado con todo listo -->
         <ul id="add_link_help"> 
             <li> <img alt="Busqueda TPB" title="Buscar en The Pirate Bay" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_pb" src="/static/images/search-tpb.ico">
@@ -13,65 +13,3 @@
         </ul>
     </form>
 </div>
-
-<script type="text/javascript">
-$('#language_help').click( function() {
-    $.jGrowl('<a href="/faq">FAQ</a><b>Referencia de Idiomas:</b><li>en: Inglés<li>es: Español<li>es-es: Español Latino<li>ca: Català<li>jp: Japonés');
-});
-
-$('#search_pb').click( function() {
-    query = $(this).attr('rel');
-    $.jGrowl('Abriendo búsqueda en The Pirate Bay para ' + query);
-    window.open( 'http://thepiratebay.org/search/' + query + '/0/7/0');
-});
-
-$('#search_torrentz').click( function() {
-    query = $(this).attr('rel');
-    $.jGrowl('Abriendo búsqueda en Torrenz para ' + query);
-    window.open( 'http://torrentz.eu/search?f=' + query);
-});
-
-$('#search_listadesinde').click( function() {
-    query = $(this).attr('rel');
-    $.jGrowl('Abriendo búsqueda en La Lista de Sinde para ' + query);
-    window.open('http://www.google.com/cse?cx=004411908642504437083%3A1dyk2klbrj8&ie=UTF-8&q=' + query + '&sa=Buscar+descargas!&siteurl=lalistadesinde.net%2F');
-});
-
-
-$('#submit').click(function (e) {       
-    e.preventDefault();
-    var url = $('input[name=url]');
-    var audio = $('select[name=audio_lang]');
-    var subtitle = $('select[name=subtitle]');
-    var post_url = $('form#add_link_form[action]').attr('action');
-      //Simple validation to make sure user entered something
-        //If error found, add hightlight class to the text field
-        if (url.val()==''||url.val()=='http://') {
-            url.addClass('hightlight');
-            return false;
-        } else url.removeClass('hightlight');
-
-        if (audio.val()=='') {
-            $('label[for=id_audio_lang]').addClass('hightlight');
-            return false;
-        } else $('label[for=id_audio_lang]').removeClass('hightlight');
-
-    $.post(post_url, {
-        'url': url.val(), 
-        'audio_lang': audio.val(), 
-        'subtitle': subtitle.val(),
-        'csrfmiddlewaretoken': getCookie('csrftoken')
-    }, function(data) {
-        if (data.mensaje  == 'Gracias'){
-            $.jGrowl("El enlace se ha guardado exitosamente");
-        } else if (data.mensaje == 'Link duplicado') {
-            $.jGrowl("Link duplicado, prueba a agregar otro");
-        } else {
-            $.jGrowl("Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net");
-        }
-      }  
-    );  
-
-    return false;
-});
-</script>
