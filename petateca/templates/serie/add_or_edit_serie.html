@@ -1,9 +1,10 @@
-{% extends "base_stripped.html" %}
+{% extends "base.html" %}
 {% load thumbnail %}
 {% block title %}{% if serie %}Editando serie {{ serie.name.title }}{% else %}Agregando serie{% endif %} | Liberateca{% endblock %}
 {% block contents %}
 {{ message }}
-<form id="add_serie_form" enctype="multipart/form-data" class="grid_2" action="{% if serie %}{% url edit_serie serie_slug=serie.slug_name %}{% else %}{% url add_serie %}{% endif %}" method="POST">
+<div class="grid_10">
+<form id="add_serie_form" enctype="multipart/form-data" action="{% if serie %}{% url edit_serie serie_slug=serie.slug_name %}{% else %}{% url add_serie %}{% endif %}" method="POST">
     <div class="left">
         {% if serie.poster.src %}
             {% thumbnail serie.poster.src "400x300" as img_serie %}
@@ -15,10 +16,6 @@
     </div>
     <div class="right">
         <ul class="left">
-            {{ form }}
-
-        </ul>
-        <ul>
             {{ form.non_field_errors }}
             <li class="fieldwrapper">
                 {{ form.name_es.errors }}
@@ -52,7 +49,7 @@
             </li>
         </ul>
     </div>
-        <table>
+        <table class="grid_8">
             <tr>
                 <th>
                     Español
@@ -72,6 +69,7 @@
                 </td>
             </tr>
         </table>
-            <input class="button" id="submit_serie" type="submit" value="{% if serie %}Editar{% else %}Agregar{% endif %}" />
+                <input class="button" id="submit_serie" type="submit" value="{% if serie %}Editar{% else %}Agregar{% endif %}" />
 </form>
+</div>
 {% endblock %}
