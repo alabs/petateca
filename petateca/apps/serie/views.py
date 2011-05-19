@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
@@ -12,8 +12,8 @@ from django.db import IntegrityError
 from djangoratings.views import AddRatingView
 from decorators import render_to
 
-from serie.forms import SerieForm
-from serie.models import Serie, Season, Link, Genre
+from serie.forms import SerieForm, ImageSerieForm
+from serie.models import Serie, Season, Link, ImageSerie
 
 
 
@@ -108,72 +108,63 @@ def add_or_edit_serie(request, serie_slug=None):
     Formulario que agrega/edita series
     '''
     if request.method == 'POST':
-        if request.POST['finished'] == 'on': 
-            serie_finished = True
         # TODO: preparamos los actores/roles
-        # Convertimos los generos en una lista, separando el primero de los otros
-        genres = request.POST['genres_raw']
-        if ',' in genres: 
-            genre_split = genres.split(',')
-            genre = genre_split[0]
-            all_genres = genre_split
-        # TODO: posters
         serie_post_clean = request.POST.copy()
         serie_post_clean['slug_name'] = slugify(request.POST['name_es'])
         serie_post_clean['name'] = request.POST['name_en']
         serie_post_clean['description'] = request.POST['description_en']
-        serie_post_clean['finished'] = serie_finished
-        # pasamos el primer genre a taves de POST ...
-        serie_post_clean['genres'] = genre
         # Si hay una serie no es add, es edit, ergo tratamos la instancia
         if serie_slug:
             serie = Serie.objects.get(slug_name=serie_slug)
             form_serie = SerieForm(serie_post_clean, instance=serie)
+            img_form = ImageSerieForm()
         else:
             form_serie = SerieForm(serie_post_clean)
+            img_form = ImageSerieForm()
         if form_serie.is_valid():
             try:
                 form_serie.save()
                 slug = form_serie.data['slug_name']
-                s = Serie.objects.get(slug_name=slug)
-                # ... y ahora si tratamos toods los generos
-                s.genres.clear()
-                for g in all_genres:
-                    s.genres.add(Genre.objects.get(id=g))
+                serie = Serie.objects.get(slug_name=slug)
+                if request.FILES:
+                    img_serie = ImageSerie()
+                    img_serie.title = serie_slug
+                    img_serie.src = request.FILES['src']
+                    img_serie.is_poster = True
+                    img_serie.serie = serie
+                    img_serie.save()
                 # TODO: tratamiento de los actores
                 final_url = reverse('serie.views.get_serie', kwargs={
                     'serie_slug': slug
                 })
-                if serie:
-                    result = 'Updated'
-                else:
-                    result = 'Created'
-                return HttpResponse(
-                    simplejson.dumps({ 'result': result, 'redirect': final_url }),
-                    mimetype='application/json'
-                )
-                #return HttpResponseRedirect(final_url)
+                return HttpResponseRedirect(final_url)
             except IntegrityError:
-                return HttpResponse(
-                    simplejson.dumps({ 'result': 'Duplicated' }),
-                    mimetype='application/json'
-                )
+                return {
+                    'message': 'Duplicada',
+                    'form': form_serie,
+                    'img_form': img_form,
+                }
         else:
-            return HttpResponse(
-                simplejson.dumps({ 'result': 'Error'} ), 
-                mimetype='application/json'
-            )
+            return {
+                'message': 'Error',
+                'form': form_serie,
+                'img_form': img_form,
+            }
     # Si hay una serie no es add, es edit, ergo devolvemos la instancia
     if serie_slug:
         serie = Serie.objects.get(slug_name=serie_slug)
         form_serie = SerieForm(instance=serie)
+        img_form = ImageSerieForm()
         return {
                 'form': form_serie,
                 'serie': serie,
+                'img_form': img_form,
             }
     else:
         # Agregar una serie
         form_serie = SerieForm()
+        img_form = ImageSerieForm()
         return {
             'form': form_serie,
+            'img_form': img_form,
         }
