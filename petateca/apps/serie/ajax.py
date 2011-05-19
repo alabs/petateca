@@ -301,7 +301,7 @@ def ajax_add_episode(request, serie_id, season):
                     mimetype='application/json'
                 )
             except: 
-                episode = Episode(
+                episode = m.Episode(
                     air_date=form_epi.cleaned_data['air_date'],
                     title=form_epi.cleaned_data['title'],
                     title_es=form_epi.cleaned_data['title_es'],
