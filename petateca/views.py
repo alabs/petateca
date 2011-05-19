@@ -1,11 +1,11 @@
-from serie.models import Serie, Episode, Link
 from decorators import render_to
 from invitation.models import InvitationKey
 
-from serie.models import Serie, Episode, Link
+from serie.models import Serie, Link
 from voting.models import Vote
 from django.contrib.auth.models import User
 from djangoratings.models import Vote as Rating
+
 
 @render_to('index.html')
 def index(request):
