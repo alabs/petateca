@@ -9,6 +9,7 @@ from django.template.defaultfilters import slugify
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_protect
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 
 from djangoratings.views import AddRatingView
 from decorators import render_to
@@ -166,7 +167,9 @@ def add_or_edit_serie(request, serie_slug=None):
                         'form': form_serie,
                         'img_form': img_form,
                     }
-            form_serie.save()
+                except ObjectDoesNotExist:
+                    pass
+            serie = form_serie.save()
             # Si existe FILES es que nos envian una imagen para la serie
             if request.FILES:
                 img_serie = ImageSerie()
