@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput #, FileInput
+from django.forms import ModelForm, TextInput, FileInput, SelectMultiple
 from serie import models as m
 
 class LinkForm(ModelForm):
@@ -22,6 +22,7 @@ class SerieForm(ModelForm):
         model = m.Serie
         widgets = {
             'runtime': TextInput(attrs={'size':1}),
+            'genres': SelectMultiple(attrs={'size':'9'}),
         }
 
 
@@ -29,9 +30,9 @@ class ImageSerieForm(ModelForm):
     class Meta:
         model = m.ImageSerie
         exclude = ('creator','title', 'serie', 'is_poster',)
-     #   widgets = {
-     #       'src': FileInput(attrs={'class':'button'}),
-     #   }
+        widgets = {
+            'src': FileInput(attrs={'size':'15'}),
+        }
 
 
 class EpisodeForm(ModelForm):

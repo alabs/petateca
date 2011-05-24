@@ -222,7 +222,7 @@ $(document).ready(function () {
 
             
         // para el form de add_or_edit_serie
-        $('#submit_serie').click(function (e) {
+        $('#submit_serie').click(function (event) {
             var $name_es = $('input[name=name_es]');
             var $name_en = $('input[name=name_en]');
             var $description_es = $('textarea[name=description_es]');
@@ -236,8 +236,9 @@ $(document).ready(function () {
            fields = [ $name_es, $name_en, $description_es, $description_en, $network, $runtime ];
            $.each(fields, function(index, f){
                if (f.val()==='') {
+                   event.preventDefault();
                    f.addClass('hightlight'); 
-                   return false;
+                   //return false;
                } else {f.removeClass('hightlight');}
            });
         

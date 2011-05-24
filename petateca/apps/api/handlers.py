@@ -3,8 +3,6 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 
 from piston.handler import BaseHandler
-from piston.utils import throttle
-from piston.doc import generate_doc
 
 from serie.models import Serie, Season, Episode
 from api.utils import catch_404

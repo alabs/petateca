@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
 from django.template.defaultfilters import slugify
+from django.db.models import Q
 from django.views.decorators.csrf import csrf_protect
 from django.db import IntegrityError
 
@@ -107,64 +108,84 @@ def add_or_edit_serie(request, serie_slug=None):
     '''
     Formulario que agrega/edita series
     '''
+    # Entregamos el formulario
+    if request.method == 'GET':
+        if serie_slug:
+        # Si hay una serie no es add, es edit, ergo devolvemos la instancia
+            serie = Serie.objects.get(slug_name=serie_slug)
+            form_serie = SerieForm(instance=serie)
+            img_form = ImageSerieForm()
+            return {
+                    'form': form_serie,
+                    'serie': serie,
+                    'img_form': img_form,
+                }
+        else:
+            # Agregar una serie, este es el formulario limpio
+            form_serie = SerieForm()
+            img_form = ImageSerieForm()
+            return {
+                'form': form_serie,
+                'img_form': img_form,
+            }
+
+    # Respuesta, nos llega el formulario
     if request.method == 'POST':
         # TODO: preparamos los actores/roles
         serie_post_clean = request.POST.copy()
         serie_post_clean['slug_name'] = slugify(request.POST['name_es'])
-        serie_post_clean['name'] = request.POST['name_en']
-        serie_post_clean['description'] = request.POST['description_en']
+        # Le pasamos a modeltranslation los campos por defecto en spanish
+        serie_post_clean['name'] = request.POST['name_es']
+        serie_post_clean['description'] = request.POST['description_es']
         # Si hay una serie no es add, es edit, ergo tratamos la instancia
         if serie_slug:
             serie = Serie.objects.get(slug_name=serie_slug)
+            # para que no joda el poster ya existente
+            try:
+                serie_post_clean['poster'] = serie.poster.id
+            except:
+                pass
             form_serie = SerieForm(serie_post_clean, instance=serie)
             img_form = ImageSerieForm()
         else:
             form_serie = SerieForm(serie_post_clean)
             img_form = ImageSerieForm()
         if form_serie.is_valid():
-            try:
-                form_serie.save()
-                slug = form_serie.data['slug_name']
-                serie = Serie.objects.get(slug_name=slug)
-                if request.FILES:
-                    img_serie = ImageSerie()
-                    img_serie.title = serie_slug
-                    img_serie.src = request.FILES['src']
-                    img_serie.is_poster = True
-                    img_serie.serie = serie
-                    img_serie.save()
-                # TODO: tratamiento de los actores
-                final_url = reverse('serie.views.get_serie', kwargs={
-                    'serie_slug': slug
-                })
-                return HttpResponseRedirect(final_url)
-            except IntegrityError:
-                return {
-                    'message': 'Duplicada',
-                    'form': form_serie,
-                    'img_form': img_form,
-                }
+            if not serie_slug:
+                try:
+                    # Comprobamos que no exista ya una serie con ese nombre
+                    name_es = form_serie.data['name_es']
+                    name_en = form_serie.data['name_en']
+                    serie = Serie.objects.get(
+                            Q(name_es=name_es)|
+                            Q(name_en=name_en)
+                        )
+                except IntegrityError:
+                    return {
+                        'message': 'Duplicada',
+                        'form': form_serie,
+                        'img_form': img_form,
+                    }
+            form_serie.save()
+            # Si existe FILES es que nos envian una imagen para la serie
+            if request.FILES:
+                img_serie = ImageSerie()
+                img_serie.title = serie_slug
+                img_serie.src = request.FILES['src']
+                img_serie.is_poster = True
+                img_serie.serie = serie
+                img_serie.save()
+            # TODO: tratamiento de los actores
+            final_url = reverse('serie.views.get_serie', kwargs={
+                'serie_slug': form_serie.cleaned_data['slug_name']
+            })
+            # Redireccionamos a la ficha de la serie
+            return HttpResponseRedirect(final_url)
         else:
+            # uoops -- excepciones
             return {
-                'message': 'Error',
+                'message': form_serie.errors,
+                'message2': img_form.errors,
                 'form': form_serie,
                 'img_form': img_form,
             }
-    # Si hay una serie no es add, es edit, ergo devolvemos la instancia
-    if serie_slug:
-        serie = Serie.objects.get(slug_name=serie_slug)
-        form_serie = SerieForm(instance=serie)
-        img_form = ImageSerieForm()
-        return {
-                'form': form_serie,
-                'serie': serie,
-                'img_form': img_form,
-            }
-    else:
-        # Agregar una serie
-        form_serie = SerieForm()
-        img_form = ImageSerieForm()
-        return {
-            'form': form_serie,
-            'img_form': img_form,
-        }

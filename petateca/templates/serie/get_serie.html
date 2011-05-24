@@ -73,6 +73,9 @@
 	    {% endif %}
 	    {% endif %}
 	</div>
+    <div id="edit-serie" class="right">
+        <a href="{% url edit_serie serie_slug=serie.slug_name %}"><img src="/static/images/accessories-text-editor.png"></a>
+    </div>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- SEASONS -->
 	<h2><span>{% trans "Temporadas" %}</span></h2>
