@@ -89,15 +89,14 @@ class SerieAlias(models.Model):
 
 
 class Season(models.Model):
-    serie = models.ForeignKey('Serie', related_name="season")
-    season = models.IntegerField(
-        help_text=_('numero de temporada para la serie')
-    )
+    serie = models.ForeignKey('Serie', related_name="season", editable=False)
+    season = models.IntegerField(name=_("Temporada"))
     poster = models.OneToOneField(
         'ImageSeason',
         related_name='poster_of',
         null=True,
-        blank=True
+        blank=True,
+        editable=False,
     )
 
     def get_next_season(self):

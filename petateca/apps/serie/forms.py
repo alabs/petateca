@@ -35,6 +35,14 @@ class ImageSerieForm(ModelForm):
         }
 
 
+class SeasonForm(ModelForm):
+    class Meta:
+        model = m.Season
+        widgets = {
+                'season': TextInput(attrs={'size':1}),
+        }
+
+
 class EpisodeForm(ModelForm):
     class Meta:
         model = m.Episode

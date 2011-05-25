@@ -80,30 +80,19 @@
 	<!-- SEASONS -->
 	<h2><span>{% trans "Temporadas" %}</span></h2>
     <div class="left">
-    <table>
 	{% for season in season_list %}
-        <tr>
-            <td>
-                <a class="portfolio_item float alpha season" href="{{ season.get_absolute_url }}">
-                <div class="preload" style="width:44px; height:64px;">
-                {% if season.poster %} {% thumbnail season.poster.src "44x64" as img_season %} 
-                    <img class="prel" src="{{ img_season.url }}" alt="{{serie.name}} - {{season.season}}"/>{% endthumbnail %}
-                {% else %}
-                    {% if serie.poster.src %}{% thumbnail serie.poster.src "44x64" as img_serie %}
-                    <img class="prel" src="{{ img_serie.url }}" />{% endthumbnail %}
-                    {% else %}<div class="image_not_found"  height="60" width="40">  <img src="/static/images/image_not_available_small.png"> </div>
-                    {% endif %}
-                {% endif %}
-                </div>
-                </a>
-            </td>
-            <td>
-                <a class="portfolio_item float alpha season" href="{{ season.get_absolute_url }}">
-                <p class="subtitle">{% trans "Temporada" %} {% if season.season == 0 %}<br />Especial{%else%} {{ season.season }}{%endif %}</p> 
-            </td>
-        </tr>
+        <ul id="season{{season.season}}">
+            <li> <a class="season" href="{{ season.get_absolute_url }}">
+            <p class="subtitle">{% trans "Temporada" %} {% if season.season == 0 %}<br />Especial{%else%} {{ season.season }}{%endif %}</p> 
+        </ul>
     {% endfor %}
-    </table>
+    <ul>
+        <li><a class="button" id="season_add" href="{% url add_season serie_slug=serie.slug_name %}">
+            <img src="/static/images/list-add.png" class="left nobottom">
+            <p class="right nobottom">Agregar</p>
+        </a>
+    </ul>
+        <div id="season_add_form"></div>
     </div>
     <div class="right" id="season_list" ></div>
     <!-- DESCRIPTION -->
@@ -134,5 +123,4 @@
 
 <div>
 </div>
-
 {% endblock %}

@@ -184,6 +184,15 @@ function voting( direction, linktype, linkid ){
     );
     return false;
 }
+
+function check_value(selector){
+    // Function para checkear que los formularios no esten en blanco
+    // FIXME: no funciona el return false
+    if (selector.val()==='') {
+        selector.addClass('hightlight'); 
+        return false;
+    } else {selector.removeClass('hightlight');}
+}
     
 
 $(document).ready(function () {
@@ -398,33 +407,33 @@ $(document).ready(function () {
         var season = season_serie[6];
 
         // FIXME: Comprobamos que ningun campo este en blanco, lo suyo seria hacer esto pero no funcioan
-    //    fields = [ $air_date, $title_es, $title_en, $episode ]
-    //    $.each(fields, function(index, f){
-    //        if (f.val()==='') {
-    //            f.addClass('hightlight'); 
-    //            return false;
-    //        } else f.removeClass('hightlight');
-    //    })
-    //
-        if ($air_date.val()=='') {
-            $air_date.addClass('hightlight');
-            return false;
-        } else $air_date.removeClass('hightlight');
+        fields = [ $air_date, $title_es, $title_en, $episode ];
+        $.each(fields, function(index, f){
+            if (f.val()==='') {
+                f.addClass('hightlight'); 
+                return false;
+            } else {f.removeClass('hightlight');}
+        });
+    
+ //       if ($air_date.val()==='') {
+ //           $air_date.addClass('hightlight');
+ //           return false;
+ //       } else { $air_date.removeClass('hightlight'); }
 
-        if ($title_es.val()=='') {
-            $title_es.addClass('hightlight');
-            return false;
-        } else $title_es.removeClass('hightlight');
+ //       if ($title_es.val()==='') {
+ //           $title_es.addClass('hightlight');
+ //           return false;
+ //       } else $title_es.removeClass('hightlight');
 
-        if ($title_en.val()=='') {
-            $title_en.addClass('hightlight');
-            return false;
-        } else $title_en.removeClass('hightlight');
+ //       if ($title_en.val()=='') {
+ //           $title_en.addClass('hightlight');
+ //           return false;
+ //       } else $title_en.removeClass('hightlight');
 
-        if ($episode.val()=='') {
-            $episode.addClass('hightlight');
-            return false;
-        } else $episode.removeClass('hightlight');
+ //       if ($episode.val()=='') {
+ //           $episode.addClass('hightlight');
+ //           return false;
+ //       } else $episode.removeClass('hightlight');
 
         // TODO: Comprobamos que la fecha este en un formato valido 
 
@@ -492,15 +501,15 @@ $(document).ready(function () {
         var post_url = $('form#add_link_form[action]').attr('action');
         //Simple validation to make sure user entered something
             //If error found, add hightlight class to the text field
-            if (url.val()==''||url.val()=='http://') {
+            if (url.val()===''||url.val()==='http://') {
                 url.addClass('hightlight');
                 return false;
-            } else url.removeClass('hightlight');
+            } else {url.removeClass('hightlight');}
 
-            if (audio.val()=='') {
+            if (audio.val()==='') {
                 $('label[for=id_audio_lang]').addClass('hightlight');
                 return false;
-            } else $('label[for=id_audio_lang]').removeClass('hightlight');
+            } else {$('label[for=id_audio_lang]').removeClass('hightlight');}
 
         $.post(post_url, {
             'url': url.val(), 
@@ -546,4 +555,45 @@ $(document).ready(function () {
     lookup('.abc', 'letter'); 
     lookup('.genre', 'genre'); 
     lookup('.network', 'network'); 
+
+
+    // Formulario de agregar temporada
+    $('#season_add').bind('click', function(event) {
+        // AJAX para traer el formulario
+        event.preventDefault();
+        $('#season_add_form').load($(this).attr('href'));
+        return false;
+    });
+
+    $('#form_add_season').live('submit', function(event){
+        // AJAX que envia y procesa los resultados al agregar temporada
+        var action = $('#form_add_season').attr('action');
+        var $id_season = $('#id_season');
+
+        if ($id_season.val()==='') {
+            $id_season.addClass('hightlight'); 
+            return false;
+        } else {$id_season.removeClass('hightlight');}
+
+        $.post(action, {'season': $id_season.val()}, function(data){
+            switch (data.message) {
+            case 'OK':
+                $.jGrowl("Temporada agregada, redireccionando...");
+                window.location.replace(data.redirect);
+                break;
+            case 'Duplicated':
+                $.jGrowl("Esa temporada ya se encuentra, comprueba el número.");
+                break;
+            case 'Error':
+                $.jGrowl("Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net");
+                break;
+            default:
+                $.jGrowl("Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net");
+                break;
+            }
+        });
+        event.preventDefault();
+    });
+
+
 });

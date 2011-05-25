@@ -1052,7 +1052,7 @@ div.dialog a:link, div.dialog a:visited {
 
 .hightlight {
     border:2px solid #9F1319 !important;
-    background:url(/static/images/alert.png) no-repeat 2px !important;
+ /*   background:url(/static/images/alert.png) no-repeat 2px !important; */
 }
 
 #img_espoiler {

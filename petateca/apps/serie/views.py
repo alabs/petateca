@@ -14,7 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from djangoratings.views import AddRatingView
 from decorators import render_to
 
-from serie.forms import SerieForm, ImageSerieForm
+from serie.forms import SerieForm, ImageSerieForm, SeasonForm
 from serie.models import Serie, Season, Link, ImageSerie
 
 
@@ -192,3 +192,41 @@ def add_or_edit_serie(request, serie_slug=None):
                 'form': form_serie,
                 'img_form': img_form,
             }
+
+
+@login_required
+@render_to('serie/add_season.html')
+def add_season(request, serie_slug):
+    serie = Serie.objects.get(slug_name=serie_slug)
+    if request.method == 'GET':
+        form_season = SeasonForm(initial={'serie': serie.id})
+        return { 'form_season': form_season, 'serie': serie, }
+    if request.method == 'POST':
+        form_season = SeasonForm(request.POST)
+        if form_season.is_valid():
+                season, result = Season.objects.get_or_create(
+                    season = form_season.cleaned_data['season'],
+                    serie = serie
+                )
+                # if season doesn't exists
+                if result == True:
+                    season.save()
+                    return HttpResponse(
+                        simplejson.dumps({
+                            'message': 'OK',
+                            'redirect': serie.get_absolute_url(),
+                            }), 
+                        mimetype='application/json'
+                    )
+                # if exists, it's duplicated
+                elif result == False:
+                    return HttpResponse(
+                        simplejson.dumps({'message': 'Duplicated'}), 
+                        mimetype='application/json'
+                    )
+        # if not number
+        else:
+            return HttpResponse(
+                simplejson.dumps({'message': 'Error'}), 
+                mimetype='application/json'
+            )
