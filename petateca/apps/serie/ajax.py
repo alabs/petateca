@@ -95,7 +95,8 @@ def ajax_letter(request, letter):
     Buscador de letras para el listado de series 
     TODO: generic_list / generic_object magik
     '''
-    series = m.Serie.objects.filter(name__startswith=letter)
+    series = m.Serie.objects.filter(name_es__startswith=letter)
+    series = series.order_by('name_es')
     return { 'series_list': series }
 
 
