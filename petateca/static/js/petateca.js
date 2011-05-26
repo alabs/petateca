@@ -193,6 +193,22 @@ function check_value(selector){
         return false;
     } else {selector.removeClass('hightlight');}
 }
+
+
+function search_lookup(inputString) {
+    // busqueda en ajax
+    if (inputString.length < 2) {
+        $('#suggestions').fadeOut(); // Hide the suggestions box
+    } else {
+        $.get("/search/lookup/?query=" + inputString, function(data) { // Do an AJAX call
+            $('#suggestions').fadeIn(); // Show the suggestions box
+            $('#suggestions').html(data); // Fill the suggestions box
+            });
+    }
+}
+
+
+
     
 
 $(document).ready(function () {
