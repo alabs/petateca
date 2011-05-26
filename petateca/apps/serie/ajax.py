@@ -324,3 +324,27 @@ def ajax_add_episode(request, serie_id, season):
         'serie': serie,
         'season': season,
     }
+
+
+#@login_required
+#def tracking(request):
+#    """
+#    Tracking / Seguimiento de las series. 
+#    Recibo un episodio (con su serie y temporada) y marco todas las anteriores
+#    como vistas (viewed)
+#    """
+#    if request.method == 'POST':
+#        serie_id = int(request.POST['serie_id'])
+#        season = int(request.POST['season'])
+#        episode = int(request.POST['episode'])
+#        user = request.user
+#        serie = m.Serie.objects.get(id=serie_id)
+#        season = m.Season.objects.get(serie=serie, season=season)
+#        seasons_viewed = m.Season.objects.filter(serie=serie, season__lt=season)
+#        episodes_viewed = m.Episode.objects.filter(season=season, episode__lte=episode)
+#        for epi in episodes_viewed:
+#            epi.hhh
+#        return HttpResponse(
+#            simplejson.dumps('OK'), 
+#            mimetype='application/json'
+#        )
