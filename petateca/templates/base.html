@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
 {% spaceless %} {% load i18n %}
-{% load compressed %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}{% endspaceless %}
 <!-- Si estas viendo esto por ahi te interesa ver nuestro código: http://github.com/alabs/petateca -->
@@ -10,7 +9,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico" />
     <!-- Stylesheets -->
-    {% compressed_css 'all' %}
+    <link href="/static/" rel="stylesheet" type="text/css" />
+    <link href="/static/css/reset.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/styles.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/jquery.colorbox.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/jquery.jgrowl.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/jquery.rating.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/jquery.bubblepopup.v2.3.1.css" rel="stylesheet" type="text/css">
     {% block extrastyle %}{% endblock %}
 </head>
 <body>
@@ -114,6 +119,12 @@
 </noscript>    
 </body>
     <!-- Scripts -->
-    {% compressed_js 'all' %}
+    <script type="text/javascript" src="js/jquery-min.js"></script>
+    <script type="text/javascript" src="js/jquery-min.js"></script>
+    <script type="text/javascript" src="js/jquery.colorbox.js"></script>
+    <script type="text/javascript" src="js/jquery.jgrowl.js"></script>
+    <script type="text/javascript" src="js/jquery.rating.js"></script>
+    <script type="text/javascript" src="js/jquery.bubblepopup.v2.3.1.min.js"></script>
+    <script type="text/javascript" src="js/petateca.js"></script>
     {% block extrascript %}{% endblock %}
 </html>

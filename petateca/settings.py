@@ -119,7 +119,6 @@ INSTALLED_APPS = (
     'djangoratings',
     'voting',
     'avatar',
-    'compress',
     'piston',
     'twitter_messages',
     #Sentry
@@ -206,38 +205,6 @@ LOGIN_URL_INDEX = '/accounts/signin/'
 INVITATION_MAIL = 'invitaciones@liberateca.net'
 ADMIN_MAIL = 'admin@liberateca.net'
 
-# compress app settings
-COMPRESS_CSS = {
-    'all': {
-        'source_filenames': (
-            'css/reset.css',
-            'css/styles.css',
-            'css/jquery.colorbox.css',
-            'css/jquery.jgrowl.css',
-            'css/jquery.rating.css',
-            'css/jquery.bubblepopup.v2.3.1.css',
-            'css/jquery.sorter_blue.css',
-        ),
-        'output_filename': 'css/compressed-?.css',
-    },
-}
-
-COMPRESS_JS = {
-    'all': {
-        'source_filenames': (
-            'js/jquery-min.js',
-            'js/jquery.colorbox.js',
-            'js/jquery.jgrowl.js',
-            'js/jquery.rating.js',
-            'js/jquery.bubblepopup.v2.3.1.min.js',
-            'js/petateca.js',
-        ),
-        'output_filename': 'js/compressed-?.js',
-    },
-}
-
-COMPRESS = True
-COMPRESS_VERSION = True
 
 CACHE_BACKEND = 'dummy://'
 
