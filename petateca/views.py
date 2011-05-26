@@ -21,10 +21,10 @@ def index(request):
          }
     # Le damos una cookie que queramos, luego comprobamos que este
     # para enviar los mensajes con jgrowl
-    if request.session.get('logo_mess', False):
+    if request.session.get('logo_voting', False):
         return index_response
     else:
-        request.session['logo_mess'] = True
+        request.session['logo_voting'] = True
         logo_message = 1
         index_response.update({
                 'logo_message': logo_message,

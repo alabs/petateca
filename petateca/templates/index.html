@@ -36,8 +36,8 @@
                     </p>
 			</div>
 			<div class="quicknavgrid_3 quicknav">
-					<h4 class="title ">{% trans "Concurso de logos" %}</h4>
-					<p style="text-align:center; font-size:120%;">Participa en el concurso de logos enviando tu propuesta a logos(arroba)liberateca.net. <b>Tienes tiempo hasta el 20 de Mayo</b>. <a href="http://liberateca.uservoice.com/forums/106199-general/suggestions/1765475-logo">Más información</a> </p>
+					<h4 class="title ">{% trans "Votacion de logos" %}</h4>
+					<p style="text-align:center; font-size:120%;">Ya puedes participar votando por el nuevo logo de Liberateca que más te guste. <b>Tienes tiempo hasta el 5 de Junio</b>. <a href="http://blog.alabs.es/elige-el-nuevo-logo-para-liberateca/">Más información</a> </p>
 			</div>
 			<div class="quicknavgrid_3 quicknav">
 					<h4 class="title ">{% trans "Errores o sugerencias" %}</h4>
@@ -80,7 +80,7 @@
 {% block extrascript %}
     {% if logo_message %}
     <script>
-        $.jGrowl("¿Te gusta nuestro logo actual? A nosotros tampoco. Ayúdanos a cambiarlo enviando tu propuesta a logos@liberateca.net", { header: 'Concurso de logos', sticky: true });
+        $.jGrowl("¿Te gusta nuestro logo actual? A nosotros tampoco. Ya puedes <a style='color:#fff; text-decoration:underline;' href='http://blog.alabs.es/elige-el-nuevo-logo-para-liberateca/'><b>votar las propuestas</b></a> que nos han llegado. Tienes tiempo hasta el 5 de Junio.", { header: 'Votación de logos', sticky: true });
     </script>
     {% endif %}
 {% endblock %}
