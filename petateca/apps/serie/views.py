@@ -170,17 +170,18 @@ def add_or_edit_serie(request, serie_slug=None):
                 except ObjectDoesNotExist:
                     pass
             serie = form_serie.save()
+            slug = form_serie.cleaned_data['slug_name']
             # Si existe FILES es que nos envian una imagen para la serie
             if request.FILES:
                 img_serie = ImageSerie()
-                img_serie.title = serie_slug
+                img_serie.title = slug
                 img_serie.src = request.FILES['src']
                 img_serie.is_poster = True
                 img_serie.serie = serie
                 img_serie.save()
             # TODO: tratamiento de los actores
             final_url = reverse('serie.views.get_serie', kwargs={
-                'serie_slug': form_serie.cleaned_data['slug_name']
+                'serie_slug': slug
             })
             # Redireccionamos a la ficha de la serie
             return HttpResponseRedirect(final_url)
