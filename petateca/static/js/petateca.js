@@ -257,7 +257,7 @@ $(document).ready(function () {
 
             var post_url = $('form#add_serie_form[action]').attr('action');
 
-            // FIXME: Comprobamos que ningun campo este en blanco, lo suyo seria hacer esto pero no funcioan
+            // Comprobamos que ningun campo este en blanco
            fields = [ $name_es, $name_en, $description_es, $description_en, $network, $runtime ];
            $.each(fields, function(index, f){
                if (f.val()==='') {
@@ -267,37 +267,7 @@ $(document).ready(function () {
                } else {f.removeClass('hightlight');}
            });
         
-           // if ($name_es.val()==='') {
-           //     $name_es.addClass('hightlight');
-           //     return false;
-           // } else {$name_es.removeClass('hightlight');}
-
-           // if ($name_en.val()==='') {
-           //     $name_en.addClass('hightlight');
-           //     return false;
-           // } else {$name_en.removeClass('hightlight');}
-
-           // if ($description_es.val()==='') {
-           //     $description_es.addClass('hightlight');
-           //     return false;
-           // } else {$description_es.removeClass('hightlight');}
-
-           // if ($description_en.val()==='') {
-           //     $description_en.addClass('hightlight');
-           //     return false;
-           // } else {$description_en.removeClass('hightlight');}
-
-           // // TODO: genres hightlight
-
-           // if ($network.val()==='') {
-           //     $network.addClass('hightlight');
-           //     return false;
-           // } else {$network.removeClass('hightlight');}
-
-           // if ($runtime.val()==='') {
-           //     $runtime.addClass('hightlight');
-           //     return false;
-           // } else {$runtime.removeClass('hightlight');}
+           // TODO: genres hightlight
 
             // TODO: comprobamos que la duracion sea un numero
         });
@@ -422,7 +392,7 @@ $(document).ready(function () {
         var serie = season_serie[4];
         var season = season_serie[6];
 
-        // FIXME: Comprobamos que ningun campo este en blanco, lo suyo seria hacer esto pero no funcioan
+        // Comprobamos que ningun campo este en blanco
         fields = [ $air_date, $title_es, $title_en, $episode ];
         $.each(fields, function(index, f){
             if (f.val()==='') {
@@ -431,25 +401,6 @@ $(document).ready(function () {
             } else {f.removeClass('hightlight');}
         });
     
- //       if ($air_date.val()==='') {
- //           $air_date.addClass('hightlight');
- //           return false;
- //       } else { $air_date.removeClass('hightlight'); }
-
- //       if ($title_es.val()==='') {
- //           $title_es.addClass('hightlight');
- //           return false;
- //       } else $title_es.removeClass('hightlight');
-
- //       if ($title_en.val()=='') {
- //           $title_en.addClass('hightlight');
- //           return false;
- //       } else $title_en.removeClass('hightlight');
-
- //       if ($episode.val()=='') {
- //           $episode.addClass('hightlight');
- //           return false;
- //       } else $episode.removeClass('hightlight');
 
         // TODO: Comprobamos que la fecha este en un formato valido 
 
