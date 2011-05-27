@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 
 # Hay algunas partes en las que no se puede cambiar, 
 # asi que si se va a cambiar es recomendable hacer antes un
-# egre -R "(petateca|liberateca)" * 
+# egrep -R "(petateca|liberateca)" * 
 SITE_NAME = 'Liberateca'
 
 DEBUG = True
@@ -32,12 +32,6 @@ DATABASES = {
         'HOST': '',
         'PORT': '',
     },
-#    'imdb': {
-#        'ENGINE': 'postgresql_psycopg2',
-#        'NAME': 'imdb',
-#        'USER': 'petateca',
-#        'PASSWORD': 'libre',
-#    },
 }
 
 TIME_ZONE = 'Europe/Madrid'
@@ -93,9 +87,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'context_processors.site_name',
 )
 
-#FIXTURE_DIRS = (
-#    os.path.join(PROJECT_ROOT, 'blog/fixtures')
-#)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -121,6 +112,7 @@ INSTALLED_APPS = (
     'avatar',
     'piston',
     'twitter_messages',
+    'api',
     #Sentry
     # don't forget to add the dependencies!
     'indexer',
@@ -129,13 +121,6 @@ INSTALLED_APPS = (
     'sentry.client',
 )
 
-DATABASE_ROUTERS = ['imdblocal.dbrouter.ImdbRouter']
-
-#Valid values are http, sql
-IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
-
-#uri for use with sql
-IMDB_ACCESS_DB_URI = "postgres://petateca:libre@localhost/imdb"
 
 THUMBNAIL_DEBUG = True
 THUMBNAIL_SUBDIR = 'thumbs'
