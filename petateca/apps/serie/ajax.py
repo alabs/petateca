@@ -65,7 +65,7 @@ def espoiler_lookup(request, serie_id, season, episode):
 @login_required
 def vote_link(request, link_type):
     ''' Tratamiento de los votos de los enlaces '''
-    if request.method == 'POST':
+    if request.method == 'POST' and request.is_ajax():
         ''' Trata las votaciones '''
         user = User.objects.get(username=request.user)
         if link_type == 'episode':
@@ -76,9 +76,8 @@ def vote_link(request, link_type):
             Vote.objects.record_vote(link, user, +1)
         elif request.POST['vote'] == 'downvote':
             Vote.objects.record_vote(link, user, -1)
-        if request.is_ajax():
-            votes = Vote.objects.get_score(link)
-            return HttpResponse(simplejson.dumps(votes), mimetype='application/json')
+        votes = Vote.objects.get_score(link)
+        return HttpResponse(simplejson.dumps(votes), mimetype='application/json')
 
 
 @render_to('serie/ajax/actors.html')
