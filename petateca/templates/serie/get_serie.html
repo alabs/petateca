@@ -66,15 +66,16 @@
 	<!-- FAVORITE -->
 	<div id="favorite" class="right">
 	  {% if favorite == "no" %}
-		<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_black.png"></a>
+		<a href="#" onclick="favorite();" id="favorite"><img title="Agregar a favoritas" alt="Agregar a favoritas" class="heart_fav" src="/static/images/heart_black.png"></a>
 	  {% else %} 
 	  {% if favorite == "yes" %}
-		<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_red.png"></a>
+		<a href="#" onclick="favorite();" id="favorite"><img title="Quitar de favoritas" alt="Quitar de favoritas" class="heart_fav" src="/static/images/heart_red.png"></a>
 	    {% endif %}
 	    {% endif %}
 	</div>
+    <!-- EDIT -->
     <div id="edit-serie" class="right">
-        <a href="{% url edit_serie serie_slug=serie.slug_name %}"><img src="/static/images/accessories-text-editor.png"></a>
+        <a href="{% url edit_serie serie_slug=serie.slug_name %}"><img title="Editar serie" alt="Editar serie" src="/static/images/accessories-text-editor.png"></a>
     </div>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- SEASONS -->
@@ -87,8 +88,9 @@
         </ul>
     {% endfor %}
     <ul>
+        <!-- AGREGAR TEMPORADA -->
         <li><a class="button" id="season_add" href="{% url add_season serie_slug=serie.slug_name %}">
-            <img src="/static/images/list-add.png" class="left nobottom">
+            <img title="Agregar temporada nueva" alt="Agregar temporada nueva" src="/static/images/list-add.png" class="left nobottom">
             <p class="right nobottom">Agregar</p>
         </a>
     </ul>
