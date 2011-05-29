@@ -1,3 +1,4 @@
+# encoding: utf-8
 """
 Tests para la APP de serie
 """
@@ -6,6 +7,12 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 
 from serie import models as m
+
+from serie.templatetags.background_color import background_color
+from serie.templatetags.echo_language import echo_language 
+from serie.templatetags.extract_domain import extract_domain
+from serie.templatetags.extract_type import extract_type
+from serie.templatetags.tagcloud import tagcloud
 
 from voting.models import Vote
 
@@ -257,12 +264,60 @@ class SerieTest(TestCase):
         self.assertEqual(votes, 1)
 
     def test_search_lookup(self):
+        ''' La busqueda de AJAX '''
         url = '/search/lookup/?query=Twin'
         r = self.client.get(url, {})
         self.assertEqual(r.status_code, 200)
         search_twin_peaks = r._get_content().find('Twin Peaks')
         self.assertEqual(search_twin_peaks, 143)
 
+    # Templatetags
+    def test_background_color(self):
+        ''' Prueba el templatetag de background color '''
+        result = background_color(5)
+        self.assertEqual(result, 'positive_bg')
+        result = background_color(3)
+        self.assertEqual(result, 'neutral_bg')
+        result = background_color(1)
+        self.assertEqual(result, 'negative_bg')
+        result = background_color(0)
+        self.assertEqual(result, 'no_bg')
 
-#    def test_add_comment(self):
+    def test_echo_language(self):
+        ''' Templatetag que devuelve el lenguaje '''
+        result = echo_language('es')
+        self.assertEqual(result, 'Español')
+        result = echo_language('en')
+        self.assertEqual(result, 'Inglés')
+        result = echo_language('eu')
+        self.assertEqual(result, 'Euskera')
+        result = echo_language('ca')
+        self.assertEqual(result, 'Catalán')
+        result = echo_language('jp')
+        self.assertEqual(result, 'Japonés')
+        result = echo_language('xx')
+        self.assertEqual(result, 'Desconocido')
+
+    def test_extract_domain(self):
+        ''' Templatetag que devuelve el dominio de una URL '''
+        result = extract_domain('http://www.megavideo.com/?d=FABADA')
+        self.assertEqual(result, 'megavideo.com')
+
+    def test_extract_type(self):
+        ''' Templatetag que devuelve el tipo de una URL '''
+        result = extract_type('http://www.megavideo.com/?d=FABADA')
+        self.assertEqual(result, 'Visionado online')
+        result = extract_type('http://www.megaupload.com/?d=FABADA')
+        self.assertEqual(result, 'Descarga directa')
+        result = extract_type('http://www.mininova.org/?d=FABADA')
+        self.assertEqual(result, 'Torrent')
+        result = extract_type('http://www.xxxxxxx.org/?d=FABADA')
+        self.assertEqual(result, 'Desconocido')
+
+    def test_tagcloud(self):
+        ''' Templatetag que devuelve el tagcloud para Genre/Network '''
+        result = tagcloud('Genre', '1', '5')['tagcloud_list'][0]['name']
+        self.assertEqual(result, 'Drama')
+        result = tagcloud('Network', '1', '5')['tagcloud_list'][0]['name']
+        self.assertEqual(result, 'ABC')
 

@@ -633,7 +633,10 @@ p.error {
 }
 #comment_form textarea {
     width: 500px;
-    height: 150px;
+    height: 50px;
+}
+#send_message {
+    margin-top: 6em;
 }
 /* Invitation form */
 #invitation_form ul { float: left }

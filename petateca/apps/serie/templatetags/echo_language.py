@@ -7,9 +7,8 @@ register = template.Library()
 
 
 @register.filter()
-def echo_language(value):  # Only one argument.
+def echo_language(lang):  # Only one argument.
     "Converts iso_code to language name"
-    lang = value
     if lang == 'es' or lang == 'es-es': lang_name = 'Español'
     elif lang == 'en': lang_name = 'Inglés'
     elif lang == 'eu': lang_name = 'Euskera'
