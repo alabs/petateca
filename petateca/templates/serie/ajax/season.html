@@ -1,7 +1,10 @@
-
+<html>
+    <body>
+{% if request.user.is_authenticated %}
 <!-- AÑADIR UN EPISODIO --> 
 <a href="{% url ajax_add_episode serie_id=season.serie.id season=season.season %}" id="add_episode" class="button" title="Agregar episodio">Agregar episodio</a>
 <div id="episode_inside"></div>
+{% endif %}
 
 <div id="episode_list" class="left">
   <ul>
@@ -10,21 +13,60 @@
         <a class="zoom" href="{% url ajax_list_links_season serie_id=season.serie.id season=season.season %}">
             <strong>Temporada {{ season.season }} Completa</strong>
         <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
-        <img alt="Añadir" title="Añadir un enlace" id="{{ season.id }}" rel="/series/links/add/season/" class="add_link nobottom right" src="/static/images/list-add.png"></a>
+        {% if request.user.is_authenticated %}<img alt="Añadir" title="Añadir un enlace" id="{{ season.id }}" rel="/series/links/add/season/" class="add_link nobottom right" src="/static/images/list-add.png"></a>{% endif %}
         <div class="list_inside" id="inside{{ season.id }}"></div>
     </li>
   {% for episode in episode_list %}
-    <li>
+    <li id="serie_{{ season.serie.id }}_{{ season.season }}_{{ episode.episode }}">
         <!-- EPISODIO {{ episode.episode }} -->
-        <!-- TODO: seguimineto <input style="margin-left:1em;" type="checkbox" name="view" class="left" -->
-        <a class="zoom" {% if episode.from_future %}id="future" {% endif %}href="{% url ajax_list_links_episodes serie_id=season.serie.id season=season.season episode=episode.episode %}">
+        {% if request.user.is_authenticated %}<input style="margin-left:1em;" type="checkbox" name="view" class="left" {% if episode.is_viewed %}checked{%endif%} >{% endif %}
+        <a class="zoom {% if request.user.is_authenticated %}{% if episode.is_viewed %}checked{%endif%}{%endif%}" {% if episode.from_future %}id="future" {% endif %}href="{% url ajax_list_links_episodes serie_id=season.serie.id season=season.season episode=episode.episode %}">
             <strong>{{ episode.season_episode }}</strong>- {{ episode.title }} - <span id="datemeta">({{ episode.air_date|date:"SHORT_DATE_FORMAT" }})</span>
         <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
-        <img alt="Descrición" title="Ver descripción" class="right espoiler" id="{{ episode.id }}" rel="{% url ajax_espoiler serie_id=season.serie.id season=season.season episode=episode.episode %}" src="/static/images/emblem-photos.png" style="margin-bottom:0 !important;">
-        <img alt="Añadir" title="Añadir un enlace" id="{{ episode.id }}" rel="/series/links/add/episode/" class="add_link right nobottom" src="/static/images/list-add.png">
+        <img alt="Descrición" title="Ver descripción" class="right espoiler nobottom" id="{{ episode.id }}" rel="{% url ajax_espoiler serie_id=season.serie.id season=season.season episode=episode.episode %}" src="/static/images/emblem-photos.png">
+        {% if request.user.is_authenticated %}<img alt="Añadir" title="Añadir un enlace" id="{{ episode.id }}" rel="/series/links/add/episode/" class="add_link right nobottom" src="/static/images/list-add.png">{% endif %}
         </a>
         <div class="list_inside" id="inside{{episode.id}}"></div>
     </li>
   {% endfor %}
   </ul>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){ 
+    $("input:checkbox").bind("click", function(){ 
+        // Marcamos las anteriores como checked, marcamos las posteriores limpias
+        var mybox = this; 
+        var tick = true; 
+        $("input:checkbox").each(function(){ 
+            this.checked = tick; 
+            if ( this == mybox ) tick = false; 
+        }); 
+        // Enviamos el valor de ultima por AJAX
+        serie_season_episode = $(this).parent().attr('id').split('_');
+        serie_id = serie_season_episode[1];
+        season = serie_season_episode[2]; 
+        episode = serie_season_episode[3]; 
+        $.post('/series/tracking/', {
+                'serie_id': serie_id,
+                'season': season,
+                'episode': episode,
+                }, function(data){
+                    switch (data) {
+                        case 'OK':
+                            $.jGrowl("Has marcado el episodio como visto");
+                            break;
+                        default:
+                            $.jGrowl("Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net");
+                            alert(data);
+                    }
+                }
+        )
+    });
+});
+
+//    $("input:checkbox").click(
+//        function(){ 
+//    });
+</script>
+</body>
+</html>

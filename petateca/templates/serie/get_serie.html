@@ -63,6 +63,7 @@
 <div class="grid_9">
 	<!-- TITLE -->
 	<h1 class="title float">{{serie.name|title}}</h1>
+    {% if request.user.is_authenticated %}
 	<!-- FAVORITE -->
 	<div id="favorite" class="right">
 	  {% if favorite == "no" %}
@@ -77,6 +78,7 @@
     <div id="edit-serie" class="right">
         <a href="{% url edit_serie serie_slug=serie.slug_name %}"><img title="Editar serie" alt="Editar serie" src="/static/images/accessories-text-editor.png"></a>
     </div>
+    {% endif %}
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- SEASONS -->
 	<h2><span>{% trans "Temporadas" %}</span></h2>
@@ -84,15 +86,18 @@
 	{% for season in season_list %}
         <ul id="season{{season.season}}">
             <li> <a class="season" href="{{ season.get_absolute_url }}">
-            <p class="subtitle">{% trans "Temporada" %} {% if season.season == 0 %}<br />Especial{%else%} {{ season.season }}{%endif %}</p> 
+                <p class="subtitle">{% trans "Temporada" %} {% if season.season == 0 %}<br />Especial{%else%} {{ season.season }}{%endif %}</p> 
+            </a></li>
         </ul>
     {% endfor %}
     <ul>
+    {% if request.user.is_authenticated %}
         <!-- AGREGAR TEMPORADA -->
         <li><a class="button" id="season_add" href="{% url add_season serie_slug=serie.slug_name %}">
             <img title="Agregar temporada nueva" alt="Agregar temporada nueva" src="/static/images/list-add.png" class="left nobottom">
             <p class="right nobottom">Agregar</p>
         </a>
+    {% endif %}
     </ul>
         <div id="season_add_form"></div>
     </div>

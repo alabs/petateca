@@ -962,12 +962,46 @@ left:46em;
     margin-top: 3px;
 }
 
-#episode_list { width:550px; font-family:Georgia, Times, serif; font-size:12px; }
-#episode_list ul { list-style: none; }
-#episode_list ul li { }
-#episode_list ul li a { display:block; text-decoration:none; color:#000000; background-color:#FFFFFF; line-height:25px; border-bottom-style:solid; border-bottom-width:1px; border-bottom-color:#CCCCCC; padding-left:10px; cursor:pointer; }
-#episode_list ul li a:hover { color:#FFFFFF; background-color:#999999; background-repeat:repeat-x; }
-#episode_list ul li a strong { margin-right:10px; }
+
+#episode_list { 
+    width:550px; 
+    font-family:Georgia, Times, 
+    serif; font-size:11px; 
+}
+#episode_list ul { 
+    list-style: none; 
+}
+#episode_list ul li a { 
+    display:block; text-decoration:none;
+    color:#000000;
+    background-color:#FFFFFF;
+    line-height:25px;
+    border-bottom-style:solid;
+    border-bottom-width:1px; 
+    border-bottom-color:#CCCCCC; 
+    padding-left:10px; 
+    cursor:pointer; 
+}
+#episode_list ul li a:hover { 
+    color:#FFFFFF;
+    background-color:#999999;
+    background-repeat:repeat-x;
+}
+#episode_list ul li a strong {
+    margin-right:10px;
+}
+#episode_list ul li .selected_list {
+    background-color: #000;
+    color: #fff; 
+    background-repeat:repeat-x; 
+}
+#episode_list ul li .checked {
+    background-color: #BDBDBD;
+    color: #424242;
+    background-repeat:repeat-x; 
+}
+
+
 #future { color:#FFFFFF !important; background-color:#999999 !important; background-repeat:repeat-x; }
 #datemeta {
     font-family: 'Lucida Grande','Lucida Sans Unicode',Tahoma,Arial,san-serif;
@@ -976,11 +1010,6 @@ left:46em;
     line-height: 16px;
     text-shadow: none;
     text-transform: none;
-}
-
-.selected_list {
-    background-color: #000 !important;
-    color: #fff !important; 
 }
 
 #downvote { 

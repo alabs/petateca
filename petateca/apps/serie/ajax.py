@@ -1,14 +1,17 @@
-from serie import models as m
-from django.contrib import messages
-from serie.forms import LinkForm, LinkSeasonForm, EpisodeForm, EpisodeImageForm
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
-from django.utils import simplejson
-from voting.models import Vote
-from django.http import HttpResponse
-from decorators import render_to
 from datetime import datetime
+from decorators import render_to
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import get_object_or_404
+from django.utils import simplejson
+from djangoratings.views import AddRatingView
+from serie import models as m
+from serie.forms import LinkForm, LinkSeasonForm, EpisodeForm, EpisodeImageForm
+from voting.models import Vote
 
 @render_to('serie/ajax/popup.html')
 def serie_lookup(request, serie_id):
@@ -23,11 +26,30 @@ def season_lookup(request, serie_id, season):
     ''' Listado de episodios para una temporada, ordenados por numero de episodio '''
     serie = get_object_or_404(m.Serie, id=serie_id)
     season = get_object_or_404(m.Season, serie=serie, season=season)
-    episode_list = season.episodes.all().order_by('episode')
-    return { 
-        'season': season,
-        'episode_list' : episode_list,
-    }
+    episode_list = season.episodes.order_by('episode')
+    # Comprobamos si el usuario tiene episodios vistos
+    if request.user.is_authenticated():
+        episode_list_cleaned = []
+        profile = request.user.profile
+        for epi in episode_list: 
+            epi_cleaned = {
+                'title' : epi.title,
+                'title_en' : epi.title_en,
+                'title_es' : epi.title_es,
+                'air_date' : epi.air_date,
+                'episode' : epi.episode,
+                'is_viewed' : epi.viewed_episodes.filter(user=profile).exists()
+            }
+            episode_list_cleaned.append(epi_cleaned)
+        return { 
+            'season': season,
+            'episode_list' : episode_list_cleaned,
+        }
+    else:
+        return {
+            'season': season,
+            'episode_list': episode_list,
+        }
 
 
 @render_to('serie/ajax/links_list.html')
@@ -301,6 +323,7 @@ def ajax_add_episode(request, serie_id, season):
                     mimetype='application/json'
                 )
             except: 
+                # Guardamos el epi
                 episode = m.Episode(
                     air_date=form_epi.cleaned_data['air_date'],
                     title=form_epi.cleaned_data['title'],
@@ -314,11 +337,13 @@ def ajax_add_episode(request, serie_id, season):
                     simplejson.dumps('OK'), 
                     mimetype='application/json'
                 )
+        # Uops 
         else:
             return HttpResponse(
                 simplejson.dumps('Error'), 
                 mimetype='application/json'
             )
+    # Entrega del formulario limpio
     return {
         'form': form_epi,
         'serie': serie,
@@ -326,25 +351,71 @@ def ajax_add_episode(request, serie_id, season):
     }
 
 
-#@login_required
-#def tracking(request):
-#    """
-#    Tracking / Seguimiento de las series. 
-#    Recibo un episodio (con su serie y temporada) y marco todas las anteriores
-#    como vistas (viewed)
-#    """
-#    if request.method == 'POST':
-#        serie_id = int(request.POST['serie_id'])
-#        season = int(request.POST['season'])
-#        episode = int(request.POST['episode'])
-#        user = request.user
-#        serie = m.Serie.objects.get(id=serie_id)
-#        season = m.Season.objects.get(serie=serie, season=season)
-#        seasons_viewed = m.Season.objects.filter(serie=serie, season__lt=season)
-#        episodes_viewed = m.Episode.objects.filter(season=season, episode__lte=episode)
-#        for epi in episodes_viewed:
-#            epi.hhh
-#        return HttpResponse(
-#            simplejson.dumps('OK'), 
-#            mimetype='application/json'
-#        )
+@login_required
+def tracking(request):
+    """
+    Tracking / Seguimiento de las series. 
+    Recibo un episodio (con su serie y temporada) y marco todas las anteriores
+    como vistas (viewed)
+    """
+    if request.method == 'POST' and request.is_ajax():
+        episode_n = int(request.POST['episode'])
+        season_n = int(request.POST['season'])
+        user = request.user
+        serie = m.Serie.objects.get(id=int(request.POST['serie_id']))
+        season = m.Season.objects.get(serie=serie, season=season_n)
+        episodes_viewed = m.Episode.objects.filter(season=season, episode__lte=episode_n)
+        episodes_not_viewed = m.Episode.objects.filter(season=season, episode__gt=episode_n)
+        for epi in episodes_viewed: epi.viewed_episodes.add(user.profile)
+        for epi in episodes_not_viewed: epi.viewed_episodes.remove(user.profile)
+        return HttpResponse(
+            simplejson.dumps('OK'), 
+            mimetype='application/json'
+        )
+    else:
+        return HttpResponseForbidden('Error en la peticion AJAX')
+
+@login_required
+def rating_serie(request, serie_slug):
+    ''' Tratamiento de ratings para series '''
+    if request.method == 'POST' and request.is_ajax():
+        serie_id = m.Serie.objects.get(slug_name=serie_slug).id
+        if request.POST['rating']:
+            content_type = ContentType.objects.get(
+                app_label='serie', 
+                name='serie'
+            )
+            params = {
+                'content_type_id': content_type.id,
+                'object_id': serie_id,
+                'field_name': 'rating',  # campo en el modelo
+                'score': request.POST['rating'],
+            }
+            response = AddRatingView()(request, **params)
+            return HttpResponse(
+                simplejson.dumps(response.content),
+                mimetype='application/json'
+            )
+    else:
+        return HttpResponseForbidden('Error en la peticion AJAX')
+
+@login_required
+def favorite_serie(request, serie_slug):
+    ''' Tratamiento de favoritos (series) ''' 
+    if request.method == 'POST' and request.is_ajax():
+        serie = m.Serie.objects.get(slug_name=serie_slug)
+        user = User.objects.get(username=request.user)
+        if request.POST['favorite'] == 'yes':
+            serie.favorite_of.add(user.profile)
+            return HttpResponse(
+                simplejson.dumps('yes'), 
+                mimetype='application/json'
+            )
+        elif request.POST['favorite'] == 'no':
+            serie.favorite_of.remove(user.profile)
+            return HttpResponse(
+                simplejson.dumps('no'),
+                mimetype='application/json'
+            )
+    else:
+        return HttpResponseForbidden('Error en la peticion AJAX')

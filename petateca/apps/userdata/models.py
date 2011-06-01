@@ -5,11 +5,15 @@ from django.contrib.auth.backends import ModelBackend
 
 from datetime import datetime
 
-from serie.models import Serie
+from serie.models import Serie, Episode
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     favorite_series = models.ManyToManyField(Serie, related_name="favorite_of")
+    viewed_episodes = models.ManyToManyField(
+        Episode, 
+        related_name="viewed_episodes"
+    )
 
 def user_post_delete(sender, instance, **kwargs):
     try:

@@ -60,17 +60,17 @@ function favorite() {
         decision = "no";
     }
     $('#favorite').html('<img src="/static/images/ajax-loading.gif">');
-    var url = window.location.pathname;
+    var url = window.location.pathname + 'favorite/';
     if (decision == "yes") {
         $.post(url, {
-            'favorite': "favorite",
+            'favorite': 'yes',
             'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function (data) {
             disc_fav_data(data);
         });
     } else if (decision == "no") {
         $.post(url, {
-            'no-favorite': "no-favorite",
+            'favorite': "no",
             'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function (data) {
             disc_fav_data(data);
@@ -215,7 +215,7 @@ $(document).ready(function () {
     // Rating de estrellas, se envia el rating por post a /serie/nombre
     $('.ratingstar').rating({
         callback: function (value, link) {
-            var url = window.location.pathname;
+            var url = window.location.pathname + 'rate/';
             $.post(url, {
                 'rating': value,
                 'csrfmiddlewaretoken': getCookie('csrftoken')
@@ -245,9 +245,10 @@ $(document).ready(function () {
         }
     );
 
-            
+
         // para el form de add_or_edit_serie
         $('#submit_serie').click(function (event) {
+            // Variables que capturamos
             var $name_es = $('input[name=name_es]');
             var $name_en = $('input[name=name_en]');
             var $description_es = $('textarea[name=description_es]');

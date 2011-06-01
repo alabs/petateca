@@ -136,8 +136,7 @@ class SerieTest(TestCase):
         user, password = self.create_user()
         c = Client()
         c.login(username=user.username, password=password)
-        response = c.post('/serie/twin-peaks/', {
-            'favorite': 'favorite',},
+        response = c.post('/serie/twin-peaks/favorite/', {},
             # AJAX!!
             HTTP_X_REQUESTED_WITH='XMLHttpRequest'
         )
@@ -321,3 +320,15 @@ class SerieTest(TestCase):
         result = tagcloud('Network', '1', '5')['tagcloud_list'][0]['name']
         self.assertEqual(result, 'ABC')
 
+    # custom methods
+    def test_next_season(self):
+        ''' Comprueba get_next_season ''' 
+        serie = m.Serie.objects.get(id=1)
+        season = m.Season.objects.get(season=1, serie=serie)
+        self.assertEqual(season.get_next_season().season, 2)
+
+    def test_previous_season(self):
+        ''' Comprueba get_previous_season ''' 
+        serie = m.Serie.objects.get(id=1)
+        season = m.Season.objects.get(season=2, serie=serie)
+        self.assertEqual(season.get_previous_season().season, 1)

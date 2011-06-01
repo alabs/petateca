@@ -191,7 +191,7 @@ INVITATION_MAIL = 'invitaciones@liberateca.net'
 ADMIN_MAIL = 'admin@liberateca.net'
 
 
-CACHE_BACKEND = 'dummy://'
+#CACHE_BACKEND = 'dummy://'
 
 USE_ETAGS = True
 
@@ -199,6 +199,10 @@ SECURE_REQUIRED_PATHS = (
     '/admin/',
     '/accounts/',
 )
+
+#Valid values are http, sql
+IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
+
 
 
 # Con local_settings podemos reescribir / agregar settings que sean 
