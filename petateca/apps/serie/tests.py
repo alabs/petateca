@@ -136,7 +136,8 @@ class SerieTest(TestCase):
         user, password = self.create_user()
         c = Client()
         c.login(username=user.username, password=password)
-        response = c.post('/serie/twin-peaks/favorite/', {},
+        response = c.post('/serie/twin-peaks/favorite/', 
+            {'favorite': 'yes'},
             # AJAX!!
             HTTP_X_REQUESTED_WITH='XMLHttpRequest'
         )
@@ -261,6 +262,40 @@ class SerieTest(TestCase):
         link = m.Link.objects.get(id=linkid)
         votes = Vote.objects.get_score(link)['score']
         self.assertEqual(votes, 1)
+
+    def test_tracking_episodes(self):
+        '''
+        Seguimiento de series/episodios
+        '''
+        url = '/series/tracking/'
+        serie_id = 1
+        episode = 3
+        season = 2
+        params = {
+            'serie_id': serie_id,
+            'episode': episode,
+            'season': season,
+        }
+        user, password = self.create_user()
+        c = Client()
+        c.login(username=user.username, password=password)
+        response = c.post(url, params,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
+        # Comprueba que efectivamente se agrego
+        self.assertEqual(response.status_code, 200)
+        message_ok = '"OK"'
+        self.assertEqual(response._get_content(), message_ok)
+        serie = m.Serie.objects.get(id=serie_id)
+        season = m.Season.objects.get(serie=serie, season=season)
+        episode = m.Episode.objects.get(season=season, episode=episode)
+        # Esto ha de hacerse haciendo un filter contra el usuario, pero al 
+        # ser un test con un unico usuario, da igual
+        result = episode.viewed_episodes.exists()
+        self.assertEqual(result, True)
+        # Y el siguiente esta como no visto?
+        result = episode.get_next_episode().viewed_episodes.exists()
+        self.assertEqual(result, False)
 
     def test_search_lookup(self):
         ''' La busqueda de AJAX '''
