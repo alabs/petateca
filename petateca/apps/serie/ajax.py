@@ -38,6 +38,7 @@ def season_lookup(request, serie_id, season):
                 'title_es' : epi.title_es,
                 'air_date' : epi.air_date,
                 'episode' : epi.episode,
+                'season_episode': epi.season_episode(),
                 'is_viewed' : epi.viewed_episodes.filter(user=profile).exists()
             }
             episode_list_cleaned.append(epi_cleaned)
