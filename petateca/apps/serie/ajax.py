@@ -110,6 +110,19 @@ def actors_lookup(request, serie_slug):
     roles = m.Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie)
     return { 'roles': roles }
 
+def get_numbers():
+    series = m.Serie.objects.filter(name_es__startswith="0") | \
+    m.Serie.objects.filter(name_es__startswith="1") | \
+    m.Serie.objects.filter(name_es__startswith="2") | \
+    m.Serie.objects.filter(name_es__startswith="3") | \
+    m.Serie.objects.filter(name_es__startswith="4") | \
+    m.Serie.objects.filter(name_es__startswith="5") | \
+    m.Serie.objects.filter(name_es__startswith="6") | \
+    m.Serie.objects.filter(name_es__startswith="7") | \
+    m.Serie.objects.filter(name_es__startswith="8") | \
+    m.Serie.objects.filter(name_es__startswith="9") 
+    return series
+
 
 @render_to('serie/generic_list.html')
 def ajax_letter(request, letter):
@@ -117,9 +130,13 @@ def ajax_letter(request, letter):
     Buscador de letras para el listado de series 
     TODO: generic_list / generic_object magik
     '''
-    series = m.Serie.objects.filter(name_es__startswith=letter)
+    if letter == "0":
+        series = get_numbers()
+    else:
+        series = m.Serie.objects.filter(name_es__startswith=letter)
     series = series.order_by('name_es')
     return { 'series_list': series }
+
 
 
 @render_to('serie/generic_list.html')
