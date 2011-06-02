@@ -256,33 +256,9 @@ class Command(BaseCommand):
             db_season = m.Season.objects.get(serie=db_serie, season=ntemp)
         except m.Season.DoesNotExist:
             db_season = m.Season()
-            
-        db_season.serie = db_serie
-        db_season.season = int(ntemp)
-
-        tvdb_en = Tvdb(actors=True, banners=True)
-        reg_en = tvdb_en[db_serie.name]
-     
-        db_season.save()
-
-        # Try Season image, if it's do nothing..
-        # If not exists, then 
-        # check for banners
-        # create banners
-        try:
-             season_banners = reg_en['_banners']['season']['season']
-        except KeyError:
-             return db_season
-        for img_banner in season_banners:
-            if int(ntemp) == int(season_banners[img_banner]['season']):
-                img_url = season_banners[img_banner]['_bannerpath']
-                img_title = season_banners[img_banner]['id']
-                img = urllib.urlretrieve(img_url)
-                db_img = m.ImageSeason(is_poster=True, title=img_title)
-                db_img.season = db_season
-                file_content = ContentFile(open(img[0]).read())
-                db_img.src.save(os.path.basename(img_url), file_content)
-                db_img.save()
+            db_season.serie = db_serie
+            db_season.season = int(ntemp)
+            db_season.save()
         return db_season 
 
 
