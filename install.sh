@@ -3,7 +3,7 @@
 #  aptitude y los paquetes correspondientes
 
 # Instalacion de dependencias
-sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg8-dev subversion csstidy && 
+sudo aptitude install python-setuptools python-dev libxml2 libxslt1-dev libjpeg8-dev subversion && 
 sudo easy_install -U pip &&
 
 # Desde el directorio raiz (donde se encuentra README.txt)
@@ -37,7 +37,7 @@ python manage.py createsuperuser --noinput --username=liberateca --email=liberat
 python manage.py update_translation_fields &&
 
 # Compilamos el CSS y el JS
-python manage.py synccompress &&
+#python manage.py synccompress &&
 
 # Creamos el admin
 python manage.py createsuperuser &&
