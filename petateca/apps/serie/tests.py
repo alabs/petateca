@@ -21,100 +21,87 @@ class SerieTest(TestCase):
     fixtures = ['test_data.json']
     
     # GETS
+    def GET(self, url, status=200):
+        '''
+        Get a URL and require a specific status code before proceeding
+        http://djangosnippets.org/snippets/137/
+        '''
+        self.client = Client()
+        response = self.client.get(url)
+        self.failUnlessEqual(response.status_code, status)
+        return response
 
     def test_serie_list(self):
-        url = '/series/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Listado de series '''
+        self.GET('/series/')
 
     def test_serie_lookup(self):
-        url = '/series/lookup/serie/1/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
-
-    def test_serie_lookup_season(self):
-        url = '/series/lookup/serie/1/season/2/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Las burbujas con la info de la serie '''
+        self.GET('/series/lookup/serie/1/')
 
     def test_lookup_genre(self):
-        url = '/series/lookup/genre/drama/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Genero en el listado de series '''
+        self.GET('/series/lookup/genre/drama/')
 
     def test_lookup_genre_404(self):
-        url = '/series/lookup/genre/genero-no-existente/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 404)
+        ''' Genero no encontrado en el listado de series '''
+        self.GET('/series/lookup/genre/genero-no-existente/', status=404)
 
     def test_lookup_network(self):
-        url = '/series/lookup/network/abc/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Cadena en el listado de series '''
+        self.GET('/series/lookup/network/abc/')
 
     def test_lookup_network_404(self):
-        url = '/series/lookup/network/network-no-existente/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 404)
+        ''' Cadena no encontrada en el listado de series '''
+        self.GET('/series/lookup/network/network-no-existente/', status=404)
 
     def test_get_serie(self):
-        url = '/serie/twin-peaks/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Ficha de la serie '''
+        self.GET('/serie/twin-peaks/')
 
     def test_get_serie_404(self):
-        url = '/serie/esta-serie-no-existe/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 404)
+        ''' Ficha de serie que no existe '''
+        self.GET('/serie/esta-serie-no-existe/', status=404)
 
     def test_get_season(self):
-        url = '/series/lookup/serie/1/season/1/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Ver temporada de una serie '''
+        self.GET('/series/lookup/serie/1/season/2/')
 
     def test_get_episode(self):
-        url = '/series/links/list/1/1/1/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Ver episodio de una serie '''
+        self.GET('/series/links/list/1/1/1/')
 
     def test_get_episode_description(self):
-        url = '/series/lookup/espoiler/1/1/1/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Ver descripcion episodio de una serie '''
+        self.GET('/series/lookup/espoiler/1/1/1/')
 
     def test_get_all_actors(self):
-        url = '/series/lookup/actors/twin-peaks/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Ver actores de una serie '''
+        self.GET('/series/lookup/actors/twin-peaks/')
 
     def test_get_actor(self):
-        url = '/series/actor/heather-graham/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
+        ''' Ver actor '''
+        self.GET('/series/actor/heather-graham/')
 
     # REDIRECTS
 
     def test_get_form_add_season(self):
-        'Solo comprueba que estemos recibiendo el formulario'
-        url = '/serie/twin-peaks/add/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 302)
+        '''
+        Recibir el formulario de agregar temporada 
+        '''
+        self.GET('/serie/twin-peaks/add/', status=302)
 
     def test_get_form_add_episode(self):
         '''
-        Comprueba que estemos recibiendo el formulario de agregar episodio
+        Recibir el formulario de agregar episodio
         '''
-        url = '/series/lookup/serie/1/season/1/add/episode/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 302)
+        self.GET('/series/lookup/serie/1/season/1/add/episode/', status=302)
 
     def test_get_form_add_link(self):
         '''
         Recibiendo el formulario de agregar link
         '''
-        url = '/series/links/add/episode/100/'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 302)
+        self.GET('/series/links/add/episode/100/', status=302)
 
     # POST
     # Formularios para usuarios autenticados 
