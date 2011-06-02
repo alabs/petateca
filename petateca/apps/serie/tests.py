@@ -18,7 +18,7 @@ from voting.models import Vote
 
 
 class SerieTest(TestCase):
-    fixtures = ['test_data.json']
+    fixtures = ['twin_peaks.json']
     
     # GETS
     def GET(self, url, status=200):

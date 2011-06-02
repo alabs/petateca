@@ -35,7 +35,7 @@ class APIAccessDenied(TestCase):
         self.assertEqual(r.status_code, 401)
 
 class TestAPIAuth(BaseAuthenticatedClient):
-    fixtures = ['test_data.json']
+    fixtures = ['twin_peaks.json']
 
     def test_get_series_list(self):
         '''
