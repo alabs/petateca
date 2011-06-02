@@ -41,6 +41,10 @@ urlpatterns = patterns('',
 
     (r'^i18n/', include('django.conf.urls.i18n')),
 
+    url(r'^opensearch.xml/$', 'django.views.generic.simple.direct_to_template',
+        {'template': 'opensearch.xml'},
+        name="opensearch"
+       ),
     url(r'^faq/$', 'django.views.generic.simple.direct_to_template',
         {'template': 'faq.html'},
         name="faq"

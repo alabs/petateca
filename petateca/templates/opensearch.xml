@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+    <ShortName>Liberateca</ShortName>
+    <LongName>Liberateca</LongName>
+    <Description>Search through Liberateca</Description>
+    <InputEncoding>UTF-8</InputEncoding>
+    <OutputEncoding>UTF-8</OutputEncoding>
+    <AdultContent>false</AdultContent>
+    <Language>es</Language>
+    <Developer>Liberateca</Developer>
+    <Contact>admin@liberateca.net</Contact>
+    <Description>Search for series (tv-shows), movies, books and much more on liberateca.net!</Description>
+    <Tags>liberateca series tv-shows movies books</Tags>
+    <Attribution>Search data from Liberateca, http://liberateca.net/</Attribution>
+    <SyndicationRight>open</SyndicationRight>
+    <Query role="example" searchTerms="Twin Peaks"/>
+    <Image height="16" width="16" type="image/vnd.microsoft.icon">http://liberateca.net/favicon.ico</Image>
+    <Image height="64" width="64" type="image/png">http://liberateca.net/favicon.ico</Image>
+    <Url type="text/html" template="http://liberateca.net/search/?q={searchTerms}"/>
+</OpenSearchDescription>
