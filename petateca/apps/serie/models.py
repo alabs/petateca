@@ -91,13 +91,6 @@ class SerieAlias(models.Model):
 class Season(models.Model):
     serie = models.ForeignKey('Serie', related_name="season", editable=False)
     season = models.IntegerField(name=_("Temporada"))
-    poster = models.OneToOneField(
-        'ImageSeason',
-        related_name='poster_of',
-        null=True,
-        blank=True,
-        editable=False,
-    )
 
     def get_next_season(self):
         next_season = self.season + 1
@@ -130,20 +123,6 @@ class Season(models.Model):
                 'serie_slug': self.serie.slug_name,
                 'season': self.season,
         })
-
-
-class ImageSeason(models.Model):
-    title = models.CharField(max_length=100)
-    src = models.ImageField(upload_to="img/season")
-    creator = models.CharField(max_length=100, null=True, blank=True)
-    is_poster = models.BooleanField(
-        help_text=_('entre varias imagenes, cual es el poster?')
-    )
-    season = models.ForeignKey("Season", related_name="images")
-    objects = models.Manager()
-
-    def __unicode__(self):
-        return self.title
 
 
 def get_default_user_for_links():
@@ -422,7 +401,6 @@ class ImageEpisode(models.Model):
 
 poster_dispatch = {
     ImageSerie: "serie",
-    ImageSeason: "season",
     ImageEpisode: "episode",
     ImageActor: "actor",
 }

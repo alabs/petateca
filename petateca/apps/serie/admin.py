@@ -101,15 +101,9 @@ class ImageSerieAdmin(admin.ModelAdmin):
     image_serie.allow_tags = True  #pylint: disable-msg=W0612
 
 
-class SeasonImageInline(admin.TabularInline):
-    model = m.ImageSeason
-    extra = 1
-
-
 class SeasonAdmin(admin.ModelAdmin):
     model = m.Season
     inlines = [
-        SeasonImageInline,
         EpisodeInline,
     ]
 
@@ -133,4 +127,3 @@ admin.site.register(m.Network)
 admin.site.register(m.Serie, SerieAdmin)
 admin.site.register(m.Season, SeasonAdmin)
 admin.site.register(m.SubtitleLink)
-admin.site.register(m.ImageSeason)
