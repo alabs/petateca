@@ -22,7 +22,7 @@ Iniciando entorno de desarrollo
 Importar datos de pruebas
 -------------------------
 
-`python manage.py loaddata apps/serie/fixtures/test_data.json`
+`python manage.py loaddata apps/serie/fixtures/twin_peaks.json`
 
 `cp -rp apps/serie/fixtures/img/* static/img/`
 
