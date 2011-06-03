@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'piston',
     'twitter_messages',
     'api',
+    'search',
     #Sentry
     # don't forget to add the dependencies!
     'indexer',

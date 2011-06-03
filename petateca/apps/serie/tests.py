@@ -284,14 +284,6 @@ class SerieTest(TestCase):
         result = episode.get_next_episode().viewed_episodes.exists()
         self.assertEqual(result, False)
 
-    def test_search_lookup(self):
-        ''' La busqueda de AJAX '''
-        url = '/search/lookup/?query=Twin'
-        r = self.client.get(url, {})
-        self.assertEqual(r.status_code, 200)
-        search_twin_peaks = r._get_content().find('Twin Peaks')
-        self.assertEqual(search_twin_peaks, 143)
-
     # Templatetags
     def test_background_color(self):
         ''' Prueba el templatetag de background color '''
