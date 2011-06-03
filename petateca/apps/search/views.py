@@ -63,7 +63,6 @@ def opensearch_lookup(request):
         # $ curl "http://suggestqueries.google.com/complete/search?output=firefox&q=opensear"
         # ["opensear",["opensearch","opensearchdescription","opensearch.xml"]]
         result = "[%s, %s]" % (dumps(value), dumps(list_model))
-        print result
         return HttpResponse(result, mimetype='application/json')
     else:
         return HttpResponseBadRequest()
