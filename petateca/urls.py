@@ -1,10 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 
-from haystack.views import SearchView, search_view_factory
-from haystack.forms import ModelSearchForm
-from haystack.query import SearchQuerySet
-
 from django.views.generic.simple import redirect_to
 
 from django.contrib import admin
@@ -29,18 +25,10 @@ urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
 
-    url(r'^api/$', redirect_to, { 'url': '/api/v1' }, name='api'),
+    url(r'^api/', redirect_to, { 'url': '/api/v1' }, name='api'),
     (r'^api/v1/', include('api.urls')),
 
-    # TODO: mover a apps/search/urls.py
-    (r'^search/$', search_view_factory(
-        view_class=SearchView,
-        searchqueryset=SearchQuerySet(),
-        form_class=ModelSearchForm
-    )),
-    (r'^search/lookup/$', 'search.views.search_lookup'),
-    (r'^search/opensearch/$', 'search.views.opensearch_lookup'),
-
+    (r'^search/', include('search.urls')),
 
     (r'^i18n/', include('django.conf.urls.i18n')),
 
