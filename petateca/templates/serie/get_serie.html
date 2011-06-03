@@ -10,10 +10,10 @@
 	<!-- IMAGE -->
 	{% if serie.poster.src %}
         {% thumbnail serie.poster.src "400x300" as img_serie %}
-            <img id="poster" src="{{ img_serie.url }}" />
+            <img id="poster" alt="{{ serie.name }}" src="{{ img_serie.url }}" />
         {% endthumbnail %}
 	{% else %}
-        <div class="image_not_found">  <img src="/static/images/image_not_available.png" height="200"> </div>
+        <div class="image_not_found center">  <img src="/static/images/image_not_available.png" alt="{{ serie.name }}" width="200" /> </div>
 	{% endif %}
 	<!-- RATING -->
 	  <div id="rating">
