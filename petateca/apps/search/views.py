@@ -1,5 +1,3 @@
-from django.utils import simplejson
-from django.http import HttpResponse
 from serie.models import Serie
 
 from django.db.models import Q
@@ -41,8 +39,6 @@ def search_lookup(request):
        </span>
     </p>
     '''
-    # Default return list
-    results = []
     if request.method == "GET":
         if request.GET.has_key(u'query'):
             value = request.GET[u'query']
