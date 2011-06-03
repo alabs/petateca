@@ -16,5 +16,6 @@
     <Query role="example" searchTerms="Twin Peaks"/>
     <Image height="16" width="16" type="image/vnd.microsoft.icon">http://liberateca.net/favicon.ico</Image>
     <Image height="64" width="64" type="image/png">http://liberateca.net/favicon.ico</Image>
+    <Url type="application/x-suggestions+json" template="http://liberateca.net/search/opensearch/?q={searchTerms}"/>
     <Url type="text/html" template="http://liberateca.net/search/?q={searchTerms}"/>
 </OpenSearchDescription>

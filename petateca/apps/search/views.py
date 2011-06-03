@@ -1,5 +1,7 @@
 from serie.models import Serie
+from django.http import HttpResponse, HttpResponseBadRequest
 
+from django.utils.simplejson import dumps
 from django.db.models import Q
 from decorators import render_to
 
@@ -39,9 +41,29 @@ def search_lookup(request):
        </span>
     </p>
     '''
-    if request.method == "GET":
-        if request.GET.has_key(u'query'):
-            value = request.GET[u'query']
-            model_results = Serie.objects.filter( Q(name_es__icontains=value) | Q(name__icontains=value))[:4]
-            return  { 'results': model_results }
+    if request.GET.has_key(u'query'):
+        value = request.GET[u'query']
+        model_results = Serie.objects.filter( Q(name_es__icontains=value) | Q(name__icontains=value))[:4]
+        return  { 'results': model_results }
 
+
+def opensearch_lookup(request):
+    ''' 
+    Ajax sugestion/autocomplete para OpenSearch
+    http://hublog.hubmed.org/archives/001681.html
+    '''
+    value = request.GET[u'q']
+    if value:
+        model_results = Serie.objects.filter(
+                Q(name_es__icontains=value)
+                | Q(name__icontains=value)
+            ).values('name')
+        list_model = [result['name'] for result in model_results]
+        # El formato de respuesta debe ser asi: 
+        # $ curl "http://suggestqueries.google.com/complete/search?output=firefox&q=opensear"
+        # ["opensear",["opensearch","opensearchdescription","opensearch.xml"]]
+        result = "[%s, %s]" % (dumps(value), dumps(list_model))
+        print result
+        return HttpResponse(result, mimetype='application/json')
+    else:
+        return HttpResponseBadRequest()

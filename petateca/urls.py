@@ -13,6 +13,7 @@ admin.autodiscover()
 from registration.forms import RegistrationFormTermsOfService
 from invitation.views import register 
 from django.contrib.auth import views as auth_views
+from django.views.generic.simple import direct_to_template
 
 
 urlpatterns = patterns('',
@@ -31,34 +32,29 @@ urlpatterns = patterns('',
     url(r'^api/$', redirect_to, { 'url': '/api/v1' }, name='api'),
     (r'^api/v1/', include('api.urls')),
 
-    (r'^search/lookup/$', 'search.views.search_lookup'),
-
+    # TODO: mover a apps/search/urls.py
     (r'^search/$', search_view_factory(
         view_class=SearchView,
         searchqueryset=SearchQuerySet(),
         form_class=ModelSearchForm
     )),
+    (r'^search/lookup/$', 'search.views.search_lookup'),
+    (r'^search/opensearch/$', 'search.views.opensearch_lookup'),
+
 
     (r'^i18n/', include('django.conf.urls.i18n')),
 
-    url(r'^opensearch.xml/$', 'django.views.generic.simple.direct_to_template',
-        {'template': 'opensearch.xml'},
-        name="opensearch"
-       ),
-    url(r'^faq/$', 'django.views.generic.simple.direct_to_template',
-        {'template': 'faq.html'},
-        name="faq"
-       ),
-    url(r'^aviso-legal/$', 'django.views.generic.simple.direct_to_template',
-        {'template': 'aviso-legal.html'},
-        name="aviso-legal"
-       ),
-    url(r'^politica-privacidad/$', 'django.views.generic.simple.direct_to_template',
-        {'template': 'politica-privacidad.html'},
-        name="politica-privacidad"
-       ),
+    url(r'^opensearch.xml/$', direct_to_template, \
+        {'template': 'opensearch.xml'}, name="opensearch"),
+    url(r'^faq/$', direct_to_template, \
+        {'template': 'faq.html'}, name="faq"),
+    url(r'^aviso-legal/$', direct_to_template, \
+        {'template': 'aviso-legal.html'}, name="aviso-legal"),
+    url(r'^politica-privacidad/$', direct_to_template, 
+        {'template': 'politica-privacidad.html'}, name="politica-privacidad"),
 
     # Usuarios, invitaciones, registros, avatar, etc
+    # TODO: mover a apps/userdata/urls.py
     (r'^accounts/', include('invitation.urls')),
     (r'^accounts/profile/$', 'userdata.views.view_profile'),
     url(r'^accounts/register/$',
