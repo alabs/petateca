@@ -84,6 +84,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
     'context_processors.site_name',
 )
 
@@ -168,10 +169,6 @@ INVITATIONS_PER_USER = 6
 USER_WHO_INVITES = 'liberateca'
 DEFAULT_USER_FOR_LINKS = 'liberateca'
 
-if INVITE_MODE:
-    MIDDLEWARE_CLASSES += (
-        'userdata.middleware.LoginRequiredMiddleware',
-    )
 
 LOGIN_EXEMPT_URLS = (
     r'^static/', 
@@ -214,3 +211,7 @@ try:
 except ImportError:
     pass
 
+if INVITE_MODE:
+    MIDDLEWARE_CLASSES += (
+        'userdata.middleware.LoginRequiredMiddleware',
+    )
