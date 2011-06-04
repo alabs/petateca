@@ -1,11 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
-from django.http import HttpResponseRedirect
-from django.forms import ValidationError
 from django.shortcuts import get_object_or_404
 
 from invitation.models import InvitationKey
-from djangoratings.models import Vote
 from decorators import render_to
 
 from serie.models import Link, Serie
