@@ -1,6 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
 {% spaceless %} {% load i18n %}
+{# http://recursive-design.com/blog/2009/11/10/noreversematch-custom-registration-templates-break-django-unit-tests/ #}
+{% url serie-index as serie_index %}{% url sneak_links as sneak_links %}{% url api as api %}
+{% url faq as faq %}{% url aviso-legal as aviso_legal %}{% url politica-privacidad as politica_privacidad %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}{% endspaceless %}
 <!-- Si estas viendo esto por ahi te interesa ver nuestro código: http://github.com/alabs/petateca -->
@@ -36,7 +39,7 @@
                 {% else %}
                     <li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>    
             {% endif %}
-            <li><a href="{% url serie-index %}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
+            <li><a href="{{ serie_index }}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
         </ul>
         <div id="search_form">
               <form action="/search/" id="searchform">
@@ -57,8 +60,8 @@
 			<li class="footerbox first">
 				<strong>Series</strong>
 					<ul>
-						<li><a href="{% url serie-index %}">Listado completo</a></li>
-						<li><a href="{% url sneak_links %}">Ver ultimas</a></li>
+                        <li><a href="{{ serie_index }}">Listado completo</a></li>
+                        <li><a href="{{ sneak_links }}">Ver ultimas</a></li>
 					</ul>
 			</li>
 			<li class="footerbox">
@@ -72,7 +75,7 @@
 				<strong>Desarrolladores</strong>
 					<ul>
 						<li><a href="http://github.com/alabs/petateca">Código</a></li>
-						<li><a href="{% url api %}">API</a></li>
+                        <li><a href="{{ api }}">API</a></li>
 					</ul>
 			</li>
 			<li class="footerbox">
@@ -91,10 +94,10 @@
 			<li class="footerbox">
 				<strong>Liberateca</strong>
 					<ul>
-						<li><a href="{% url faq %}">FAQ</a></li>
+                        <li><a href="{{ faq }}">FAQ</a></li>
 						<li><a href="http://twitter.com/liberateca">Twitter</a></li>
-						<li><a href="{% url aviso-legal %}">Aviso legal</a></li>
-						<li><a href="{% url politica-privacidad %}">Política de privacidad</a></li>
+                        <li><a href="{{ aviso_legal }}">Aviso legal</a></li>
+                        <li><a href="{{ politica_privacidad }}">Política de privacidad</a></li>
 					</ul>
 			</li>
 		</ul>
