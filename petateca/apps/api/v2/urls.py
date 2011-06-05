@@ -5,7 +5,7 @@ from piston.resource import Resource
 
 from api.v2 import handlers as h
 
-auth = HttpBasicAuthentication(realm="Liberateca v1 API - Autenticacion")
+auth = HttpBasicAuthentication(realm="Liberateca v2 API - Autenticacion")
 ad = { 'authentication': auth }
 
 serielist_resource = Resource(handler=h.SerieListHandler, **ad)
@@ -16,9 +16,9 @@ episode_resource = Resource(handler=h.EpisodeHandler, **ad)
 
 urlpatterns = patterns('',
     (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'api.html'}),
-    url(r'^series/$', serielist_resource, name='API_serie_list'),
-    url(r'^series/(?P<serie_id>\d+)/$', serie_resource, name='API_serie_detail'),
-    url(r'^series/(?P<serie_id>\d+)/seasons/$', seasonlist_resource, name='API_season_list'),
-    url(r'^series/(?P<serie_id>\d+)/(?P<season>\d+)/$', season_resource, name='API_season_detail'),
-    url(r'^series/(?P<serie_id>\d+)/(?P<season>\d+)/(?P<episode>\d+)/$', episode_resource, name='API_episode_detail'),
+    url(r'^series/$', serielist_resource, name='API_v2_serie_list'),
+    url(r'^series/(?P<serie_id>\d+)/$', serie_resource, name='API_v2_serie_detail'),
+    url(r'^series/(?P<serie_id>\d+)/seasons/$', seasonlist_resource, name='API_v2_season_list'),
+    url(r'^series/(?P<serie_id>\d+)/(?P<season>\d+)/$', season_resource, name='API_v2_season_detail'),
+    url(r'^series/(?P<serie_id>\d+)/(?P<season>\d+)/(?P<episode>\d+)/$', episode_resource, name='API_v2_episode_detail'),
 )

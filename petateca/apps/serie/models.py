@@ -16,6 +16,7 @@ from voting.models import Vote
 # Thumbnails de la API
 from sorl.thumbnail import get_thumbnail
 from api.utils import get_urlprefix
+from django.core.urlresolvers import reverse
 
 
 class Serie(models.Model):
@@ -53,6 +54,11 @@ class Serie(models.Model):
         blank=True
     )
 
+    def url(self):
+        ''' Devuelve la URL para la API (version 2) '''
+        return get_urlprefix() + reverse('API_v2_serie_detail', 
+            kwargs={'serie_id': self.pk})
+    
     def __unicode__(self):
         return self.name
 

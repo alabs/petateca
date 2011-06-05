@@ -14,29 +14,22 @@ class SerieListHandler(BaseHandler):
     ''' Listado de series '''
     allowed_methods = ('GET', )
     model = Serie
+    fields = ('id', 'name', 'url')
 
     @catch_404
     def read(self, request):
         ''' Muestra listado de series con URL para ver detalle ''' 
         series = Serie.objects.order_by('name_es')
-        serie_list = []
-        for s in series:
-            serie_list.append({
-                'name': s.name,
-                'id': s.pk,
-                'url': urlprefix + reverse('API_serie_detail', 
-                    kwargs={'serie_id': s.pk})
-                })
-        return serie_list
+        return series
 
 
 class SerieHandler(BaseHandler):
     ''' Detalle de Serie '''
     allowed_methods = ('GET', )
     model = Serie
-    fields = ('id', 'name', 'slug', 'description', ('network', ('name', )), 
-            'runtime', ('genres', ('name', )), 'rating_score', 
-            ( 'poster', ('thumbnail', )), )
+    fields = ('id', 'name', 'slug', 'description_en', 'description_es', 
+            ('network', ('name', )), 'runtime', ('genres', ('name', )), 
+            'rating_score', ( 'poster', ('thumbnail', )), )
 
 
     @catch_404
@@ -55,8 +48,7 @@ class SerieHandler(BaseHandler):
         return get_object_or_404(Serie, id=serie_id)
 
 
-# TODO: Actores, Posters, Posters de Actores
-# /posters
+# TODO: Actores
 # /actors
 
 class SeasonListHandler(BaseHandler):

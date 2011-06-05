@@ -26,7 +26,7 @@ class SerieListHandler(BaseHandler):
             serie_list.append({
                 'name': s.name,
                 'id': s.pk,
-                'url': urlprefix + reverse('API_serie_detail', 
+                'url': urlprefix + reverse('API_v1_serie_detail', 
                     kwargs={'serie_id': s.pk})
                 })
         return serie_list
@@ -71,7 +71,7 @@ class SeasonListHandler(BaseHandler):
         for s in serie.season.all():
             season_list.append({
                 'id': s.pk,
-                'url': urlprefix + reverse('API_season_detail', 
+                'url': urlprefix + reverse('API_v1_season_detail', 
                     kwargs={'serie_id': serie.id, 'season': s.season}),
                 })
         # TODO: Imagen de Temporadas
@@ -99,7 +99,7 @@ class SeasonHandler(BaseHandler):
             epi = {
                     'episode': e.episode,
                     'title' : e.title,
-                    'url': urlprefix + reverse("API_episode_detail", kwargs={
+                    'url': urlprefix + reverse("API_v1_episode_detail", kwargs={
                         'serie_id': serie.id, 'season': season.season, 'episode': e.episode}),
                     }
             if e.air_date: 
