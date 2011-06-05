@@ -13,6 +13,10 @@ from djangoratings.fields import RatingField
 from voting.models import Vote 
 #XXX: poster deberia ser on_delete null en vez de cascade
 
+# Thumbnails de la API
+from sorl.thumbnail import get_thumbnail
+from api.utils import get_urlprefix
+
 
 class Serie(models.Model):
     name = models.CharField(max_length=255)
@@ -367,6 +371,11 @@ class ImageSerie(models.Model):
     serie = models.ForeignKey("Serie", related_name="images")
     objects = models.Manager()
 
+    def thumbnail(self):
+        ''' Para la API, conseguir thumbnail '''
+        urlprefix = get_urlprefix()
+        return urlprefix + get_thumbnail(self.src, '400x300').url
+
     def __unicode__(self):
         return self.title
 
@@ -394,6 +403,11 @@ class ImageEpisode(models.Model):
     )
     episode = models.ForeignKey("Episode", related_name="images")
     objects = models.Manager()
+
+    def thumbnail(self):
+        ''' Para la API, conseguir thumbnail '''
+        urlprefix = get_urlprefix()
+        return urlprefix + get_thumbnail(self.src, '200x150').url
 
     def __unicode__(self):
         return self.title

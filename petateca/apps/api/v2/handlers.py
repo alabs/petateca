@@ -1,14 +1,12 @@
-from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 
 from piston.handler import BaseHandler
 
 from serie.models import Serie, Season, Episode
-from api.utils import catch_404
+from api.utils import catch_404, get_urlprefix
 
-current_site = Site.objects.get_current()
-urlprefix = 'http://' + current_site.domain
+urlprefix = get_urlprefix()
 
 
 
@@ -37,7 +35,9 @@ class SerieHandler(BaseHandler):
     allowed_methods = ('GET', )
     model = Serie
     fields = ('id', 'name', 'slug', 'description', ('network', ('name', )), 
-            'runtime', ('genres', ('name', )), 'rating_score', )
+            'runtime', ('genres', ('name', )), 'rating_score', 
+            ( 'poster', ('thumbnail', )), )
+
 
     @catch_404
     def read(self, request, serie_id):
@@ -50,6 +50,7 @@ class SerieHandler(BaseHandler):
         * Duracion: 'runtime'
         * Generos: 'genre'
         * Puntuacion: 'rating_score'
+        * Thumbnail: 'poster'
         '''
         return get_object_or_404(Serie, id=serie_id)
 
@@ -131,7 +132,11 @@ class EpisodeHandler(BaseHandler):
                 'id': epi.pk,
                 'season': season.season,
                 'episode': epi.episode,
-                'title': epi.title,
+                'title_es': epi.title_es,
+                'title_en': epi.title_en,
+                'thumbnail': epi.poster.thumbnail(),
+                'description_en': epi.description_en,
+                'description_es': epi.description_es,
                 'air_date': epi.air_date.isoformat(),
                 }
         link_list = []
