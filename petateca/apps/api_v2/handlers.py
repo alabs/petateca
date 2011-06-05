@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from piston.handler import BaseHandler
 
 from serie.models import Serie, Season, Episode
-from api.utils import catch_404, get_urlprefix
+from api_v2.utils import catch_404, get_urlprefix
 
 urlprefix = get_urlprefix()
 

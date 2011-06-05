@@ -113,7 +113,8 @@ INSTALLED_APPS = (
     'avatar',
     'piston',
     'twitter_messages',
-    'api',
+    'api_v1',
+    'api_v2',
     'search',
     #Sentry
     # don't forget to add the dependencies!

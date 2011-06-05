@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from piston.handler import BaseHandler
 
 from serie.models import Serie, Season, Episode
-from api.utils import catch_404
+from api_v1.utils import catch_404
 
 current_site = Site.objects.get_current()
 urlprefix = 'http://' + current_site.domain

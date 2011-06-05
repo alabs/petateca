@@ -15,7 +15,7 @@ from voting.models import Vote
 
 # Thumbnails de la API
 from sorl.thumbnail import get_thumbnail
-from api.utils import get_urlprefix
+from api_v2.utils import get_urlprefix
 from django.core.urlresolvers import reverse
 
 

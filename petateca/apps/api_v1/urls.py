@@ -3,7 +3,7 @@ from django.conf.urls.defaults import *
 from piston.authentication import HttpBasicAuthentication
 from piston.resource import Resource
 
-from api.v1 import handlers as h
+from api_v1 import handlers as h
 
 auth = HttpBasicAuthentication(realm="Liberateca v1 API - Autenticacion")
 ad = { 'authentication': auth }

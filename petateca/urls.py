@@ -26,8 +26,8 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     url(r'^api/$', redirect_to, { 'url': '/api/v1' }, name='api'),
-    (r'^api/v1/', include('api.v1.urls')),
-    (r'^api/v2/', include('api.v2.urls')),
+    (r'^api/v1/', include('api_v1.urls')),
+    (r'^api/v2/', include('api_v2.urls')),
 
     (r'^search/', include('search.urls')),
 
