@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load markup %}
+{% block contents %}
+<h1>Documentación de la API - v0.2</h1>
+
+<div id="notice"> 
+    ¡ATENCIÓN! El desarrollo de esta API se encuentra abierto a <a href="http://liberateca.uservoice.com">sugerencias</a> y modificaciones. 
+</div>
+
+<p>Para utilizar la API es necesario acceder a través de una usuario registrado en Liberateca, con la aplicación cURL (utilizada en los ejemplos) es "-u usuario:contraseña".
+
+Por defecto devuelve la información en formato JSON, pero pasándole el parámetro "?format=" se puede modificar. Los fomatos válidos son json, xml y pickle.
+</p>
+
+
+<p><b>Nuevas funcionalidades en esta versión</b>: 
+<ul>
+    <li>Paginación en el listado de series (Siguiendo el RFC)
+    <li>Listado de series ordenado por nombre :P
+    <li>Thumbnails en series y episodios
+    <li>Descripciones, nombres y títulos en Inglés y en Español
+</ul>
+
+<h3 id="serielist" class="header_api">Listado de Series</h3>
+<ul>
+    <li>Lista las series que se encuentran en Liberateca así como la URL donde se encuentra el recurso (ver Serie)
+    <li>URL: <b>https://liberateca.net/api/v1/series/</b>
+    <li>Métodos aceptados: 
+        <ul>
+            <li><b> GET </b> - Devuelve el listado de series
+        </ul>
+    <li> Ejemplo:
+    <pre>
+        <code class="example">
+            $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/
+
+        [
+            {
+                "url": "https://liberateca.net/api/v1/serie/1", 
+                "name": "90210 Sensación de Vivir: La Nueva Generación"
+            }, 
+            {
+                "url": "https://liberateca.net/api/v1/serie/2", 
+                "name": "Ashes to Ashes"
+            }, 
+            {
+                "url": "https://liberateca.net/api/v1/serie/3", 
+                "name": "Archer"
+            }, 
+        (...)
+        ]
+        </code>
+    </pre>
+</ul>
+
+<h3 id="serie" class="header_api">Serie</h3>
+<ul>
+    <li>Devuelve el detalle de una serie. Para obtener las series disponibles ver <a href="#serielist">Listado de Series</a>.
+    <li>URL: <b>https://liberateca.net/api/v1/series/(SERIE_ID)/</b>
+    <li>Métodos aceptados: 
+        <ul>
+            <li><b> GET </b> - Muestra el detalle de la serie, siendo la correspondencia: 
+                <ul>
+                    <li>Nombre: 'name'
+                    <li>URL: 'slug'
+                    <li>Descripcion: 'description'
+                    <li>Cadena: 'network'
+                    <li>Duracion: 'runtime'
+                    <li>Generos: 'genre'
+                    <li>Puntuacion: 'rating_score'
+                </ul>
+        </ul>
+    <li> Ejemplo:
+    <pre>
+        <code class="example">
+        $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/
+
+        {
+            "genres": [
+                {
+                    "name": "Drama"
+                }, 
+                {
+                    "name": "Action and Adventure"
+                }, 
+                {
+                    "name": "Science-Fiction"
+                }
+            ], 
+            "network": {
+                "name": "FOX"
+            }, 
+            "description": "Cuando el vuelo 627 aterriza con todo el pasaje y la tripulación muerta, 
+                la Agente del FBI Olivia Dunham es llamada para inverstigar los hechos. Todos los 
+                muertos parecen haberse \"derretido\" fruto de un agente contagioso por el aire. 
+                Todo apunta a un acto terrorista, pero poco a poco se darán cuenta de que hay cosas 
+                que están por encima del terrorismo e incluso por encima de la propia imaginación. 
+                ¿Que pasaría si la ciencia llegara a evolucionar hasta tal punto que no pudieramos controlarla?", 
+            "rating_score": 19, 
+            "runtime": 60, 
+            "id": 46, 
+            "name": "Fringe"
+        }
+        </code>
+    </pre>
+</ul>
+
+<h3 id="seasonlist" class="header_api">Listado de Temporadas</h3>
+<ul>
+    <li>Devuelve el listado de temporadas de una serie dada.
+    <li>URL: <b>https://liberateca.net/api/v1/series/(SERIE_ID)/seasons/</b>
+    <li>Métodos aceptados: 
+        <ul>
+            <li><b> GET </b> -  Muestra las temporadas que tiene una serie.
+        </ul>
+    <li> Ejemplo:
+    <pre>
+        <code class="example">
+        $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/seasons/
+
+        {
+            "seasons": [
+                "https://liberateca.net/api/v1/serie/46/0", 
+                "https://liberateca.net/api/v1/serie/46/1", 
+                "https://liberateca.net/api/v1/serie/46/2", 
+                "https://liberateca.net/api/v1/serie/46/3"
+            ]
+        }
+        </code>
+    </pre>
+</ul>
+
+<h3 id="season" class="header_api">Temporada</h3>
+<ul>
+    <li>Devuelve el listado de episodios que tiene una temporada (ver <a href="#seasonlist">Listado de Temporadas</a>)
+    <li>URL: <b>https://liberateca.net/api/v1/series/(SERIE_ID)/(SEASON)/</b>
+    <li>Métodos aceptados: 
+        <ul>
+            <li><b> GET </b> -  Muestra el listado de episodios para una temporada dada, y lista la siguiente información de cada episodio: 
+            <ul>
+                <li>Titulo: 'title'
+                <li>Fecha de emision: 'air_date'
+                <li>Ubicacion del recurso del episodio: 'url'
+            </ul>
+        </ul>
+    <li> Ejemplo:
+    <pre>
+        <code class="example">
+        $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/
+
+        [
+            {
+                "url": "https://liberateca.net/api/v1/serie/46/1/1", 
+                "title": "Piloto", 
+                "episode": 1, 
+                "air_date": "2008-09-09"
+            }, 
+            {
+                "url": "https://liberateca.net/api/v1/serie/46/1/2", 
+                "title": "La historia de siempre", 
+                "episode": 2, 
+                "air_date": "2008-09-16"
+            }, 
+        (...)
+        ]
+        </code>
+    </pre>
+</ul>
+
+<h3 id="season" class="header_api">Episodio</h3>
+<ul>
+    <li>Devuelve el detalle y los enlaces de un episodio.
+    <li>URL: <b>https://liberateca.net/api/v1/series/(SERIE_ID)/(SEASON)/(EPISODIO)/</b>
+    <li>Métodos aceptados: 
+        <ul>
+            <li><b> GET </b> -  Muestra la siguiente información de un episodio:
+            <ul>
+                <li>Titulo: 'title' 
+                <li>Numero de Episodio: 'episode'
+                <li>Numero de Temporada: 'season'
+                <li>Fecha de Emision: 'air_date'
+                <li>Listado de URLs
+            </ul>
+        </ul>
+    <li>Ejemplo:
+    <pre>
+        <code class="example">
+        $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/1/
+
+        {
+            "season": 1, 
+            "episode": 1, 
+            "links": [
+                {
+                    "url": "https://torrent.zoink.it/Fringe.S01E01.720p.HDTV.x264-E7.[eztv].torrent", 
+                    "audio": "en"
+                }, 
+                {
+                    "url": "https://www.bt-chat.com/download.php?info_hash=2750070c75ce4857e85aadc44cd99bbca913ec10", 
+                    "audio": "en"
+                }, 
+            (...)
+            ], 
+            "title": "Piloto"
+        }
+        </code>
+    </pre>
+</ul>
+{% endblock %}

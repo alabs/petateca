@@ -1125,6 +1125,17 @@ div.dialog a:link, div.dialog a:visited {
     margin-top:3em;
 }
 
+#notice {
+    text-align:center;
+    background-color:#DF0101;
+    font-style:bold;
+    font-size:1.5em;
+    color:#FFF;
+    margin:1em;
+    padding:0.5em;
+    border-color:#000;
+}
+
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {
