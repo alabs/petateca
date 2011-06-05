@@ -3,16 +3,16 @@ from django.conf.urls.defaults import *
 from piston.authentication import HttpBasicAuthentication
 from piston.resource import Resource
 
-from api.handlers import SerieListHandler, SerieHandler, SeasonListHandler, SeasonHandler, EpisodeHandler
+from api.v1 import handlers as h
 
-auth = HttpBasicAuthentication(realm="Liberateca API - Autenticacion")
+auth = HttpBasicAuthentication(realm="Liberateca v1 API - Autenticacion")
 ad = { 'authentication': auth }
 
-serielist_resource = Resource(handler=SerieListHandler, **ad)
-serie_resource = Resource(handler=SerieHandler, **ad)
-seasonlist_resource = Resource(handler=SeasonListHandler, **ad)
-season_resource = Resource(handler=SeasonHandler, **ad)
-episode_resource = Resource(handler=EpisodeHandler, **ad)
+serielist_resource = Resource(handler=h.SerieListHandler, **ad)
+serie_resource = Resource(handler=h.SerieHandler, **ad)
+seasonlist_resource = Resource(handler=h.SeasonListHandler, **ad)
+season_resource = Resource(handler=h.SeasonHandler, **ad)
+episode_resource = Resource(handler=h.EpisodeHandler, **ad)
 
 urlpatterns = patterns('',
     (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'api.html'}),
