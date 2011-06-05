@@ -24,15 +24,14 @@ setup(
         'django-voting',
         'django-avatar',
         'django-rosetta',
-        'django-piston',
         'django-indexer',
         'django-paging',
         'django-sentry',
         'django-compress',
         'unittest2',
         'python-twitter',
-      #  'docutils',
-      #  'django-localeurl',
+        #'django-piston', lo instalamos a traves de src/ por ser este fork
+        # https://bitbucket.org/joeb/django-piston/
     ],
     classifiers=[
         'Environment :: Web Environment',

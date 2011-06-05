@@ -16,7 +16,13 @@ sudo easy_install -U pip &&
 
 # Instalamos las dependencias
 python setup.py develop && 
+
+# La version del pip es antigua y da warnings
 pip install src/django-registration-0.8-alpha-1.tar.gz && 
+
+# Utilizamos el fork que acepta paginacion
+# https://bitbucket.org/joeb/django-piston/
+pip install src/django-piston-0.2.3rc1.tar.gz &&
 
 # Herramientas de debugging
 pip install ipdb django-debug-toolbar &&
@@ -35,9 +41,6 @@ python manage.py createsuperuser --noinput --username=liberateca --email=liberat
 
 # Actualizamos campos de traduccion
 python manage.py update_translation_fields &&
-
-# Compilamos el CSS y el JS
-#python manage.py synccompress &&
 
 # Creamos el admin
 python manage.py createsuperuser &&
