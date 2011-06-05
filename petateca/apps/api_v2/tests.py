@@ -30,59 +30,68 @@ class APIAccessDenied(TestCase):
 
     def test_auth_required(self):
         "Comprueba que nos pide autenticacion para acceder a la API"
-        url = '/api/v1/series/'
+        url = '/api/v2/series/'
         r = self.client.get(url, {})
         self.assertEqual(r.status_code, 401)
 
 class TestAPIAuth(BaseAuthenticatedClient):
     fixtures = ['twin_peaks.json']
 
+    def json_response(self, response):
+        return loads(response._get_content())
+
     def test_get_series_list(self):
         '''
         Listado de series
         '''
-        url = '/api/v1/series/'
+        url = '/api/v2/series/'
         response = self.client.get(url, {}, **self.extra)
         self.assertEqual(response.status_code, 200)
-        serie_name = loads(response._get_content())[0]['name']
+        serie_name = self.json_response(response)[0]['name']
         self.assertEqual(serie_name, 'Twin Peaks')
+
+    # TODO: comprobar pagination
 
     def test_get_serie(self):
         '''
         Obtener una serie
         '''
-        url = '/api/v1/series/1/'
+        url = '/api/v2/series/1/'
         response = self.client.get(url, {}, **self.extra)
         self.assertEqual(response.status_code, 200)
-        serie_name = loads(response._get_content())['name']
+        json_response = loads(response._get_content())
+        serie_name = json_response['name']
         self.assertEqual(serie_name, 'Twin Peaks')
+        thumbnail = json_response['poster']['thumbnail']
+        img = 'http://example.com/static/cache/6d/11/6d11de6c41317323c8fe535322fab6ee.jpg'
+        self.assertEqual(img, thumbnail)
 
     def test_get_seasons(self):
         '''
         Obtener listado de temporadas de serie
         '''
-        url = '/api/v1/series/1/seasons/'
+        url = '/api/v2/series/1/seasons/'
         response = self.client.get(url, {}, **self.extra)
         self.assertEqual(response.status_code, 200)
-        season = loads(response._get_content())[0]['id']
+        season = self.json_response(response)[0]['id']
         self.assertEqual(season, 1)
 
     def test_get_season(self):
         '''
         Obtener temporada de una serie dada
         '''
-        url = '/api/v1/series/1/1/'
+        url = '/api/v2/series/1/1/'
         response = self.client.get(url, {}, **self.extra)
         self.assertEqual(response.status_code, 200)
-        epi_title = loads(response._get_content())[0]['title']
+        epi_title = self.json_response(response)[0]['title']
         self.assertEqual(epi_title, 'Pilot')
 
     def test_get_episode(self):
         '''
         Obtener episodio y links de una serie/temporada/episodio
         '''
-        url = '/api/v1/series/1/1/1/'
+        url = '/api/v2/series/1/1/1/'
         response = self.client.get(url, {}, **self.extra)
         self.assertEqual(response.status_code, 200)
-        epi_link = loads(response._get_content())['links'][0]['url']
+        epi_link = self.json_response(response)['links'][0]['url']
         self.assertEqual(epi_link, 'http://www.megavideo.com/?v=E001L7IE')
