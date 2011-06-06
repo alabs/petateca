@@ -126,7 +126,14 @@
     <script type="text/javascript" src="/static/js/jquery.jgrowl.js"></script>
     <script type="text/javascript" src="/static/js/jquery.rating.js"></script>
     <script type="text/javascript" src="/static/js/jquery.bubblepopup.v2.3.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.syntax.js"></script>
     <script type="text/javascript" src="/static/js/petateca.js"></script>
     {% block extrascript %}{% endblock %}
+<script type="text/javascript">
+jQuery(function($) {
+            $.syntax({root: '/static/js/jquery-syntax/'});
+        });
+</script>
+
 </body>
 </html>

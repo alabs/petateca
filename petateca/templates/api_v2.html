@@ -17,7 +17,7 @@ Por defecto devuelve la información en formato JSON, pero pasándole el paráme
 
 <p><b>Nuevas funcionalidades en esta versión</b>: 
 <ul>
-    <li>Paginación en el listado de series (Siguiendo el RFC)
+    <li>Paginación en el listado de series
     <li>Listado de series ordenado por nombre :P
     <li>Thumbnails en series y episodios
     <li>Descripciones, nombres y títulos en Inglés y en Español
@@ -32,28 +32,43 @@ Por defecto devuelve la información en formato JSON, pero pasándole el paráme
             <li><b> GET </b> - Devuelve el listado de series
         </ul>
     <li> Ejemplo:
-    <pre>
-        <code class="example">
-            $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/
+    <pre class="syntax">
+$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/
 
-        [
-            {
-                "url": "https://liberateca.net/api/v1/serie/1", 
-                "name": "90210 Sensación de Vivir: La Nueva Generación"
-            }, 
-            {
-                "url": "https://liberateca.net/api/v1/serie/2", 
-                "name": "Ashes to Ashes"
-            }, 
-            {
-                "url": "https://liberateca.net/api/v1/serie/3", 
-                "name": "Archer"
-            }, 
-        (...)
-        ]
-        </code>
-    </pre>
-</ul>
+[
+    {
+        "url": "http://liberateca.net/api/v2/series/249/",
+        "name": "009-1",
+        "id": 249
+    },
+    {
+        "url": "http://liberateca.net/api/v2/series/300/",
+        "name": "07-Ghost",
+        "id": 300
+    },
+    {
+        "url": "http://liberateca.net/api/v2/series/676/",
+        "name": "101 Dalmatians: The Series",
+        "id": 676
+    },
+    (...)
+]</pre>
+    <li><b>Paginación</b>: Al tratarse de una lista de muchos elementos, se habilita la opción de paginar entre todos los resultados, a través de la cabecera "Range" o los parámetros GET offset y limit. Ejemplos: 
+    <pre class="syntax">
+$ curl -u usuario:contraseña -H "Range: items=90-91" https://liberateca.net/api/v2/series/  
+
+[
+    {
+        "url": "http://liberateca.net/api/v2/series/552/",
+        "name": "Bedlam",
+        "id": 552
+    },
+    {
+        "url": "http://liberateca.net/api/v2/series/372/",
+        "name": "Being Erica",
+        "id": 372
+    }
+]</pre>
 
 <h3 id="serie" class="header_api">Serie</h3>
 <ul>
@@ -63,48 +78,47 @@ Por defecto devuelve la información en formato JSON, pero pasándole el paráme
         <ul>
             <li><b> GET </b> - Muestra el detalle de la serie, siendo la correspondencia: 
                 <ul>
-                    <li>Nombre: 'name'
+                    <li>Nombre [es]: 'name'
+                    <li>Nombre [en]: 'name'
                     <li>URL: 'slug'
-                    <li>Descripcion: 'description'
+                    <li>Descripcion [es]: 'description'
+                    <li>Descripcion [en]: 'description'
                     <li>Cadena: 'network'
                     <li>Duracion: 'runtime'
                     <li>Generos: 'genre'
                     <li>Puntuacion: 'rating_score'
+                    <li>Imagen: 'Poster'
                 </ul>
         </ul>
     <li> Ejemplo:
-    <pre>
-        <code class="example">
-        $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/
+    <pre class="syntax">
+$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/
 
-        {
-            "genres": [
-                {
-                    "name": "Drama"
-                }, 
-                {
-                    "name": "Action and Adventure"
-                }, 
-                {
-                    "name": "Science-Fiction"
-                }
-            ], 
-            "network": {
-                "name": "FOX"
-            }, 
-            "description": "Cuando el vuelo 627 aterriza con todo el pasaje y la tripulación muerta, 
-                la Agente del FBI Olivia Dunham es llamada para inverstigar los hechos. Todos los 
-                muertos parecen haberse \"derretido\" fruto de un agente contagioso por el aire. 
-                Todo apunta a un acto terrorista, pero poco a poco se darán cuenta de que hay cosas 
-                que están por encima del terrorismo e incluso por encima de la propia imaginación. 
-                ¿Que pasaría si la ciencia llegara a evolucionar hasta tal punto que no pudieramos controlarla?", 
-            "rating_score": 19, 
-            "runtime": 60, 
-            "id": 46, 
-            "name": "Fringe"
+{   
+    "genres": [
+        {   
+            "name": "Drama"
+        },
+        {   
+            "name": "Acción y Aventura"
+        },
+        {   
+            "name": "Ciencia Ficción"
         }
-        </code>
-    </pre>
+    ],
+    "name": "Fringe",
+    "poster": {
+        "thumbnail": "http://liberateca.net/static/cache/16/a4/16a41935ef581dfe1c858e62bc736b1b.jpg"
+    },
+    "description_en": "Fringe follows FBI Agent Olivia Dunham, Consultant Peter Bishop and science explorer extraordinaire Doctor Walter Bishop as they search for clues to the series of bizarre and horrific crimes inflicted on the world. The world that we  know.",
+    "description_es": "Cuando el vuelo 627 aterriza con todo el pasaje y la tripulación muerta, la Agente del FBI Olivia Dunham es llamada para inverstigar los hechos. Todos los muertos parecen haberse \"derretido\" fruto de un agente contagioso por el aire. Todo apunta a un acto terrorista, pero poco a poco se darán cuenta de que hay cosas que están por encima del terrorismo e incluso por encima de la propia imaginación. ¿Que pasaría si la ciencia llegara a evolucionar hasta tal punto que no pudieramos controlarla?",
+    "rating_score": 181,
+    "runtime": 60,
+    "id": 46,
+    "network": {
+        "name": "FOX"
+    }
+}</pre>
 </ul>
 
 <h3 id="seasonlist" class="header_api">Listado de Temporadas</h3>
@@ -116,20 +130,27 @@ Por defecto devuelve la información en formato JSON, pero pasándole el paráme
             <li><b> GET </b> -  Muestra las temporadas que tiene una serie.
         </ul>
     <li> Ejemplo:
-    <pre>
-        <code class="example">
-        $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/seasons/
+    <pre class="syntax">
+$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/seasons/
 
-        {
-            "seasons": [
-                "https://liberateca.net/api/v1/serie/46/0", 
-                "https://liberateca.net/api/v1/serie/46/1", 
-                "https://liberateca.net/api/v1/serie/46/2", 
-                "https://liberateca.net/api/v1/serie/46/3"
-            ]
-        }
-        </code>
-    </pre>
+[   
+    {   
+        "url": "http://liberateca.net/api/v2/series/46/0/",
+        "id": 221
+    },
+    {   
+        "url": "http://liberateca.net/api/v2/series/46/1/",
+        "id": 222
+    },
+    {   
+        "url": "http://liberateca.net/api/v2/series/46/2/",
+        "id": 223
+    },
+    {   
+        "url": "http://liberateca.net/api/v2/series/46/3/",
+        "id": 224
+    }
+]</pre>
 </ul>
 
 <h3 id="season" class="header_api">Temporada</h3>
@@ -146,27 +167,24 @@ Por defecto devuelve la información en formato JSON, pero pasándole el paráme
             </ul>
         </ul>
     <li> Ejemplo:
-    <pre>
-        <code class="example">
-        $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/
+    <pre class="syntax">
+$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/
 
-        [
-            {
-                "url": "https://liberateca.net/api/v1/serie/46/1/1", 
-                "title": "Piloto", 
-                "episode": 1, 
-                "air_date": "2008-09-09"
-            }, 
-            {
-                "url": "https://liberateca.net/api/v1/serie/46/1/2", 
-                "title": "La historia de siempre", 
-                "episode": 2, 
-                "air_date": "2008-09-16"
-            }, 
-        (...)
-        ]
-        </code>
-    </pre>
+[
+    {
+        "url": "https://liberateca.net/api/v1/serie/46/1/1", 
+        "title": "Piloto", 
+        "episode": 1, 
+        "air_date": "2008-09-09"
+    }, 
+    {
+        "url": "https://liberateca.net/api/v1/serie/46/1/2", 
+        "title": "La historia de siempre", 
+        "episode": 2, 
+        "air_date": "2008-09-16"
+    }, 
+(...)
+]</pre>
 </ul>
 
 <h3 id="season" class="header_api">Episodio</h3>
@@ -185,27 +203,24 @@ Por defecto devuelve la información en formato JSON, pero pasándole el paráme
             </ul>
         </ul>
     <li>Ejemplo:
-    <pre>
-        <code class="example">
-        $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/1/
+    <pre class="syntax">
+$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/1/
 
+{
+    "season": 1, 
+    "episode": 1, 
+    "links": [
         {
-            "season": 1, 
-            "episode": 1, 
-            "links": [
-                {
-                    "url": "https://torrent.zoink.it/Fringe.S01E01.720p.HDTV.x264-E7.[eztv].torrent", 
-                    "audio": "en"
-                }, 
-                {
-                    "url": "https://www.bt-chat.com/download.php?info_hash=2750070c75ce4857e85aadc44cd99bbca913ec10", 
-                    "audio": "en"
-                }, 
-            (...)
-            ], 
-            "title": "Piloto"
-        }
-        </code>
-    </pre>
+            "url": "https://torrent.zoink.it/Fringe.S01E01.720p.HDTV.x264-E7.[eztv].torrent", 
+            "audio": "en"
+        }, 
+        {
+            "url": "https://www.bt-chat.com/download.php?info_hash=2750070c75ce4857e85aadc44cd99bbca913ec10", 
+            "audio": "en"
+        }, 
+    (...)
+    ], 
+    "title": "Piloto"
+}</pre>
 </ul>
 {% endblock %}
