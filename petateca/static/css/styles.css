@@ -153,6 +153,7 @@ ol { padding: 0 0 0 5px }
 .right { float: right; text-align:right; }
 .left { float: left; text-align:left; }
 .center { float: center; text-align:center; }
+.nobottom { margin-bottom: 0em !important }
 .img_left {
     float: left;
     margin: 10px 20px 10px 0;
@@ -270,6 +271,7 @@ h1.logo {
 #header ul li {
     float: left;
     position: relative;
+    margin-top: 0.5em;
 }
 #header .user {
     float: right;
@@ -370,9 +372,9 @@ h1.logo {
     color: #FFFFFF !important;
 }
 
+
 #search {
     margin: 0.5em;
-    margin-right: 12em;
     font-size: 13px;
     padding: 4px 25px 5px 5px;
     width: 268px;
