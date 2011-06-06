@@ -26,14 +26,14 @@ Por defecto devuelve la información en formato JSON, pero pasándole el paráme
 <h3 id="serielist" class="header_api">Listado de Series</h3>
 <ul>
     <li>Lista las series que se encuentran en Liberateca así como la URL donde se encuentra el recurso (ver Serie)
-    <li>URL: <b>https://liberateca.net/api/v1/series/</b>
+    <li>URL: <b>https://liberateca.net/api/v2/series/</b>
     <li>Métodos aceptados: 
         <ul>
             <li><b> GET </b> - Devuelve el listado de series
         </ul>
     <li> Ejemplo:
     <pre class="syntax">
-$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/
+$ curl -u usuario:contraseña https://liberateca.net/api/v2/series/
 
 [
     {
@@ -73,7 +73,7 @@ $ curl -u usuario:contraseña -H "Range: items=90-91" https://liberateca.net/api
 <h3 id="serie" class="header_api">Serie</h3>
 <ul>
     <li>Devuelve el detalle de una serie. Para obtener las series disponibles ver <a href="#serielist">Listado de Series</a>.
-    <li>URL: <b>https://liberateca.net/api/v1/series/(SERIE_ID)/</b>
+    <li>URL: <b>https://liberateca.net/api/v2/series/(SERIE_ID)/</b>
     <li>Métodos aceptados: 
         <ul>
             <li><b> GET </b> - Muestra el detalle de la serie, siendo la correspondencia: 
@@ -92,7 +92,7 @@ $ curl -u usuario:contraseña -H "Range: items=90-91" https://liberateca.net/api
         </ul>
     <li> Ejemplo:
     <pre class="syntax">
-$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/
+$ curl -u usuario:contraseña https://liberateca.net/api/v2/series/46/
 
 {   
     "genres": [
@@ -124,14 +124,14 @@ $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/
 <h3 id="seasonlist" class="header_api">Listado de Temporadas</h3>
 <ul>
     <li>Devuelve el listado de temporadas de una serie dada.
-    <li>URL: <b>https://liberateca.net/api/v1/series/(SERIE_ID)/seasons/</b>
+    <li>URL: <b>https://liberateca.net/api/v2/series/(SERIE_ID)/seasons/</b>
     <li>Métodos aceptados: 
         <ul>
             <li><b> GET </b> -  Muestra las temporadas que tiene una serie.
         </ul>
     <li> Ejemplo:
     <pre class="syntax">
-$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/seasons/
+$ curl -u usuario:contraseña https://liberateca.net/api/v2/series/46/seasons/
 
 [   
     {   
@@ -156,7 +156,7 @@ $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/seasons/
 <h3 id="season" class="header_api">Temporada</h3>
 <ul>
     <li>Devuelve el listado de episodios que tiene una temporada (ver <a href="#seasonlist">Listado de Temporadas</a>)
-    <li>URL: <b>https://liberateca.net/api/v1/series/(SERIE_ID)/(SEASON)/</b>
+    <li>URL: <b>https://liberateca.net/api/v2/series/(SERIE_ID)/(SEASON)/</b>
     <li>Métodos aceptados: 
         <ul>
             <li><b> GET </b> -  Muestra el listado de episodios para una temporada dada, y lista la siguiente información de cada episodio: 
@@ -168,7 +168,7 @@ $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/seasons/
         </ul>
     <li> Ejemplo:
     <pre class="syntax">
-$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/
+$ curl -u usuario:contraseña https://liberateca.net/api/v2/series/46/1/
 
 [
     {
@@ -190,7 +190,7 @@ $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/
 <h3 id="season" class="header_api">Episodio</h3>
 <ul>
     <li>Devuelve el detalle y los enlaces de un episodio.
-    <li>URL: <b>https://liberateca.net/api/v1/series/(SERIE_ID)/(SEASON)/(EPISODIO)/</b>
+    <li>URL: <b>https://liberateca.net/api/v2/series/(SERIE_ID)/(SEASON)/(EPISODIO)/</b>
     <li>Métodos aceptados: 
         <ul>
             <li><b> GET </b> -  Muestra la siguiente información de un episodio:
@@ -204,23 +204,34 @@ $ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/
         </ul>
     <li>Ejemplo:
     <pre class="syntax">
-$ curl -u usuario:contraseña https://liberateca.net/api/v1/series/46/1/1/
+$ curl -u usuario:contraseña https://liberateca.net/api/v2/series/46/1/1/
 
 {
-    "season": 1, 
-    "episode": 1, 
+    "episode": 1,
     "links": [
         {
-            "url": "https://torrent.zoink.it/Fringe.S01E01.720p.HDTV.x264-E7.[eztv].torrent", 
+            "url": "http://torrent.zoink.it/Fringe.S01E01.720p.HDTV.x264-E7.[eztv].torrent",
             "audio": "en"
-        }, 
+        },
         {
-            "url": "https://www.bt-chat.com/download.php?info_hash=2750070c75ce4857e85aadc44cd99bbca913ec10", 
+            "url": "http://www.bt-chat.com/download.php?info_hash=2750070c75ce4857e85aadc44cd99bbca913ec10",
             "audio": "en"
-        }, 
+        },
+        {
+            "url": "http://www.mininova.org/tor/1788565",
+            "audio": "en"
+        },
     (...)
-    ], 
-    "title": "Piloto"
-}</pre>
+    ],
+    "air_date": "2008-09-09",
+    "season": 1,
+    "title_en": "Pilot",
+    "description_en": "When all the passengers on a plane die, FBI agent Olivia Dunham investigates the events and her partner almost dies. A desperate Olivia looks for help from Dr. Walter Bishop who has been institutionalized. Olivia, Dr. Bishop and his son Peter begin to discover what really happened on Flight 627 and begin to uncover a larger truth.",
+    "thumbnail": "http://liberateca.net/static/cache/16/c5/16c537b15cbfa7a1ae75945b61dd0cfe.jpg",
+    "title_es": "Piloto",
+    "description_es": "El vuelo 627 aterriza con todo el pasaje y la tripulación muerta en extrañas circunstancias. Parece que un virus haya \"derretido\" sus cuerpos. La Agente del FBI Olivia Dunham es la encargada de averiguar que es lo que ha ocurrido. Para ello necesitará la ayuda de un científico calificado como el Einstein de nuestra generación llamado Walter Bishop, que lleva encerrado en un psiquiatrico 20 años por un supuesto incidente en sus experimentos. Bishop le ayudará a comunicarse con su compañero John, que se encuentra en estado de coma, para poder dar con el responsable de lo ocurrido en el avión.",
+    "id": 3662
+}
+</pre>
 </ul>
 {% endblock %}
