@@ -3,7 +3,7 @@
 {% load get_twitter_messages %}
 {% load thumbnail %}
 {% block contents %}
-        <h2 class="grid_12 caption clearfix center">{% blocktrans %}<span>{{ SITE_NAME }}</span>. Comparte tus series, porque <span>compartir es bueno</span>.{% endblocktrans %}</h2>
+        <h2 class="grid_12 caption clearfix center">{% blocktrans %}Comparte tus series, porque <span>compartir es bueno</span>.{% endblocktrans %}</h2>
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 
         <div class="center">
@@ -22,58 +22,6 @@
             <a href="{% url serie-index %}" class="float right alpha">
                 <img title="Ver más series" src="/static/images/go-next.png" id="go-next" />
             </a>
-
-		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
-		<div id="quicknav" class="grid_12">
-			<div class="quicknavgrid_3 quicknav">
-					<h4 class="title ">{% trans "Invitaciones" %}</h4>
-					<p style="text-align:center; font-size:120%;">
-                    {% if remaining_invitations %}
-                        Si te gusta {{ SITE_NAME }} puedes ayudarnos recomendandosela a tus amigos. <a href="{% url invitation_invite %}">Tienes {{ remaining_invitations }} invitaciones restantes. ¡Invita a tus colegas!</a>
-                    {% else %} 
-                        No te quedan invitaciones disponibles. ¡Gracias por recomendarnos!
-                    {% endif %}
-                    </p>
-			</div>
-			<div class="quicknavgrid_3 quicknav">
-					<h4 class="title ">{% trans "Votacion de logos" %}</h4>
-					<p style="text-align:center; font-size:120%;">Ya puedes participar votando por el nuevo logo de Liberateca que más te guste. <b>Tienes tiempo hasta el 5 de Junio</b>. <a href="http://blog.alabs.es/elige-el-nuevo-logo-para-liberateca/">Más información</a> </p>
-			</div>
-			<div class="quicknavgrid_3 quicknav">
-					<h4 class="title ">{% trans "Errores o sugerencias" %}</h4>
-                    <p style="font-size:120%;">Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustaria que tuviese</a>.</p>
-			</div>
-			<div class="quicknavgrid_3 quicknav">
-					<h4 class="title ">{% trans "Desarrollo" %}</h4>
-                    <p style="font-size:120%;">Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
-			</div>
-        </div>
-
-
-			
-		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
-		<div id="quicknav" class="grid_12">
-			<a class="quicknavgrid_3 quicknav alpha" href="http://nolesvotes.com">
-					<h4 class="title ">{% trans "No les votes..." %}</h4>
-					<p>... a los mismos de siempre </p>
-					<p style="text-align:center;"><img alt="{% trans "No les votes" %}" src="/static/images/nolesvotes.png" /></p>
-			</a>
-			<a class="quicknavgrid_3 quicknav" href="{% url faq %}">
-					<h4 class="title ">{% trans "FAQ" %}</h4>
-					<p>{% trans "Preguntas más frecuentes" %}</p>
-					<p style="text-align:center;"><img alt="{% trans "Preguntas más frecuentes" %}" src="/static/images/info.png" /></p>
-			</a>
-
-			<div class="quicknavgrid_6 quicknav">
-					<h4 class="title "><a href="http://twitter.com/liberateca/">{% trans "Síguenos en Twitter" %}</a></h4>
-            {% get_twitter_messages user liberateca limit 3 as tweets %}
-            {% for tweet in tweets %}
-            <ul>
-               <li><a href="{{ tweet.url }}">{{ tweet.text }}</a> {{ tweet.time }} </li>
-            </ul>
-            {% endfor %} 
-			</div>
-		</div>
 
 
 {% endblock %}

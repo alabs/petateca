@@ -1,54 +1,88 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE_CODE}}" dir="{{LANGUAGE_BIDI|yesno:"rtl,ltr,ltr"}}">
-{% spaceless %} {% load i18n %}
-{# http://recursive-design.com/blog/2009/11/10/noreversematch-custom-registration-templates-break-django-unit-tests/ #}
-{% url serie-index as serie_index %}{% url sneak_links as sneak_links %}{% url api as api %}
-{% url faq as faq %}{% url aviso-legal as aviso_legal %}{% url politica-privacidad as politica_privacidad %}
+<!DOCTYPE html>{% spaceless %} {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}{% endspaceless %}
+<html lang="{{LANGUAGE_CODE}}" xml:lang="{{LANGUAGE_CODE}}">
 <!-- Si estas viendo esto por ahi te interesa ver nuestro código: http://github.com/alabs/petateca -->
 <head>
+    <meta charset="utf-8" />
     <title>{% block title %}{{title|default:"Liberateca"}}{%endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico" />
     <!-- Stylesheets -->
-    <link href="/static/css/reset.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/styles.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/jquery.colorbox.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/jquery.jgrowl.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/jquery.rating.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/jquery.bubblepopup.v2.3.1.css" rel="stylesheet" type="text/css">
-    {% block extrastyle %}{% endblock %}
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" />
+    <link rel="stylesheet" href="/static/css/jquery.jgrowl.css" />
+    <link rel="stylesheet" href="/static/css/jquery.rating.css" />
+    <link rel="stylesheet" href="/static/css/jquery.bubblepopup.v2.3.1.css" />{% block extrastyle %}{% endblock %}
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Liberateca" />
 </head>
 <body>
-    <!-- RIBBON -->
-    <img src="/static/images/ribbon.gif" border="0" width="150" height="150" style="position:absolute; right:0px; top:0px; margin:0px; padding:0px">
     <div id="wrapper" class="container_12 clearfix">
-        <!-- Text Logo -->
-        <div id="logo" class="grid_4">
-            <img src="/static/images/logo.png" class="left" alt="liberateca" width="50" style="margin-top:2em;" />
-            <h1 class="right" id="logo"><a href="/">{{SITE_NAME}}</a></h1>
-            <span class="slogan meta right">Omnia Sunt Communia</span>
-        </div>
+    <header>
         <!-- Navigation Menu -->
-        <ul id="navigation" class="grid_8">
+        <nav id="header-wrapper">
+        <a href="/"><img src="/static/images/logo.png" class="left" alt="liberateca" /></a>
+        <div class="content" id="header">
+            <ul class="main-pages">
+                <li class="kids">
+                    <a class="" href="{% url serie-index %}">Series</a>
+                    <ul>
+                        <li><a href="{% url serie-index %}">Listado</a></li>
+                        <li><a href="{% url sneak_links %}">Ver últimas</a></li>
+                    </ul>
+                </li>
+                <li><a class="" href="http://liberateca.uservoice.com/">Sugerencias</a></li>
+                </li>
+                <li class="kids">
+                    <a class="" href="http://github.com/alabs/petateca/">Desarrolladores</a>
+                    <ul>
+                        <li><a href="http://github.com/alabs/petateca/">Código</a></li>
+                        <li><a href="{% url api %}">API</a></li>
+                        <li><a href="http://listas.alabs.es/mailman/listinfo/liberateca-dev/">Lista de desarrollo</a></li>
+                    </ul>
+                </li>
+                <li class="kids">
+                    <a class="" href="/">Liberateca</a>
+                    <ul>
+                        <li><a href="{% url faq %}">FAQ</a></li>
+                        <li>Redes</li>
+                        <li><a href="http://twitter.com/liberateca">Twitter</a></li>
+                        <li><a href="http://facebook.com/liberateca">Facebook</a></li>
+                        <li>Legales</li>
+                        <li><a href="{% url aviso-legal %}">Aviso legal</a></li>
+                        <li><a href="{% url politica-privacidad %}">Política de privacidad</a></li>
+                    </ul>
+                </li>
             {% if request.user.is_authenticated %}
-                    <li><a href="/accounts/logout"><span class="meta">{% trans "cerrar sesión" %}</span><br />{% trans "SALIR" %}</a></li>
-                    <li><a href="{% url get_user_public_profile user_name=request.user.username %}"><span class="meta">{{request.user.username}}</span><br />{% trans "PERFIL" %}</a></li>
-                {% else %}
-                    <li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'><span class="meta">{% trans "iniciar sesión" %}</span><br />{% trans "ACCEDER" %}</a></li>    
+                <li class="kids">
+                    <a class="" href="/accounts/logout/">Salir</a>
+                    <ul>
+                        <li><a href="{% url get_user_public_profile user_name=request.user.username %}">{% trans "Ver perfil" %}</a></li>
+                        <li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
+                        <li><a href="{% url invitation_invite %}">Invitar</a></li>
+                    </ul>
+                </li>
+            {% else %}
+                <li class="user signed-out">
+                    <ul>
+                        <li><a id="header-join" href="/accounts/login/" class="login" onclick='parent.$.colorbox({href:"/accounts/login/"}); return false;'>{% trans "ACCEDER" %}</a></li>    
+                        <li><a id="header-signin" href="/accounts/register/">Registrarse</a></li>
+                    </ul>
+                </li>
             {% endif %}
-            <li><a href="{{ serie_index }}"><span class="meta">{% trans "todas las" %}</span><br />{% trans "SERIES" %}</a></li>
-        </ul>
-        <div id="search_form">
+            </ul>
+                </div>
+        <div id="search_form" class="right">
               <form action="/search/" id="searchform">
                 <div>
-                  <input name="q" onkeyup="search_lookup(this.value);" type="text" autocomplete="off" />
+                  <input id="search" name="q" onkeyup="search_lookup(this.value);" type="text" autocomplete="off" required />
                 </div>
               </form>           
             <div id="suggestions"></div>
         </div>
+
+        </nav>
+    </header>
         <div class="hr grid_12">&nbsp;</div>
         <div class="clear"></div>
         {% block contents %}{% endblock %}
@@ -56,56 +90,11 @@
         <p class="grid_11 footer clearfix">
         <div class="hr grid_12">&nbsp;</div>
         <div id="footer">
-		<ul class="footerbox">
-			<li class="footerbox first">
-				<strong>Series</strong>
-					<ul>
-                        <li><a href="{{ serie_index }}">Listado completo</a></li>
-                        <li><a href="{{ sneak_links }}">Ver ultimas</a></li>
-					</ul>
-			</li>
-			<li class="footerbox">
-				<strong>Participa</strong>
-					<ul>
-						<li><a href="http://liberateca.uservoice.com/">Sugerencias</a></li>
-						<li><a href="http://listas.alabs.es/mailman/listinfo/liberateca-dev/">Lista de correo</a></li>
-					</ul>
-			</li>
-			<li class="footerbox">
-				<strong>Desarrolladores</strong>
-					<ul>
-						<li><a href="http://github.com/alabs/petateca">Código</a></li>
-                        <li><a href="{{ api }}">API</a></li>
-					</ul>
-			</li>
-			<li class="footerbox">
-				<strong>Usuario</strong>
-					<ul>
-                {% if request.user.is_authenticated %}
-						<li><a href="/accounts/logout/">Salir</a></li>
-                        <li><a href="{% url get_user_public_profile user_name=request.user.username %}">{% trans "Ver perfil" %}</a></li>
-						<li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
-						<li><a href="{% url invitation_invite %}">Invitar</a></li>
-                    {% else %}
-                        <li><a href="/accounts/login" class="login" onclick='parent.$.colorbox({href:"/accounts/login"}); return false;'>{% trans "Acceder" %}</a></li>    
-                {% endif %}
-					</ul>
-			</li>
-			<li class="footerbox">
-				<strong>Liberateca</strong>
-					<ul>
-                        <li><a href="{{ faq }}">FAQ</a></li>
-						<li><a href="http://twitter.com/liberateca">Twitter</a></li>
-                        <li><a href="{{ aviso_legal }}">Aviso legal</a></li>
-                        <li><a href="{{ politica_privacidad }}">Política de privacidad</a></li>
-					</ul>
-			</li>
-		</ul>
 	</div>
     <br class="clear">
         <p class="grid_12 footer clearfix">
         <div class="hr grid_12">&nbsp;</div>
-            <span class="float"><p>
+            <span class="float">
                 <a href="http://qwibbledesigns.co.uk/"><b>QwibbleDesigns</b></a> |
                 <a href="http://www.gnu.org/licenses/agpl.html"><b>GPL Affero</b></a> | 
                 <a href="http://creativecommons.org/licenses/by-sa/3.0/es/"><b>CC-BY-SA</b></a> | 
@@ -113,10 +102,10 @@
                 <a href="http://thetvdb.com/"><b>TheTVDB</b></a> |
                 <a href="http://github.com/alabs/petateca"><b>GitHub</b></a> |
                 <a href="http://twitter.com/liberateca"><b>Twitter</b></a> 
-            </p></span>
+            </span>
             <a class="float right" href="http://alabs.es"><b>aLabs</b></a>
-        </p>
     </div>
+</div>
 <noscript>
         <div id="noscript-warning"> {{SITE_NAME}} funciona mejor con JavaScript activado.</div>
 </noscript>    
@@ -126,14 +115,7 @@
     <script type="text/javascript" src="/static/js/jquery.jgrowl.js"></script>
     <script type="text/javascript" src="/static/js/jquery.rating.js"></script>
     <script type="text/javascript" src="/static/js/jquery.bubblepopup.v2.3.1.min.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.syntax.js"></script>
     <script type="text/javascript" src="/static/js/petateca.js"></script>
     {% block extrascript %}{% endblock %}
-<script type="text/javascript">
-jQuery(function($) {
-            $.syntax({root: '/static/js/jquery-syntax/'});
-        });
-</script>
-
 </body>
 </html>
