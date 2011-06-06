@@ -6,15 +6,14 @@
         <h2 class="grid_12 caption clearfix center">{% blocktrans %}Comparte tus series, porque <span>compartir es bueno</span>.{% endblocktrans %}</h2>
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 
-        <div class="center">
 			{% for serie in series %}
-                <div class="grid_2">
+                <div class="grid_1_5">
         		{% thumbnail serie.poster.src "150x200" as img_serie %}
           			<a href="{% url serie.views.get_serie serie_slug=serie.slug_name %}" class="portfolio_item float alpha">
                         <div class="preload" style="width:140px; height:190px;">
                             <img class="prel serie" id="{{ serie.id }}" alt="{{ serie.name }}" src="{{ img_serie.url }}">
                         </div>
-                        <span>{{ serie.name }}</span>
+                        <span class="center">{{ serie.name }}</span>
                     </a> 
         		{% endthumbnail %}
                 </div>
@@ -24,11 +23,4 @@
             </a>
 
 
-{% endblock %}
-{% block extrascript %}
-    {% if logo_message %}
-    <script>
-        $.jGrowl("¿Te gusta nuestro logo actual? A nosotros tampoco. Ya puedes <a style='color:#fff; text-decoration:underline;' href='http://blog.alabs.es/elige-el-nuevo-logo-para-liberateca/'><b>votar las propuestas</b></a> que nos han llegado. Tienes tiempo hasta el 5 de Junio.", { header: 'Votación de logos', sticky: true });
-    </script>
-    {% endif %}
 {% endblock %}

@@ -10,7 +10,7 @@ from djangoratings.models import Vote as Rating
 @render_to('index.html')
 def index(request):
     ''' Para la home '''
-    serie_list = Serie.objects.order_by('rating_score').reverse().select_related('poster')[:5] 
+    serie_list = Serie.objects.order_by('rating_score').reverse().select_related('poster')[:7] 
     if request.user.is_authenticated():
         remaining_invitations = abs(InvitationKey.objects.remaining_invitations_for_user(request.user))
     else:

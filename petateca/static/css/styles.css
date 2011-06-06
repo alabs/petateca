@@ -54,7 +54,7 @@ pre,
 table,
 address,
 fieldset,
-img { margin-bottom: 20px }
+img { margin-bottom: 2em }
 #wrapper { margin-top: 0px}
 ul li ul,
 ol li ol { margin-bottom: 0px }
@@ -71,6 +71,7 @@ ol { padding: 0 0 0 5px }
     position: relative;
 }
 .grid_1,
+.grid_1_5,
 .grid_2,
 .grid_3,
 .grid_4,
@@ -98,6 +99,7 @@ ol { padding: 0 0 0 5px }
     margin-right: 1%;
 }
 .container_12 .grid_1 { width: 6.333% }
+.container_12 .grid_1_5 { width: 10.667% }
 .container_12 .grid_2 { width: 14.667% }
 .container_12 .grid_3 { width: 23.0% }
 .container_12 .grid_4 { width: 31.333% }
@@ -128,7 +130,7 @@ ol { padding: 0 0 0 5px }
     border-bottom: 1px solid #f0f0f0;
     border-top: 1px solid #d6d6d6;
     clear: both;
-    height: 0;
+    height: 1;
     line-height: 0;
     width: 100%;
     font-size: 0;
@@ -619,7 +621,6 @@ a img {
 /* Portfolio Styles */
 .portfolio_item {
     position: relative;
-    margin: 0 14px 28px 14px;
     padding: 0;
 }
 /*.portfolio_item                        {width:223px; position:relative; margin:0 14px 28px 14px; padding:0;}_NO__DOTCOMMA__AFTER__*/
