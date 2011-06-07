@@ -454,7 +454,7 @@ h1.logo {
 .footer,
 .footer a { color: #494949 }
 .footer a:hover { color: #9d9d9d }
-/* Sub Navigation */
+/* Sub Navigation 
 ul.sidebar {
     list-style: none;
     margin: 0 0 30px 0;
@@ -488,7 +488,7 @@ ul.sidebar a:hover {
     width: 280px;
     background: #f6f6f6;
     padding: 10px 0 10px 20px;
-}
+}*/
 /* Caption */
 h2.caption {
     color: #494949;
@@ -933,7 +933,6 @@ padding-right: 20px;
     padding: 6px 25px 4px 6px;
     width: 215px;
 }
-<<<<<<< HEAD
 #search_form .button,
 .button:visited {
     background: #000000 url(../images/alert-overlay.png) repeat-x;
@@ -958,6 +957,7 @@ padding-right: 20px;
     border:10;
     margin: 6px;
     width: 16px;
+}
 /* ADD EPISODE FORM */
 #add_episode_form label {
     width: 12em;
@@ -1030,12 +1030,11 @@ left:46em;
 /* Contact Page Sidebar */
 .contact ul { list-style: none }
 .contact li { margin: 0 }
-/* Link Tables */
+/* Link Tables 
 #links {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 12px;
     margin: 5px;
-    /*    width: 480px;*/
     text-align: left;
     border-collapse: collapse;
     border: 1px solid #717171;
@@ -1085,6 +1084,8 @@ left:46em;
     font-family: Helvetica;
     font-size: 18px;
 }
+
+*/
 #rating {
     margin-bottom: 2em;
     padding-left: 5em;
@@ -1128,10 +1129,7 @@ left:46em;
 .center{
     text-align: center;
     display: block;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: auto;
 }
 .prev_next{
     margin: 1em;
@@ -1149,6 +1147,7 @@ left:46em;
     font-weight: normal;        
 }
 
+/*
 .vermas_head{border:1px solid #998675;}
 
 .vermas_body {display:none; width:184px;border-right:1px solid #998675;border-bottom:1px solid #998675;border-left:1px solid #998675;}
@@ -1191,11 +1190,18 @@ left:46em;
 }
 .cssdropdown li ul li a {
     font-size: 1em;
+} */
+
+#horizontal_list {
+    width: 5em;
+}
+#horizontal_list li {
+    display: inline;
 }
 
-
+/* RATING BOX WITH COLORS */
 .rating_num {
-    font-size: 36px;
+    font-size: 16px;
     font-weight: bold;
     padding: 10px 0 12px;
     text-align: center;
@@ -1210,7 +1216,7 @@ left:46em;
     background-color: #FC1C12;
     color: #FFFFFF;
 }
-.neutral_bg {
+#neutral_bg {
     background-color: #F5BE3D;
     color: #FFFFFF;
 }
@@ -1225,7 +1231,7 @@ left:46em;
     margin-top: 3px;
 }
 
-#episode_list { width:550px; font-family:Georgia, Times, serif; font-size:12px; }
+#episode_list { width:550px; }
 #episode_list ul { list-style: none; }
 #episode_list ul li { }
 #episode_list ul li a { display:block; text-decoration:none; color:#000000; background-color:#FFFFFF; line-height:25px; border-bottom-style:solid; border-bottom-width:1px; border-bottom-color:#CCCCCC; padding-left:10px; cursor:pointer; }
@@ -1254,6 +1260,7 @@ left:46em;
     background: url('/static/images/voting/good.png');
 }
 
+/*
 
 #footer ul.footerbox {
 }
@@ -1285,6 +1292,7 @@ left:46em;
     margin-top: 0.5em;
 }
 
+    */
 div.dialog {
 	width: 60em;
 	padding: 0 4em;
@@ -1306,28 +1314,6 @@ div.dialog a:link, div.dialog a:visited {
     padding-top: 70px;
 }
 
-#header {
-    height: 60px;
-    position: fixed;
-    width: 100%;
-    background: -moz-linear-gradient(center top , #333333, #111111) repeat scroll 0 0 transparent;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    min-width: 885px;
-}
-
-
-.header { 
-}
-
-.header_api {
-    font-size: 200%;
-    line-height: 1.5em;
-    background-color: #333;
-    color: #FFF;
-    text-align:center;
-} 
 
 .hightlight {
     border:2px solid #9F1319 !important;
@@ -1361,6 +1347,7 @@ div.dialog a:link, div.dialog a:visited {
 #tagcloud a{ text-decoration:none; }
 #tagcloud a:hover{ text-decoration:underline; }
 
+#title { text-align:center; margin-bottom:1em;}
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {

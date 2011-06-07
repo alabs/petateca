@@ -208,7 +208,6 @@ function search_lookup(inputString) {
 }
 
 
-
     
 
 $(document).ready(function () {
@@ -224,14 +223,20 @@ $(document).ready(function () {
             });
         }
     }); 
+
     // Listado de episodios por temporadas
-    $('.season').live('click', function(){ 
-            $('#season_list').html('<img src="/static/images/ajax-loading-bar.gif">');
-            season = $(this).attr('href');
-            $('#season_list').load(season);
-            return false; 
-        }
-    );
+    $('.season').live('click', function(event){ 
+        event.preventDefault();
+        $(this).addClass('selected_list');
+        season_full_id = $(this).attr('id');
+        $inside = $('#inside_' + season_full_id);
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+        serie_season_raw = season_full_id.split('_');
+        var serie_id = serie_season_raw[1];
+        var season_n = serie_season_raw[3];
+        $inside.load('/series/lookup/serie/' + serie_id + '/season/' + season_n + '/');
+    });
+
     // Listado de actores segun serie
     $('#get_actors').click(
         function(){

@@ -1,13 +1,13 @@
-<html>
-    <body>
-{% if request.user.is_authenticated %}
-<!-- AÑADIR UN EPISODIO --> 
-<a href="{% url ajax_add_episode serie_id=season.serie.id season=season.season %}" id="add_episode" class="button" title="Agregar episodio">Agregar episodio</a>
-<div id="episode_inside"></div>
-{% endif %}
 
-<div id="episode_list" class="left">
+<div id="episode_list">
   <ul>
+    {% if request.user.is_authenticated %}
+    <li>
+        <!-- AÑADIR UN EPISODIO --> 
+        <a href="{% url ajax_add_episode serie_id=season.serie.id season=season.season %}" id="add_episode" title="Agregar episodio">Agregar episodio</a>
+        <div id="episode_inside"></div>
+    </li>
+    {% endif %}
     <!-- TEMPORADA COMPLETA -->
     <li>
         <a class="zoom" href="{% url ajax_list_links_season serie_id=season.serie.id season=season.season %}">
@@ -68,5 +68,3 @@ $(document).ready(function(){
 //        function(){ 
 //    });
 </script>
-</body>
-</html>
