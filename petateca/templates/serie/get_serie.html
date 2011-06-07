@@ -37,12 +37,13 @@
         <h2><a id="get_actors" name="get_actors" href="#get_actors">{% trans "Actores" %}</a></h2>
         <div id="actors_list"></div>
 
-	{% if not comment_count == 0 %}
+    {% get_comment_count for serie as comment_count %}
+	{% ifnotequal comment_count 0 %}
         <div class="hr clearfix">&nbsp;</div>
         <!-- RESEÑAS -->
         <h2>{% trans "Reseñas" %}</h2>
         {% render_comment_list for serie %}
-	{% endif %}
+	{% endifnotequal %}
 	<!-- RESEÑA -->
     <div class="hr clearfix">&nbsp;</div>
     <h2>{% trans "Añade tu reseña" %}</h2>
