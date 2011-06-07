@@ -1195,7 +1195,6 @@ left:-23em;top: -5.6em;
 } */
 
 #horizontal_list {
-    width: 5em;
 }
 #horizontal_list li {
     display: inline;
@@ -1203,7 +1202,7 @@ left:-23em;top: -5.6em;
 
 /* RATING BOX WITH COLORS */
 .rating_num {
-    font-size: 16px;
+    font-size: 36px;
     font-weight: bold;
     padding: 10px 0 12px;
     text-align: center;
