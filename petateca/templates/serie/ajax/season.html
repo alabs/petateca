@@ -4,7 +4,10 @@
     {% if request.user.is_authenticated %}
     <li>
         <!-- AÑADIR UN EPISODIO --> 
-        <a href="{% url ajax_add_episode serie_id=season.serie.id season=season.season %}" id="add_episode" title="Agregar episodio">Agregar episodio</a>
+        <a href="{% url ajax_add_episode serie_id=season.serie.id season=season.season %}" id="add_episode" title="Agregar episodio">
+            <img title="Agregar capitulo nuevo" alt="Agregar capitulo nuevo" src="/static/images/list-add.png" class="left nobottom">
+            Agregar capitulo
+        </a>
         <div id="episode_inside"></div>
     </li>
     {% endif %}
