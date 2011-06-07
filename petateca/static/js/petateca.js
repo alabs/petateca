@@ -400,9 +400,18 @@ $(document).ready(function () {
         episodeid = $(this).attr('id');
         $inside = $('#inside' + episodeid);
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-        episode_rel = $(this).attr('rel');
-        $inside.load(episode_rel + episodeid + '/');
+        $inside.load('/series/links/add/episode/' + episodeid + '/');
     });
+
+    $(".no_link").live('click', function(e){
+    // agregar enlace cuando no hay ninguno
+        e.preventDefault();
+        episodeid = $(this).attr('id');
+        $inside = $('#inside' + episodeid);
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+        $inside.load('/series/links/add/episode/' + episodeid + '/');
+    });
+
 
     $("#add_episode").live('click', function(e){
     // agregar episodio, muestra el formulario

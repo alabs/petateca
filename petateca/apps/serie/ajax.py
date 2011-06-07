@@ -75,13 +75,16 @@ def ajax_links_list(request, serie_id, season, episode=None):
         epi = get_object_or_404(m.Episode, episode=episode, season=season)
         link_list = epi.links.all()
         is_season = False
+        entity = epi
     else:
         link_list = season.links.all()
         is_season = True
+        entity = season
     return { 
         'season': season,
         'link_list': link_list,
         'is_season': is_season,
+        'entity': entity,
     }
 
 
