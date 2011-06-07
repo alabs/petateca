@@ -224,10 +224,28 @@ $(document).ready(function () {
         }
     }); 
 
+    $('.selected_list').live('click', function(event){
+        event.preventDefault();
+        $(this).siblings().html('');
+    });
+
     // Listado de episodios por temporadas
     $('.season').live('click', function(event){ 
         event.preventDefault();
-        $(this).addClass('selected_list');
+
+        // poor mans toogle
+        // comprobamos si ya estaba seleccionada anteriormente
+        var check_selected = $(this).attr('class'); 
+        if (check_selected.indexOf('selected_list') != -1) {
+            // si ya existe lo cerramos
+            $(this).removeClass('selected_list');
+            $(this).siblings().html('');
+            return false;
+        } else { 
+            $(this).addClass('selected_list');
+        }
+
+
         season_full_id = $(this).attr('id');
         $inside = $('#inside_' + season_full_id);
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
@@ -342,7 +360,19 @@ $(document).ready(function () {
 
     $(".zoom").live('click', function(){
     // listado de episodios
-        $(this).addClass('selected_list');
+    
+        // poor mans toogle
+        // comprobamos si ya estaba seleccionada anteriormente
+        var check_selected = $(this).attr('class'); 
+        if (check_selected.indexOf('selected_list') != -1) {
+            // si ya existe lo cerramos
+            $(this).removeClass('selected_list');
+            $(this).siblings().html('');
+            return false;
+        } else { 
+            $(this).addClass('selected_list');
+        }
+
         $inside = $(this).siblings();
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
         href = $(this).attr('href');
