@@ -217,6 +217,10 @@ h1.logo {
     padding: 5px;
 }
 
+#ribbon {
+position:absolute; right:0px; top:0px; margin:0px; padding:0px;
+}
+
 /* Site Navigation */
 .nav {
         background-color: 212121;
