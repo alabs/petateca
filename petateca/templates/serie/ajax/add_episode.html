@@ -1,6 +1,6 @@
 {{ mensaje }}
 
-<form class="left" id="add_episode_form" action="{% url ajax_add_episode serie_id=serie.id season=season.season %}" method="POST">
+<form id="add_episode_form" action="{% url ajax_add_episode serie_id=serie.id season=season.season %}" method="POST">
 <ul>
     {{ form.non_field_errors }}
     <li class="fieldWrapper">
