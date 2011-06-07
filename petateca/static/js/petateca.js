@@ -385,7 +385,7 @@ $(document).ready(function () {
         e.preventDefault();
         $(this).parent().addClass('selected_list');
         episodeid = $(this).attr('id');
-        $inside = $('#inside' + episodeid);
+        var $inside = $('#inside' + episodeid);
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
         espoiler_id = $(this).attr('rel');
         $inside.load(espoiler_id);
@@ -402,13 +402,13 @@ $(document).ready(function () {
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
         episode_rel = $(this).attr('rel');
         $inside.load(episode_rel + episodeid + '/');
-        return false;
     });
 
     $("#add_episode").live('click', function(e){
     // agregar episodio, muestra el formulario
         e.preventDefault();
         $inside = $('#episode_inside');
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
         episode_href = $(this).attr('href');
         $inside.load(episode_href);
         $(this).hide();
@@ -454,9 +454,9 @@ $(document).ready(function () {
                 switch (data) {
                     case 'OK':
                         $.jGrowl("El episodio se ha creado exitosamente, gracias por colaborar");
-                        $('#season_list').html('<img src="/static/images/ajax-loading-bar.gif">');
-                        $('#season_list').load('/series/lookup/serie/' + serie + '/season/' + season + '/');
-                        return false; 
+                        var $inside = $('#inside_serie_' + serie + '_season_' + season);
+                        $inside.html('<img src="/static/images/ajax-loading-bar.gif">');
+                        $inside.load('/series/lookup/serie/' + serie + '/season/' + season + '/');
                         break;
                     case 'Duplicado':
                         $.jGrowl("Ese episodio ya se encuentra, comprueba el numero");
@@ -564,7 +564,7 @@ $(document).ready(function () {
     $('#season_add').bind('click', function(event) {
         // AJAX para traer el formulario
         event.preventDefault();
-        $('#season_add_form').load($(this).attr('href'));
+        $('#inside_season_add').load($(this).attr('href'));
         return false;
     });
 
@@ -578,7 +578,10 @@ $(document).ready(function () {
             return false;
         } else {$id_season.removeClass('hightlight');}
 
-        $.post(action, {'season': $id_season.val()}, function(data){
+        $.post(action, {
+            'season': $id_season.val(),
+            'csrfmiddlewaretoken': getCookie('csrftoken')
+        }, function(data){
             switch (data.message) {
             case 'OK':
                 $.jGrowl("Temporada agregada, redireccionando...");
