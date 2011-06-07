@@ -23,34 +23,47 @@ def serie_lookup(request, serie_id):
 
 @render_to('serie/ajax/season.html')
 def season_lookup(request, serie_id, season):
-    ''' Listado de episodios para una temporada, ordenados por numero de episodio '''
-    serie = get_object_or_404(m.Serie, id=serie_id)
-    season = get_object_or_404(m.Season, serie=serie, season=season)
-    episode_list = season.episodes.order_by('episode')
-    # Comprobamos si el usuario tiene episodios vistos
-    if request.user.is_authenticated():
-        episode_list_cleaned = []
-        profile = request.user.profile
-        for epi in episode_list: 
-            epi_cleaned = {
-                'title' : epi.title,
-                'title_en' : epi.title_en,
-                'title_es' : epi.title_es,
-                'air_date' : epi.air_date,
-                'episode' : epi.episode,
-                'season_episode': epi.season_episode(),
-                'is_viewed' : epi.viewed_episodes.filter(user=profile).exists()
-            }
-            episode_list_cleaned.append(epi_cleaned)
-        return { 
-            'season': season,
-            'episode_list' : episode_list_cleaned,
-        }
-    else:
-        return {
-            'season': season,
-            'episode_list': episode_list,
-        }
+       ''' Listado de episodios para una temporada, ordenados por numero de episodio '''
+       serie = get_object_or_404(m.Serie, id=serie_id)
+       season = get_object_or_404(m.Season, serie=serie, season=season)
+       episode_list = season.episodes.all().order_by('episode')
+       return { 
+                  'season': season,
+                  'episode_list' : episode_list,
+              }
+
+
+# PARA TRACKING 
+#@render_to('serie/ajax/season.html')
+#def season_lookup(request, serie_id, season):
+#    ''' Listado de episodios para una temporada, ordenados por numero de episodio '''
+#    serie = get_object_or_404(m.Serie, id=serie_id)
+#    season = get_object_or_404(m.Season, serie=serie, season=season)
+#    episode_list = season.episodes.order_by('episode')
+#    # Comprobamos si el usuario tiene episodios vistos
+#    if request.user.is_authenticated():
+#        episode_list_cleaned = []
+#        profile = request.user.profile
+#        for epi in episode_list: 
+#            epi_cleaned = {
+#                'title' : epi.title,
+#                'title_en' : epi.title_en,
+#                'title_es' : epi.title_es,
+#                'air_date' : epi.air_date,
+#                'episode' : epi.episode,
+#                'season_episode': epi.season_episode(),
+#                'is_viewed' : epi.viewed_episodes.filter(user=profile).exists()
+#            }
+#            episode_list_cleaned.append(epi_cleaned)
+#        return { 
+#            'season': season,
+#            'episode_list' : episode_list_cleaned,
+#        }
+#    else:
+#        return {
+#            'season': season,
+#            'episode_list': episode_list,
+#        }
 
 
 @render_to('serie/ajax/links_list.html')
