@@ -33,6 +33,7 @@ urlpatterns = patterns('',
 
     (r'^i18n/', include('django.conf.urls.i18n')),
 
+    (r'^favicon\.ico$', redirect_to, {'url': '/static/images/favicon.ico'}),
     url(r'^opensearch.xml/$', direct_to_template, \
         {'template': 'opensearch.xml'}, name="opensearch"),
     url(r'^faq/$', direct_to_template, \
