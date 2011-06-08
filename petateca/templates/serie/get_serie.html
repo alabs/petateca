@@ -55,10 +55,7 @@
 
 
 
-<div class="grid_4" style="    background-color: #FAFAFA;
-        border-radius: 6px 6px 6px 6px;
-            margin-bottom: 20px;
-                padding: 20px;">
+<div class="grid_4" id="box">
 	<!-- IMAGE -->
     <div class="left">
         {% if serie.poster.src %}
@@ -95,26 +92,30 @@
           </div>
       {% endwith %}
 		<div class="hr dotted clearfix">&nbsp;</div>
+	<!-- RUNTIME -->
+    <li>
+        <span class="meta_box">{% trans "Duración" %}</span>
+        </li><li>
+	    {{ serie.runtime }} {% trans "minutos" %}
+    </li>
 	<!-- NETWORK -->
 	{% if serie.network.name %}
-    <li>{% trans "Cadena" %}
-			<a href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a>
-            </li>
+    <li>
+        <span class="meta_box">{% trans "Cadena" %}</span>
+        </li><li>
+		<a href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a>
+    </li>
 	{% endif %}
 	<!-- GENRE -->
-	{% trans "Género" %}
     <li>
+        <span class="meta_box">{% trans "Género" %}</span>
 		<ul>
       		{% for genre in serie.genres.all %}
-		<li><a href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
-		{% endfor %}
+            <li><a href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
+            {% endfor %}
 		</ul>
     </li>
-	<!-- RUNTIME -->
-	{% trans "Duración" %}
-	<li>{{ serie.runtime }} {% trans "minutos" %}</p>
 		<div class="hr dotted clearfix">&nbsp;</div>
-        </li>
 	<!-- BUTTONS -->
     <li>
 		<a href="/series" class="button">&lt;&lt; {% trans "Series" %}</a>

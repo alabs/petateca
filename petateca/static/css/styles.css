@@ -1353,6 +1353,32 @@ div.dialog a:link, div.dialog a:visited {
 #tagcloud a:hover{ text-decoration:underline; }
 
 #title { text-align:center; margin-bottom:1em;}
+
+#box {
+    background-color: #FAFAFA;
+    border-radius: 6px 6px 6px 6px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.meta_box {
+    font-weight: normal;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif;
+    font-size: 11px;
+    line-height: 16px;
+    text-transform: none;
+    text-shadow: none;
+}
+
+#show_espoiler {
+    display:inline-block;
+}
+
+.margin {
+    margin:1em;
+}
+
+
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {

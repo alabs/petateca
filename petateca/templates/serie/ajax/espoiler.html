@@ -1,13 +1,13 @@
 {% load i18n %}
 {% load thumbnail %}
-<li class="center" id="marginal">
-{% if episode.poster.src %}
-  {% thumbnail episode.poster.src "200x150" as img_episode %}
-    <img id="img_espoiler" src="{{ img_episode.url }}">
-  {% endthumbnail %}
-{% endif %}
-  <p>
-    <span class="meta">{% trans "Descripción" %}</span>
-    {{ episode.description }}
-  </p>
-</li>
+<div id="show_espoiler" class="center">
+    {% if episode.poster.src %}
+        {% thumbnail episode.poster.src "200x150" as img_episode %}
+            <img class="right margin" alt="Imagen capitulo {{ episode.season_episode }}" src="{{ img_episode.url }}">
+        {% endthumbnail %}
+    {% endif %}
+    <div class="margin">
+        <span class="meta">{% trans "Descripción" %}</span>
+        {{ episode.description }}
+    </div>
+</div>
