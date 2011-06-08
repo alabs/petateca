@@ -1,24 +1,15 @@
 {% extends "base_stripped.html" %}
 {% load i18n %}
 {% block title %}Liberateca: Omnia sunt communia{% endblock %}
-{% block extrahead %}
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
-<script type="text/javascript">
-    $(function() {
-            $( "#accordion" ).accordion();
-                });
-</script>
-{% endblock %}
 {% block contents %}
     <!-- RIBBON -->
-    <img src="/static/images/ribbon.gif" border="0" width="150" height="150" alt="Peta" style="position:absolute; right:0px; top:0px; margin:0px; padding:0px" />
+    <img src="/static/images/ribbon.gif" id="ribbon" alt="peta" />
 <div class="dialog"> 
 	<br/>
-    <img src="/static/images/logo.png" alt="liberateca" width="100" />
-    <h2>{{ SITE_NAME }}</h2>
+    <img src="/static/images/logo.png" alt="liberateca" />
     <p> 
         {% blocktrans %}
-        Liberateca es una pagina de enlaces de nueva generación. 
+        Compartimos cultura. 
             <p>
                 <ul>
                 <li>Puedes <b>votar, comentar y valorar</b> tanto las series como los enlaces.
@@ -30,7 +21,7 @@
         {% endblocktrans %}
     </p> 
     <div id="accordion">
-        <h3 class="header"><a href="#">{% trans "Ingresar" %}</a></h3>
+        <h3 class="heading"><a href="#">{% trans "Ingresar" %}</a></h3>
         <div>
             <!-- LOGIN form -->
             <form method="post" action="." id="signin_form">
@@ -41,7 +32,7 @@
             </form>  
                 <a href="{% url auth_password_reset %}">¿Has olvidado tu contraseña?</a>
         </div>
-        <h3 class="header"><a href="#">{% trans "Pedir invitación" %}</a></h3>
+        <h3 class="heading"><a href="#">{% trans "Pedir invitación" %}</a></h3>
         <div>
                     <p> Puedes pedir una invitacion rellenando tu correo y proximamente te la enviaremos </p>
                         <form method="post" action="{% url request_invitation %}" id="signin_form">

@@ -1378,6 +1378,12 @@ div.dialog a:link, div.dialog a:visited {
     margin:1em;
 }
 
+.heading { 
+    font-size: 130%; 
+    line-height: 1.5em; 
+    background-color: #333333;
+    margin-top: 2em; 
+}
 
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
