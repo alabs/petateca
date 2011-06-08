@@ -1384,6 +1384,12 @@ div.dialog a:link, div.dialog a:visited {
     background-color: #333333;
     margin-top: 2em; 
 }
+#go-next{
+    display:block;
+    margin-top:5em;
+    margin-right:4em;
+}
+
 
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */

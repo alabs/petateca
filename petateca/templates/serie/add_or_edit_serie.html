@@ -4,6 +4,7 @@
 {% block contents %}
 <div class="grid_10">
 <form id="add_serie_form" enctype="multipart/form-data" action="{% if serie %}{% url edit_serie serie_slug=serie.slug_name %}{% else %}{% url add_serie %}{% endif %}" method="POST">
+    <h1>{% if serie %}Editando serie {{ serie.name.title }}{% else %}Agregando serie{% endif %}</h1>
 <ul>
     <li class="grid_3">
             {% if serie.poster.src %}
@@ -16,11 +17,10 @@
         {% if not serie %}
             <div id="alert-new-serie">
                 <img class="left" src="/static/images/dialog-warning-big.png" alt="Atencion">
-                <div class="hightlight"><b>¡Atención!</b> Comprueba a través del buscador o del <a href="{% url serie-index %}">listado de series</a> que la serie que vayas a agregar no se encuentre ya.</div>
+                <div style="margin-top:4em" class="hightlight"><b>¡Atención!</b> Comprueba a través del buscador o del <a href="{% url serie-index %}">listado de series</a> que la serie que vayas a agregar no se encuentre ya.</div>
             </div>
         {% endif %} 
     </li>
-    <h1 class="grid_6 title float">{% if serie %}Editando serie {{ serie.name.title }}{% else %}Agregando serie{% endif %}</h1>
     <li class="grid_3">
         <ul>
             {{ form.non_field_errors }}

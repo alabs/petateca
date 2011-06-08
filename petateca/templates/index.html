@@ -6,6 +6,7 @@
         <h2 class="grid_12 caption clearfix center">{% blocktrans %}Comparte tus series, porque <span>compartir es bueno</span>.{% endblocktrans %}</h2>
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 
+<div class="grid_12">
 			{% for serie in series %}
                 <div class="grid_1_5">
         		{% thumbnail serie.poster.src "150x200" as img_serie %}
@@ -21,6 +22,31 @@
             <a href="{% url serie-index %}" class="float right alpha">
                 <img title="Ver más series" src="/static/images/go-next.png" id="go-next" />
             </a>
+
+</div>
+
+        <p class="grid_11 clearfix"></p>
+        <div class="grid_10 center" style="margin-left:5em;">
+            <div class="quicknavgrid_3 quicknav">
+                    <h4 class="title ">Invitaciones</h4>
+                    <p style="text-align:center; font-size:120%;">
+                        Si te gusta Liberateca puedes ayudarnos recomendandosela a tus amigos. <a href="/accounts/invite/">Tienes 8 invitaciones restantes. ¡Invita a tus colegas!</a>
+                    </p>
+            </div>
+            <div class="quicknavgrid_3 quicknav">
+                    <h4 class="title ">Errores o sugerencias</h4>
+                    <p style="font-size:120%;">Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustarian</a>.</p>
+            </div>
+            <div class="quicknavgrid_3 quicknav">
+                    <h4 class="title ">Desarrollo</h4>
+                    <p style="font-size:120%;">Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
+            </div>
+            <div class="quicknavgrid_3 quicknav">
+                    <h4 class="title ">API v2</h4>
+                    <p style="font-size:120%;">Si eres programador puede resultarte interesarte nuestra <a href="/api/">API para desarrollar tus aplicaciones</a>. </p>
+            </div>
+        </div>
+
 
 
 {% endblock %}
