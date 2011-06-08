@@ -1389,6 +1389,15 @@ div.dialog a:link, div.dialog a:visited {
     margin-top:5em;
     margin-right:4em;
 }
+#sharebox {
+    bottom:50px;
+    right:30px;
+    position:fixed;
+}
+
+#sharebox .sharefloat {
+    padding:5px;
+}
 
 
 /* Overiding Classes */
