@@ -1,4 +1,4 @@
 from settings import *
 
-INSTALLED_APPS += ('django_hudson',)
+INSTALLED_APPS += ('django_jenkins',)
 

@@ -112,7 +112,6 @@ INSTALLED_APPS = (
     'voting',
     'avatar',
     'piston',
-    'twitter_messages',
     'api_v1',
     'api_v2',
     'search',
