@@ -9,7 +9,7 @@ sudo easy_install -U pip &&
 # Desde el directorio raiz (donde se encuentra README.txt)
 # Preparamos el entorno virtual de desarrollo (como si fuera una jaula)
 [ -d virtual ] || sudo pip install -U virtualenv virtualenvwrapper &&
-[ -d virtual ] || pip -E virtual install django==1.2.3 ipython PIL &&
+[ -d virtual ] || pip -E virtual install django ipython PIL &&
 
 # Con esto entramos a la jaula, vamos a tener que hacerlo siempre para entrar
 . virtual/bin/activate &&
@@ -23,6 +23,10 @@ pip install src/django-registration-0.8-alpha-1.tar.gz &&
 # Utilizamos el fork que acepta paginacion
 # https://bitbucket.org/joeb/django-piston/
 pip install src/django-piston-0.2.3rc1.tar.gz &&
+
+# Utilizamos el fork de Kronuz que esta mas cuidado 
+# Arregla este bug https://github.com/dcramer/django-ratings/issues/12
+pip install src/django-ratings-0.3.6.tar.gz &&
 
 # Herramientas de debugging
 pip install ipdb django-debug-toolbar &&
