@@ -5,7 +5,7 @@
         </ul>
         <input style="margin-left:1em; margin-bottom: 1em;" class="button" id="submit_link" type="submit" value="Enviar" />
         <!-- TODO: Templatetag pasandole el query string, que devuelva el listado con todo listo -->
-        <ul id="horizontal_list"> 
+        <ul class="horizontal_list"> 
             <li> <img alt="Busqueda TPB" title="Buscar en The Pirate Bay" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_pb" src="/static/images/search-tpb.ico">
             <li> <img alt="Busqueda Torrentz" title="Buscar en Torrentz" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_torrentz" src="/static/images/search-torrentz.ico">
             <li> <img alt="Busqueda Sinde" title="Buscar en la Lista de Sinde" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_listadesinde" src="/static/images/search-sinde.ico">
