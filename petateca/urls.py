@@ -6,9 +6,6 @@ from django.views.generic.simple import redirect_to
 from django.contrib import admin
 admin.autodiscover()
 
-from registration.forms import RegistrationFormTermsOfService
-from invitation.views import register 
-from django.contrib.auth import views as auth_views
 from django.views.generic.simple import direct_to_template
 
 
@@ -43,27 +40,8 @@ urlpatterns = patterns('',
     url(r'^politica-privacidad/$', direct_to_template, 
         {'template': 'politica-privacidad.html'}, name="politica-privacidad"),
 
-    # Usuarios, invitaciones, registros, avatar, etc
-    # TODO: mover a apps/userdata/urls.py
-    (r'^accounts/', include('invitation.urls')),
-    (r'^accounts/profile/$', 'userdata.views.view_profile'),
-    url(r'^accounts/register/$',
-        register,
-        {
-            'form_class': RegistrationFormTermsOfService,
-            'backend': 'invitation.backends.InvitationBackend',
-        },
-        name='registration_register'),
-    url(r'^accounts/signin/$',
-        auth_views.login,
-        {
-            'template_name': 'invitation/signin.html', 
-        },
-        name='auth_login'),
-    (r'^accounts/', include('registration.urls')),
-    url(r'^user/(?P<user_name>[-\w]+)$', 'userdata.views.get_user_public_profile', name='get_user_public_profile'),
-    (r'^accounts/avatar/', include('avatar.urls')),
-    url(r'^accounts/invitation/request/$', 'userdata.views.request_invitation', name='request_invitation'),
+    (r'^accounts/', include('userdata.urls')),
+    url(r'^user/(?P<user_name>[-\w]+)$', 'userdata.views.get_user_public_profile', name='user_profile'),
 )
 
 if settings.DEBUG:
