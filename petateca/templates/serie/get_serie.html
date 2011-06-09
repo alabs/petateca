@@ -69,7 +69,7 @@
     </div>
     <div class="right">
         {% if request.user.is_authenticated %}
-        <ul id="horizontal_list">
+        <ul class="horizontal_list">
             <!-- FAVORITE -->
             <li id="favorite">
             {% if favorite == "no" %}
@@ -138,28 +138,31 @@
     <p>{{ serie.description }}</p>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<div class="hr dotted clearfix">&nbsp;</div>
-    <h2>Compártela</h2>
-        <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
-        <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-        
-        <div id="sharebox">
-            <div class="sharefloat">
+    <div class="grid_2 left">
+        <h2>Compártela</h2>
+            <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+            <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+            
+            <div>
                 <a href="http://twitter.com/share" class="twitter-share-button"
                     data-url="{{ request.build_absolute_uri }}"
                     data-via="Liberateca"
                     data-text="Me gusta {{ serie.name }}"
                     data-count="vertical">Tweet</a>
-            </div>
-            <div class="sharefloat">
                 <fb:like href="{{ request.build_absolute_uri }}" send="true" layout="box_count" width="450" show_faces="true" font=""></fb:like>
             </div>
-        </div>
-	<div class="hr dotted clearfix">&nbsp;</div>
+    </div>
+    <div class="grid_6 right">
     <h2>Seguidores</h2>
-    {% for user in serie.favorite_of.all %}
-        {% avatar user.user 45 %}
-        <p>{{ user.user.username }}</p>
-    {% endfor %}
+        {% for user in serie.favorite_of.all %}
+            <ul class="followers">
+                <a href="{% url user_profile user_name=user.user.username %}">
+                    <li>{% avatar user.user 30 %}
+                    <li><span>{{ user.user.username }}</span>
+                </a>
+            </ul>
+        {% endfor %}
+    </div>
 </div>
 
 	<div class="hr clearfix">&nbsp;</div>
