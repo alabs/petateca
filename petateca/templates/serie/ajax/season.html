@@ -22,7 +22,7 @@
   {% for episode in episode_list %}
     <li id="serie_{{ season.serie.id }}_{{ season.season }}_{{ episode.episode }}">
         <!-- EPISODIO {{ episode.episode }} -->
-        {% if request.user.is_authenticated %}<!-- input style="margin-left:1em;" type="checkbox" name="view" class="left" {% if episode.is_viewed %}checked{% endif %} --> {% endif %}
+        {% if request.user.is_authenticated %}<input style="margin-left:1em;" type="checkbox" name="view" class="left" {% if episode.is_viewed %}checked{% endif %}> {% endif %}
         <a class="zoom {% if request.user.is_authenticated %}{% if episode.is_viewed %}checked{%endif%}{%endif%}" {% if episode.from_future %}id="future" {% endif %}href="{% url ajax_list_links_episodes serie_id=season.serie.id season=season.season episode=episode.episode %}">
             <strong>{{ episode.season_episode }}</strong>- {{ episode.title }} - <span id="datemeta">({{ episode.air_date|date:"SHORT_DATE_FORMAT" }})</span>
             <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
@@ -53,6 +53,7 @@ $(document).ready(function(){
                 'serie_id': serie_id,
                 'season': season,
                 'episode': episode,
+                'csrfmiddlewaretoken': getCookie('csrftoken')
                 }, function(data){
                     switch (data) {
                         case 'OK':
