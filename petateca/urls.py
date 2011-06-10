@@ -40,6 +40,8 @@ urlpatterns = patterns('',
     url(r'^politica-privacidad/$', direct_to_template, 
         {'template': 'politica-privacidad.html'}, name="politica-privacidad"),
 
+    (r'^comments/', include('django.contrib.comments.urls')),
+
     (r'^accounts/', include('userdata.urls')),
     url(r'^user/(?P<user_name>[-\w]+)$', 'userdata.views.get_user_public_profile', name='user_profile'),
 )
