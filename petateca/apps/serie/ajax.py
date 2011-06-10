@@ -1,8 +1,8 @@
 from datetime import datetime
 from decorators import render_to
+from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse, HttpResponseForbidden
@@ -389,8 +389,10 @@ def ajax_add_episode(request, serie_id, season):
 def tracking(request):
     """
     Tracking / Seguimiento de las series. 
-    Recibo un episodio (con su serie y temporada) y marco todas las anteriores
-    como vistas (viewed)
+
+    Recibo un episodio (con su serie y temporada) y lo marco como visto
+    Antes, reviso los episodios ya vistos y compruebo que no sea para 
+    esta misma serie, si ya tiene uno visto, lo quito.
     """
     if request.method == 'POST' and request.is_ajax():
         episode_n = int(request.POST['episode'])
@@ -398,10 +400,14 @@ def tracking(request):
         user = request.user
         serie = m.Serie.objects.get(id=int(request.POST['serie_id']))
         season = m.Season.objects.get(serie=serie, season=season_n)
-        episodes_viewed = m.Episode.objects.filter(season=season, episode__lte=episode_n)
-        episodes_not_viewed = m.Episode.objects.filter(season=season, episode__gt=episode_n)
-        for epi in episodes_viewed: epi.viewed_episodes.add(user.profile)
-        for epi in episodes_not_viewed: epi.viewed_episodes.remove(user.profile)
+        episode = m.Episode.objects.get(season=season, episode=episode_n)
+        # clean old episodes viewed for this serie
+        episodes_viewed = user.profile.viewed_episodes.all()
+        for epi in episodes_viewed:
+            if epi.season.serie == serie:
+                epi.viewed_episodes.remove(user.profile)
+        # mark episode as viewed
+        episode.viewed_episodes.add(user.profile)
         return HttpResponse(
             simplejson.dumps('OK'), 
             mimetype='application/json'
