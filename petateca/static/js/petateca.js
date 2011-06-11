@@ -239,7 +239,6 @@ function check_viewed(serie_id, season_n, episode_n){
     // Marcamos los siguientes como no vistos, por si se equivoca al seleccionarlo
     var episode_n_next = parseInt(episode_n, 10) + 1;
     for (i = episode_n_next; i < 100; i++){
-        console.log(i);
         var episode_next = '#serie_'.concat(serie_id, '_', season_n, '_', i);
         var $checkbox_next = $(episode_next.concat(' input'));
         var $link_next = $(episode_next.concat(' a'));
@@ -664,7 +663,6 @@ $(document).ready(function () {
         serie_id = serie_season_episode[1];
         season = serie_season_episode[2]; 
         episode = serie_season_episode[3]; 
-        check_viewed(serie_id, season, episode);
         $.post('/series/tracking/', {
                 'serie_id': serie_id,
                 'season': season,
@@ -674,6 +672,7 @@ $(document).ready(function () {
                     switch (data) {
                         case 'OK':
                             $.jGrowl('Has marcado el episodio como visto');
+                            check_viewed(serie_id, season, episode);
                             break;
                         case 'Error':
                             $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
