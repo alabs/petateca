@@ -7,8 +7,7 @@
 {% block contents %}
 
 <!-- COLUMN 2 -->
-<div class="grid_6">
-	<!-- TITLE -->
+<div class="grid_6"> <!-- TITLE -->
 	<h1 id="title">{{ user.username }}</h1>
 	<div class="hr dotted clearfix">&nbsp;</div>
 
@@ -17,24 +16,23 @@
     <div id="viewed_episodes">
         <h2>Seguimiento</h2>
         TODO: PROXIMOS EPIS
-        {% for episode in user.profile.viewed_episodes.all %}
-        <h3>{{ episode.season.serie }}</h3>
         <div id="episode_list">
             <ul>
-            {% with episode.get_next_episode as episode %}
-                <li><a href="#" class="selected_list">Temporada {{ episode.season.season }}
-                <li>
-                    <a class="zoom" {% if episode.from_future %}id="future" {% endif %}href="{% url ajax_list_links_episodes serie_id=episode.season.serie.id season=episode.season.season episode=episode.episode %}">
-                        <strong>{{ episode.season_episode }}</strong>- {{ episode.title }} - <span id="datemeta">({{ episode.air_date|date:"SHORT_DATE_FORMAT" }})</span>
-                        <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
-                        <img alt="Descrición" title="Ver descripción" class="right espoiler nobottom" id="{{ episode.id }}" rel="{% url ajax_espoiler serie_id=episode.season.serie.id season=episode.season.season episode=episode.episode %}" src="/static/images/emblem-photos.png">
-                        {% if request.user.is_authenticated %}<img alt="Añadir" title="Añadir un enlace" id="{{ episode.id }}" rel="/series/links/add/episode/" class="add_link right nobottom" src="/static/images/list-add.png">{% endif %}
-                    </a>
-                <div class="list_inside" id="inside{{episode.pk}}"></div>
-            {% endwith %}
-            </ul>
-        </div>
+        {% for episode in user.profile.viewed_episodes.all %}
+                <li class="series_not_viewed"><a href="#">{{ episode.season.serie }}</a>
+                {% with episode.get_next_episode as episode %}
+                    <li class="episodes_not_viewed">
+                        <a class="zoom" {% if episode.from_future %}id="future" {% endif %}href="{% url ajax_list_links_episodes serie_id=episode.season.serie.id season=episode.season.season episode=episode.episode %}">
+                            <strong>{{ episode.season_episode }}</strong>- {{ episode.title }} - <span id="datemeta">({{ episode.air_date|date:"SHORT_DATE_FORMAT" }})</span>
+                            <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
+                            <img alt="Descrición" title="Ver descripción" class="right espoiler nobottom" id="{{ episode.id }}" rel="{% url ajax_espoiler serie_id=episode.season.serie.id season=episode.season.season episode=episode.episode %}" src="/static/images/emblem-photos.png">
+                            {% if request.user.is_authenticated %}<img alt="Añadir" title="Añadir un enlace" id="{{ episode.id }}" rel="/series/links/add/episode/" class="add_link right nobottom" src="/static/images/list-add.png">{% endif %}
+                        </a>
+                    <div class="list_inside" id="inside{{episode.pk}}"></div>
+                {% endwith %}
         {% endfor %}
+                </ul>
+            </div>
     </div>
     {% endif %}
 
