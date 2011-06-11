@@ -14,6 +14,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     inlines = [UserProfileInline]
 
 class UserToInviteAdmin(admin.ModelAdmin):
+    search_fields = ('mail',)
     pass
 
 
