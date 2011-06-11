@@ -1,6 +1,5 @@
 from datetime import datetime
 from decorators import render_to
-from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -23,14 +22,20 @@ def serie_lookup(request, serie_id):
 
 @render_to('serie/ajax/season.html')
 def season_lookup(request, serie_id, season):
-       ''' Listado de episodios para una temporada, ordenados por numero de episodio '''
-       serie = get_object_or_404(m.Serie, id=serie_id)
-       season = get_object_or_404(m.Season, serie=serie, season=season)
-       episode_list = season.episodes.all().order_by('episode')
-       return { 
-                  'season': season,
-                  'episode_list' : episode_list,
-              }
+    ''' Listado de episodios para una temporada, ordenados por numero de episodio '''
+    serie = get_object_or_404(m.Serie, id=serie_id)
+    season = get_object_or_404(m.Season, serie=serie, season=season)
+    episode_list = season.episodes.all().order_by('episode')
+    response = { 
+                'season': season,
+                'episode_list' : episode_list,
+            }
+    # Comprobamos si entre los episodios ya vistos hay alguno de esta serie
+    all_viewed = request.user.profile.viewed_episodes.all()
+    for epi in all_viewed:
+        if epi.season.serie == serie:
+            response['viewed_episode'] = epi
+    return response
 
 
 # PARA TRACKING 
