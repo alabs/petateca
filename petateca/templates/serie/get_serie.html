@@ -5,9 +5,8 @@
 {% load background_color %}
 {% block title %}{{ serie.name.title }} | Liberateca{% endblock %}
 {% block contents %}
-<!-- COLUMN 1 -->
 
-<!-- COLUMN 2 -->
+<!-- COLUMN LEFT -->
 <div class="grid_6">
 	<!-- TITLE -->
 	<h1 id="title">{{serie.name|title}}</h1>
@@ -39,8 +38,7 @@
         <div id="actors_list"></div>
 
     {% get_comment_count for serie as comment_count %}
-	{% ifnotequal comment_count 0 %}
-        <div class="hr clearfix">&nbsp;</div>
+	{% ifnotequal comment_count 0 %} <div class="hr clearfix">&nbsp;</div>
         <!-- RESEÑAS -->
         <h2>{% trans "Reseñas" %}</h2>
         {% render_comment_list for serie %}
@@ -54,13 +52,13 @@
 </div>
 
 
-
+<!-- COLUMN RIGHT -->
 <div class="grid_4" id="box">
 	<!-- IMAGE -->
     <div class="left">
         {% if serie.poster.src %}
             {% thumbnail serie.poster.src "400x300" as img_serie %}
-                <img alt="{{ serie.name }}" title="{{ serie.name }}" id="poster" alt="{{ serie.name }}" src="{{ img_serie.url }}" />
+                <img alt="{{ serie.name }}" title="{{ serie.name }}" id="poster" src="{{ img_serie.url }}" />
             {% endthumbnail %}
         {% else %}
             <div class="image_not_found center">  <img alt="{{ serie.name }}" title="{{ serie.name }}" src="/static/images/image_not_available.png" alt="{{ serie.name }}" width="200" /> </div>
@@ -93,32 +91,34 @@
       {% endwith %}
 		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- RUNTIME -->
-    <li>
-        <span class="meta_box">{% trans "Duración" %}</span>
-        </li><li>
-	    {{ serie.runtime }} {% trans "minutos" %}
-    </li>
+    <ul>
+        <li>
+            <span class="meta_box">{% trans "Duración" %}</span>
+        </li>
+        <li>
+            {{ serie.runtime }} {% trans "minutos" %}
+        </li>
 	<!-- NETWORK -->
 	{% if serie.network.name %}
-    <li>
-        <span class="meta_box">{% trans "Cadena" %}</span>
-        </li><li>
-		<a href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a>
-    </li>
+        <li>
+            <span class="meta_box">{% trans "Cadena" %}</span>
+        </li>
+        <li>
+            <a href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a>
+        </li>
 	{% endif %}
 	<!-- GENRE -->
-    <li>
-        <span class="meta_box">{% trans "Género" %}</span>
-		<ul>
-      		{% for genre in serie.genres.all %}
-            <li><a href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
-            {% endfor %}
-		</ul>
-    </li>
-		<div class="hr dotted clearfix">&nbsp;</div>
+        <li>
+            <span class="meta_box">{% trans "Género" %}</span>
+            <ul>
+                {% for genre in serie.genres.all %}
+                <li><a href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
 	<!-- BUTTONS -->
-    <li>
-		<a href="/series" class="button">&lt;&lt; {% trans "Series" %}</a>
+        <li>
+            <a href="/series" class="button">&lt;&lt; {% trans "Series" %}</a>
         </li>
      </ul>
     </div>
@@ -151,34 +151,4 @@
 
 </div>
 
-{% endblock %}
-{% block extrascript %}
-<script stype="text/javascript">
-{% if viewed_episode %} check_viewed({{viewed_episode.season.serie.id}}, {{viewed_episode.season.season}}, {{viewed_episode.episode }}); {% endif %}
-
-function check_viewed(serie_id, season_n, episode_n){
-    // Recibe cual temporada/episodio es el ultimo visto, marca los anteriores
-    var episode = "#serie_".concat(serie_id, '_', season_n, '_', episode_n);
-    var $episode = $(episode);
-    var $checkbox = $(episode.concat(' input'));
-    $checkbox.attr('checked', 'checked');
-    // Cuenta atras desde episode_n, marca los checkbox como vistos 
-    // y agrega la clase viewed a los links
-    for (i = episode_n; i > 0; i--){
-        var episode = "#serie_".concat(serie_id, '_', season_n, '_', i);
-        var $checkbox = $(episode.concat(' input'));
-        var $link = $(episode.concat(' a'));
-        $checkbox.attr('checked', 'checked');
-        $link.addClass('viewed');
-    }
-    // Marcamos los siguientes como no vistos, por si se equivoca al seleccionarlo
-    for (i = episode_n + 1; i < 100; i++){
-        var episode = "#serie_".concat(serie_id, '_', season_n, '_', i);
-        var $checkbox = $(episode.concat(' input'));
-        var $link = $(episode.concat(' a'));
-        $checkbox.attr('checked', '');
-        $link.removeClass('viewed');
-    }
-}
-</script>
 {% endblock %}
