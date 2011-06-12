@@ -43,7 +43,7 @@ LANGUAGES = (
  ('en', ugettext('English')),
 )
 #LOCALEURL_USE_ACCEPT_LANGUAGE = True
-TRANSLATION_REGISTRY = 'translation'
+TRANSLATION_REGISTRY = 'core.translation'
 SITE_ID = 1
 
 USE_I18N = True
@@ -85,7 +85,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-    'context_processors.site_name',
+    'core.context_processors.site_name',
 )
 
 
@@ -115,6 +115,7 @@ INSTALLED_APPS = (
     'api_v1',
     'api_v2',
     'search',
+    'core',
     #Sentry
     # don't forget to add the dependencies!
     'indexer',
@@ -143,7 +144,7 @@ if DEBUG:
     except: 
         pass 
 
-HAYSTACK_SITECONF = 'search_sites'
+HAYSTACK_SITECONF = 'search.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
 
