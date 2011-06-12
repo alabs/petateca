@@ -211,6 +211,12 @@ class Episode(models.Model):
         except:
             return None
 
+    def get_next_5_episodes(self):
+        try:
+            return Episode.objects.filter(episode__gt=self.episode, season=self.season)[:5]
+        except:
+            return None
+
     def get_previous_episode(self):
         prev_epi = self.episode - 1
         try:
