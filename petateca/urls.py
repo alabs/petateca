@@ -46,7 +46,7 @@ urlpatterns = patterns('',
     # Usuarios, invitaciones, registros, avatar, etc
     # TODO: mover a apps/userdata/urls.py
     (r'^accounts/', include('invitation.urls')),
-    (r'^accounts/profile/$', 'userdata.views.view_profile'),
+#    (r'^accounts/profile/$', 'userdata.views.view_profile'),
     url(r'^accounts/register/$',
         register,
         {
