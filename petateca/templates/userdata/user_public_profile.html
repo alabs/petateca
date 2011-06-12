@@ -15,24 +15,16 @@
     {% if request.user == user %} 
     <div id="viewed_episodes">
         <h2>Seguimiento</h2>
-        TODO: PROXIMOS EPIS
-        <div id="episode_list">
-            <ul>
         {% for episode in user.profile.viewed_episodes.all %}
-                <li class="series_not_viewed"><a href="#">{{ episode.season.serie }}</a>
-                {% with episode.get_next_episode as episode %}
-                    <li class="episodes_not_viewed">
-                        <a class="zoom" {% if episode.from_future %}id="future" {% endif %}href="{% url ajax_list_links_episodes serie_id=episode.season.serie.id season=episode.season.season episode=episode.episode %}">
-                            <strong>{{ episode.season_episode }}</strong>- {{ episode.title }} - <span id="datemeta">({{ episode.air_date|date:"SHORT_DATE_FORMAT" }})</span>
-                            <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
-                            <img alt="Descrición" title="Ver descripción" class="right espoiler nobottom" id="{{ episode.id }}" rel="{% url ajax_espoiler serie_id=episode.season.serie.id season=episode.season.season episode=episode.episode %}" src="/static/images/emblem-photos.png">
-                            {% if request.user.is_authenticated %}<img alt="Añadir" title="Añadir un enlace" id="{{ episode.id }}" rel="/series/links/add/episode/" class="add_link right nobottom" src="/static/images/list-add.png">{% endif %}
-                        </a>
-                    <div class="list_inside" id="inside{{episode.pk}}"></div>
-                {% endwith %}
+        <a class="serie_hidden" style="font-size:2em;" href="#">{{ episode.season.serie }}</a>
+        <div id="episode_list" class="episodes_hidden">
+            <ul>
+                {% for episode in episode.get_next_5_episodes  %}
+                    {% include "serie/ajax/episode.html" %}
+                {% endfor %}
+            </ul>
+        </div>
         {% endfor %}
-                </ul>
-            </div>
     </div>
     {% endif %}
 
@@ -72,25 +64,31 @@
 	<!-- IMAGE -->
     <div class="left">
         <!-- AVATAR -->
-        {% avatar user %}
-        <br />
+        {% if request.user == user %} 
+            <a class="avatar_change" href="{% url avatar_change %}">
+                {% avatar user 120 %}
+            </a>
+        {% else %}
+                {% avatar user 120 %}
+        {% endif %}
     </div>
     <div class="right">
-        {% if request.user == user %} 
         <ul>
+        {% if request.user == user %} 
             <li><a class="avatar_change" href="{% url avatar_change %}">Cambiar avatar</a> 
             <li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
             <li>&nbsp;
             {% if remaining_invitations %}
-            <li>Tienes {{ remaining_invitations }} invitaciones.
-            <li><a href="{% url invitation_invite %}">Invita a tus colegas</a></li>
+                <li>Tienes {{ remaining_invitations }} invitaciones.
+                <li><a href="{% url invitation_invite %}">Invita a tus colegas</a></li>
             {% else %}
-            <li>No tienes invitaciones disponibles.
+                <li>No tienes invitaciones disponibles.
             {% endif %}
-        </ul>
+            <li>&nbsp;
         {% endif %}
-        {{ user.date_joined }}
-        {{ user.last_login }}
+            <li>Usuario desde: {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
+            <li>Último inicio de sesión: {{ user.last_login|date:"SHORT_DATE_FORMAT" }}
+        </ul>
 
     </div>
     <div class="hr dotted clearfix">&nbsp;</div>
@@ -112,4 +110,14 @@
         {% endif %}
 </div>
 
+{% endblock %}
+{% block extrascript %}
+<script type="text/javascript">
+    $('.episodes_hidden').hide();
+
+    $('.serie_hidden').live('click', function(event){
+        event.preventDefault();
+        $(this).next().slideToggle();
+    }); 
+</script>
 {% endblock %}
