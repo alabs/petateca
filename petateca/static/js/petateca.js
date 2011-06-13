@@ -338,25 +338,41 @@ $(document).ready(function () {
      onClosed:function(){ location.reload(true); } });
 
     // Popup de las series, cuando se pone encima de la imagen
-    $('.serie').live('mouseover', function(){
-        // Obtenemos el id de la serie y lo buscamos
-        var serie = $(this);
+   $('.serie').live('mouseover', function() {
+      var url = '/series/lookup/serie/';
+      var id = $(this).attr('id');
 
-        serie.CreateBubblePopup({
-            position: 'right',
-            align: 'center',
-            width: '350',
-            innerHtml: '<img src="/static/images/ajax-loading-bar.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
-            innerHtmlStyle: { color:'#fff', 'text-align':'left' },
-            themeName: 'all-black',
-            themePath: '/static/images/jquerybubblepopup-theme'
-        });
-
-        var serie_id = serie.attr('id');
-        $.get('/series/lookup/serie/' + serie_id + '/', function(data) {
-            serie.SetBubblePopupInnerHtml(data);
-        }); 
+      // Setup the tooltip...
+      $(this).qtip(
+      {
+         content: {
+            text: 'Cargando...', // Generic loading message so we know the data is coming.
+            ajax: {
+               url: url + id + '/',
+               dataType: 'html', // The script returns HTML
+               success: function(html) {
+                  // Set the tooltip content
+                  var content = html;
+                  this.set('content.text', content);
+ 
+                  return false; // Prevent default content update
+               }
+            }
+         },
+         overwrite: false, // Make sure another tooltip can't overwrite this one without it being explicitly destroyed
+         show: {
+            ready: true // Needed to make it show on first mouseover event
+         },
+         position: {
+            my: 'left center',
+            at: 'right center'
+         },
+         style: {
+            classes: 'ui-tooltip-imdb ui-tooltip-tipsy ui-tooltip-shadow'
+         }
+       });
     });
+
 
     $(".zoom").live('click', function(){
     // listado de episodios
