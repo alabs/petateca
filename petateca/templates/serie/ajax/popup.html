@@ -1,11 +1,10 @@
-{% load background_color %}
-<div>
-    <div class="left"><h3 style="font-size:160%;"> {{ serie.name }}{% if serie.name != serie.name_en %} <br/>{{ serie.name_en }}{% endif %}</h3>
-    <b>Género</b>: {% for g in genres %} {{ g.name }} {% endfor %}<br />
-    <b>Cadena</b>: {{ serie.network.name }}<br />
-    <b>Duración</b>: {{ serie.runtime }} minutos<br /></div>
-        <div class="center right rating_num {{ serie.rating.get_rating|background_color }}"> {{ serie.rating.get_rating|floatformat }}
-            <div class="mt_3">de 5</div>
-        </div>
+<div id="popup_serie">
+    <h3 style="font-size:160%;"> {{ serie.name }}{% if serie.name != serie.name_en %} <br/>{{ serie.name_en }}{% endif %}</h3>
+    <ul>
+        <li>Rating:{{ serie.rating.get_rating|floatformat }}
+        <li><b>Género</b>: {% for g in genres %} {{ g.name }} {% endfor %}
+        <li><b>Cadena</b>: {{ serie.network.name }}
+        <li><b>Duración</b>: {{ serie.runtime }} minutos
+        <li><p> {{ serie.description|truncatewords:50 }}
+    </ul>
 </div>
-<p style="margin-top:9em;"> {{ serie.description|truncatewords:50 }} </p>
