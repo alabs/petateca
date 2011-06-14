@@ -6,14 +6,14 @@
                                 <li class="comment">
                                 {% url get_user_public_profile user_name=comment.name as user_profile %}
                                 <div class="gravatar">
-                                <a href="{{ user_profile }}">
-                                    {% avatar comment.name %}
-                                </a>
+                                    <a href="{% url user_profile user_name=comment.user_name %}">
+                                        {% avatar comment.name %}
+                                    </a>
                                 </div>
                                 <div class="comment_content">
                                         <div class="clearfix">
                                             <cite class="author_name">
-                                                <a href="{{ user_profile }}">{{ comment.name }}</a>
+                                                <a href="{% url user_profile user_name=comment.user_name %}">{{ comment.name }}</a>
                                             </cite>
                                                 <div class="comment-meta commentmetadata">{{ comment.submit_date }}</div>
                                         </div>
