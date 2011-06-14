@@ -1389,12 +1389,11 @@ div.dialog a:link, div.dialog a:visited {
     display:block;
     margin-top:5em;
     margin-right:4em;
-}
-
-.followers img{
     margin-bottom: 0.4em;
 }
 
+.viewed {
+    background-color: #E6E6E6 !important;
 
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */

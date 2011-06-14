@@ -5,95 +5,119 @@
 {% load avatar_tags %}
 {% block title %}{{ user.username }} | Liberateca{% endblock %}
 {% block contents %}
-<!-- USER NAME -->
-<h2 class="grid_12 caption clearfix"><span>{{ user.username }}</span></h2>
 
-<div class="grid_2">
-	<!-- AVATAR -->
-	{% avatar user %}
-	<br />
-	{% if request.user == user %} 
-        <p>
-            <a class="avatar_change" href="{% url avatar_change %}">Cambiar avatar</a> 
-            <a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
-        </p>
-        <p>
-            {% if remaining_invitations %}
-                 Tienes {{ remaining_invitations }} invitaciones.
-                <a href="{% url invitation_invite %}">Invita a tus colegas</a></li>
-            {% else %}
-                No tienes invitaciones disponibles.
-            {% endif %}
-        </p>
+<!-- COLUMN 2 -->
+<div class="grid_6"> <!-- TITLE -->
+	<h1 id="title">{{ user.username }}</h1>
+	<div class="hr dotted clearfix">&nbsp;</div>
+
+	<!-- TRACKING -->
+    {% if request.user == user %} 
+    <div id="viewed_episodes">
+        <h2>Seguimiento</h2>
+        {% for episode in user.profile.viewed_episodes.all %}
+        <a class="serie_hidden" style="font-size:2em;" href="#">{{ episode.season.serie }}</a>
+        <div id="episode_list" class="episodes_hidden">
+            <ul>
+                {% for episode in episode.get_next_5_episodes  %}
+                    {% include "serie/ajax/episode.html" %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
     {% endif %}
-</div>
-
-
-<div class="grid_10">
-    <p class="clearfix">
-        <!-- FAVORITE SERIES -->
-        <h2>Series favoritas</h2>
-        {% if favorite_series %}
-          {% for serie in favorite_series %}
-            <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
-            <div class="preload" style="width:120px; height:170px">
-            {% if serie.poster %} {% thumbnail serie.poster.src "180x160" as img_serie %} 
-                <img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" alt="{{serie.name}}"/>{% endthumbnail %}
-            {% else %}
-                <div class="image_not_found">  <img src="/static/images/image_not_available.png" width=110> </div>
-            {% endif %}
-            </div>
-            <p class="subtitle"> {{ serie.name|slice:":18" }}</p> 
-        </a>{% endfor %}
-        {% else %} 
-        No tienes series favoritas :(
-        {% endif %}
-    </p>
 
     <p class="clearfix">
-        <!-- VOTED LINKS -->
-        <h2> Últimos enlaces votados </h2>
-        {% if voted_links %}
-        <table id="links">
-            <thead>
-            <tr>
-                <th scope="col">Serie</th>
-                <th scope="col">Season</th>
-                <th scope="col">Episode</th>
-                <th scope="col">Link</th>
-                <th scope="col">Audio</th>
-                <th scope="col">Subtitles</th>
-                <th scope="col">Vote</th>
-            </tr>
-            {% for vote in voted_links %}
-            <tr>
-                <td>{{ vote.0.episode.season.serie|title }}</td>
-                <td>{{ vote.0.episode.season.season }}</td>
-                <td>{{ vote.0.episode.episode}}</td>
-                <td><a href="{{ vote.0 }}"> {{ vote.0|extract_domain }}</a></td>
-                <td>{{ vote.0.audio_lang }}</td>
-                <td>{% if vote.0.subtitle %}{{ vote.0.subtitle }}{% endif%}</td>
-                <td>{% if vote.1 == 1 %}<img src="/static/images/voting/aupmod.gif">{% else %}
-                {% if vote.1 == -1 %}<img src="/static/images/voting/adownmod.gif">{% endif %}{% endif %}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        No ha votado ningun link.
-        {% endif %}
-    </p>
+	<div class="hr dotted clearfix">&nbsp;</div>
 
-	<h2> Últimas 10 reseñas de series </h2>
+	<h2> Últimas reseñas </h2>
 	{% if comments_serie %}
 	<ul>
 		{% for comment in comments_serie %}
-			<li> <a href="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.name }}</a> - {{ comment.comment}} -  {{comment.submit_date }}
+            <ol class="commentlist" id="c{{ comment.id }}">
+                    <li class="comment">
+                                <div class="gravatar">
+                                    TODO: INSERTAR IMAGEN SERIE
+                                </div>
+                    <div class="comment_content">
+                            <div class="clearfix">
+                                    <cite class="author_name">{{ comment.name }}</cite>
+                                    <div class="comment-meta commentmetadata">{{ comment.submit_date }}</div>
+                            </div>
+                            <div class="comment_text">
+                                    <p>{{comment.comment}}</p>
+                            </div>
+                    </div>
+                    </li>
+            </ol>
 		{% endfor %}
 	</ul>
 	{% else %}
 	No has reseñado ninguna serie.
 	{% endif %}
-
 </div>
 
+
+
+<div class="grid_4" id="box">
+	<!-- IMAGE -->
+    <div class="left">
+        <!-- AVATAR -->
+        {% if request.user == user %} 
+            <a class="avatar_change" href="{% url avatar_change %}">
+                {% avatar user 120 %}
+            </a>
+        {% else %}
+                {% avatar user 120 %}
+        {% endif %}
+    </div>
+    <div class="right">
+        <ul>
+        {% if request.user == user %} 
+            <li><a class="avatar_change" href="{% url avatar_change %}">Cambiar avatar</a> 
+            <li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
+            <li>&nbsp;
+            {% if remaining_invitations %}
+                <li>Tienes {{ remaining_invitations }} invitaciones.
+                <li><a href="{% url invitation_invite %}">Invita a tus colegas</a></li>
+            {% else %}
+                <li>No tienes invitaciones disponibles.
+            {% endif %}
+            <li>&nbsp;
+        {% endif %}
+            <li>Usuario desde: {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
+            <li>Último inicio de sesión: {{ user.last_login|date:"SHORT_DATE_FORMAT" }}
+        </ul>
+
+    </div>
+    <div class="hr dotted clearfix">&nbsp;</div>
+        <!-- FAVORITE SERIES -->
+        <h2>Series favoritas</h2>
+        {% if favorite_series %}
+          {% for serie in favorite_series %}
+            <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
+                <div class="preload" >
+            {% if serie.poster %} {% thumbnail serie.poster.src "150x150" as img_serie %} 
+                <img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" alt="{{serie.name}}"/>{% endthumbnail %}
+            {% else %}
+                <div class="image_not_found">  <img src="/static/images/image_not_available.png" width="50"> </div>
+            {% endif %}
+            </div>
+        </a>{% endfor %}
+        {% else %} 
+        No tienes series favoritas :(
+        {% endif %}
+</div>
+
+{% endblock %}
+{% block extrascript %}
+<script type="text/javascript">
+    $('.episodes_hidden').hide();
+
+    $('.serie_hidden').live('click', function(event){
+        event.preventDefault();
+        $(this).next().slideToggle();
+    }); 
+</script>
 {% endblock %}

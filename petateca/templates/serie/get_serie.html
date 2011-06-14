@@ -6,9 +6,8 @@
 {% load avatar_tags %}
 {% block title %}{{ serie.name.title }} | Liberateca{% endblock %}
 {% block contents %}
-<!-- COLUMN 1 -->
 
-<!-- COLUMN 2 -->
+<!-- COLUMN LEFT -->
 <div class="grid_6">
 	<!-- TITLE -->
 	<h1 id="title">{{serie.name|title}}</h1>
@@ -33,15 +32,14 @@
         {% endfor %}
         </ul>
     </div>
-    <div id="season_list" class="right grid_7" name="season_list"></div>
+    <div id="season_list" class="right grid_7"></div>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- ACTORS -->
-        <h2><a id="get_actors" name="get_actors" href="#get_actors">{% trans "Actores" %}</a></h2>
+        <h2><a id="get_actors" href="#get_actors">{% trans "Actores" %}</a></h2>
         <div id="actors_list"></div>
 
     {% get_comment_count for serie as comment_count %}
-	{% ifnotequal comment_count 0 %}
-        <div class="hr clearfix">&nbsp;</div>
+	{% ifnotequal comment_count 0 %} <div class="hr clearfix">&nbsp;</div>
         <!-- RESEÑAS -->
         <h2>{% trans "Reseñas" %}</h2>
         {% render_comment_list for serie %}
@@ -55,13 +53,13 @@
 </div>
 
 
-
+<!-- COLUMN RIGHT -->
 <div class="grid_4" id="box">
 	<!-- IMAGE -->
     <div class="left">
         {% if serie.poster.src %}
             {% thumbnail serie.poster.src "400x300" as img_serie %}
-                <img alt="{{ serie.name }}" title="{{ serie.name }}" id="poster" alt="{{ serie.name }}" src="{{ img_serie.url }}" />
+                <img alt="{{ serie.name }}" title="{{ serie.name }}" id="poster" src="{{ img_serie.url }}" />
             {% endthumbnail %}
         {% else %}
             <div class="image_not_found center">  <img alt="{{ serie.name }}" title="{{ serie.name }}" src="/static/images/image_not_available.png" alt="{{ serie.name }}" width="200" /> </div>
@@ -71,7 +69,7 @@
         {% if request.user.is_authenticated %}
         <ul class="horizontal_list">
             <!-- FAVORITE -->
-            <li id="favorite">
+            <li>
             {% if favorite == "no" %}
                 <a href="#" onclick="favorite();" id="favorite"><img title="Agregar a favoritas" alt="Agregar a favoritas" class="heart_fav nobottom" src="/static/images/heart_black.png"></a>
             {% else %} 
@@ -94,32 +92,34 @@
       {% endwith %}
 		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- RUNTIME -->
-    <li>
-        <span class="meta_box">{% trans "Duración" %}</span>
-        </li><li>
-	    {{ serie.runtime }} {% trans "minutos" %}
-    </li>
+    <ul>
+        <li>
+            <span class="meta_box">{% trans "Duración" %}</span>
+        </li>
+        <li>
+            {{ serie.runtime }} {% trans "minutos" %}
+        </li>
 	<!-- NETWORK -->
 	{% if serie.network.name %}
-    <li>
-        <span class="meta_box">{% trans "Cadena" %}</span>
-        </li><li>
-		<a href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a>
-    </li>
+        <li>
+            <span class="meta_box">{% trans "Cadena" %}</span>
+        </li>
+        <li>
+            <a href="{{ serie.network.get_absolute_url }}">{{ serie.network.name }}</a>
+        </li>
 	{% endif %}
 	<!-- GENRE -->
-    <li>
-        <span class="meta_box">{% trans "Género" %}</span>
-		<ul>
-      		{% for genre in serie.genres.all %}
-            <li><a href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
-            {% endfor %}
-		</ul>
-    </li>
-		<div class="hr dotted clearfix">&nbsp;</div>
+        <li>
+            <span class="meta_box">{% trans "Género" %}</span>
+            <ul>
+                {% for genre in serie.genres.all %}
+                <li><a href="{{ genre.get_absolute_url}}">{{ genre.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
 	<!-- BUTTONS -->
-    <li>
-		<a href="/series" class="button">&lt;&lt; {% trans "Series" %}</a>
+        <li>
+            <a href="/series" class="button">&lt;&lt; {% trans "Series" %}</a>
         </li>
      </ul>
     </div>

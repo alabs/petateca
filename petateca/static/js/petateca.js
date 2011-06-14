@@ -37,14 +37,14 @@ function disc_fav_data(data) {
     switch (data) {
     case 'yes':
         $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_red.png"></a>');
-        $.jGrowl("Has agregado esta serie como favorita");
+        $.jGrowl('Has agregado esta serie como favorita');
         break;
     case 'no':
         $("#favorite").html('<a href="#" onclick="favorite();" id="favorite"><img class="heart_fav" src="/static/images/heart_black.png"></a>');
-        $.jGrowl("Has quitado esta serie de tus favoritas");
+        $.jGrowl('Has quitado esta serie de tus favoritas');
         break;
     case 'no-user':
-        $.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", {
+        $.jGrowl('Para poder votar debes estar registrado o haber iniciado sesion', {
             header: 'Error'
         });
         break;
@@ -53,24 +53,24 @@ function disc_fav_data(data) {
 
 function favorite() {
     // Tratamiento del favorito
-    var imgsrc = $("#favorite img").attr('src');
-    if (imgsrc == "/static/images/heart_black.png") {
-        decision = "yes";
-    } else if (imgsrc == "/static/images/heart_red.png") {
-        decision = "no";
+    var imgsrc = $('#favorite img').attr('src');
+    if (imgsrc == '/static/images/heart_black.png') {
+        decision = 'yes';
+    } else if (imgsrc == '/static/images/heart_red.png') {
+        decision = 'no';
     }
     $('#favorite').html('<img src="/static/images/ajax-loading.gif">');
     var url = window.location.pathname + 'favorite/';
-    if (decision == "yes") {
+    if (decision == 'yes') {
         $.post(url, {
             'favorite': 'yes',
             'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function (data) {
             disc_fav_data(data);
         });
-    } else if (decision == "no") {
+    } else if (decision == 'no') {
         $.post(url, {
-            'favorite': "no",
+            'favorite': 'no',
             'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function (data) {
             disc_fav_data(data);
@@ -83,15 +83,15 @@ function disc_rat_data(data) {
     // Discriminacion de las votaciones dependiendo la respuesta que llegue
     switch (data) {
         case 'no-user':
-            $.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", {
+            $.jGrowl('Para poder votar debes estar registrado o haber iniciado sesion', {
                 header: 'Error'
             });
             break;
         case 'Vote recorded.':
-            $.jGrowl("Su voto ha sido guardado");
+            $.jGrowl('Su voto ha sido guardado');
             break;
         case 'Vote changed.':
-            $.jGrowl("Su voto ha sido cambiado");
+            $.jGrowl('Su voto ha sido cambiado');
             break;
     }
 }
@@ -102,13 +102,13 @@ function disc_rat_data(data){
     switch(data)
             {
             case 'no-user':
-                    $.jGrowl("Para poder votar debes estar registrado o haber iniciado sesion", { header: 'Error' });
+                    $.jGrowl('Para poder votar debes estar registrado o haber iniciado sesion', { header: 'Error' });
                     break;
             case 'Vote recorded.':
-                    $.jGrowl("Su voto ha sido guardado"); 
+                    $.jGrowl('Su voto ha sido guardado'); 
                     break;
             case 'Vote changed.':
-                    $.jGrowl("Su voto ha sido cambiado"); 
+                    $.jGrowl('Su voto ha sido cambiado'); 
                     break;
             }
 }
@@ -129,7 +129,7 @@ function disc_rat_data(data){
 
   function _loadUserVoice() {
     var s = document.createElement('script');
-    s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
+    s.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.uservoice.com/javascripts/widgets/tab.js';
     document.getElementsByTagName('head')[0].appendChild(s);
   }
 
@@ -200,15 +200,53 @@ function search_lookup(inputString) {
     if (inputString.length < 2) {
         $('#suggestions').fadeOut(); // Hide the suggestions box
     } else {
-        $.get("/search/lookup/?query=" + inputString, function(data) { // Do an AJAX call
+        $.get('/search/lookup/?query=' + inputString, function(data) { // Do an AJAX call
             $('#suggestions').fadeIn(); // Show the suggestions box
             $('#suggestions').html(data); // Fill the suggestions box
             });
     }
 }
 
+function check_viewed(serie_id, season_n, episode_n){
+    // Recibe cual temporada/episodio es el ultimo visto, marca los anteriores
+    //
+    // SOLO PARA EL EPISODIO QUE ESTA VISTO
+    var episode_id = '#serie_'.concat(serie_id, '_', season_n, '_', episode_n);
+    var $episode = $(episode_id);
+    var $checkbox = $(episode_id.concat(' input'));
+    $checkbox.attr('checked', 'checked');
 
-    
+    // Cuenta atras desde episode_n, marca los checkbox como vistos 
+    // y agrega la clase viewed a los links
+    for (i = episode_n; i > 0; i--){
+        var episode_prev = '#serie_'.concat(serie_id, '_', season_n, '_', i);
+        var $checkbox_prev = $(episode_prev.concat(' input'));
+        var $link_prev = $(episode_prev.concat(' a'));
+        $checkbox_prev.attr('checked', 'checked');
+        $link_prev.addClass('viewed');
+    }
+
+    // Cuenta atras desde season_n, marca los checkbox como vistos 
+    // y agrega la clase viewed a los links
+    for (i = season_n; i > 0; i--){
+        var season_id = '#serie_'.concat(serie_id, '_season_', i);
+        var $season = $(season_id);
+        $previous_episodes = $season.next().children().children().children().filter('.episode');
+        $previous_episodes.children('input').attr('checked', 'checked');
+        $previous_episodes.children('a').addClass('viewed');
+    }
+
+    // Marcamos los siguientes como no vistos, por si se equivoca al seleccionarlo
+    var episode_n_next = parseInt(episode_n, 10) + 1;
+    for (i = episode_n_next; i < 100; i++){
+        var episode_next = '#serie_'.concat(serie_id, '_', season_n, '_', i);
+        var $checkbox_next = $(episode_next.concat(' input'));
+        var $link_next = $(episode_next.concat(' a'));
+        $checkbox_next.attr('checked', '');
+        $link_next.removeClass('viewed');
+    }
+}
+
 
 $(document).ready(function () {
     // Rating de estrellas, se envia el rating por post a /serie/nombre
@@ -297,7 +335,7 @@ $(document).ready(function () {
         });
 
     // El popup cuando se hace click en login
-	$(".login").colorbox({iframe:true, innerWidth:555, innerHeight:324});
+	$('.login').colorbox({iframe:true, innerWidth:555, innerHeight:324});
 
     // Que cuando se haga click en el rating envia el valor por post
     $('.ratingstar').rating({ callback: function(value, link){
@@ -311,7 +349,7 @@ $(document).ready(function () {
         $(this).hide();
         $(this).load(function () {
             $(this).width($(this).parent().width()).height($(this).parent().height());
-            $(this).fadeIn("slow");
+            $(this).fadeIn('slow');
         });
     });
 
@@ -334,7 +372,7 @@ $(document).ready(function () {
     });
 
     // Popup de cambiar avatar
-	$(".avatar_change").colorbox({width:"600px", height:"500px", iframe:true,
+	$('.avatar_change').colorbox({width:'600px', height:'500px', iframe:true,
      onClosed:function(){ location.reload(true); } });
 
     // Popup de las series, cuando se pone encima de la imagen
@@ -358,7 +396,7 @@ $(document).ready(function () {
         }); 
     });
 
-    $(".zoom").live('click', function(){
+    $('.zoom').live('click', function(){
     // listado de episodios
     
         // poor mans toogle
@@ -380,7 +418,7 @@ $(document).ready(function () {
         return false;
     });
 
-    $(".espoiler").live('click', function(e){
+    $('.espoiler').live('click', function(e){
     // descripcion del episodio
         e.preventDefault();
         $(this).parent().addClass('selected_list');
@@ -393,7 +431,7 @@ $(document).ready(function () {
     });
 
 
-    $(".add_link").live('click', function(e){
+    $('.add_link').live('click', function(e){
     // agregar enlace
         e.preventDefault();
         $(this).parent().addClass('selected_list');
@@ -403,7 +441,7 @@ $(document).ready(function () {
         $inside.load('/series/links/add/episode/' + episodeid + '/');
     });
 
-    $(".no_link").live('click', function(e){
+    $('.no_link').live('click', function(e){
     // agregar enlace cuando no hay ninguno
         e.preventDefault();
         episodeid = $(this).attr('id');
@@ -413,7 +451,7 @@ $(document).ready(function () {
     });
 
 
-    $("#add_episode").live('click', function(e){
+    $('#add_episode').live('click', function(e){
     // agregar episodio, muestra el formulario
         e.preventDefault();
         $inside = $('#episode_inside');
@@ -462,16 +500,16 @@ $(document).ready(function () {
         }, function(data) {
                 switch (data) {
                     case 'OK':
-                        $.jGrowl("El episodio se ha creado exitosamente, gracias por colaborar");
+                        $.jGrowl('El episodio se ha creado exitosamente, gracias por colaborar');
                         var $inside = $('#inside_serie_' + serie + '_season_' + season);
                         $inside.html('<img src="/static/images/ajax-loading-bar.gif">');
                         $inside.load('/series/lookup/serie/' + serie + '/season/' + season + '/');
                         break;
                     case 'Duplicado':
-                        $.jGrowl("Ese episodio ya se encuentra, comprueba el numero");
+                        $.jGrowl('Ese episodio ya se encuentra, comprueba el numero');
                         break;
                     default:
-                        $.jGrowl("Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net");
+                        $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                 }
         }  
         );  
@@ -496,7 +534,7 @@ $(document).ready(function () {
         window.open( 'http://torrentz.eu/search?f=' + query);
     });
 
-    // busqueda en la lista de sinde ;)
+    // busqueda en la lista de sinde 
     $('#search_listadesinde').live('click', function() {
         query = $(this).attr('rel');
         $.jGrowl('Abriendo búsqueda en La Lista de Sinde para ' + query);
@@ -530,11 +568,11 @@ $(document).ready(function () {
             'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function(data) {
             if (data.mensaje  == 'Gracias'){
-                $.jGrowl("El enlace se ha guardado exitosamente");
+                $.jGrowl('El enlace se ha guardado exitosamente');
             } else if (data.mensaje == 'Link duplicado') {
-                $.jGrowl("Link duplicado, prueba a agregar otro");
+                $.jGrowl('Link duplicado, prueba a agregar otro');
             } else {
-                $.jGrowl("Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net");
+                $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
             }
         }  
         );  
@@ -593,17 +631,17 @@ $(document).ready(function () {
         }, function(data){
             switch (data.message) {
             case 'OK':
-                $.jGrowl("Temporada agregada, redireccionando...");
+                $.jGrowl('Temporada agregada, redireccionando...');
                 window.location.replace(data.redirect);
                 break;
             case 'Duplicated':
-                $.jGrowl("Esa temporada ya se encuentra, comprueba el número.");
+                $.jGrowl('Esa temporada ya se encuentra, comprueba el número.');
                 break;
             case 'Error':
-                $.jGrowl("Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net");
+                $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                 break;
             default:
-                $.jGrowl("Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net");
+                $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                 break;
             }
         });
@@ -619,4 +657,32 @@ $(document).ready(function () {
         } else {$comment.removeClass('hightlight');}
     });
 
+    $('.tracking').live('click', function(){ 
+        // Enviamos el valor de ultima por AJAX
+        serie_season_episode = $(this).parent().attr('id').split('_');
+        serie_id = serie_season_episode[1];
+        season = serie_season_episode[2]; 
+        episode = serie_season_episode[3]; 
+        $.post('/series/tracking/', {
+                'serie_id': serie_id,
+                'season': season,
+                'episode': episode,
+                'csrfmiddlewaretoken': getCookie('csrftoken')
+                }, function(data){
+                    switch (data) {
+                        case 'OK':
+                            $.jGrowl('Has marcado el episodio como visto');
+                            check_viewed(serie_id, season, episode);
+                            break;
+                        case 'Error':
+                            $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                            break;
+                        default:
+                            $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                            alert(data);
+                            break;
+                    }
+                }
+        );
+    });
 });

@@ -10,9 +10,9 @@ from django.views.generic.simple import direct_to_template
 
 
 urlpatterns = patterns('',
-    (r'^$', 'views.index'),
+    (r'^$', 'core.views.index'),
     # estadistcas
-    (r'^stats/$', 'views.statistics'),
+    (r'^stats/$', 'core.views.statistics'),
 
     (r'^sentry/', include('sentry.urls')),
 
@@ -32,13 +32,13 @@ urlpatterns = patterns('',
 
     (r'^favicon\.ico$', redirect_to, {'url': '/static/images/favicon.ico'}),
     url(r'^opensearch.xml/$', direct_to_template, \
-        {'template': 'opensearch.xml'}, name="opensearch"),
+        {'template': 'core/opensearch.xml'}, name="opensearch"),
     url(r'^faq/$', direct_to_template, \
-        {'template': 'faq.html'}, name="faq"),
+        {'template': 'core/faq.html'}, name="faq"),
     url(r'^aviso-legal/$', direct_to_template, \
-        {'template': 'aviso-legal.html'}, name="aviso-legal"),
+        {'template': 'core/aviso-legal.html'}, name="aviso-legal"),
     url(r'^politica-privacidad/$', direct_to_template, 
-        {'template': 'politica-privacidad.html'}, name="politica-privacidad"),
+        {'template': 'core/politica-privacidad.html'}, name="politica-privacidad"),
 
     (r'^comments/', include('django.contrib.comments.urls')),
 
