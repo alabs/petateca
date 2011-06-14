@@ -98,6 +98,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.comments',
+    'threadedcomments',
     'django.contrib.markup',
     'serie',
     'userdata',
@@ -201,7 +202,7 @@ SECURE_REQUIRED_PATHS = (
 #Valid values are http, sql
 IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
 
-
+COMMENTS_APP = 'threadedcomments'
 
 # Con local_settings podemos reescribir / agregar settings que sean 
 # propios de la maquina donde se encuentre, por ejemplo BBDD y DEBUG
@@ -216,3 +217,4 @@ if INVITE_MODE:
     MIDDLEWARE_CLASSES += (
         'userdata.middleware.LoginRequiredMiddleware',
     )
+

@@ -851,7 +851,10 @@ p.error {
 }
 #comment_form textarea {
     width: 500px;
-    height: 150px;
+    height: 50px;
+}
+#send_message{
+    margin-top: 7em;
 }
 /* Invitation form */
 #invitation_form ul { float: left }
@@ -1198,9 +1201,7 @@ left:-23em;top: -5.6em;
     font-size: 1em;
 } */
 
-#horizontal_list {
-}
-#horizontal_list li {
+.horizontal_list li {
     display: inline;
 }
 
@@ -1388,6 +1389,10 @@ div.dialog a:link, div.dialog a:visited {
     display:block;
     margin-top:5em;
     margin-right:4em;
+}
+
+.followers img{
+    margin-bottom: 0.4em;
 }
 
 
