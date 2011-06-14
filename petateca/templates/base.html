@@ -10,10 +10,25 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/static/css/reset.css" />
     <link rel="stylesheet" href="/static/css/styles.css" />
-    <link rel="stylesheet" href="/static/css/jquery.colorbox.css" />
     <link rel="stylesheet" href="/static/css/jquery.jgrowl.css" />
     <link rel="stylesheet" href="/static/css/jquery.rating.css" />
-    <link rel="stylesheet" href="/static/css/jquery.qtip.min.css" />{% block extrastyle %}{% endblock %}
+    <link rel="stylesheet" href="/static/css/jquery.qtip.css" />{% block extrastyle %}{% endblock %}
+    <style>
+/* Add some nice box-shadow-ness to the modal tooltip */
+#ui-tooltip-modal{
+   max-width: 30em;
+ 
+   -moz-box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
+   -webkit-box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
+   box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
+}
+ 
+#ui-tooltip-modal .ui-tooltip-content{
+   padding: 10px;
+}
+
+
+    </style>
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Liberateca" />
 </head>
 <body>
@@ -75,7 +90,7 @@
                     </ul>
                 </li>
             {% else %}
-                <li><a id="header-join" href="/accounts/login/" class="login" onclick='parent.$.colorbox({href:"/accounts/login/"}); return false;'>{% trans "Acceder / Registrarse" %}</a></li>    
+                <li><a id="header-join" href="/accounts/login/" class="login">{% trans "Acceder / Registrarse" %}</a></li>    
             {% endif %}
             </ul>
                 </div>
@@ -109,7 +124,6 @@
 </noscript>    
     <!-- Scripts -->
     <script type="text/javascript" src="/static/js/jquery-min.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.colorbox.js"></script>
     <script type="text/javascript" src="/static/js/jquery.jgrowl.js"></script>
     <script type="text/javascript" src="/static/js/jquery.rating.js"></script>
     <script type="text/javascript" src="/static/js/jquery.qtip.min.js"></script>
