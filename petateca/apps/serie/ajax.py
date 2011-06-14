@@ -30,11 +30,12 @@ def season_lookup(request, serie_id, season):
                 'season': season,
                 'episode_list' : episode_list,
             }
-    # Comprobamos si entre los episodios ya vistos hay alguno de esta serie
-    all_viewed = request.user.profile.viewed_episodes.all()
-    for epi in all_viewed:
-        if epi.season.serie == serie:
-            response['viewed_episode'] = epi
+    if request.user.is_authenticated():
+        # Comprobamos si entre los episodios ya vistos hay alguno de esta serie
+        all_viewed = request.user.profile.viewed_episodes.all()
+        for epi in all_viewed:
+            if epi.season.serie == serie:
+                response['viewed_episode'] = epi
     return response
 
 

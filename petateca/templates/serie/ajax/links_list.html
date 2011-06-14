@@ -20,8 +20,10 @@
         {% endif %}
         <!-- VOTING -->
         <span class="score" style="position:relative; top:-25%; margin-right:2em;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
-        <img class="votelink nobottom" id="up_{% if is_season %}season{% else %}episode{% endif %}_{{link.id}}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
-        <img class="votelink nobottom" id="down_{% if is_season %}season{% else %}episode{% endif %}_{{link.id}}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+        {% if request.user.is_authenticated %}
+            <img class="votelink nobottom" id="up_{% if is_season %}season{% else %}episode{% endif %}_{{link.id}}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
+            <img class="votelink nobottom" id="down_{% if is_season %}season{% else %}episode{% endif %}_{{link.id}}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+        {% endif %}
         </div>
         {% endfor %}
 {% else %}
