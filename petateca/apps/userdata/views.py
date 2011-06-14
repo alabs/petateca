@@ -27,7 +27,7 @@ def get_user_public_profile(request, user_name):
         remaining_invitations = None
     # for series marked as favorite
     favorite_series = Serie.objects.select_related("poster").filter(favorite_of=user)
-    # comments for posts of blog
+    # comments for series
     serie = ContentType.objects.get(app_label='serie', name='serie')
     comments_series = user.comment_comments.filter(content_type=serie.id).order_by('-submit_date')[:10]
     return {
