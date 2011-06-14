@@ -4,6 +4,11 @@
 {% load comments %}
 {% load background_color %}
 {% load avatar_tags %}
+{% block extrahead %}
+<meta property="og:title" content="{{serie.name}} | Liberateca" />
+<meta property="og:description" content="{{ serie.description }}" />
+<meta property="og:image" content="{{ serie.poster.src.url }}" />
+{% endblock %}
 {% block title %}{{ serie.name.title }} | Liberateca{% endblock %}
 {% block contents %}
 
