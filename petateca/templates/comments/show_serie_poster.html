@@ -1,0 +1,9 @@
+{% load thumbnail %}
+<a class="portfolio_item alpha" href="{{ serie.get_absolute_url }}">
+<div class="preload" >
+    {% if serie.poster %} {% thumbnail serie.poster.src "70x70" as img_serie %} 
+        <img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" alt="{{serie.name}}"/>{% endthumbnail %}
+    {% else %}
+        <div class="image_not_found">  <img src="/static/images/image_not_available.png" width="50"> </div>
+    {% endif %}
+</div>

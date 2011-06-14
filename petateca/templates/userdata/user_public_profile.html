@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load extract_domain %}
 {% load avatar_tags %}
+{% load process_serie_id %}
 {% block title %}{{ user.username }} | Liberateca{% endblock %}
 {% block contents %}
 
@@ -38,7 +39,7 @@
             <ol class="commentlist" id="c{{ comment.id }}">
                     <li class="comment">
                                 <div class="gravatar">
-                                    TODO: INSERTAR IMAGEN SERIE
+                            {% process_serie_id comment.object_pk %}
                                 </div>
                     <div class="comment_content">
                             <div class="clearfix">
@@ -97,7 +98,7 @@
         {% if favorite_series %}
           {% for serie in favorite_series %}
             <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
-                <div class="preload" >
+            <div class="preload" >
             {% if serie.poster %} {% thumbnail serie.poster.src "150x150" as img_serie %} 
                 <img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" alt="{{serie.name}}"/>{% endthumbnail %}
             {% else %}
