@@ -761,4 +761,15 @@ $(document).ready(function () {
                 }
         );
     });
+
+    // Muestra el nombre del usuario al hacer overr
+    $('.followers[title]').qtip({
+        position: {
+            my: 'center', // Use the corner...
+            at: 'center' // ...and opposite corner
+        },
+        style: {
+            classes: 'ui-tooltip-shadow ui-tooltip-dark'
+        }
+    });
 });
