@@ -155,12 +155,9 @@
     <div class="grid_6 right">
     <h2>Seguidores</h2>
         {% for user in serie.favorite_of.all %}
-            <ul class="followers">
-                <a href="{% url user_profile user_name=user.user.username %}">
-                    <li>{% avatar user.user 30 %}
-                    <li><span>{{ user.user.username }}</span>
-                </a>
-            </ul>
+            <a alt="{{ user.user.username }}" href="{% url user_profile user_name=user.user.username %}">
+                {% avatar user.user 30 %}
+            </a>
         {% endfor %}
     </div>
 </div>
