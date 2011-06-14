@@ -296,6 +296,7 @@ $(document).ready(function () {
     // Listado de actores segun serie
     $('#get_actors').click(
         function(){
+            $('#actors_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
             var url = window.location.pathname;
             var serie = url.split('/')[2];
             $.get('/series/lookup/actors/' + serie + '/', {}, 
