@@ -99,25 +99,26 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.comments',
     'django.contrib.markup',
+    # django-app
+    'registration', # users
+    'invitation', # users
+    'avatar', # users
+    'south', # migrations
+    'modeltranslation', # translations
+    'rosetta', # translations
+    'sorl.thumbnail', # thumbnails
+    'haystack', # search
+    'djangoratings', # ratings
+    'voting', # ratings
+    'piston', # API
+    # customs
     'serie',
     'userdata',
-    'registration',
-    'invitation',
-    'south',
-    'modeltranslation',
-    'rosetta',
-    'sorl.thumbnail',
-    'haystack',
-    'djangoratings',
-    'voting',
-    'avatar',
-    'piston',
     'api_v1',
     'api_v2',
     'search',
     'core',
-    #Sentry
-    # don't forget to add the dependencies!
+    # sentry logger
     'indexer',
     'paging',
     'sentry',
