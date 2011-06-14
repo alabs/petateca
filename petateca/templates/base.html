@@ -77,7 +77,7 @@
         </li>
             {% if request.user.is_authenticated %}
                 <li class="kids" id="user">
-                {% avatar user 30 %}
+                {% avatar request.user 30 %}
                 {% url user_profile user_name=request.user.username as profile_user %}
                 <a href="{{ profile_user }}">{{ request.user.username }}</a>
                     <ul>
