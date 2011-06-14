@@ -7,7 +7,7 @@
 {% block extrahead %}
 <meta property="og:title" content="{{serie.name}} | Liberateca" />
 <meta property="og:description" content="{{ serie.description }}" />
-<meta property="og:image" content="{{ serie.poster.src.url }}" />
+<meta property="og:image" content="http://liberateca.net{{ serie.poster.src.url }}" />
 {% endblock %}
 {% block title %}{{ serie.name.title }} | Liberateca{% endblock %}
 {% block contents %}
@@ -34,8 +34,7 @@
                 </a>
                 <div id="inside_serie_{{serie.id}}_season_{{season.season}}"></div>
             </li>
-        {% endfor %}
-        </ul>
+        {% endfor %} </ul>
     </div>
     <div id="season_list" class="right grid_7"></div>
 	<div class="hr dotted clearfix">&nbsp;</div>
