@@ -336,7 +336,35 @@ $(document).ready(function () {
         });
 
     // El popup cuando se hace click en login
-	$('.login').colorbox({iframe:true, innerWidth:555, innerHeight:324});
+  $('.login').each(function(){
+        $login = $(this);
+        $login.click( function(){ return false; }); 
+        $.get('/accounts/login/', function(data){
+            $login.qtip(
+            {
+                id: 'modal', // Since we're only creating one modal, give it an ID so we can style it
+                content: {
+                    text: data,
+                    title: {
+                        text: 'Iniciar sesión',
+                        button: true
+                    }
+                },
+                position: {
+                    my: 'center', // ...at the center of the viewport
+                    at: 'center',
+                    target: $(window)
+                },
+                show: {
+                    event: 'click', // Show it on click...
+                    solo: true, // ...and hide all other tooltips...
+                    modal: true // ...and make it modal
+                },
+                style: 'ui-tooltip-light ui-tooltip-rounded'
+            });
+            return false;
+        });
+     });
 
     // Que cuando se haga click en el rating envia el valor por post
     $('.ratingstar').rating({ callback: function(value, link){
@@ -368,33 +396,80 @@ $(document).ready(function () {
     });
 
     // Popup de añadir enlace
-    $('.add_link').colorbox({width:'50%', height:'60%', iframe:true, 
-         onClosed:function(){ location.reload(true); } 
-    });
+//    $('.add_link').colorbox({width:'50%', height:'60%', iframe:true, 
+//         onClosed:function(){ location.reload(true); } 
+//    });
+//
+//    // Popup de cambiar avatar
+//	$(".avatar_change").colorbox({width:"600px", height:"500px", iframe:true,
+//     onClosed:function(){ location.reload(true); } });
+//
 
-    // Popup de cambiar avatar
-	$('.avatar_change').colorbox({width:'600px', height:'500px', iframe:true,
-     onClosed:function(){ location.reload(true); } });
+  $('.avatar_change').each(function(){
+        $avatar = $(this);
+        $avatar.click( function(){ return false; }); 
+        $.get('/accounts/avatar/change/', function(data){
+            $avatar.qtip(
+            {
+                id: 'modal', // Since we're only creating one modal, give it an ID so we can style it
+                content: {
+                    text: data,
+                    title: {
+                        text: 'Cambiar avatar',
+                        button: true
+                    }
+                },
+                position: {
+                    my: 'center', // ...at the center of the viewport
+                    at: 'center',
+                    target: $(window)
+                },
+                show: {
+                    event: 'click', // Show it on click...
+                    solo: true, // ...and hide all other tooltips...
+                    modal: true // ...and make it modal
+                },
+                style: 'ui-tooltip-light ui-tooltip-rounded'
+            });
+            return false;
+        });
+     });
+
 
     // Popup de las series, cuando se pone encima de la imagen
-    $('.serie').live('mouseover', function(){
-        // Obtenemos el id de la serie y lo buscamos
-        var serie = $(this);
+   $('.serie').live('mouseover', function() {
+      var url = '/series/lookup/serie/';
+      var id = $(this).attr('id');
 
-        serie.CreateBubblePopup({
-            position: 'right',
-            align: 'center',
-            width: '350',
-            innerHtml: '<img src="/static/images/ajax-loading-bar.gif" style="border:0px; vertical-align:middle; margin-right:10px; display:inline;" />',
-            innerHtmlStyle: { color:'#fff', 'text-align':'left' },
-            themeName: 'all-black',
-            themePath: '/static/images/jquerybubblepopup-theme'
-        });
-
-        var serie_id = serie.attr('id');
-        $.get('/series/lookup/serie/' + serie_id + '/', function(data) {
-            serie.SetBubblePopupInnerHtml(data);
-        }); 
+      // Setup the tooltip...
+      $(this).qtip(
+      {
+         content: {
+            text: 'Cargando...', // Generic loading message so we know the data is coming.
+            ajax: {
+               url: url + id + '/',
+               dataType: 'html', // The script returns HTML
+               success: function(html) {
+                  // Set the tooltip content
+                  var content = html;
+                  this.set('content.text', content);
+ 
+                  return false; // Prevent default content update
+               }
+            }
+         },
+         overwrite: false, // Make sure another tooltip can't overwrite this one without it being explicitly destroyed
+         show: {
+            ready: true // Needed to make it show on first mouseover event
+         },
+         position: {
+            my: 'left center',
+            at: 'right center'
+         },
+         style: {
+            classes: 'ui-tooltip-imdb ui-tooltip-tipsy ui-tooltip-shadow'
+         }
+       });
     });
 
     $('.zoom').live('click', function(){
