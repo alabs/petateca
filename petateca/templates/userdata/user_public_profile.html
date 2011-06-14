@@ -13,7 +13,7 @@
 	<div class="hr dotted clearfix">&nbsp;</div>
 
 	<!-- TRACKING -->
-    {% if request.user == user %} 
+    {# if request.user == user %} 
     <div id="viewed_episodes">
         <h2>Seguimiento</h2>
         {% for episode in user.profile.viewed_episodes.all %}
@@ -27,7 +27,7 @@
         </div>
         {% endfor %}
     </div>
-    {% endif %}
+    {% endif #}
 
     <p class="clearfix">
 	<div class="hr dotted clearfix">&nbsp;</div>
