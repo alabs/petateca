@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
-from decorators import render_to
+from core.decorators import render_to
 
 from serie.forms import SerieForm, ImageSerieForm, SeasonForm
 from serie.models import Serie, Season, Link, ImageSerie

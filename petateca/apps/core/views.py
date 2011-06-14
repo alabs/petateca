@@ -1,4 +1,4 @@
-from decorators import render_to
+from core.decorators import render_to
 from invitation.models import InvitationKey
 
 from serie.models import Serie, Link
@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from djangoratings.models import Vote as Rating
 
 
-@render_to('index.html')
+@render_to('core/index.html')
 def index(request):
     ''' Para la home '''
     serie_list = Serie.objects.order_by('rating_score').reverse().select_related('poster')[:7] 
@@ -31,7 +31,7 @@ def index(request):
          })
         return index_response
 
-@render_to('statistics.html')
+@render_to('core/statistics.html')
 def statistics(request):
     ''' Muestra estadisticas de los links, series, usuarios, etc '''
     count_links = Link.objects.count()

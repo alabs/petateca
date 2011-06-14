@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 
 from django.utils.simplejson import dumps
 from django.db.models import Q
-from decorators import render_to
+from core.decorators import render_to
 
 @render_to('search/ajax_search.html')
 def search_lookup(request):

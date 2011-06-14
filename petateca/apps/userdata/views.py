@@ -1,12 +1,20 @@
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
 from invitation.models import InvitationKey
-from decorators import render_to
+from core.decorators import render_to
 
 from serie.models import Serie
 from userdata.forms import UserToInviteForm
 from userdata.models import User, UserToInvite
+
+@render_to('registration/profile.html')
+@login_required
+def view_profile(request):
+    ''' TODO: Para cambiar cosas del perfil ''' 
+    user_profile = request.user.get_profile()
+    return { 'profile': user_profile, } 
 
 
 @render_to('userdata/user_public_profile.html')
