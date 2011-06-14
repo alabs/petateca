@@ -146,7 +146,7 @@ if DEBUG:
 
 HAYSTACK_SITECONF = 'search.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'indexes')
+HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'apps/search/indexes')
 
 # Registration
 AUTH_PROFILE_MODULE = 'userdata.UserProfile'

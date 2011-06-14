@@ -22,6 +22,6 @@ petateca/static/img/serie/thumbs/*.jpg
 build
 petateca/.coverage
 petateca/reports/
-petateca/indexes/
+petateca/apps/search/indexes/
 *.egg
 petateca/local_settings.py
