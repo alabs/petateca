@@ -16,8 +16,7 @@
     <style>
 /* Add some nice box-shadow-ness to the modal tooltip */
 #ui-tooltip-modal{
-   max-width: 30em;
- 
+   min-width: 200px;
    -moz-box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
    -webkit-box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
    box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
@@ -25,6 +24,15 @@
  
 #ui-tooltip-modal .ui-tooltip-content{
    padding: 10px;
+}
+
+
+
+.loginform {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 45%;
 }
 
 
@@ -48,23 +56,19 @@
                         <li><a href="{% url sneak_links %}">Ver últimas</a></li>
                     </ul>
                 </li>
-                <li class="kids"><a href="http://liberateca.uservoice.com/">Sugerencias</a></li>
-                <li class="kids">
-                    <a class="" href="http://github.com/alabs/petateca/">Desarrolladores</a>
-                    <ul>
-                        <li><a href="http://github.com/alabs/petateca/">Código</a></li>
-                        <li><a href="{% url api %}">API</a></li>
-                        <li><a href="http://listas.alabs.es/mailman/listinfo/liberateca-dev/">Lista de desarrollo</a></li>
-                    </ul>
-                </li>
                 <li class="kids">
                     <a class="" href="/">Liberateca</a>
                     <ul>
                         <li><a href="{% url faq %}">FAQ</a></li>
+                        <li><a href="http://liberateca.uservoice.com/">Sugerencias</a></li>
+                        <li>Desarrolladores</li>
+                        <li><a href="http://github.com/alabs/petateca/">Código</a></li>
+                        <li><a href="{% url api %}">API</a></li>
+                        <li><a href="http://listas.alabs.es/mailman/listinfo/liberateca-dev/">Lista de desarrollo</a></li>
                         <li>Redes</li>
                         <li><a href="http://twitter.com/liberateca">Twitter</a></li>
-                        <li><a href="http://facebook.com/liberateca">Facebook</a></li>
-                        <li>Legales</li>
+                        <li><a href="http://www.facebook.com/pages/Liberateca/155455614516791">Facebook</a></li>
+                        <li>Legal</li>
                         <li><a href="{% url aviso-legal %}">Aviso legal</a></li>
                         <li><a href="{% url politica-privacidad %}">Política de privacidad</a></li>
                     </ul>
