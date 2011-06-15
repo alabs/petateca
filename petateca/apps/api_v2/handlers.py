@@ -10,31 +10,19 @@ urlprefix = get_urlprefix()
 
 
 
-class SerieListHandler(BaseHandler):
+class SerieHandler(BaseHandler):
     ''' Listado de series '''
     allowed_methods = ('GET', )
     model = Serie
-    fields = ('id', 'name_en', 'name_es', 'url')
-
-    @catch_404
-    def read(self, request):
-        ''' Muestra listado de series con URL para ver detalle ''' 
-        series = Serie.objects.order_by('name_es')
-        return series
-
-
-class SerieHandler(BaseHandler):
-    ''' Detalle de Serie '''
-    allowed_methods = ('GET', )
-    model = Serie
+    list_fields = ('id', 'name_en', 'name_es', 'url')
     fields = ('id', 'name_es', 'name_en', 'slug', 'description_en', 'description_es', 
             ('network', ('name', )), 'runtime', ('genres', ('name', )), 
             'rating_score', ( 'poster', ('thumbnail', )), )
 
-
     @catch_404
-    def read(self, request, serie_id):
-        ''' Muestra el detalle de la serie: 
+    def read(self, request, serie_id=None):
+        '''
+        Muestra listado y detalle de series
 
         * Nombre: 'name'
         * URL: 'slug'
@@ -45,57 +33,52 @@ class SerieHandler(BaseHandler):
         * Puntuacion: 'rating_score'
         * Thumbnail: 'poster'
         '''
-        return get_object_or_404(Serie, id=serie_id)
+        if serie_id:
+            return get_object_or_404(Serie, id=serie_id)
+        else:
+            return Serie.objects.order_by('name_es')
 
 
-class SeasonListHandler(BaseHandler):
+class SeasonHandler(BaseHandler):
     ''' Listado de temporadas '''
     allowed_methods = ('GET', )
     model = Season
 
     @catch_404
-    def read(self, request, serie_id):
+    def read(self, request, serie_id, season=None):
         ''' Muestra el listado de URLs de temporadas que tiene una Serie'''
-        serie = get_object_or_404(Serie, id=serie_id)
-        season_list = []
-        for s in serie.season.all():
-            season_list.append({
-                'id': s.pk,
-                'url': urlprefix + reverse('API_v2_season_detail', 
-                    kwargs={'serie_id': serie.id, 'season': s.season}),
-                })
-        # TODO: Imagen de Temporadas
-        return season_list
+        if season:
+            ''' Muestra el listado de episodios para una temporada dada, y lista la siguiente informacion de cada episodio: 
 
-
-class SeasonHandler(BaseHandler):
-    ''' Detalle de temporada '''
-    allowed_methods = ('GET', )
-    model = Season
-
-    @catch_404
-    def read(self, request, serie_id, season):
-        ''' Muestra el listado de episodios para una temporada dada, y lista la siguiente informacion de cada episodio: 
-
-        * Titulo: 'title'
-        * Fecha de emision: 'air_date'
-        * Ubicacion del recurso del episodio: 'url'
-        '''
-        serie = get_object_or_404(Serie, id=serie_id)
-        season = get_object_or_404(Season, serie=serie, season=season) 
-        epi_list = []
-        for e in season.episodes.all():
-            # TODO: season y serie
-            epi = {
-                    'episode': e.episode,
-                    'title' : e.title,
-                    'url': urlprefix + reverse("API_v2_episode_detail", kwargs={
-                        'serie_id': serie.id, 'season': season.season, 'episode': e.episode}),
-                    }
-            if e.air_date: 
-                epi['air_date'] = e.air_date.isoformat()
-            epi_list.append(epi)
-        return epi_list
+            * Titulo: 'title'
+            * Fecha de emision: 'air_date'
+            * Ubicacion del recurso del episodio: 'url'
+            '''
+            serie = get_object_or_404(Serie, id=serie_id)
+            season = get_object_or_404(Season, serie=serie, season=season) 
+            epi_list = []
+            for e in season.episodes.all():
+                # TODO: season y serie
+                epi = {
+                        'episode': e.episode,
+                        'title' : e.title,
+                        'url': urlprefix + reverse("API_v2_episode_detail", kwargs={
+                            'serie_id': serie.id, 'season': season.season, 'episode': e.episode}),
+                        }
+                if e.air_date: 
+                    epi['air_date'] = e.air_date.isoformat()
+                epi_list.append(epi)
+            return epi_list
+        else:
+            serie = get_object_or_404(Serie, id=serie_id)
+            season_list = []
+            for s in serie.season.all():
+                season_list.append({
+                    'id': s.pk,
+                    'url': urlprefix + reverse('API_v2_season_detail', 
+                        kwargs={'serie_id': serie.id, 'season': s.season}),
+                    })
+            return season_list
 
 
 class EpisodeHandler(BaseHandler):
