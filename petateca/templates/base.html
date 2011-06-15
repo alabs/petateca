@@ -89,7 +89,27 @@
                     </ul>
                 </li>
             {% else %}
-                <li><a id="header-join" href="/accounts/login/" class="login">{% trans "Acceder / Registrarse" %}</a></li>    
+            <li class="kids"> <a href="/accounts/register/">Registrarse</a>
+            <li class="kids" id="topnav">  <a href="/accounts/login/" class="signin"><span>Acceder</span></a> 
+            <fieldset id="signin_menu">
+                <form method="post" id="signin" action="/accounts/login/">
+                <label for="username">Usuario o correo</label>
+                <input id="username" name="username" value="" title="username" tabindex="4" type="text">
+                </p>
+                <p>
+                    <label for="password">Contraseña</label>
+                    <input id="password" name="password" value="" title="password" tabindex="5" type="password">
+                </p>
+                <input type="hidden" name="next" value="{{ NEXT }}" />
+                <input class="button" value="Acceder" tabindex="6" type="submit">
+                <p class="forgot"> <a href="{% url auth_password_reset %}" id="resend_password_link">¿Has olvidado tu contraseña?</a> </p>
+                </form>
+            </fieldset>
+                <!-- form action="/accounts/login/" method="post" accept-charset="utf-8">
+                    <label for="username">Usuario o correo</label><input type="text" name="username" value="" id="username" />
+                    <label for="password">Contraseña</label><input type="password" name="password" value="" id="password" />
+                    <p><input type="submit" class="button" value="Acceder"></p>
+                </form-->
             {% endif %}
             </ul>
                 </div>
@@ -128,5 +148,27 @@
     <script type="text/javascript" src="/static/js/jquery.qtip.min.js"></script>
     <script type="text/javascript" src="/static/js/petateca.js"></script>
     {% block extrascript %}{% endblock %}
+<script type="text/javascript">
+        $(document).ready(function() {
+
+            $(".signin").click(function(e) {          
+                e.preventDefault();
+                $("fieldset#signin_menu").toggle();
+                $(".signin").toggleClass("menu-open");
+            });
+            
+            $("fieldset#signin_menu").mouseup(function() {
+                return false
+            });
+            $(document).mouseup(function(e) {
+                if($(e.target).parent("a.signin").length==0) {
+                    $(".signin").removeClass("menu-open");
+                    $("fieldset#signin_menu").hide();
+                }
+            });         
+            
+        });
+</script>
+
 </body>
 </html>

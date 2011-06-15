@@ -1,6 +1,5 @@
-{% extends "base_stripped.html" %}
+{% extends "base.html" %}
 {% load i18n %}
-{% load message_box %}
 {% block title %}Iniciar Sesión | Liberateca{% endblock %}
 {% block contents %}
 {% if request.user.is_authenticated %}
@@ -8,33 +7,21 @@
 {% else %}
 
 <!-- LOGIN form -->
-<div class="grid_5">
-    <h1>Iniciar sesión</h1>
-    <form method="post" action="{% url django.contrib.auth.views.login %}" id="login_form">
+<div class="center">
+    <h1>Acceder</h1>
+    <form method="post" action="{% url django.contrib.auth.views.login %}">
         <ul>
         {{ form.as_ul }}
-            <p><a href="{% url auth_password_reset %}">forgot</a> your password?  </p>
+            <p><a href="{% url auth_password_reset %}">¿Has olvidado tu contraseña?</a></p>
             <input type="hidden" name="next" value="{{ next }}" />
             <div id="button">
-            <input type='submit' id='send_message' class="button" value='login' />
+            <input type='submit' id='send_access' class="button" value='Acceder' />
             </div>
             </li> 
         </ul> 
     </form>  
 </div>
 
-<!-- REGISTRATION form -->
-<div class="grid_5">
-    <h1>Registrarse</h1>
-    <form method='post' action="{% url registration_register %}?invitation_key={{invitation_key}}" id="login_form">
-        {{ form.as_p }}
-            <div id="button">
-            <input type='submit' id='send_message' class="button" value='{% trans "Enviar correo de activación" %}' />
-            </div>
-            </li> 
-        </ul> 
-    </form>  
-</div>
 
 {% endif %}
 
