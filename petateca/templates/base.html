@@ -119,14 +119,10 @@
         <div class="hr grid_12">&nbsp;</div>
         <div class="clear"></div>
         {% block contents %}{% endblock %}
+        <div class="hr grid_12">&nbsp;</div>
+        <div class="clear"></div>
         <!-- FOOTER -->
-        <p class="grid_11 footer clearfix">
-        <div class="hr grid_12">&nbsp;</div>
-        <div id="footer">
-	</div>
-    <br class="clear">
-        <p class="grid_12 footer clearfix">
-        <div class="hr grid_12">&nbsp;</div>
+        <footer> 
             <span class="float">
                 <a href="http://www.gnu.org/licenses/agpl.html">
                     <img src="/static/images/badges/gpl-badge.png" alt="gpl" title="gpl" />
@@ -147,6 +143,7 @@
             <a class="float right" href="http://alabs.es">
                 <img src="/static/images/alabs.png" title="alabs" alt="alabs" /> 
             </a>
+            </footer>
 </div>
 <noscript>
         <div id="noscript-warning"> {{SITE_NAME}} funciona mejor con JavaScript activado.</div>
@@ -178,6 +175,25 @@
             });         
             
         });
+$(function(){
+    // jquery sticky footer
+    positionFooter(); 
+    function positionFooter(){
+        var padding_top = $("footer").css("padding-top").replace("px", "");
+        var page_height = $(document.body).height() - padding_top;
+        var window_height = $(window).height();
+        var difference = window_height - page_height;
+        if (difference < 0) 
+            difference = 0;
+ 
+        $("footer").css({
+            padding: difference + "px 0 0 0"
+        })
+    }
+ 
+    $(window)
+        .resize(positionFooter)
+});
 </script>
 
 </body>
