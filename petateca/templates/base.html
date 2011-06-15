@@ -14,23 +14,6 @@
     <link rel="stylesheet" href="/static/css/jquery.jgrowl.css" />
     <link rel="stylesheet" href="/static/css/jquery.rating.css" />
     <link rel="stylesheet" href="/static/css/jquery.qtip.css" />{% block extrastyle %}{% endblock %}
-    <style>
-/* Add some nice box-shadow-ness to the modal tooltip */
-#ui-tooltip-modal{
-   min-width: 200px;
-   -moz-box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
-   -webkit-box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
-   box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
-}
- 
-#ui-tooltip-modal .ui-tooltip-content{
-   padding: 10px;
-}
-
-.followers img {
-    margin-bottom: 0em !important;
-}
-    </style>
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Liberateca" />
 </head>
 <body>
@@ -116,34 +99,34 @@
 
         </nav>
     </header>
-        <div class="hr grid_12">&nbsp;</div>
-        <div class="clear"></div>
-        {% block contents %}{% endblock %}
-        <div class="hr grid_12">&nbsp;</div>
-        <div class="clear"></div>
-        <!-- FOOTER -->
-        <footer> 
-            <span class="float">
-                <a href="http://www.gnu.org/licenses/agpl.html">
-                    <img src="/static/images/badges/gpl-badge.png" alt="gpl" title="gpl" />
-                </a>
-                <a href="http://creativecommons.org/licenses/by-sa/3.0/es/">
-                    <img src="/static/images/badges/ccbysa-badge.png" alt="ccbysa" title="ccbysa" />
-                </a>
-                <a href="http://djangoproject.com/">
-                    <img src="/static/images/badges/django-badge.png" alt="django" title="django" />
-                </a>
-                <a href="http://github.com/alabs/petateca">
-                    <img src="/static/images/badges/github-badge.png" alt="github" title="github" />
-                </a>
-                <a href="http://twitter.com/liberateca">
-                    <img src="/static/images/badges/twitter-badge.png" alt="twitter" title="twitter" />
-                </a>
-            </span>
-            <a class="float right" href="http://alabs.es">
-                <img src="/static/images/alabs.png" title="alabs" alt="alabs" /> 
+    <div class="hr grid_12">&nbsp;</div>
+    <div class="clear"></div>
+    {% block contents %}{% endblock %}
+    <div class="hr grid_12">&nbsp;</div>
+    <div class="clear"></div>
+    <!-- FOOTER -->
+    <footer> 
+        <span class="float">
+            <a href="http://www.gnu.org/licenses/agpl.html">
+                <img src="/static/images/badges/gpl-badge.png" alt="gpl" title="gpl" />
             </a>
-            </footer>
+            <a href="http://creativecommons.org/licenses/by-sa/3.0/es/">
+                <img src="/static/images/badges/ccbysa-badge.png" alt="ccbysa" title="ccbysa" />
+            </a>
+            <a href="http://djangoproject.com/">
+                <img src="/static/images/badges/django-badge.png" alt="django" title="django" />
+            </a>
+            <a href="http://github.com/alabs/petateca">
+                <img src="/static/images/badges/github-badge.png" alt="github" title="github" />
+            </a>
+            <a href="http://twitter.com/liberateca">
+                <img src="/static/images/badges/twitter-badge.png" alt="twitter" title="twitter" />
+            </a>
+        </span>
+        <a class="float right" href="http://alabs.es">
+            <img src="/static/images/alabs.png" title="alabs" alt="alabs" /> 
+        </a>
+    </footer>
 </div>
 <noscript>
         <div id="noscript-warning"> {{SITE_NAME}} funciona mejor con JavaScript activado.</div>
@@ -155,46 +138,5 @@
     <script type="text/javascript" src="/static/js/jquery.qtip.min.js"></script>
     <script type="text/javascript" src="/static/js/petateca.js"></script>
     {% block extrascript %}{% endblock %}
-<script type="text/javascript">
-        $(document).ready(function() {
-
-            $(".signin").click(function(e) {          
-                e.preventDefault();
-                $("fieldset#signin_menu").toggle();
-                $(".signin").toggleClass("menu-open");
-            });
-            
-            $("fieldset#signin_menu").mouseup(function() {
-                return false
-            });
-            $(document).mouseup(function(e) {
-                if($(e.target).parent("a.signin").length==0) {
-                    $(".signin").removeClass("menu-open");
-                    $("fieldset#signin_menu").hide();
-                }
-            });         
-            
-        });
-$(function(){
-    // jquery sticky footer
-    positionFooter(); 
-    function positionFooter(){
-        var padding_top = $("footer").css("padding-top").replace("px", "");
-        var page_height = $(document.body).height() - padding_top;
-        var window_height = $(window).height();
-        var difference = window_height - page_height;
-        if (difference < 0) 
-            difference = 0;
- 
-        $("footer").css({
-            padding: difference + "px 0 0 0"
-        })
-    }
- 
-    $(window)
-        .resize(positionFooter)
-});
-</script>
-
 </body>
 </html>

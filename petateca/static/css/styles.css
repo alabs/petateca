@@ -1396,6 +1396,10 @@ div.dialog a:link, div.dialog a:visited {
     background-color: #E6E6E6 !important;
 }
 
+.followers img {
+    margin-bottom: 0em !important;
+}
+
 /* SINGIN / LOGIN */
 
 #topnav a.signin {
@@ -1513,6 +1517,9 @@ border:0;
     background-position:0 -5px;
     cursor:pointer;
 } 
+
+
+
 
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
