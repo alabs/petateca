@@ -11,7 +11,7 @@ get_actor = {
 }
 
 serie_list = {
-    'queryset': Serie.objects.select_related('poster').order_by('-rating_score').all()[:16],
+    'queryset': Serie.objects.select_related('poster').order_by('-rating_score').all()[:20],
     'template_name': 'serie/serie_list.html',
 }
 

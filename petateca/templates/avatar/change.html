@@ -1,22 +1,29 @@
 {% extends "base.html" %}
 {% load avatar_tags %}
 {% block contents %}
-    <h2>Tu Avatar actual: </h2>
-    <div class="hr clearfix dotted">&nbsp;</div>
-    {% avatar user %}
+    <div id="box" class="grid_2 left">
+        <h2>Tu avatar: </h2>
+        {% avatar user %}
+    </div>
+
     {% if not avatars %}
-        <p>No tienes ningun Avatar, por favor añade alguno.</p>
+        <p>No tienes ningun avatar, por favor añade alguno.</p>
     {% else %}
-        <form method="POST" action="">
+    <div id="box" class="grid_2 left">
+        <form method="POST" action=".">
         <ul id="avatar_list">
             {{ primary_avatar_form.as_ul }}
         </ul>
-            <input class="button" type="submit" value="Elegir como Avatar" />
+            <input class="button center" type="submit" value="Elegir" />
         </form>
+    </div>
     {% endif %}
-    <div class="hr clearfix dotted">&nbsp;</div>
-    <form enctype="multipart/form-data" method="POST" action="">
-        <input type="file" name="avatar" value="Avatar Image" />
-        <input class="button" type="submit" value="Subir nuevo Avatar" />
-    </form>
+    <div id="box" class="grid_3 left">
+        <form enctype="multipart/form-data" method="POST" action="">
+            <ul>
+                <li><input type="file" name="avatar" value="Avatar Image" />
+                <li><input style="margin-top:2em;" class="button center" type="submit" value="Subir nuevo" />
+            </ul>
+        </form>
+    </div>
 {% endblock %}

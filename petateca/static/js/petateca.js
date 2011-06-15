@@ -772,4 +772,42 @@ $(document).ready(function () {
             classes: 'ui-tooltip-shadow ui-tooltip-dark'
         }
     });
+
+    // Twitter style login
+    $(".signin").click(function(e) {          
+        e.preventDefault();
+        $("fieldset#signin_menu").toggle();
+        $(".signin").toggleClass("menu-open");
+    });
+    
+    $("fieldset#signin_menu").mouseup(function() {
+        return false;
+    });
+    $(document).mouseup(function(e) {
+        if($(e.target).parent("a.signin").length===0) {
+            $(".signin").removeClass("menu-open");
+            $("fieldset#signin_menu").hide();
+        }
+    });         
+
+
+    // jquery sticky footer
+    function positionFooter(){
+        var padding_top = $("footer").css("padding-top").replace("px", "");
+        var page_height = $(document.body).height() - padding_top;
+        var window_height = $(window).height();
+        var difference = window_height - page_height;
+        if (difference < 0) {
+            difference = 0;
+        }
+        $("footer")
+            .css({ padding: difference + "px 0 0 0" })
+            .css('margin-top', '2em');
+    }
+
+    positionFooter(); 
+ 
+    $(window)
+        .resize(positionFooter);
+
 });
