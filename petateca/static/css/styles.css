@@ -1148,6 +1148,9 @@ left:-23em;top: -5.6em;
     list-style-type: none;
     padding-right: 20px;
 }
+#avatar_list img{
+    vertical-align: middle;
+}
 .errorlist li {        
     display: block;        
     color: #C00;        
