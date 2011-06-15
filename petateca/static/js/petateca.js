@@ -800,9 +800,9 @@ $(document).ready(function () {
         if (difference < 0) {
             difference = 0;
         }
-        $("footer").css({
-            padding: difference + "px 0 0 0"
-        });
+        $("footer")
+            .css({ padding: difference + "px 0 0 0" })
+            .css('margin-top', '2em');
     }
 
     positionFooter(); 
