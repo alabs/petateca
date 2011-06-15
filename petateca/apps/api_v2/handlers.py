@@ -123,11 +123,14 @@ class EpisodeHandler(BaseHandler):
                 'episode': epi.episode,
                 'title_es': epi.title_es,
                 'title_en': epi.title_en,
-                'thumbnail': epi.poster.thumbnail(),
                 'description_en': epi.description_en,
                 'description_es': epi.description_es,
                 'air_date': epi.air_date.isoformat(),
                 }
+        try:
+            episode['thumbnail'] = epi.poster.thumbnail()
+        except:
+            pass
         link_list = []
         for l in epi.links.all():
             link = {'url': l.url, 'audio': l.audio_lang.iso_code,}
