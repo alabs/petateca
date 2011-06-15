@@ -1400,13 +1400,15 @@ div.dialog a:link, div.dialog a:visited {
 
 #topnav a.signin {
     background:#000;
-    padding:4px 6px 6px;
     text-decoration:none;
     font-weight:bold;
     color:#fff;
     -webkit-border-radius:4px;
     -moz-border-radius:4px;
     border-radius:4px;
+    font-size: -0.8em !important;
+    line-height: 2em;
+    margin-top:0.5em;
 }
 #topnav a.signin:hover {
     background:#666;
@@ -1423,11 +1425,9 @@ a.signin {
 a.signin span {
     background-repeat:no-repeat;
     background-position:100% 50%;
-    padding:4px 16px 6px 0;
-}
-#topnav a.menu-open {
-    background:#ddeef6!important;
-    color:#666!important;
+} #topnav a.menu-open {
+    background:#8e8e8e!important;
+    color:#fff!important;
     outline:none;
 }
 #small_signup {
@@ -1438,7 +1438,7 @@ a.signin span {
     width:170px;
 }
 a.signin.menu-open span {
-    color:#789;
+    color:#fff;
 } 
 
 #signin_menu {
@@ -1449,7 +1449,7 @@ a.signin.menu-open span {
     -webkit-border-bottom-left-radius:5px;
     -webkit-border-bottom-right-radius:5px;
     display:none;
-    background-color:#ddeef6;
+    background-color:#8e8e8e;
     position:absolute;
     width:210px;
     z-index:100;
@@ -1461,7 +1461,7 @@ a.signin.menu-open span {
     margin-top:5px;
     margin-right: 0px;
     *margin-right: -1px;
-    color:#789;
+    color:#FFF;
     font-size:11px;
 }
 
@@ -1469,7 +1469,6 @@ a.signin.menu-open span {
     display:block;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
-    border:1px solid #ACE;
     font-size:13px;
     margin:0 0 5px;
     padding:5px;
@@ -1479,7 +1478,7 @@ a.signin.menu-open span {
     margin:0;
 }
 #signin_menu a {
-    color:#6AC;
+    color:#FFF;
 }
 #signin_menu label {
     font-weight:normal;
@@ -1492,7 +1491,7 @@ a.signin.menu-open span {
     margin:5px 0;
 }
 #signin_menu p a {
-    color:#27B!important;
+    color:#FFF!important;
 }
 #signin_submit {
     -moz-border-radius:4px;
