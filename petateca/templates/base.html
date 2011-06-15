@@ -18,14 +18,14 @@
 </head>
 <body>
     <!-- RIBBON -->
-    <img src="/static/images/ribbon.gif" id="ribbon" alt="peta">
+    <!-- img src="/static/images/ribbon.gif" id="ribbon" alt="peta" -->
     <div id="wrapper" class="container_12 clearfix">
     <header>
         <!-- Navigation Menu -->
         <nav id="header-wrapper">
         <a href="/"><img src="/static/images/logo.png" class="left" alt="liberateca" /></a>
         <div class="content" id="header">
-            <ul class="main-pages">
+            <ul class="main-pages left">
                 <li class="kids">
                     <a class="" href="{% url serie-index %}">Series</a>
                     <ul>
@@ -58,18 +58,27 @@
               </form>           
             <div id="suggestions"></div>
         </li>
+    </ul>
+        <ul class="main-pages right">
             {% if request.user.is_authenticated %}
                 <li class="kids" id="user">
-                {% avatar request.user 30 %}
                 {% url user_profile user_name=request.user.username as profile_user %}
-                <a href="{{ profile_user }}">{{ request.user.username }}</a>
+                <a class="loggedin" href="{{ profile_user }}">
+                    {% avatar request.user 30 %}
+                    {{ request.user.username }}
+                </a>
                     <ul>
                         <li><a href="{{ profile_user }}">{% trans "Ver perfil" %}</a></li>
                         <li><a class="avatar_change" href="/accounts/avatar/change/">Cambiar avatar</a></li>
                         <li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
                         <li><a href="{% url invitation_invite %}">Invitar</a></li>
-                        <li><a class="" href="/accounts/logout/">Salir</a></li>
                     </ul>
+                    <li class="kids">
+                        <a href="/accounts/logout/">
+                            <img class="nobottom" src="/static/images/system-shutdown.png" alt="Salir" title="Salir" />
+                            Salir
+                        </a>
+                    </li>
                 </li>
             {% else %}
             <li class="kids"> <a href="/accounts/register/">Registrarse</a>

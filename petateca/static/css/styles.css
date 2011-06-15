@@ -263,7 +263,6 @@ position:absolute; right:0px; top:0px; margin:0px; padding:0px;
     padding-left: 38px;
 }
 #header .main-pages {
-    float: left;
     margin-left: 10px;
 }
 #header ul {
@@ -1398,6 +1397,11 @@ div.dialog a:link, div.dialog a:visited {
 
 .followers img {
     margin-bottom: 0em !important;
+}
+
+.loggedin img{
+   margin-bottom: 0em !important; 
+
 }
 
 /* SINGIN / LOGIN */
