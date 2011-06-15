@@ -1,24 +1,20 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}Iniciar Sesión | Liberateca{% endblock %}
+{% block title %}Iniciar sesión | Liberateca{% endblock %}
 {% block contents %}
 {% if request.user.is_authenticated %}
-	<h2 class="grid_12 caption clearfix">{% trans "Ya has iniciado sesión." %}! {% trans "Vete a ver algunas" %} <a href="/series">series</a></h2>
+    <h2 class="grid_12 caption clearfix">{% trans "Ya has iniciado sesión." %}! {% trans "Vete a ver algunas" %} <a href="{% url serie-index %}">series</a></h2>
 {% else %}
-
 <!-- LOGIN form -->
-<div class="center">
+<div id="box" class="center login_box">
     <h1>Acceder</h1>
     <form method="post" action="{% url django.contrib.auth.views.login %}">
         <ul>
-        {{ form.as_ul }}
-            <p><a href="{% url auth_password_reset %}">¿Has olvidado tu contraseña?</a></p>
-            <input type="hidden" name="next" value="{{ next }}" />
-            <div id="button">
-            <input type='submit' id='send_access' class="button" value='Acceder' />
-            </div>
-            </li> 
+            {{ form.as_ul }}
+            <li><input type="hidden" name="next" value="{{ next }}" />
+            <li><input type="submit" id="send_access" class="button" value="Acceder" />
         </ul> 
+            <p><a href="{% url auth_password_reset %}">¿Has olvidado tu contraseña?</a></p>
     </form>  
 </div>
 
