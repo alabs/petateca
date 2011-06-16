@@ -101,7 +101,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     # django-app
     'registration', # users
-    'invitation', # users
+# DEPRECATED    'invitation', # users
     'avatar', # users
     'south', # migrations
     'modeltranslation', # translations
@@ -151,7 +151,7 @@ HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'apps/search/indexes')
 
 # Registration
 AUTH_PROFILE_MODULE = 'userdata.UserProfile'
-ACCOUNT_ACTIVATION_DAYS = 7
+ACCOUNT_ACTIVATION_DAYS = 15
 LOGIN_REDIRECT_URL = '/'
 DEFAULT_FROM_EMAIL = 'noreply@liberateca.net'
 
@@ -166,7 +166,8 @@ FORCE_LOWERCASE_TAGS = True
 # Invitations
 # Si se pone como True, redirige a /accounts/signin
 # y permite el registro solo a traves de invitaciones de otros usuarios
-INVITE_MODE = True
+# DEPRECTAED INVITE_MODE = True
+INVITE_MODE = False
 ACCOUNT_INVITATION_DAYS = 30 
 INVITATIONS_PER_USER = 6
 USER_WHO_INVITES = 'liberateca'
