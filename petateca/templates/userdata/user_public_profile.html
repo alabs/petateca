@@ -79,13 +79,6 @@
             <li><a class="avatar_change" href="{% url avatar_change %}">Cambiar avatar</a> 
             <li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
             <li>&nbsp;
-            {% if remaining_invitations %}
-                <li>Tienes {{ remaining_invitations }} invitaciones.
-                <li><a href="{% url invitation_invite %}">Invita a tus colegas</a></li>
-            {% else %}
-                <li>No tiene invitaciones disponibles.
-            {% endif %}
-            <li>&nbsp;
         {% endif %}
             <li>Usuario desde: {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
             <li>Último inicio de sesión: {{ user.last_login|date:"SHORT_DATE_FORMAT" }}

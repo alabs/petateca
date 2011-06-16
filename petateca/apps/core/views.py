@@ -1,5 +1,4 @@
 from core.decorators import render_to
-from invitation.models import InvitationKey
 
 from serie.models import Serie, Link
 from voting.models import Vote
@@ -11,25 +10,18 @@ from djangoratings.models import Vote as Rating
 def index(request):
     ''' Para la home '''
     serie_list = Serie.objects.order_by('rating_score').reverse().select_related('poster')[:7] 
-    if request.user.is_authenticated():
-        remaining_invitations = abs(InvitationKey.objects.remaining_invitations_for_user(request.user))
-    else:
-        remaining_invitations = 'anonymous'
-    index_response = {
-                'series': serie_list,
-                'remaining_invitations': remaining_invitations,
-         }
+    return { 'series': serie_list, }
     # Le damos una cookie que queramos, luego comprobamos que este
     # para enviar los mensajes con jgrowl
-    if request.session.get('logo_voting', False):
-        return index_response
-    else:
-        request.session['logo_voting'] = True
-        logo_message = 1
-        index_response.update({
-                'logo_message': logo_message,
-         })
-        return index_response
+   # if request.session.get('logo_voting', False):
+   #     return index_response
+   # else:
+   #     request.session['logo_voting'] = True
+   #     logo_message = 1
+   #     index_response.update({
+   #             'logo_message': logo_message,
+   #      })
+   #     return index_response
 
 @render_to('core/statistics.html')
 def statistics(request):
