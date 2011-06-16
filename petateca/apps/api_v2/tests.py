@@ -47,7 +47,7 @@ class TestAPIAuth(BaseAuthenticatedClient):
         url = '/api/v2/series/'
         response = self.client.get(url, {}, **self.extra)
         self.assertEqual(response.status_code, 200)
-        serie_name = self.json_response(response)[0]['name']
+        serie_name = self.json_response(response)[0]['name_es']
         self.assertEqual(serie_name, 'Twin Peaks')
 
     # TODO: comprobar pagination
@@ -60,7 +60,7 @@ class TestAPIAuth(BaseAuthenticatedClient):
         response = self.client.get(url, {}, **self.extra)
         self.assertEqual(response.status_code, 200)
         json_response = loads(response._get_content())
-        serie_name = json_response['name']
+        serie_name = json_response['name_es']
         self.assertEqual(serie_name, 'Twin Peaks')
         thumbnail = json_response['poster']['thumbnail']
         img = 'http://example.com/static/cache/6d/11/6d11de6c41317323c8fe535322fab6ee.jpg'
