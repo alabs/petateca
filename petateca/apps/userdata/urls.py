@@ -13,6 +13,7 @@ urlpatterns = patterns('',
             'form_class': RegistrationFormUniqueEmail
         },
         name='registration_register'),
+    url(r'^activate/$', 'userdata.views.activate_by_code', name="activate_by_code"),
     (r'^', include('registration.backends.default.urls')),
     (r'^profile/$', 'userdata.views.view_profile'),
     (r'^avatar/', include('avatar.urls')),

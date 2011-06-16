@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Activación por código | Liberateca{% endblock %}
+{% block contents %}
+<div class="center login_box" id="box">
+    <form action="{% url activate_by_code %}" method="POST">
+    <ul>
+        <li class="fieldwrapper">
+            <label for="id_activation_key">Ingresa tu código de activación:</label>
+            <input id="id_activation_key" type="text" class="required" name="activation_key" required />
+        </li>
+    </ul>
+            <input type='submit' id='send_activation' class="button" value='Enviar código de activación' />
+    </form>
+</div>
+{% endblock %}

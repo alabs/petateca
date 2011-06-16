@@ -1,6 +1,9 @@
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 
 from invitation.models import InvitationKey
 from core.decorators import render_to
@@ -59,3 +62,15 @@ def request_invitation(request):
                 u.save()
                 return { 'invited_mail': u.mail, 'TEMPLATE': 'invitation/thanks.html' }
     return { 'form' : form }
+
+
+@render_to('userdata/activation_by_code.html')
+def activate_by_code(request):
+    if request.POST.get('activation_key'):
+        activation_key = request.POST.get('activation_key')
+        final_url = reverse('registration.views.activate', kwargs={
+            'activation_key': activation_key
+        })
+        return HttpResponseRedirect(final_url)
+    else: 
+        return {'mensaje': 'Error'}

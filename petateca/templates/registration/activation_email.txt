@@ -7,5 +7,11 @@ Para activar la cuenta, por favor haz click en el siguiente link en los proximos
 
 http://{{site.domain}}/accounts/activate/{{ activation_key }}
 
+O dirigite a esta pagina: 
+http://{{site.domain}}/accounts/activate/
+
+Y agrega el siguiente código:
+{{ activation_key }}
+
 Saludos,
 {{ site.name }}
