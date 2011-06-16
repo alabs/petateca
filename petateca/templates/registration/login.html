@@ -3,7 +3,7 @@
 {% block title %}Iniciar sesión | Liberateca{% endblock %}
 {% block contents %}
 {% if request.user.is_authenticated %}
-    <h2 class="grid_12 caption clearfix">{% trans "Ya has iniciado sesión." %}! {% trans "Vete a ver algunas" %} <a href="{% url serie-index %}">series</a></h2>
+    <h2 class="grid_12 caption clearfix">{% trans "Ya has iniciado sesión." %}! {% trans "Vete a ver algunas" %} <a href="{% url serie_index %}">series</a></h2>
 {% else %}
 <!-- LOGIN form -->
 <div id="box" class="center login_box">

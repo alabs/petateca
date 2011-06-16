@@ -16,7 +16,7 @@ serie_list = {
 }
 
 urlpatterns = patterns('serie.views',
-    url(r'^$', object_list, serie_list, name='serie-index'), 
+    url(r'^$', object_list, serie_list, name='serie_index'), 
     url(r'^actor/(?P<slug>[-\w]+)/$', object_detail, get_actor, name="get_actor"),
     url(r'^sneak/$', 'sneak_links', name="sneak_links"),
     url(r'^add/$', 'add_or_edit_serie', name="add_serie"),
