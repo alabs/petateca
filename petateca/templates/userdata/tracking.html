@@ -1,7 +1,11 @@
 <div id="episode_list" class="episodes_hidden">
     <ul>
-        {% for episode in episodes  %}
-            {% include "serie/ajax/episode.html" %}
-        {% endfor %}
+    {% if episodes %}
+            {% for episode in episodes  %}
+                {% include "serie/ajax/episode.html" %}
+            {% endfor %}
+    {% else %}
+        <li><a href="/series/">Parece que te has visto todos los episodios de esta serie -- es hora de buscar otra :P</a>
+    {% endif %}
     </ul>
 </div>
