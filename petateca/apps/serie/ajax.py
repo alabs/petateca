@@ -392,36 +392,6 @@ def ajax_add_episode(request, serie_id, season):
 
 
 @login_required
-def tracking(request):
-    """
-    Tracking / Seguimiento de las series. 
-
-    Recibo un episodio (con su serie y temporada) y lo marco como visto
-    Antes, reviso los episodios ya vistos y compruebo que no sea para 
-    esta misma serie, si ya tiene uno visto, lo quito.
-    """
-    if request.method == 'POST' and request.is_ajax():
-        episode_n = int(request.POST['episode'])
-        season_n = int(request.POST['season'])
-        user = request.user
-        serie = m.Serie.objects.get(id=int(request.POST['serie_id']))
-        season = m.Season.objects.get(serie=serie, season=season_n)
-        episode = m.Episode.objects.get(season=season, episode=episode_n)
-        # clean old episodes viewed for this serie
-        episodes_viewed = user.profile.viewed_episodes.all()
-        for epi in episodes_viewed:
-            if epi.season.serie == serie:
-                epi.viewed_episodes.remove(user.profile)
-        # mark episode as viewed
-        episode.viewed_episodes.add(user.profile)
-        return HttpResponse(
-            simplejson.dumps('OK'), 
-            mimetype='application/json'
-        )
-    else:
-        return HttpResponseForbidden('Error en la peticion AJAX')
-
-@login_required
 def rating_serie(request, serie_slug):
     ''' Tratamiento de ratings para series '''
     if request.method == 'POST' and request.is_ajax():

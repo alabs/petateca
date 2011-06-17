@@ -4,8 +4,7 @@ from registration.forms import RegistrationFormUniqueEmail
 from registration.views import register
 
 urlpatterns = patterns('',
-    # Usuarios, invitaciones, registros, avatar, etc
-    #(r'^', include('registration.urls')),
+    # Usuarios, registros, avatar, etc
     url(r'^register/$',
         register,
         {
@@ -17,7 +16,7 @@ urlpatterns = patterns('',
     (r'^', include('registration.backends.default.urls')),
     (r'^profile/$', 'userdata.views.view_profile'),
     (r'^avatar/', include('avatar.urls')),
-    url(r'^tracking/$', 'userdata.views.show_tracking', name='show_tracking'),
+
     # DEPRECATED
     #(r'^', include('invitation.urls')),
     #url(r'^signin/$',

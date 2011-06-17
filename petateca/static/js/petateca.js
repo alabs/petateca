@@ -745,13 +745,26 @@ $(document).ready(function () {
         } else {$comment.removeClass('hightlight');}
     });
 
+
+    // Muestra el nombre del usuario al hacer overr
+    $('.followers[title]').qtip({
+        position: {
+            my: 'center', // Use the corner...
+            at: 'center' // ...and opposite corner
+        },
+        style: {
+            classes: 'ui-tooltip-shadow ui-tooltip-dark'
+        }
+    });
+
+    // TRACKING
     $('.tracking').live('click', function(){ 
-        // Enviamos el valor de ultima por AJAX
+        // Enviamos el valor de ultimo episodio por AJAX
         serie_season_episode = $(this).parent().attr('id').split('_');
         serie_id = serie_season_episode[1];
         season = serie_season_episode[2]; 
         episode = serie_season_episode[3]; 
-        $.post('/series/tracking/', {
+        $.post('/tracking/set/', {
                 'serie_id': serie_id,
                 'season': season,
                 'episode': episode,
@@ -774,16 +787,81 @@ $(document).ready(function () {
         );
     });
 
-    // Muestra el nombre del usuario al hacer overr
-    $('.followers[title]').qtip({
-        position: {
-            my: 'center', // Use the corner...
-            at: 'center' // ...and opposite corner
-        },
-        style: {
-            classes: 'ui-tooltip-shadow ui-tooltip-dark'
+    $('.serie_hidden').live('click', function(event){
+        event.preventDefault();
+
+        var $refresh = $(this).children('.refresh');
+
+        // poor mans toogle
+        // comprobamos si ya estaba seleccionada anteriormente
+        var check_selected = $(this).attr('class'); 
+        if (check_selected.indexOf('selected_list') != -1) {
+            // si ya existe lo cerramos
+            $(this).removeClass('selected_list');
+            $(this).siblings().html('');
+            $refresh.hide();
+            return false;
+        } else { 
+            $(this).addClass('selected_list');
         }
-    });
+
+        // loading..
+        var $inside = $(this).next();
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+
+        // conseguimos serie_id
+        var serie_id_raw = $(this).attr('id'); 
+        var serie_id = serie_id_raw.split('_')[1]; // poker face ('_')
+
+        $.post('/tracking/show/', { 
+            'serie_id' : serie_id,
+            'csrfmiddlewaretoken': getCookie('csrftoken')
+            }, function(data){
+                $inside.html(data);
+            }
+        );
+
+        // mostramos el refresh
+        $refresh.show();
+    }); 
+
+    $('.refresh').hide();
+
+    $('.refresh').live('click', function(event){
+        // recargar los episodios del tracking
+        event.preventDefault();
+
+        // loading..
+        var $inside = $(this).parent().next();
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+
+        // conseguimos serie_id
+        var serie_id_raw = $(this).parent().attr('id'); 
+        var serie_id = serie_id_raw.split('_')[1]; // poker face ('_')
+
+        $.post('/tracking/show/', { 
+            'serie_id' : serie_id,
+            'csrfmiddlewaretoken': getCookie('csrftoken')
+            }, function(data){
+                $inside.html(data);
+            }
+        );
+
+        event.stopPropagation();
+    }); 
+
+
+    $('.go-jump').live('click', function(event){
+        // ir a la pagina de la serie al ser click en la flechita verde
+        event.preventDefault();
+        var href = $(this).attr('rel');
+        window.location.href = href;
+        event.stopPropagation();
+    }); 
+
+
+
+    
 
     // Twitter style login
     $(".signin").click(function(e) {          

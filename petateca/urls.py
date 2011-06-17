@@ -42,6 +42,8 @@ urlpatterns = patterns('',
 
     (r'^comments/', include('django.contrib.comments.urls')),
 
+    (r'^tracking/', include('tracking.urls')),
+
     (r'^accounts/', include('userdata.urls')),
     url(r'^user/(?P<user_name>[-\w]+)/$', 'userdata.views.public_profile', name='user_profile'),
 )

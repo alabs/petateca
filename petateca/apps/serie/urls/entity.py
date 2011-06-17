@@ -52,6 +52,4 @@ urlpatterns += patterns('serie.ajax',
     # - editar episodio (descripcion e imagen)
     url(r'^lookup/serie/(?P<serie_id>\d+)/season/(?P<season>\d+)/edit/episode/(?P<episode>\d+)/$', 'ajax_edit_episode_description', name="ajax_edit_episode_description"),
 
-    # seguimiento de series
-    url(r'^tracking/$', 'tracking', name="tracking"),
 )

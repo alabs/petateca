@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'api_v2',
     'search',
     'core',
+    'tracking',
     # sentry logger
     'indexer',
     'paging',
