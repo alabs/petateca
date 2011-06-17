@@ -31,8 +31,11 @@
                 <label for="id_password2">Contraseña (de nuevo):</label>
                 {{ form.password2 }}
             </li>
-        </ul> 
             <input type='submit' id='send_registration' class="button" value='{% trans "Enviar correo de activación" %}' />
+            <li>
+                <p><a href="{% url auth_password_reset %}">¿Tienes una cuenta y has olvidado tu contraseña?</a></p>
+            </li>
+        </ul> 
     </form>  
 </div>
 {% endif %}

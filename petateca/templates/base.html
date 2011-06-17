@@ -94,6 +94,7 @@
                     <input type="hidden" name="next" value="{{ request.path }}" />
                     <input class="button" value="Acceder" tabindex="6" type="submit">
                     <p class="forgot"> <a href="{% url auth_password_reset %}" id="resend_password_link">¿Has olvidado tu contraseña?</a> </p>
+                    <p class="no-account"> <a href="/accounts/register/" id="no-account">¿No tienes una cuenta? Regístrate</a> </p>
                     </form>
                 </fieldset>
             {% endif %}
