@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.core.urlresolvers import reverse
 
 from core.decorators import render_to
@@ -47,8 +47,11 @@ def activate_by_code(request):
 
 @render_to('userdata/tracking.html')
 def show_tracking(request):
-    user = request.user
-    serie = request.GET.get('serie')
-    episode = user.profile.viewed_episodes.get(season__serie=serie)
-    episodes = episode.get_next_5_episodes()
-    return { 'episodes': episodes }
+    if request.method == 'POST' and request.is_ajax():
+        user = request.user
+        serie = request.POST.get('serie_id')
+        episode = user.profile.viewed_episodes.get(season__serie=serie)
+        episodes = episode.get_next_5_episodes()
+        return { 'episodes': episodes }
+    else:
+        return HttpResponseForbidden('Error en la peticion AJAX')

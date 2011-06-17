@@ -20,11 +20,12 @@
             <ul>
             {% for episode in user.profile.viewed_episodes.all %}
             <li>
-                <a class="serie_hidden" href="#">
+                <a class="serie_hidden" id="serie_{{ episode.season.serie.id }}" href="#">
                     {{ episode.season.serie }}
-                    <img alt="Ir a serie" title="Ir a la página de la serie" class="right nobottom" src="/static/images/go-jump.png">
-                    <img alt="Actualizar" title="Actualizar lista de enlaces" class="right nobottom hidden" src="/static/images/view-refresh.png">
+                    <img alt="Ir a serie" title="Ir a la página de la serie" class="right nobottom go-jump" src="/static/images/go-jump.png" rel="{{ episode.season.serie.get_absolute_url }}">
+                    <img alt="Actualizar" title="Actualizar lista de enlaces" class="right nobottom refresh" src="/static/images/view-refresh.png">
                 </a>
+                <div id="inside_{{ episode.season.serie.id }}"></div>
             {% endfor %}
             </ul>
         </div>
@@ -108,11 +109,77 @@
 {% endblock %}
 {% block extrascript %}
 <script type="text/javascript">
-    $('.episodes_hidden').hide();
-
     $('.serie_hidden').live('click', function(event){
         event.preventDefault();
-        $(this).next().slideToggle();
+
+        var $refresh = $(this).children('.refresh');
+
+        // poor mans toogle
+        // comprobamos si ya estaba seleccionada anteriormente
+        var check_selected = $(this).attr('class'); 
+        if (check_selected.indexOf('selected_list') != -1) {
+            // si ya existe lo cerramos
+            $(this).removeClass('selected_list');
+            $(this).siblings().html('');
+            $refresh.hide();
+            return false;
+        } else { 
+            $(this).addClass('selected_list');
+        }
+
+        // loading..
+        var $inside = $(this).next();
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+
+        // conseguimos serie_id
+        var serie_id_raw = $(this).attr('id'); 
+        var serie_id = serie_id_raw.split('_')[1] // poker fac ('_')
+
+        $.post('/accounts/tracking/', { 
+            'serie_id' : serie_id,
+            'csrfmiddlewaretoken': getCookie('csrftoken')
+            }, function(data){
+                $inside.html(data);
+            }
+        );
+
+        // mostramos el refresh
+        $refresh.show();
     }); 
+
+    $('.refresh').hide();
+
+    $('.refresh').live('click', function(event){
+        // recargar los episodios del tracking
+        event.preventDefault();
+
+        // loading..
+        var $inside = $(this).parent().next();
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+
+        // conseguimos serie_id
+        var serie_id_raw = $(this).parent().attr('id'); 
+        var serie_id = serie_id_raw.split('_')[1] // poker fac ('_')
+
+        $.post('/accounts/tracking/', { 
+            'serie_id' : serie_id,
+            'csrfmiddlewaretoken': getCookie('csrftoken')
+            }, function(data){
+                $inside.html(data);
+            }
+        );
+
+        event.stopPropagation();
+    }); 
+
+
+    $('.go-jump').live('click', function(event){
+        // ir a la pagina de la serie al ser click en la flechita verde
+        event.preventDefault();
+        var href = $(this).attr('rel');
+        window.location.href = href;
+        event.stopPropagation();
+    }); 
+    
 </script>
 {% endblock %}
