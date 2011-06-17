@@ -20,8 +20,8 @@ def view_profile(request):
     return { 'profile': user_profile, } 
 
 
-@render_to('userdata/user_public_profile.html')
-def get_user_public_profile(request, user_name):
+@render_to('userdata/public_profile.html')
+def public_profile(request, user_name):
     ''' Perfil publico del usuario ''' 
     user = get_object_or_404(User, username=user_name)
     if request.user == user:
