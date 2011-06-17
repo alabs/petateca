@@ -23,15 +23,8 @@
                 <a class="serie_hidden" href="#">
                     {{ episode.season.serie }}
                     <img alt="Ir a serie" title="Ir a la página de la serie" class="right nobottom" src="/static/images/go-jump.png">
-                    <img alt="Actualizar" title="Actualizar lista de enlaces" class="right nobottom" src="/static/images/view-refresh.png">
+                    <img alt="Actualizar" title="Actualizar lista de enlaces" class="right nobottom hidden" src="/static/images/view-refresh.png">
                 </a>
-                <div id="episode_list" class="episodes_hidden">
-                    <ul>
-                        {% for episode in episode.get_next_5_episodes  %}
-                            {% include "serie/ajax/episode.html" %}
-                        {% endfor %}
-                    </ul>
-                </div>
             {% endfor %}
             </ul>
         </div>
@@ -52,7 +45,6 @@
                                 </div>
                     <div class="comment_content">
                             <div class="clearfix">
-                                    <cite class="author_name">{{ comment.name }}</cite>
                                     <div class="comment-meta commentmetadata">{{ comment.submit_date }}</div>
                             </div>
                             <div class="comment_text">

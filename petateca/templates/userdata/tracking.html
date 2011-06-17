@@ -1,0 +1,7 @@
+<div id="episode_list" class="episodes_hidden">
+    <ul>
+        {% for episode in episodes  %}
+            {% include "serie/ajax/episode.html" %}
+        {% endfor %}
+    </ul>
+</div>
