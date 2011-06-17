@@ -212,8 +212,15 @@ class Episode(models.Model):
             return None
 
     def get_next_5_episodes(self):
+        ''' Muestra los proximos 5 episodios '''
         try:
-            return Episode.objects.filter(episode__gt=self.episode, season=self.season)[:5]
+            episodes = Episode.objects.filter(episode__gt=self.episode, season=self.season)
+            if episodes.count() < 5:
+                # Si no hay episodios suficientes los busca en la siguiente temporada
+                next_season = self.season.get_next_season()
+                next_episodes = Episode.objects.filter(episode__gte=1, season=next_season)
+                episodes = episodes | next_episodes
+            return episodes[:5]
         except:
             return None
 
