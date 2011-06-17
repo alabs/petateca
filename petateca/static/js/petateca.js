@@ -511,19 +511,31 @@ $(document).ready(function () {
     // agregar enlace
         e.preventDefault();
         $(this).parent().addClass('selected_list');
-        episodeid = $(this).attr('id');
+        var episoderaw = $(this).attr('id');
+        var type = episoderaw.split('_')[0];
+        var episodeid = episoderaw.split('_')[1];
         $inside = $('#inside' + episodeid);
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-        $inside.load('/series/links/add/episode/' + episodeid + '/');
+        if ( type === 'epi' ) {
+            $inside.load('/series/links/add/episode/' + episodeid + '/');
+        } else {
+            $inside.load('/series/links/add/season/' + episodeid + '/');
+        }
     });
 
     $('.no_link').live('click', function(e){
     // agregar enlace cuando no hay ninguno
         e.preventDefault();
-        episodeid = $(this).attr('id');
+        var episoderaw = $(this).attr('id');
+        var type = episoderaw.split('_')[0];
+        var episodeid = episoderaw.split('_')[1];
         $inside = $('#inside' + episodeid);
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-        $inside.load('/series/links/add/episode/' + episodeid + '/');
+        if ( type === 'epi' ) {
+            $inside.load('/series/links/add/episode/' + episodeid + '/');
+        } else {
+            $inside.load('/series/links/add/season/' + episodeid + '/');
+        }
     });
 
 

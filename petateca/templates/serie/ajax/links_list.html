@@ -27,5 +27,10 @@
         </div>
         {% endfor %}
 {% else %}
-    <li> <a class="no_link" id="{{ entity.id }}" href="#">{% trans "No hay enlaces disponibles - agregalo " %}<img alt="Añadir" title="Añadir un enlace" class="add_link nobottom" src="/static/images/list-add.png"></a>
+    <li> 
+        <a class="no_link" id="{% if is_season %}season{% else %}epi{% endif %}_{{ entity.id }}" href="#">
+            {% trans "No hay enlaces disponibles - agregalo " %}
+            <img alt="Añadir" title="Añadir un enlace" class="add_link nobottom" src="/static/images/list-add.png">
+        </a>
+    </li>
 {% endif %}
