@@ -1,7 +1,9 @@
 {% load i18n %}
+{% load endless %}
 {% load thumbnail %}
-{% if series_list %}
-  {% for serie in series_list %}
+{% if objects %}
+  {% paginate objects %}
+  {% for serie in objects %}
     <div class="grid_2" style="margin-bottom:2em; margin-right:1em;">
         <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
             <div class="preload" style="width:140px; height:200px">
@@ -19,6 +21,7 @@
             </a>
     </div>
   {% endfor %}
+{% show_more %}
 {% else %} 
 <h2 class="grid_12 caption clearfix">No hay series de este tipo todavia</h2>
 {% endif %}
