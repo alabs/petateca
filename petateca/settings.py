@@ -100,17 +100,18 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django.contrib.markup',
     # django-app
-    'registration', # users
+    'registration', # users - register and that stuff
 # DEPRECATED    'invitation', # users
-    'avatar', # users
-    'south', # migrations
+    'avatar', # users - images
+    'south', # migrations DDBB
     'modeltranslation', # translations
     'rosetta', # translations
     'sorl.thumbnail', # thumbnails
-    'haystack', # search
+    'haystack', # search 
     'djangoratings', # ratings
-    'voting', # ratings
+    'voting', # ratings / votaciones de enlaces
     'piston', # API
+    'endless_pagination', # pagination for /series/
     # customs
     'serie',
     'userdata',
@@ -197,10 +198,9 @@ ADMIN_MAIL = 'admin@liberateca.net'
 
 USE_ETAGS = True
 
-SECURE_REQUIRED_PATHS = (
-    '/admin/',
-    '/accounts/',
-)
+# PAGINATION 
+ENDLESS_PAGINATION_PER_PAGE = 15
+ENDLESS_PAGINATION_LOADING = ''' <img src="/static/images/ajax-loading-bar.gif" alt="loading" /> '''
 
 #Valid values are http, sql
 IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
@@ -218,4 +218,5 @@ if INVITE_MODE:
     MIDDLEWARE_CLASSES += (
         'userdata.middleware.LoginRequiredMiddleware',
     )
+
 

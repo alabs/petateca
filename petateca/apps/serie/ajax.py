@@ -1,15 +1,20 @@
 from datetime import datetime
-from core.decorators import render_to
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.utils import simplejson
 from djangoratings.views import AddRatingView
+
+from core.decorators import render_to
 from serie import models as m
 from serie.forms import LinkForm, LinkSeasonForm, EpisodeForm, EpisodeImageForm
+
 from voting.models import Vote
 
 @render_to('serie/ajax/popup.html')
@@ -37,39 +42,6 @@ def season_lookup(request, serie_id, season):
             if epi.season.serie == serie:
                 response['viewed_episode'] = epi
     return response
-
-
-# PARA TRACKING 
-#@render_to('serie/ajax/season.html')
-#def season_lookup(request, serie_id, season):
-#    ''' Listado de episodios para una temporada, ordenados por numero de episodio '''
-#    serie = get_object_or_404(m.Serie, id=serie_id)
-#    season = get_object_or_404(m.Season, serie=serie, season=season)
-#    episode_list = season.episodes.order_by('episode')
-#    # Comprobamos si el usuario tiene episodios vistos
-#    if request.user.is_authenticated():
-#        episode_list_cleaned = []
-#        profile = request.user.profile
-#        for epi in episode_list: 
-#            epi_cleaned = {
-#                'title' : epi.title,
-#                'title_en' : epi.title_en,
-#                'title_es' : epi.title_es,
-#                'air_date' : epi.air_date,
-#                'episode' : epi.episode,
-#                'season_episode': epi.season_episode(),
-#                'is_viewed' : epi.viewed_episodes.filter(user=profile).exists()
-#            }
-#            episode_list_cleaned.append(epi_cleaned)
-#        return { 
-#            'season': season,
-#            'episode_list' : episode_list_cleaned,
-#        }
-#    else:
-#        return {
-#            'season': season,
-#            'episode_list': episode_list,
-#        }
 
 
 @render_to('serie/ajax/links_list.html')
@@ -131,54 +103,6 @@ def actors_lookup(request, serie_slug):
     serie = m.Serie.objects.get(slug_name=serie_slug)
     roles = m.Role.objects.select_related('actor', 'serie', 'actor__poster').filter(serie = serie)
     return { 'roles': roles }
-
-def get_numbers():
-    series = m.Serie.objects.filter(name_es__startswith="0") | \
-    m.Serie.objects.filter(name_es__startswith="1") | \
-    m.Serie.objects.filter(name_es__startswith="2") | \
-    m.Serie.objects.filter(name_es__startswith="3") | \
-    m.Serie.objects.filter(name_es__startswith="4") | \
-    m.Serie.objects.filter(name_es__startswith="5") | \
-    m.Serie.objects.filter(name_es__startswith="6") | \
-    m.Serie.objects.filter(name_es__startswith="7") | \
-    m.Serie.objects.filter(name_es__startswith="8") | \
-    m.Serie.objects.filter(name_es__startswith="9") 
-    return series
-
-
-@render_to('serie/generic_list.html')
-def ajax_letter(request, letter):
-    ''' 
-    Buscador de letras para el listado de series 
-    TODO: generic_list / generic_object magik
-    '''
-    if letter == "0":
-        series = get_numbers()
-    else:
-        series = m.Serie.objects.filter(name_es__startswith=letter)
-    series = series.order_by('name_es')
-    return { 'series_list': series }
-
-
-
-@render_to('serie/generic_list.html')
-def ajax_genre(request, genre_slug):
-    ''' 
-    Buscador de generos para el listado de series 
-    TODO: generic_list / generic_object magik
-    '''
-    genre = get_object_or_404(m.Genre, slug_name = genre_slug)
-    return { 'series_list': genre.series.all() }
-
-
-@render_to('serie/generic_list.html')
-def ajax_network(request, network_slug):
-    ''' 
-    Buscador de cadenas para el listado de series 
-    TODO: generic_list / generic_object magik
-    '''
-    network = get_object_or_404(m.Network, slug_name = network_slug)
-    return { 'series_list': network.series.all() }
 
 
 
@@ -435,3 +359,55 @@ def favorite_serie(request, serie_slug):
             )
     else:
         return HttpResponseForbidden('Error en la peticion AJAX')
+
+# PAGINATION series_list
+
+def get_numbers():
+    series = m.Serie.objects.filter(name_es__startswith="0") | \
+    m.Serie.objects.filter(name_es__startswith="1") | \
+    m.Serie.objects.filter(name_es__startswith="2") | \
+    m.Serie.objects.filter(name_es__startswith="3") | \
+    m.Serie.objects.filter(name_es__startswith="4") | \
+    m.Serie.objects.filter(name_es__startswith="5") | \
+    m.Serie.objects.filter(name_es__startswith="6") | \
+    m.Serie.objects.filter(name_es__startswith="7") | \
+    m.Serie.objects.filter(name_es__startswith="8") | \
+    m.Serie.objects.filter(name_es__startswith="9") 
+    return series
+
+
+def serie_index(request,
+        template="serie/serie_list.html",
+        page_template="serie/generic_list.html",
+        letter=False,
+        genre_slug=False,
+        network_slug=False,
+    ):
+    ''' 
+    Paginacion para letras / generos / series favoritas hecho con endless pagination
+    '''
+    if letter: 
+        # Paginacion de letras 
+        if letter == "0":
+            series = get_numbers()
+        else:
+            series = m.Serie.objects.filter(name_es__startswith=letter)
+        query = series.order_by('name_es')
+    elif genre_slug:
+        # Paginacion de generos 
+        query = get_object_or_404(m.Genre, slug_name = genre_slug).series.all()
+    elif network_slug:
+        query = get_object_or_404(m.Network, slug_name = network_slug).series.all()
+    else:
+        query = m.Serie.objects.select_related('poster').order_by('-rating_score').all()
+
+    context = {
+        'objects': query, 
+        'page_template': page_template,
+    }
+    if request.is_ajax():
+        template = page_template
+    return render_to_response(template, context,
+        context_instance=RequestContext(request))
+
+
