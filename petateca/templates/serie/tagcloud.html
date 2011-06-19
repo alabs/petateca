@@ -1,5 +1,5 @@
 <div id="tagcloud">
     {% for t in tagcloud_list %}
-        <a class="{{ t.class }} {{ t.tag }}" href="#{{ t.slug_name }}">{{ t.name }}</a>
+        <a class="navigator {{ t.tag }}" href="#{{ t.class }}/{{ t.slug_name }}">{{ t.name }}</a>
     {% endfor %}
 </div>

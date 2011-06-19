@@ -690,9 +690,9 @@ $(document).ready(function () {
         return false;
     });
 
-    lookup('.abc', 'letter'); 
-    lookup('.genre', 'genre'); 
-    lookup('.network', 'network'); 
+    // lookup('.abc', 'letter'); 
+    // lookup('.genre', 'genre'); 
+    // lookup('.network', 'network'); 
 
 
     // Formulario de agregar temporada

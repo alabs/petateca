@@ -30,32 +30,32 @@
 			<p>
 				<div class="pagination">
                     <h2 class="center">
-                        <a class="abc" href="#0">0-9</a>
-                        <a class="abc" href="#A">A</a>
-                        <a class="abc" href="#B">B</a>
-                        <a class="abc" href="#C">C</a>
-                        <a class="abc" href="#D">D</a>
-                        <a class="abc" href="#E">E</a>
-                        <a class="abc" href="#F">F</a>
-                        <a class="abc" href="#G">G</a>
-                        <a class="abc" href="#H">H</a>
-                        <a class="abc" href="#I">I</a>
-                        <a class="abc" href="#J">J</a>
-                        <a class="abc" href="#K">K</a>
-                        <a class="abc" href="#L">L</a>
-                        <a class="abc" href="#M">M</a>
-                        <a class="abc" href="#N">N</a>
-                        <a class="abc" href="#O">O</a>
-                        <a class="abc" href="#P">P</a>
-                        <a class="abc" href="#Q">Q</a>
-                        <a class="abc" href="#R">R</a>
-                        <a class="abc" href="#S">S</a>
-                        <a class="abc" href="#T">T</a>
-                        <a class="abc" href="#U">U</a>
-                        <a class="abc" href="#V">V</a>
-                        <a class="abc" href="#W">W</a>
-                        <a class="abc" href="#Y">Y</a>
-                        <a class="abc" href="#Z">Z</a>
+                        <a class="navigator" href="#letter/0">0-9</a>
+                        <a class="navigator" href="#letter/A">A</a>
+                        <a class="navigator" href="#letter/B">B</a>
+                        <a class="navigator" href="#letter/C">C</a>
+                        <a class="navigator" href="#letter/D">D</a>
+                        <a class="navigator" href="#letter/E">E</a>
+                        <a class="navigator" href="#letter/F">F</a>
+                        <a class="navigator" href="#letter/G">G</a>
+                        <a class="navigator" href="#letter/H">H</a>
+                        <a class="navigator" href="#letter/I">I</a>
+                        <a class="navigator" href="#letter/J">J</a>
+                        <a class="navigator" href="#letter/K">K</a>
+                        <a class="navigator" href="#letter/L">L</a>
+                        <a class="navigator" href="#letter/M">M</a>
+                        <a class="navigator" href="#letter/N">N</a>
+                        <a class="navigator" href="#letter/O">O</a>
+                        <a class="navigator" href="#letter/P">P</a>
+                        <a class="navigator" href="#letter/Q">Q</a>
+                        <a class="navigator" href="#letter/R">R</a>
+                        <a class="navigator" href="#letter/S">S</a>
+                        <a class="navigator" href="#letter/T">T</a>
+                        <a class="navigator" href="#letter/U">U</a>
+                        <a class="navigator" href="#letter/V">V</a>
+                        <a class="navigator" href="#letter/W">W</a>
+                        <a class="navigator" href="#letter/Y">Y</a>
+                        <a class="navigator" href="#letter/Z">Z</a>
                     </h2>
 				</div>
 			</p>
@@ -68,5 +68,43 @@
 {% endblock %}
 {% block extrascript %}
 <script type="text/javascript" src="/static/js/endless.js"></script>
-<script src="/static/js/endless_on_scroll.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/js/endless_on_scroll.js" ></script>
+<script type="text/javascript" src="/static/js/jquery.ba-bbq.min.js" ></script>
+
+<script type="text/javascript">
+
+
+$(function(){
+
+  $(window).bind( "hashchange", function(e) {
+    $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+    var url = $.param.fragment();
+
+    $(".navigator").each(function(){
+      // iterando cada navigator y buscando los links ...
+      var href = $(this).attr( "href" );
+      var href_nohash = href.split('#')[1];
+
+      // ..a ver si el navigator que esta en la barra de direcciones
+      // es igual que el mio...
+      if ( href_nohash === url ) {
+        $(this).addClass( "nolink" );
+      } else {
+        $(this).removeClass( "nolink" );
+      }
+    });
+
+
+    if (url){
+      // console.log(url);
+      // url que esperamos es algo por el estilo: genre/science-fiction
+      $('#series_list').load('/series/lookup/' + url + '/');
+    }
+
+  });
+
+  $(window).trigger( "hashchange" );
+});
+
+</script>
 {% endblock %}

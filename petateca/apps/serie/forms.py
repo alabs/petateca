@@ -54,3 +54,7 @@ class EpisodeForm(ModelForm):
 class EpisodeImageForm(ModelForm):
     class Meta:
         model = m.ImageEpisode
+        exclude = ('creator','title', 'serie', 'is_poster',)
+        widgets = {
+            'src': FileInput(attrs={'size':'15'}),
+        }
