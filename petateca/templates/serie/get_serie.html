@@ -110,7 +110,7 @@
             <span class="meta_box">{% trans "Cadena" %}</span>
         </li>
         <li>
-            <a href="/series/#network/{{ serie.network.slug_name }}">{{ serie.network.name }}</a>
+            <a href="/series/#/network/{{ serie.network.slug_name }}/">{{ serie.network.name }}</a>
         </li>
 	{% endif %}
 	<!-- GENRE -->
@@ -118,7 +118,7 @@
             <span class="meta_box">{% trans "Género" %}</span>
             <ul>
                 {% for genre in serie.genres.all %}
-                <li><a href="/series/#genre/{{ genre.slug_name }}">{{ genre.name }}</a></li>
+                <li><a href="/series/#/genre/{{ genre.slug_name }}/">{{ genre.name }}</a></li>
                 {% endfor %}
             </ul>
         </li>
