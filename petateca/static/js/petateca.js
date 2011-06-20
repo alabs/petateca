@@ -901,3 +901,46 @@ $(document).ready(function () {
         .resize(positionFooter);
 
 });
+
+$(function(){
+/* 
+
+Navegacion en /series/ listado de AJAX con parametros del tipo: 
+
+* /series/#/genre/drama/
+* /series/#/network/abc/
+* /series/#/letter/A/
+
+Utiliza jquery-BBQ y soporta historial en el navegador y links directos
+
+*/
+
+  $(window).bind( "hashchange", function(e) {
+    var url = $.param.fragment();
+
+    $(".navigator").each(function(){
+      // iterando cada navigator y buscando los links ...
+      var href = $(this).attr( "href" );
+      var href_nohash = href.split('#')[1];
+
+      // ..a ver si el navigator que esta en la barra de direcciones
+      // es igual que el mio...
+      if ( href_nohash === url ) {
+        $(this).addClass( "nolink" );
+      } else {
+        $(this).removeClass( "nolink" );
+      }
+    });
+
+
+    if (url){
+      $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+      // console.log(url);
+      // url que esperamos es algo por el estilo: genre/science-fiction
+      $('#series_list').load('/series/lookup' + url);
+    }
+
+  });
+
+  $(window).trigger( "hashchange" );
+});

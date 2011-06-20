@@ -9,53 +9,51 @@
 			<!-- BROWSE -->
 			<div class="grid_3" style="margin-top:2em;" >
                 <a class="button" href="{% url add_serie %}" style="vertical-align:middle; margin-bottom:2em;">
-                    <img class="left nobottom" src="/static/images/list-add-big.png">
-                    <h4 class="right nobottom" style="margin-top:7px;">Agregar Serie</h4>
+                    <img class="left nobottom" src="/static/images/list-add.png">
+                    <p class="right nobottom">Agregar serie</p>
                 </a>
+
+                <div class="hr clearfix">&nbsp;</div>
 				<!-- BY GENRE -->
-                <h4 class="title ">Géneros</h4>
-                <div class="hr clearfix dotted">&nbsp;</div>
-                <p>
+                <h4 class="center nobottom">Géneros</h4>
                 {% tagcloud "Genre" "50" "5"%}
-                </p>
+
+                <div class="hr clearfix">&nbsp;</div>
 				<!-- BY NETWORK -->
-                <h4 class="title ">Cadenas</h4>
-                <div class="hr clearfix dotted">&nbsp;</div>
-                <p>
+                <h4 class="center nobottom">Cadenas</h4>
                 {% tagcloud "Network" "20" "5" %}
-                </p>
 			</div>
 			<div class="grid_9">
 			<!-- ALPHABETHICAL PAGINATION -->
 			<p>
 				<div class="pagination">
                     <h2 class="center">
-                        <a class="navigator" href="#letter/0">0-9</a>
-                        <a class="navigator" href="#letter/A">A</a>
-                        <a class="navigator" href="#letter/B">B</a>
-                        <a class="navigator" href="#letter/C">C</a>
-                        <a class="navigator" href="#letter/D">D</a>
-                        <a class="navigator" href="#letter/E">E</a>
-                        <a class="navigator" href="#letter/F">F</a>
-                        <a class="navigator" href="#letter/G">G</a>
-                        <a class="navigator" href="#letter/H">H</a>
-                        <a class="navigator" href="#letter/I">I</a>
-                        <a class="navigator" href="#letter/J">J</a>
-                        <a class="navigator" href="#letter/K">K</a>
-                        <a class="navigator" href="#letter/L">L</a>
-                        <a class="navigator" href="#letter/M">M</a>
-                        <a class="navigator" href="#letter/N">N</a>
-                        <a class="navigator" href="#letter/O">O</a>
-                        <a class="navigator" href="#letter/P">P</a>
-                        <a class="navigator" href="#letter/Q">Q</a>
-                        <a class="navigator" href="#letter/R">R</a>
-                        <a class="navigator" href="#letter/S">S</a>
-                        <a class="navigator" href="#letter/T">T</a>
-                        <a class="navigator" href="#letter/U">U</a>
-                        <a class="navigator" href="#letter/V">V</a>
-                        <a class="navigator" href="#letter/W">W</a>
-                        <a class="navigator" href="#letter/Y">Y</a>
-                        <a class="navigator" href="#letter/Z">Z</a>
+                        <a class="navigator" href="#/letter/0/">0-9</a>
+                        <a class="navigator" href="#/letter/A/">A</a>
+                        <a class="navigator" href="#/letter/B/">B</a>
+                        <a class="navigator" href="#/letter/C/">C</a>
+                        <a class="navigator" href="#/letter/D/">D</a>
+                        <a class="navigator" href="#/letter/E/">E</a>
+                        <a class="navigator" href="#/letter/F/">F</a>
+                        <a class="navigator" href="#/letter/G/">G</a>
+                        <a class="navigator" href="#/letter/H/">H</a>
+                        <a class="navigator" href="#/letter/I/">I</a>
+                        <a class="navigator" href="#/letter/J/">J</a>
+                        <a class="navigator" href="#/letter/K/">K</a>
+                        <a class="navigator" href="#/letter/L/">L</a>
+                        <a class="navigator" href="#/letter/M/">M</a>
+                        <a class="navigator" href="#/letter/N/">N</a>
+                        <a class="navigator" href="#/letter/O/">O</a>
+                        <a class="navigator" href="#/letter/P/">P</a>
+                        <a class="navigator" href="#/letter/Q/">Q</a>
+                        <a class="navigator" href="#/letter/R/">R</a>
+                        <a class="navigator" href="#/letter/S/">S</a>
+                        <a class="navigator" href="#/letter/T/">T</a>
+                        <a class="navigator" href="#/letter/U/">U</a>
+                        <a class="navigator" href="#/letter/V/">V</a>
+                        <a class="navigator" href="#/letter/W/">W</a>
+                        <a class="navigator" href="#/letter/Y/">Y</a>
+                        <a class="navigator" href="#/letter/Z/">Z</a>
                     </h2>
 				</div>
 			</p>
@@ -65,46 +63,4 @@
                 </div>
 			</div>
 		</div>
-{% endblock %}
-{% block extrascript %}
-<script type="text/javascript" src="/static/js/endless.js"></script>
-<script type="text/javascript" src="/static/js/endless_on_scroll.js" ></script>
-<script type="text/javascript" src="/static/js/jquery.ba-bbq.min.js" ></script>
-
-<script type="text/javascript">
-
-
-$(function(){
-
-  $(window).bind( "hashchange", function(e) {
-    $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-    var url = $.param.fragment();
-
-    $(".navigator").each(function(){
-      // iterando cada navigator y buscando los links ...
-      var href = $(this).attr( "href" );
-      var href_nohash = href.split('#')[1];
-
-      // ..a ver si el navigator que esta en la barra de direcciones
-      // es igual que el mio...
-      if ( href_nohash === url ) {
-        $(this).addClass( "nolink" );
-      } else {
-        $(this).removeClass( "nolink" );
-      }
-    });
-
-
-    if (url){
-      // console.log(url);
-      // url que esperamos es algo por el estilo: genre/science-fiction
-      $('#series_list').load('/series/lookup/' + url + '/');
-    }
-
-  });
-
-  $(window).trigger( "hashchange" );
-});
-
-</script>
 {% endblock %}
