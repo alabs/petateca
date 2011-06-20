@@ -1,4 +1,4 @@
-<div id="tagcloud">
+<div class="tagcloud">
     {% for t in tagcloud_list %}
     <a class="navigator {{ t.tag }}" href="#/{{ t.class }}/{{ t.slug_name }}/">{{ t.name }} ({{t.total}})</a> 
     {% endfor %}

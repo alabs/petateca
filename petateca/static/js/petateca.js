@@ -247,6 +247,26 @@ function check_viewed(serie_id, season_n, episode_n){
     }
 }
 
+function hide_tagcloud(selector) {
+    // muestra el siguiente div que encuentre
+       selector 
+            .parent()
+            .parent()
+            .children('div')
+            .hide(); 
+
+}
+
+function show_tagcloud(selector) {
+    // muestra el siguiente div que encuentre
+       selector 
+            .parent()
+            .parent()
+            .children('div')
+            .show(); 
+
+}
+
 
 $(document).ready(function () {
     // Rating de estrellas, se envia el rating por post a /serie/nombre
@@ -828,7 +848,7 @@ $(document).ready(function () {
     $('.refresh').hide();
 
     $('.refresh').live('click', function(event){
-        // recargar los episodios del tracking
+        // recargar los episodios del tracking/seguimiento
         event.preventDefault();
 
         // loading..
@@ -853,6 +873,7 @@ $(document).ready(function () {
 
     $('.go-jump').live('click', function(event){
         // ir a la pagina de la serie al ser click en la flechita verde
+        // especialmente util en seguimiento por ejemplo
         event.preventDefault();
         var href = $(this).attr('rel');
         window.location.href = href;
@@ -860,6 +881,24 @@ $(document).ready(function () {
     }); 
 
 
+
+    $('.tagcloud').hide();
+    $('.show_tagcloud').click( function() { 
+
+        var visibilidad = $(this).parent().parent().children('div').attr('style'); 
+
+        switch(visibilidad) {
+            case  "display: block;" : 
+                console.log('abierto');
+                hide_tagcloud($(this));
+                break;
+            case  "display: none;" : 
+                console.log('cerrado');
+                show_tagcloud($(this));
+                break;
+        }
+
+    });
 
     
 
@@ -926,6 +965,19 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
       // ..a ver si el navigator que esta en la barra de direcciones
       // es igual que el mio...
       if ( href_nohash === url ) {
+          // comprobamos el tipo de peticion y abrimos el tagcloud adecuado
+          var type = url.split('/')[1]; 
+
+          switch (type) {
+              case 'genre':
+                  show_tagcloud($('.show_tagcloud.genre'));
+                  break;
+              case 'network':
+                  show_tagcloud($('.show_tagcloud.network'));
+                  break;
+          }
+
+        // cambiamos el estilo del link clickeado
         $(this).addClass( "nolink" );
       } else {
         $(this).removeClass( "nolink" );

@@ -15,13 +15,17 @@
 
                 <div class="hr clearfix">&nbsp;</div>
 				<!-- BY GENRE -->
-                <h4 class="center nobottom">Géneros</h4>
-                {% tagcloud "Genre" "50" "5"%}
+                <div id="box">
+                    <h1 class="nobottom"><a href="#" class="show_tagcloud genre">Géneros</a></h1>
+                    {% tagcloud "Genre" "50" "5"%}
+                </div>
 
-                <div class="hr clearfix">&nbsp;</div>
 				<!-- BY NETWORK -->
-                <h4 class="center nobottom">Cadenas</h4>
-                {% tagcloud "Network" "20" "5" %}
+                <div id="box">
+                    <h1 class="nobottom"><a href="#" class="show_tagcloud network">Cadenas</a></h1>
+                    {% tagcloud "Network" "50" "5"%}
+                </div>
+
 			</div>
 			<div class="grid_9">
 			<!-- ALPHABETHICAL PAGINATION -->
