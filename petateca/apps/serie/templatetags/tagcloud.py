@@ -11,6 +11,7 @@ def tagcloud(tag_type, val_max, val_min):
     val_max, val_min = int(val_max), int(val_min)
     if tag_type == 'Genre': object_list = Genre.objects.annotate(total=Count('series'))
     elif tag_type == 'Network': object_list = Network.objects.annotate(total=Count('series'))
+    object_list = object_list.order_by('-total')
     for t in object_list:
         countdown = t.total
         if countdown > val_max: tag = "tag3"
