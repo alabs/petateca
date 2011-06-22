@@ -40,7 +40,7 @@ urlpatterns = patterns('',
     url(r'^politica-privacidad/$', direct_to_template, 
         {'template': 'core/politica-privacidad.html'}, name="politica-privacidad"),
 
-    (r'^comments/', include('django.contrib.comments.urls')),
+    (r'^comments/', include('threadedcomments.urls')),
 
     (r'^tracking/', include('tracking.urls')),
 
