@@ -1214,7 +1214,7 @@ left:-23em;top: -5.6em;
     padding: 10px 0 12px;
     text-align: center;
     width: 2em;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
 }
 .positive_bg {
     background-color: #4EB122;
@@ -1236,7 +1236,7 @@ left:-23em;top: -5.6em;
     font-size: 10px;
 }
 .mt_3 {
-    margin-top: 3px;
+    margin-top: 6px;
 }
 
 #episode_list { width:550px; }

@@ -384,47 +384,6 @@ $(document).ready(function () {
         return false;
     });
 
-    // Popup de añadir enlace
-//    $('.add_link').colorbox({width:'50%', height:'60%', iframe:true, 
-//         onClosed:function(){ location.reload(true); } 
-//    });
-//
-//    // Popup de cambiar avatar
-//	$(".avatar_change").colorbox({width:"600px", height:"500px", iframe:true,
-//     onClosed:function(){ location.reload(true); } });
-//
-
-//  $('.avatar_change').each(function(){
-//        $avatar = $(this);
-//        $avatar.click( function(){ return false; }); 
-//        $.get('/accounts/avatar/change/', function(data){
-//            $avatar.qtip(
-//            {
-//                id: 'modal', // Since we're only creating one modal, give it an ID so we can style it
-//                content: {
-//                    text: data,
-//                    title: {
-//                        text: 'Cambiar avatar',
-//                        button: true
-//                    }
-//                },
-//                position: {
-//                    my: 'center', // ...at the center of the viewport
-//                    at: 'center',
-//                    target: $(window)
-//                },
-//                show: {
-//                    event: 'click', // Show it on click...
-//                    solo: true, // ...and hide all other tooltips...
-//                    modal: true // ...and make it modal
-//                },
-//                style: 'ui-tooltip-light ui-tooltip-rounded'
-//            });
-//            return false;
-//        });
-//     });
-
-
     // Popup de las series, cuando se pone encima de la imagen
    $('.serie').live('mouseover', function() {
       var url = '/series/lookup/serie/';
@@ -450,17 +409,17 @@ $(document).ready(function () {
             ready: true // Needed to make it show on first mouseover event
          },
       position: {
-         at: $('#at').val(),
-         my: $('#my').val(),
+         at: 'right center',
+         my: 'left center',
          viewport: $(window),
          adjust: {
-            method: $('#adjust_method').val(),
-            x: parseInt($('#adjust_x').val(), 50) || 0,
-            y: parseInt($('#adjust_y').val(), 50) || 0
+            method: 'flip',
+            x: 0,
+            y: 0
          }
       },
          style: {
-            classes: 'ui-tooltip-shadow ui-tooltip-light'
+            classes: 'ui-tooltip-light'
          }
        });
     });
