@@ -849,7 +849,7 @@ p.error {
     -webkit-border-radius: 5px;
 }
 #comment_form textarea {
-    width: 500px;
+    width: 100%;
     height: 50px;
 }
 #send_message{

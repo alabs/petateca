@@ -8,6 +8,9 @@ admin.autodiscover()
 
 from django.views.generic.simple import direct_to_template
 
+from voting.views import xmlhttprequest_vote_on_object
+from threadedcomments.models import ThreadedComment
+
 
 urlpatterns = patterns('',
     (r'^$', 'core.views.index'),
@@ -41,6 +44,11 @@ urlpatterns = patterns('',
         {'template': 'core/politica-privacidad.html'}, name="politica-privacidad"),
 
     (r'^comments/', include('threadedcomments.urls')),
+    url(r'^comments/vote/(?P<object_id>\d+)/(?P<direction>up|down|clear)vote/$', 
+        xmlhttprequest_vote_on_object, 
+        { 'model' : ThreadedComment }, 
+        name="vote_comment"
+    ),
 
     (r'^tracking/', include('tracking.urls')),
 

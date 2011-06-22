@@ -1,21 +1,50 @@
 {% load avatar_tags %}
-{% url get_user_public_profile user_name=comment.user_name as user_profile %}
+{% load voting_tags %}
+
+{% votes_by_user user on comment_list as vote_dict %}
+{% scores_for_objects comment_list as score_dict %}
+{% url user_profile user_name=comment.user.username as user_profile %}
+
 <div class="hr dotted clearfix">&nbsp;</div>
 {% for comment in comment_list %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
     <ol class="comment_list">{% endif %}
+      {% dict_entry_for_item comment from score_dict as score %}
+      {% dict_entry_for_item comment from vote_dict as vote %}
+
         <li class="comment_li" id="comment_{{ comment.id }}" style="margin-left: {{ comment.depth }}0em">
+<div class="left"> 
+
+    <div class="vote" {% if user.is_authenticated %}{% else %}style="display: none;"{% endif %}>
+        {% if vote.is_upvote %}
+        <a href="javascript:vote_comment({{ comment.id }},'up')" class="up"><img  class="nobottom" src="/static/images/voting/aupmod.gif"></img></a>
+        {% else %}
+        <a href="javascript:vote_comment({{ comment.id }},'clear')" class="up"><img class="nobottom" src="/static/images/voting/aupgrey.gif"></img></a>
+        {% endif %}
+    </div>
+    <p class="score">{{ score.score }}</p>
+    <div class="vote" {% if user.is_authenticated %}{% else %}style="display: none;"{% endif %}>
+        {% if vote.is_downvote %}
+        <a href="javascript:vote_comment({{ comment.id }},'clear')" class="down"><img  class="nobottom" src="/static/images/voting/adownmod.gif"></img></a>
+        {% else %}
+        <a href="javascript:vote_comment({{ comment.id }},'down')" class="down"><img class="nobottom"  src="/static/images/voting/adowngrey.gif"></img></a>
+        {% endif %}
+    </div>
+</div>
             <div class="gravatar">
+
                 <a href="{{ user_profile }}">
-                {% avatar comment.user %}
+                {{ user_profile }}
+                {% avatar comment.user 50 %}
                 </a>
+
+
                 <a href="#comment_{{ comment.id }}" class="comment_reply_link">Contestar</a>
             </div>
             <div class="comment_content">
                 <div class="clearfix">
                     <cite class="author_name">
-                        <a href="{{ user_profile }}">{{ comment.name }}</a>
-                    </cite>
-                        <div class="comment-meta commentmetadata">{{ comment.date_submitted|date:"d/m/Y"  }} </div>
+                        <a href="{{ user_profile }}">{{ comment.user.username }}</a>
+                    </cite><br />{{ comment.date_submitted|date:"d/m/Y"  }}
                 </div>
                 <div class="comment_text">
                         <p>{{comment.comment}}</p>

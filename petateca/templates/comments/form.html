@@ -2,7 +2,7 @@
 <div class="wrap_write_comment">
     <div id="form-comment">
         {% get_threaded_comment_form as form %}
-        <form action="{% if object %}{% get_comment_url object %}{% else %}{{ url_parent }}{% endif %}" method="POST">{% csrf_token %}
+        <form action="{% get_comment_url object %}" method="POST" id="comment_form">{% csrf_token %}
         {# pasamos el formulario for y quitamos el markup para que solo quede el input del texto y los hidden que necesita #}
 
         {% for field in form %}
@@ -17,7 +17,7 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-            <li><input type="submit" class="button" value="Añadir"/></li>
+            <li><input type="submit" class="button right" value="Añadir"/></li>
         </form>
     </div>
 </div>

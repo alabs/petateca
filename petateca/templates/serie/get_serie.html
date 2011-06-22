@@ -195,5 +195,14 @@
        // y lo agregamos
        $(this).parent().parent().append(reply_form);
     })
+
+function vote_comment( object_id, direction ){
+    $.post('/comments/vote/' + object_id + '/' + direction + 'vote/', 
+        { 'csrfmiddlewaretoken': getCookie('csrftoken') }, 
+        function (data) {
+            alert(data);
+        }
+    );
+}
     </script>
 {% endblock %}
