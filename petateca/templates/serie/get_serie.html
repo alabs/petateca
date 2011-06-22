@@ -7,6 +7,8 @@
 {% block extrahead %}
     <meta property="og:title" content="{{serie.name}} | Liberateca" />
     <meta property="og:description" content="{{ serie.description }}" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:type" content="tv_show" />
     <meta property="og:image" content="http://liberateca.net{{ serie.poster.src.url }}" />
 {% endblock %}
 {% block title %}{{ serie.name.title }} | Liberateca{% endblock %}
