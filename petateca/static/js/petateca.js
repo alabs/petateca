@@ -355,37 +355,6 @@ $(document).ready(function () {
             // TODO: comprobamos que la duracion sea un numero
         });
 
-    // El popup cuando se hace click en login
-  $('.login').each(function(){
-        $login = $(this);
-        $login.click( function(){ return false; }); 
-        $.get('/accounts/login/', function(data){
-            $login.qtip(
-            {
-                id: 'modal', // Since we're only creating one modal, give it an ID so we can style it
-                content: {
-                    text: data,
-                    title: {
-                        text: 'Iniciar sesión',
-                        button: true
-                    }
-                },
-                position: {
-                    my: 'center', // ...at the center of the viewport
-                    at: 'center',
-                    target: $(window)
-                },
-                show: {
-                    event: 'click', // Show it on click...
-                    solo: true, // ...and hide all other tooltips...
-                    modal: true // ...and make it modal
-                },
-                style: 'ui-tooltip-light ui-tooltip-rounded'
-            });
-            return false;
-        });
-     });
-
     // Que cuando se haga click en el rating envia el valor por post
     $('.ratingstar').rating({ callback: function(value, link){
             $.post(url, { 'rating': value }, function(data){ disc_rat_data(data); } ); }
