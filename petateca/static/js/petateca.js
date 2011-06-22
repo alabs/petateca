@@ -469,11 +469,9 @@ $(document).ready(function () {
             ajax: {
                url: url + id + '/',
                dataType: 'html', // The script returns HTML
-               success: function(html) {
+               success: function(content) {
                   // Set the tooltip content
-                  var content = html;
                   this.set('content.text', content);
- 
                   return false; // Prevent default content update
                }
             }
@@ -482,12 +480,18 @@ $(document).ready(function () {
          show: {
             ready: true // Needed to make it show on first mouseover event
          },
-         position: {
-            my: 'left center',
-            at: 'right center'
-         },
+      position: {
+         at: $('#at').val(),
+         my: $('#my').val(),
+         viewport: $(window),
+         adjust: {
+            method: $('#adjust_method').val(),
+            x: parseInt($('#adjust_x').val(), 50) || 0,
+            y: parseInt($('#adjust_y').val(), 50) || 0
+         }
+      },
          style: {
-            classes: 'ui-tooltip-imdb ui-tooltip-tipsy ui-tooltip-shadow'
+            classes: 'ui-tooltip-shadow ui-tooltip-light'
          }
        });
     });

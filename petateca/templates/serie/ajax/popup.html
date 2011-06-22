@@ -1,7 +1,11 @@
-<div id="popup_serie">
-    <h3 style="font-size:160%;"> {{ serie.name }}{% if serie.name != serie.name_en %} <br/>{{ serie.name_en }}{% endif %}</h3>
-    <ul>
-        <li>Rating:{{ serie.rating.get_rating|floatformat }}
+{% load background_color %}
+<div class="ui-tooltip-titlebar">{{ serie.name }}{% if serie.name != serie.name_en %} <br/>{{ serie.name_en }}{% endif %}</div>
+<div id="ui-tooltip-3-content" class="ui-tooltip-content" aria-atomic="true">
+        <div class="right rating_num {{ rating|background_color }}"> {{ serie.rating.get_rating|floatformat }}
+        <div class="mt_3">de 5</div>
+        <div class="mt_3">({{ serie.rating.votes }} votos)</div>
+        </div>
+    <ul class="left">
         <li><b>Género</b>: {% for g in genres %} {{ g.name }} {% endfor %}
         <li><b>Cadena</b>: {{ serie.network.name }}
         <li><b>Duración</b>: {{ serie.runtime }} minutos
