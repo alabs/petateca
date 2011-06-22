@@ -50,3 +50,10 @@
 
 
 {% endblock %}
+{% block extrascript %}
+    {% if image_avatar %}
+        <script type="text/javascript">
+            $.jGrowl("¡Tienes el avatar por defecto! Puedes cambiarlo <a href='/accounts/avatar/change/' title='Cambiar avatar'>ya mismo</a>.");
+        </script>
+    {% endif %}
+{% endblock %}
