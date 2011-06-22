@@ -1,28 +1,26 @@
 {% load avatar_tags %}
-                        <div class="hr dotted clearfix">&nbsp;</div>
-
-  {% for comment in comment_list %}
-                        <ol class="commentlist" id="c{{ comment.id }}">
-                                <li class="comment">
-                                {% url get_user_public_profile user_name=comment.name as user_profile %}
-                                <div class="gravatar">
-                                    <a href="{% url user_profile user_name=comment.user_name %}">
-                                        {% avatar comment.name %}
-                                    </a>
-                                </div>
-                                <div class="comment_content">
-                                        <div class="clearfix">
-                                            <cite class="author_name">
-                                                <a href="{% url user_profile user_name=comment.user_name %}">{{ comment.name }}</a>
-                                            </cite>
-                                                <div class="comment-meta commentmetadata">{{ comment.submit_date }}</div>
-                                        </div>
-                                        <div class="comment_text">
-                                                <p>{{comment.comment}}</p>
-                                        </div>
-                                </div>
-                                </li>
-                        </ol>
-
+{% url get_user_public_profile user_name=comment.user_name as user_profile %}
+<div class="hr dotted clearfix">&nbsp;</div>
+{% for comment in comment_list %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
+    <ol class="comment_list">{% endif %}
+        <li class="comment_li" id="comment_{{ comment.id }}" style="margin-left: {{ comment.depth }}0em">
+            <div class="gravatar">
+                <a href="{{ user_profile }}">
+                {% avatar comment.user %}
+                </a>
+                <a href="#comment_{{ comment.id }}" class="comment_reply_link">Contestar</a>
+            </div>
+            <div class="comment_content">
+                <div class="clearfix">
+                    <cite class="author_name">
+                        <a href="{{ user_profile }}">{{ comment.name }}</a>
+                    </cite>
+                        <div class="comment-meta commentmetadata">{{ comment.date_submitted|date:"d/m/Y"  }} </div>
+                </div>
+                <div class="comment_text">
+                        <p>{{comment.comment}}</p>
+                </div>
+            </div>
+    {% for close in comment.close %}</li></ol>{% endfor %}
+<div class="hr dotted clearfix">&nbsp;</div>
 {% endfor %}
-

@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
-{% load comments %}
+{% load threadedcommentstags %}
 {% load background_color %}
 {% load avatar_tags %}
 {% block extrahead %}
-<meta property="og:title" content="{{serie.name}} | Liberateca" />
-<meta property="og:description" content="{{ serie.description }}" />
-<meta property="og:image" content="http://liberateca.net{{ serie.poster.src.url }}" />
+    <meta property="og:title" content="{{serie.name}} | Liberateca" />
+    <meta property="og:description" content="{{ serie.description }}" />
+    <meta property="og:image" content="http://liberateca.net{{ serie.poster.src.url }}" />
 {% endblock %}
 {% block title %}{{ serie.name.title }} | Liberateca{% endblock %}
 {% block contents %}
@@ -42,18 +42,21 @@
         <h2><a id="get_actors" href="#get_actors">{% trans "Actores" %}</a></h2>
         <div id="actors_list"></div>
 
-    {% get_comment_count for serie as comment_count %}
-	{% ifnotequal comment_count 0 %} <div class="hr clearfix">&nbsp;</div>
+	 <div class="hr clearfix">&nbsp;</div>
         <!-- RESEÑAS -->
-        <h2>{% trans "Reseñas" %}</h2>
-        {% render_comment_list for serie %}
-	{% endifnotequal %}
-	<!-- RESEÑA -->
-    <div class="hr clearfix">&nbsp;</div>
-    <h2>{% trans "Añade tu reseña" %}</h2>
-	{% with request.path as next %}
-        {% render_comment_form for serie %}
-	{% endwith %}
+        {% get_threaded_comment_tree  for serie as comment_list %}
+        <h2>{{ comment_list|length }} {% trans "Reseñas" %}</h2>
+        {% include "comments/list.html" %}
+
+        <!-- AGREGAR RESEÑA -->
+        <div class="hr clearfix">&nbsp;</div>
+        <h2>{% trans "Añade tu reseña" %}</h2>
+        {% with serie as object %}
+            {% include "comments/form.html" %}
+        {% endwith %}
+
+
+
 </div>
 
 
@@ -171,4 +174,26 @@
 	<div class="hr clearfix">&nbsp;</div>
 
 
+{% endblock %}
+{% block extrascript %}
+    <script type="text/javascript">
+
+    // respuesta de parents en threaded comments
+
+    // obtenemos el formulario original
+    var comment_form = $('.wrap_write_comment').html();
+
+    $('.comment_reply_link').click( function(){
+       // cuando se hace click en reply...
+       // obtenemos la url para responder el parent_id
+       var parent_id = $(this).attr('href').split('comment_')[1];
+       var url_post = '{% get_comment_url serie %}'; 
+       var parent_post = url_post + parent_id + '/'; 
+       console.log(parent_post);
+       // la cambiamos en el form
+       var reply_form = comment_form.replace(url_post, parent_post);
+       // y lo agregamos
+       $(this).parent().parent().append(reply_form);
+    })
+    </script>
 {% endblock %}

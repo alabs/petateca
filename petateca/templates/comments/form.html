@@ -1,13 +1,15 @@
-{% load comments i18n %}
-<div class="hr dotted clearfix">&nbsp;</div>
-{% if request.user.is_authenticated %}
-   <form id="comment_form" class="grid_6" action="{% comment_form_target %}" method="post">
-        {% if next %}<input name="next" type="hidden" value="{{ next }}" />{% endif %}
+{% load threadedcommentstags %}
+<div class="wrap_write_comment">
+    <div id="form-comment">
+        {% get_threaded_comment_form as form %}
+        <form action="{% if object %}{% get_comment_url object %}{% else %}{{ url_parent }}{% endif %}" method="POST">{% csrf_token %}
+        {# pasamos el formulario for y quitamos el markup para que solo quede el input del texto y los hidden que necesita #}
+
         {% for field in form %}
             {% if field.is_hidden %}
                 {{ field }}
             {% else %}
-                {% if field.name != "name" and field.name != "email" and field.name != "url" %}
+                {% if field.name != "markup" %}
                     {% if field.errors %}{{ field.errors }}{% endif %}
                     <p {% if field.errors %} class="error"{% endif %} {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
                     {{ field }}
@@ -15,8 +17,7 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-        <input type="submit" id="send_message" class="button center" name="post" value="{% trans "Añadir" %}" />
-   </form>
-{% else %}
-<p class="clearfix">{% trans "Lo siento, debes haber" %} <a href="/accounts/login/?next={{request.path}}">{% trans "iniciado sesion" %}</a> {% trans "para enviar comentarios. Otra razon más para crearse una cuenta" %}</p>
-{% endif %}
+            <li><input type="submit" class="button" value="Añadir"/></li>
+        </form>
+    </div>
+</div>

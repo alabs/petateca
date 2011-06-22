@@ -112,6 +112,8 @@ INSTALLED_APPS = (
     'voting', # ratings / votaciones de enlaces
     'piston', # API
     'endless_pagination', # pagination for /series/
+    'threadedcomments',
+
     # customs
     'serie',
     'userdata',
