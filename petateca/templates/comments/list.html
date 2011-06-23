@@ -7,19 +7,19 @@
 
 <ol class="commentlist">
 <div class="hr dotted clearfix">&nbsp;</div>
-    {% dict_entry_for_item comment from score_dict as score %}
-    {% dict_entry_for_item comment from vote_dict as vote %}
-    {{ comment_list }}
     {% for comment in comment_list %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
                     <ul>{% endif %}
+
+    {% dict_entry_for_item comment from score_dict as score %}
+    {% dict_entry_for_item comment from vote_dict as vote %}
 
     <li class="comment_li depth-{{ comment.depth }}" id="comment_{{ comment.id }}">
         <div class="left"> 
             <div class="vote" {% if user.is_authenticated %}{% else %}style="display: none;"{% endif %}>
                 {% if vote.is_upvote %}
-                <a href="javascript:vote_comment({{ comment.id }},'up')" class="up"><img  class="nobottom" src="/static/images/voting/aupmod.gif"></img></a>
+                <a href="javascript:vote_comment({{ comment.id }},'clear')" class="up"><img  class="nobottom" src="/static/images/voting/aupmod.gif"></img></a>
                 {% else %}
-                <a href="javascript:vote_comment({{ comment.id }},'clear')" class="up"><img class="nobottom" src="/static/images/voting/aupgrey.gif"></img></a>
+                <a href="javascript:vote_comment({{ comment.id }},'up')" class="up"><img class="nobottom" src="/static/images/voting/aupgrey.gif"></img></a>
                 {% endif %}
             </div>
             <p class="score">{{ score.score }}</p>
