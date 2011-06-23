@@ -51,7 +51,7 @@ def ajax_links_list(request, serie_id, season, episode=None):
     season = get_object_or_404(m.Season, serie=serie, season=season)
     if episode:
         epi = get_object_or_404(m.Episode, episode=episode, season=season)
-        link_list = epi.links.all()
+        link_list = epi.links.sorted_by_votes().all()
         is_season = False
         entity = epi
     else:
@@ -386,24 +386,26 @@ def serie_index(request,
     ''' 
     Paginacion para letras / generos / series favoritas hecho con endless pagination
     '''
+    # TODO: select_related en letra, genero y cadena
     if letter: 
         # Paginacion de letras 
         if letter == "0":
-            series = get_numbers()
+            query = get_numbers()
         else:
-            series = m.Serie.objects.filter(name_es__startswith=letter)
-        query = series.order_by('name_es')
+            query = m.Serie.objects.filter(name_es__startswith=letter)
     elif genre_slug:
         # Paginacion de generos 
         query = get_object_or_404(m.Genre, slug_name = genre_slug).series.all()
     elif network_slug:
+        # Paginacion de cadenas
         query = get_object_or_404(m.Network, slug_name = network_slug).series.all()
     else:
+        # Paginacion de series ordenadas por favoritas
         query = m.Serie.objects.select_related('poster').order_by('-rating_score').all()
-
     context = {
-        'objects': query, 
+        'objects': query.order_by('name_es'), 
         'page_template': page_template,
+        'pagination_per_page': 15,
     }
     if request.is_ajax():
         template = page_template

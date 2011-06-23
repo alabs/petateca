@@ -2,7 +2,7 @@
 {% load endless %}
 {% load thumbnail %}
 {% if objects %}
-    {% paginate objects %}
+  {% paginate pagination_per_page objects %}
   {% for serie in objects %}
     <div class="grid_2" style="margin-bottom:2em; margin-right:1em;">
         <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
@@ -22,7 +22,7 @@
     </div>
   {% endfor %}
     <div class="hr"></div>
-    <div class="center">{% show_more "Ver más" %}</div>
+    <div class="center">{% show_more "<div class="button">Ver más</div>" %}</div>
 {% else %} 
 <h2 class="grid_12 caption clearfix">No hay series de este tipo todavia</h2>
 {% endif %}
