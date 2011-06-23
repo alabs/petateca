@@ -18,6 +18,8 @@ from sorl.thumbnail import get_thumbnail
 from api_v2.utils import get_urlprefix
 from django.core.urlresolvers import reverse
 
+from django.db.models import Sum
+from generic_aggregation import generic_annotate
 
 class Serie(models.Model):
     name = models.CharField(max_length=255)
@@ -260,6 +262,11 @@ class Episode(models.Model):
         return self.title
 
 
+class SorterManager(models.Manager):
+    def sorted_by_votes(self):
+        return generic_annotate(self, Vote.object, Sum('vote')) 
+
+
 class Link(models.Model):
     episode = models.ForeignKey(
         "Episode",
@@ -295,6 +302,7 @@ class Link(models.Model):
         help_text=_('cuando se ha subido el link? por defecto cuando se guarda'),
         editable=False
     )
+    objects = SorterManager()
 
     def __unicode__(self):
         return self.url
