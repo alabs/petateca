@@ -5,23 +5,23 @@ from voting.models import Vote
 from django.contrib.auth.models import User
 from djangoratings.models import Vote as Rating
 
+from avatar.models import Avatar
 
 @render_to('core/index.html')
 def index(request):
     ''' Para la home '''
     serie_list = Serie.objects.order_by('rating_score').reverse().select_related('poster')[:7] 
-    return { 'series': serie_list, }
+    index_response = { 'series': serie_list, }
     # Le damos una cookie que queramos, luego comprobamos que este
     # para enviar los mensajes con jgrowl
-   # if request.session.get('logo_voting', False):
-   #     return index_response
-   # else:
-   #     request.session['logo_voting'] = True
-   #     logo_message = 1
-   #     index_response.update({
-   #             'logo_message': logo_message,
-   #      })
-   #     return index_response
+    if request.user.is_authenticated():
+        try: 
+            Avatar.objects.get(user__username=request.user.username)
+        except Avatar.DoesNotExist:
+            index_response.update({
+                    'image_avatar': 'OK',
+            })
+    return index_response
 
 @render_to('core/statistics.html')
 def statistics(request):
