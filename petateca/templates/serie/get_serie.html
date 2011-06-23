@@ -151,7 +151,7 @@
         <h2>Compártela</h2>
             <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
             <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-            <div>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
                 <a href="http://twitter.com/share" class="twitter-share-button"
                     data-url="{{ request.build_absolute_uri }}"
                     data-via="Liberateca"
@@ -159,7 +159,7 @@
                     data-count="vertical">Tweet
                 </a>
                 <fb:like href="{{ request.build_absolute_uri }}" send="true" layout="box_count" width="450" show_faces="true" font=""></fb:like>
-            </div>
+                <g:plusone size="tall"></g:plusone>
     </div>
     <div class="grid_6 right">
         <h2>Seguidores ({{ serie.favorite_of.count }})</h2>
