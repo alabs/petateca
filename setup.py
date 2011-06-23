@@ -29,6 +29,7 @@ setup(
         'django-sentry',
         'django-compress',
         'django-endless-pagination',
+        'django-generic-aggregation',
         'unittest2',
         'python-twitter',
         #'django-piston', lo instalamos a traves de src/ por ser este fork
