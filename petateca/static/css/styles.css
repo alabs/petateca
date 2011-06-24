@@ -703,6 +703,7 @@ padding: 10px;
     float: left;
     width: 100%;
 }
+/*
 .commentlist li {
     width: 100%;
     clear: both;
@@ -712,6 +713,8 @@ padding: 10px;
     margin: 0;
     position: relative;
 }
+*/
+
 .gravatar {
     float: left;
     width: 60px;
@@ -728,7 +731,7 @@ padding: 10px;
     width: 85%;
 }
 .commentmetadata { float: right }
-.comment-reply-link {
+.comment_reply_link {
     text-decoration: none;
     font-size: 10px;
 }
@@ -747,6 +750,13 @@ padding: 10px;
     text-align: center;
     display: block;
 }
+
+li.depth-1 { border-left:5px solid #000; margin:0 0 .25em .25em; }
+li.depth-2 { border-left:5px solid #555; margin:0 0 .25em .25em; }
+li.depth-3 { border-left:5px solid #999; margin:0 0 .25em .25em; }
+li.depth-4 { border-left:5px solid #bbb; margin:0 0 .25em .25em; }
+li.depth-5 {}
+
 /* Contact Form */
 p.error {
     margin-left: 140px;
@@ -825,21 +835,7 @@ p.error {
 }
 #login_form input.button { float: right }
 /* Comment form */
-#comment_form ul { float: left }
-#comment_form ul li {
-    margin: 10px 0;
-    list-style: none;
-    position: relative;
-    clear: both;
-}
-#comment_form label {
-    line-height: 35px;
-    width: 100px;
-    text-align: right;
-    float: left;
-    margin-right: 10px;
-}
-#comment_form textarea {
+.comment_form textarea {
     float: left;
     padding: 8px;
     border: 1px solid #CCCCCC;
@@ -848,12 +844,9 @@ p.error {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 }
-#comment_form textarea {
-    width: 100%;
+.comment_form textarea {
+    width: 90%;
     height: 50px;
-}
-#send_message{
-    margin-top: 7em;
 }
 /* Invitation form */
 #invitation_form ul { float: left }

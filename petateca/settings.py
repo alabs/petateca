@@ -202,6 +202,8 @@ USE_ETAGS = True
 ENDLESS_PAGINATION_PER_PAGE = 15
 ENDLESS_PAGINATION_LOADING = ''' <img src="/static/images/ajax-loading-bar.gif" alt="loading" /> '''
 
+COMMENTS_APP = 'threadedcomments'
+
 #Valid values are http, sql
 IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
 

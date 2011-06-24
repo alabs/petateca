@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
-{% load threadedcommentstags %}
+{% load threadedcomments_tags %}
 {% load background_color %}
 {% load avatar_tags %}
 {% block extrahead %}
@@ -44,7 +44,7 @@
 
 	 <div class="hr clearfix">&nbsp;</div>
         <!-- RESEÑAS -->
-        {% get_threaded_comment_tree  for serie as comment_list %}
+        {% get_comment_list for serie as comment_list %}
         <h2>{{ comment_list|length }} {% trans "Reseñas" %}</h2>
         {% include "comments/list.html" %}
 
@@ -179,30 +179,28 @@
     <script type="text/javascript">
 
     // respuesta de parents en threaded comments
-
-    // obtenemos el formulario original
-    var comment_form = $('.wrap_write_comment').html();
-
     $('.comment_reply_link').click( function(){
        // cuando se hace click en reply...
-       // obtenemos la url para responder el parent_id
+
+       // copiamos el form de comentarios 
+       var comment_form = $('.wrap_write_comment').html();
+
+       // obtenemos el id del parent
        var parent_id = $(this).attr('href').split('comment_')[1];
-       var url_post = '{% get_comment_url serie %}'; 
-       var parent_post = url_post + parent_id + '/'; 
-       console.log(parent_post);
-       // la cambiamos en el form
-       var reply_form = comment_form.replace(url_post, parent_post);
-       // y lo agregamos
-       $(this).parent().parent().append(reply_form);
+
+        console.log(parent_id);
+        // para el threadedcomments, hace falta pasarle el parametro del parent, ej:
+        // <input type="hidden" id="id_parent" value="10" name="parent">
+        // sin parent se ve asi
+        // <input name="parent" id="id_parent" type="hidden">
+
+        var reply_form = comment_form.replace('name="parent"', 'name="parent" value="' + parent_id + '"')
+
+        console.log(reply_form);
+       // y lo mostramos
+       $(this).parent().parent().parent().append(reply_form);
     })
 
-function vote_comment( object_id, direction ){
-    $.post('/comments/vote/' + object_id + '/' + direction + 'vote/', 
-        { 'csrfmiddlewaretoken': getCookie('csrftoken') }, 
-        function (data) {
-            alert(data);
-        }
-    );
-}
+
     </script>
 {% endblock %}
