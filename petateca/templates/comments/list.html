@@ -1,15 +1,14 @@
 {% load avatar_tags %}
 {% load threadedcomments_tags %}
-{% url user_profile user_name=comment.user as user_profile %}
 <ol class="commentlist">
 <div class="hr dotted clearfix">&nbsp;</div>
     {% for comment in comment_list|fill_tree|annotate_tree %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
         <ul>{% endif %}
     <li class="comment_li depth-{{ comment.depth }}" id="comment_{{ comment.id }}">
+        {% url user_profile user_name=comment.user as user_profile %}
         <div class="gravatar">
             <a href="{{ user_profile }}">
-            {{ user_profile }}
-            {% avatar comment.user 50 %}
+            {% avatar comment.user %}
             </a>
         </div>
         <div class="comment_content">
@@ -18,7 +17,7 @@
                     <a href="{{ user_profile }}">{{ comment.user.username }}</a>
                 </cite>
                 <div class="commentmetadata"> 
-                    {{ comment.submit_date|date:"SHORT_DATETIME_FORMAT"  }} - 
+                    <a href="#comment_{{ comment.id }}">{{ comment.submit_date|date:"SHORT_DATETIME_FORMAT"  }}</a> - 
                     <a href="#comment_{{ comment.id }}" class="comment_reply_link">Contestar</a>
                 </div>
             </div>
