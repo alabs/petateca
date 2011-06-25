@@ -54,9 +54,6 @@
         {% with serie as object %}
             {% include "comments/form.html" %}
         {% endwith %}
-
-
-
 </div>
 
 
@@ -192,7 +189,11 @@
         // <input type="hidden" id="id_parent" value="10" name="parent">
         // sin parent se ve asi
         // <input name="parent" id="id_parent" type="hidden">
-        var reply_form = comment_form.replace('name="parent"', 'name="parent" value="' + parent_id + '"')
+       // tambien quitamos el posible hightlight de cuando el form esta vacio
+       var reply_form = comment_form
+            .replace('name="parent"', 'name="parent" value="' + parent_id + '"')
+            .replace('class="hightlight"', '');
+        console.log(reply_form);
 
        // y lo mostramos
        $(this).parent().parent().parent().append(reply_form);
