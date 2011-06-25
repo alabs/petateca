@@ -756,9 +756,9 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    $('#comment_form').submit(function(){
+    $('.comment_form').submit(function(){
         // Form de comentarios, que no salga sin nada
-        $comment = $('#id_comment');
+        $comment = $(this).children('p').children('#id_comment');
         if ($comment.val()==='') {
             $comment.addClass('hightlight');
             return false;
