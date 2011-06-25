@@ -756,7 +756,7 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    $('.comment_form').submit(function(){
+    $('#comment_form').submit(function(){
         // Form de comentarios, que no salga sin nada
         $comment = $('#id_comment');
         if ($comment.val()==='') {
@@ -769,8 +769,8 @@ $(document).ready(function () {
     // Muestra el nombre del usuario al hacer overr
     $('.followers[title]').qtip({
         position: {
-            my: 'top center', // Use the corner...
-            at: 'top center' // ...and opposite corner
+            my: 'center', // Use the corner...
+            at: 'center' // ...and opposite corner
         },
         style: {
             classes: 'ui-tooltip-shadow ui-tooltip-dark'
