@@ -52,9 +52,8 @@
                 </li>
         <li id="search_form">
               <form action="/search/" id="searchform">
-                <div>
-                  <input id="search" name="q" onkeyup="search_lookup(this.value);" type="text" autocomplete="off" required />
-                </div>
+                <input id="search" name="q" onkeyup="search_lookup(this.value);" type="search" placeholder="Prueba con 'Futurama'" autocomplete="off" required />
+                <input class="button" type="submit" value="Ir" />
               </form>           
             <div id="suggestions"></div>
         </li>
