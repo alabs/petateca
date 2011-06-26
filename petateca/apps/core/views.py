@@ -15,9 +15,8 @@ def index(request):
     # Le damos una cookie que queramos, luego comprobamos que este
     # para enviar los mensajes con jgrowl
     if request.user.is_authenticated():
-        try: 
-            Avatar.objects.get(user__username=request.user.username)
-        except Avatar.DoesNotExist:
+        avatars = Avatar.objects.filter(user__username=request.user.username)
+        if not avatars:
             index_response.update({
                     'image_avatar': 'OK',
             })

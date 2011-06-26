@@ -99,22 +99,25 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.comments',
     'django.contrib.markup',
-    # django-app
-    'registration', # users - register and that stuff
-# DEPRECATED    'invitation', # users
-    'avatar', # users - images
-    'south', # migrations DDBB
-    'modeltranslation', # translations
-    'rosetta', # translations
-    'sorl.thumbnail', # thumbnails
-    'haystack', # search 
-    'djangoratings', # ratings
-    'voting', # ratings / votaciones de enlaces
-    'piston', # API
-    'endless_pagination', # pagination for /series/
-    'threadedcomments',
-
-    # customs
+    ### django-app ###
+    'registration',         # users - register and that stuff
+    'avatar',               # users - images
+    'south',                # migrations DDBB
+    'modeltranslation',     # translations
+    'rosetta',              # translations
+    'sorl.thumbnail',       # thumbnails
+    'haystack',             # search 
+    'djangoratings',        # ratings
+    'voting',               # ratings / votaciones de enlaces
+    'piston',               # API
+    'endless_pagination',   # pagination for /series/
+    'threadedcomments',     # comentarios anidados
+    ### sentry logger ###
+    'indexer',
+    'paging',
+    'sentry',
+    'sentry.client',
+    ### customs ###
     'serie',
     'userdata',
     'api_v1',
@@ -122,11 +125,6 @@ INSTALLED_APPS = (
     'search',
     'core',
     'tracking',
-    # sentry logger
-    'indexer',
-    'paging',
-    'sentry',
-    'sentry.client',
 )
 
 
@@ -203,6 +201,8 @@ USE_ETAGS = True
 # PAGINATION 
 ENDLESS_PAGINATION_PER_PAGE = 15
 ENDLESS_PAGINATION_LOADING = ''' <img src="/static/images/ajax-loading-bar.gif" alt="loading" /> '''
+
+COMMENTS_APP = 'threadedcomments'
 
 #Valid values are http, sql
 IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse

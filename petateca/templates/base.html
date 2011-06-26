@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% spaceless %} {% load i18n %} {% load avatar_tags %}
+<!DOCTYPE html>{% spaceless %} {% load i18n %} {% load avatar_tags %} {% load random_selection %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}{% endspaceless %}
 <html lang="{{LANGUAGE_CODE}}" xml:lang="{{LANGUAGE_CODE}}">
@@ -52,9 +52,8 @@
                 </li>
         <li id="search_form">
               <form action="/search/" id="searchform">
-                <div>
-                  <input id="search" name="q" onkeyup="search_lookup(this.value);" type="text" autocomplete="off" required />
-                </div>
+                  <input id="search" name="q" onkeyup="search_lookup(this.value);" type="search" placeholder="Prueba con '{% any %}Futurama|Fringe|Dexter|House|Misfits|Breaking Bad{% endany %}'" autocomplete="off" required />
+                <input class="button" type="submit" value="Ir" />
               </form>           
             <div id="suggestions"></div>
         </li>

@@ -688,9 +688,9 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    $('#comment_form').submit(function(){
+    $('.comment_form').submit(function(){
         // Form de comentarios, que no salga sin nada
-        $comment = $('#id_comment');
+        $comment = $(this).children('p').children('#id_comment');
         if ($comment.val()==='') {
             $comment.addClass('hightlight');
             return false;
@@ -850,6 +850,31 @@ $(document).ready(function () {
             $("fieldset#signin_menu").hide();
         }
     });         
+
+    // respuesta de parents en threaded comments
+    $('.comment_reply_link').click( function(){
+       // cuando se hace click en reply...
+
+       $(this).hide();
+
+       // copiamos el form de comentarios 
+       var comment_form = $('.wrap_write_comment').html();
+
+       // obtenemos el id del parent
+       var parent_id = $(this).attr('href').split('comment_')[1];
+
+        // para el threadedcomments, hace falta pasarle el parametro del parent, ej:
+        // <input type="hidden" id="id_parent" value="10" name="parent">
+        // sin parent se ve asi
+        // <input name="parent" id="id_parent" type="hidden">
+       // tambien quitamos el posible hightlight de cuando el form esta vacio
+       var reply_form = comment_form
+            .replace('name="parent"', 'name="parent" value="' + parent_id + '"')
+            .replace('class="hightlight"', '');
+
+       // y lo mostramos
+       $(this).parent().parent().append(reply_form);
+    });
 
 
     // jquery sticky footer
