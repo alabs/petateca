@@ -43,7 +43,7 @@ def search_lookup(request):
     '''
     if request.GET.has_key(u'query'):
         value = request.GET[u'query']
-        model_results = Serie.objects.filter( Q(name_es__icontains=value) | Q(name__icontains=value))[:4]
+        model_results = Serie.objects.filter( Q(name_es__icontains=value) | Q(name_en__icontains=value))[:4]
         return  { 'results': model_results }
 
 
@@ -56,7 +56,7 @@ def opensearch_lookup(request):
     if value:
         model_results = Serie.objects.filter(
                 Q(name_es__icontains=value)
-                | Q(name__icontains=value)
+                | Q(name_en__icontains=value)
             ).values('name')
         list_model = [result['name'] for result in model_results]
         # El formato de respuesta debe ser asi: 
