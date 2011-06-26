@@ -36,29 +36,33 @@
 	<div class="hr dotted clearfix">&nbsp;</div>
 
 	<h2> Últimas reseñas </h2>
-	{% if comments_serie %}
-	<ul>
-		{% for comment in comments_serie %}
-            <ol class="commentlist" id="c{{ comment.id }}">
-                    <li class="comment">
-                                <div class="gravatar">
-                            {% process_serie_id comment.object_pk %}
-                                </div>
-                    <div class="comment_content">
-                            <div class="clearfix">
-                                    <div class="comment-meta commentmetadata">{{ comment.submit_date }}</div>
-                            </div>
-                            <div class="comment_text">
-                                    <p>{{comment.comment}}</p>
-                            </div>
+    {% if comments_serie %}
+        {% for comment in comments_serie %}
+            <ol class="commentlist">
+                <li class="comment {% cycle "even" "odd" %} depth-{{ comment.depth }}" id="comment_{{ comment.id }}">
+                    {% url user_profile user_name=comment.user as user_profile %}
+                    <div class="avatar">
+                        {% process_serie_id comment.object_pk %}
                     </div>
-                    </li>
+                    <div class="comment_content">
+                        <div>
+                            <cite class="author name">
+                                <a href="{{ user_profile }}">{{ comment.user.username }}</a>
+                            </cite> dice:
+                            <div class="commentmetadata"> 
+                                <a href="#comment_{{ comment.id }}">{{ comment.submit_date|date:"SHORT_DATETIME_FORMAT"  }}</a> 
+                            </div>
+                        </div>
+                        <div class="comment_text">
+                                <p>{{comment.comment}}</p>
+                        </div>
+                    </div>
+                <div class="hr dotted clearfix">&nbsp;</div>
             </ol>
-		{% endfor %}
-	</ul>
-	{% else %}
-	No has reseñado ninguna serie.
-	{% endif %}
+        {% endfor %}
+    {% else %}
+        No ha reseñado ninguna serie.
+    {% endif %}
 </div>
 
 
