@@ -4,23 +4,23 @@
 <div class="hr dotted clearfix">&nbsp;</div>
     {% for comment in comment_list|fill_tree|annotate_tree %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
         <ul>{% endif %}
-    <li class="comment_li depth-{{ comment.depth }}" id="comment_{{ comment.id }}">
+    <li class="comment {% cycle "even" "odd" %} depth-{{ comment.depth }}" id="comment_{{ comment.id }}">
         {% url user_profile user_name=comment.user as user_profile %}
-        <div class="gravatar">
+        <div class="avatar">
             <a href="{{ user_profile }}">
             {% avatar comment.user %}
             </a>
+            {% if request.user.is_authenticated %}
+                <a href="#comment_{{ comment.id }}" class="comment_reply_link center">Contestar</a>
+            {% endif %}
         </div>
         <div class="comment_content">
-            <div class="clearfix">
-                <cite class="author_name">
+            <div>
+                <cite class="author name">
                     <a href="{{ user_profile }}">{{ comment.user.username }}</a>
-                </cite>
+                </cite> dice:
                 <div class="commentmetadata"> 
                     <a href="#comment_{{ comment.id }}">{{ comment.submit_date|date:"SHORT_DATETIME_FORMAT"  }}</a> 
-                    {% if request.user.is_authenticated %}
-                        - <a href="#comment_{{ comment.id }}" class="comment_reply_link">Contestar</a>
-                    {% endif %}
                 </div>
             </div>
             <div class="comment_text">

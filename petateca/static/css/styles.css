@@ -695,7 +695,7 @@ padding: 10px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 }
-/* Comment's List */
+/* Comment's List 
 .commentlist {
     margin: 0;
     padding: 0;
@@ -734,10 +734,6 @@ li.depth-5 {}
     width: 85%;
 }
 .commentmetadata { float: right }
-.comment-reply-link {
-    text-decoration: none;
-    font-size: 10px;
-}
 .author_name {
     font-weight: bold;
     font-style: normal;
@@ -752,7 +748,67 @@ li.depth-5 {}
 .comment-reply-link {
     text-align: center;
     display: block;
+}*/
+
+.commentlist {
+    margin: 0;
+    padding: 0;
 }
+.commentlist ol {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.commentlist li {
+    clear: both;
+    float: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 95%;
+}
+.commentlist li.odd, .commentlist li.even {
+    list-style: none outside none;
+    margin: 0 0 10px;
+    padding: 15px;
+}
+.commentlist li.odd {
+    background-color: #F7F7F7;
+    color: #666666;
+}
+.commentlist li.even {
+    background-color: #E8E8E8;
+    color: #666666;
+}
+.commentlist li cite.author {
+    font-weight: bold;
+}
+.commentlist .submitdate {
+    font-size: smaller;
+}
+.commentlist p {
+    font-weight: normal;
+    margin: 10px 5px 10px 0;
+    padding: 0;
+    text-transform: none;
+}
+.commentlist li .avatar {
+    border: 1px solid #EEEEEE;
+    float: right;
+    margin-bottom: 2em;
+}
+
+.commentlist li .avatar img {
+    display: block;
+    padding: 5px;
+    margin-bottom: 0px;
+}
+.commentlist li a.comment_reply_link {
+    font-size: 0.9em;
+}
+                    
+
 /* Contact Form */
 p.error {
     margin-left: 140px;
