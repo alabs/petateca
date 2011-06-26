@@ -28,6 +28,10 @@ pip install src/django-piston-0.2.3rc1.tar.gz &&
 # Arregla este bug https://github.com/dcramer/django-ratings/issues/12
 pip install src/django-ratings-0.3.6.tar.gz &&
 
+# Utilizamos el fork de HonzaKral que esta mantenido, la version del pip es muy vieja
+# https://github.com/HonzaKral/django-threadedcomments
+pip install src/django-threadedcomments-0.9.tar.gz 
+
 # Herramientas de debugging
 pip install ipdb django-debug-toolbar &&
 
