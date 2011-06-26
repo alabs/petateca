@@ -31,17 +31,13 @@ Salir del entorno de desarrollo
 
 `deactivate`
 
+
 Indice de Búsquedas
 -------------------
 
 Si se importan datos hay que actualizar el indice de busquedas:
 
 `python manage.py update_index`
-
-Django-Invitation
--------------------
-
-Al no tener migraciones, se tuvo que copiar la app al directorio petateca/apps/invitation
 
 
 Django-Rosetta
