@@ -11,7 +11,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ("username", "email")
     list_display = ("username", "is_staff", "is_superuser")
     list_filter = ("is_staff", "is_superuser", "is_active")
-    inlines = [UserProfileInline]
+#    inlines = [UserProfileInline]
 
 class UserToInviteAdmin(admin.ModelAdmin):
     search_fields = ('mail',)
