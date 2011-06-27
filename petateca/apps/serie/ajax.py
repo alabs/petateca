@@ -390,20 +390,20 @@ def serie_index(request,
     if letter: 
         # Paginacion de letras 
         if letter == "0":
-            query = get_numbers()
+            query = get_numbers().order_by('name_es')
         else:
-            query = m.Serie.objects.filter(name_es__startswith=letter)
+            query = m.Serie.objects.filter(name_es__startswith=letter).order_by('name_es')
     elif genre_slug:
         # Paginacion de generos 
-        query = get_object_or_404(m.Genre, slug_name = genre_slug).series.all()
+        query = get_object_or_404(m.Genre, slug_name = genre_slug).series.order_by('name_es').all()
     elif network_slug:
         # Paginacion de cadenas
-        query = get_object_or_404(m.Network, slug_name = network_slug).series.all()
+        query = get_object_or_404(m.Network, slug_name = network_slug).series.order_by('name_es').all()
     else:
         # Paginacion de series ordenadas por favoritas
         query = m.Serie.objects.select_related('poster').order_by('-rating_score').all()
     context = {
-        'objects': query.order_by('name_es'), 
+        'objects': query, 
         'page_template': page_template,
         'pagination_per_page': 15,
     }
