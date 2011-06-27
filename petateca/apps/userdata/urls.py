@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
+from django.views.generic.simple import redirect_to
+
 from registration.forms import RegistrationFormUniqueEmail
-#from invitation.views import register 
 from registration.views import register
 
 urlpatterns = patterns('',
@@ -17,14 +18,5 @@ urlpatterns = patterns('',
     (r'^profile/$', 'userdata.views.view_profile'),
     (r'^avatar/', include('avatar.urls')),
 
-    # DEPRECATED
-    #(r'^', include('invitation.urls')),
-    #url(r'^signin/$',
-    #    auth_views.login,
-    #    {
-    #        'template_name': 'invitation/signin.html', 
-    #    },
-    #    name='auth_login'),
-   # url(r'^invitation/request/$', 'userdata.views.request_invitation', name='request_invitation'),
-
+    url(r'^signin/$', redirect_to, { 'url': '/accounts/login/' }, name='signin'),
 )
