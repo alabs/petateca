@@ -21,6 +21,8 @@ from django.core.urlresolvers import reverse
 from django.db.models import Sum
 from generic_aggregation import generic_annotate
 
+from core.lib.strip_accents import strip_accents
+
 class Serie(models.Model):
     name = models.CharField(max_length=255)
     slug_name = models.SlugField(unique=True, help_text=_('nombre en la URL'))
@@ -60,7 +62,10 @@ class Serie(models.Model):
         ''' Devuelve la URL para la API (version 2) '''
         return get_urlprefix() + reverse('API_v2_serie_detail', 
             kwargs={'serie_id': self.pk})
-    
+
+    def ascii_name(self):
+        return strip_accents(self.name_es)
+
     def __unicode__(self):
         return self.name
 

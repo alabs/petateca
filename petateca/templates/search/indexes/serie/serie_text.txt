@@ -1,3 +1,4 @@
 {{ object.name }}
 {{ object.name_es }}
 {{ object.name_en }}
+{{ object.ascii_name }}
