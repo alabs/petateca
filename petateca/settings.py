@@ -163,19 +163,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-FORCE_LOWERCASE_TAGS = True
-
-
-# Invitations
-# Si se pone como True, redirige a /accounts/signin
-# y permite el registro solo a traves de invitaciones de otros usuarios
-# DEPRECTAED INVITE_MODE = True
-INVITE_MODE = False
-ACCOUNT_INVITATION_DAYS = 30 
-INVITATIONS_PER_USER = 6
-USER_WHO_INVITES = 'liberateca'
 DEFAULT_USER_FOR_LINKS = 'liberateca'
-
 
 LOGIN_EXEMPT_URLS = (
     r'^static/', 
@@ -225,10 +213,3 @@ try:
     from local_settings import *
 except ImportError:
     pass
-
-if INVITE_MODE:
-    MIDDLEWARE_CLASSES += (
-        'userdata.middleware.LoginRequiredMiddleware',
-    )
-
-
