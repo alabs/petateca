@@ -37,7 +37,7 @@
 	<div class="hr dotted clearfix">&nbsp;</div>
 
 	<h2> Últimas reseñas </h2>
-    {% cache 500 comments %}
+    {% cache 500 comments user %}
     {% if comments_serie %}
         {% for comment in comments_serie %}
             <ol class="commentlist">
@@ -94,7 +94,7 @@
         </ul>
 
     </div>
-    {% cache 500 favorites %}
+    {% cache 500 favorites user %}
     <div class="hr dotted clearfix">&nbsp;</div>
         <!-- FAVORITE SERIES -->
         <h2>Series favoritas</h2>

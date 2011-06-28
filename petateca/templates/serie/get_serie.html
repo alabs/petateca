@@ -45,12 +45,13 @@
         <h2><a id="get_actors" href="#get_actors">{% trans "Actores" %}</a></h2>
         <div id="actors_list"></div>
 
-    {% cache 500 comments serie %}
+    {# cache 500 comments serie TODO: Arreglar el contestar  #}
 	 <div class="hr clearfix">&nbsp;</div>
         <!-- RESEÑAS -->
         {% get_comment_list for serie as comment_list %}
         <h2>{{ comment_list|length }} {% trans "Reseñas" %}</h2>
         {% include "comments/list.html" %}
+    {# endcache #}
 
         <!-- AGREGAR RESEÑA -->
         <div class="hr clearfix">&nbsp;</div>
@@ -58,7 +59,6 @@
         {% with serie as object %}
             {% include "comments/form.html" %}
         {% endwith %}
-    {% endcache %}
 </div>
 
 
