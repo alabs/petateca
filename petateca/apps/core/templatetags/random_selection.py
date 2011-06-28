@@ -17,7 +17,7 @@ class AnyNode(template.Node):
             if stripped: clean_options.append(stripped)
         if len(clean_options) == 1:
             clean_options = clean_options[0].split("|")
-        print "clean_options:", clean_options
+        #print "clean_options:", clean_options
         return random.choice(clean_options)
 
 @register.tag(name="any")
