@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% load cache %}
 {% load tagcloud %}
 {% block title %}{% trans "Series" %} | Liberateca{% endblock %}
 {% block contents %}
@@ -16,6 +17,7 @@
                 </div>
 
                 <div class="hr clearfix">&nbsp;</div>
+                {% cache 500 sidebar %}
 				<!-- BY GENRE -->
                 <div id="box">
                     <h1 class="nobottom"><a href="#" class="show_tagcloud genre">Géneros</a></h1>
@@ -27,6 +29,7 @@
                     <h1 class="nobottom"><a href="#" class="show_tagcloud network">Cadenas</a></h1>
                     {% tagcloud "Network" "50" "5"%}
                 </div>
+                {% endcache %}
 
 			</div>
 			<div class="grid_9">
@@ -64,8 +67,10 @@
 				</div>
 			</p>
                 <div id="series_list">
+                {% cache 500 list %}
                 <!-- THUMBNAILS -->
                 {% include "serie/generic_list.html" %}
+                {% endcache %}
                 </div>
 			</div>
 		</div>

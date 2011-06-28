@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% load cache %}
 {% block extrahead %}
     <meta property="og:title" content="Liberateca | Omnia sunt communia" />
     <meta property="og:type" content="website" />
@@ -13,6 +14,7 @@
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 
 <div class="grid_12">
+    {% cache 500 serie_list %}
 			{% for serie in series %}
                 <div class="grid_1_5">
         		{% thumbnail serie.poster.src "150x200" as img_serie %}
@@ -28,7 +30,7 @@
             <a href="{% url serie_index %}" class="float right alpha">
                 <img title="Ver más series" src="/static/images/go-next.png" id="go-next" />
             </a>
-
+        {% endcache %}
 </div>
 
         <p class="grid_11 clearfix"></p>

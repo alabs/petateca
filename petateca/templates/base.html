@@ -1,4 +1,5 @@
 <!DOCTYPE html>{% spaceless %} {% load i18n %} {% load avatar_tags %} {% load random_selection %}
+        {% load cache %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}{% endspaceless %}
 <html lang="{{LANGUAGE_CODE}}" xml:lang="{{LANGUAGE_CODE}}">
@@ -60,6 +61,7 @@
     </ul>
         <ul class="main-pages right">
             {% if request.user.is_authenticated %}
+                {% cache 500 loggedbar request.user.username %}
                 <li class="kids" id="user">
                 {% url user_profile user_name=request.user.username as profile_user %}
                 <a class="loggedin" href="{{ profile_user }}">
@@ -78,6 +80,7 @@
                         </a>
                     </li>
                 </li>
+                {% endcache %}
             {% else %}
             <li class="kids"> <a href="/accounts/register/">Registrarse</a>
             <li class="kids" id="topnav">  <a href="/accounts/login/" class="signin"><span>Acceder</span></a> 

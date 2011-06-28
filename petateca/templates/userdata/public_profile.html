@@ -4,6 +4,7 @@
 {% load extract_domain %}
 {% load avatar_tags %}
 {% load process_serie_id %}
+{% load cache %}
 {% block title %}{{ user.username }} | Liberateca{% endblock %}
 {% block contents %}
 
@@ -36,6 +37,7 @@
 	<div class="hr dotted clearfix">&nbsp;</div>
 
 	<h2> Últimas reseñas </h2>
+    {% cache 500 comments %}
     {% if comments_serie %}
         {% for comment in comments_serie %}
             <ol class="commentlist">
@@ -63,6 +65,7 @@
     {% else %}
         No ha reseñado ninguna serie.
     {% endif %}
+    {% endcache %}
 </div>
 
 
@@ -91,6 +94,7 @@
         </ul>
 
     </div>
+    {% cache 500 favorites %}
     <div class="hr dotted clearfix">&nbsp;</div>
         <!-- FAVORITE SERIES -->
         <h2>Series favoritas</h2>
@@ -108,6 +112,7 @@
         {% else %} 
         No tiene series favoritas :(
         {% endif %}
+    {% endcache %}
 </div>
 
 {% endblock %}
