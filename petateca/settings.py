@@ -112,6 +112,7 @@ INSTALLED_APPS = (
     'piston',               # API
     'endless_pagination',   # pagination for /series/
     'threadedcomments',     # comentarios anidados
+    'memcache_status',
     ### sentry logger ###
     'indexer',
     'paging',
@@ -194,7 +195,16 @@ INVITATION_MAIL = 'invitaciones@liberateca.net'
 ADMIN_MAIL = 'admin@liberateca.net'
 
 
-#CACHE_BACKEND = 'dummy://'
+CACHE_BACKEND = 'dummy://'
+
+# Agregar en local_settings si se quiere cache:
+#
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#        'LOCATION': '127.0.0.1:11211',
+#    }
+#}
 
 USE_ETAGS = True
 

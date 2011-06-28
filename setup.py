@@ -32,6 +32,7 @@ setup(
         'django-generic-aggregation',
         'unittest2',
         'python-twitter',
+        'django-memcache-status',
         #'django-piston', lo instalamos a traves de src/ por ser este fork
         # https://bitbucket.org/joeb/django-piston/
     ],
