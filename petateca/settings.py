@@ -43,7 +43,7 @@ LANGUAGES = (
  ('en', ugettext('English')),
 )
 #LOCALEURL_USE_ACCEPT_LANGUAGE = True
-TRANSLATION_REGISTRY = 'core.translation'
+MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 SITE_ID = 1
 
 USE_I18N = True
