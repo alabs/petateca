@@ -8,7 +8,7 @@ from serie.models import Serie, Season, Episode
 from api_v1.utils import catch_404
 
 current_site = Site.objects.get_current()
-urlprefix = 'http://' + current_site.domain
+urlprefix = 'https://' + current_site.domain
 
 
 

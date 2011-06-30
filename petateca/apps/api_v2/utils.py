@@ -16,5 +16,5 @@ def catch_404(function):
 
 def get_urlprefix():
     current_site = Site.objects.get_current()
-    urlprefix = 'http://' + current_site.domain
+    urlprefix = 'https://' + current_site.domain
     return urlprefix
