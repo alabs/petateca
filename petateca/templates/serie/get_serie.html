@@ -75,6 +75,18 @@
         {% else %}
             <div class="image_not_found center">  <img alt="{{ serie.name }}" title="{{ serie.name }}" src="/static/images/image_not_available.png" alt="{{ serie.name }}" width="200" /> </div>
         {% endif %}
+
+        {% if request.user.is_authenticated %}
+        <!-- USER RATING -->
+        <div id="rating">
+            <form action="." method="POST">
+            <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
+            <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
+            <input type="radio" name="rating" value="3" class="ratingstar" {% if score == 3 %}checked="checked"{% endif %}/>
+            <input type="radio" name="rating" value="4" class="ratingstar" {% if score == 4 %}checked="checked"{% endif %}/>
+            <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
+            </form>
+        </div>
     </div>
     <div class="right">
         {% if request.user.is_authenticated %}
@@ -136,17 +148,6 @@
      </ul>
     </div>
 	<div class="hr dotted clearfix">&nbsp;</div>
-        {% if request.user.is_authenticated %}
-        <!-- USER RATING -->
-        <div id="rating">
-            <form action="." method="POST">
-            <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
-            <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
-            <input type="radio" name="rating" value="3" class="ratingstar" {% if score == 3 %}checked="checked"{% endif %}/>
-            <input type="radio" name="rating" value="4" class="ratingstar" {% if score == 4 %}checked="checked"{% endif %}/>
-            <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
-            </form>
-        </div>
 	<div class="hr dotted clearfix">&nbsp;</div>
         {% endif %}
     <p>{{ serie.description }}</p>
