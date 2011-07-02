@@ -8,6 +8,12 @@ admin.autodiscover()
 
 from django.views.generic.simple import direct_to_template
 
+from core.sitemap import SerieSitemap
+
+sitemaps = {
+    "serie": SerieSitemap
+}
+
 
 urlpatterns = patterns('',
     (r'^$', 'core.views.index'),
@@ -29,6 +35,11 @@ urlpatterns = patterns('',
     (r'^search/', include('search.urls')),
 
     (r'^i18n/', include('django.conf.urls.i18n')),
+
+    (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {
+        'sitemaps': sitemaps,
+        'template_name': 'core/sitemap.xml',
+    }),
 
     (r'^favicon\.ico$', redirect_to, {'url': '/static/images/favicon.ico'}),
     url(r'^opensearch.xml/$', direct_to_template, \

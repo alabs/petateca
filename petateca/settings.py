@@ -99,6 +99,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.comments',
     'django.contrib.markup',
+    'django.contrib.sitemaps',
     ### django-app ###
     'registration',         # users - register and that stuff
     'avatar',               # users - images
