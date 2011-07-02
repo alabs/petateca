@@ -2,6 +2,8 @@ User-agent: *
 Disallow: /admin/
 Disallow: /sentry/
 
+Disallow: /user/
+
 Disallow: /series/lookup/
 Disallow: /series/links/
 
