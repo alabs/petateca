@@ -49,6 +49,7 @@ class Serie(models.Model):
     rating = RatingField(
         range=5,
         can_change_vote=True,
+        allow_delete=True,
         help_text=_('puntuacion de estrellas')
     )
     poster = models.OneToOneField(

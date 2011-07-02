@@ -259,9 +259,13 @@ function show_tagcloud(selector) {
 $(document).ready(function () {
 
     // Rating de estrellas, se envia el rating por post a /serie/nombre
+
     $('.ratingstar').rating({
         callback: function (value, link) {
             var url = window.location.pathname + 'rate/';
+            if (!value) {
+              var value = 0;
+            }
             $.post(url, {
                 'rating': value,
                 'csrfmiddlewaretoken': getCookie('csrftoken')
@@ -345,9 +349,9 @@ $(document).ready(function () {
         });
 
     // Que cuando se haga click en el rating envia el valor por post
-    $('.ratingstar').rating({ callback: function(value, link){
-            $.post(url, { 'rating': value }, function(data){ disc_rat_data(data); } ); }
-    });
+//    $('.ratingstar').rating({ callback: function(value, link){
+//            $.post(url, { 'rating': value }, function(data){ disc_rat_data(data); } ); }
+//    });
 
 
     // Preloading de las imagenes, para que aparezca el ajax-loading que queda mas 2.0
