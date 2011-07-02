@@ -3,13 +3,12 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import simplejson
-from djangoratings.views import AddRatingView
+from djangoratings.views import InvalidRating
 
 from core.decorators import render_to
 from serie import models as m
@@ -319,21 +318,19 @@ def ajax_add_episode(request, serie_id, season):
 def rating_serie(request, serie_slug):
     ''' Tratamiento de ratings para series '''
     if request.method == 'POST' and request.is_ajax():
-        serie_id = m.Serie.objects.get(slug_name=serie_slug).id
+        serie = m.Serie.objects.get(slug_name=serie_slug)
         if request.POST['rating']:
-            content_type = ContentType.objects.get(
-                app_label='serie', 
-                name='serie'
-            )
-            params = {
-                'content_type_id': content_type.id,
-                'object_id': serie_id,
-                'field_name': 'rating',  # campo en el modelo
-                'score': request.POST['rating'],
-            }
-            response = AddRatingView()(request, **params)
+            try:
+                serie.rating.add(
+                    score=request.POST['rating'],
+                    user=request.user,
+                    ip_address=request.META['REMOTE_ADDR']
+                )
+                response = 'Ok'
+            except InvalidRating:
+                response = 'Error'
             return HttpResponse(
-                simplejson.dumps(response.content),
+                simplejson.dumps(response),
                 mimetype='application/json'
             )
     else:

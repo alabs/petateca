@@ -15,20 +15,20 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function lookup( selector, type ) {
-   // Magia de /series, se trae los generos, cadenas y listado alfabetico a traves dea jaax (.load)
-    $(selector).click(
-    function() {
-          $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-          letter = $(this).attr('href');
-          newlet = letter.substring(1);
-          $('#series_list').load('/series/lookup/' + type + '/' + newlet + '/');
-          $(this).addClass('nolink');
-          if (typeof ($last) != 'undefined') { $last.removeClass('nolink'); } 
-          $last = $(this);
-        }
-   );
-}
+//function lookup( selector, type ) {
+//   // Magia de /series, se trae los generos, cadenas y listado alfabetico a traves dea jaax (.load)
+//    $(selector).click(
+//    function() {
+//          $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+//          letter = $(this).attr('href');
+//          newlet = letter.substring(1);
+//          $('#series_list').load('/series/lookup/' + type + '/' + newlet + '/');
+//          $(this).addClass('nolink');
+//          if (typeof ($last) != 'undefined') { $last.removeClass('nolink'); } 
+//          $last = $(this);
+//        }
+//   );
+//}
 
 
 function disc_fav_data(data) {
@@ -79,37 +79,24 @@ function favorite() {
 }
 
 
-function disc_rat_data(data) {
-    // Discriminacion de las votaciones dependiendo la respuesta que llegue
-    switch (data) {
-        case 'no-user':
-            $.jGrowl('Para poder votar debes estar registrado o haber iniciado sesion', {
-                header: 'Error'
-            });
-            break;
-        case 'Vote recorded.':
-            $.jGrowl('Su voto ha sido guardado');
-            break;
-        case 'Vote changed.':
-            $.jGrowl('Su voto ha sido cambiado');
-            break;
-    }
-}
-
-
 function disc_rat_data(data){
     // Las respuestas cuando se hace un rating, ver en el view de series para el tratamiento
     switch(data)
             {
-            case 'no-user':
-                    $.jGrowl('Para poder votar debes estar registrado o haber iniciado sesion', { header: 'Error' });
-                    break;
-            case 'Vote recorded.':
+            //case 'no-user':
+            //        $.jGrowl('Para poder votar debes estar registrado o haber iniciado sesion', { header: 'Error' });
+            //        break;
+            //case 'Vote changed.':
+            //        $.jGrowl('Su voto ha sido cambiado'); 
+            //        break;
+            case 'Ok':
                     $.jGrowl('Su voto ha sido guardado'); 
                     break;
-            case 'Vote changed.':
-                    $.jGrowl('Su voto ha sido cambiado'); 
+            case 'Error':
+                    $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                     break;
+            default:
+                $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
             }
 }
 
@@ -270,6 +257,7 @@ function show_tagcloud(selector) {
 
 
 $(document).ready(function () {
+
     // Rating de estrellas, se envia el rating por post a /serie/nombre
     $('.ratingstar').rating({
         callback: function (value, link) {
