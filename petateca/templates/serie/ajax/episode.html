@@ -1,6 +1,6 @@
 <li id="serie_{{ episode.season.serie.id }}_{{ episode.season.season }}_{{ episode.episode }}" class="episode">
     <!-- EPISODIO {{ episode.episode }} -->
-    <input type="checkbox" class="left tracking"> 
+    {% if request.user.is_authenticated %}   <input type="checkbox" class="left tracking">  {% endif %}
         <a class="zoom" {% if episode.from_future %}id="future" {% endif %}href="{% url ajax_list_links_episodes serie_id=episode.season.serie.id season=episode.season.season episode=episode.episode %}">
             <strong>{{ episode.season_episode }}</strong>- {{ episode.title }} - <span id="datemeta">({{ episode.air_date|date:"SHORT_DATE_FORMAT" }})</span>
             <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
