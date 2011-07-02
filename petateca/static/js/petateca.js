@@ -153,8 +153,9 @@ function voting( direction, linktype, linkid ){
     // tratamiento de las votaciones de links
     // campos que vamos a tratar
     var $linkscore = $('span#linkscore' + linkid);
-    var dir_down = $('#down_' + linktype + '_' + linkid);
-    var dir_up = $('#up_' + linktype + '_' + linkid);
+    var dir_down = $('img#down_' + linktype + '_' + linkid);
+    var dir_up = $('img#up_' + linktype + '_' + linkid);
+
     // loading
     $linkscore.html('<img style="margin-bottom:0 !important;" src="/static/images/ajax-loading.gif">');
     // la url va por tipo
