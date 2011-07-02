@@ -9,7 +9,7 @@ class UserProfileInline(admin.StackedInline):
 
 class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ("username", "email")
-    list_display = ("username", "is_staff", "is_superuser")
+    list_display = ("username", "is_staff", "is_superuser", "is_active")
     list_filter = ("is_staff", "is_superuser", "is_active")
 #    inlines = [UserProfileInline]
 
