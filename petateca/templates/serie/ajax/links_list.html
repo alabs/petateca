@@ -28,9 +28,14 @@
         {% endfor %}
 {% else %}
     <li> 
-        <a class="no_link" id="{% if is_season %}season{% else %}epi{% endif %}_{{ entity.id }}" href="#">
+    <a id="{% if is_season %}season{% else %}epi{% endif %}_{{ entity.id }}" 
+        {% if request.user.is_authenticated %}
+            class="no_link" >
             {% trans "No hay enlaces disponibles - agregalo " %}
             <img alt="Añadir" title="Añadir un enlace" class="add_link nobottom" src="/static/images/list-add.png">
+        {% else %} >
+            {% trans "No hay enlaces disponibles " %}
+        {% endif %}
         </a>
     </li>
 {% endif %}

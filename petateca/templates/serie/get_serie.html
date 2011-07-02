@@ -23,6 +23,7 @@
 	<!-- SEASONS -->
     <div class="grid_2 left" id="episode_list">
         <ul>
+            {% if request.user.is_authenticated %}
             <li>
                 <a id="season_add" href="{% url add_season serie_slug=serie.slug_name %}">
                     <img title="Agregar temporada nueva" alt="Agregar temporada nueva" src="/static/images/list-add.png" class="left nobottom">
@@ -30,6 +31,7 @@
                 </a>
                 <div id="inside_season_add"></div>
             </li>
+            {% endif %}
         {% for season in season_list %}
             <li>
                 <a class="season"  id="serie_{{serie.id}}_season_{{season.season}}" href="#season_list">

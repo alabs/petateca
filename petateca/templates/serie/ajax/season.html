@@ -1,23 +1,26 @@
 <div id="episode_list">
-  <ul>
+    <ul>
     {% if request.user.is_authenticated %}
-    <li>
-        <!-- AÑADIR UN EPISODIO --> 
-        <a href="{% url ajax_add_episode serie_id=season.serie.id season=season.season %}" id="add_episode" title="Agregar capítulo">
-            <img title="Agregar capitulo nuevo" alt="Agregar capitulo nuevo" src="/static/images/list-add.png" class="left nobottom">
-            Agregar capítulo
-        </a>
-        <div id="episode_inside"></div>
-    </li>
+        <li>
+            <!-- AÑADIR UN EPISODIO --> 
+            <a href="{% url ajax_add_episode serie_id=season.serie.id season=season.season %}" id="add_episode" title="Agregar capítulo">
+                <img title="Agregar capitulo nuevo" alt="Agregar capitulo nuevo" src="/static/images/list-add.png" class="left nobottom">
+                Agregar capítulo
+            </a>
+            <div id="episode_inside"></div>
+        </li>
     {% endif %}
     <!-- TEMPORADA COMPLETA -->
     <li>
         <a class="zoom" href="{% url ajax_list_links_season serie_id=season.serie.id season=season.season %}">
             <strong>Temporada {{ season.season }} Completa</strong>
-        <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
-        {% if request.user.is_authenticated %}<img alt="Añadir" title="Añadir un enlace" id="season_{{ season.id }}" rel="/series/links/add/season/" class="add_link nobottom right" src="/static/images/list-add.png"></a>{% endif %}
-        <div class="list_inside" id="inside{{ season.id }}"></div>
+            <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
+                {% if request.user.is_authenticated %}<img alt="Añadir" title="Añadir un enlace" id="season_{{ season.id }}" rel="/series/links/add/season/" class="add_link nobottom right" src="/static/images/list-add.png"></a>{% endif %} <div class="list_inside" id="inside{{ season.id }}"></div>
+        </a>
+        <div class="list_inside" id="inside{{season.pk}}"></div>
     </li>
+
+
   {% for episode in episode_list %}
         {% include "serie/ajax/episode.html" %}
   {% endfor %}
