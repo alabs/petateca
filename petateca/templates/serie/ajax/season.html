@@ -15,7 +15,9 @@
         <a class="zoom" href="{% url ajax_list_links_season serie_id=season.serie.id season=season.season %}">
             <strong>Temporada {{ season.season }} Completa</strong>
             <img alt="Descargar" title="Ver lista de enlaces" class="right nobottom" src="/static/images/download.png">
-                {% if request.user.is_authenticated %}<img alt="Añadir" title="Añadir un enlace" id="season_{{ season.id }}" rel="/series/links/add/season/" class="add_link nobottom right" src="/static/images/list-add.png"></a>{% endif %} <div class="list_inside" id="inside{{ season.id }}"></div>
+            {% if request.user.is_authenticated %}
+                <img alt="Añadir" title="Añadir un enlace" id="season_{{ season.id }}" rel="/series/links/add/season/" class="add_link nobottom right" src="/static/images/list-add.png">
+            {% endif %} 
         </a>
         <div class="list_inside" id="inside{{season.pk}}"></div>
     </li>

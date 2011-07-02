@@ -96,12 +96,12 @@
         </ul>
         {% endif %}
         <!-- GENERAL RATING -->
-      {% with serie.rating.get_rating as rating %}
-          <div class="right rating_num {{ rating|background_color }}"> {{ rating|floatformat }}
-            <div class="mt_3">de 5</div>
-            <div class="mt_3">({{ serie.rating.votes }} votos)</div>
-          </div>
-      {% endwith %}
+        {% with serie.rating.get_rating as rating %}
+            <div class="right rating_num {{ rating|background_color }}"> {{ rating|floatformat }}
+                <div class="mt_3">de 5</div>
+                <div class="mt_3">({{ serie.rating.votes }} votos)</div>
+            </div>
+        {% endwith %}
 		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- RUNTIME -->
     <ul>
@@ -136,6 +136,7 @@
      </ul>
     </div>
 	<div class="hr dotted clearfix">&nbsp;</div>
+        {% if request.user.is_authenticated %}
         <!-- USER RATING -->
         <div id="rating">
             <form action="." method="POST">
@@ -147,6 +148,7 @@
             </form>
         </div>
 	<div class="hr dotted clearfix">&nbsp;</div>
+        {% endif %}
     <p>{{ serie.description }}</p>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<div class="hr dotted clearfix">&nbsp;</div>
