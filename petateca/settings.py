@@ -1,6 +1,8 @@
 import os
 import sys
 
+import logging
+
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
@@ -127,6 +129,7 @@ INSTALLED_APPS = (
     'search',
     'core',
     'tracking',
+    'checker',
 )
 
 
@@ -206,6 +209,7 @@ COMMENTS_APP = 'threadedcomments'
 #Valid values are http, sql
 IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
 
+
 # Con local_settings podemos reescribir / agregar settings que sean 
 # propios de la maquina donde se encuentre, por ejemplo BBDD y DEBUG
 # MANTENER SIEMPRE ABAJO; PARA SOBREESCRIBIR
@@ -214,3 +218,25 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+# LOGGING 
+# Como depende del DEBUG, lo ponemos despues del local_settings
+
+LOG_DIR = os.path.join(PROJECT_ROOT, 'logs')
+
+if DEBUG:
+    # will output to your console
+    logging.basicConfig(
+        level = logging.INFO,
+        format = '%(asctime)s %(levelname)s %(message)s',
+        filename = os.path.join(LOG_DIR, '/liberateca_development.log'),
+        filemode = 'a'
+    )
+else:
+    # will output to logging file
+    logging.basicConfig(
+        level = logging.WARNING,
+        format = '%(asctime)s %(levelname)s %(message)s',
+        filename = os.path.join(LOG_DIR, '/liberateca_production.log'),
+        filemode = 'a'
+    )
