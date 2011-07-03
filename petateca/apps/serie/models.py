@@ -177,6 +177,9 @@ class LinkSeason(models.Model):
         default=get_default_user_for_links
     )
     pub_date = models.DateTimeField(default=datetime.now, editable=False)
+    # For link checker, so it can deactivate and/or change the check_date
+    is_active = models.BooleanField(default=True, editable=False)
+    check_date = models.DateTimeField(null=True, blank=True, editable=False)
 
     def __unicode__(self):
         return self.url
@@ -308,6 +311,9 @@ class Link(models.Model):
         help_text=_('cuando se ha subido el link? por defecto cuando se guarda'),
         editable=False
     )
+    # For link checker, so it can deactivate and/or change the check_date
+    is_active = models.BooleanField(default=True, editable=False)
+    check_date = models.DateTimeField(null=True, blank=True, editable=False)
     objects = SorterManager()
 
     def __unicode__(self):

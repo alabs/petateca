@@ -56,28 +56,20 @@ class SubtitleLinkInline(admin.TabularInline):
 class LinkAdmin(admin.ModelAdmin):
     list_display = [
         'url',
-        'episode',
-        'get_epi_season',
-        'get_epi_number',
-        'get_serie',
+        'pub_date',
+        'get_epi_full',
+        'is_active',
+        'check_date',
         'user',
     ]
     inlines = [
         SubtitleLinkInline,
     ]
 
-    def get_serie(self, obj):
-        return '%s' % (obj.episode.serie)
+    def get_epi_full(self, obj):
+        return '%s - %s' % (obj.episode.season, obj.episode.episode)
 
-    def get_epi_season(self, obj):
-        return '%s' % (obj.episode.season)
-
-    def get_epi_number(self, obj):
-        return '%s' % (obj.episode.episode)
-
-    get_serie.short_description = 'Serie'  #pylint: disable-msg=W0612
-    get_epi_season.short_description = 'Season'  #pylint: disable-msg=W0612
-    get_epi_number.short_description = 'Episode'  #pylint: disable-msg=W0612
+    get_epi_full.short_description = 'Episodio'  #pylint: disable-msg=W0612
 
 
 
