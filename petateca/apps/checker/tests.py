@@ -67,4 +67,3 @@ class CheckerTest(TestCase):
         self.assertEqual(False, result)
 
 
-    def test_
