@@ -222,14 +222,12 @@ except ImportError:
 # LOGGING 
 # Como depende del DEBUG, lo ponemos despues del local_settings
 
-LOG_DIR = os.path.join(PROJECT_ROOT, 'logs')
-
 if DEBUG:
     # will output to your console
     logging.basicConfig(
         level = logging.INFO,
         format = '%(asctime)s %(levelname)s %(message)s',
-        filename = os.path.join(LOG_DIR, '/liberateca_development.log'),
+        filename = os.path.join(PROJECT_ROOT, 'logs/liberateca_development.log'),
         filemode = 'a'
     )
 else:
@@ -237,6 +235,6 @@ else:
     logging.basicConfig(
         level = logging.WARNING,
         format = '%(asctime)s %(levelname)s %(message)s',
-        filename = os.path.join(LOG_DIR, '/liberateca_production.log'),
+        filename = os.path.join(PROJECT_ROOT, 'logs/liberateca_production.log'),
         filemode = 'a'
     )

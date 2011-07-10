@@ -25,3 +25,4 @@ petateca/reports/
 petateca/apps/search/indexes/
 *.egg
 petateca/local_settings.py
+petateca/logs/*.log
