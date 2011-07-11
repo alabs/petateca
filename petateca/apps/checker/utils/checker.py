@@ -1,6 +1,8 @@
 import re
 from urllib2 import Request, urlopen
 from urlparse import urlparse
+from apps.checker.utils.checker_torrent import CheckerTorrent
+from time import sleep
 
 import logging
 
@@ -115,6 +117,21 @@ class Checker(object):
         elif url.startswith('http://www.mininova.org/'):
             # http://torrentfreak.com/mininova-filters-copyright-infringing-content-090506/  :(
             return 'KO'
+        elif url.startswith('http://public.zoink.it/'):
+            return CheckerTorrent(url).get_status() 
+        elif url.startswith('http://torrent.zoink.it/'):
+            return CheckerTorrent(url).get_status() 
+        elif url.startswith('http://zoink.it/'):
+            return CheckerTorrent(url).get_status() 
+        elif url.startswith('http://www.bt-chat.com/'):
+            # Tienen activado el throttle en bt-chat, asi que comprobamos que no nos 
+            # hayan bloqueado, si nos bloquearon esperamos unos segundos y reintentamos
+            response = urlopen(url).read()
+            if response.find('Throttled') == -1: 
+                return CheckerTorrent(url).get_status() 
+            else:
+                sleep(20) 
+                return CheckerTorrent(url).get_status() 
         else:
-            logger.error("LINK: Domain not valid - %s " % (code['full_url']))
+            logger.error("LINK: Domain not valid - %s " % url)
             return False
