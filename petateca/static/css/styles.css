@@ -976,10 +976,9 @@ p.error {
 }
 
 #add_link_list li {
-    display: inline;
-    list-style-type: none;
-    padding-right: 20px;
-    margin-right: 3em;
+display: inline;
+list-style-type: none;
+padding-right: 20px;
 }
 /* Search form */
 #search_form { 
