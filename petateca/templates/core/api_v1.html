@@ -2,8 +2,11 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load markup %}
+{% block title %}Documentación de la API - v0.1 | Liberateca{% endblock %}
 {% block contents %}
 <h1>Documentación de la API - v0.1</h1>
+
+<p class="notice center">Atención: esta versión de la API no se encuentra mantenida, por favor utiliza la <a href="/api">última versión</a></p>
 
 <p>Para utilizar la API es necesario acceder a través de una usuario registrado en Liberateca, con la aplicación cURL (utilizada en los ejemplos) es "-u usuario:contraseña".
 
@@ -19,6 +22,7 @@ Por defecto devuelve la información en formato JSON, pero pasándole el paráme
     <li><a href="http://code.google.com/p/xbmc-tvalacarta/source/browse/trunk/pelisalacarta/pelisalacarta/channels/liberateca.py">Python II (xbmc-tvalacarta)</a></li>
     <li><a href="https://github.com/karlosgliberal/liberateca">node.js</a></li>
 </ul>
+
 
 <h3 id="serielist" class="header_api">Listado de Series</h3>
 <ul>

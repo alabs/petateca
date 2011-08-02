@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
 
-    url(r'^api/$', redirect_to, { 'url': '/api/v1' }, name='api'),
+    url(r'^api/$', redirect_to, { 'url': '/api/v2/' }, name='api'),
     (r'^api/v1/', include('api_v1.urls')),
     (r'^api/v2/', include('api_v2.urls')),
 

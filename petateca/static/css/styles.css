@@ -1293,6 +1293,14 @@ div.dialog a:link, div.dialog a:visited {
     background:url(/static/images/alert.png) no-repeat 2px !important;
 }
 
+.notice {
+    border:2px solid red !important;
+    color: red;
+    font-size: 1.5em;
+    margin: 1em;
+    padding: 1em;
+}
+
 #img_espoiler {
     margin-bottom:0px !important;
     float:left;
