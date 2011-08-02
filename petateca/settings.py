@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'endless_pagination',   # pagination for /series/
     'threadedcomments',     # comentarios anidados
     'memcache_status',
+    'djcelery',
     ### sentry logger ###
     'indexer',
     'paging',
@@ -208,6 +209,15 @@ COMMENTS_APP = 'threadedcomments'
 
 #Valid values are http, sql
 IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
+
+import djcelery
+djcelery.setup_loader()
+
+BROKER_HOST = "localhost"
+BROKER_PORT = 5672
+BROKER_USER = "guest"
+BROKER_PASSWORD = "guest"
+BROKER_VHOST = "/"
 
 
 # Con local_settings podemos reescribir / agregar settings que sean 

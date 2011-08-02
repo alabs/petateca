@@ -12,7 +12,7 @@ class Migration(SchemaMigration):
         db.delete_column('serie_linkseason', 'episode_id')
 
         # Adding field 'LinkSeason.season'
-        db.add_column('serie_linkseason', 'season', self.gf('django.db.models.fields.related.ForeignKey')(default='', related_name='links', to=orm['serie.Season']), keep_default=False)
+        db.add_column('serie_linkseason', 'season', self.gf('django.db.models.fields.related.ForeignKey')(default='', related_name='links', to=orm['serie.Season']), keep_default=True)
 
 
     def backwards(self, orm):
