@@ -296,6 +296,7 @@ $(document).ready(function () {
             $(this).addClass('selected_list');
         }
 
+
         season_full_id = $(this).attr('id');
         $inside = $('#inside_' + season_full_id);
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
@@ -431,7 +432,7 @@ $(document).ready(function () {
             $(this).addClass('selected_list');
         }
 
-        $inside = $(this).next();
+        $inside = $(this).siblings();
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
         href = $(this).attr('href');
         $inside.load(href);
