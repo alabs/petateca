@@ -99,7 +99,6 @@ class EpisodeHandler(BaseHandler):
         serie = get_object_or_404(Serie, id=serie_id)
         season = get_object_or_404(Season, serie=serie, season=season) 
         epi = get_object_or_404(Episode, season=season, episode=episode)
-        # TODO: Imagen de episodio
         episode = {
                 'id': epi.pk,
                 'season': season.season,
@@ -108,12 +107,11 @@ class EpisodeHandler(BaseHandler):
                 'title_en': epi.title_en,
                 'description_en': epi.description_en,
                 'description_es': epi.description_es,
-                'air_date': epi.air_date.isoformat(),
                 }
-        try:
+        if epi.air_date:
+            episode['air_date'] = epi.air_date.isoformat()
+        if epi.poster:
             episode['thumbnail'] = epi.poster.thumbnail()
-        except:
-            pass
         link_list = []
         for l in epi.links.all():
             link = {'url': l.url, 'audio': l.audio_lang.iso_code,}
