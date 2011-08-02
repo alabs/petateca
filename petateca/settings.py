@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'sentry.client',
     ### customs ###
     'serie',
+    'book',
     'userdata',
     'api_v1',
     'api_v2',

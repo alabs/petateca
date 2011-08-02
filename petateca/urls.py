@@ -22,6 +22,9 @@ urlpatterns = patterns('',
 
     (r'^sentry/', include('sentry.urls')),
 
+    (r'^book/', include('book.urls.obj')),
+    (r'^books/', include('book.urls.entity')),
+
     (r'^serie/', include('serie.urls.obj')),
     (r'^series/', include('serie.urls.entity')),
 
