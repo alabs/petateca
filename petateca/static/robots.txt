@@ -1,5 +1,3 @@
-Sitemap: http://liberateca.net/sitemap.xml
-
 User-agent: *
 Disallow: /admin/
 Disallow: /sentry/
