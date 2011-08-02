@@ -75,37 +75,37 @@
         {% else %}
             <div class="image_not_found center">  <img alt="{{ serie.name }}" title="{{ serie.name }}" src="/static/images/image_not_available.png" alt="{{ serie.name }}" width="200" /> </div>
         {% endif %}
-
         {% if request.user.is_authenticated %}
-        <!-- USER RATING -->
-        <div id="rating">
-            <form action="." method="POST">
-            <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
-            <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
-            <input type="radio" name="rating" value="3" class="ratingstar" {% if score == 3 %}checked="checked"{% endif %}/>
-            <input type="radio" name="rating" value="4" class="ratingstar" {% if score == 4 %}checked="checked"{% endif %}/>
-            <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
-            </form>
-        </div>
+          <!-- USER RATING -->
+          <div id="rating">
+              <form action="." method="POST">
+              <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
+              <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
+              <input type="radio" name="rating" value="3" class="ratingstar" {% if score == 3 %}checked="checked"{% endif %}/>
+              <input type="radio" name="rating" value="4" class="ratingstar" {% if score == 4 %}checked="checked"{% endif %}/>
+              <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
+              </form>
+          </div>
+        {% endif %}
     </div>
     <div class="right">
         {% if request.user.is_authenticated %}
-        <ul class="horizontal_list">
-            <!-- FAVORITE -->
-            <li>
-            {% if favorite == "no" %}
-                <a href="#" onclick="favorite();" id="favorite"><img title="Agregar a favoritas" alt="Agregar a favoritas" class="heart_fav nobottom" src="/static/images/heart_black.png"></a>
-            {% else %} 
-            {% if favorite == "yes" %}
-                <a href="#" onclick="favorite();" id="favorite"><img title="Quitar de favoritas" alt="Quitar de favoritas" class="heart_fav nobottom" src="/static/images/heart_red.png"></a>
-                {% endif %}
-                {% endif %}
-            </li>
-            <!-- EDIT -->
-            <li id="edit-serie">
-                <a href="{% url edit_serie serie_slug=serie.slug_name %}"><img title="Editar serie" class="nobottom" alt="Editar serie" src="/static/images/accessories-text-editor.png"></a>
-            </li>
-        </ul>
+          <ul class="horizontal_list">
+              <!-- FAVORITE -->
+              <li>
+              {% if favorite == "no" %}
+                  <a href="#" onclick="favorite();" id="favorite"><img title="Agregar a favoritas" alt="Agregar a favoritas" class="heart_fav nobottom" src="/static/images/heart_black.png"></a>
+              {% else %} 
+              {% if favorite == "yes" %}
+                  <a href="#" onclick="favorite();" id="favorite"><img title="Quitar de favoritas" alt="Quitar de favoritas" class="heart_fav nobottom" src="/static/images/heart_red.png"></a>
+                  {% endif %}
+                  {% endif %}
+              </li>
+              <!-- EDIT -->
+              <li id="edit-serie">
+                  <a href="{% url edit_serie serie_slug=serie.slug_name %}"><img title="Editar serie" class="nobottom" alt="Editar serie" src="/static/images/accessories-text-editor.png"></a>
+              </li>
+          </ul>
         {% endif %}
         <!-- GENERAL RATING -->
         {% with serie.rating.get_rating as rating %}
@@ -149,7 +149,6 @@
     </div>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<div class="hr dotted clearfix">&nbsp;</div>
-        {% endif %}
     <p>{{ serie.description }}</p>
 	<div class="hr dotted clearfix">&nbsp;</div>
 	<div class="hr dotted clearfix">&nbsp;</div>
