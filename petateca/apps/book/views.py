@@ -29,17 +29,15 @@ def get_book(request, book_slug):
         slug_name=book_slug
     )
     # Vemos si el usuario tiene el libro como favorito
-    score = 1
-    favorite_status = 'no'
-#    try:
-#        book.favorite_of.get(user=request.user.profile)
-#        favorite_status = 'yes'
-#    except:
-#        favorite_status = 'no'
-#    try:
-#        score = int(serie.rating.get_rating_for_user(request.user))
-#    except:
-#        score = None
+    try:
+        book.favorite_book.get(user=request.user.profile)
+        favorite_status = 'yes'
+    except:
+        favorite_status = 'no'
+    try:
+        score = int(book.rating.get_rating_for_user(request.user))
+    except:
+        score = None
     return {
             'book': book,
             'score': score,

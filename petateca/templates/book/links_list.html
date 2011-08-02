@@ -21,14 +21,14 @@
         <!-- VOTING -->
         <span class="score" style="position:relative; top:-25%; margin-right:2em;" id="linkscore{{ link.id }}" title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">{{ score.score|default:0 }}</span>
         {% if request.user.is_authenticated %}
-            <img class="votelink nobottom" id="up_{% if is_season %}season{% else %}episode{% endif %}_{{link.id}}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
-            <img class="votelink nobottom" id="down_{% if is_season %}season{% else %}episode{% endif %}_{{link.id}}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
+            <img class="votelink nobottom" id="up_book_{{link.id}}" src="/static/images/voting/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.gif">
+            <img class="votelink nobottom" id="down_book_{{link.id}}" src="/static/images/voting/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.gif">
         {% endif %}
         </div>
         {% endfor %}
 {% else %}
     <li> 
-    <a id="{% if is_season %}season{% else %}epi{% endif %}_{{ entity.id }}" 
+    <a id="book_{{ entity.id }}" 
         {% if request.user.is_authenticated %}
             class="no_link" >
             {% trans "No hay enlaces disponibles - agregalo " %}

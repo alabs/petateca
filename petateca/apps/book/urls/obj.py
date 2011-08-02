@@ -11,10 +11,10 @@ urlpatterns = patterns('book.views',
  #   url(r'^(?P<serie_slug>[-\w]+)/add/$', 'add_season', name="add_season"),
 )
 
-#urlpatterns += patterns('book.ajax', 
-#    # Rate
-#    url(r'^(?P<book_slug>[-\w]+)/rate/$', 'rating_book', name="rating_book"),
-#
-#    # Favorite
-#    url(r'^(?P<book_slug>[-\w]+)/favorite/$', 'favorite_book', name="favorite_book"),
-#)
+urlpatterns += patterns('book.ajax', 
+    # Rate
+    url(r'^(?P<book_slug>[-\w]+)/rate/$', 'rating_book', name="rating_book"),
+
+    # Favorite
+    url(r'^(?P<book_slug>[-\w]+)/favorite/$', 'favorite_book', name="favorite_book"),
+)

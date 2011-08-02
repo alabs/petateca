@@ -9,7 +9,7 @@
     <meta property="og:title" content="{{book.name}} | Liberateca" />
     <meta property="og:description" content="{{ book.description }}" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-    <meta property="og:type" content="tv_show" />
+    <meta property="og:type" content="book" />
     <meta property="og:image" content="http://liberateca.net{{ book.poster.src.url }}" />
 {% endblock %}
 {% block title %}{{ book.name.title }} | Liberateca{% endblock %}
@@ -20,7 +20,7 @@
 	<!-- TITLE -->
 	<h1 id="title">{{book.name|title}}</h1>
 	<div class="hr dotted clearfix">&nbsp;</div>
-	<!-- SEASONS -->
+	<!-- LINKS -->
     <div class="grid_2 left" id="episode_list">
         <ul>
             <li><a href="#"> Agregar enlace</a></li>
@@ -128,7 +128,7 @@
         </li>
 	<!-- BUTTONS -->
         <li>
-            <a href="/books" class="button">&lt;&lt; {% trans "Series" %}</a>
+            <a href="/books" class="button">&lt;&lt; {% trans "Libros" %}</a>
         </li>
      </ul>
     </div>

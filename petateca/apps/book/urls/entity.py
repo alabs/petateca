@@ -17,3 +17,7 @@ urlpatterns = patterns('book.views',
 #    (r'^recommended/$', 'list_user_recommendation'),
 )
 
+urlpatterns += patterns('book.ajax',
+    # -tratar votaciones de los links
+    url(r'^links/vote/(?P<link_type>[-\w]+)/$', 'vote_link', name='vote_link'),
+)

@@ -146,10 +146,18 @@ function voting( direction, linktype, linkid ){
     // loading
     $linkscore.html('<img style="margin-bottom:0 !important;" src="/static/images/ajax-loading.gif">');
     // la url va por tipo
-    if ( linktype === 'episode' ) {
-        url = '/series/links/vote/episode/';
-    } else {
-        url = '/series/links/vote/season/';
+    switch (linktype) {
+        case 'episode':
+            url = '/series/links/vote/episode/';
+            break;
+        case 'season':
+            url = '/series/links/vote/season/';
+            break;
+        case 'book':
+            url = '/books/links/vote/book/';
+            break;
+        default:
+            $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
     }
     // el POST, aka jquery te amo
     $.post(url, { 
