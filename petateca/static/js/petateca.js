@@ -805,19 +805,21 @@ $(document).ready(function () {
         event.stopPropagation();
     }); 
 
-
-
     $('.tagcloud').hide();
     $('.show_tagcloud').click( function() { 
+        // comprobamos su visibilidad
 
-        var visibilidad = $(this).parent().parent().children('div').attr('style'); 
+        var visibilidad_raw = $(this).parent().parent().children('div').attr('style'); 
+        var visibilidad = visibilidad_raw.split(': ')[1].split(';')[0]
 
+        // en funcion si esta mostrado o no lo escondemos/monstramos 
+        // poor's man toggle :(
         switch(visibilidad) {
-            case  "display: block;" : 
+            case  "block" : 
                 console.log('abierto');
                 hide_tagcloud($(this));
                 break;
-            case  "display: none;" : 
+            case  "none" : 
                 console.log('cerrado');
                 show_tagcloud($(this));
                 break;
