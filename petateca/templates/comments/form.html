@@ -2,7 +2,7 @@
     {% load threadedcomments_tags %}
     <div class="wrap_write_comment">
         <div id="form-comment">
-            {% get_comment_form for serie as form %}
+            {% get_comment_form for object as form %}
             <form action="/comments/post/" method="POST" class="comment_form">
             {# pasamos el formulario for y quitamos el markup para que solo quede el input del texto y los hidden que necesita #}
             <input type="hidden" value="{{ request.path }}" name="next" />
