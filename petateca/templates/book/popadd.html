@@ -1,16 +1,17 @@
-<html>
-    <head>
-        <title>Agregar {{ field }}</title>
-        <script type="text/javascript" src="/media/js/admin/RelatedObjectLookups.js"></script>
-    </head>
-    <body>
-        <h1>Agregar {{ field }}</h1>
-        <form method="POST" action="/books/add/{{ action }}/">
-            <table>
-                {{ form }}
-            </table>
-            <p><input type="submit" value="Agregar" /> | <a href="javascript:window.close()">Cancelar</a></p>
-        </form>
-    </body>
-</html>
-
+{% extends "base_stripped.html" %}
+{% block title %}Agregar {{ field }} | Liberateca {% endblock %}
+{% block extrascript %}
+        <script type="text/javascript" src="/static/js/RelatedObjectLookups_small.js"></script>
+{% endblock%}
+{% block contents %}
+<div class="hr grid_12">&nbsp;</div>
+<div class="clear"></div>
+<div class="grid_3 mrg_2" id="box">
+    <h1>Agregar {{ field }}</h1>
+    <form method="POST" action="/books/add/{{ action }}/">
+        <table>
+            {{ form }}
+        </table>
+        <p><input type="submit" value="Agregar" /> | <a href="javascript:window.close()">Cancelar</a></p>
+</div>
+{% endblock %}

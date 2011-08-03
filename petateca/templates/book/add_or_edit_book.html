@@ -2,7 +2,7 @@
 {% load thumbnail %}
 {% block title %}{% if book %}Editando libro {{ book.name.title }}{% else %}Agregando libro{% endif %} | Liberateca{% endblock %}
 {% block extrascript %}
-<script src="/media/js/admin/RelatedObjectLookups.js"></script>
+        <script type="text/javascript" src="/static/js/RelatedObjectLookups_small.js"></script>
 {% endblock %}
 {% block contents %}
 <div class="grid_10">
@@ -18,9 +18,9 @@
             {% endif %}
             {{ img_form }}
         {% if not book %}
-            <div id="alert-new-book">
-                <img class="left" src="/static/images/dialog-warning-big.png" alt="Atencion">
-                <div style="margin-top:4em" class="hightlight"><b>¡Atención!</b> Comprueba a través del buscador o del <a href="{% url book_index %}">listado de libros</a> que la book que vayas a agregar no se encuentre ya.</div>
+            <div class="notice_small">
+                <img class="left" src="/static/images/dialog-warning-big.png" alt="Atencion" style="margin-right:1em;">
+                <b>¡Atención!</b> Comprueba a través del buscador o del <a href="{% url book_index %}">listado de libros</a> que el libro que vayas a agregar no se encuentre ya.
             </div>
         {% endif %} 
     </li>

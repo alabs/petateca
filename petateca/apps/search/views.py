@@ -1,4 +1,6 @@
 from serie.models import Serie
+from book.models import Book
+
 from django.http import HttpResponse, HttpResponseBadRequest
 
 from django.utils.simplejson import dumps
@@ -43,8 +45,12 @@ def search_lookup(request):
     '''
     if request.GET.has_key(u'query'):
         value = request.GET[u'query']
-        model_results = Serie.objects.filter( Q(name_es__icontains=value) | Q(name_en__icontains=value))[:4]
-        return  { 'results': model_results }
+        series_results = Serie.objects.filter( Q(name_es__icontains=value) | Q(name_en__icontains=value))[:4]
+        books_results = Book.objects.filter(name__icontains=value)[:4]
+        return  {
+            'series_results': series_results,
+            'books_results': books_results
+        }
 
 
 def opensearch_lookup(request):

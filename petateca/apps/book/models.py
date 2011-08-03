@@ -9,6 +9,8 @@ from voting.models import Vote
 from django.db.models import Sum
 from generic_aggregation import generic_annotate
 
+from core.lib.strip_accents import strip_accents
+
 class SorterManager(models.Manager):
     def sorted_by_votes(self):
         return generic_annotate(self, Vote.object, Sum('vote')) 
@@ -55,9 +57,9 @@ class Book(models.Model):
 #        ''' Devuelve la URL para la API (version 2) '''
 #        return get_urlprefix() + reverse('API_v2_serie_detail', 
 #            kwargs={'serie_id': self.pk})
-#
-#    def ascii_name(self):
-#        return strip_accents(self.name_es)
+
+    def ascii_name(self):
+        return strip_accents(self.name)
 
     def __unicode__(self):
         return self.name

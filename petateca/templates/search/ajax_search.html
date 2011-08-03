@@ -1,20 +1,21 @@
-{% load thumbnail %}
 <p id="searchresults">
-    <span class="category">Serie</span>
-    {% for result in results %}
-        <a href="{{ result.get_absolute_url }}">
-            {% if result.poster %}
-                {% thumbnail result.poster.src "100x80" as img_serie %}
-                <img alt="{{ result.name }}" src="{{ img_serie.url }}"/>
-                {% endthumbnail %}
-            {% else %} 
-                <img alt="{{ result.name }}" src="/static/images/image_not_available_small.png"/>
-            {% endif %}
-             <span class="searchheading">{{ result.name }}</span>
-             <span>{{ result.description|slice:":200" }}...</span>
-        </a>
+{% if books_results %}
+    <span class="category">Libros</span>
+    {% for result in books_results %}
+        {% include "search/_ajax_results.html" %}
+    {% endfor %}
+    <span class="seperator">
+    <a href="/books/">Si no encuentras tu libro prueba en el listado</a>
+    </span>
+{% endif %}
+<span class="clear"></span>
+{% if series_results %}
+    <span class="category">Series</span>
+    {% for result in series_results %}
+        {% include "search/_ajax_results.html" %}
     {% endfor %}
     <span class="seperator">
     <a href="/series/">Si no encuentras tu serie prueba en el listado</a>
     </span>
+{% endif %}
 </p>

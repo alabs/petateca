@@ -1,0 +1,12 @@
+{% load thumbnail %}
+        <a href="{{ result.get_absolute_url }}">
+            {% if result.poster %}
+                {% thumbnail result.poster.src "100x80" as img_serie %}
+                <img alt="{{ result.name }}" src="{{ img_serie.url }}"/>
+                {% endthumbnail %}
+            {% else %} 
+                <img alt="{{ result.name }}" src="/static/images/image_not_available_small.png"/>
+            {% endif %}
+             <span class="searchheading">{{ result.name }}</span>
+             <span>{{ result.description|slice:":200" }}...</span>
+        </a>

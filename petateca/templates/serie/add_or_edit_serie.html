@@ -15,9 +15,9 @@
             {% endif %}
             {{ img_form }}
         {% if not serie %}
-            <div id="alert-new-serie">
-                <img class="left" src="/static/images/dialog-warning-big.png" alt="Atencion">
-                <div style="margin-top:4em" class="hightlight"><b>¡Atención!</b> Comprueba a través del buscador o del <a href="{% url serie_index %}">listado de series</a> que la serie que vayas a agregar no se encuentre ya.</div>
+            <div class="notice_small">
+                <img class="left" src="/static/images/dialog-warning-big.png" alt="Atencion" style="margin-right:1em;">
+                <b>¡Atención!</b> Comprueba a través del buscador o del <a href="{% url serie_index %}">listado de series</a> que la serie que vayas a agregar no se encuentre ya.
             </div>
         {% endif %} 
     </li>

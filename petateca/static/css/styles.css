@@ -311,7 +311,7 @@ position:absolute; right:0px; top:0px; margin:0px; padding:0px;
     width: 150px;
 }
 #header .main-pages li ul {
-    left: 5px;
+    right: 0;
     padding-bottom: 5px;
     width: 200%;
 }
@@ -1200,9 +1200,7 @@ left:-23em;top: -10.2em;
 .rating_num div {
     font-size: 10px;
 }
-.mt_3 {
-    margin-top: 6px;
-}
+
 
 #episode_list { width:550px; }
 #episode_list ul { list-style: none; }
@@ -1301,6 +1299,12 @@ div.dialog a:link, div.dialog a:visited {
     padding: 1em;
 }
 
+.notice_small {
+    border:2px solid red !important;
+    margin: 1em;
+    padding: 1em;
+}
+
 #img_espoiler {
     margin-bottom:0px !important;
     float:left;
@@ -1387,7 +1391,7 @@ div.dialog a:link, div.dialog a:visited {
 
 .loggedin img{
    margin-bottom: 0em !important; 
-
+   margin-top: 0.4em;
 }
 
 /* SINGIN / LOGIN */
@@ -1508,7 +1512,32 @@ border:0;
     cursor:pointer;
 } 
 
+/* shares */
 
+.twitter-share-button, .fb_iframe_widget, #___plusone_0 {
+    margin: 0.5em !important;
+}
+
+.mrg_2{
+    margin:2em;
+
+}
+
+.mt_3 {
+    margin-top: 6px;
+}
+
+.mt_2 {
+    margin-top: 2em;
+}
+
+.mb_1 {
+    margin-bottom: 1em;
+}
+
+.valign {
+    vertical-align:middle;
+}
 
 
 /* Overiding Classes */
@@ -1526,3 +1555,4 @@ border:0;
 * html .clearfix { height: 1% }
 .alpha { margin-left: 0 }
 .omega { margin-right: 0 }
+

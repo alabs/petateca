@@ -16,6 +16,7 @@
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 
 <div class="grid_12">
+    <h3 class="grid_11 mb_1">Series con mejor puntuación</h2>
     {% cache 500 serie_list %}
 			{% for serie in series %}
                 <div class="grid_1_5">
@@ -29,11 +30,37 @@
         		{% endthumbnail %}
                 </div>
       		{% endfor %}
-            <a href="{% url serie_index %}" class="float right alpha">
-                <img title="Ver más series" src="/static/images/go-next.png" id="go-next" />
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+        <h4 class="grid_12 center mt_2">
+            <a href="{% url serie_index %}" class="nobottom">
+                Ver todas las series
+                <img title="Ver más series" src="/static/images/go-next.png" class="nobottom valign" />
+            </a>
+        </h4>
+        {% endcache %}
+</div>
+<div class="clear"> </div>
+<div class="grid_12">
+    <h3 class="grid_11 mb_1 mt_2">Libros con mejor puntuación</h2>
+    {% cache 500 books_list %}
+			{% for book in books %}
+                <div class="grid_1_5">
+        		{% thumbnail book.poster.src "150x200" as img_book %}
+          			<a href="{% url get_book book_slug=book.slug_name %}" class="portfolio_item float alpha">
+                        <div class="preload" style="width:140px; height:190px;">
+                            <img class="prel book" id="{{ book.id }}" alt="{{ book.name }}" src="{{ img_book.url }}">
+                        </div>
+                        <span class="center">{{ book.name }}</span>
+                    </a> 
+        		{% endthumbnail %}
+                </div>
+      		{% endfor %}
+            <a href="{% url book_index %}" class="float right alpha">
+                <img title="Ver más libros" src="/static/images/go-next.png" id="go-next" />
             </a>
         {% endcache %}
 </div>
+
 
         <p class="grid_11 clearfix"></p>
         <div class="center">
