@@ -20,13 +20,15 @@
         {% if not book %}
             <div id="alert-new-book">
                 <img class="left" src="/static/images/dialog-warning-big.png" alt="Atencion">
-                <div style="margin-top:4em" class="hightlight"><b>¡Atención!</b> Comprueba a través del buscador o del <a href="{# url book_index #}">listado de libros</a> que la book que vayas a agregar no se encuentre ya.</div>
+                <div style="margin-top:4em" class="hightlight"><b>¡Atención!</b> Comprueba a través del buscador o del <a href="{% url book_index %}">listado de libros</a> que la book que vayas a agregar no se encuentre ya.</div>
             </div>
         {% endif %} 
     </li>
+    <li class="grid_6">
         <ul>
             {{ form.as_ul }}
         </ul>
+    </li>
     <li class="grid_12 center">
         <input class="button" id="submit_book" type="submit" style="margin-top:2em;" value="{% if book %}Actualizar{% else %}Agregar{% endif %}" />
     </li>

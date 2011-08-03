@@ -32,9 +32,8 @@
     <a id="book_{{ entity.id }}" 
         {% if request.user.is_authenticated %}
             class="no_link" >
-            {% trans "No hay enlaces disponibles - agregalo " %}
-            <img alt="Añadir" title="Añadir un enlace" class="add_link nobottom" src="/static/images/list-add.png">
-        {% else %} >
+            {% trans "No hay enlaces disponibles" %}
+        {% else %} 
             {% trans "No hay enlaces disponibles " %}
         {% endif %}
         </a>

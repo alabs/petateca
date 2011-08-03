@@ -6,7 +6,7 @@
         <ul>{% endif %}
     <li class="comment {% cycle "even" "odd" %} depth-{{ comment.depth }}" id="comment_{{ comment.id }}">
         {% url user_profile user_name=comment.user as user_profile %}
-        <div class="avatar">
+        <div class="avatar nobottom">
             <a href="{{ user_profile }}">
             {% avatar comment.user %}
             </a>

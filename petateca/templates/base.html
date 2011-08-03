@@ -33,6 +33,11 @@
                         <li><a href="{% url serie_index %}">Listado</a></li>
                         <li><a href="{% url sneak_links %}">Ver últimas</a></li>
                     </ul>
+                <li class="kids">
+                    <a class="" href="{% url book_index %}">Libros</a>
+                    <ul>
+                        <li><a href="{% url book_index %}">Listado</a></li>
+                    </ul>
                 </li>
                 <li class="kids">
                     <a class="" href="/">Liberateca</a>
@@ -72,13 +77,8 @@
                         <li><a href="{{ profile_user }}">{% trans "Ver perfil" %}</a></li>
                         <li><a class="avatar_change" href="/accounts/avatar/change/">Cambiar avatar</a></li>
                         <li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
+                        <li><a href="/accounts/logout/"><img class="nobottom" src="/static/images/system-shutdown.png" alt="Salir" title="Salir" />Salir</a>
                     </ul>
-                    <li class="kids">
-                        <a href="/accounts/logout/">
-                            <img class="nobottom" src="/static/images/system-shutdown.png" alt="Salir" title="Salir" />
-                            Salir
-                        </a>
-                    </li>
                 </li>
                 {% endcache %}
             {% else %}

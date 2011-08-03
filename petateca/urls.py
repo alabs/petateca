@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     # estadistcas
     (r'^stats/$', 'core.views.statistics'),
 
-    (r'^sentry/', include('sentry.urls')),
+    (r'^sentry/', include('sentry.web.urls')),
 
     (r'^book/', include('book.urls.obj')),
     (r'^books/', include('book.urls.entity')),

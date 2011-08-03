@@ -20,7 +20,6 @@ setup(
         'sorl-thumbnail>=11.01',
         'django-haystack>=1.2.0',
         'Whoosh',
-        'django-ratings',
         'django-voting',
         'django-avatar',
         'django-rosetta',
@@ -36,6 +35,7 @@ setup(
         'django-celery',
         #'django-piston', lo instalamos a traves de src/ por ser este fork
         # https://bitbucket.org/joeb/django-piston/
+        #'django-ratings',
     ],
     classifiers=[
         'Environment :: Web Environment',

@@ -929,7 +929,7 @@ $(document).ready(function () {
 $(function(){
 /* 
 
-Navegacion en /series/ listado de AJAX con parametros del tipo: 
+Navegacion en /series/ y /books/ listado de AJAX con parametros del tipo: 
 
 * /series/#/genre/drama/
 * /series/#/network/abc/
@@ -951,7 +951,10 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
       // es igual que el mio...
       if ( href_nohash === url ) {
           // comprobamos el tipo de peticion y abrimos el tagcloud adecuado
+          // ej: genre, network, category, author
           var type = url.split('/')[1]; 
+
+          console.log(type);
 
           switch (type) {
               case 'genre':
@@ -959,6 +962,12 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
                   break;
               case 'network':
                   show_tagcloud($('.show_tagcloud.network'));
+                  break;
+              case 'category':
+                  show_tagcloud($('.show_tagcloud.category'));
+                  break;
+              case 'author':
+                  show_tagcloud($('.show_tagcloud.author'));
                   break;
           }
 
@@ -969,12 +978,24 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
       }
     });
 
+    // books or series
+    var object = document.URL.split('/')[3];
 
     if (url){
-      $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-      // console.log(url);
-      // url que esperamos es algo por el estilo: genre/science-fiction
-      $('#series_list').load('/series/lookup' + url);
+        switch (object) {
+            case 'series':
+              $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+              // console.log(url);
+              // url que esperamos es algo por el estilo: genre/science-fiction
+              $('#series_list').load('/series/lookup' + url);
+              break;
+            case 'books':
+              $('#books_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+              // console.log(url);
+              // url que esperamos es algo por el estilo: category/drama
+              $('#books_list').load('/books/lookup' + url);
+              break;
+        }
     }
 
   });

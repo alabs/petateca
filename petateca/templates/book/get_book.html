@@ -96,7 +96,7 @@
               </li>
               <!-- EDIT -->
               <li id="edit-book">
-                  <a href="{# url edit_book book_slug=book.slug_name #}"><img title="Editar libro" class="nobottom" alt="Editar libro" src="/static/images/accessories-text-editor.png"></a>
+                  <a href="{% url edit_book book_slug=book.slug_name %}"><img title="Editar libro" class="nobottom" alt="Editar libro" src="/static/images/accessories-text-editor.png"></a>
               </li>
           </ul>
         {% endif %}

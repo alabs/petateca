@@ -30,7 +30,7 @@ class Book(models.Model):
     category = models.ManyToManyField("Category", related_name="books")
     author = models.ManyToManyField(
         "Author", 
-        related_name="authors",
+        related_name="books",
         null=True,
         blank=True,
         help_text=_('autores que escribieron el libro')
@@ -67,10 +67,10 @@ class Book(models.Model):
         self.slug_name = slugify(self.name)
         super(Book, self).save(force_insert, force_update, using)
 
-#    @models.permalink
-#    def get_absolute_url(self):
-#        return ('serie.views.get_serie', (),
-#                {'serie_slug': self.slug_name, })
+    @models.permalink
+    def get_absolute_url(self):
+        return ('book.views.get_book', (),
+                {'book_slug': self.slug_name, })
 
 
 class Category(models.Model):
@@ -151,7 +151,7 @@ class BookLink(models.Model):
 class Author(models.Model):
     name = models.CharField(max_length=100)
     slug_name = models.SlugField(unique=True, help_text=_('nombre en URL'))
-    book = models.ForeignKey("Book", related_name="books")
+#    book = models.ForeignKey("Book", related_name="books")
 
     def save(self, force_insert=False, force_update=False, using=None):
         ''' When is saved, the name is converted to slug - aka URL'''

@@ -3,9 +3,12 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.contrib.auth.models import User
 from djangoratings.views import InvalidRating
 from django.utils import simplejson
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 
 from core.decorators import render_to
@@ -167,3 +170,57 @@ def ajax_add_link(request, link_type, obj_id=1):
                 return HttpResponse(simplejson.dumps({'mensaje': 'Link duplicado'}), mimetype='application/json')
             else: 
                 return HttpResponse(simplejson.dumps(form.errors), mimetype='application/json')
+
+
+def get_numbers():
+    books = m.Book.objects.filter(name__startswith="0") | \
+    m.Book.objects.filter(name__startswith="1") | \
+    m.Book.objects.filter(name__startswith="2") | \
+    m.Book.objects.filter(name__startswith="3") | \
+    m.Book.objects.filter(name__startswith="4") | \
+    m.Book.objects.filter(name__startswith="5") | \
+    m.Book.objects.filter(name__startswith="6") | \
+    m.Book.objects.filter(name__startswith="7") | \
+    m.Book.objects.filter(name__startswith="8") | \
+    m.Book.objects.filter(name__startswith="9") 
+    return books
+
+
+def book_index(request,
+        template="book/book_list.html",
+        page_template="book/generic_list.html",
+        letter=False,
+        category_slug=False,
+        author_slug=False,
+    ):
+    ''' 
+    Paginacion para letras / categorias / autores / books favoritas hecho con endless pagination
+    '''
+    # TODO: select_related en letra, genero y cadena
+    if letter: 
+        # Paginacion de letras 
+        if letter == "0":
+            query = get_numbers().order_by('name')
+        else:
+            query = m.Book.objects.filter(
+                    Q(name__startswith=letter) |
+                    Q(name__startswith=letter.lower())
+                ).order_by('name')
+    elif category_slug:
+        # Paginacion de categorias 
+        query = get_object_or_404(m.Category, slug_name = category_slug).books.order_by('name').all()
+    elif author_slug:
+        # Paginacion de autores
+        query = get_object_or_404(m.Author, slug_name = author_slug).books.order_by('name').all()
+    else:
+        # Paginacion de libros ordenadas por favoritas
+        query = m.Book.objects.select_related('poster').order_by('-rating_score').all()
+    context = {
+        'objects': query, 
+        'page_template': page_template,
+        'pagination_per_page': 15,
+    }
+    if request.is_ajax():
+        template = page_template
+    return render_to_response(template, context,
+        context_instance=RequestContext(request))

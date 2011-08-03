@@ -16,6 +16,7 @@ petateca/static/img/blog/*
 petateca/static/img/episodes/*
 petateca/static/img/season/*
 petateca/static/img/serie/*
+petateca/static/img/book/*
 petateca/static/img/serie/thumbs/*
 build
 petateca/.coverage

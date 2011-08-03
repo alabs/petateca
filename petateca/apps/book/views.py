@@ -86,7 +86,6 @@ def add_or_edit_book(request, book_slug=None):
             }
     # Respuesta, nos llega el formulario
     if request.method == 'POST':
-        print request.POST
         # TODO: preparamos los actores/roles
         book_post_clean = request.POST.copy()
         book_post_clean['slug_name'] = slugify(request.POST['name'])
@@ -132,6 +131,8 @@ def add_or_edit_book(request, book_slug=None):
                 img_book.is_poster = True
                 img_book.book = book
                 img_book.save()
+                book.poster = img_book
+                book.save()
             final_url = reverse('book.views.get_book', kwargs={
                 'book_slug': book.slug_name
             })
@@ -160,7 +161,7 @@ def handlePopAdd(request, addForm, field, action):
                     (escape(newObject._get_pk_val()), escape(newObject)))
     else:
         form = addForm()
-    pageContext = {'form': form, 'field': field, action: 'action'}
+    pageContext = {'form': form, 'field': field, 'action': action}
     return render_to_response("book/popadd.html", pageContext)
 
 
