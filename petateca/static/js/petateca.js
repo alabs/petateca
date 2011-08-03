@@ -459,9 +459,24 @@ $(document).ready(function () {
         return false;
     });
 
+    $('.add_link_single').live('click', function(e){
+    // agregar enlace para libros y peliculas
+        e.preventDefault();
+        $(this).hide();
+        var object_raw = $(this).attr('id');
+        var type = object_raw.split('_')[0];
+        var object_id = object_raw.split('_')[1];
+        $inside = $('#inside_' + type + '_' + object_id);
+        $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+        if ( type === 'book' ) {
+            $inside.load('/books/links/add/book/' + object_id + '/');
+        } else {
+            $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+        }
+    });
 
     $('.add_link').live('click', function(e){
-    // agregar enlace
+    // agregar enlace para listados de series (episodio y temporada)
         e.preventDefault();
         $(this).parent().addClass('selected_list');
         var episoderaw = $(this).attr('id');
@@ -587,6 +602,7 @@ $(document).ready(function () {
     $('#submit_link').live('click', function (e) {
         e.preventDefault();
         var url = $('input[name=url]');
+        var lang = $('select[name=lang]');
         var audio = $('select[name=audio_lang]');
         var subtitle = $('select[name=subtitle]');
         var post_url = $('form#add_link_form[action]').attr('action');
@@ -602,14 +618,23 @@ $(document).ready(function () {
                 return false;
             } else {$('label[for=id_audio_lang]').removeClass('hightlight');}
 
+            if (lang.val()==='') {
+                $('label[for=id_lang]').addClass('hightlight');
+                return false;
+            } else {$('label[for=id_lang]').removeClass('hightlight');}
+
         $.post(post_url, {
             'url': url.val(), 
+            'lang': lang.val(), 
             'audio_lang': audio.val(), 
             'subtitle': subtitle.val(),
             'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function(data) {
             if (data.mensaje  == 'Gracias'){
                 $.jGrowl('El enlace se ha guardado exitosamente');
+                if ( data.type == 'book') {
+                    location.reload(true);
+                }
             } else if (data.mensaje == 'Link duplicado') {
                 $.jGrowl('Link duplicado, prueba a agregar otro');
             } else {

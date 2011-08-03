@@ -2,20 +2,22 @@ from django.shortcuts import get_object_or_404
 from core.decorators import render_to
 from django.views.decorators.csrf import csrf_protect
 
-from book.models import Book
+from book.models import Book, ImageBook
 
 #from django.utils import simplejson
-#from django.template.defaultfilters import slugify
-#from django.contrib.auth.decorators import login_required
-#from django.http import HttpResponse, HttpResponseRedirect
-#from django.core.urlresolvers import reverse
-#from django.db.models import Q
-#from django.db import IntegrityError
-#from django.core.exceptions import ObjectDoesNotExist
-#
-#
-#from serie.forms import SerieForm, ImageSerieForm, SeasonForm
-#from serie.models import Serie, Season, Link, ImageSerie
+from django.template.defaultfilters import slugify
+from django.contrib.auth.decorators import login_required
+from django.utils.html import escape
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+from django.db.models import Q
+from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render_to_response
+
+from django import forms
+
+from book.forms import BookForm, ImageBookForm, CategoryForm, AuthorForm
 
 
 
@@ -54,133 +56,120 @@ def get_book(request, book_slug):
 #    ''' Ultimos enlaces agregados '''
 #    last_links = Link.objects.order_by('-pub_date')[:30]
 #    return {'last_links' : last_links}
-#
-#
-#@login_required
-#@render_to('serie/add_or_edit_serie.html')
-#def add_or_edit_serie(request, serie_slug=None):
-#    '''
-#    Formulario que agrega/edita series
-#    '''
-#    # Entregamos el formulario
-#    if request.method == 'GET':
-#        if serie_slug:
-#        # Si hay una serie no es add, es edit, ergo devolvemos la instancia
-#            serie = Serie.objects.get(slug_name=serie_slug)
-#            form_serie = SerieForm(instance=serie)
-#            img_form = ImageSerieForm()
-#            return {
-#                    'form': form_serie,
-#                    'serie': serie,
-#                    'img_form': img_form,
-#                }
-#        else:
-#            # Agregar una serie, este es el formulario limpio
-#            form_serie = SerieForm()
-#            img_form = ImageSerieForm()
-#            return {
-#                'form': form_serie,
-#                'img_form': img_form,
-#            }
-#
-#    # Respuesta, nos llega el formulario
-#    if request.method == 'POST':
-#        # TODO: preparamos los actores/roles
-#        serie_post_clean = request.POST.copy()
-#        serie_post_clean['slug_name'] = slugify(request.POST['name_es'])
-#        # Le pasamos a modeltranslation los campos por defecto en spanish
-#        serie_post_clean['name'] = request.POST['name_es']
-#        serie_post_clean['description'] = request.POST['description_es']
-#        # Si hay una serie no es add, es edit, ergo tratamos la instancia
-#        if serie_slug:
-#            serie = Serie.objects.get(slug_name=serie_slug)
-#            # para que no joda el poster ya existente
-#            try:
-#                serie_post_clean['poster'] = serie.poster.id
-#            except:
-#                pass
-#            form_serie = SerieForm(serie_post_clean, instance=serie)
-#            img_form = ImageSerieForm()
-#        else:
-#            form_serie = SerieForm(serie_post_clean)
-#            img_form = ImageSerieForm()
-#        if form_serie.is_valid():
-#            if not serie_slug:
-#                try:
-#                    # Comprobamos que no exista ya una serie con ese nombre
-#                    name_es = form_serie.data['name_es']
-#                    name_en = form_serie.data['name_en']
-#                    serie = Serie.objects.get(
-#                            Q(name_es=name_es)|
-#                            Q(name_en=name_en)
-#                        )
-#                except IntegrityError:
-#                    return {
-#                        'message': 'Duplicada',
-#                        'form': form_serie,
-#                        'img_form': img_form,
-#                    }
-#                except ObjectDoesNotExist:
-#                    pass
-#            serie = form_serie.save()
-#            slug = form_serie.cleaned_data['slug_name']
-#            # Si existe FILES es que nos envian una imagen para la serie
-#            if request.FILES:
-#                img_serie = ImageSerie()
-#                img_serie.title = slug
-#                img_serie.src = request.FILES['src']
-#                img_serie.is_poster = True
-#                img_serie.serie = serie
-#                img_serie.save()
-#            # TODO: tratamiento de los actores
-#            final_url = reverse('serie.views.get_serie', kwargs={
-#                'serie_slug': slug
-#            })
-#            # Redireccionamos a la ficha de la serie
-#            return HttpResponseRedirect(final_url)
-#        else:
-#            # uoops -- excepciones
-#            return {
-#                'message': form_serie.errors,
-#                'message2': img_form.errors,
-#                'form': form_serie,
-#                'img_form': img_form,
-#            }
-#
-#
-#@login_required
-#@render_to('serie/add_season.html')
-#def add_season(request, serie_slug):
-#    serie = Serie.objects.get(slug_name=serie_slug)
-#    if request.method == 'GET':
-#        form_season = SeasonForm(initial={'serie': serie.id})
-#        return { 'form_season': form_season, 'serie': serie, }
-#    if request.method == 'POST':
-#        form_season = SeasonForm(request.POST)
-#        if form_season.is_valid():
-#                season, result = Season.objects.get_or_create(
-#                    season = form_season.cleaned_data['season'],
-#                    serie = serie
-#                )
-#                # if season doesn't exists
-#                if result == True:
-#                    season.save()
-#                    return HttpResponse(
-#                        simplejson.dumps({
-#                            'message': 'OK',
-#                            'redirect': serie.get_absolute_url(),
-#                            }), 
-#                        mimetype='application/json'
-#                    )
-#                # if exists, it's duplicated
-#                elif result == False:
-#                    return HttpResponse(
-#                        simplejson.dumps({'message': 'Duplicated'}), 
-#                        mimetype='application/json'
-#                    )
-#        # if not number
-#        else:
-#            return HttpResponse(
-#                simplejson.dumps({'message': 'Error'}), 
-#                mimetype='application/json'
-#            )
+
+
+@login_required
+@render_to('book/add_or_edit_book.html')
+def add_or_edit_book(request, book_slug=None):
+    '''
+    Formulario que agrega/edita books
+    '''
+    # Entregamos el formulario
+    if request.method == 'GET':
+        if book_slug:
+        # Si hay una book no es add, es edit, ergo devolvemos la instancia
+            book = Book.objects.get(slug_name=book_slug)
+            form_book = BookForm(instance=book)
+            img_form = ImageBookForm()
+            return {
+                    'form': form_book,
+                    'book': book,
+                    'img_form': img_form,
+                }
+        else:
+            # Agregar una book, este es el formulario limpio
+            form_book = BookForm()
+            img_form = ImageBookForm()
+            return {
+                'form': form_book,
+                'img_form': img_form,
+            }
+    # Respuesta, nos llega el formulario
+    if request.method == 'POST':
+        print request.POST
+        # TODO: preparamos los actores/roles
+        book_post_clean = request.POST.copy()
+        book_post_clean['slug_name'] = slugify(request.POST['name'])
+        # Le pasamos a modeltranslation los campos por defecto en spanish
+        book_post_clean['name'] = request.POST['name']
+        book_post_clean['description'] = request.POST['description']
+        # Si hay una book no es add, es edit, ergo tratamos la instancia
+        if book_slug:
+            book = Book.objects.get(name=request.POST['name'])
+            # para que no joda el poster ya existente
+            try:
+                book_post_clean['poster'] = book.poster.id
+            except:
+                pass
+            form_book = BookForm(book_post_clean, instance=book)
+            img_form = ImageBookForm()
+        else:
+            form_book = BookForm(book_post_clean)
+            img_form = ImageBookForm()
+        if form_book.is_valid():
+            if not book_slug:
+                try:
+                    # Comprobamos que no exista ya una book con ese nombre
+                    name = form_book.data['name']
+                    book = Book.objects.get(
+                            Q(name=name)
+                        )
+                except IntegrityError:
+                    return {
+                        'message': 'Duplicada',
+                        'form': form_book,
+                        'img_form': img_form,
+                    }
+                except ObjectDoesNotExist:
+                    pass
+            book = form_book.save()
+            #slug = form_book.cleaned_data['slug_name']
+            # Si existe FILES es que nos envian una imagen para la book
+            if request.FILES:
+                img_book = ImageBook()
+                img_book.title = form_book.cleaned_data['name']
+                img_book.src = request.FILES['src']
+                img_book.is_poster = True
+                img_book.book = book
+                img_book.save()
+            final_url = reverse('book.views.get_book', kwargs={
+                'book_slug': book.slug_name
+            })
+            # Redireccionamos a la ficha de la book
+            return HttpResponseRedirect(final_url)
+        else:
+            # uoops -- excepciones
+            return {
+                'message': form_book.errors,
+                'message2': img_form.errors,
+                'form': form_book,
+                'img_form': img_form,
+            }
+
+
+def handlePopAdd(request, addForm, field, action):
+    if request.method == "POST":
+        form = addForm(request.POST)
+        if form.is_valid():
+            try:
+                newObject = form.save()
+            except forms.ValidationError:
+                newObject = None
+            if newObject:
+                return HttpResponse('<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s");</script>' % \
+                    (escape(newObject._get_pk_val()), escape(newObject)))
+    else:
+        form = addForm()
+    pageContext = {'form': form, 'field': field, action: 'action'}
+    return render_to_response("book/popadd.html", pageContext)
+
+
+@login_required
+def add_author(request):
+    return handlePopAdd(request, AuthorForm, 'autor', 'author')
+
+
+@login_required
+def add_category(request):
+    return handlePopAdd(request, CategoryForm, 'categoria', 'category')
+

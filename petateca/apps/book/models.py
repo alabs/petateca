@@ -123,12 +123,14 @@ class BookLink(models.Model):
         related_name="langs",
         verbose_name="Idioma"
     )
+    # FIXME: :(
 #    user = models.ForeignKey(
 #        User,
 #        related_name="booklink_user",
 #        editable=False,
 #        default=get_default_user_for_links
 #    )
+# TODO: formatos
     pub_date = models.DateTimeField(
         default=datetime.now,
         help_text=_('cuando se ha subido el link? por defecto cuando se guarda'),

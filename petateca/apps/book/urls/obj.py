@@ -2,13 +2,11 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('book.views',
+    # get a book
     url(r'^(?P<book_slug>[-\w]+)/$', 'get_book', name='get_book'),
 
- #   # Edition serie
- #   url(r'^(?P<serie_slug>[-\w]+)/edit/$', 'add_or_edit_serie', name="edit_serie"),
-
- #   # Adding season of a serie
- #   url(r'^(?P<serie_slug>[-\w]+)/add/$', 'add_season', name="add_season"),
+    # book editing 
+    url(r'^(?P<book_slug>[-\w]+)/edit/$', 'add_or_edit_book', name="edit_book"),
 )
 
 urlpatterns += patterns('book.ajax', 

@@ -1,10 +1,17 @@
+from datetime import datetime 
+
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.models import User
 from djangoratings.views import InvalidRating
 from django.utils import simplejson
+from django.shortcuts import get_object_or_404
+
+from core.decorators import render_to
 
 from book import models as m
+from book.forms import BookLinkForm
 
 from voting.models import Vote
 
@@ -52,6 +59,7 @@ def rating_book(request, book_slug):
     else:
         return HttpResponseForbidden('Error en la peticion AJAX')
 
+
 @login_required
 def vote_link(request, link_type):
     ''' Tratamiento de los votos de los enlaces '''
@@ -65,3 +73,97 @@ def vote_link(request, link_type):
             Vote.objects.record_vote(link, user, -1)
         votes = Vote.objects.get_score(link)
         return HttpResponse(simplejson.dumps(votes), mimetype='application/json')
+
+
+@login_required
+@render_to('book/ajax/add_link.html')
+def ajax_add_link(request, link_type, obj_id=1):
+    ''' 
+    Formulario que agrega/edita links en AJAX
+    ''' 
+    book = get_object_or_404( m.Book, id=obj_id )
+    Form = BookLinkForm
+    # Si es para editar, devolvemos la instancia del link ya existente ;)
+    # Esto es solo para presentar el form, para el post viene mas adelante...
+#    if request.method == 'GET' and request.GET.get('edit') and request.GET.get('linkid'):
+#        linkid = request.GET.get('linkid')
+#        if link_type == 'episode':
+#            link = m.Link.objects.get(pk=linkid)
+#        elif link_type == 'season':
+#            link = m.SeasonLink.objects.get(pk=linkid)
+#        if request.user.username == link.user:
+#            form = Form(instance=link) 
+#            link_info.update({ 'form': form, 'edit': 'yes', 'link': link, })
+#            return link_info
+    # Este es el formulario inicial, si el request.method es GET
+    # pre-populamos con el episodio, que eso ya lo tenemos de la URL
+    if request.method == 'GET':
+        form = Form(initial={ 'url':'http://', }) 
+        return { 'book': book, 'form': form }
+    # Cuando se envia el formulario...
+    if request.method == 'POST':
+        # Capturamos lo que nos pasa, agregamos el episode
+        # fecha de publicacion y usuario que hace la peticion
+        user = User.objects.get(username=request.user.username)
+        now = datetime.now()
+        data = {
+            'url': request.POST['url'], 
+            'lang': request.POST['lang'], 
+            'user': user,
+            'pub_date': now,
+            'book': book.pk,
+        } 
+        form = Form(data)
+        if form.is_valid():
+            # Comprobamos que el form sea correcta, lo procesamos
+            if not form.cleaned_data['url'].startswith('http://'):  # TODO: agregar magnet/ed2k, otros URIs
+                messages.error(request, 'URL invalida')
+                return { 'mensaje' : 'Invalida' }
+            # Audio Lang, Subtitle y Episode hay que pasarlos como instancias
+            # Episode ya lo tenemos, vamos a buscar audio_lang
+            #lang = m.BookLanguages.objects.get(pk=form.cleaned_data['lang'])
+            # si en el POST encontramos el edit, pues esta editando :S
+            if request.GET.get('edit'):
+                print "TODO"
+                return HttpResponse(simplejson.dumps({'mensaje': 'Error'}), mimetype='application/json')
+               # if link_type == 'episode':
+               #     link = m.Link.objects.get(pk=request.GET.get('linkid'))
+               # elif link_type == 'season':
+               #     link = m.LinkSeason.objects.get(pk=request.GET.get('linkid'))
+               # # capturamos el link q esta editando y agregamos las modificaciones
+               # link.url=form.cleaned_data['url']
+               # link.audio_lang=lang
+               # link.user=user
+               # link.episode=episode
+               # link.pub_date=now
+               # if form.cleaned_data['subtitle']:
+               #     subt = m.Languages.objects.get(pk=data['subtitle'])
+               #     link.subtitle = subt
+               # try:
+               #     # El aguila esta en el nido
+               #     link.save()
+               #    # messages.info(request, 'Gracias')
+               #     return HttpResponse(simplejson.dumps({'mensaje': 'Gracias'}), mimetype='application/json')
+               # except:
+               #     return HttpResponse(simplejson.dumps({'mensaje': 'Error'}), mimetype='application/json')
+            # sino, es un link nuevo
+            else:
+                link = m.BookLink(
+                    url=form.cleaned_data['url'],
+                    lang=form.cleaned_data['lang'],
+                    book=book,
+                   # user=user,
+                    pub_date=now,
+                )
+                link.save()
+                #messages.info(request, 'Gracias')
+                return HttpResponse(
+                    simplejson.dumps({
+                        'mensaje': 'Gracias',
+                        'type': 'book'
+                    }), mimetype='application/json')
+        else:
+            if form.errors['url'] == [u'Ya existe Link con este URL.']:
+                return HttpResponse(simplejson.dumps({'mensaje': 'Link duplicado'}), mimetype='application/json')
+            else: 
+                return HttpResponse(simplejson.dumps(form.errors), mimetype='application/json')

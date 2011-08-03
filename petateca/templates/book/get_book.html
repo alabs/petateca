@@ -23,7 +23,15 @@
 	<!-- LINKS -->
     <div class="grid_2 left" id="episode_list">
         <ul>
-            <li><a href="#"> Agregar enlace</a></li>
+            {% if request.user.is_authenticated %}
+                <li>
+                    <a href="#" class="add_link_single" id="book_{{ book.id }}">
+                        <img title="Agregar enlace" alt="Agregar enlace" src="/static/images/list-add.png" class="left nobottom">
+                        Agregar enlace
+                    </a>
+                </li>
+            {% endif %}
+            <div id="inside_book_{{ book.id }}"></div>
             {% with book.links.all as link_list %}
                 {% include "book/links_list.html" %}
             {% endwith %} 
@@ -101,16 +109,18 @@
         {% endwith %}
 		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- AUTORS -->
+    <ul>
         <li>
-            <span class="meta_box">{% trans "Autores" %}</span>
+            <span class="meta_box">Autor{{ book.author.count|pluralize:"es" }}</span>
+        </li>
+        <li>
             <ul>
-                {% for autor in book.autor.all %}
-                <li><a href="/books/#/autor/{{ autor.slug_name }}/">{{ autor.name }}</a></li>
+                {% for author in book.author.all %}
+                <li><a href="/books/#/autor/{{ author.slug_name }}/">{{ author.name }}</a></li>
                 {% endfor %}
             </ul>
         </li>
 	<!-- ISBN -->
-    <ul>
         <li>
             <span class="meta_box">{% trans "ISBN" %}</span>
         </li>
@@ -119,7 +129,7 @@
         </li>
 	<!-- GENRE -->
         <li>
-            <span class="meta_box">{% trans "Categoria" %}</span>
+            <span class="meta_box">Categoria{{ book.category.count|pluralize}}</span>
             <ul>
                 {% for category in book.category.all %}
                 <li><a href="/books/#/category/{{ category.slug_name }}/">{{ category.name }}</a></li>
@@ -154,12 +164,14 @@
     </div>
     <div class="grid_6 right">
         {% cache 500 followers book %}
-            <h2>Seguidores ({{ book.favorite_of.count }})</h2>
-            {% for user in book.favorite_of.all %}
-                <a class="followers" title="{{ user.user.username }}" href="{% url user_profile user_name=user.user.username %}">
-                    {% avatar user.user 30 %}
-                </a>
-            {% endfor %}
+            {% if not book.favorite_book.count == 0 %}
+                <h2>Seguidores ({{ book.favorite_book.count }})</h2>
+                {% for user in book.favorite_book.all %}
+                    <a class="followers" title="{{ user.user.username }}" href="{% url user_profile user_name=user.user.username %}">
+                        {% avatar user.user 30 %}
+                    </a>
+                {% endfor %}
+            {% endif %}
         {% endcache %}
     </div>
 </div>
