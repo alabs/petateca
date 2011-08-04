@@ -9,7 +9,7 @@
 <form id="add_book_form" enctype="multipart/form-data" action="{% if book %}{% url edit_book book_slug=book.slug_name %}{% else %}{% url add_book %}{% endif %}" method="POST">
     <h1>{% if book %}Editando libro {{ book.name.title }}{% else %}Agregando libro{% endif %}</h1>
 <ul>
-    <li class="grid_3">
+    <li class="grid_4">
             {% if book.poster.src %}
                 {% thumbnail book.poster.src "400x300" as img_book %}
                 <img id="poster" src="{{ img_book.url }}" /> {% endthumbnail %}
@@ -24,9 +24,36 @@
             </div>
         {% endif %} 
     </li>
-    <li class="grid_6">
-        <ul>
-            {{ form.as_ul }}
+    <li class="grid_8">
+        <ul class="grid_8">
+            {{ form.non_field_errors }}
+            <li class="fieldwrapper">
+                {{ form.name.errors }}
+                <label for="id_name_es">Nombre:</label>
+                {{ form.name }}
+            </li>
+            <li class="fieldwrapper">
+                {{ form.description.errors }}
+                <label for="id_description">Descripción:</label>
+                {{ form.description }}
+            </li>
+            <li class="fieldwrapper">
+                {{ form.isbn.errors }}
+                <label for="id_isbn">ISBN:</label>
+                {{ form.isbn }}
+            </li>
+        </ul>
+        <ul class="grid_3">
+            <li class="fieldwrapper">
+                {{ form.category.errors }}
+                <label for="id_category">Categoría:</label>
+                {{ form.category }}
+            </li>
+            <li class="fieldwrapper">
+                {{ form.author.errors }}
+                <label for="id_author">Autor:</label>
+                {{ form.author }}
+            </li>
         </ul>
     </li>
     <li class="grid_12 center">

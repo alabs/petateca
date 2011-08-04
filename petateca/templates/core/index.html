@@ -12,10 +12,10 @@
     <meta property="og:image" content="http://liberateca.net/static/images/logos/logo_square.png" />
 {% endblock %}
 {% block contents %}
-        <h2 class="grid_12 caption clearfix center">{% blocktrans %}Comparte tus series, porque <span>compartir es bueno</span>.{% endblocktrans %}</h2>
+        <h2 class="grid_12 caption clearfix center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 
-<div class="grid_12">
+<div class="grid_12" id="box">
     <h3 class="grid_11 mb_1">Series con mejor puntuación</h2>
     {% cache 500 serie_list %}
 			{% for serie in series %}
@@ -31,7 +31,7 @@
                 </div>
       		{% endfor %}
 		<div class="hr grid_12 clearfix">&nbsp;</div>
-        <h4 class="grid_12 center mt_2">
+        <h4 class="grid_12 center mt_1">
             <a href="{% url serie_index %}" class="nobottom">
                 Ver todas las series
                 <img title="Ver más series" src="/static/images/go-next.png" class="nobottom valign" />
@@ -55,9 +55,13 @@
         		{% endthumbnail %}
                 </div>
       		{% endfor %}
-            <a href="{% url book_index %}" class="float right alpha">
-                <img title="Ver más libros" src="/static/images/go-next.png" id="go-next" />
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+        <h4 class="grid_12 center mt_1">
+            <a href="{% url book_index %}" class="nobottom">
+                Ver todos los libros
+                <img title="Ver más libros" src="/static/images/go-next.png" class="nobottom valign" />
             </a>
+        </h4>
         {% endcache %}
 </div>
 
