@@ -16,27 +16,14 @@
                     </a>
                 </div>
 
-                <div class="hr clearfix">&nbsp;</div>
-                {% cache 500 sidebar %}
-				<!-- BY GENRE -->
                 <div id="box">
-                    <h1 class="nobottom"><a href="#" class="show_tagcloud genre">Géneros</a></h1>
-                    {% tagcloud "Genre" "50" "5"%}
+                    <h1 class="nobottom">
+                        <a href="/series">Popularidad</a>
+                    </h1>
                 </div>
 
-				<!-- BY NETWORK -->
                 <div id="box">
-                    <h1 class="nobottom"><a href="#" class="show_tagcloud network">Cadenas</a></h1>
-                    {% tagcloud "Network" "50" "5"%}
-                </div>
-                {% endcache %}
-
-			</div>
-			<div class="grid_9">
-			<!-- ALPHABETHICAL PAGINATION -->
-			<p>
-				<div class="pagination">
-                    <h2 class="center">
+                    <div class="center" id="alf">
                         <a class="navigator" href="#/letter/0/">0-9</a>
                         <a class="navigator" href="#/letter/A/">A</a>
                         <a class="navigator" href="#/letter/B/">B</a>
@@ -63,13 +50,30 @@
                         <a class="navigator" href="#/letter/W/">W</a>
                         <a class="navigator" href="#/letter/Y/">Y</a>
                         <a class="navigator" href="#/letter/Z/">Z</a>
-                    </h2>
-				</div>
-			</p>
+                    </div>
+                </div>
+
+                <div class="hr clearfix">&nbsp;</div>
+                {% cache 500 sidebar %}
+				<!-- BY GENRE -->
+                <div id="box">
+                    <h1 class="nobottom"><a href="#" class="show_tagcloud genre">Géneros</a></h1>
+                    {% tagcloud "Genre" "50" "5"%}
+                </div>
+
+				<!-- BY NETWORK -->
+                <div id="box">
+                    <h1 class="nobottom"><a href="#" class="show_tagcloud network">Cadenas</a></h1>
+                    {% tagcloud "Network" "50" "5"%}
+                </div>
+                {% endcache %}
+
+			</div>
+			<div class="grid_9">
                 <div id="series_list">
                 {% cache 500 list %}
                 <!-- THUMBNAILS -->
-                {% include "serie/generic_list.html" %}
+                {% include "core/generic_list.html" with obj_type="serie" %}
                 {% endcache %}
                 </div>
 			</div>

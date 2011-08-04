@@ -375,7 +375,7 @@ def get_numbers():
 
 def serie_index(request,
         template="serie/serie_list.html",
-        page_template="serie/generic_list.html",
+        page_template="core/generic_list.html",
         letter=False,
         genre_slug=False,
         network_slug=False,
@@ -402,6 +402,7 @@ def serie_index(request,
     context = {
         'objects': query, 
         'page_template': page_template,
+        'obj_type': 'serie',
         'pagination_per_page': 15,
     }
     if request.is_ajax():

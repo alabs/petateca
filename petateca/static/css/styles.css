@@ -1539,6 +1539,9 @@ border:0;
     vertical-align:middle;
 }
 
+#alf a{
+    font-size:2em;
+}
 
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
