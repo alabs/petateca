@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/static/css/reset.css" />
     <link rel="stylesheet" href="/static/css/styles.css" />
     <link rel="stylesheet" href="/static/css/jquery.jgrowl.css" />
+    <link rel="stylesheet" href="/static/css/jquery.jsquares.css" type="text/css" media="all" />
     <link rel="stylesheet" href="/static/css/jquery.rating.css" />
     <link rel="stylesheet" href="/static/css/jquery.qtip.css" />{% block extrastyle %}{% endblock %}
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Liberateca" />
@@ -142,10 +143,23 @@
     <script type="text/javascript" src="/static/js/jquery.jgrowl.js"></script>
     <script type="text/javascript" src="/static/js/jquery.rating.js"></script>
     <script type="text/javascript" src="/static/js/jquery.qtip.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.jsquares.js"></script>
     <script type="text/javascript" src="/static/js/endless.js"></script>
     <script type="text/javascript" src="/static/js/endless_on_scroll.js" ></script>
     <script type="text/javascript" src="/static/js/jquery.ba-bbq.min.js" ></script>
     <script type="text/javascript" src="/static/js/petateca.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#js-container').jsquares({
+            caption_height: 180,
+            caption_width: 330
+        });
+        //$('.js-container-wall').jsquares({
+        //    caption_height: 180,
+        //    caption_width: 330
+        //});
+    });
+    </script>
     {% block extrascript %}{% endblock %}
 </body>
 </html>

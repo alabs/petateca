@@ -3,26 +3,27 @@
 {% load thumbnail %}
 {% if objects %}
   {% paginate pagination_per_page objects %}
-  {% for serie in objects %}
-    <div class="grid_2" style="margin-bottom:2em; margin-right:1em;">
-        <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
-            <div class="preload" style="width:140px; height:200px">
-            {% spaceless %}
-                {% if serie.poster.src %}
-                    {% thumbnail serie.poster.src "150x200" as img_serie %}
-                        <img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" />
+        <div class="js-container-wall"> 
+  {% for obj in objects %}
+                <div class="js-image js-image-wall size-3">
+                    {% thumbnail obj.poster.src "150x200" as img_obj %}
+                        <a href="{{ obj.get_absolute_url }}"><img class="js-small-image" src="/static/{{ img_obj }}"/></a>
                     {% endthumbnail %}
-                {% else %}
-                <img class="prel serie" id="{{ serie.id }}" src="/static/images/image_not_available.png" height="300" width="200" /> 
-                {% endif %}
-                <span class="center">{{ serie.name }}</span>
-            {% endspaceless %}
-            </div>
-            </a>
-    </div>
-  {% endfor %}
-    <div class="hr"></div>
-    <div class="center">{% show_more "<div class="button">Ver más</div>" %}</div>
+                    <div class="js-small-caption">
+                        <span>{{ obj.name }}</span>
+                    </div>
+                    <div class="js-overlay-caption-content">
+                        <h4>{{ obj.name }}</h4>
+                        <p>
+<!-- FIXME -->
+                           {{ obj.description|truncatewords:40 }}<a href="{{ obj.get_absolute_url }}">Ver serie &raquo;</a>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+            <div class="center">{% show_more "<div class="button" style="width:15em;">Ver más</div>" %}</div>
 {% else %} 
-<h2 class="grid_12 caption clearfix">No hay series de este tipo todavia</h2>
+                                            <!-- FIXME -->
+    <h2 class="grid_12 caption clearfix">No hay series de este tipo todavia</h2>
 {% endif %}
