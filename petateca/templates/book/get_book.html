@@ -6,13 +6,13 @@
 {% load avatar_tags %}
 {% load cache %}
 {% block extrahead %}
-    <meta property="og:title" content="{{book.name}} | Liberateca" />
+    <meta property="og:title" content="{{book.name}} | Libro | Liberateca" />
     <meta property="og:description" content="{{ book.description }}" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
     <meta property="og:type" content="book" />
     <meta property="og:image" content="http://liberateca.net{{ book.poster.src.url }}" />
 {% endblock %}
-{% block title %}{{ book.name.title }} | Liberateca{% endblock %}
+{% block title %}{{ book.name.title }} | Libro | Liberateca{% endblock %}
 {% block contents %}
 
 <!-- COLUMN LEFT -->
@@ -62,7 +62,7 @@
 	<!-- IMAGE -->
     <div class="left">
         {% if book.poster.src %}
-            {% thumbnail book.poster.src "400x300" as img_book %}
+            {% thumbnail book.poster.src "200x200" as img_book %}
                 <img alt="{{ book.name }}" title="{{ book.name }}" id="poster" src="{{ img_book.url }}" />
             {% endthumbnail %}
         {% else %}
@@ -98,6 +98,9 @@
               <li id="edit-book">
                   <a href="{% url edit_book book_slug=book.slug_name %}"><img title="Editar libro" class="nobottom" alt="Editar libro" src="/static/images/accessories-text-editor.png"></a>
               </li>
+          </ul>
+          <ul class="horizontal_list">
+              <a href="/books"><img src="/static/images/book.png" class="nobottom" alt="Libro" title="Libro"></a>
           </ul>
         {% endif %}
         <!-- GENERAL RATING -->

@@ -380,7 +380,7 @@ position:absolute; right:0px; top:0px; margin:0px; padding:0px;
     margin: 0.5em;
     font-size: 13px;
     padding: 4px 25px 5px 5px;
-    width: 268px;
+    width: 40em;
 }
 
 
@@ -982,7 +982,11 @@ padding-right: 20px;
 }
 /* Search form */
 #search_form { 
+    position: absolute;
+    top: 3em;   left: 23em;
     padding: 6px 0 0;
+    position: absolute;
+    top: 3em;
 }
 #search_form #SearchField { width: 200px }
 #search_form #query { 
@@ -1042,7 +1046,7 @@ padding-right: 20px;
 #suggestions{ position: relative; left:235px; width:320px; display:none; top:8em; }
 /* SEARCHRESULTS */
 #searchresults { 
-border-width:1px; border-color:#919191; border-style:solid; width:320px; background-color:#a0a0a0; font-size:10px; line-height:14px; position:absolute; z-index:100; 
+border-width:1px; border-color:#919191; border-style:solid; width:55em; background-color:#a0a0a0; font-size:10px; line-height:14px; position:absolute; z-index:100; 
 /* FIXME: esto es una guarrada muy grande, se acomoda por el position absolute.
  * Por favor mirar para otro lado o arreglar */
 left:-23em;top: -10.2em;

@@ -57,13 +57,6 @@
                         <li><a href="{% url politica-privacidad %}">Política de privacidad</a></li>
                     </ul>
                 </li>
-        <li id="search_form">
-              <form action="/search/" id="searchform">
-                  <input id="search" name="q" onkeyup="search_lookup(this.value);" type="search" placeholder="Prueba con '{% any %}Futurama|Fringe|Dexter|House|Misfits|Breaking Bad{% endany %}'" autocomplete="off" required />
-                <input class="button" type="submit" value="Ir" />
-              </form>           
-            <div id="suggestions"></div>
-        </li>
     </ul>
         <ul class="main-pages right">
             {% if request.user.is_authenticated %}
@@ -102,6 +95,14 @@
                 </fieldset>
             {% endif %}
             </ul>
+
+                    <div id="search_form">
+                          <form action="/search/" id="searchform">
+                              <input id="search" name="q" onkeyup="search_lookup(this.value);" type="search" placeholder="Prueba con '{% any %}Futurama|Fringe|Dexter|House|Misfits|Breaking Bad{% endany %}'" autocomplete="off" required />
+                            <input class="button" type="submit" value="Ir" />
+                          </form>           
+                        <div id="suggestions"></div>
+                    </div>
                 </div>
 
         </nav>

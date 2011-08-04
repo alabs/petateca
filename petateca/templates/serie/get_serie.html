@@ -6,13 +6,13 @@
 {% load avatar_tags %}
 {% load cache %}
 {% block extrahead %}
-    <meta property="og:title" content="{{serie.name}} | Liberateca" />
+    <meta property="og:title" content="{{serie.name}} | Serie | Liberateca" />
     <meta property="og:description" content="{{ serie.description }}" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
     <meta property="og:type" content="tv_show" />
     <meta property="og:image" content="http://liberateca.net{{ serie.poster.src.url }}" />
 {% endblock %}
-{% block title %}{{ serie.name.title }} | Liberateca{% endblock %}
+{% block title %}{{ serie.name.title }} | Serie | Liberateca{% endblock %}
 {% block contents %}
 
 <!-- COLUMN LEFT -->
@@ -105,6 +105,9 @@
               <li id="edit-serie">
                   <a href="{% url edit_serie serie_slug=serie.slug_name %}"><img title="Editar serie" class="nobottom" alt="Editar serie" src="/static/images/accessories-text-editor.png"></a>
               </li>
+          </ul>
+          <ul class="horizontal_list">
+              <a href="/series"><img src="/static/images/tv.png" width="32" class="nobottom" alt="Serie" title="Serie"></a>
           </ul>
         {% endif %}
         <!-- GENERAL RATING -->
