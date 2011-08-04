@@ -72,7 +72,7 @@
 
 			</div>
                 <div id="books_list">
-                {% cache 500 list %}
+                {% cache 500 book_list %}
                 <!-- THUMBNAILS -->
                 {% include "core/generic_list.html" with obj_type="book" %}
                 {% endcache %}
