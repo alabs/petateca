@@ -39,7 +39,7 @@ class Book(models.Model):
     )
     description = models.TextField()
     pub_date = models.DateTimeField(default=datetime.now, editable=False)
-    isbn = models.BigIntegerField()
+    isbn = models.CharField(null=True, blank=True, max_length=20)
     rating = RatingField(
         range=5,
         can_change_vote=True,
