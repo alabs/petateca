@@ -80,10 +80,11 @@ def vote_link(request, link_type):
 
 @login_required
 @render_to('book/ajax/add_link.html')
-def ajax_add_link(request, link_type, obj_id=1):
+def ajax_add_link(request, link_type, obj_id):
     ''' 
     Formulario que agrega/edita links en AJAX
     ''' 
+#    import pdb; pdb.set_trace()
     book = get_object_or_404( m.Book, id=obj_id )
     Form = BookLinkForm
     # Si es para editar, devolvemos la instancia del link ya existente ;)
@@ -118,10 +119,10 @@ def ajax_add_link(request, link_type, obj_id=1):
         } 
         form = Form(data)
         if form.is_valid():
+            url = form.cleaned_data['url']
             # Comprobamos que el form sea correcta, lo procesamos
-            if not form.cleaned_data['url'].startswith('http://'):  # TODO: agregar magnet/ed2k, otros URIs
-                messages.error(request, 'URL invalida')
-                return { 'mensaje' : 'Invalida' }
+            if not url.startswith('http://') and not url.startswith('https://'):  # TODO: agregar magnet/ed2k, otros URIs
+                return { 'mensaje' : 'Invalida', 'book' : book }
             # Audio Lang, Subtitle y Episode hay que pasarlos como instancias
             # Episode ya lo tenemos, vamos a buscar audio_lang
             #lang = m.BookLanguages.objects.get(pk=form.cleaned_data['lang'])
@@ -166,7 +167,7 @@ def ajax_add_link(request, link_type, obj_id=1):
                         'type': 'book'
                     }), mimetype='application/json')
         else:
-            if form.errors['url'] == [u'Ya existe Link con este URL.']:
+            if form.errors['url'] == [u'Ya existe Book link con este URL.']:
                 return HttpResponse(simplejson.dumps({'mensaje': 'Link duplicado'}), mimetype='application/json')
             else: 
                 return HttpResponse(simplejson.dumps(form.errors), mimetype='application/json')
