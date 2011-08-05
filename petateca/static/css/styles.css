@@ -510,7 +510,8 @@ h2.caption a:hover { text-decoration : underline }
 #quicknav { background: url(../images/link_border.png) repeat-x }
 a .title { color: #000000 }
 .quicknavgrid_3 {
-    width: 204px;
+    width: 198px;
+    height: 216px;
     margin: 0px;
     padding: 20px 20px 0;
     display: inline;

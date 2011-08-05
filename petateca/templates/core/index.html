@@ -48,19 +48,64 @@
 
         <p class="grid_11 clearfix"></p>
         <div class="center">
-            <div class="quicknavgrid_3">
-            </div>
             <div class="quicknavgrid_3 quicknav">
-                    <h4 class="title ">Errores o sugerencias</h4>
-                    <p style="font-size:120%;">Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustarian</a>.</p>
+                <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+                <script>
+                new TWTR.Widget({
+                  version: 2,
+                  type: 'profile',
+                  rpp: 3,
+                  interval: 6000,
+                  width: 210,
+                  height: 300,
+                  theme: {
+                    shell: {
+                      background: '#bdbdbd',
+                      color: '#000000'
+                    },
+                    tweets: {
+                      background: '#fafafa',
+                      color: '#000000',
+                      links: '#666666'
+                    }
+                  },
+                  features: {
+                    scrollbar: false,
+                    loop: false,
+                    live: true,
+                    hashtags: true,
+                    timestamp: true,
+                    avatars: false,
+                    behavior: 'all'
+                  }
+                }).render().setUser('liberateca').start();
+                </script>
             </div>
-            <div class="quicknavgrid_3 quicknav">
-                    <h4 class="title ">Desarrollo</h4>
-                    <p style="font-size:120%;">Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
-            </div>
-            <div class="quicknavgrid_3 quicknav">
-                    <h4 class="title ">API v2</h4>
-                    <p style="font-size:120%;">Si eres programador puede resultarte interesarte nuestra <a href="/api/">API para desarrollar tus aplicaciones</a>. </p>
+            <div class="grid_9">
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">Errores o sugerencias</h4>
+                        <p>Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustarian</a>.</p>
+                </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">Desarrollo</h4>
+                        <p>Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
+                </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">API v2</h4>
+                        <p>Si eres programador puede resultarte interesarte nuestra <a href="/api/">API para desarrollar tus aplicaciones</a>. </p>
+                </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">Diseño</h4>
+                        <p>Estamos buscando diseñadores web para que nos ayuden a mejorar Liberateca y hacerla más usable. Ponte en contacto con nosotros en root[arroba]liberateca.net</p>
+                </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">Preguntas más frecuentes (FAQ)</h4>
+                        <p>Si tienes alguna duda sobre el proyecto puedes revisar las <a href="/faq/">preguntas más frecuentes</a> o enviarnos un correo a root[arroba]liberateca.net</p>
+                </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">Libros</h4>
+                        <p>Por fin puedes agregar tus libros preferidos a Liberateca. <a href="/books/add/">Agrega algún libro nuevo</a> o revisa <a href="/books/">el listado completo de libros</a>. Gracias por ayudarnos a ayudarle ayudarnos.</p>
+                </div>
             </div>
         </div>
 {% endblock %}
