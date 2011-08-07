@@ -102,27 +102,12 @@ function disc_rat_data(data){
 
 
 //Uservoice (Sugerencias)
-  var uservoiceOptions = {
-    key: 'liberateca',
-    host: 'liberateca.uservoice.com', 
-    forum: '106199',
-    alignment: 'left',
-    background_color:'#000000', 
-    text_color: 'white',
-    hover_color: '#0066CC',
-    lang: 'es',
-    showTab: true
-  };
-
-  function _loadUserVoice() {
-    var s = document.createElement('script');
-    s.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.uservoice.com/javascripts/widgets/tab.js';
-    document.getElementsByTagName('head')[0].appendChild(s);
-  }
-
-  _loadSuper = window.onload;
-  window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/FFqUl0DJZxv4hDFg4EbALQ.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
 
 
 // Google Analytics
