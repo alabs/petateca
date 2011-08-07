@@ -1,11 +1,13 @@
 import distribute_setup
 distribute_setup.use_setuptools()
 
+bla = 'hola mundo'
+
 from setuptools import setup
 
 setup(
     name="petateca",
-    version='0.1dev',
+    version='0.2dev',
     author="",
     author_email="",
     packages=['petateca',],
