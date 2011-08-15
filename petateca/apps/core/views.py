@@ -13,7 +13,7 @@ from avatar.models import Avatar
 def index(request):
     ''' Para la home '''
     serie_list = Serie.objects.order_by('rating_score').reverse().select_related('poster')[:15] 
-    books_list = Book.objects.order_by('rating_score').reverse().select_related('poster')[:7] 
+    books_list = Book.objects.order_by('rating_score').reverse().select_related('poster')[:15] 
     index_response = { 
         'series': serie_list,
         'books': books_list, 
