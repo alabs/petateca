@@ -1,7 +1,7 @@
 from core.decorators import render_to
 
 from serie.models import Serie, Link
-#from book.models import Book
+from book.models import Book
 
 from voting.models import Vote
 from django.contrib.auth.models import User
@@ -13,10 +13,10 @@ from avatar.models import Avatar
 def index(request):
     ''' Para la home '''
     serie_list = Serie.objects.order_by('rating_score').reverse().select_related('poster')[:15] 
-#    books_list = Book.objects.order_by('rating_score').reverse().select_related('poster')[:7] 
+    books_list = Book.objects.order_by('rating_score').reverse().select_related('poster')[:7] 
     index_response = { 
         'series': serie_list,
-       # 'books': books_list, 
+        'books': books_list, 
     }
     # Le damos una cookie que queramos, luego comprobamos que este
     # para enviar los mensajes con jgrowl

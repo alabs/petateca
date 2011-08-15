@@ -1346,6 +1346,13 @@ div.dialog a:link, div.dialog a:visited {
     padding: 20px;
 }
 
+.box_index {
+    background-color: #FAFAFA;
+    border-radius: 6px 6px 6px 6px;
+    margin-bottom: 10em;
+    padding: 20px;
+}
+
 .login_box {
     margin-left: auto;
     margin-right: auto;
