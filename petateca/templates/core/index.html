@@ -15,11 +15,15 @@
         <h2 class="grid_12 caption clearfix center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
 		<div class="hr grid_12 clearfix">&nbsp;</div>
 
-{% url book_index as url_book %}
-{% include "core/_index_jsquares.html" with type_plur="Libros" type_ind="libro" cacheid="book-list" elements=books type_message="Ver todos los libros" url_index=url_book jscontainerid="js-container-2" %}
+{% cache 500 index-books %}
+    {% url book_index as url_book %}
+    {% include "core/_index_jsquares.html" with type_plur="Libros" type_ind="libro" elements=books type_message="Ver todos los libros" url_index=url_book jscontainerid="js-container-2" %}
+{% endcache %}
 
-{% url serie_index as url_serie %}
-{% include "core/_index_jsquares.html" with type_plur="Series" type_ind="serie" cacheid="serie-list" elements=series type_message="Ver todas las series" url_index=url_serie jscontainerid="js-container" %}
+{% cache 500 index-series %}
+    {% url serie_index as url_serie %}
+    {% include "core/_index_jsquares.html" with type_plur="Series" type_ind="serie" elements=series type_message="Ver todas las series" url_index=url_serie jscontainerid="js-container" %}
+{% endcache %}
 
         <p class="grid_11 clearfix"></p>
         <div class="center">

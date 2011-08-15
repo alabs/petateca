@@ -1,8 +1,6 @@
-{% load cache %}
 {% load thumbnail %}
 <div class="grid_12" id="box">
     <h3 class="grid_11 mb_1">{{ type_plur }} con mejor puntuación</h2>
-    {% cache 500 cacheid %}
         <div id="{{ jscontainerid }}"> 
 			{% for e in elements %}
                 <div class="js-image {% cycle "size-1" "size-2" "size-3" %}" style="{% cycle "top:0px;left:0px;" "top:0px;left:101px;" "top:0px;left:178px;" "top:0px;left:324px;" "top:0px;left:426px;" "top:0px;left:502px;" "top:126px;left:0px;" "top:102px;left:101px;" "top:127px;left:330px;" "top:202px;left:481px;" "top:329px;left:505px;" "top:202px;left:583px;" "top:253px;left:0px;" "top:205px;left:102px;" "top:202px;left:179px;" %}"> 
@@ -28,5 +26,4 @@
                 <img title="Ver más {{ type_plur }}" src="/static/images/go-next.png" class="nobottom valign" />
             </a>
         </h4>
-    {% endcache %}
 </div>
