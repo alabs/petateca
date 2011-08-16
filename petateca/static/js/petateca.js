@@ -852,6 +852,7 @@ $(document).ready(function () {
         e.preventDefault();
         $("fieldset#signin_menu").toggle();
         $(".signin").toggleClass("menu-open");
+        $("#username").focus();
     });
     
     $("fieldset#signin_menu").mouseup(function() {
