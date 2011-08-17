@@ -331,9 +331,14 @@ $(document).ready(function () {
            $.each(fields, function(index, f){
                if (f.val()==='') {
                    event.preventDefault();
-                   f.addClass('hightlight'); 
+                   // f.addClass('hightlight'); 
+                   f.parent().addClass('error');
+                   $.jGrowl('Ha ocurrido un error durante el envio, revisa el formulario');
                    //return false;
-               } else {f.removeClass('hightlight');}
+               } else {
+                   //f.removeClass('hightlight');
+                   f.parent().removeClass('error');
+               }
            });
         
            // TODO: genres hightlight

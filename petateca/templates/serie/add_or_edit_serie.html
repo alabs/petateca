@@ -2,27 +2,29 @@
 {% load thumbnail %}
 {% block title %}{% if serie %}Editando serie {{ serie.name.title }}{% else %}Agregando serie{% endif %} | Liberateca{% endblock %}
 {% block contents %}
-<div class="grid_10">
+<div class="grid_12">
 <form id="add_serie_form" enctype="multipart/form-data" action="{% if serie %}{% url edit_serie serie_slug=serie.slug_name %}{% else %}{% url add_serie %}{% endif %}" method="POST">
     <h1>{% if serie %}Editando serie {{ serie.name.title }}{% else %}Agregando serie{% endif %}</h1>
-<ul>
-    <li class="grid_3">
+    <ul class="controls grid_3">
+        <li class="center">
             {% if serie.poster.src %}
                 {% thumbnail serie.poster.src "400x300" as img_serie %}
                 <img id="poster" src="{{ img_serie.url }}" /> {% endthumbnail %}
             {% else %}
                  <img src="/static/images/image_not_available.png" height="200"> 
             {% endif %}
-            {{ img_form }}
+                {{ img_form.non_field_errors }}
+                {{ img_form.src.errors }}
+                {{ img_form.src }}
+        </li>
+    </ul>
+    <ul class="controls grid_3">
         {% if not serie %}
             <div class="notice_small">
                 <img class="left" src="/static/images/dialog-warning-big.png" alt="Atencion" style="margin-right:1em;">
                 <b>¡Atención!</b> Comprueba a través del buscador o del <a href="{% url serie_index %}">listado de series</a> que la serie que vayas a agregar no se encuentre ya.
             </div>
         {% endif %} 
-    </li>
-    <li class="grid_3">
-        <ul>
             {{ form.non_field_errors }}
             <li class="fieldwrapper">
                 {{ form.name_es.errors }}
@@ -54,20 +56,26 @@
                 <label for="id_genres">Géneros:</label>
                 {{ form.genres }}
             </li>
-        </ul>
-    </li>
-    <li class="grid_3">
+    </ul>
+    <ul class="controls grid_4">
+            <li>
                 <label for="id_genres">Descripción [es]:</label>
                     {{ form.description_es.errors }}
                     {{ form.description_es }}
+            </li>
+            <li>
                 <label for="id_genres">Descripción [en]:</label>
                     {{ form.description_en.errors }}
                     {{ form.description_en }}
-    </li>
-    <li class="grid_12 center">
-        <input class="button" id="submit_serie" type="submit" style="margin-top:2em;" value="{% if serie %}Actualizar{% else %}Agregar{% endif %}" />
-    </li>
-</ul>
+            </li>
+    </ul>
+    <div class="clear"></div>
+        <input class="button center" id="submit_serie" type="submit" value="{% if serie %}Actualizar{% else %}Agregar{% endif %}" />
 </form>
 </div>
+{% endblock %}
+{% block extrascript %}
+<script>
+$('form').highlight();
+</script>
 {% endblock %}
