@@ -992,4 +992,7 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
   });
 
   $(window).trigger( "hashchange" );
+
+  $('form').highlight();
+
 });

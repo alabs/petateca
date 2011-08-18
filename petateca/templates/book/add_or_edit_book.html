@@ -5,11 +5,12 @@
         <script type="text/javascript" src="/static/js/RelatedObjectLookups_small.js"></script>
 {% endblock %}
 {% block contents %}
-<div class="grid_10">
+<div class="grid_10" id="box">
 <form id="add_book_form" enctype="multipart/form-data" action="{% if book %}{% url edit_book book_slug=book.slug_name %}{% else %}{% url add_book %}{% endif %}" method="POST">
     <h1>{% if book %}Editando libro {{ book.name.title }}{% else %}Agregando libro{% endif %}</h1>
 <ul>
-    <li class="grid_4">
+    <ul class="controls grid_4">
+        <li>
             {% if book.poster.src %}
                 {% thumbnail book.poster.src "400x300" as img_book %}
                 <img id="poster" src="{{ img_book.url }}" /> {% endthumbnail %}
@@ -17,15 +18,20 @@
                  <img src="/static/images/image_not_available.png" height="200"> 
             {% endif %}
             {{ img_form }}
+        </li>
+        <li class="center">
+            <input class="button" id="submit_book" type="submit" style="margin-top:2em;" value="{% if book %}Actualizar{% else %}Agregar{% endif %}" />
+        </li>
         {% if not book %}
+        <li>
             <div class="notice_small">
                 <img class="left" src="/static/images/dialog-warning-big.png" alt="Atencion" style="margin-right:1em;">
                 <b>¡Atención!</b> Comprueba a través del buscador o del <a href="{% url book_index %}">listado de libros</a> que el libro que vayas a agregar no se encuentre ya.
             </div>
+        </li>
         {% endif %} 
-    </li>
-    <li class="grid_8">
-        <ul class="grid_8">
+    </ul>
+        <ul class="grid_4 controls">
             {{ form.non_field_errors }}
             <li class="fieldwrapper">
                 {{ form.name.errors }}
@@ -43,7 +49,7 @@
                 {{ form.isbn }}
             </li>
         </ul>
-        <ul class="grid_3">
+        <ul class="grid_3 controls">
             <li class="fieldwrapper">
                 {{ form.category.errors }}
                 <label for="id_category">Categoría:</label>
@@ -55,10 +61,6 @@
                 {{ form.author }}
             </li>
         </ul>
-    </li>
-    <li class="grid_12 center">
-        <input class="button" id="submit_book" type="submit" style="margin-top:2em;" value="{% if book %}Actualizar{% else %}Agregar{% endif %}" />
-    </li>
 </ul>
 </form>
 </div>

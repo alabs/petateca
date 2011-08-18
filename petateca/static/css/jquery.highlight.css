@@ -267,10 +267,11 @@
 		font-family: Verdana, Arial, Helvetica, sans-serif;
 		}
 
-	.input[type="text"],
+	input[type="text"],
 	textarea
 		{
 		padding:1px;
+        width: 90%;
 		}
 		
 	.input[type="radio"],
