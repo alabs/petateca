@@ -993,6 +993,16 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
 
   $(window).trigger( "hashchange" );
 
-  $('form').highlight();
+  $('#add_book_form, #add_serie_form').highlight();
 
+  $('#js-container').jsquares({
+      shuffle_in: false, 
+      caption_height: 180,
+      caption_width: 330
+  });
+  $('#js-container-2').jsquares({
+      shuffle_in: false, 
+      caption_height: 180,
+      caption_width: 330
+  });
 });

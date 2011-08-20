@@ -1476,7 +1476,6 @@ a.signin.menu-open span {
 }
 
 #signin_menu input[type=text], #signin_menu input[type=password] {
-    display:block;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
     font-size:13px;

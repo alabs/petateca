@@ -9,7 +9,7 @@
 <div id="box" class="center login_box">
     <h1>Registro de usuario</h1>
     <form class="center" method='post' action="{% url registration_register %}">
-        <ul>
+        <ul class="controls">
             {{ form.non_field_errors }}
             <li class="fieldwrapper">
                 {{ form.username.errors }}

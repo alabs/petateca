@@ -267,7 +267,14 @@
 		font-family: Verdana, Arial, Helvetica, sans-serif;
 		}
 
-	input[type="text"],
+	#add_book_form input[type="text"],
+	textarea
+		{
+		padding:1px;
+        width: 90%;
+		}
+
+	#add_serie_form input[type="text"],
 	textarea
 		{
 		padding:1px;
