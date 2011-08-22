@@ -7,5 +7,5 @@
             <img alt="Descrición" title="Ver descripción" class="right espoiler nobottom" id="{{ episode.id }}" rel="{% url ajax_espoiler serie_id=episode.season.serie.id season=episode.season.season episode=episode.episode %}" src="/static/images/emblem-photos.png">
             {% if request.user.is_authenticated %}<img alt="Añadir" title="Añadir un enlace" id="epi_{{ episode.id }}" rel="/series/links/add/episode/" class="add_link right nobottom" src="/static/images/list-add.png">{% endif %}
         </a>
-    <div class="list_inside" id="inside{{episode.pk}}"></div>
+    <ul class="list_inside" id="inside{{episode.pk}}"></ul>
 </li>

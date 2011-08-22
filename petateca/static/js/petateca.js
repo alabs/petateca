@@ -430,7 +430,7 @@ $(document).ready(function () {
             $(this).addClass('selected_list');
         }
 
-        $inside = $(this).siblings();
+        $inside = $(this).siblings('ul');
         $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
         href = $(this).attr('href');
         $inside.load(href);
@@ -839,11 +839,9 @@ $(document).ready(function () {
         // poor's man toggle :(
         switch(visibilidad) {
             case  "block" : 
-                console.log('abierto');
                 hide_tagcloud($(this));
                 break;
             case  "none" : 
-                console.log('cerrado');
                 show_tagcloud($(this));
                 break;
         }
@@ -945,8 +943,6 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
           // ej: genre, network, category, author
           var type = url.split('/')[1]; 
 
-          console.log(type);
-
           switch (type) {
               case 'genre':
                   show_tagcloud($('.show_tagcloud.genre'));
@@ -976,7 +972,6 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
         switch (object) {
             case 'series':
               $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-              // console.log(url);
               // url que esperamos es algo por el estilo: genre/science-fiction
               $('#series_list').load('/series/lookup' + url);
               break;
