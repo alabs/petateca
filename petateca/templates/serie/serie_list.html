@@ -71,10 +71,12 @@
 			</div>
 			<div class="grid_9">
                 <div id="series_list">
-                {% cache 500 list %}
-                <!-- THUMBNAILS -->
-                {% include "core/generic_list.html" with obj_type="serie" %}
-                {% endcache %}
+                    <div class="js-container-wall">
+                        {% cache 500 list %}
+                            <!-- THUMBNAILS -->
+                            {% include "core/generic_list.html" with obj_type="serie" %}
+                        {% endcache %}
+                    </div>
                 </div>
 			</div>
 		</div>

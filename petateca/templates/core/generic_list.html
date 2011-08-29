@@ -3,28 +3,26 @@
 {% load thumbnail %}
 {% if objects %}
   {% paginate pagination_per_page objects %}
-        <div class="js-container-wall"> 
   {% for obj in objects %}
-                <div class="js-image js-image-wall size-3">
-                {% if obj.poster %}
-                    {% thumbnail obj.poster.src "150x200" as img_obj %}
-                        <a href="{{ obj.get_absolute_url }}"><img class="js-small-image" src="/static/{{ img_obj }}"/></a>
-                    {% endthumbnail %}
-                {% else %} 
-                        <a href="{{ obj.get_absolute_url }}"><img class="js-small-image" src="/static/images/image_not_available.png"/></a>
-                {% endif %}
-                    <div class="js-small-caption">
-                        <span>{{ obj.name }}</span>
-                    </div>
-                    <div class="js-overlay-caption-content">
-                        <h4><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></h4>
-                        <p>
-                        </p>
-                    </div>
-                </div>
-            {% endfor %}
+        <div class="js-image js-image-wall size-3">
+        {% if obj.poster %}
+            {% thumbnail obj.poster.src "150x200" as img_obj %}
+                <a href="{{ obj.get_absolute_url }}"><img class="js-small-image" alt="{{ obj.name }}" src="/static/{{ img_obj }}"/></a>
+            {% endthumbnail %}
+        {% else %} 
+                <a href="{{ obj.get_absolute_url }}"><img class="js-small-image" src="/static/images/image_not_available.png"/></a>
+        {% endif %}
+            <div class="js-small-caption">
+                <span>{{ obj.name }}</span>
+            </div>
+            <div class="js-overlay-caption-content">
+                <h4><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></h4>
+                <p>
+                </p>
+            </div>
         </div>
-            <div class="center">{% show_more "<div class='hr clean'></div><div class='button' style='width:15em; margin-top:2em;'>Ver más</div>" %}</div>
+    {% endfor %}
+        {% show_more "<div class="center"><div class='hr clean'></div><div class='button' style='width:15em; margin-top:2em;'>Ver más</div></div>" %}
 {% else %} 
     <h2 class="caption clearfix center">No hay {% if obj_type == 'serie' %}serie{% endif %}{% if obj_type == 'book' %}libro{% endif %}s de este tipo todavia</h2>
 {% endif %}
