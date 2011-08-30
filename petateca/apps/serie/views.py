@@ -40,6 +40,7 @@ def get_serie(request, serie_slug):
             'season_list': Season.objects.filter(serie=serie).order_by('season'),
             'score': score,
             'favorite': favorite_status,
+            'obj_type': 'serie',
         }
 
 

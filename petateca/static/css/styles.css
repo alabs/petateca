@@ -346,6 +346,10 @@ position:absolute; right:0px; top:0px; margin:0px; padding:0px;
 #header .signed-in:hover, #header .main-pages li.kids:hover > a {
     background-color: #000000;
 }
+#header .header-selected{
+    background-color: #000000;
+    color: #FFFFFF;
+}
 #header .signed-in:hover > a {
     background-image: url("http://vicmackey.trakt.tv/images/arrow-down-on.png");
     color: #FFFFFF;

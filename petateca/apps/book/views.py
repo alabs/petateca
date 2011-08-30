@@ -44,6 +44,7 @@ def get_book(request, book_slug):
             'book': book,
             'score': score,
             'favorite': favorite_status,
+            'obj_type': 'book',
         }
 
 
