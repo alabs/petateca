@@ -1,0 +1,21 @@
+{% extends "zinnia/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Authors" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "Author list" %}</h2>
+<div>
+  <ul>
+    {% for object in object_list %}
+    <li class="vcard">
+      <a href="{% url zinnia_author_detail object.username %}"
+         title="{{ object.username }}" class="fn nickname url">
+        {{ object.username }}
+      </a>
+      {% blocktrans count object.entries_published_set.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

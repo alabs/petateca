@@ -87,6 +87,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'core.context_processors.site_name',
+    'zinnia.context_processors.version',
+    'zinnia.context_processors.media',
 )
 
 
@@ -116,6 +118,9 @@ INSTALLED_APPS = (
     'threadedcomments',     # comentarios anidados
     'memcache_status',
     'djcelery',
+    'tagging',
+    'mptt',
+    'zinnia',
     ### sentry logger ###
     'indexer',
     'paging',
