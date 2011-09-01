@@ -1,11 +1,11 @@
-{% extends "zinnia/skeleton.html" %}
+{% extends "base.html" %}
 {% load zinnia_tags tagging_tags i18n %}
 
 {% block breadcrumbs %}
   {% zinnia_breadcrumbs %}
 {% endblock %}
 
-{% block sidebar %}
+{% block contents %}
 <div class="search">
   <h3>{% trans "Search" %}</h3>
   <form method="get" id="searchform" action="{% url zinnia_entry_search %}">
@@ -95,4 +95,6 @@
   </ul>
 </div>
 {% endif %}
+
+
 {% endblock %}
