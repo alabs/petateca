@@ -29,21 +29,24 @@
         <div class="content" id="header">
             <ul class="main-pages left">
                 <li class="kids">
-                <a class="{% if obj_type == 'serie' %}header-selected{% endif %}" href="{% url serie_index %}">Series</a>
+                <a href="{% url serie_index %}" id="header-serie">Series</a>
                     <ul>
                         <li><a href="{% url serie_index %}">Listado</a></li>
                         <li><a href="{% url sneak_links %}">Ver últimas</a></li>
                     </ul>
                 </li>
                 <li class="kids">
-                    <a class="{% if obj_type == 'book' %}header-selected{% endif %}" href="{% url book_index %}">Libros</a>
+                    <a href="{% url book_index %}" id="header-book">Libros</a>
                     <ul>
                         <li><a href="{% url book_index %}">Listado</a></li>
                         <li><a href="{% url add_book %}">Agregar</a></li>
                     </ul>
                 </li>
                 <li class="kids">
-                    <a class="" href="/">Liberateca</a>
+                  <a href="/blog/" id="header-blog">Blog</a>
+                </li>
+                <li class="kids">
+                    <a href="/" id="header-liberateca">Liberateca</a>
                     <ul>
                         <li><a href="{% url faq %}">FAQ</a></li>
                         <li><a href="http://liberateca.uservoice.com/">Sugerencias</a></li>

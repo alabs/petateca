@@ -1000,4 +1000,25 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
       caption_height: 180,
       caption_width: 330
   });
+
+  // marcar en header
+  section = document.URL.split('/')[3];
+  switch (section) {
+    case 'blog': 
+      $('#header-blog').addClass('header-selected');
+      break;
+    case 'serie':
+       $('#header-serie').addClass('header-selected');
+       break;
+    case 'series':
+       $('#header-serie').addClass('header-selected');
+       break;
+    case 'book':
+       $('#header-book').addClass('header-selected');
+       break;
+    case 'books':
+       $('#header-book').addClass('header-selected');
+       break;
+  }
+
 });
