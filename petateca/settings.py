@@ -206,6 +206,9 @@ BROKER_VHOST = "/"
 
 PISTON_IGNORE_DUPE_MODELS = True
 
+BITLY_LOGIN = 'liberateca'
+BITLY_API_KEY = 'CAMBIAME_EN_LOCAL_SETTINGS'
+ZINNIA_URL_SHORTENER_BACKEND = 'zinnia.url_shortener.backends.bitly'
 
 # Con local_settings podemos reescribir / agregar settings que sean 
 # propios de la maquina donde se encuentre, por ejemplo BBDD y DEBUG
