@@ -1,4 +1,5 @@
 {% load tagging_tags comments i18n %}
+{% load thumbnail %}
 
 <div class="entry-header span-16 last">
   <h2 class="entry-title">
@@ -7,16 +8,6 @@
     </a>
   </h2>
   <p class="entry-info">
-    {% trans "Written by" %}
-    {% for author in object.authors.all %}
-    <span class="vcard author">
-      <a href="{% url zinnia_author_detail author %}" class="fn nickname url"
-         title="{% blocktrans with author as author %}Show {{ author }} entries{% endblocktrans %}">
-        {{ author }}
-      </a>
-    </span>{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-    {% trans "on" %}
     <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">
       {{ object.creation_date|date:"DATE_FORMAT" }}
     </abbr>
@@ -28,7 +19,7 @@
     </a>
     {% if not forloop.last %}, {% endif %}
     {% endfor %}
-    {% endif %}.
+    {% endif %}
   </p>
 </div>
 
@@ -37,7 +28,9 @@
   <div class="entry-image">
     <p>
       <a href="{{ object.get_absolute_url }}" rel="bookmark">
-	<img src="{{ object.image.url }}" alt="{{ object.title }}" class="left" />
+        {% thumbnail object.image "200x200" as img %}
+	<img src="{{ img.url }}" alt="{{ object.title }}" class="left" />
+  {% endthumbnail %}  
       </a>
     </p>
   </div>

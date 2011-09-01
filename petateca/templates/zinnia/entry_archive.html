@@ -8,8 +8,6 @@
 
 {% block script %}
   {{ block.super }}
-  <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.js"></script>
-  <script type="text/javascript" src="{{ ZINNIA_MEDIA_URL }}js/jquery.ui.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
       $("#slider").tabs({ fx:{ opacity: "toggle"}}).tabs("rotate", 5000, true);

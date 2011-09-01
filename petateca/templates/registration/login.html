@@ -9,6 +9,7 @@
 <div id="box" class="center login_box">
     <h1>Acceder</h1>
     <form id="login_form" method="post" action="{% url django.contrib.auth.views.login %}">
+      {% csrf_token %}
         <ul>
             {{ form.as_ul }}
             <li><input type="hidden" name="next" value="{{ next }}" />

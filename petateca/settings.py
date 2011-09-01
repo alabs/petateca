@@ -174,24 +174,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 DEFAULT_USER_FOR_LINKS = 'liberateca'
-
-LOGIN_EXEMPT_URLS = (
-    r'^static/', 
-    r'^accounts/invitation/request/$', 
-    r'^admin/',
-    r'^accounts/register/',
-    r'^accounts/login/',
-    r'^accounts/activate/',
-    r'^accounts/password/reset/',
-    # la API se encarga de la autenticacion
-    # usuarios no registrados pueden entrar a la Doc
-    r'^api/',
-)
-
-LOGIN_URL_INDEX = '/accounts/signin/'
-INVITATION_MAIL = 'invitaciones@liberateca.net'
 ADMIN_MAIL = 'admin@liberateca.net'
-
 
 CACHE_BACKEND = 'dummy://'
 
@@ -211,9 +194,6 @@ ENDLESS_PAGINATION_PER_PAGE = 15
 ENDLESS_PAGINATION_LOADING = ''' <img src="/static/images/ajax-loading-bar.gif" alt="loading" /> '''
 
 COMMENTS_APP = 'threadedcomments'
-
-#Valid values are http, sql
-IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
 
 import djcelery
 djcelery.setup_loader()

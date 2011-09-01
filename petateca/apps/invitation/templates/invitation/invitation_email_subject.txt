@@ -1,2 +1,0 @@
-{% load i18n %}
-{% blocktrans with site.name as sitename and invitation_key.from_user.username as username %}Invitation from {{ username }} to join {{ sitename }}{% endblocktrans %}
