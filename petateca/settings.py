@@ -118,9 +118,11 @@ INSTALLED_APPS = (
     'threadedcomments',     # comentarios anidados
     'memcache_status',
     'djcelery',
+    ### blog ###
     'tagging',
     'mptt',
     'zinnia',
+    'django_bitly',
     ### sentry logger ###
     'indexer',
     'paging',
