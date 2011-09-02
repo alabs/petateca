@@ -30,10 +30,11 @@ pip install src/django-ratings-0.3.6.tar.gz &&
 
 # Utilizamos el fork de HonzaKral que esta mantenido, la version del pip es muy vieja
 # https://github.com/HonzaKral/django-threadedcomments
-pip install src/django-threadedcomments-0.9.tar.gz 
+pip install src/django-threadedcomments-0.9.tar.gz &&
 
 # Herramientas de debugging
 pip install ipdb django-debug-toolbar &&
+pip install -e git://github.com/jbalogh/django-debug-cache-panel#egg=cache_panel &&
 
 # Desde petateca (donde esta manage.py)
 cd petateca &&

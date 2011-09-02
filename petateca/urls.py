@@ -67,4 +67,5 @@ if settings.DEBUG:
         (r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
         url(r'^rosetta/', include('rosetta.urls')),
+        url(r'^', include('debug_toolbar_htmltidy.urls'))
     )
