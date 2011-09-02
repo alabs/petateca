@@ -239,6 +239,7 @@ BROKER_VHOST = "/"
 
 PISTON_IGNORE_DUPE_MODELS = True
 
+AXES_LOGIN_FAILURE_LIMIT = 10
 
 # Con local_settings podemos reescribir / agregar settings que sean 
 # propios de la maquina donde se encuentre, por ejemplo BBDD y DEBUG
