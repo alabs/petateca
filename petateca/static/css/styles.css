@@ -235,7 +235,7 @@ position:absolute; right:0px; top:0px; margin:0px; padding:0px;
 #header > ul > li > a, #header .signed-in > a, #header .signed-in-notice > a {
     display: block;
     float: left;
-    font-size: 15px;
+    font-size: 1.1em;
     line-height: 40px;
     margin-left: 5px;
     padding: 0 10px;
@@ -384,7 +384,7 @@ position:absolute; right:0px; top:0px; margin:0px; padding:0px;
     margin: 0.5em;
     font-size: 13px;
     padding: 4px 25px 5px 5px;
-    width: 40em;
+    width: 90%;
 }
 
 
