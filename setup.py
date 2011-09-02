@@ -35,6 +35,7 @@ setup(
         'python-twitter',
         'django-memcache-status',
         'django-celery',
+        'django-axes',
         #'django-piston', lo instalamos a traves de src/ por ser este fork
         # https://bitbucket.org/joeb/django-piston/
         #'django-ratings',

@@ -82,6 +82,7 @@
             <li class="kids" id="topnav">  <a href="/accounts/login/" class="signin"><span>Acceder</span></a> 
                 <fieldset id="signin_menu">
                     <form method="post" id="signin" action="/accounts/login/">
+                      {% csrf_token %}
                     <label for="username">Usuario o correo</label>
                     <input id="username" name="username" value="" title="username" tabindex="4" type="text">
                     </p>

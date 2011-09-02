@@ -69,6 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'axes.middleware.FailedLoginMiddleware',
     'sentry.client.middleware.Sentry404CatchMiddleware',
 )
 
@@ -116,6 +117,7 @@ INSTALLED_APPS = (
     'threadedcomments',     # comentarios anidados
     'memcache_status',
     'djcelery',
+    'axes',
     ### sentry logger ###
     'indexer',
     'paging',
