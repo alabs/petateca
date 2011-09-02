@@ -348,4 +348,11 @@
 		background-color:#e2e2e2;
 		background-image:url(../images/highlight.gif);
 		}
+
+	.highlight-error{
+    color: #000;
+		background-color:#e2e2e2;
+		background-image:url(../images/highlight-error.gif);
+		font-weight: bold;
+		}
 	

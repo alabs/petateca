@@ -332,12 +332,12 @@ $(document).ready(function () {
                if (f.val()==='') {
                    event.preventDefault();
                    // f.addClass('hightlight'); 
-                   f.parent().addClass('error');
+                   f.parent().addClass('highlight-error');
                    $.jGrowl('Ha ocurrido un error durante el envio, revisa el formulario');
                    //return false;
                } else {
                    //f.removeClass('hightlight');
-                   f.parent().removeClass('error');
+                   f.parent().removeClass('highlight-error');
                }
            });
         
