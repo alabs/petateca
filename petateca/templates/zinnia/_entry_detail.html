@@ -1,35 +1,21 @@
 {% load tagging_tags comments i18n %}
 {% load thumbnail %}
 
-<div class="entry-header span-16 last">
-  <h2 class="entry-title">
+<div class="entry-header grid_12 last">
+  <h2 class="entry-title caption center">
     <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
       {{ object.title }}
     </a>
   </h2>
-  <p class="entry-info">
-    <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">
-      {{ object.creation_date|date:"DATE_FORMAT" }}
-    </abbr>
-    {% if object.categories.count %}
-    {% trans "in" %}
-    {% for category in object.categories.all %}
-    <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">
-      {{ category }}
-    </a>
-    {% if not forloop.last %}, {% endif %}
-    {% endfor %}
-    {% endif %}
-  </p>
 </div>
 
-<div class="entry-body span-16 last">
+<div class="entry-body grid_12 last">
   {% if object.image %}
   <div class="entry-image">
     <p>
       <a href="{{ object.get_absolute_url }}" rel="bookmark">
         {% thumbnail object.image "200x200" as img %}
-	<img src="{{ img.url }}" alt="{{ object.title }}" class="left" />
+	<img src="{{ img.url }}" alt="{{ object.title }}" class="left" style="margin:1em;" />
   {% endthumbnail %}  
       </a>
     </p>
@@ -41,7 +27,7 @@
 </div>
 
 <div class="entry-footer">
-  <p class="entry-tags span-16 last">
+  <p class="entry-tags grid_12 last">
     <strong>{% trans "Tags" %}</strong> :
     {% tags_for_object object as tag_list %}
     {% for tag in tag_list %}
@@ -53,7 +39,7 @@
     {% endfor %}
   </p>
 
-  <p class="entry-shorturl span-16 last">
+  <p class="entry-shorturl grid_12 last">
     <strong>{% trans "Short url" %}</strong> :
     {% if object.short_url %}
     <a href="{{ object.short_url }}" title="{{ object.title }}">
@@ -64,7 +50,7 @@
     {% endif %}
   </p>
 
-  <p class="entry-comments span-16 last">
+  <p class="entry-comments grid_12 last">
     <strong>{% trans "Discussions" %}</strong> :
     {% with object.comments.count as comment_count %}
     {% if comment_count %}
@@ -97,4 +83,23 @@
     {% endif %}
     {% endwith %}
   </p>
+
+    {% if object.categories.count %}
+  <p class="entry-category grid_4 last">
+    <strong>{% trans "Category" %}</strong> :
+    {% for category in object.categories.all %}
+    <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">
+      {{ category }}
+    </a>
+    {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+  </p>
+    {% endif %}
+
+  <p class="entry-info grid_3">
+    <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">
+      {{ object.creation_date|date:"d/m/Y" }}
+    </abbr>
+  </p>
+
 </div>

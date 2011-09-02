@@ -466,6 +466,7 @@ div.paginator span.page:hover, div.paginator span.next:hover, div.paginator span
 div.paginator span.page:hover a, div.paginator span.next:hover a, div.paginator span.previous:hover a { color: white; }
 div.paginator span.current { border-color: #006699; background-color: #006699; color: white; }
 
+.hentry {margin:1em;}
 .hentry .entry-header { margin-bottom: 1em; }
 .hentry .entry-header .entry-title { margin: 0; padding-left: 0.25em; }
 .hentry .entry-header .entry-info { margin: 0; padding-left: 2em; background: transparent url(../img/category.png) no-repeat scroll 0.5em; }

@@ -4,6 +4,7 @@
         <div id="form-comment">
             {% get_comment_form for object as form %}
             <form action="/comments/post/" method="POST" class="comment_form">
+              {% csrf_token %}
             {# pasamos el formulario for y quitamos el markup para que solo quede el input del texto y los hidden que necesita #}
             <input type="hidden" value="{{ request.path }}" name="next" />
             {% for field in form %}

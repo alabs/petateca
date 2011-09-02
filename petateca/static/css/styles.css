@@ -251,17 +251,6 @@ position:absolute; right:0px; top:0px; margin:0px; padding:0px;
     float: left;
     overflow: hidden;
 }
-#header .logo {
-    background: url("http://vicmackey.trakt.tv/images/logo-tv.png") no-repeat scroll 1px 0 transparent;
-    color: #FFFFFF;
-    display: block;
-    float: left;
-    font-size: 26px;
-    font-weight: bold;
-    line-height: 40px;
-    margin-left: 0;
-    padding-left: 38px;
-}
 #header .main-pages {
     margin-left: 10px;
 }
@@ -1557,6 +1546,39 @@ border:0;
 #alf a{
     font-size:2em;
 }
+
+/* zinnia */
+
+#sidebar div:first-child h3 { margin-top: 0; }
+#sidebar h3 { background-color: #e9e9f3; padding: 0.5em; margin-bottom:1em; }
+#sidebar p { padding-left: 1em; }
+#sidebar li ul, #sidebar li ol { margin: 0 1.5em 0 0; }
+#sidebar input { width: auto; }
+#sidebar .calendar h3 { margin-bottom: 0; }
+#sidebar .calendar .month-navigation { padding-bottom: 1.5em; }
+#sidebar .calendar .month-navigation .month-previous { float: left; }
+#sidebar .calendar .month-navigation .month-next { float: right; }
+#sidebar .tags ul { list-style-type: none; list-style: none; font-size: 1.5em; line-height: 1.8em; }
+#sidebar .tags ul, #sidebar .tags ul li { margin: 0px; padding: 0px; display: inline; }
+#sidebar .tags ul li { list-style-image: none; list-style-type: none; margin-left: 0px; }
+#sidebar .tags ul .tag_1 { font-size: 0.75em; }
+#sidebar .tags ul .tag_2 { font-size: 1em; }
+#sidebar .tags ul .tag_3 { font-size: 1.125em; }
+#sidebar .tags ul .tag_4 { font-size: 2em; }
+#sidebar .tags ul .tag_5 { font-size: 2.25em; }
+#sidebar .tags ul .tag_6 { font-size: 3em; }
+
+.hentry .entry-header { margin-bottom: 1em; }
+.hentry .entry-header .entry-title { margin: 0; padding-left: 0.25em; }
+.hentry .entry-header .entry-info { margin: 0; padding-left: 2em; background: transparent url(../img/category.png) no-repeat scroll 0.5em; }
+.hentry .entry-body .entry-content { padding-left: 1em; padding-right: 1em; }
+.hentry .entry-body .entry-image { margin-top: -1.5em; }
+.hentry .entry-body .entry-image p img { border: 0; margin: 0 1.5em 1.5em 0; }
+.hentry .entry-footer p { margin-bottom: 0; }
+.hentry .entry-footer p strong { padding-left: 1.5em; }
+.hentry .entry-footer .entry-tags strong { background: transparent url(../zinnia/img/tags.png) no-repeat scroll; }
+.hentry .entry-footer .entry-shorturl strong { background: transparent url(../zinnia/img/shorturl.png) no-repeat scroll; }
+.hentry .entry-footer .entry-comments strong { background: transparent url(../zinnia/img/comments.png) no-repeat scroll; }
 
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
