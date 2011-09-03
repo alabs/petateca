@@ -4,9 +4,7 @@
 {% load cache %}
 {% load tagcloud %}
 {% block title %}{% trans "Series" %} | Liberateca{% endblock %}
-{% block contents %}
-		<!-- COLUMN 1 -->
-		<div class="catagory_1 clearfix">
+{% block sidebar %}
 			<!-- BROWSE -->
 			<div class="grid_3" style="margin-top:2em;" >
 
@@ -74,6 +72,9 @@
                 {% endcache %}
 
 			</div>
+{% endblock %}
+{% block contents %}
+
 			<div class="grid_9">
                 <div id="series_list">
                     <div class="js-container-wall">

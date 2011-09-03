@@ -77,6 +77,9 @@
   {% endif %}
 </div>
 
+{% endblock %}
+{% block sidebar %}
+
 <div class="grid_4" id="sidebar">
   {% block admin_tools %}
     {% if category and perms.zinnia.change_category %}

@@ -4,9 +4,9 @@
 {% block extrascript %}
         <script type="text/javascript" src="/static/js/RelatedObjectLookups_small.js"></script>
 {% endblock %}
-{% block contents %}
-<div class="grid_10" id="box">
+{% block sidebar %}
 <form id="add_book_form" enctype="multipart/form-data" action="{% if book %}{% url edit_book book_slug=book.slug_name %}{% else %}{% url add_book %}{% endif %}" method="POST">
+  {% csrf_token %}
     <h1>{% if book %}Editando libro {{ book.name.title }}{% else %}Agregando libro{% endif %}</h1>
 <ul>
     <ul class="controls grid_4">
@@ -31,6 +31,8 @@
         </li>
         {% endif %} 
     </ul>
+    {% endblock %}
+    {% block contents %} 
         <ul class="grid_4 controls">
             {{ form.non_field_errors }}
             <li class="fieldwrapper">

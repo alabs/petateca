@@ -150,8 +150,8 @@ ol { padding: 0 0 0 5px }
     text-transform: none;
     text-shadow: none;
 }
-.right { float: right; text-align:right; }
-.left { float: left; text-align:left; }
+.right { float: right !important; text-align:right; }
+.left { float: left !important; text-align:left; }
 .center { float: center; text-align:center; }
 .nobottom { margin-bottom: 0em !important }
 .img_left {
@@ -1579,6 +1579,11 @@ border:0;
 .hentry .entry-footer .entry-tags strong { background: transparent url(../zinnia/img/tags.png) no-repeat scroll; }
 .hentry .entry-footer .entry-shorturl strong { background: transparent url(../zinnia/img/shorturl.png) no-repeat scroll; }
 .hentry .entry-footer .entry-comments strong { background: transparent url(../zinnia/img/comments.png) no-repeat scroll; }
+
+.topbar {
+    height: 100px !important;
+    position: relative !important;
+}
 
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */

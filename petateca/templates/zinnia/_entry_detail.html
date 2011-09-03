@@ -1,12 +1,16 @@
 {% load tagging_tags comments i18n %}
 {% load thumbnail %}
 
+<section>
+
+
 <div class="entry-header grid_12 last">
   <h2 class="entry-title caption center">
     <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
       {{ object.title }}
     </a>
   </h2>
+<time pubdate="" datetime="2011-04-05"><span class="month">Apr</span><span class="month_long">April</span> <span class="day">05</span><span class="comma">,</span> <span class="year">2011</span></time>
 </div>
 
 <div class="entry-body grid_12 last">
@@ -103,3 +107,4 @@
   </p>
 
 </div>
+</section>

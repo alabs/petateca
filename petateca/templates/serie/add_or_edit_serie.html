@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% block title %}{% if serie %}Editando serie {{ serie.name.title }}{% else %}Agregando serie{% endif %} | Liberateca{% endblock %}
-{% block contents %}
-<div class="grid_12" id="box">
+{% block sidebar %}
 <form id="add_serie_form" enctype="multipart/form-data" action="{% if serie %}{% url edit_serie serie_slug=serie.slug_name %}{% else %}{% url add_serie %}{% endif %}" method="POST">
     <h1>{% if serie %}Editando serie {{ serie.name.title }}{% else %}Agregando serie{% endif %}</h1>
     <ul class="controls grid_3">
@@ -18,7 +17,7 @@
                 {{ img_form.src }}
         </li>
         <li>
-            <input class="button center" style="margin-left:5em;margin-top:2em;margin-bottom:2em;" id="submit_serie" type="submit" value="{% if serie %}Actualizar{% else %}Agregar{% endif %}" />
+            <input class="btn success center" style="margin-left:5em;margin-top:2em;margin-bottom:2em;" id="submit_serie" type="submit" value="{% if serie %}Actualizar{% else %}Agregar{% endif %}" />
         </li>
         {% if not serie %}
         <li>
@@ -29,6 +28,8 @@
         </li>
         {% endif %} 
     </ul>
+{% endblock %}
+{% block contents %}
     <ul class="controls grid_3">
             {{ form.non_field_errors }}
             <li class="fieldwrapper">

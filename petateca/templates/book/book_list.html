@@ -4,23 +4,25 @@
 {% load cache %}
 {% load tagcloud %}
 {% block title %}{% trans "Libros" %} | Liberateca{% endblock %}
-{% block contents %}
-		<!-- COLUMN 1 -->
-		<div class="catagory_1 clearfix">
+{% block sidebar %}
 			<!-- BROWSE -->
 			<div class="grid_3" style="margin-top:2em;" >
+
+                <h1 class="center" style="margin-bottom:1em;">
+                    <a href="/books">Libros</a>
+                </h1>
+
                 <div id="box">
-                    <a class="button" href="{% url add_book %}" style="vertical-align:middle;">
+                    <a class="btn primary" href="{% url add_book %}" style="vertical-align:middle;">
                         <img class="left nobottom" src="/static/images/list-add.png">
                         <p class="right nobottom">Agregar libro</p>
                     </a>
                 </div>
 
-
                 <div id="box">
-                    <h1 class="nobottom">
+                    <h2 class="nobottom">
                         <a href="/books">Popularidad</a>
-                    </h1>
+                    </h2>
                 </div>
 
 			<!-- ALPHABETHICAL PAGINATION -->
@@ -70,14 +72,13 @@
                 </div>
                 {% endcache %}
 
-			</div>
-			<div class="grid_9">
+
+      {% endblock %}
+{% block contents %}
                 <div id="books_list">
                 {% cache 500 book_list %}
                 <!-- THUMBNAILS -->
                 {% include "core/generic_list.html" with obj_type="book" %}
                 {% endcache %}
                 </div>
-			</div>
-		</div>
 {% endblock %}

@@ -12,8 +12,7 @@
     <meta property="og:image" content="http://liberateca.net/static/images/logos/logo_square.png" />
 {% endblock %}
 {% block contents %}
-        <h2 class="grid_12 caption clearfix center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
-		<div class="hr grid_12 clearfix">&nbsp;</div>
+        <h2 class="caption center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
 
 {% cache 500 index-books %}
     {% url book_index as url_book %}
@@ -24,9 +23,9 @@
     {% url serie_index as url_serie %}
     {% include "core/_index_jsquares.html" with type_plur="Series" type_ind="serie" elements=series type_message="Ver todas las series" url_index=url_serie jscontainerid="js-container" %}
 {% endcache %}
+{% endblock %}
+{% block sidebar %}
 
-        <p class="grid_11 clearfix"></p>
-        <div class="center">
             <div class="quicknavgrid_3 quicknav">
                 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
                 <script>
@@ -60,7 +59,6 @@
                 }).render().setUser('liberateca').start();
                 </script>
             </div>
-            <div class="grid_9">
                 <div class="quicknavgrid_3 quicknav">
                         <h4 class="title ">Errores o sugerencias</h4>
                         <p>Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustarian</a>.</p>
@@ -85,8 +83,6 @@
                         <h4 class="title ">Libros</h4>
                         <p>Por fin puedes agregar tus libros preferidos a Liberateca. <a href="/books/add/">Agrega algún libro nuevo</a> o revisa <a href="/books/">el listado completo de libros</a>. Gracias por ayudarnos a ayudarle ayudarnos.</p>
                 </div>
-            </div>
-        </div>
 {% endblock %}
 {% block extrascript %}
     {% if image_avatar %}

@@ -102,10 +102,10 @@
 
 
 </div>
+{% endblock %}
 
-
+{% block sidebar %}
 <div class="entry-widgets grid_4 last">
-
 {% if perms.zinnia.change_entry %}
 <h2 class="center mb_1">
   <a href="{% url admin:zinnia_entry_change object.pk %}" title="{% trans "Edit the entry" %}">

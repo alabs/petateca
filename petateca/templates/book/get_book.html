@@ -13,15 +13,33 @@
     <meta property="og:image" content="http://liberateca.net{{ book.poster.src.url }}" />
 {% endblock %}
 {% block title %}{{ book.name.title }} | Libro | Liberateca{% endblock %}
-{% block contents %}
 
+{% block options %}
+      <ul class="main-pages left">
+          <!-- FAVORITE -->
+          <li>
+          {% if favorite == "no" %}
+              <a href="#" onclick="favorite();" id="favorite"><img title="Agregar a favoritas" alt="Agregar a favoritas" class="heart_fav nobottom" src="/static/images/heart_black.png"></a>
+          {% else %} 
+          {% if favorite == "yes" %}
+              <a href="#" onclick="favorite();" id="favorite"><img title="Quitar de favoritas" alt="Quitar de favoritas" class="heart_fav nobottom" src="/static/images/heart_red.png"></a>
+              {% endif %}
+              {% endif %}
+          </li>
+          <!-- EDIT -->
+          <li id="edit-book">
+              <a href="{% url edit_book book_slug=book.slug_name %}"><img title="Editar libro" class="nobottom" alt="Editar libro" src="/static/images/accessories-text-editor.png"></a>
+          </li>
+      </ul>
+
+{% endblock %}
+
+{% block contents %}
 <!-- COLUMN LEFT -->
-<div class="grid_7">
 	<!-- TITLE -->
 	<h1 id="title">{{book.name|title}}</h1>
-	<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- LINKS -->
-    <div class="grid_2 left" id="episode_list">
+    <div class="left" id="episode_list">
         <ul>
             {% if request.user.is_authenticated %}
                 <li>
@@ -38,7 +56,6 @@
         </ul>
     </div>
     <div id="season_list" class="right grid_7"></div>
-	<div class="hr dotted clearfix">&nbsp;</div>
 
     {# cache 500 comments serie TODO: Arreglar el contestar  #}
 	 <div class="hr clearfix">&nbsp;</div>
@@ -56,9 +73,11 @@
         {% endwith %}
 </div>
 
+{% endblock %}
+{% block sidebar %}
 
 <!-- COLUMN RIGHT -->
-<div class="grid_4" id="box">
+<div id="box">
 	<!-- IMAGE -->
     <div class="left">
         {% if book.poster.src %}
@@ -84,21 +103,6 @@
     <div class="right">
         {% if request.user.is_authenticated %}
           <ul class="horizontal_list">
-              <!-- FAVORITE -->
-              <li>
-              {% if favorite == "no" %}
-                  <a href="#" onclick="favorite();" id="favorite"><img title="Agregar a favoritas" alt="Agregar a favoritas" class="heart_fav nobottom" src="/static/images/heart_black.png"></a>
-              {% else %} 
-              {% if favorite == "yes" %}
-                  <a href="#" onclick="favorite();" id="favorite"><img title="Quitar de favoritas" alt="Quitar de favoritas" class="heart_fav nobottom" src="/static/images/heart_red.png"></a>
-                  {% endif %}
-                  {% endif %}
-              </li>
-              <!-- EDIT -->
-              <li id="edit-book">
-                  <a href="{% url edit_book book_slug=book.slug_name %}"><img title="Editar libro" class="nobottom" alt="Editar libro" src="/static/images/accessories-text-editor.png"></a>
-              </li>
-          </ul>
           <ul class="horizontal_list">
               <a href="/books"><img src="/static/images/book.png" class="nobottom" alt="Libro" title="Libro"></a>
           </ul>
@@ -110,7 +114,6 @@
                 <div class="mt_3">({{ book.rating.votes }} votos)</div>
             </div>
         {% endwith %}
-		<div class="hr dotted clearfix">&nbsp;</div>
 	<!-- AUTORS -->
     <ul>
         <li>
@@ -145,11 +148,7 @@
         </li>
      </ul>
     </div>
-	<div class="hr dotted clearfix">&nbsp;</div>
-	<div class="hr dotted clearfix">&nbsp;</div>
     <p>{{ book.description }}</p>
-	<div class="hr dotted clearfix">&nbsp;</div>
-	<div class="hr dotted clearfix">&nbsp;</div>
     <div class="grid_2 left">
         <!-- SHARE -->
         <h2>Compártela</h2>
@@ -179,6 +178,5 @@
     </div>
 </div>
 
-	<div class="hr clearfix">&nbsp;</div>
 {% endblock %}
 
