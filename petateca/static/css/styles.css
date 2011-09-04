@@ -504,7 +504,6 @@ h2.caption a:hover { text-decoration : underline }
 a .title { color: #000000 }
 .quicknavgrid_3 {
     width: 198px;
-    height: 216px;
     margin: 0px;
     padding: 20px 20px 0;
     display: inline;
@@ -1057,10 +1056,6 @@ left:-23em;top: -10.2em;
       background-image:url(http://localhost:8000/static/images/shortcuts_arrow.gif); background-repeat:no-repeat; background-position:right; }
 #searchresults span.seperator a { background-color:transparent; display:block; height:auto; color:#ffffff; }
 
-#rating {
-    margin-bottom: 2em;
-    padding-left: 5em;
-}
 .subtitle {
     font-weight: bold;
     font-size: 13px;
@@ -1579,9 +1574,20 @@ border:0;
 .hentry .entry-footer .entry-shorturl strong { background: transparent url(../zinnia/img/shorturl.png) no-repeat scroll; }
 .hentry .entry-footer .entry-comments strong { background: transparent url(../zinnia/img/comments.png) no-repeat scroll; }
 
+/* Overiding Bootstrap */
+
 .topbar {
     height: 100px !important;
     position: relative !important;
+}
+
+.topbar form input['search'] {
+    background-color: white !important;
+}
+
+h3, h4, h5, h6 {
+  line-height:1em !important;
+  margin-bottom: 1em !important;
 }
 
 /* Overiding Classes */

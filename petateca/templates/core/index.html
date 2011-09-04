@@ -12,7 +12,7 @@
     <meta property="og:image" content="http://liberateca.net/static/images/logos/logo_square.png" />
 {% endblock %}
 {% block contents %}
-        <h2 class="caption center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
+        <h2 class="margin caption center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
 
 {% cache 500 index-books %}
     {% url book_index as url_book %}
@@ -26,6 +26,20 @@
 {% endblock %}
 {% block sidebar %}
 
+              <div class="quicknavgrid_3 quicknav">
+              </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">Errores o sugerencias</h4>
+                        <p>Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustarian</a>.</p>
+                </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">Desarrollo</h4>
+                        <p>Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
+                </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">API v2</h4>
+                        <p>Si eres programador puede resultarte interesarte nuestra <a href="/api/">API para desarrollar tus aplicaciones</a>. </p>
+                </div>
             <div class="quicknavgrid_3 quicknav">
                 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
                 <script>
@@ -60,17 +74,7 @@
                 </script>
             </div>
                 <div class="quicknavgrid_3 quicknav">
-                        <h4 class="title ">Errores o sugerencias</h4>
-                        <p>Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustarian</a>.</p>
-                </div>
-                <div class="quicknavgrid_3 quicknav">
-                        <h4 class="title ">Desarrollo</h4>
-                        <p>Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
-                </div>
-                <div class="quicknavgrid_3 quicknav">
-                        <h4 class="title ">API v2</h4>
-                        <p>Si eres programador puede resultarte interesarte nuestra <a href="/api/">API para desarrollar tus aplicaciones</a>. </p>
-                </div>
+            </div>
                 <div class="quicknavgrid_3 quicknav">
                         <h4 class="title ">Diseño</h4>
                         <p>Estamos buscando diseñadores web para que nos ayuden a mejorar Liberateca y hacerla más usable. Ponte en contacto con nosotros en root[arroba]liberateca.net</p>
