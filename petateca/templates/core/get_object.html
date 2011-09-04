@@ -45,8 +45,8 @@
     <div id="season_list" class="right"></div>
   {% endif %}
   {% if object_type == "book" %}
-    <div class="left" id="episode_list">
-        <ul>
+    <div class="center" id="episode_list">
+        <ul style="text-align:left;">
             {% if request.user.is_authenticated %}
                 <li>
                     <a href="#" class="add_link_single" id="book_{{ object.id }}">
@@ -94,7 +94,8 @@
         {% endif %}
         {% if request.user.is_authenticated %}
           <!-- USER RATING -->
-          <div id="rating">
+          <center>
+          <div id="rating" class="center clearfix">
               <form action="." method="POST">
               <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
               <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
@@ -103,6 +104,7 @@
               <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
               </form>
           </div>
+        </center>
         {% endif %}
         {% if request.user.is_authenticated %}
           <ul class="horizontal_list">
