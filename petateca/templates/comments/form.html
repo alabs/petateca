@@ -1,7 +1,5 @@
 {% if request.user.is_authenticated %}
     {% load threadedcomments_tags %}
-    <div class="wrap_write_comment">
-        <div id="form-comment">
             {% get_comment_form for object as form %}
             <form action="/comments/post/" method="POST" class="comment_form">
               {% csrf_token %}
@@ -21,8 +19,6 @@
             {% endfor %}
                 <li><input type="submit" class="button" value="Añadir"/></li>
             </form>
-        </div>
-    </div>
 {% else %}
-<p class="clearfix">Debes <a href="/accounts/login/?next={{request.path}}">iniciar sesión</a> o <a href="/accounts/register/">registrarte</a> para agregar una reseña
+<p>Debes <a href="/accounts/login/?next={{request.path}}">iniciar sesión</a> o <a href="/accounts/register/">registrarte</a> para agregar una reseña
 {% endif %}

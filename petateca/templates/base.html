@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="/static/css/jquery.jgrowl.css" />
     <link rel="stylesheet" href="/static/css/jquery.jsquares.css" type="text/css" media="all" />
     <link rel="stylesheet" href="/static/css/jquery.rating.css" />
-    <link rel="stylesheet" href="/static/css/jquery.highlight.css" />
     <link rel="stylesheet" href="/static/css/jquery.qtip.css" />{% block extrastyle %}{% endblock %}
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Liberateca" />
 </head>
@@ -121,6 +120,7 @@
     {% block sidebar %}{% endblock %}
 </div>
 <div class="content">
+  <div id="notify"></div>
     {% block contents %}{% endblock %}
 </div>
 </div>
@@ -160,7 +160,6 @@
     <script type="text/javascript" src="/static/js/endless.js"></script>
     <script type="text/javascript" src="/static/js/endless_on_scroll.js" ></script>
     <script type="text/javascript" src="/static/js/jquery.ba-bbq.min.js" ></script>
-    <script type="text/javascript" src="/static/js/jquery.highlight.js" ></script>
     <script type="text/javascript" src="/static/js/petateca.js"></script>
     {% block extrascript %}{% endblock %}
 </body>

@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load threadedcomments_tags %}
+{% load background_color %}
+{% load avatar_tags %}
+{% load cache %}
+{% block extrahead %}
+    <meta property="og:title" content="{{object.name}} | {% if object_type == "serie" %}Serie{% endif %}{% if object_type == "book" %}Libro{% endif %} | Liberateca" />
+    <meta property="og:description" content="{{ object.description }}" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:type" content="{% if object_type == "serie" %}tv_show{% endif %}{% if object_type == "book" %}book{% endif %}" />
+    <meta property="og:image" content="http://liberateca.net{{ object.poster.src.url }}" />
+{% endblock %}
+{% block title %}{{ object.name.title }} | {% if object_type == serie %}Serie{% endif %}{% if object_type == "book" %}Libro{% endif %} | Liberateca{% endblock %}
+
+
+{% block contents %}
+<!-- COLUMN LEFT -->
+	<!-- TITLE -->
+	<h1 id="title">{{object.name|title}}</h1>
+	<!-- LINKS -->
+  {% if object_type == "serie" %}
+	<!-- SEASONS -->
+    <div class="center" id="episode_list">
+        <ul style="text-align:left;">
+            {% if request.user.is_authenticated %}
+            <li>
+                <a id="season_add" href="{% url add_season serie_slug=object.slug_name %}">
+                    <img title="Agregar temporada nueva" alt="Agregar temporada nueva" src="/static/images/list-add.png" class="left nobottom">
+                    Agregar temporada
+                </a>
+                <div id="inside_season_add"></div>
+            </li>
+            {% endif %}
+        {% for season in season_list %}
+            <li>
+                <a class="season"  id="serie_{{object.id}}_season_{{season.season}}" href="#season_list">
+                   {% if season.season == 0 %}Capitulos sueltos{% else %}{% trans "Temporada" %}  {{ season.season }}{% endif %}
+                </a>
+                <div id="inside_serie_{{object.id}}_season_{{season.season}}"></div>
+            </li>
+        {% endfor %} </ul>
+    </div>
+    <div id="season_list" class="right"></div>
+  {% endif %}
+  {% if object_type == "book" %}
+    <div class="left" id="episode_list">
+        <ul>
+            {% if request.user.is_authenticated %}
+                <li>
+                    <a href="#" class="add_link_single" id="book_{{ object.id }}">
+                        <img title="Agregar enlace" alt="Agregar enlace" src="/static/images/list-add.png" class="left nobottom">
+                        Agregar enlace
+                    </a>
+                </li>
+            {% endif %}
+            <div id="inside_book_{{ object.id }}"></div>
+            {% with object.links.all as link_list %}
+                {% include "book/links_list.html" %}
+            {% endwith %} 
+        </ul>
+    </div>
+    <div id="season_list" class="right"></div>
+  {% endif %}
+
+  <div class="comments">
+    <!-- AGREGAR RESEÑA -->
+    <h2>{% trans "Añade tu reseña" %}</h2>
+    {% include "comments/form.html" %}
+
+    {# cache 500 comments serie TODO: Arreglar el contestar  #}
+        <!-- RESEÑAS -->
+        {% get_comment_list for object as comment_list %}
+        <h2>{{ comment_list|length }} {% trans "Reseñas" %}</h2>
+        {% include "comments/list.html" %}
+    {# endcache #}
+  </div>
+</div>
+
+{% endblock %}
+{% block sidebar %}
+
+<!-- COLUMN RIGHT -->
+<div id="box">
+	<!-- IMAGE -->
+    <div class="center">
+        {% if object.poster.src %}
+            {% thumbnail object.poster.src "250x250" as img_object %}
+                <img alt="{{ object.name }}" title="{{ object.name }}" id="poster" src="{{ img_object.url }}" />
+            {% endthumbnail %}
+        {% else %}
+            <div class="image_not_found center">  <img alt="{{ object.name }}" title="{{ object.name }}" src="/static/images/image_not_available.png" alt="{{ object.name }}" width="200" /> </div>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+          <!-- USER RATING -->
+          <div id="rating">
+              <form action="." method="POST">
+              <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
+              <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
+              <input type="radio" name="rating" value="3" class="ratingstar" {% if score == 3 %}checked="checked"{% endif %}/>
+              <input type="radio" name="rating" value="4" class="ratingstar" {% if score == 4 %}checked="checked"{% endif %}/>
+              <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
+              </form>
+          </div>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+          <ul class="horizontal_list">
+          <!-- FAVORITE -->
+          <li>
+          {% if favorite == "no" %}
+              <a href="#" onclick="favorite();" id="favorite"><img title="Agregar a favoritas" alt="Agregar a favoritas" class="heart_fav nobottom" src="/static/images/heart_black.png"></a>
+          {% else %} 
+          {% if favorite == "yes" %}
+              <a href="#" onclick="favorite();" id="favorite"><img title="Quitar de favoritas" alt="Quitar de favoritas" class="heart_fav nobottom" src="/static/images/heart_red.png"></a>
+              {% endif %}
+              {% endif %}
+          </li>
+          <!-- EDIT -->
+          <li>
+          {% if object_type == "serie" %}
+              <a href="{% url edit_serie serie_slug=object.slug_name %}"><img title="Editar serie" class="nobottom" alt="Editar serie" src="/static/images/accessories-text-editor.png"></a>
+          {% endif %}
+          {% if object_type == "book" %}
+              <a href="{% url edit_book book_slug=object.slug_name %}"><img title="Editar libro" class="nobottom" alt="Editar libro" src="/static/images/accessories-text-editor.png"></a>
+          {% endif %}
+          </li>
+          <li>
+          {% if object_type == "serie" %}
+              <a href="/series"><img src="/static/images/tv.png" width="32" class="nobottom" alt="Serie" title="Serie"></a>
+          {% endif %}
+          {% if object_type == "book" %}
+              <a href="/books"><img src="/static/images/book.png" class="nobottom" alt="Libro" title="Libro"></a>
+          {% endif %}
+          </li>
+          </ul>
+        {% endif %}
+        <!-- GENERAL RATING -->
+        {% with object.rating.get_rating as rating %}
+            <div class="center rating_num {{ rating|background_color }}"> {{ rating|floatformat }}
+                <div class="mt_3">de 5</div>
+                <div class="mt_3">({{ object.rating.votes }} votos)</div>
+            </div>
+        {% endwith %}
+  {% if object_type == "serie" %}
+  <table class="zebra-striped">
+    <!-- RUNTIME -->
+    <tr>
+      <th>
+        {% trans "Duración" %}
+      </td>
+      <td>
+        {{ object.runtime }} {% trans "minutos" %}
+      </td>
+    </tr>
+	{% if object.network.name %}
+    <!-- NETWORK -->
+    <tr>
+      <th>
+        {% trans "Cadena" %}
+      </td>
+      <td>
+        <a href="/series/#/network/{{ object.network.slug_name }}/">{{ object.network.name }}</a>
+      </td>
+    </tr>
+	{% endif %}
+    <!-- GENRE -->
+    <tr>
+      <th>
+        {% trans "Género" %}
+      </th>
+      {% for genre in object.genres.all %}
+      {% if not forloop.first %} <tr> <td> </td> {% endif %}
+      <td>
+        <a href="/series/#/genre/{{ genre.slug_name }}/">{{ genre.name }}</a>
+      </td>
+      </tr>
+      {% endfor %}
+  </table>
+        <li>
+            <ul>
+            </ul>
+        </li>
+	<!-- BUTTONS -->
+        <li>
+            <a href="/series" class="button">&lt;&lt; {% trans "Series" %}</a>
+        </li>
+     </ul>
+    </div>
+  {% endif %}
+  {% if object_type == "book" %}
+  <table class="zebra-striped">
+    <!-- AUTORS -->
+    <tr>
+      <th>
+        Autor{{ object.author.count|pluralize:"es" }}
+      </th>
+    </tr>
+    <tr>
+    {% for author in object.author.all %}
+      <td>
+        <a href="/books/#/autor/{{ author.slug_name }}/">{{ author.name }}</a>
+      </td>
+    {% endfor %}
+    </tr>
+    <!-- ISBN -->
+    <tr>
+      <th>
+        {% trans "ISBN" %}
+      </th>
+      <td>
+        {{ object.isbn }}
+      </td>
+    </tr>
+    <!-- GENRE -->
+    <tr>
+      <th>
+         Categoria{{ object.category.count|pluralize}}
+       </th>
+      {% for category in object.category.all %}
+       <td>
+         <a href="/books/#/category/{{ category.slug_name }}/">{{ category.name }}</a>
+       </td>
+      {% endfor %}
+    </tr>
+  </table>
+	<!-- BUTTONS -->
+        <li>
+            <a href="/books" class="btn primary">&lt;&lt; {% trans "Libros" %}</a>
+        </li>
+     </ul>
+    </div>
+  {% endif %}
+    <p>{{ object.description }}</p>
+    <div class="left">
+        <!-- SHARE -->
+        <h2>Compártela</h2>
+            <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+            <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+                <a href="http://twitter.com/share" class="twitter-share-button"
+                    data-url="{{ request.build_absolute_uri }}"
+                    data-via="Liberateca"
+                    data-text="Disfrutando {{ object.name }}"
+                    data-count="vertical">Tweet
+                </a>
+                <fb:like href="{{ request.build_absolute_uri }}" send="true" layout="box_count" width="450" show_faces="true" font=""></fb:like>
+                <g:plusone size="tall"></g:plusone>
+    </div>
+    <div class="right">
+      {% if object_type == "serie" %}
+        {% cache 500 followers object %}
+            <h2>Seguidores ({{ object.favorite_of.count }})</h2>
+            {% for user in object.favorite_of.all %}
+                <a class="followers" title="{{ user.user.username }}" href="{% url user_profile user_name=user.user.username %}">
+                    {% avatar user.user 30 %}
+                </a>
+            {% endfor %}
+        {% endcache %}
+      {% endif %}
+      {% if object_type == "book" %}
+        {% cache 500 followers object %}
+            {% if not object.favorite_book.count == 0 %}
+                <h2>Seguidores ({{ object.favorite_book.count }})</h2>
+                {% for user in object.favorite_book.all %}
+                    <a class="followers" title="{{ user.user.username }}" href="{% url user_profile user_name=user.user.username %}">
+                        {% avatar user.user 30 %}
+                    </a>
+                {% endfor %}
+            {% endif %}
+        {% endcache %}
+      {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+

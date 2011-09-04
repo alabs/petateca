@@ -754,7 +754,6 @@ li.depth-5 {}
     padding: 0;
 }
 .commentlist li {
-    clear: both;
     float: left;
     list-style-type: none;
     margin: 0;

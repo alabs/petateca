@@ -21,7 +21,7 @@ from book.forms import BookForm, ImageBookForm, CategoryForm, AuthorForm
 
 
 
-@render_to('book/get_book.html')
+@render_to('core/get_object.html')
 @csrf_protect
 def get_book(request, book_slug):
     ''' Request a book, returns images and links,
@@ -41,10 +41,10 @@ def get_book(request, book_slug):
     except:
         score = None
     return {
-            'book': book,
+            'object': book,
             'score': score,
             'favorite': favorite_status,
-            'obj_type': 'book',
+            'object_type': 'book',
         }
 
 
