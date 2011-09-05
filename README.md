@@ -15,6 +15,14 @@ Gracias por ayudarnos a ayudarle a ayudarnos.
 
 ¡Omnia sunt communia!
 
+Código:
+===============
+
+Petateca es una web hecha con:
+
+* Lenguaje de programación: Python
+* Framework web: Django (+ plugins)
+* Librería javascript: jQuery (+ plugins)
 
 Últimos cambios:
 ===============
