@@ -995,15 +995,16 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
     if (url){
         switch (object) {
             case 'series':
-              $('#series_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+              $('#generic_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
               // url que esperamos es algo por el estilo: genre/science-fiction
-              $('#series_list').load('/series/lookup' + url);
+              console.log(url);
+              $('#generic_list').load('/series/lookup' + url);
               break;
             case 'books':
-              $('#books_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+              $('#generic_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
               // console.log(url);
               // url que esperamos es algo por el estilo: category/drama
-              $('#books_list').load('/books/lookup' + url);
+              $('#generic_list').load('/books/lookup' + url);
               break;
         }
     }
