@@ -1050,4 +1050,15 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
     $(this).parent().hide();
   }); 
 
+  // si estamos en la pagina de la API, creamos el menu
+  if ( $('.header_api').size() != 0 ) {
+    $('.sidebar').html('<h2>Indice</h2>');
+    $.toc('h1,h3.header_api').appendTo('.sidebar');
+  }
+
+  if ( $('.header').size() != 0 ) {
+    $('.sidebar').html('<h2>Indice</h2>');
+    $.toc('.content h1,.content h2').appendTo('.sidebar');
+  }
+
 });
