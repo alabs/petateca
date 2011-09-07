@@ -1,15 +1,29 @@
-<div class="center marginal">
-    <form id="add_link_form" action="{% if link_type == 'episode' %}{% url ajax_add_link link_type='episode' obj_id=episode.id %}{% else %}{% if link_type == 'season' %}{% url ajax_add_link link_type='season' obj_id=season.id %}{% endif %}{% endif %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
-        <ul id="add_link_list">
-            {{ form.as_ul }}
-        </ul>
-        <input style="margin-left:1em; margin-bottom: 1em;" class="button" id="submit_link" type="submit" value="Enviar" />
-        <!-- TODO: Templatetag pasandole el query string, que devuelva el listado con todo listo -->
-        <ul class="horizontal_list"> 
-            <li> <img alt="Busqueda TPB" title="Buscar en The Pirate Bay" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_pb" src="/static/images/search-tpb.ico">
-            <li> <img alt="Busqueda Torrentz" title="Buscar en Torrentz" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_torrentz" src="/static/images/search-torrentz.ico">
-            <li> <img alt="Busqueda Sinde" title="Buscar en la Lista de Sinde" rel="{{ serie.name_en }} {% if link_type == 'episode' %}{{ episode.season_episode }}{% else %}{% if link_type == 'season' %}S0{{season.season}}{% endif %}{% endif %}" id="search_listadesinde" src="/static/images/search-sinde.ico">
-            <li> <img alt="Ayuda" title="Ayuda de idiomas" id="language_help" src="/static/images/help-browser.png">
-        </ul>
-    </form>
-</div>
+  <form class="center margin" id="add_link_form" action="{% if link_type == 'episode' %}{% url ajax_add_link link_type='episode' obj_id=episode.id %}{% else %}{% if link_type == 'season' %}{% url ajax_add_link link_type='season' obj_id=season.id %}{% endif %}{% endif %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
+  {{ form.non_field_errors }}
+    <ul>
+      <li class="fieldwrapper">
+        {{ form.url.errors }}
+        <label for="id_url">URL:</label>
+        <div class="input">
+          {{ form.url }}
+        </div>
+      </li>
+      <li class="fieldwrapper">
+        {{ form.audio_lang.errors }}
+        <label for="id_audio_lang">Idioma:</label>
+        <div class="input">
+          {{ form.audio_lang }}
+        </div>
+      </li>
+      <li class="fieldwrapper">
+        {{ form.subtitle.errors }}
+        <label for="id_subtitle">Subtitulos:</label>
+        <div class="input">
+          {{ form.subtitle }}
+        </div>
+      </li>
+    </ul>
+    <input class="btn primary margin" id="submit_link" type="submit" value="Enviar" />
+    {% include "core/_search_and_help_toolbar.html" %}
+
+  </form>

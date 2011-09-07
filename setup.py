@@ -36,6 +36,7 @@ setup(
         'django-memcache-status',
         'django-celery',
         'django-blog-zinnia',
+
         'django-bitly',
         #'django-piston', lo instalamos a traves de src/ por ser este fork
         # https://bitbucket.org/joeb/django-piston/
@@ -53,6 +54,7 @@ setup(
     ],
     dependency_links = [
         #XXX: For django-modeltranslation
+        "https://github.com/Fantomas42/django-blog-zinnia.git#egg=django-blog-zinnia-0.8.1",
         "http://code.google.com/p/django-modeltranslation/wiki/InstallationAndUsage",
     ],
 )

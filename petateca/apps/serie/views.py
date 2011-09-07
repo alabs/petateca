@@ -32,7 +32,8 @@ def get_serie(request, serie_slug):
     except:
         favorite_status = 'no'
     try:
-        score = int(serie.rating.get_rating_for_user(request.user))
+    # FIXME
+        score = int(serie.rating.get_rating_for_user(user=request.user))
     except:
         score = None
     return {

@@ -12,13 +12,11 @@
     <meta property="og:type" content="{% if object_type == "serie" %}tv_show{% endif %}{% if object_type == "book" %}book{% endif %}" />
     <meta property="og:image" content="http://liberateca.net{{ object.poster.src.url }}" />
 {% endblock %}
-{% block title %}{{ object.name.title }} | {% if object_type == serie %}Serie{% endif %}{% if object_type == "book" %}Libro{% endif %} | Liberateca{% endblock %}
-
-
+{% block title %}{{ object.name.title }} | {% if object_type == "serie" %}Serie{% endif %}{% if object_type == "book" %}Libro{% endif %} | Liberateca{% endblock %}
 {% block contents %}
 <!-- COLUMN LEFT -->
 	<!-- TITLE -->
-	<h1 id="title">{{object.name|title}}</h1>
+	<h1 class="title center margin" id="title">{{object.name|title}}</h1>
 	<!-- LINKS -->
   {% if object_type == "serie" %}
 	<!-- SEASONS -->
@@ -26,7 +24,7 @@
         <ul style="text-align:left;">
             {% if request.user.is_authenticated %}
             <li>
-                <a id="season_add" href="{% url add_season serie_slug=object.slug_name %}">
+                <a title="Haz click para agregar una temporada" id="season_add" href="{% url add_season serie_slug=object.slug_name %}">
                     <img title="Agregar temporada nueva" alt="Agregar temporada nueva" src="/static/images/list-add.png" class="left nobottom">
                     Agregar temporada
                 </a>
@@ -49,7 +47,7 @@
         <ul style="text-align:left;">
             {% if request.user.is_authenticated %}
                 <li>
-                    <a href="#" class="add_link_single" id="book_{{ object.id }}">
+                    <a title="Agregar un enlace de este libro" href="#" class="add_link_single" id="book_{{ object.id }}">
                         <img title="Agregar enlace" alt="Agregar enlace" src="/static/images/list-add.png" class="left nobottom">
                         Agregar enlace
                     </a>
@@ -84,18 +82,17 @@
 <!-- COLUMN RIGHT -->
 <div id="box">
 	<!-- IMAGE -->
-    <div class="center">
+    <div class="center rows">
         {% if object.poster.src %}
             {% thumbnail object.poster.src "250x250" as img_object %}
-                <img alt="{{ object.name }}" title="{{ object.name }}" id="poster" src="{{ img_object.url }}" />
+              <img alt="{{ object.name }}" title="{{ object.name }}" id="poster" src="{{ img_object.url }}" />
             {% endthumbnail %}
         {% else %}
             <div class="image_not_found center">  <img alt="{{ object.name }}" title="{{ object.name }}" src="/static/images/image_not_available.png" alt="{{ object.name }}" width="200" /> </div>
         {% endif %}
         {% if request.user.is_authenticated %}
           <!-- USER RATING -->
-          <center>
-          <div id="rating" class="center clearfix">
+          <li id="rating" class="center margin" style="margin-left: 4.5em;">
               <form action="." method="POST">
               <input type="radio" name="rating" value="1" class="ratingstar" {% if score == 1 %}checked="checked"{% endif %}/>
               <input type="radio" name="rating" value="2" class="ratingstar" {% if score == 2 %}checked="checked"{% endif %}/>
@@ -103,47 +100,56 @@
               <input type="radio" name="rating" value="4" class="ratingstar" {% if score == 4 %}checked="checked"{% endif %}/>
               <input type="radio" name="rating" value="5" class="ratingstar" {% if score == 5 %}checked="checked"{% endif %}/>
               </form>
-          </div>
-        </center>
+          </li>
         {% endif %}
-        {% if request.user.is_authenticated %}
-          <ul class="horizontal_list">
+      {% if request.user.is_authenticated %}
+        <ul class="horizontal_list" style="margin-top: 4em;">
           <!-- FAVORITE -->
-          <li>
           {% if favorite == "no" %}
-              <a href="#" onclick="favorite();" id="favorite"><img title="Agregar a favoritas" alt="Agregar a favoritas" class="heart_fav nobottom" src="/static/images/heart_black.png"></a>
+            <a title="Agregar a favoritas" href="#" onclick="favorite();" id="favorite">
+              <img title="Agregar a favoritas" alt="Agregar a favoritas" class="heart_fav nobottom" src="/static/images/heart_black.png">
+            </a>
           {% else %} 
           {% if favorite == "yes" %}
-              <a href="#" onclick="favorite();" id="favorite"><img title="Quitar de favoritas" alt="Quitar de favoritas" class="heart_fav nobottom" src="/static/images/heart_red.png"></a>
-              {% endif %}
-              {% endif %}
+            <a title="Quitar de favoritas" href="#" onclick="favorite();" id="favorite">
+              <img title="Quitar de favoritas" alt="Quitar de favoritas" class="heart_fav nobottom" src="/static/images/heart_red.png">
+            </a>
+          {% endif %}
+        {% endif %}
           </li>
           <!-- EDIT -->
           <li>
           {% if object_type == "serie" %}
-              <a href="{% url edit_serie serie_slug=object.slug_name %}"><img title="Editar serie" class="nobottom" alt="Editar serie" src="/static/images/accessories-text-editor.png"></a>
+            <a title="Editar serie" href="{% url edit_serie serie_slug=object.slug_name %}">
+              <img title="Editar serie" class="nobottom" alt="Editar serie" src="/static/images/accessories-text-editor.png">
+            </a>
           {% endif %}
           {% if object_type == "book" %}
-              <a href="{% url edit_book book_slug=object.slug_name %}"><img title="Editar libro" class="nobottom" alt="Editar libro" src="/static/images/accessories-text-editor.png"></a>
+            <a title="Editar libro" href="{% url edit_book book_slug=object.slug_name %}">
+              <img title="Editar libro" class="nobottom" alt="Editar libro" src="/static/images/accessories-text-editor.png">
+            </a>
           {% endif %}
           </li>
-          <li>
-          {% if object_type == "serie" %}
-              <a href="/series"><img src="/static/images/tv.png" width="32" class="nobottom" alt="Serie" title="Serie"></a>
+            <!-- BUTTONS -->
+        <li>
+            {% if object_type == "serie" %}
+              <a href="/series/" class="btn primary mt_3" title="Ir a listado de series">&lt;&lt; {% trans "Serie" %}</a>
+            {% endif %}
+            {% if object_type == "book" %}
+              <a href="/books/" class="btn primary mt_3" title="Ir a listado de libros">&lt;&lt; {% trans "Libro" %}</a>
+            {% endif %}
           {% endif %}
-          {% if object_type == "book" %}
-              <a href="/books"><img src="/static/images/book.png" class="nobottom" alt="Libro" title="Libro"></a>
-          {% endif %}
-          </li>
-          </ul>
-        {% endif %}
+        </li>
         <!-- GENERAL RATING -->
         {% with object.rating.get_rating as rating %}
-            <div class="center rating_num {{ rating|background_color }}"> {{ rating|floatformat }}
+            <li>
+              <div class="mt_6 center rating_num {{ rating|background_color }}"> {{ rating|floatformat }}
                 <div class="mt_3">de 5</div>
-                <div class="mt_3">({{ object.rating.votes }} votos)</div>
-            </div>
+                <div class="mt_1">({{ object.rating.votes }} votos)</div>
+              </div>
+            </li>
         {% endwith %}
+      </ul>
   {% if object_type == "serie" %}
   <table class="zebra-striped">
     <!-- RUNTIME -->
@@ -179,32 +185,22 @@
       </tr>
       {% endfor %}
   </table>
-        <li>
-            <ul>
-            </ul>
-        </li>
-	<!-- BUTTONS -->
-        <li>
-            <a href="/series" class="button">&lt;&lt; {% trans "Series" %}</a>
-        </li>
-     </ul>
-    </div>
+</div>
   {% endif %}
   {% if object_type == "book" %}
   <table class="zebra-striped">
     <!-- AUTORS -->
-    <tr>
       <th>
         Autor{{ object.author.count|pluralize:"es" }}
       </th>
-    </tr>
-    <tr>
-    {% for author in object.author.all %}
+      {% for author in object.author.all %}
+      {% if not forloop.first %} <tr> <td> </td> {% endif %}
       <td>
         <a href="/books/#/autor/{{ author.slug_name }}/">{{ author.name }}</a>
       </td>
-    {% endfor %}
-    </tr>
+      </tr>
+      {% endfor %}
+  {% if object.isbn %}
     <!-- ISBN -->
     <tr>
       <th>
@@ -214,42 +210,50 @@
         {{ object.isbn }}
       </td>
     </tr>
+  {% endif %}
     <!-- GENRE -->
-    <tr>
       <th>
          Categoria{{ object.category.count|pluralize}}
-       </th>
+      </th>
       {% for category in object.category.all %}
-       <td>
+      {% if not forloop.first %} <tr> <td> </td> {% endif %}
+      <td>
          <a href="/books/#/category/{{ category.slug_name }}/">{{ category.name }}</a>
-       </td>
+      </td>
+      </tr>
       {% endfor %}
-    </tr>
   </table>
-	<!-- BUTTONS -->
-        <li>
-            <a href="/books" class="btn primary">&lt;&lt; {% trans "Libros" %}</a>
-        </li>
-     </ul>
     </div>
   {% endif %}
     <p>{{ object.description }}</p>
-    <div class="left">
+    <div>
         <!-- SHARE -->
         <h2>Compártela</h2>
+        <ul>
+          <li>
             <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+            <a href="http://twitter.com/share" class="twitter-share-button"
+                data-url="{{ request.build_absolute_uri }}"
+                data-via="Liberateca"
+                data-text="Disfrutando {{ object.name }}"
+                data-count="horizontal">Tweet
+            </a>
+          </li>
+          <li>
             <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-                <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-                <a href="http://twitter.com/share" class="twitter-share-button"
-                    data-url="{{ request.build_absolute_uri }}"
-                    data-via="Liberateca"
-                    data-text="Disfrutando {{ object.name }}"
-                    data-count="vertical">Tweet
-                </a>
-                <fb:like href="{{ request.build_absolute_uri }}" send="true" layout="box_count" width="450" show_faces="true" font=""></fb:like>
-                <g:plusone size="tall"></g:plusone>
+            <fb:like href="{{ request.build_absolute_uri }}" send="true" layout="button_count" width="450" show_faces="true" font=""></fb:like>
+          </li>
+          <li>
+            <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+              <!-- Place this tag where you want the +1 button to render -->
+              <div class="g-plusone" data-size="medium" data-href="{{ request.build_absolute_uri }}"></div>
+
+              <!-- Place this render call where appropriate -->
+              <script type="text/javascript">gapi.plusone.go();</script>
+          </li>
+        </ul>
     </div>
-    <div class="right">
+    <div class="left">
       {% if object_type == "serie" %}
         {% cache 500 followers object %}
             <h2>Seguidores ({{ object.favorite_of.count }})</h2>

@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from core.decorators import render_to
 from django.views.decorators.csrf import csrf_protect
 
-from book.models import Book, ImageBook
+from book.models import Book, ImageBook, BookLink
 
 #from django.utils import simplejson
 from django.template.defaultfilters import slugify
@@ -52,11 +52,11 @@ def get_book(request, book_slug):
 #    return "TODO: listar las recomendaciones para el usuario"
 #
 #
-#@render_to('serie/sneak_links.html')
-#def sneak_links(request):
-#    ''' Ultimos enlaces agregados '''
-#    last_links = Link.objects.order_by('-pub_date')[:30]
-#    return {'last_links' : last_links}
+@render_to('book/sneak_links.html')
+def sneak_links(request):
+    ''' Ultimos enlaces agregados '''
+    last_links = BookLink.objects.order_by('-pub_date')[:30]
+    return {'last_links' : last_links}
 
 
 @login_required

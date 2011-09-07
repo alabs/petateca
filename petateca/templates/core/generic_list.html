@@ -1,8 +1,10 @@
 {% load i18n %}
-{% load endless %}
 {% load thumbnail %}
 {% if objects %}
-  {% paginate pagination_per_page objects %}
+  {% if pagination_per_page %}
+    {% load endless %}
+    {% paginate pagination_per_page objects %}
+  {% endif %}
   {% for obj in objects %}
         <div class="js-image js-image-wall size-3">
         {% if obj.poster %}
@@ -22,7 +24,9 @@
             </div>
         </div>
     {% endfor %}
+    {% if pagination_per_page %}
         {% show_more "<div class="center"><div class='hr clean'></div><div class='button' style='width:15em; margin-top:2em;'>Ver más</div></div>" %}
+    {% endif %} 
 {% else %} 
     <h2 class="caption clearfix center">No hay {% if obj_type == 'serie' %}serie{% endif %}{% if obj_type == 'book' %}libro{% endif %}s de este tipo todavia</h2>
 {% endif %}

@@ -2,8 +2,8 @@
     <form id="add_link_form" action="{% url ajax_add_link_book link_type='book', obj_id=book.id %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
         <ul>
             {{ form.as_ul }}
+            <li><input class="btn primary margin" id="submit_link" type="submit" value="Enviar" /></li>
         </ul>
-        <input style="margin-left:1em; margin-bottom: 1em;" class="button" id="submit_link" type="submit" value="Enviar" />
         <!-- TODO: Templatetag pasandole el query string, que devuelva el listado con todo listo -->
         {% include "core/search_list.html" with query=book type="books" %}
     </form>

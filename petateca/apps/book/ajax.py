@@ -220,7 +220,7 @@ def book_index(request,
         'objects': query, 
         'page_template': page_template,
         'object_type': 'book',
-        'pagination_per_page': 15,
+        'pagination_per_page': 18,
     }
     if request.is_ajax():
         template = page_template

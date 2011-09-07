@@ -11,9 +11,9 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/static/css/reset.css" />
     <link rel="stylesheet" href="/static/css/styles.css" />
-<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css">
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css">
     <link rel="stylesheet" href="/static/css/jquery.jgrowl.css" />
-    <link rel="stylesheet" href="/static/css/jquery.jsquares.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="/static/css/jquery.jsquares.css" />
     <link rel="stylesheet" href="/static/css/jquery.rating.css" />
     <link rel="stylesheet" href="/static/css/jquery.qtip.css" />{% block extrastyle %}{% endblock %}
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Liberateca" />
@@ -26,11 +26,12 @@
     <div class="container">
       <a href="/"><img src="/static/images/logo.png" class="left" alt="liberateca" /></a>
       <div id="header">
-          <ul class="main-pages left">
+          <ul class="main-pages main-pages-left left">
               <li class="kids">
               <a href="{% url serie_index %}" id="header-serie">Series</a>
                   <ul>
                       <li><a href="{% url serie_index %}">Listado</a></li>
+                      <li><a href="{% url add_serie %}">Agregar</a></li>
                       <li><a href="{% url sneak_links %}">Ver últimas</a></li>
                   </ul>
               </li>
@@ -39,6 +40,7 @@
                   <ul>
                       <li><a href="{% url book_index %}">Listado</a></li>
                       <li><a href="{% url add_book %}">Agregar</a></li>
+                      <li><a href="{% url sneak_links_book %}">Ver últimas</a></li>
                   </ul>
               </li>
               <li class="kids">
@@ -65,6 +67,13 @@
   {% block options %}
   {% endblock %}
       <ul class="main-pages right">
+            <li class="kids">
+                  <form action="/search/" id="searchform">
+                      <input id="search" name="q" onkeyup="search_lookup(this.value);" type="search" placeholder="Prueba con '{% any %}Futurama|Fringe|Dexter|House|Misfits|Breaking Bad{% endany %}'" autocomplete="off" required />
+                    <input class="btn primary" type="submit" value="Ir" />
+                  </form>           
+                <div id="suggestions"></div>
+            </li>
           {% if request.user.is_authenticated %}
               {% cache 500 loggedbar request.user.username %}
               <li class="kids" id="user">
@@ -95,21 +104,15 @@
                       <input id="password" name="password" value="" title="password" tabindex="5" type="password">
                   </p>
                   <input type="hidden" name="next" value="{{ request.path }}" />
-                  <input class="button" value="Acceder" tabindex="6" type="submit">
+                  <input class="btn primary" value="Acceder" tabindex="6" type="submit">
                   <p class="forgot"> <a href="{% url auth_password_reset %}" id="resend_password_link">¿Has olvidado tu contraseña?</a> </p>
                   <p class="no-account"> <a href="/accounts/register/" id="no-account">¿No tienes una cuenta? Regístrate</a> </p>
                   </form>
               </fieldset>
+            </li>
           {% endif %}
           </ul>
 
-                  <div id="search_form">
-                        <form action="/search/" id="searchform">
-                            <input id="search" name="q" onkeyup="search_lookup(this.value);" type="search" placeholder="Prueba con '{% any %}Futurama|Fringe|Dexter|House|Misfits|Breaking Bad{% endany %}'" autocomplete="off" required />
-                          <input class="button" type="submit" value="Ir" />
-                        </form>           
-                      <div id="suggestions"></div>
-                  </div>
       </div>
     </div>
   </div>
@@ -119,7 +122,7 @@
 <div class="sidebar">
     {% block sidebar %}{% endblock %}
 </div>
-<div class="content">
+<div class="content row">
   <div id="notify"></div>
     {% block contents %}{% endblock %}
 </div>

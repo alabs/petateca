@@ -6,6 +6,19 @@ function notify(severity, message){
   window.location.replace('#notify');
 }
 
+function notify_bug() {
+  message = 'Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net';
+  notify('error', message);
+}
+
+function error_add(selector){
+    selector.parent().parent().addClass('error');
+}
+
+function error_remove(selector){
+    selector.parent().parent().removeClass('error');
+}
+
 
 
 function getCookie(name) {
@@ -106,13 +119,17 @@ function disc_rat_data(data){
           //        $.jGrowl('Su voto ha sido cambiado'); 
           //        break;
           case 'Ok':
-                  $.jGrowl('Su voto ha sido guardado'); 
+                  // $.jGrowl('Su voto ha sido guardado'); 
+                  message = 'Su voto ha sido guardado';
+                  notify('success', message);
                   break;
           case 'Error':
-                  $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                  notify_bug();
+                  //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                   break;
           default:
-              $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                  notify_bug();
+                  //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
           }
 }
 
@@ -158,7 +175,8 @@ function voting( direction, linktype, linkid ){
           url = '/books/links/vote/book/';
           break;
       default:
-          $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+          notify_bug();
+          //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
   }
   // el POST, aka jquery te amo
   $.post(url, { 
@@ -308,27 +326,12 @@ $(document).ready(function () {
 
       season_full_id = $(this).attr('id');
       $inside = $('#inside_' + season_full_id);
-      $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+      $inside.html('<img class="loading-small" src="/static/images/ajax-loading-bar.gif" />');
       serie_season_raw = season_full_id.split('_');
       var serie_id = serie_season_raw[1];
       var season_n = serie_season_raw[3];
       $inside.load('/series/lookup/serie/' + serie_id + '/season/' + season_n + '/');
   });
-
-  // Listado de actores segun serie
-  $('#get_actors').click(
-      function(){
-          $('#actors_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
-          var url = window.location.pathname;
-          var serie = url.split('/')[2];
-          $.get('/series/lookup/actors/' + serie + '/', {}, 
-              function(data){
-                  $('#actors_list').html(data);
-              }
-          ); 
-      }
-  );
-
 
       // para el form de add_or_edit_serie
       $('#submit_serie').click(function (event) {
@@ -348,12 +351,14 @@ $(document).ready(function () {
              if (f.val()==='') {
                  event.preventDefault();
                  // f.addClass('hightlight'); 
-                 f.parent().addClass('error');
-                 $.jGrowl('Ha ocurrido un error durante el envio, revisa el formulario');
+                 //f.parents().parents().addClass('error');
+                 error_add(f);
+                 notify('error', 'Ha ocurrido un error durante el envio, revisa el formulario');
                  //return false;
              } else {
                  //f.removeClass('hightlight');
-                 f.parent().removeClass('error');
+                 error_remove(f);
+                 //f.parents().parents().removeClass('error');
              }
          });
       
@@ -477,7 +482,8 @@ $(document).ready(function () {
       if ( type === 'book' ) {
           $inside.load('/books/links/add/book/' + object_id + '/');
       } else {
-          $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+          notify_bug();
+          //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
       }
   });
 
@@ -541,9 +547,13 @@ $(document).ready(function () {
       fields = [ $air_date, $title_es, $title_en, $episode ];
       $.each(fields, function(index, f){
           if (f.val()==='') {
-              f.addClass('hightlight'); 
+              //f.parents().parents().addClass('error'); 
+              error_add(f);
               return false;
-          } else {f.removeClass('hightlight');}
+          } else {
+              error_remove(f);
+              //f.parents().parents().removeClass('error');
+          }
       });
   
 
@@ -562,16 +572,19 @@ $(document).ready(function () {
       }, function(data) {
               switch (data) {
                   case 'OK':
-                      $.jGrowl('El episodio se ha creado exitosamente, gracias por colaborar');
+                      //$.jGrowl('El episodio se ha creado exitosamente, gracias por colaborar');
+                      notify('success', 'El episodio se ha creado exitosamente, gracias por colaborar');
                       var $inside = $('#inside_serie_' + serie + '_season_' + season);
                       $inside.html('<img src="/static/images/ajax-loading-bar.gif">');
                       $inside.load('/series/lookup/serie/' + serie + '/season/' + season + '/');
                       break;
                   case 'Duplicado':
-                      $.jGrowl('Ese episodio ya se encuentra, comprueba el numero');
+                      //$.jGrowl('Ese episodio ya se encuentra, comprueba el numero');
+                      notify('error', 'Ese episodio ya se encuentra, comprueba el numero');
                       break;
                   default:
-                      $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                      notify_bug();
+                      //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
               }
       }  
       );  
@@ -579,27 +592,31 @@ $(document).ready(function () {
 
   // muestra la referencia de idiomas
   $('#language_help').live('click', function() {
-      $.jGrowl('<a href="/faq">FAQ</a><b>Referencia de Idiomas:</b><li>en: Inglés<li>es: Español<li>es-es: Español Latino<li>ca: Català<li>jp: Japonés');
+      //$.jGrowl('<a href="/faq">FAQ</a><b>Referencia de Idiomas:</b><li>en: Inglés<li>es: Español<li>es-es: Español Latino<li>ca: Català<li>jp: Japonés');
+      notify('info', '<a href="/faq">FAQ</a><br><b>Referencia de Idiomas:</b><li>en: Inglés<li>es: Español<li>es-es: Español Latino<li>ca: Català<li>jp: Japonés');
     });
 
     // busqueda en thepiratebay
     $('#search_pb').live('click', function() {
         query = $(this).attr('rel');
-        $.jGrowl('Abriendo búsqueda en The Pirate Bay para ' + query);
+        //$.jGrowl('Abriendo búsqueda en The Pirate Bay para ' + query);
+        notify('info', 'Abriendo búsqueda en The Pirate Bay para ' + query);
         window.open( 'http://thepiratebay.org/search/' + query + '/0/7/0');
     });
 
     // busqueda en torrentz
     $('#search_torrentz').live('click', function() {
         query = $(this).attr('rel');
-        $.jGrowl('Abriendo búsqueda en Torrenz para ' + query);
+        //$.jGrowl('Abriendo búsqueda en Torrenz para ' + query);
+        notify('info', 'Abriendo búsqueda en Torrentz para ' + query);
         window.open( 'http://torrentz.eu/search?f=' + query);
     });
 
     // busqueda en la lista de sinde 
     $('#search_listadesinde').live('click', function() {
         query = $(this).attr('rel');
-        $.jGrowl('Abriendo búsqueda en La Lista de Sinde para ' + query);
+        //$.jGrowl('Abriendo búsqueda en La Lista de Sinde para ' + query);
+        notify('info', 'Abriendo búsqueda en La Lista de Sinde para ' + query);
         window.open('http://www.google.com/cse?cx=004411908642504437083%3A1dyk2klbrj8&ie=UTF-8&q=' + query + '&sa=Buscar+descargas!&siteurl=lalistadesinde.net%2F');
     });
 
@@ -615,20 +632,31 @@ $(document).ready(function () {
         //Simple validation to make sure user entered something
             //If error found, add hightlight class to the text field
             if (url.val()===''||url.val()==='http://') {
-                url.addClass('hightlight');
+                //url.parents().parents().addClass('error');
+                error_add(url);
                 return false;
-            } else {url.removeClass('hightlight');}
+            } else {
+                error_remove(url); 
+             //   url.parents().parents().removeClass('error');
+            }
 
             if (audio.val()==='') {
-                $('label[for=id_audio_lang]').addClass('hightlight');
+                //$('label[for=id_audio_lang]').parents().parents().addClass('error');
+                error_add( $('label[for=id_audio_lang]') );
                 return false;
-            } else {$('label[for=id_audio_lang]').removeClass('hightlight');}
+            } else {
+            //    $('label[for=id_audio_lang]').parents('li').removeClass('error');
+                error_remove( $('label[for=id_audio_lang]') );
+            }
 
             if (lang.val()==='') {
-                $('label[for=id_lang]').addClass('hightlight');
+             //   $('label[for=id_lang]').parents.('li').addClass('error');
+                error_add($('label[for=id_lang]'));
                 return false;
-            } else {$('label[for=id_lang]').removeClass('hightlight');}
-
+            } else {
+            //    $('label[for=id_lang]').parents.('li').removeClass('error');
+                error_remove($('label[for=id_lang]'));
+            }
         $.post(post_url, {
             'url': url.val(), 
             'lang': lang.val(), 
@@ -637,14 +665,18 @@ $(document).ready(function () {
             'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function(data) {
             if (data.mensaje  == 'Gracias'){
-                $.jGrowl('El enlace se ha guardado exitosamente');
+                //$.jGrowl('El enlace se ha guardado exitosamente');
+                var message = 'El enlace se ha guardado exitosamente.';
+                notify('success', message);
                 if ( data.type == 'book') {
                     location.reload(true);
                 }
             } else if (data.mensaje == 'Link duplicado') {
-                $.jGrowl('Link duplicado, prueba a agregar otro');
+                var message = 'Link duplicado, prueba a agregar otro';
+                notify('error', message);
             } else {
-                $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                notify_bug();
+                //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
             }
         }  
         );  
@@ -693,9 +725,13 @@ $(document).ready(function () {
         var $id_season = $('#id_season');
 
         if ($id_season.val()==='') {
-            $id_season.addClass('hightlight'); 
+            //$id_season.addClass('hightlight'); 
+            error_add($id_season);
             return false;
-        } else {$id_season.removeClass('hightlight');}
+        } else {
+            //$id_season.removeClass('hightlight'); 
+            error_remove($id_season);
+        }
 
         $.post(action, {
             'season': $id_season.val(),
@@ -714,27 +750,28 @@ $(document).ready(function () {
                 notify('error', message);
                 break;
             case 'Error':
-                // $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
-                message = 'Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net';
-                notify('error', message);
+                notify_bug();
+                //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                 break;
             default:
-                // $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
-                message = 'Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net';
-                notify('error', message);
+                notify_bug();
+                //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                 break;
             }
         });
         event.preventDefault();
     });
 
-    $('.comment_form').submit(function(){
+    $('.comment_form').submit(function(e){
         // Form de comentarios, que no salga sin nada
-        $comment = $(this).children('p').children('#id_comment');
+        $comment = $('.comment_form').children('li').children('div').children('#id_comment');
         if ($comment.val()==='') {
-            $comment.addClass('hightlight');
-            return false;
-        } else {$comment.removeClass('hightlight');}
+            e.preventDefault();
+            error_add($comment);
+            notify('error', 'Agrega tu comentario');
+        } else {
+            error_remove($comment);
+        }
     });
 
 
@@ -764,15 +801,17 @@ $(document).ready(function () {
                 }, function(data){
                     switch (data) {
                         case 'OK':
-                            $.jGrowl('Has marcado el episodio como visto');
+                            // $.jGrowl('Has marcado el episodio como visto');
+                            notify('success', 'Has marcado el episodio como visto.');
                             check_viewed(serie_id, season, episode);
                             break;
                         case 'Error':
-                            $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                            notify_bug();
+                            //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                             break;
                         default:
-                            $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
-                            alert(data);
+                            notify_bug();
+                            //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                             break;
                     }
                 }
@@ -956,6 +995,7 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
     var url = $.param.fragment();
 
     $(".navigator").each(function(){
+
       // iterando cada navigator y buscando los links ...
       var href = $(this).attr( "href" );
       var href_nohash = href.split('#')[1];
@@ -986,6 +1026,7 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
         $(this).addClass( "nolink" );
       } else {
         $(this).removeClass( "nolink" );
+        $('#popularity').removeClass('nolink');      
       }
     });
 
@@ -995,13 +1036,13 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
     if (url){
         switch (object) {
             case 'series':
-              $('#generic_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+              $('#generic_list').html('<img class="loading" src="/static/images/ajax-loading-bar.gif" />');
               // url que esperamos es algo por el estilo: genre/science-fiction
               console.log(url);
               $('#generic_list').load('/series/lookup' + url);
               break;
             case 'books':
-              $('#generic_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+              $('#generic_list').html('<img class="loading" src="/static/images/ajax-loading-bar.gif" />');
               // console.log(url);
               // url que esperamos es algo por el estilo: category/drama
               $('#generic_list').load('/books/lookup' + url);
@@ -1037,12 +1078,20 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
        break;
     case 'series':
        $('#header-serie').addClass('header-selected');
+       if (! $.param.fragment()) {
+       // Si no hay # en la URL entonces estamos en /
+          $('#popularity').addClass('nolink');      
+       } 
        break;
     case 'book':
        $('#header-book').addClass('header-selected');
        break;
     case 'books':
        $('#header-book').addClass('header-selected');
+       if (! $.param.fragment()) {
+       // Si no hay # en la URL entonces estamos en /
+          $('#popularity').addClass('nolink');      
+       } 
        break;
   }
 
@@ -1061,5 +1110,29 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
     $('.sidebar').html('<h2>Indice</h2>');
     $.toc('.content h1,.content h2').appendTo('.sidebar');
   }
+
+  $('a[title], .votelink[title]').qtip({
+      position: {
+         at: 'middle center',
+         my: 'top center',
+         adjust: {
+            method: 'flip',
+            x: 0,
+            y: 0
+         }
+      },
+         style: {
+            classes: 'ui-tooltip-dark'
+         }
+  });
+
+  $('.input input, .fieldwrapper input, .fieldwrapper textarea, .fieldwrapper select')
+    .live('focus', function(){
+      $(this).parent().parent().addClass('over');
+    })
+    .live('blur', function(){
+      $(this).parent().parent().removeClass('over');
+  }); 
+
 
 });

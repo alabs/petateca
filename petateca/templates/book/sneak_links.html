@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load message_box %}
+{% load extract_domain %}
+{% load echo_language %}
+{% block title %}Ultimos enlaces añadidos | Libros | Liberateca{% endblock %}
+{% block contents %}
+<table class="zebra-striped">
+    <tr>
+        <th width="45%" colspan="2"> Libro </th>
+        <th> Link </th>
+        <th> Idioma </th>
+        <th> Fecha </th>
+    </tr>
+{% for link in last_links %}
+    <tr>
+        <td>
+            <a href="{{ link.book.get_absolute_url }}">
+                {% thumbnail link.book.poster.src "90x90" as img_book %}
+                    <img src="{{ img_book.url }}">
+                {% endthumbnail %}
+            </a>
+        </td>
+        <td>
+          <a style="font-weight:bold;" href="{{ link.book.get_absolute_url }}">
+            {{ link.book.name }}
+            </a> - 
+          </span>
+              <a href="{{ link.book.get_absolute_url }}">
+                {% for author in link.book.author.all %}
+                {{ author.name }}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+              </a>
+            <p>{{ link.book.description }}</p></a>
+        </td>
+        <td>
+            <a href="{{ link.url }} ">{{ link.url|extract_domain }} </a></td> 
+        <td>
+          {{ link.lang.iso_code|echo_language }}
+        </td>
+        <td>{{ link.pub_date|date:"d/m/y H:i" }}</td> 
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

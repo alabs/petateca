@@ -6,12 +6,32 @@
 {% load process_serie_id %}
 {% load cache %}
 {% block title %}{{ user.username }} | Liberateca{% endblock %}
-{% block contents %}
+{% block sidebar %}
+	<!-- IMAGE -->
+    <div class="center margin">
+        <!-- AVATAR -->
+        {% if request.user == user %} 
+            <a class="avatar_change" href="{% url avatar_change %}">
+                {% avatar user 120 %}
+            </a>
+        {% else %}
+                {% avatar user 120 %}
+        {% endif %}
+        <ul>
+        {% if request.user == user %} 
+            <li><a class="avatar_change" href="{% url avatar_change %}">Cambiar avatar</a> 
+            <li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
+            <li>&nbsp;
+        {% endif %}
+            <li>Usuario desde: {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
+            <li>Último inicio de sesión: {{ user.last_login|date:"SHORT_DATE_FORMAT" }}
+        </ul>
 
+    </div>
+{% endblock %}
+{% block contents %}
 <!-- COLUMN 2 -->
-<div class="grid_6"> <!-- TITLE -->
 	<h1 id="title">{{ user.username }}</h1>
-	<div class="hr dotted clearfix">&nbsp;</div>
 
 	<!-- TRACKING -->
     {% if request.user == user %} 
@@ -33,8 +53,25 @@
     </div>
     {% endif %}
 
-    <p class="clearfix">
-	<div class="hr dotted clearfix">&nbsp;</div>
+    {% cache 500 favorite_series user %}
+    <div class="span16 columns">
+        <!-- FAVORITE SERIES -->
+        <h2>Series favoritas</h2>
+        {% if favorite_series %}
+          {% include "core/generic_list.html" with objects=favorite_series %}
+        {% endif %}
+    </div>
+    {% endcache %}
+
+    {% cache 500 favorite_books user %}
+    <div class="span16 columns">
+        <!-- FAVORITE BOOKS -->
+        <h2>Libros favoritos</h2>
+        {% if favorite_books %}
+          {% include "core/generic_list.html" with objects=favorite_books %}
+        {% endif %}
+    </div>
+    {% endcache %}
 
 	<h2> Últimas reseñas </h2>
     {% cache 500 comments user %}
@@ -67,52 +104,4 @@
     {% endif %}
     {% endcache %}
 </div>
-
-
-
-<div class="grid_4" id="box">
-	<!-- IMAGE -->
-    <div class="left">
-        <!-- AVATAR -->
-        {% if request.user == user %} 
-            <a class="avatar_change" href="{% url avatar_change %}">
-                {% avatar user 120 %}
-            </a>
-        {% else %}
-                {% avatar user 120 %}
-        {% endif %}
-    </div>
-    <div class="right">
-        <ul>
-        {% if request.user == user %} 
-            <li><a class="avatar_change" href="{% url avatar_change %}">Cambiar avatar</a> 
-            <li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
-            <li>&nbsp;
-        {% endif %}
-            <li>Usuario desde: {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
-            <li>Último inicio de sesión: {{ user.last_login|date:"SHORT_DATE_FORMAT" }}
-        </ul>
-
-    </div>
-    {% cache 500 favorites user %}
-    <div class="hr dotted clearfix">&nbsp;</div>
-        <!-- FAVORITE SERIES -->
-        <h2>Series favoritas</h2>
-        {% if favorite_series %}
-          {% for serie in favorite_series %}
-            <a class="portfolio_item float alpha" href="{{ serie.get_absolute_url }}">
-            <div class="preload" >
-            {% if serie.poster %} {% thumbnail serie.poster.src "150x150" as img_serie %} 
-                <img class="prel serie" id="{{ serie.id }}" src="{{ img_serie.url }}" alt="{{serie.name}}"/>{% endthumbnail %}
-            {% else %}
-                <div class="image_not_found">  <img src="/static/images/image_not_available.png" width="50"> </div>
-            {% endif %}
-            </div>
-        </a>{% endfor %}
-        {% else %} 
-        No tiene series favoritas :(
-        {% endif %}
-    {% endcache %}
-</div>
-
 {% endblock %}

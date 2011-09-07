@@ -1,28 +1,36 @@
 {{ mensaje }}
 
-<form id="add_episode_form" action="{% url ajax_add_episode serie_id=serie.id season=season.season %}" method="POST">
+<form class="center" id="add_episode_form" action="{% url ajax_add_episode serie_id=serie.id season=season.season %}" method="POST">
 <ul>
     {{ form.non_field_errors }}
-    <li class="fieldWrapper">
+    <li class="fieldwrapper">
         {{ form.air_date.errors }}
         <label for="id_air_date">Fecha de emisión:</label>
-        {{ form.air_date }}
+        <div class="input">
+          {{ form.air_date }}
+        </div>
     </li>
-    <li class="fieldWrapper">
+    <li class="fieldwrapper">
         {{ form.title_es.errors }}
         <label for="id_title_es">Título [es]:</label>
-        {{ form.title_es }}
+        <div class="input">
+          {{ form.title_es }}
+        </div>
     </li>
-    <li class="fieldWrapper">
+    <li class="fieldwrapper">
         {{ form.title_en.errors }}
         <label for="id_title_es">Título [en]:</label>
-        {{ form.title_en }}
+        <div class="input">
+          {{ form.title_en }}
+        </div>
     </li>
-    <li class="fieldWrapper">
+    <li class="fieldwrapper">
         {{ form.episode.errors }}
         <label for="id_episode">Número de episodio:</label>
-        {{ form.episode }}
+        <div class="input">
+          {{ form.episode }}
+        </div>
     </li>
 </ul>
-    <input class="button center" id="submit_episode" type="submit" value="Agregar episodio" />
+    <input class="btn primary center" id="submit_episode" type="submit" value="Agregar episodio" />
 </form>

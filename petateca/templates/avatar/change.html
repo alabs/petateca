@@ -1,29 +1,30 @@
 {% extends "base.html" %}
 {% load avatar_tags %}
-{% block contents %}
-    <div id="box" class="grid_2 left">
-        <h2>Tu avatar: </h2>
+{% block title %}Cambiar avatar | Liberateca {% endblock %}
+{% block sidebar %}
+        <h1>Tu avatar: </h1>
         {% avatar user %}
-    </div>
+{% endblock %}
 
+{% block contents %}
+<h2> Cambiar </h2>
     {% if not avatars %}
         <p>No tienes ningun avatar, por favor añade alguno.</p>
     {% else %}
-    <div id="box" class="grid_2 left">
         <form method="POST" action=".">
+          {% csrf_token %}
         <ul id="avatar_list">
             {{ primary_avatar_form.as_ul }}
         </ul>
-            <input class="button center" type="submit" value="Elegir" />
+            <input class="btn primary center" type="submit" value="Elegir" />
         </form>
-    </div>
     {% endif %}
-    <div id="box" class="grid_3 left">
+    <h2> Agregar </h2>
         <form enctype="multipart/form-data" method="POST" action="">
+          {% csrf_token %}
             <ul>
                 <li><input type="file" name="avatar" value="Avatar Image" />
-                <li><input style="margin-top:2em;" class="button center" type="submit" value="Subir nuevo" />
+                <li><input style="margin-top:2em;" class="btn primary center" type="submit" value="Subir nuevo" />
             </ul>
         </form>
-    </div>
 {% endblock %}

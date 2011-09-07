@@ -31,8 +31,8 @@
                 {% endif %} 
             </a>
             <a class="right" href="{{ result.object.get_absolute_url }}"> <h2>{{result.object.name|title}}</h2></a>
-            <p>Cadena: <a href="{{result.object.network.get_absolute_url}}" class="button"> {{ result.object.network }}</a></p>
-            <p>Generos: {% for genre in result.object.genres.all %}<a href="{{ genre.get_absolute_url }}" class="button"
+            <p>Cadena: <a href="{{result.object.network.get_absolute_url}}" class="btn primary"> {{ result.object.network }}</a></p>
+            <p>Generos: {% for genre in result.object.genres.all %}<a href="{{ genre.get_absolute_url }}" class="btn primary"
             style="margin:0.5em;">{{genre.name}}</a>{% endfor %}</p>
             <p>Actores: {% for actor in result.object.actors.all %}<a href="{{actor.get_absolute_url}}">{{actor.name}}, <a>{% endfor %}</p>
             <p>{{result.object.description}}</p>

@@ -116,17 +116,20 @@ def ajax_add_link(request, link_type, obj_id):
             m.Episode,
             id=obj_id
         )
+        query = episode.season.serie.name + ' ' + episode.season_episode()
     elif link_type == 'season':
         season = get_object_or_404(
             m.Season,
             id=obj_id
         )
+        query = season.serie.name + ' S0' + season.season
     if link_type == 'episode':
         Form = LinkForm
         link_info = {
             'episode': episode,
             'season': episode.season,
             'serie': episode.season.serie,
+            'query': query,
             'link_type': 'episode',
         }
     elif link_type == 'season':
@@ -134,6 +137,7 @@ def ajax_add_link(request, link_type, obj_id):
         link_info = {
             'season': season,
             'serie': season.serie,
+            'query': query,
             'link_type': 'season',
         }
     # Si es para editar, devolvemos la instancia del link ya existente ;)
@@ -403,7 +407,7 @@ def serie_index(request,
         'objects': query, 
         'page_template': page_template,
         'object_type': 'serie',
-        'pagination_per_page': 15,
+        'pagination_per_page': 18,
     }
     if request.is_ajax():
         template = page_template
