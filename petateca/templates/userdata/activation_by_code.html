@@ -3,6 +3,7 @@
 {% block contents %}
 <div class="center login_box" id="box">
     <form action="{% url activate_by_code %}" method="POST">
+      {% csrf_token %}
     <ul>
         <li class="fieldwrapper">
             <label for="id_activation_key">Ingresa tu código de activación:</label>

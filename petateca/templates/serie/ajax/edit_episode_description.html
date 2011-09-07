@@ -1,6 +1,7 @@
 {{ mensaje }}
 
 <form class="left" id="add_episode_form" action="{% url ajax_edit_episode_description serie_id=serie.id season=season.season episode=episode.episode %}" method="POST">
+  {% csrf_token %}
 <ul>
     {{ form.non_field_errors }}
     <li class="fieldWrapper"> 

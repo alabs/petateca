@@ -1,4 +1,5 @@
   <form class="center margin" id="add_link_form" action="{% if link_type == 'episode' %}{% url ajax_add_link link_type='episode' obj_id=episode.id %}{% else %}{% if link_type == 'season' %}{% url ajax_add_link link_type='season' obj_id=season.id %}{% endif %}{% endif %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
+    {% csrf_token %}
   {{ form.non_field_errors }}
     <ul>
       <li class="fieldwrapper">

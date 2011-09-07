@@ -1,5 +1,6 @@
 <div class="center marginal">
     <form id="add_link_form" action="{% url ajax_add_link_book link_type='book', obj_id=book.id %}{% if edit %}?edit=yes&linkid={{ link.id }}{% endif %}" method="post">
+      {% csrf_token %}
         <ul>
             {{ form.as_ul }}
             <li><input class="btn primary margin" id="submit_link" type="submit" value="Enviar" /></li>

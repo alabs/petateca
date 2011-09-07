@@ -9,6 +9,7 @@
 <div class="grid_3 mrg_2" id="box">
     <h1>Agregar {{ field }}</h1>
     <form method="POST" action="/books/add/{{ action }}/">
+      {% csrf_token %}
         <table>
             {{ form }}
         </table>
