@@ -948,6 +948,85 @@ $(document).ready(function () {
        $(this).parent().parent().append(reply_form);
     });
 
+  $('#js-container').jsquares({
+      shuffle_in: false, 
+      caption_height: 180,
+      caption_width: 330
+  });
+  $('#js-container-2').jsquares({
+      shuffle_in: false, 
+      caption_height: 180,
+      caption_width: 330
+  });
+
+  // marcar en header
+  section = document.URL.split('/')[3];
+  switch (section) {
+    case 'blog': 
+      $('#header-blog').addClass('header-selected');
+      break;
+    case 'serie':
+       $('#header-serie').addClass('header-selected');
+       break;
+    case 'series':
+       $('#header-serie').addClass('header-selected');
+       if (! $.param.fragment()) {
+       // Si no hay # en la URL entonces estamos en /
+          $('#popularity').addClass('nolink');      
+       } 
+       break;
+    case 'book':
+       $('#header-book').addClass('header-selected');
+       break;
+    case 'books':
+       $('#header-book').addClass('header-selected');
+       if (! $.param.fragment()) {
+       // Si no hay # en la URL entonces estamos en /
+          $('#popularity').addClass('nolink');      
+       } 
+       break;
+  }
+
+  // cerrar el notify
+  $('.close').live('click', function() {
+    $(this).parent().hide();
+  }); 
+
+  // si estamos en la pagina de la API, creamos el menu
+  if ( $('.header_api').size() != 0 ) {
+    $('.sidebar').html('<h2>Indice</h2>');
+    $.toc('h1,h3.header_api').appendTo('.sidebar');
+  }
+
+  if ( $('.header').size() != 0 ) {
+    $('.sidebar').html('<h2>Indice</h2>');
+    $.toc('.content h1,.content h2').appendTo('.sidebar');
+  }
+
+  $('a[title], .votelink[title]').qtip({
+      position: {
+         at: 'middle center',
+         my: 'top center',
+         adjust: {
+            method: 'flip',
+            x: 0,
+            y: 0
+         }
+      },
+         style: {
+            classes: 'ui-tooltip-dark'
+         }
+  });
+
+  $('.input input, .fieldwrapper input, .fieldwrapper textarea, .fieldwrapper select')
+    .live('focus', function(){
+      $(this).parent().parent().addClass('over');
+    })
+    .live('blur', function(){
+      $(this).parent().parent().removeClass('over');
+  }); 
+
+
 
     // jquery sticky footer
     function positionFooter(){
@@ -1047,84 +1126,6 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
   $(window).trigger( "hashchange" );
 
 //  $('#add_book_form, #add_serie_form').highlight();
-
-  $('#js-container').jsquares({
-      shuffle_in: false, 
-      caption_height: 180,
-      caption_width: 330
-  });
-  $('#js-container-2').jsquares({
-      shuffle_in: false, 
-      caption_height: 180,
-      caption_width: 330
-  });
-
-  // marcar en header
-  section = document.URL.split('/')[3];
-  switch (section) {
-    case 'blog': 
-      $('#header-blog').addClass('header-selected');
-      break;
-    case 'serie':
-       $('#header-serie').addClass('header-selected');
-       break;
-    case 'series':
-       $('#header-serie').addClass('header-selected');
-       if (! $.param.fragment()) {
-       // Si no hay # en la URL entonces estamos en /
-          $('#popularity').addClass('nolink');      
-       } 
-       break;
-    case 'book':
-       $('#header-book').addClass('header-selected');
-       break;
-    case 'books':
-       $('#header-book').addClass('header-selected');
-       if (! $.param.fragment()) {
-       // Si no hay # en la URL entonces estamos en /
-          $('#popularity').addClass('nolink');      
-       } 
-       break;
-  }
-
-  // cerrar el notify
-  $('.close').live('click', function() {
-    $(this).parent().hide();
-  }); 
-
-  // si estamos en la pagina de la API, creamos el menu
-  if ( $('.header_api').size() != 0 ) {
-    $('.sidebar').html('<h2>Indice</h2>');
-    $.toc('h1,h3.header_api').appendTo('.sidebar');
-  }
-
-  if ( $('.header').size() != 0 ) {
-    $('.sidebar').html('<h2>Indice</h2>');
-    $.toc('.content h1,.content h2').appendTo('.sidebar');
-  }
-
-  $('a[title], .votelink[title]').qtip({
-      position: {
-         at: 'middle center',
-         my: 'top center',
-         adjust: {
-            method: 'flip',
-            x: 0,
-            y: 0
-         }
-      },
-         style: {
-            classes: 'ui-tooltip-dark'
-         }
-  });
-
-  $('.input input, .fieldwrapper input, .fieldwrapper textarea, .fieldwrapper select')
-    .live('focus', function(){
-      $(this).parent().parent().addClass('over');
-    })
-    .live('blur', function(){
-      $(this).parent().parent().removeClass('over');
-  }); 
 
 
 });
