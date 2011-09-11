@@ -35,13 +35,9 @@ setup(
         'python-twitter',
         'django-memcache-status',
         'django-celery',
-<<<<<<< HEAD
         'django-axes',
-=======
-        'django-blog-zinnia',
-
-        'django-bitly',
->>>>>>> bootstrap
+        #'django-blog-zinnia',
+        #'django-bitly',
         #'django-piston', lo instalamos a traves de src/ por ser este fork
         # https://bitbucket.org/joeb/django-piston/
         #'django-ratings',
