@@ -36,6 +36,7 @@ setup(
         'django-memcache-status',
         'django-celery',
         'django-axes',
+        'django-dtpanel-htmltidy',
         #'django-blog-zinnia',
         #'django-bitly',
         #'django-piston', lo instalamos a traves de src/ por ser este fork
