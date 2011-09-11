@@ -153,6 +153,8 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
+// Google + button
+gapi.plusone.go();
 
 function voting( direction, linktype, linkid ){
   // tratamiento de las votaciones de links

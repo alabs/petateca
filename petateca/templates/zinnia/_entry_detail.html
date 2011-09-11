@@ -1,12 +1,13 @@
-{% load tagging_tags comments i18n %}
-{% load thumbnail %}
-
-<div class="entry-header grid_12 last">
-  <h2 class="entry-title">
-    <a class="center margin" href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+{% load tagging_tags comments i18n thumbnail %} 
+<div class="entry-header grid_12 last margin">
+  <h2 class="entry-title center">
+    <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
       {{ object.title }}
     </a>
   </h2>
+    <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">
+      {% trans "Published on"%} {{ object.creation_date|date:"d/m/Y" }}
+    </abbr>
 </div>
 
 <div class="entry-body last">
@@ -24,7 +25,7 @@
   </div>
 </div>
 
-<ul class="entry-footer">
+<ul class="entry-footer margin">
   <li class="entry-tags last">
     <strong>{% trans "Tags" %}</strong> :
     {% tags_for_object object as tag_list %}
@@ -94,12 +95,5 @@
   </li>
     {% endif %}
 
-  <li class="entry-info">
-    <strong>{% trans "Published" %}</strong> :
-    <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">
-      {{ object.creation_date|date:"d/m/Y" }}
-    </abbr>
-  </li>
-
-  <hr style="margin-top:2em;" class="center margin" />
+  <hr class="center margin mt_3" />
 </div>

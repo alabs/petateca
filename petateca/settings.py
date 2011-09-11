@@ -87,8 +87,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'core.context_processors.site_name',
-    'zinnia.context_processors.version',
-    'zinnia.context_processors.media',
+   # 'zinnia.context_processors.version',
+   # 'zinnia.context_processors.media',
 )
 
 
@@ -103,6 +103,11 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django.contrib.markup',
     'django.contrib.sitemaps',
+    ### blog ###
+   # 'tagging',
+   # 'mptt',
+   # 'zinnia',
+   # 'django_bitly',
     ### django-app ###
     'registration',         # users - register and that stuff
     'avatar',               # users - images
@@ -118,11 +123,6 @@ INSTALLED_APPS = (
     'threadedcomments',     # comentarios anidados
     'memcache_status',
     'djcelery',
-    ### blog ###
-    'tagging',
-    'mptt',
-    'zinnia',
-    'django_bitly',
     ### sentry logger ###
     'indexer',
     'paging',
@@ -137,7 +137,7 @@ INSTALLED_APPS = (
     'search',
     'core',
     'tracking',
-    'checker',
+   # 'checker',
 )
 
 

@@ -170,6 +170,10 @@ ol { padding: 0 0 0 5px }
     width: 0;
     height: 0;
 }
+.clear_2 {
+    display: block;
+    overflow: hidden;
+}
 .textright { text-align: right }
 /* Buttons */
 .button,
@@ -215,8 +219,32 @@ h1.logo {
     padding: 5px;
 }
 
-#ribbon {
-position:absolute; right:0px; top:0px; margin:0px; padding:0px;
+
+.corner {
+    background-color: #a00;
+    overflow: hidden;
+    position: absolute;
+    left: -3em;
+    top: 1em;
+
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+
+    -moz-box-shadow: 0 0 1em #888;
+    -webkit-box-shadow: 0 0 1em #888;
+    box-shadow: 0 0 1em #888;
+}
+.corner a {
+    border: 1px solid #faa;
+    color: #fff;
+    display: block;
+    font-size:.9em;
+    font-weight:bold;
+    padding: 0.1em 4em;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #000;
 }
 
 /* Site Navigation */
@@ -362,132 +390,11 @@ position:absolute; right:0px; top:0px; margin:0px; padding:0px;
     color: #FFFFFF !important;
 }
 
-
-#search {
-    margin: 0.5em;
-    font-size: 13px;
-    padding: 4px 25px 5px 5px;
-    width: 20em;
-    color: black;
-    background-color: white;
-}
-
-
-/*
-#searchform input[type="submit"] {
-  width: inherit !important;
-  background: url(../images/search-ltr.png) no-repeat center center;
-}
-*/
-
-/*
-#header ul  {
-	text-transform: uppercase;
-	height: 100%;
-        cursor: pointer;
-	list-style: none outside none;
-        margin: 0;
-        padding: 0;
- }
-#header ul li {
-	list-style: none;
-	float: left; 
-	padding: 12px 0 0;
-        margin : 0 0 0 10px;
-        font-family: arial, sans-serif !important;
-        color: #717171;
-        font-size: 14px;
-        font-weight: bold;
-}
-#header ul li a {
-	display: block;
-	padding: 0px;
-        font-family: arial, sans-serif !important;
-        color: #A1A1A1;
-        font-size: 14px;
-        font-weight: bold;
-	text-decoration: none; }
-
-#header li ul {
-	display: none; 
-	width: 10em; 
-}
-#header li ul:last-child {
-    -moz-border-radius-bottomleft: 5px;
-    -moz-border-radius-bottomright: 5px;
-    padding-bottom: 10px;
-}
-
-#header li:hover {
-	color: #FAFAFA;
-}
-
-#header li:hover ul {
-	display: block;
-	position: absolute;
-	margin: 0;
-	padding: 0; 
-        background: url(../images/bg2.png) repeat #000;
-}
-#header li:hover li {
-	float: none; 
-        background: url(../images/bg2.png) repeat #000;
-}
-
-#header li li {
-	padding: 10px 0 0 7px;	
-	width: 13em;
-}
-#header li li:last-child {
-	padding-bottom: 10px;
-        -moz-border-radius-bottomleft: 5px;
-        -moz-border-radius-bottomright: 5px;
-}
-
-#header li li a:hover {
-        color: #FAFAFA;
-}
-*/
-
 /* Footer */
 .footer,
 .footer a { color: #494949 }
 .footer a:hover { color: #9d9d9d }
-/* Sub Navigation 
-ul.sidebar {
-    list-style: none;
-    margin: 0 0 30px 0;
-    padding: 0;
-}
-ul.sidebar li {
-    margin: 0 0 0 0;
-    padding: 0;
-}
-ul.sidebar a {
-    width: 295px;
-    display: inline-block;
-    padding: 10px 0 10px 5px;
-    border-bottom: 1px solid #e4e4e4;
-    text-decoration: none;
-    color: #393939;
-}
-ul.sidebar li:last-child a {
-    -moz-border-radius-bottomleft: 5px;
-    -moz-border-radius-bottomright: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-}
-ul.sidebar li:first-child a {
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-}
-ul.sidebar a:hover {
-    width: 280px;
-    background: #f6f6f6;
-    padding: 10px 0 10px 20px;
-}*/
+
 /* Caption */
 h2.caption {
     color: #494949;
@@ -967,7 +874,7 @@ display: inline;
 list-style-type: none;
 padding-right: 20px;
 }
-/* Search form */
+/* Search form
 #search_form { 
     position: absolute;
     top: 3em;   left: 23em;
@@ -990,7 +897,7 @@ padding-right: 20px;
     font: 13px Arial,sans-serif;
     padding: 6px 25px 4px 6px;
     width: 215px;
-}
+} */
 /* ADD EPISODE FORM */
 #add_episode_form label {
     width: 12em;
@@ -1036,7 +943,7 @@ padding-right: 20px;
     border-width:1px; 
     border-color:#919191;
     border-style:solid;
-    width:29em;
+    width:31.4em;
     background-color:#a0a0a0;
     font-size:10px;
     line-height:14px;
@@ -1044,8 +951,8 @@ padding-right: 20px;
     z-index:100; 
     /* FIXME: esto es una guarrada muy grande, se acomoda por el position absolute.
      * Por favor mirar para otro lado o arreglar */
-    left:-23em;
-    top: -6.6em;
+    left:-23.2em;
+    top: -7.2em;
 }
 #searchresults a { display:block; background-color:#e4e4e4; clear:left; height:11.9em; text-decoration:none; }
 #searchresults a:hover { background-color:#b7b7b7; color:#ffffff; }
@@ -1163,11 +1070,15 @@ padding-right: 20px;
 /* RATING BOX WITH COLORS */
 .rating_num {
     font-size: 36px;
-    font-weight: bold;
-    padding: 10px 0 12px;
+    padding: 16px 0 6px;
     text-align: center;
-    width: 2em;
-    margin-bottom: 1em;
+    width: 2.5em;
+    clear:both;
+}
+.rating_num p {
+    font-size: 0.3em;
+    margin-bottom: 0.4em !important;
+    line-height: 9px !important;
 }
 .positive_bg {
     background-color: #4EB122;
@@ -1184,9 +1095,6 @@ padding-right: 20px;
 .no_bg {
     background-color: #BBBBBB;
     color: #FFFFFF;
-}
-.rating_num div {
-    font-size: 10px;
 }
 
 
@@ -1512,13 +1420,20 @@ border:0;
 
 /* shares */
 
-.twitter-share-button, .fb_iframe_widget, #___plusone_0, #plusone {
+
+
+.twitter-share-button{
     margin: 0.5em !important;
+} 
+
+.fb_iframe_widget{
+    margin: 0.1em !important;
 }
 
-#plusone table {
-    margin: 2em !important;
+#___plusone_0, #plusone  {
+    margin: 5em !important;
 }
+
 
 .mrg_2{
     margin:2em;
@@ -1578,6 +1493,10 @@ border:0;
 .hentry .entry-footer p { margin-bottom: 0; }
 .hentry .entry-footer p strong { padding-left: 1.5em; }
 
+.entry-header abbr {
+    font-size: 85%;
+}
+
 .loading {
     margin-top: 15em;
 }
@@ -1621,9 +1540,11 @@ select {
     width: 30em !important;
 }
 
+/*
 input {
     margin: inherit !important;
 }
+  */
 
 .over{
     background: none repeat scroll 0 0 #E6E6E6;
@@ -1645,6 +1566,31 @@ input {
     width: inherit !important;
 }
 
+
+#search-form {
+    float: left;
+    margin: 6px 0 0;
+    opacity: 1;
+    position: relative;
+}
+#search-form span.glass {
+    cursor: pointer;
+    display: block;
+    padding: 7px 8px 5px;
+    position: absolute;
+    right: 0;
+}
+#search-form span.glass i {
+    background-image: url("../images/sprite-icons.png");
+    background-position: -224px -96px;
+    display: block;
+    font-size: 0;
+    height: 14px;
+    width: 14px;
+}
+#search-form input {
+    width: 23em;
+}
 
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */

@@ -12,7 +12,39 @@
     <meta property="og:image" content="http://liberateca.net/static/images/logos/logo_square.png" />
 {% endblock %}
 {% block contents %}
-        <h2 class="margin caption center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
+  <h2 class="margin caption center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
+
+  {% comment %}
+<div id="box" class="margin"> 
+  <h2 class="center"> Últimas entradas del blog </h2>
+  <ul class="horizontal_list container_12 clear_2 margin">
+    {% for entry in entry_list %}
+      <li class="grid_6">
+        <div class="entry-header">
+          <a class="center" href="{{ entry.get_absolute_url }}"> 
+            <h3>{{ entry.title }}</h3>
+            {% thumbnail entry.image "200x200" as entry_img %}
+              <img src="{{ entry_img.url }}" alt="{{ entry.title }}" />
+            {% endthumbnail %}
+          </a>
+          <abbr class="published" title="{{ entry.creation_date|date:"c" }}Z">
+            {% trans "Published on"%} {{ entry.creation_date|date:"d/m/Y" }}
+          </abbr>
+        </div>
+        <p>
+          {{ entry.html_content|truncatewords_html:50|safe }} <a href="{{ entry.get_absolute_url }}">Seguir leyendo</a>
+        </p>
+      </li>
+    {% endfor %}
+  </ul>
+  <h4 class="center mt_1">
+      <a href="/blog/" class="nobottom">
+          Ver todas las entradas 
+          <img title="Ver todas las entradas" src="/static/images/go-next.png" class="nobottom valign" />
+      </a>
+  </h4>
+</div>
+{% endcomment %}
 
 {% cache 500 index-books %}
     {% url book_index as url_book %}
@@ -23,6 +55,7 @@
     {% url serie_index as url_serie %}
     {% include "core/_index_jsquares.html" with type_plur="Series" type_ind="serie" elements=series type_message="Ver todas las series" url_index=url_serie jscontainerid="js-container" %}
 {% endcache %}
+
 {% endblock %}
 {% block sidebar %}
 

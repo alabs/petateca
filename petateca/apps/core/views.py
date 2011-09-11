@@ -8,14 +8,17 @@ from django.contrib.auth.models import User
 from djangoratings.models import Vote as Rating
 
 from avatar.models import Avatar
+#from zinnia.models import Entry
 
 @render_to('core/index.html')
 def index(request):
     ''' Para la home '''
     serie_list = Serie.objects.order_by('rating_score').reverse().select_related('poster')[:15] 
     books_list = Book.objects.order_by('rating_score').reverse().select_related('poster')[:15] 
+   # entry_list = Entry.objects.all()[:2]
     index_response = { 
         'series': serie_list,
+   #     'entry_list': entry_list,
         'books': books_list, 
     }
     # Le damos una cookie que queramos, luego comprobamos que este

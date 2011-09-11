@@ -58,7 +58,7 @@ urlpatterns = patterns('',
 
     (r'^tracking/', include('tracking.urls')),
 
-    url(r'^blog/', include('zinnia.urls')),
+    #url(r'^blog/', include('zinnia.urls')),
 
     (r'^accounts/', include('userdata.urls')),
     url(r'^user/(?P<user_name>[-\w]+)/$', 'userdata.views.public_profile', name='user_profile'),
