@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from core.decorators import render_to
 
 from serie.models import Serie
+from book.models import Book
 from userdata.models import User
 
 @render_to('registration/profile.html')
@@ -23,12 +24,15 @@ def public_profile(request, user_name):
     user = get_object_or_404(User, username=user_name)
     # for series marked as favorite
     favorite_series = Serie.objects.select_related("poster").filter(favorite_of=user)
+    # for books marked as favorite
+    favorite_books = Book.objects.select_related("poster").filter(favorite_book=user)
     # comments for series
     serie = ContentType.objects.get(app_label='serie', name='serie')
     comments_series = user.comment_comments.filter(content_type=serie.id).order_by('-submit_date')[:10]
     return {
         'user': user,
         'favorite_series': favorite_series,
+        'favorite_books': favorite_books,
         'comments_serie': comments_series,
     }
 

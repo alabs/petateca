@@ -4,17 +4,14 @@
 {% load message_box %}
 {% load extract_domain %}
 {% load echo_language %}
-{% block extrahead %}
-<meta http-equiv="refresh" content="30" />
-{% endblock %}
-{% block title %}Ultimos enlaces añadidos | Liberateca{% endblock %}
+{% block title %}Ultimos enlaces añadidos | Series | Liberateca{% endblock %}
 {% block contents %}
-<table id="links" style="width:100%">
+<table class="zebra-striped">
     <tr>
-        <td width="45%" colspan="2"> Serie </td>
-        <td> Link </td>
-        <td> Idioma </td>
-        <td> Fecha </td>
+        <th width="45%" colspan="2"> Serie </th>
+        <th> Link </th>
+        <th> Idioma </th>
+        <th> Fecha </th>
     </tr>
 {% for link in last_links %}
     <tr>
@@ -26,8 +23,8 @@
             </a>
         </td>
         <td>
-            <a style="font-weight:bold;" href="{{ link.episode.season.serie.get_absolute_url }}">{{ link.episode.season.serie }}</a> - <span style="font-weight:bold;"><a href="{{ link.episode.get_absolute_url }}">{{ link.episode.season_episode }}</span>
-            <p>{{ link.episode.description }}</p></a>
+          <a style="font-weight:bold;" href="{{ link.episode.season.serie.get_absolute_url }}">{{ link.episode.season.serie }}</a> - {{ link.episode.season_episode }}<
+            <p>{{ link.episode.description }}</p>
         </td>
         <td>
             <a href="{{ link.url }} ">{{ link.url|extract_domain }} </a></td> 

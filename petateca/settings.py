@@ -81,13 +81,15 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'core.context_processors.site_name',
+   # 'zinnia.context_processors.version',
+   # 'zinnia.context_processors.media',
 )
 
 
@@ -102,6 +104,11 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django.contrib.markup',
     'django.contrib.sitemaps',
+    ### blog ###
+   # 'tagging',
+   # 'mptt',
+   # 'zinnia',
+   # 'django_bitly',
     ### django-app ###
     'registration',         # users - register and that stuff
     'avatar',               # users - images
@@ -132,7 +139,7 @@ INSTALLED_APPS = (
     'search',
     'core',
     'tracking',
-    'checker',
+   # 'checker',
 )
 
 
@@ -187,24 +194,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 DEFAULT_USER_FOR_LINKS = 'liberateca'
-
-LOGIN_EXEMPT_URLS = (
-    r'^static/', 
-    r'^accounts/invitation/request/$', 
-    r'^admin/',
-    r'^accounts/register/',
-    r'^accounts/login/',
-    r'^accounts/activate/',
-    r'^accounts/password/reset/',
-    # la API se encarga de la autenticacion
-    # usuarios no registrados pueden entrar a la Doc
-    r'^api/',
-)
-
-LOGIN_URL_INDEX = '/accounts/signin/'
-INVITATION_MAIL = 'invitaciones@liberateca.net'
 ADMIN_MAIL = 'admin@liberateca.net'
-
 
 CACHE_BACKEND = 'dummy://'
 
@@ -225,9 +215,6 @@ ENDLESS_PAGINATION_LOADING = ''' <img src="/static/images/ajax-loading-bar.gif" 
 
 COMMENTS_APP = 'threadedcomments'
 
-#Valid values are http, sql
-IMDB_ACCESS_SYSTEM = "http"  # XXX: sql search is worse
-
 import djcelery
 djcelery.setup_loader()
 
@@ -240,6 +227,10 @@ BROKER_VHOST = "/"
 PISTON_IGNORE_DUPE_MODELS = True
 
 AXES_LOGIN_FAILURE_LIMIT = 10
+
+BITLY_LOGIN = 'liberateca'
+BITLY_API_KEY = 'CAMBIAME_EN_LOCAL_SETTINGS'
+ZINNIA_URL_SHORTENER_BACKEND = 'zinnia.url_shortener.backends.bitly'
 
 # Con local_settings podemos reescribir / agregar settings que sean 
 # propios de la maquina donde se encuentre, por ejemplo BBDD y DEBUG

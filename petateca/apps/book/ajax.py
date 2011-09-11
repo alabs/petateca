@@ -188,7 +188,7 @@ def get_numbers():
 
 
 def book_index(request,
-        template="book/book_list.html",
+        template="core/object_list.html",
         page_template="core/generic_list.html",
         letter=False,
         category_slug=False,
@@ -219,8 +219,8 @@ def book_index(request,
     context = {
         'objects': query, 
         'page_template': page_template,
-        'obj_type': 'book',
-        'pagination_per_page': 15,
+        'object_type': 'book',
+        'pagination_per_page': 18,
     }
     if request.is_ajax():
         template = page_template

@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% block title %}{% if serie %}Editando serie {{ serie.name.title }}{% else %}Agregando serie{% endif %} | Liberateca{% endblock %}
-{% block contents %}
-<div class="grid_12" id="box">
-<form id="add_serie_form" enctype="multipart/form-data" action="{% if serie %}{% url edit_serie serie_slug=serie.slug_name %}{% else %}{% url add_serie %}{% endif %}" method="POST">
-    <h1>{% if serie %}Editando serie {{ serie.name.title }}{% else %}Agregando serie{% endif %}</h1>
-    <ul class="controls grid_3">
+{% block sidebar %}
+    <h1 class="margin center">{% if serie %}Editando serie{% else %}Agregando serie{% endif %}</h1>
+    <ul class="grid_3">
         <li class="center">
             {% if serie.poster.src %}
                 {% thumbnail serie.poster.src "400x300" as img_serie %}
@@ -13,12 +11,6 @@
             {% else %}
                  <img src="/static/images/image_not_available.png" height="200"> 
             {% endif %}
-                {{ img_form.non_field_errors }}
-                {{ img_form.src.errors }}
-                {{ img_form.src }}
-        </li>
-        <li>
-            <input class="button center" style="margin-left:5em;margin-top:2em;margin-bottom:2em;" id="submit_serie" type="submit" value="{% if serie %}Actualizar{% else %}Agregar{% endif %}" />
         </li>
         {% if not serie %}
         <li>
@@ -29,51 +21,88 @@
         </li>
         {% endif %} 
     </ul>
-    <ul class="controls grid_3">
+{% endblock %}
+{% block contents %}
+  {% if serie %}
+      <h1 class="margin center">{{ serie.name_es.title }}</h1>
+  {% endif %}
+
+  <form id="add_serie_form" enctype="multipart/form-data" action="{% if serie %}{% url edit_serie serie_slug=serie.slug_name %}{% else %}{% url add_serie %}{% endif %}" method="POST">
+  {% csrf_token %}
+    <ul class="grid_3">
             {{ form.non_field_errors }}
-            <li class="fieldwrapper">
+            <li class="fieldwrapper clearfix">
                 {{ form.name_es.errors }}
                 <label for="id_name_es">Nombre [es]:</label>
-                {{ form.name_es }}
+                <div class="input">
+                  {{ form.name_es }}
+                </div>
             </li>
-            <li class="fieldwrapper">
+            <li class="fieldwrapper clearfix">
                 {{ form.name_en.errors }}
                 <label for="id_name_en">Nombre [en]:</label>
-                {{ form.name_en }}
+                <div class="input">
+                  {{ form.name_en }}
+                </div>
             </li>
-            <li class="fieldWrapper">
+            <li class="fieldwrapper clearfix">
+                {{ img_form.non_field_errors }}
+                {{ img_form.src.errors }}
+                <label for="id_name_en">Imagen:</label>
+                <div class="input">
+                  {{ img_form.src }}
+                </div>
+            </li>
+            <li class="fieldwrapper clearfix">
                 {{ form.network.errors }}
                 <label for="id_network">Cadena:</label>
-                {{ form.network }}
+                <div class="input">
+                  {{ form.network }}
+                </div>
             </li>
-            <li class="fieldwrapper">
+            <li class="fieldwrapper clearfix">
                 {{ form.finished.errors }}
                 <label for="id_finished">Finalizada:</label>
-                {{ form.finished }}
+                <div class="input">
+                  {{ form.finished }}
+                </div>
             </li>
-            <li class="fieldWrapper">
+            <li class="fieldwrapper clearfix">
                 {{ form.runtime.errors }}
                 <label for="id_runtime">Duración (en minutos):</label>
-                {{ form.runtime }}
+                <div class="input">
+                  {{ form.runtime }}
+                </div>
             </li>
-            <li class="fieldWrapper center">
+            <li class="fieldwrapper clearfix center">
                 {{ form.genres.errors }}
                 <label for="id_genres">Géneros:</label>
-                {{ form.genres }}
+                <div class="input">
+                  {{ form.genres }}
+                </div>
             </li>
-    </ul>
-    <ul class="controls grid_4">
-            <li>
-                <label for="id_genres">Descripción [es]:</label>
-                    {{ form.description_es.errors }}
-                    {{ form.description_es }}
-            </li>
-            <li>
-                <label for="id_genres">Descripción [en]:</label>
-                    {{ form.description_en.errors }}
-                    {{ form.description_en }}
-            </li>
-    </ul>
+      <li class="fieldwrapper clearfix">
+        <label for="id_description_es">Descripción [es]:</label>
+        {{ form.description_es.errors }}
+        <div class="input">
+          {{ form.description_es }}
+        </div>
+      </li>
+      <li class="fieldwrapper clearfix">
+        <label for="id_description_en">Descripción [en]:</label>
+        {{ form.description_en.errors }}
+        <div class="input">
+          {{ form.description_en }}
+        </div>
+      </li>
+      <li>
+        <div class="actions">
+          <input class="btn primary" id="submit_serie" type="submit" value="{% if serie %}Actualizar{% else %}Agregar{% endif %}" />
+          &nbsp;
+          <button type="reset" class="btn">Cancel</button>
+        </div>
+      </li>
+  </ul>
 </form>
 </div>
 {% endblock %}

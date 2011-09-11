@@ -9,6 +9,7 @@
 <div id="box" class="center login_box">
     <h1>Registro de usuario</h1>
     <form class="center" method='post' action="{% url registration_register %}">
+      {% csrf_token %}
         <ul>
             {{ form.non_field_errors }}
             <li class="fieldwrapper">
@@ -31,7 +32,7 @@
                 <label for="id_password2">Contraseña (de nuevo):</label>
                 {{ form.password2 }}
             </li>
-            <input type='submit' id='send_registration' class="button" value='{% trans "Enviar correo de activación" %}' />
+            <input type='submit' id='send_registration' class="btn primary" value='{% trans "Enviar correo de activación" %}' />
             <li>
                 <p><a href="{% url auth_password_reset %}">¿Tienes una cuenta y has olvidado tu contraseña?</a></p>
             </li>

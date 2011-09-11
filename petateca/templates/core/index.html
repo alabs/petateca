@@ -12,8 +12,39 @@
     <meta property="og:image" content="http://liberateca.net/static/images/logos/logo_square.png" />
 {% endblock %}
 {% block contents %}
-        <h2 class="grid_12 caption clearfix center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
-		<div class="hr grid_12 clearfix">&nbsp;</div>
+  <h2 class="margin caption center">{% blocktrans %}Omnia sunt communia. <span>Compartir es bueno</span>.{% endblocktrans %}</h2>
+
+  {% comment %}
+<div id="box" class="margin"> 
+  <h2 class="center"> Últimas entradas del blog </h2>
+  <ul class="horizontal_list container_12 clear_2 margin">
+    {% for entry in entry_list %}
+      <li class="grid_6">
+        <div class="entry-header">
+          <a class="center" href="{{ entry.get_absolute_url }}"> 
+            <h3>{{ entry.title }}</h3>
+            {% thumbnail entry.image "200x200" as entry_img %}
+              <img src="{{ entry_img.url }}" alt="{{ entry.title }}" />
+            {% endthumbnail %}
+          </a>
+          <abbr class="published" title="{{ entry.creation_date|date:"c" }}Z">
+            {% trans "Published on"%} {{ entry.creation_date|date:"d/m/Y" }}
+          </abbr>
+        </div>
+        <p>
+          {{ entry.html_content|truncatewords_html:50|safe }} <a href="{{ entry.get_absolute_url }}">Seguir leyendo</a>
+        </p>
+      </li>
+    {% endfor %}
+  </ul>
+  <h4 class="center mt_1">
+      <a href="/blog/" class="nobottom">
+          Ver todas las entradas 
+          <img title="Ver todas las entradas" src="/static/images/go-next.png" class="nobottom valign" />
+      </a>
+  </h4>
+</div>
+{% endcomment %}
 
 {% cache 500 index-books %}
     {% url book_index as url_book %}
@@ -25,8 +56,23 @@
     {% include "core/_index_jsquares.html" with type_plur="Series" type_ind="serie" elements=series type_message="Ver todas las series" url_index=url_serie jscontainerid="js-container" %}
 {% endcache %}
 
-        <p class="grid_11 clearfix"></p>
-        <div class="center">
+{% endblock %}
+{% block sidebar %}
+
+              <div class="quicknavgrid_3 quicknav">
+              </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">Errores o sugerencias</h4>
+                        <p>Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustarian</a>.</p>
+                </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">Desarrollo</h4>
+                        <p>Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
+                </div>
+                <div class="quicknavgrid_3 quicknav">
+                        <h4 class="title ">API v2</h4>
+                        <p>Si eres programador puede resultarte interesarte nuestra <a href="/api/">API para desarrollar tus aplicaciones</a>. </p>
+                </div>
             <div class="quicknavgrid_3 quicknav">
                 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
                 <script>
@@ -60,19 +106,8 @@
                 }).render().setUser('liberateca').start();
                 </script>
             </div>
-            <div class="grid_9">
                 <div class="quicknavgrid_3 quicknav">
-                        <h4 class="title ">Errores o sugerencias</h4>
-                        <p>Estamos en fase peta, puedes ayudarnos <a href="http://liberateca.uservoice.com/">avisandonos de los errores veas en la web o que funcionalidades te gustarian</a>.</p>
-                </div>
-                <div class="quicknavgrid_3 quicknav">
-                        <h4 class="title ">Desarrollo</h4>
-                        <p>Si quieres involucrarte en el desarrollo de la aplicacion puedes <a href="https://listas.alabs.es/mailman/listinfo/liberateca-dev">suscribirte a nuestra lista de desarrollo, donde nos coordinamos para trabajar</a>. </p>
-                </div>
-                <div class="quicknavgrid_3 quicknav">
-                        <h4 class="title ">API v2</h4>
-                        <p>Si eres programador puede resultarte interesarte nuestra <a href="/api/">API para desarrollar tus aplicaciones</a>. </p>
-                </div>
+            </div>
                 <div class="quicknavgrid_3 quicknav">
                         <h4 class="title ">Diseño</h4>
                         <p>Estamos buscando diseñadores web para que nos ayuden a mejorar Liberateca y hacerla más usable. Ponte en contacto con nosotros en root[arroba]liberateca.net</p>
@@ -85,8 +120,6 @@
                         <h4 class="title ">Libros</h4>
                         <p>Por fin puedes agregar tus libros preferidos a Liberateca. <a href="/books/add/">Agrega algún libro nuevo</a> o revisa <a href="/books/">el listado completo de libros</a>. Gracias por ayudarnos a ayudarle ayudarnos.</p>
                 </div>
-            </div>
-        </div>
 {% endblock %}
 {% block extrascript %}
     {% if image_avatar %}

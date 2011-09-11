@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 {% load thumbnail %}
-{% block title %}{% if book %}Editando libro {{ book.name.title }}{% else %}Agregando libro{% endif %} | Liberateca{% endblock %}
+{% block title %}{% if book %}Editando libro {{ book.name.title }}{% else %}Agregando libro{% endif %} | Libros | Liberateca{% endblock %}
 {% block extrascript %}
         <script type="text/javascript" src="/static/js/RelatedObjectLookups_small.js"></script>
 {% endblock %}
-{% block contents %}
-<div class="grid_10" id="box">
+{% block sidebar %}
+  <h1 class="margin center">{% if book %}Editando libro{% else %}Agregando libro{% endif %}</h1>
 <form id="add_book_form" enctype="multipart/form-data" action="{% if book %}{% url edit_book book_slug=book.slug_name %}{% else %}{% url add_book %}{% endif %}" method="POST">
-    <h1>{% if book %}Editando libro {{ book.name.title }}{% else %}Agregando libro{% endif %}</h1>
+  {% csrf_token %}
 <ul>
-    <ul class="controls grid_4">
         <li>
             {% if book.poster.src %}
                 {% thumbnail book.poster.src "400x300" as img_book %}
@@ -19,9 +18,6 @@
             {% endif %}
             {{ img_form }}
         </li>
-        <li class="center">
-            <input class="button" id="submit_book" type="submit" style="margin-top:2em;" value="{% if book %}Actualizar{% else %}Agregar{% endif %}" />
-        </li>
         {% if not book %}
         <li>
             <div class="notice_small">
@@ -30,35 +26,55 @@
             </div>
         </li>
         {% endif %} 
-    </ul>
-        <ul class="grid_4 controls">
+</ul>
+{% endblock %}
+{% block contents %} 
+  {% if book %}
+      <h1 class="margin center">{{ book.name.title }}</h1>
+  {% endif %}
+    <ul class="controls grid_3">
             {{ form.non_field_errors }}
-            <li class="fieldwrapper">
+            <li class="fieldwrapper clearfix">
                 {{ form.name.errors }}
                 <label for="id_name_es">Nombre:</label>
-                {{ form.name }}
+                <div class="input">
+                  {{ form.name }}
+                </div>
             </li>
-            <li class="fieldwrapper">
+            <li class="fieldwrapper clearfix">
                 {{ form.description.errors }}
                 <label for="id_description">Descripción:</label>
-                {{ form.description }}
+                <div class="input">
+                  {{ form.description }}
+                </div>
             </li>
-            <li class="fieldwrapper">
+            <li class="fieldwrapper clearfix">
                 {{ form.isbn.errors }}
                 <label for="id_isbn">ISBN:</label>
-                {{ form.isbn }}
+                <div class="input">
+                  {{ form.isbn }}
+                </div>
             </li>
-        </ul>
-        <ul class="grid_3 controls">
-            <li class="fieldwrapper">
+            <li class="fieldwrapper clearfix">
                 {{ form.category.errors }}
                 <label for="id_category">Categoría:</label>
-                {{ form.category }}
+                <div class="input">
+                  {{ form.category }}
+                </div>
             </li>
-            <li class="fieldwrapper">
+            <li class="fieldwrapper clearfix">
                 {{ form.author.errors }}
                 <label for="id_author">Autor:</label>
-                {{ form.author }}
+                <div class="input">
+                  {{ form.author }}
+                </div>
+            </li>
+            <li>
+              <div class="actions">
+                <input class="btn primary" id="submit_book" type="submit" value="{% if book %}Actualizar{% else %}Agregar{% endif %}" />
+                &nbsp;
+                <button type="reset" class="btn">Cancel</button>
+              </div>
             </li>
         </ul>
 </ul>

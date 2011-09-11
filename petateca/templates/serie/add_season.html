@@ -1,4 +1,14 @@
-<form style="margin-top:2em;" id="form_add_season" method="POST" action="{% url add_season serie_slug=serie.slug_name %}">
-    {{ form_season.as_ul }}
-    <input class="button" id="submit_season" type="submit" style="margin:1em;" value="Agregar" />
+<form class="center" id="form_add_season" method="POST" action="{% url add_season serie_slug=serie.slug_name %}">
+  {% csrf_token %}
+  <ul>
+    {{ form_season.non_field_errors }}
+    <li class="fieldwrapper">
+        {{ form_season.season.errors }}
+        <label for="id_season">Temporada:</label>
+        <div class="input">
+          {{ form_season.season }}
+        </div>
+    </li>
+  </ul>
+    <input class="btn primary" id="submit_season" type="submit" style="margin:1em;" value="Agregar" />
 </form>

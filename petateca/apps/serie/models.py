@@ -59,11 +59,6 @@ class Serie(models.Model):
         blank=True
     )
 
-    def url(self):
-        ''' Devuelve la URL para la API (version 2) '''
-        return get_urlprefix() + reverse('API_v2_serie_detail', 
-            kwargs={'serie_id': self.pk})
-
     def ascii_name(self):
         return strip_accents(self.name_es)
 
@@ -74,6 +69,15 @@ class Serie(models.Model):
         ''' When is saved, the title is converted to slug - aka URL'''
         self.slug_name = slugify(self.name)
         super(Serie, self).save(force_insert, force_update, using)
+
+    def url(self):
+        ''' Devuelve la URL para la API (version 2) '''
+        return get_urlprefix() + reverse('API_v2_serie_detail', 
+            kwargs={'serie_id': self.pk})
+
+    def get_absolute_full_url(self):
+        return get_urlprefix() + reverse('serie.views.get_serie', 
+            kwargs={'serie_slug': self.slug_name, })
 
     @models.permalink
     def get_absolute_url(self):

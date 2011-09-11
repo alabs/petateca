@@ -1,9 +1,8 @@
 {% if request.user.is_authenticated %}
     {% load threadedcomments_tags %}
-    <div class="wrap_write_comment">
-        <div id="form-comment">
             {% get_comment_form for object as form %}
             <form action="/comments/post/" method="POST" class="comment_form">
+              {% csrf_token %}
             {# pasamos el formulario for y quitamos el markup para que solo quede el input del texto y los hidden que necesita #}
             <input type="hidden" value="{{ request.path }}" name="next" />
             {% for field in form %}
@@ -12,16 +11,16 @@
                 {% else %}
                     {% if field.name != "markup" and field.name != "name" and field.name != "url" and field.name != "title" and field.name != "email" %}
                         {% if field.errors %}{{ field.errors }}{% endif %}
-                        <li {% if field.errors %} class="error"{% endif %} {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-                        {{ field }}
+                        <li class="fieldwrapper center{% if field.errors %} error{% endif %}" {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+                          <div>
+                            {{ field }}
+                          </div>
                         </li>
                     {% endif %}
                 {% endif %}
             {% endfor %}
-                <li><input type="submit" class="button" value="Añadir"/></li>
+                <li class="center"><input type="submit" class="btn primary margin" value="Añadir"/></li>
             </form>
-        </div>
-    </div>
 {% else %}
-<p class="clearfix">Debes <a href="/accounts/login/?next={{request.path}}">iniciar sesión</a> o <a href="/accounts/register/">registrarte</a> para agregar una reseña
+<p>Debes <a href="/accounts/login/?next={{request.path}}">iniciar sesión</a> o <a href="/accounts/register/">registrarte</a> para agregar una reseña
 {% endif %}

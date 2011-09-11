@@ -16,7 +16,7 @@ from serie.models import Serie, Season, Link, ImageSerie
 
 
 
-@render_to('serie/get_serie.html')
+@render_to('core/get_object.html')
 @csrf_protect
 def get_serie(request, serie_slug):
     ''' Request a serie, returns images and episodes,
@@ -32,15 +32,16 @@ def get_serie(request, serie_slug):
     except:
         favorite_status = 'no'
     try:
-        score = int(serie.rating.get_rating_for_user(request.user))
+    # FIXME
+        score = int(serie.rating.get_rating_for_user(user=request.user))
     except:
         score = None
     return {
-            'serie': serie,
+            'object': serie,
             'season_list': Season.objects.filter(serie=serie).order_by('season'),
             'score': score,
             'favorite': favorite_status,
-            'obj_type': 'serie',
+            'object_type': 'serie',
         }
 
 

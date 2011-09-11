@@ -6,6 +6,7 @@ urlpatterns = patterns('book.views',
     url(r'^add/$', 'add_or_edit_book', name="add_book"),
     (r'^add/author/?$', 'add_author'),
     (r'^add/category/?$', 'add_category'),
+    url(r'^sneak/$', 'sneak_links', name='sneak_links_book'),
 )
 
 urlpatterns += patterns('book.ajax',

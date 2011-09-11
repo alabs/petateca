@@ -1,6 +1,7 @@
 {{ mensaje }}
 
 <form class="left" id="add_episode_form" action="{% url ajax_edit_episode_description serie_id=serie.id season=season.season episode=episode.episode %}" method="POST">
+  {% csrf_token %}
 <ul>
     {{ form.non_field_errors }}
     <li class="fieldWrapper"> 
@@ -14,7 +15,7 @@
         {{ form.description_en }}
     </li>
 </ul>
-    <input class="button center" id="submit_description_episode" type="submit" value="Cambiar episodio" />
+    <input class="btn primary center" id="submit_description_episode" type="submit" value="Cambiar episodio" />
 </form>
 
 
@@ -22,5 +23,5 @@
 <ul>
     {{ form_img.as_ul }}
 </ul>
-    <input class="button center" id="submit_image_episode" type="submit" value="Cambiar episodio" />
+    <input class="btn primary center" id="submit_image_episode" type="submit" value="Cambiar episodio" />
 </form>

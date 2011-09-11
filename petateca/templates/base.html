@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% spaceless %} {% load i18n %} {% load avatar_tags %} {% load random_selection %} {% load cache %}
+<!DOCTYPE html>{% spaceless %} {% load i18n avatar_tags random_selection cache %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}{% endspaceless %}
 <html lang="{{LANGUAGE_CODE}}" xml:lang="{{LANGUAGE_CODE}}">
@@ -11,109 +11,128 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/static/css/reset.css" />
     <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css">
     <link rel="stylesheet" href="/static/css/jquery.jgrowl.css" />
-    <link rel="stylesheet" href="/static/css/jquery.jsquares.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="/static/css/jquery.jsquares.css" />
     <link rel="stylesheet" href="/static/css/jquery.rating.css" />
-    <link rel="stylesheet" href="/static/css/jquery.highlight.css" />
     <link rel="stylesheet" href="/static/css/jquery.qtip.css" />{% block extrastyle %}{% endblock %}
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Liberateca" />
 </head>
 <body>
-    <!-- RIBBON -->
-    <!-- img src="/static/images/ribbon.gif" id="ribbon" alt="peta" -->
-    <div id="wrapper" class="container_12 clearfix">
-    <header>
-        <!-- Navigation Menu -->
-        <nav id="header-wrapper">
-        <a href="/"><img src="/static/images/logo.png" class="left" alt="liberateca" /></a>
-        <div class="content" id="header">
-            <ul class="main-pages left">
-                <li class="kids">
-                <a class="{% if obj_type == 'serie' %}header-selected{% endif %}" href="{% url serie_index %}">Series</a>
-                    <ul>
-                        <li><a href="{% url serie_index %}">Listado</a></li>
-                        <li><a href="{% url sneak_links %}">Ver últimas</a></li>
-                    </ul>
-                </li>
-                <li class="kids">
-                    <a class="{% if obj_type == 'book' %}header-selected{% endif %}" href="{% url book_index %}">Libros</a>
-                    <ul>
-                        <li><a href="{% url book_index %}">Listado</a></li>
-                        <li><a href="{% url add_book %}">Agregar</a></li>
-                    </ul>
-                </li>
-                <li class="kids">
-                    <a class="" href="/">Liberateca</a>
-                    <ul>
-                        <li><a href="{% url faq %}">FAQ</a></li>
-                        <li><a href="http://liberateca.uservoice.com/">Sugerencias</a></li>
-                        <li>Desarrolladores</li>
-                        <li><a href="http://github.com/alabs/petateca/">Código</a></li>
-                        <li><a href="{% url api %}">API</a></li>
-                        <li><a href="http://listas.alabs.es/mailman/listinfo/liberateca-dev/">Lista de desarrollo</a></li>
-                        <li>Redes</li>
-                        <li><a href="http://twitter.com/liberateca">Twitter</a></li>
-                        <li><a href="http://www.facebook.com/pages/Liberateca/155455614516791">Facebook</a></li>
-                        <li>Legal</li>
-                        <li><a href="{% url aviso-legal %}">Aviso legal</a></li>
-                        <li><a href="{% url politica-privacidad %}">Política de privacidad</a></li>
-                    </ul>
-                </li>
-            <li>
-
-                          <form action="/search/" id="searchform">
-                              <input id="search" name="q" onkeyup="search_lookup(this.value);" type="search" placeholder="Prueba con '{% any %}Futurama|Fringe|Dexter|House|Misfits|Breaking Bad{% endany %}'" autocomplete="off" required />
-                            <input class="button" type="submit" value="Ir" />
-                          </form>           
-                        <div id="suggestions"></div>
+<div class="topbar">
+  <div class="fill">
+    <div class="container">
+      <a href="/"><img src="/static/images/logo.png" class="left" alt="liberateca" /></a>
+      <div class="corner">
+        <a href="/">peta</a>
+      </div>
+      <div id="header">
+          <ul class="main-pages main-pages-left left">
+            {% comment %}
+            si te preguntas porque creamos las URLs asi, es un workaround: 
+            https://code.djangoproject.com/ticket/11077 
+            {% endcomment %}
+              <li class="kids">
+              <a href="{% url serie_index as url_serie_index %}{{ url_serie_index }}" id="header-serie">Series</a>
+                  <ul>
+                      <li><a href="{{ url_serie_index }}">Listado</a></li>
+                      <li><a href="{% url add_serie as url_add_serie %}{{ url_add_serie }}">Agregar</a></li>
+                      <li><a href="{% url sneak_links as url_sneak_links_series %}{{ url_sneak_links_series }}">Ver últimas</a></li>
+                  </ul>
               </li>
-            </ul>
-            <ul class="main-pages right">
-            {% if request.user.is_authenticated %}
-                {% cache 500 loggedbar request.user.username %}
-                <li class="kids" id="user">
-                {% url user_profile user_name=request.user.username as profile_user %}
-                <a class="loggedin" href="{{ profile_user }}">
-                    {% avatar request.user 30 %}
-                    {{ request.user.username }}
-                </a>
-                    <ul>
-                        <li><a href="{{ profile_user }}">{% trans "Ver perfil" %}</a></li>
-                        <li><a class="avatar_change" href="/accounts/avatar/change/">Cambiar avatar</a></li>
-                        <li><a href="{% url auth_password_change %}">Cambiar contraseña</a></li>
-                        <li><a href="/accounts/logout/"><img class="nobottom" src="/static/images/system-shutdown.png" alt="Salir" title="Salir" />Salir</a>
-                    </ul>
-                </li>
-                {% endcache %}
-            {% else %}
-            <li class="kids"> <a href="/accounts/register/">Registrarse</a>
-            <li class="kids" id="topnav">  <a href="/accounts/login/" class="signin"><span>Acceder</span></a> 
-                <fieldset id="signin_menu">
-                    <form method="post" id="signin" action="/accounts/login/">
-                      {% csrf_token %}
-                    <label for="username">Usuario o correo</label>
-                    <input id="username" name="username" value="" title="username" tabindex="4" type="text">
-                    </p>
-                    <p>
-                        <label for="password">Contraseña</label>
-                        <input id="password" name="password" value="" title="password" tabindex="5" type="password">
-                    </p>
-                    <input type="hidden" name="next" value="{{ request.path }}" />
-                    <input class="button" value="Acceder" tabindex="6" type="submit">
-                    <p class="forgot"> <a href="{% url auth_password_reset %}" id="resend_password_link">¿Has olvidado tu contraseña?</a> </p>
-                    <p class="no-account"> <a href="/accounts/register/" id="no-account">¿No tienes una cuenta? Regístrate</a> </p>
-                    </form>
-                </fieldset>
-            {% endif %}
-            </ul>
+              <li class="kids">
+                <a href="{% url book_index as url_book_index %}{{ url_book_index}}" id="header-book">Libros</a>
+                  <ul>
+                      <li><a href="{{ url_book_index }}">Listado</a></li>
+                      <li><a href="{% url add_book as url_add_book %}{{ url_add_book }}">Agregar</a></li>
+                      <li><a href="{% url sneak_links_book as url_sneak_links_book %}{{ url_sneak_links_book }}">Ver últimas</a></li>
+                  </ul>
+              </li>
+              <!-- li class="kids">
+                <a href="#" id="header-blog">Blog</a>
+              </li-->
+              <li class="kids">
+                  <a href="/" id="header-liberateca">Liberateca</a>
+                  <ul>
+                      <li><a href="{% url faq as url_faq %}{{ url_faq }}">FAQ</a></li>
+                      <li><a href="http://liberateca.uservoice.com/">Sugerencias</a></li>
+                      <li>Desarrolladores</li>
+                      <li><a href="http://github.com/alabs/petateca/">Código</a></li>
+                      <li><a href="{% url api as url_api %}{{ url_api }}">API</a></li>
+                      <li><a href="http://listas.alabs.es/mailman/listinfo/liberateca-dev/">Lista de desarrollo</a></li>
+                      <li>Redes</li>
+                      <li><a href="http://twitter.com/liberateca">Twitter</a></li>
+                      <li><a href="http://www.facebook.com/pages/Liberateca/155455614516791">Facebook</a></li>
+                      <li>Legal</li>
+                      <li><a href="{% url aviso-legal as url_aviso_legal %}{{ url_aviso_legal }}">Aviso legal</a></li>
+                      <li><a href="{% url politica-privacidad as url_politica_privacidad %}{{ url_politica_privacidad }}">Política de privacidad</a></li>
+                  </ul>
+              </li>
+  </ul>
+  {% block options %}
+  {% endblock %}
+      <ul class="main-pages right">
+            <li class="kids">
 
-        </nav>
-    </header>
-    <div class="hr grid_12">&nbsp;</div>
-    <div class="clear"></div>
+              <form action="" id="search-form">
+                <span class="glass"><i></i></span>
+                <input  name="q" onkeyup="search_lookup(this.value);" type="search" placeholder="Prueba con '{% any %}Futurama|Fringe|Dexter|House|Misfits|Breaking Bad{% endany %}'" autocomplete="off" required />
+              </form>
+                <div id="suggestions"></div>
+            </li>
+          {% if request.user.is_authenticated %}
+              {% cache 500 loggedbar request.user.username %}
+              <li class="kids" id="user">
+              {% url user_profile user_name=request.user.username as profile_user %}
+              <a class="loggedin" href="{{ profile_user }}">
+                  {% avatar request.user 30 %}
+                  {{ request.user.username }}
+              </a>
+                  <ul>
+                      <li><a href="{{ profile_user }}">{% trans "Ver perfil" %}</a></li>
+                      <li><a class="avatar_change" href="/accounts/avatar/change/">Cambiar avatar</a></li>
+                      <li><a href="{% url auth_password_change as url_auth_password_change %}{{ url_auth_password_change }}">Cambiar contraseña</a></li>
+                      <li><a href="/accounts/logout/"><img class="nobottom" src="/static/images/system-shutdown.png" alt="Salir" title="Salir" />Salir</a>
+                  </ul>
+              </li>
+              {% endcache %}
+          {% else %}
+          <li class="kids"> <a href="/accounts/register/">Registrarse</a>
+          <li class="kids" id="topnav">  <a href="/accounts/login/" class="signin"><span>Acceder</span></a> 
+              <fieldset id="signin_menu">
+                  <form method="post" id="signin" action="/accounts/login/">
+                    {% csrf_token %}
+                  <label for="username">Usuario o correo</label>
+                  <input id="username" name="username" value="" title="username" tabindex="4" type="text">
+                  </p>
+                  <p>
+                      <label for="password">Contraseña</label>
+                      <input id="password" name="password" value="" title="password" tabindex="5" type="password">
+                  </p>
+                  <input type="hidden" name="next" value="{{ request.path }}" />
+                  <input class="btn primary" value="Acceder" tabindex="6" type="submit">
+                  <p class="forgot"> <a href="{% url auth_password_reset as url_auth_password_reset %}{{ url_auth_password_reset }}" id="resend_password_link">¿Has olvidado tu contraseña?</a> </p>
+                  <p class="no-account"> <a href="/accounts/register/" id="no-account">¿No tienes una cuenta? Regístrate</a> </p>
+                  </form>
+              </fieldset>
+            </li>
+          {% endif %}
+          </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+<div class="sidebar">
+    {% block sidebar %}{% endblock %}
+</div>
+<div class="content row">
+  <div id="notify"></div>
     {% block contents %}{% endblock %}
-    <div class="hr grid_12">&nbsp;</div>
-    <div class="clear"></div>
+</div>
+</div>
     <!-- FOOTER -->
     <footer> 
         <span class="float">
@@ -143,14 +162,14 @@
 </noscript>    
     <!-- Scripts -->
     <script type="text/javascript" src="/static/js/jquery-min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.ba-bbq.min.js" ></script>
     <script type="text/javascript" src="/static/js/jquery.jgrowl.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.rating.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.qtip.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.jsquares.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.qtip.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.rating.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.toc-0.1.js"></script>
     <script type="text/javascript" src="/static/js/endless.js"></script>
     <script type="text/javascript" src="/static/js/endless_on_scroll.js" ></script>
-    <script type="text/javascript" src="/static/js/jquery.ba-bbq.min.js" ></script>
-    <script type="text/javascript" src="/static/js/jquery.highlight.js" ></script>
     <script type="text/javascript" src="/static/js/petateca.js"></script>
     {% block extrascript %}{% endblock %}
 </body>

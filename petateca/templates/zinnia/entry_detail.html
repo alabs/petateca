@@ -1,0 +1,174 @@
+{% extends "zinnia/base.html" %}
+{% load i18n tagging_tags zinnia_tags %}
+{% load threadedcomments_tags %}
+
+{% block title %}{{ object.title }} | Blog | Liberateca{% endblock %}
+
+{% block meta-description %}{% if object.excerpt %}{{ object.excerpt|striptags }}{% else %}{{ object.content|striptags|truncatewords:100 }}{% endif %}{% endblock %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'" href="{% url zinnia_entry_discussion_feed object.slug %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'" href="{% url zinnia_entry_comment_feed object.slug %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_pingback_feed object.slug %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'" href="{% url zinnia_entry_trackback_feed object.slug %}" />
+{% endblock %}
+
+{% block contents %}
+<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %} grid_8 last">
+  {% with object.html_content|safe as object_content %}
+  {% include "zinnia/_entry_detail.html" %}
+  {% endwith %}
+
+
+<div id="pingbacks" class=" last">
+  <h3 class="mb_1">{% trans "Pingbacks" %}</h3>
+  {% with object.pingbacks as pingback_list %}
+  {% if pingback_list.count %}
+  <ol id="pingback-list" class="span-15 last">
+    {% for pingback in pingback_list %}
+    <li id="pingback_{{ pingback.pk }}" class="pingback {% cycle box1,box2 %} span-15 last">
+      <div class="pingback-body span-15 last">
+	<div class="pingback-author span-15 last">
+	  <a href="{{ pingback.url }}">{{ pingback.user_name }}</a>
+	  {% trans "on" %} {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+	</div>
+	<div class="span-15 last">
+	  <cite>
+	    {{ pingback.comment }}
+	  </cite>
+	</div>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+    {% if object.pingback_enabled %}
+  <p>{% trans "Pingbacks are open." %}</p>
+    {% else %}
+  <p>{% trans "Pingbacks are closed." %}</p>
+    {% endif %}
+  {% endwith %}
+</div>
+
+<div id="trackbacks" class="span-16 last">
+  <h3 class="mb_1">{% trans "Trackbacks" %}</h3>
+  {% with object.trackbacks as trackback_list %}
+  {% if trackback_list.count %}
+  <ol id="trackback-list" class="span-15 last">
+    {% for trackback in trackback_list %}
+    <li id="trackback_{{ trackback.pk }}" class="trackback {% cycle box1,box2 %} span-15 last">
+      <div class="trackback-body span-15 last">
+	<div class="trackback-author span-15 last">
+	  <a href="{{ trackback.url }}">{{ trackback.user_name }}</a>
+	  {% trans "on" %} {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
+	</div>
+	<div class="span-15 last">
+	  <cite>
+	    {{ trackback.comment }}
+	  </cite>
+	</div>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+    {% if object.pingback_enabled %}
+  <p><a href="{% url zinnia_entry_trackback object.slug %}" rel="trackback">{% trans "Trackback URL" %}</a></p>
+    {% endif %}
+  {% endwith %}
+</div>
+
+{% if object.comment_enabled %}
+<div class="commentForm span-16 last">
+
+    {# cache 500 comments serie TODO: Arreglar el contestar  #}
+	<div class="hr clearfix">&nbsp;</div>
+        <!-- COMENTARIOS -->
+        {% get_comment_list for object as comment_list %}
+        <h2 class="mb_1">{{ comment_list|length }} {% trans "Comentarios" %}</h2>
+        {% include "comments/list.html" %}
+    {# endcache #}
+
+        <!-- AGREGAR RESEÑA -->
+        <div class="hr clearfix">&nbsp;</div>
+        <h2 class="mb_1">{% trans "Añade tu reseña" %}</h2>
+
+        {% include "comments/form.html" %}
+
+  </div>
+{% endif %}
+
+
+
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<h1 class="center margin">
+  Blog
+</h1>
+
+<div class="entry-widgets last">
+{% if perms.zinnia.change_entry %}
+<h2 class="center mb_1">
+  <a href="{% url admin:zinnia_entry_change object.pk %}" title="{% trans "Edit the entry" %}">
+    {% trans "Edit the entry" %}
+  </a>
+</h2>
+{% endif %}
+
+<div id="box" class="clear_2">
+  {% with url="http://liberateca.net"|add:object.get_absolute_url %}
+    {% include "core/_share_icons.html" with title=object.title %}
+  {% endwith %}
+</div>
+
+  {% with object.next_entry as next_entry %}
+  {% if next_entry %}
+  <div id="box" class="entry-next">
+    <h3 class="mb_1">{% trans "Next entry" %}</h3>
+    <ul>
+      <li>
+        <a href="{{ next_entry.get_absolute_url }}" title="{{ next_entry.title }}" rel="next">
+          {{ next_entry.title }}
+        </a>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+  {% endwith %}
+  {% with object.previous_entry as previous_entry %}
+  {% if previous_entry %}
+  <div id="box" class="entry-previous">
+    <h3 class="mb_1">{% trans "Previous entry" %}</h3>
+    <ul>
+      <li>
+	<a href="{{ previous_entry.get_absolute_url }}" title="{{ previous_entry.title }}" rel="prev">
+	  {{ previous_entry.title }}
+	</a>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+  {% endwith %}
+  {% if object.related_published_set %}
+  <div id="box" class="entry-related">
+    <h3 class="mb_1">{% trans "Related entries" %}</h3>
+    <ul>
+      {% for entry in object.related_published_set %}
+      <li>
+	<a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  <div id="box" class="entry-similar">
+    <h3>{% trans "Similar entries" %}</h3>
+    {% get_similar_entries 5 %}
+  </div>
+</div>
+
+
+{% endblock %}
