@@ -6,19 +6,6 @@ function notify(severity, message){
   window.location.replace('#notify');
 }
 
-function notify_bug() {
-  message = 'Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net';
-  notify('error', message);
-}
-
-function error_add(selector){
-    selector.parent().parent().addClass('error');
-}
-
-function error_remove(selector){
-    selector.parent().parent().removeClass('error');
-}
-
 
 
 function getCookie(name) {
@@ -119,17 +106,13 @@ function disc_rat_data(data){
           //        $.jGrowl('Su voto ha sido cambiado'); 
           //        break;
           case 'Ok':
-                  // $.jGrowl('Su voto ha sido guardado'); 
-                  message = 'Su voto ha sido guardado';
-                  notify('success', message);
+                  $.jGrowl('Su voto ha sido guardado'); 
                   break;
           case 'Error':
-                  notify_bug();
-                  //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                  $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                   break;
           default:
-                  notify_bug();
-                  //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+              $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
           }
 }
 
@@ -153,8 +136,6 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-// Google + button
-gapi.plusone.go();
 
 function voting( direction, linktype, linkid ){
   // tratamiento de las votaciones de links
@@ -177,8 +158,7 @@ function voting( direction, linktype, linkid ){
           url = '/books/links/vote/book/';
           break;
       default:
-          notify_bug();
-          //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+          $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
   }
   // el POST, aka jquery te amo
   $.post(url, { 
@@ -325,6 +305,15 @@ $(document).ready(function () {
           $(this).addClass('selected_list');
       }
 
+      season_full_id = $(this).attr('id');
+      $inside = $('#inside_' + season_full_id);
+      $inside.html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
+      serie_season_raw = season_full_id.split('_');
+      var serie_id = serie_season_raw[1];
+      var season_n = serie_season_raw[3];
+      $inside.load('/series/lookup/serie/' + serie_id + '/season/' + season_n + '/');
+  });
+
       // para el form de add_or_edit_serie
       $('#submit_serie').click(function (event) {
           // Variables que capturamos
@@ -343,14 +332,12 @@ $(document).ready(function () {
              if (f.val()==='') {
                  event.preventDefault();
                  // f.addClass('hightlight'); 
-                 //f.parents().parents().addClass('error');
-                 error_add(f);
-                 notify('error', 'Ha ocurrido un error durante el envio, revisa el formulario');
+                 f.parent().addClass('error');
+                 $.jGrowl('Ha ocurrido un error durante el envio, revisa el formulario');
                  //return false;
              } else {
                  //f.removeClass('hightlight');
-                 error_remove(f);
-                 //f.parents().parents().removeClass('error');
+                 f.parent().removeClass('error');
              }
          });
       
@@ -474,8 +461,7 @@ $(document).ready(function () {
       if ( type === 'book' ) {
           $inside.load('/books/links/add/book/' + object_id + '/');
       } else {
-          notify_bug();
-          //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+          $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
       }
   });
 
@@ -539,13 +525,9 @@ $(document).ready(function () {
       fields = [ $air_date, $title_es, $title_en, $episode ];
       $.each(fields, function(index, f){
           if (f.val()==='') {
-              //f.parents().parents().addClass('error'); 
-              error_add(f);
+              f.addClass('hightlight'); 
               return false;
-          } else {
-              error_remove(f);
-              //f.parents().parents().removeClass('error');
-          }
+          } else {f.removeClass('hightlight');}
       });
   
 
@@ -564,19 +546,16 @@ $(document).ready(function () {
       }, function(data) {
               switch (data) {
                   case 'OK':
-                      //$.jGrowl('El episodio se ha creado exitosamente, gracias por colaborar');
-                      notify('success', 'El episodio se ha creado exitosamente, gracias por colaborar');
+                      $.jGrowl('El episodio se ha creado exitosamente, gracias por colaborar');
                       var $inside = $('#inside_serie_' + serie + '_season_' + season);
                       $inside.html('<img src="/static/images/ajax-loading-bar.gif">');
                       $inside.load('/series/lookup/serie/' + serie + '/season/' + season + '/');
                       break;
                   case 'Duplicado':
-                      //$.jGrowl('Ese episodio ya se encuentra, comprueba el numero');
-                      notify('error', 'Ese episodio ya se encuentra, comprueba el numero');
+                      $.jGrowl('Ese episodio ya se encuentra, comprueba el numero');
                       break;
                   default:
-                      notify_bug();
-                      //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                      $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
               }
       }  
       );  
@@ -584,31 +563,27 @@ $(document).ready(function () {
 
   // muestra la referencia de idiomas
   $('#language_help').live('click', function() {
-      //$.jGrowl('<a href="/faq">FAQ</a><b>Referencia de Idiomas:</b><li>en: Inglés<li>es: Español<li>es-es: Español Latino<li>ca: Català<li>jp: Japonés');
-      notify('info', '<a href="/faq">FAQ</a><br><b>Referencia de Idiomas:</b><li>en: Inglés<li>es: Español<li>es-es: Español Latino<li>ca: Català<li>jp: Japonés');
+      $.jGrowl('<a href="/faq">FAQ</a><b>Referencia de Idiomas:</b><li>en: Inglés<li>es: Español<li>es-es: Español Latino<li>ca: Català<li>jp: Japonés');
     });
 
     // busqueda en thepiratebay
     $('#search_pb').live('click', function() {
         query = $(this).attr('rel');
-        //$.jGrowl('Abriendo búsqueda en The Pirate Bay para ' + query);
-        notify('info', 'Abriendo búsqueda en The Pirate Bay para ' + query);
+        $.jGrowl('Abriendo búsqueda en The Pirate Bay para ' + query);
         window.open( 'http://thepiratebay.org/search/' + query + '/0/7/0');
     });
 
     // busqueda en torrentz
     $('#search_torrentz').live('click', function() {
         query = $(this).attr('rel');
-        //$.jGrowl('Abriendo búsqueda en Torrenz para ' + query);
-        notify('info', 'Abriendo búsqueda en Torrentz para ' + query);
+        $.jGrowl('Abriendo búsqueda en Torrenz para ' + query);
         window.open( 'http://torrentz.eu/search?f=' + query);
     });
 
     // busqueda en la lista de sinde 
     $('#search_listadesinde').live('click', function() {
         query = $(this).attr('rel');
-        //$.jGrowl('Abriendo búsqueda en La Lista de Sinde para ' + query);
-        notify('info', 'Abriendo búsqueda en La Lista de Sinde para ' + query);
+        $.jGrowl('Abriendo búsqueda en La Lista de Sinde para ' + query);
         window.open('http://www.google.com/cse?cx=004411908642504437083%3A1dyk2klbrj8&ie=UTF-8&q=' + query + '&sa=Buscar+descargas!&siteurl=lalistadesinde.net%2F');
     });
 
@@ -624,31 +599,20 @@ $(document).ready(function () {
         //Simple validation to make sure user entered something
             //If error found, add hightlight class to the text field
             if (url.val()===''||url.val()==='http://') {
-                //url.parents().parents().addClass('error');
-                error_add(url);
+                url.addClass('hightlight');
                 return false;
-            } else {
-                error_remove(url); 
-             //   url.parents().parents().removeClass('error');
-            }
+            } else {url.removeClass('hightlight');}
 
             if (audio.val()==='') {
-                //$('label[for=id_audio_lang]').parents().parents().addClass('error');
-                error_add( $('label[for=id_audio_lang]') );
+                $('label[for=id_audio_lang]').addClass('hightlight');
                 return false;
-            } else {
-            //    $('label[for=id_audio_lang]').parents('li').removeClass('error');
-                error_remove( $('label[for=id_audio_lang]') );
-            }
+            } else {$('label[for=id_audio_lang]').removeClass('hightlight');}
 
             if (lang.val()==='') {
-             //   $('label[for=id_lang]').parents.('li').addClass('error');
-                error_add($('label[for=id_lang]'));
+                $('label[for=id_lang]').addClass('hightlight');
                 return false;
-            } else {
-            //    $('label[for=id_lang]').parents.('li').removeClass('error');
-                error_remove($('label[for=id_lang]'));
-            }
+            } else {$('label[for=id_lang]').removeClass('hightlight');}
+
         $.post(post_url, {
             'url': url.val(), 
             'lang': lang.val(), 
@@ -657,18 +621,14 @@ $(document).ready(function () {
             'csrfmiddlewaretoken': getCookie('csrftoken')
         }, function(data) {
             if (data.mensaje  == 'Gracias'){
-                //$.jGrowl('El enlace se ha guardado exitosamente');
-                var message = 'El enlace se ha guardado exitosamente.';
-                notify('success', message);
+                $.jGrowl('El enlace se ha guardado exitosamente');
                 if ( data.type == 'book') {
                     location.reload(true);
                 }
             } else if (data.mensaje == 'Link duplicado') {
-                var message = 'Link duplicado, prueba a agregar otro';
-                notify('error', message);
+                $.jGrowl('Link duplicado, prueba a agregar otro');
             } else {
-                notify_bug();
-                //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
             }
         }  
         );  
@@ -717,13 +677,9 @@ $(document).ready(function () {
         var $id_season = $('#id_season');
 
         if ($id_season.val()==='') {
-            //$id_season.addClass('hightlight'); 
-            error_add($id_season);
+            $id_season.addClass('hightlight'); 
             return false;
-        } else {
-            //$id_season.removeClass('hightlight'); 
-            error_remove($id_season);
-        }
+        } else {$id_season.removeClass('hightlight');}
 
         $.post(action, {
             'season': $id_season.val(),
@@ -742,28 +698,27 @@ $(document).ready(function () {
                 notify('error', message);
                 break;
             case 'Error':
-                notify_bug();
-                //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                // $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                message = 'Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net';
+                notify('error', message);
                 break;
             default:
-                notify_bug();
-                //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                // $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                message = 'Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net';
+                notify('error', message);
                 break;
             }
         });
         event.preventDefault();
     });
 
-    $('.comment_form').submit(function(e){
+    $('.comment_form').submit(function(){
         // Form de comentarios, que no salga sin nada
-        $comment = $('.comment_form').children('li').children('div').children('#id_comment');
+        $comment = $(this).children('p').children('#id_comment');
         if ($comment.val()==='') {
-            e.preventDefault();
-            error_add($comment);
-            notify('error', 'Agrega tu comentario');
-        } else {
-            error_remove($comment);
-        }
+            $comment.addClass('hightlight');
+            return false;
+        } else {$comment.removeClass('hightlight');}
     });
 
 
@@ -793,17 +748,15 @@ $(document).ready(function () {
                 }, function(data){
                     switch (data) {
                         case 'OK':
-                            // $.jGrowl('Has marcado el episodio como visto');
-                            notify('success', 'Has marcado el episodio como visto.');
+                            $.jGrowl('Has marcado el episodio como visto');
                             check_viewed(serie_id, season, episode);
                             break;
                         case 'Error':
-                            notify_bug();
-                            //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                            $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
                             break;
                         default:
-                            notify_bug();
-                            //$.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                            $.jGrowl('Ha ocurrido un error durante el envio, reportalo a bugs@liberateca.net');
+                            alert(data);
                             break;
                     }
                 }
@@ -1066,7 +1019,6 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
     var url = $.param.fragment();
 
     $(".navigator").each(function(){
-
       // iterando cada navigator y buscando los links ...
       var href = $(this).attr( "href" );
       var href_nohash = href.split('#')[1];
@@ -1097,7 +1049,6 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
         $(this).addClass( "nolink" );
       } else {
         $(this).removeClass( "nolink" );
-        $('#popularity').removeClass('nolink');      
       }
     });
 
@@ -1107,13 +1058,13 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
     if (url){
         switch (object) {
             case 'series':
-              $('#generic_list').html('<img class="loading" src="/static/images/ajax-loading-bar.gif" />');
+              $('#generic_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
               // url que esperamos es algo por el estilo: genre/science-fiction
               console.log(url);
               $('#generic_list').load('/series/lookup' + url);
               break;
             case 'books':
-              $('#generic_list').html('<img class="loading" src="/static/images/ajax-loading-bar.gif" />');
+              $('#generic_list').html('<img class="center" src="/static/images/ajax-loading-bar.gif" />');
               // console.log(url);
               // url que esperamos es algo por el estilo: category/drama
               $('#generic_list').load('/books/lookup' + url);
@@ -1124,8 +1075,6 @@ Utiliza jquery-BBQ y soporta historial en el navegador y links directos
   });
 
   $(window).trigger( "hashchange" );
-
-//  $('#add_book_form, #add_serie_form').highlight();
 
 
 });
