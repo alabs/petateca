@@ -38,6 +38,7 @@ setup(
         'django-axes',
         'django-dtpanel-htmltidy',
         'python-memcached',
+        'fabric',
         #'django-blog-zinnia',
         #'django-bitly',
         #'django-piston', lo instalamos a traves de src/ por ser este fork
