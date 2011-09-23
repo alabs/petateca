@@ -11,8 +11,7 @@
 
     <li>
         <a href="{{ link.url }}" target="_blank" rel="nofollow" id="datemeta">{{ link.url|extract_type }} ({{ link.url|extract_domain }})<span>
-        Idioma: {{ link.audio_lang.iso_code|echo_language }}
-        {% if link.subtitle %} Subtitulos: {{ link.subtitle.iso_code|echo_language }}{% endif %}
+        Idioma: {{ link.lang.iso_code|echo_language }}
         <div class="right">
         {% if request.user == link.user %}
         <!-- EDICION --> 
