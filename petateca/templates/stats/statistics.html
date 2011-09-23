@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Estadísticas | Liberateca{% endblock %}
+{% block contents %}
+<h1>Estadísticas</h1>
+    <h2>General</h2>
+    <div id="chart_user"></div>
+    <hr class="separator" />
+    <h2>Libros</h2>
+    <div id="chart_book"></div>
+    <hr class="separator" />
+    <div id="chart_booklink"></div>
+    <hr class="separator" />
+    <h2>Series</h2>
+    <div id="chart_serie"></div>
+    <hr class="separator" />
+    <div id="chart_link"></div>
+    <hr class="separator" />
+    <div id="chart_linkseason"></div>
+{% endblock %}
+{% block extrastyle %}
+  <link rel="stylesheet" type="text/css" href="/static/css/jquery.jqplot.css" />
+{% endblock %}
+{% block extrascript %}
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="/static/js/excanvas.js">script><![endif]-->
+    <script language="javascript" type="text/javascript" src="/static/js/jquery.jqplot.js"></script>
+    <script language="javascript" type="text/javascript" src="/static/js/jquery-jqplot/jqplot.dateAxisRenderer.js"></script>script>
+    <script language="javascript" type="text/javascript" src="/static/js/jquery-jqplot/jqplot.canvasAxisLabelRenderer.js"></script>script>
+    <script language="javascript" type="text/javascript" src="/static/js/jquery-jqplot/jqplot.canvasTextRenderer.js"></script>script>
+    <script language="javascript" type="text/javascript" src="/static/js/jquery-jqplot/jqplot.highlighter.js"></script>script>
+  <script language="javascript" type="text/javascript">
+    gabe = {
+        series: [
+            {color: 'rgba(216, 159, 60, 0.4)'},
+            {color: 'rgba(159, 216, 60, 0.4)'},
+            {color: 'rgba(60, 159, 216, 0.4)'},
+        ],
+        grid: {
+            backgroundColor: '#DEA493'
+        }
+    }
+
+
+function chart_draw(items, chart_id, chart_title, color){
+  $.jqplot(chart_id, [items], {
+    title: chart_title,
+    highlighter: {
+      tooltipAxes: 'y',
+    },
+    grid: {
+        drawGridlines: false
+    },
+    axes: {
+      xaxis: {
+        label:'Fecha (Año-Mes)',
+        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+        renderer:$.jqplot.DateAxisRenderer,
+        tickOptions:{formatString:'%Y-%m'},
+        tickInterval:'1 month'
+      },
+      yaxis: {
+        label:'Cantidad',
+        labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+      }
+    },
+    series: [{
+      color: color,
+      lineWidth:4
+    }]
+  }); 
+}
+    $(function(){
+      $.jqplot.config.enablePlugins = true;
+
+      // obtenemos los items
+      var items_user = {% include "stats/_get_items.html" with stream_generic=all_streams.user %}
+      var items_book = {% include "stats/_get_items.html" with stream_generic=all_streams.book %}
+      var items_booklink = {% include "stats/_get_items.html" with stream_generic=all_streams.booklink %}
+      var items_serie = {% include "stats/_get_items.html" with stream_generic=all_streams.serie %}
+      var items_link = {% include "stats/_get_items.html" with stream_generic=all_streams.link %}
+      var items_linkseason = {% include "stats/_get_items.html" with stream_generic=all_streams.linkseason %}
+
+      // los pintamos en el grafico
+      chart_draw(items_user, 'chart_user', 'Usuarios creados', 'orange');
+      chart_draw(items_book, 'chart_book', 'Libros agregados', 'blue');
+      chart_draw(items_booklink, 'chart_booklink', 'Enlaces a libros agregados', 'green');
+      chart_draw(items_serie, 'chart_serie', 'Series agregadas', 'blue');
+      chart_draw(items_link, 'chart_link', 'Enlaces a episodios agregados', 'green');
+      chart_draw(items_linkseason, 'chart_linkseason', 'Enlaces a temporadas agregadas', 'green');
+
+    });
+  </script>
+{% endblock %}

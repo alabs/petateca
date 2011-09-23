@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'search',
     'core',
     'tracking',
+    'stats',
    # 'checker',
 )
 

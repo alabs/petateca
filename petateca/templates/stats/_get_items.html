@@ -1,0 +1,1 @@
+[{% for stream in stream_generic %}['{{ stream.pub_date|date:"Y-m-d" }} 4:00PM',{{ stream.total }}]{% if not forloop.last %},{% endif %}{% endfor %}];

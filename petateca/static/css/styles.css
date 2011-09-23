@@ -1592,6 +1592,10 @@ input {
     width: 23em;
 }
 
+.separator{ 
+    margin: 3em !important;
+}
+
 /* Overiding Classes */
 /* Must remain at the bottom of the stylesheet */
 .clearfix:after {

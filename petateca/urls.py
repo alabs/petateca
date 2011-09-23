@@ -18,7 +18,7 @@ sitemaps = {
 urlpatterns = patterns('',
     (r'^$', 'core.views.index'),
     # estadistcas
-    (r'^stats/$', 'core.views.statistics'),
+    url(r'^stats/$', 'stats.views.show_stats', name='show_stats'),
 
     (r'^sentry/', include('sentry.web.urls')),
 
